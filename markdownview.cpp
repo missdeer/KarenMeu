@@ -168,10 +168,9 @@ void MarkdownView::saveToFile(const QString &savePath)
 void MarkdownView::convert()
 {
     QByteArray ba = m_editor->content();
-    QString s(ba);
-    GoString gs{ (const char *)s.constData(), s.length()};
+    GoString content{ (const char *)ba.data(), (ptrdiff_t)ba.size()};
     GoString codeblockStyle { "xcode", 5};
-    auto res = ConvertToHTML(gs, codeblockStyle);
-    QString html((const QChar *)res.p, res.n);
+    auto res = ConvertToHTML(content, codeblockStyle);
+    QString html = QString::fromUtf8(res);
     m_preview->setHtml(html);
 }
