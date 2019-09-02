@@ -6,6 +6,7 @@
 QT_FORWARD_DECLARE_CLASS(QSplitter);
 QT_FORWARD_DECLARE_CLASS(QWebEngineView);
 QT_FORWARD_DECLARE_CLASS(QTimer);
+QT_FORWARD_DECLARE_CLASS(QResizeEvent);
 class MarkdownEditor;
 
 class MarkdownView : public QWidget
@@ -31,6 +32,9 @@ public slots:
 private slots:
     void documentModified();
     void convertTimeout();
+
+protected:
+    void resizeEvent(QResizeEvent *event) override;
 private:
     bool m_modified{false};
     QSplitter *m_splitter;

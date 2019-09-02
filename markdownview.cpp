@@ -160,6 +160,12 @@ void MarkdownView::convertTimeout()
     }
 }
 
+void MarkdownView::resizeEvent(QResizeEvent *event)
+{
+    m_splitter->setSizes(QList<int>() << width()/2 << width() /2);
+    QWidget::resizeEvent(event);
+}
+
 void MarkdownView::saveToFile(const QString &savePath)
 {
     QFile f(savePath);
