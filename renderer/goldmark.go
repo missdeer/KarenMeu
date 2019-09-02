@@ -28,7 +28,7 @@ func ConvertToHTML(md string, codeBlockStyle string) *C.char {
 	)
 
 	var buf bytes.Buffer
-	if err := markdown.Convert([]byte(md), &buf); err != nil {
+	if err := markdown.Convert([]byte(md), &buf, parser.WithWorkers(8)); err != nil {
 		log.Println(err)
 	}
 	return C.CString(buf.String())

@@ -18,6 +18,8 @@ void Settings::save()
     settings.setValue("editorZoomFactor", m_editorZoomFactor);
     settings.setValue("codeEditorFontFamily", m_codeEditorFontFamily);
     settings.setValue("codeEditorTheme", m_codeEditorTheme);
+    settings.setValue("previewTheme", m_previewTheme);
+    settings.setValue("codeBlockStyle", m_codeBlockStyle);
     settings.sync();
 }
 
@@ -27,11 +29,13 @@ void Settings::load()
 #if defined(Q_OS_IOS) || defined(Q_OS_ANDROID)
     m_autoRefreshInterval = settings.value("autoRefreshInterval", 1500).toInt();
 #else
-    m_autoRefreshInterval = settings.value("autoRefreshInterval", 750).toInt();
+    m_autoRefreshInterval = settings.value("autoRefreshInterval", 1000).toInt();
 #endif
     m_editorZoomFactor = settings.value("editorZoomFactor", 100).toInt();
     m_codeEditorFontFamily = settings.value("codeEditorFontFamily", QString("Source Code Pro")).toString();
     m_codeEditorTheme = settings.value("codeEditorTheme", QString("Default")).toString();
+    m_previewTheme = settings.value("previewTheme", QString("默认")).toString();
+    m_codeBlockStyle = settings.value("codeBlockStyle", QString("xcode")).toString();
 }
 
 const QString & Settings::codeEditorFontFamily() const
@@ -72,6 +76,26 @@ int Settings::editorZoomFactor() const
 void Settings::setEditorZoomFactor(int editorZoomFactor)
 {
     m_editorZoomFactor = editorZoomFactor;
+}
+
+const QString &Settings::previewTheme() const
+{
+    return m_previewTheme;
+}
+
+void Settings::setPreviewTheme(const QString &previewTheme)
+{
+    m_previewTheme = previewTheme;
+}
+
+const QString &Settings::codeBlockStyle() const
+{
+    return m_codeBlockStyle;
+}
+
+void Settings::setCodeBlockStyle(const QString &codeBlockStyle)
+{
+    m_codeBlockStyle = codeBlockStyle;
 }
 
 

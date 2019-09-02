@@ -29,6 +29,7 @@ SOURCES += \
         mainwindow.cpp \
         markdowneditor.cpp \
         markdownview.cpp \
+        preferencedialog.cpp \
         scintillaconfig.cpp \
         settings.cpp
 
@@ -36,11 +37,13 @@ HEADERS += \
         mainwindow.h \
         markdowneditor.h \
         markdownview.h \
+        preferencedialog.h \
         scintillaconfig.h \
         settings.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        preferencedialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

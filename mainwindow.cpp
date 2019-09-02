@@ -2,6 +2,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include "markdownview.h"
+#include "preferencedialog.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -44,5 +45,9 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_actionPreference_triggered()
 {
-    
+    PreferenceDialog dlg(this);
+    if (dlg.exec() == QDialog::Accepted)
+    {
+        m_view->forceConvert();
+    }
 }

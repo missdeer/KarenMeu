@@ -13,7 +13,7 @@ class MarkdownView : public QWidget
     Q_OBJECT
 public:
     explicit MarkdownView(QWidget *parent = nullptr);
-    
+    void forceConvert();
 signals:
     
 public slots:
@@ -27,7 +27,7 @@ public slots:
     void selectAll();
     void undo();
     void redo();
-    
+
 private slots:
     void documentModified();
     void convertTimeout();

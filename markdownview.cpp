@@ -31,6 +31,11 @@ MarkdownView::MarkdownView(QWidget *parent)
     m_convertTimer->start(g_settings->autoRefreshInterval());
 }
 
+void MarkdownView::forceConvert()
+{
+    convert();
+}
+
 void MarkdownView::openDocument()
 {
     newDocument();
@@ -169,7 +174,8 @@ void MarkdownView::convert()
 {
     QByteArray ba = m_editor->content();
     GoString content{ (const char *)ba.data(), (ptrdiff_t)ba.size()};
-    GoString codeblockStyle { "xcode", 5};
+    const QString& style = g_settings->codeBlockStyle();
+    GoString codeblockStyle { (const char *)style.toStdString().c_str(), style.length()};
     auto res = ConvertToHTML(content, codeblockStyle);
     QString html = QString::fromUtf8(res);
     m_preview->setHtml(html);

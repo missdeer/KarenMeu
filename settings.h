@@ -29,15 +29,22 @@ public:
     int editorZoomFactor() const;
     void setEditorZoomFactor(int editorZoomFactor);
 
-    
+    const QString & previewTheme() const;
+    void setPreviewTheme(const QString &previewTheme);
+
+    const QString & codeBlockStyle() const;
+    void setCodeBlockStyle(const QString &codeBlockStyle);
+
 private:
-    int m_autoRefreshInterval; // millisecond
-    int m_editorZoomFactor; // percent
+    int m_autoRefreshInterval{1000}; // millisecond
+    int m_editorZoomFactor{100}; // percent
 
     QString m_codeEditorFontFamily;
     QString m_codeEditorTheme;
     QString m_codeInspectorFontFamily;
     QString m_codeInspectorTheme;
+    QString m_previewTheme;
+    QString m_codeBlockStyle;
 };
 
 inline Settings *g_settings = nullptr;
