@@ -23,6 +23,7 @@ typedef struct { const char *p; ptrdiff_t n; } _GoString_;
 /* End of preamble from import "C" comments.  */
 
 
+/* Start of boilerplate cgo prologue.  */
 
 #ifndef GO_CGO_PROLOGUE_H
 #define GO_CGO_PROLOGUE_H
@@ -63,7 +64,7 @@ extern "C" {
 #endif
 
 
-extern GoString ConvertToHTML(GoString p0, GoString p1);
+extern char* ConvertToHTML(GoString p0, GoString p1);
 
 #ifdef __cplusplus
 }
