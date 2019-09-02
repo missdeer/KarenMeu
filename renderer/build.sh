@@ -2,3 +2,4 @@
 go env
 go version
 go build -buildmode=c-archive -o librenderer.a goldmark.go
+mv librenderer.h renderer.h
