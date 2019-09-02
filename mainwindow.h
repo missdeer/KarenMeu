@@ -6,6 +6,7 @@
 namespace Ui {
 class MainWindow;
 }
+class MarkdownView;
 
 class MainWindow : public QMainWindow
 {
@@ -17,6 +18,7 @@ public:
     
 private:
     Ui::MainWindow *ui;
+    MarkdownView *m_view;
 };
 
 #endif // MAINWINDOW_H
