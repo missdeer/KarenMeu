@@ -38,5 +38,8 @@
         <file>rc/sci/langs.model.xml</file>
         <file>rc/sci/stylers.model.xml</file>
         <file>rc/sci/themes/Default.xml</file>
+        <file>rc/images/redo.png</file>
+        <file>rc/images/save_as.png</file>
+        <file>rc/images/undo.png</file>
     </qresource>
 </RCC>

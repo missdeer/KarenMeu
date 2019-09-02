@@ -1,3 +1,6 @@
+#include <QMessageBox>
+#include <QDesktopServices>
+#include <QUrl>
 #include "markdownview.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -21,4 +24,25 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_actionExit_triggered()
+{
+    qApp->quit();
+}
+
+void MainWindow::on_actionContent_triggered()
+{
+    QDesktopServices::openUrl(QUrl("https://minidump.info/KarenMeu/"));
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    QMessageBox::about(this, tr("KarenMeu"),
+                       tr("KarenMeu is a Markdown based Wechat public account article editor for programmers."));
+}
+
+void MainWindow::on_actionPreference_triggered()
+{
+    
 }

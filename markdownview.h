@@ -23,11 +23,16 @@ public slots:
     void copy();
     void cut();
     void paste();
-    
+    void selectAll();
+    void undo();
+    void redo();
 private:
     QSplitter *m_splitter;
     MarkdownEditor *m_editor;
     QWebEngineView *m_preview;
+    QString m_savePath;
+    
+    void saveToFile(const QString &savePath);
 };
 
 #endif // MARKDOWNVIEW_H

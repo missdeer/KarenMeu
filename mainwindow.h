@@ -16,6 +16,15 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     
+private slots:
+    void on_actionExit_triggered();
+    
+    void on_actionContent_triggered();
+    
+    void on_actionAbout_triggered();
+    
+    void on_actionPreference_triggered();
+    
 private:
     Ui::MainWindow *ui;
     MarkdownView *m_view;
