@@ -1,16 +1,21 @@
+#include <QtCore>
 #include <QVBoxLayout>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSplitter>
 #include <QWebEngineView>
+#include <QTimer>
+#include "settings.h"
 #include "markdowneditor.h"
 #include "markdownview.h"
+#include "renderer.h"
 
 MarkdownView::MarkdownView(QWidget *parent) 
     : QWidget(parent)
     , m_splitter(new QSplitter(this))
     , m_editor(new MarkdownEditor(this))
     , m_preview(new QWebEngineView(this))
+    , m_convertTimer(new QTimer)
 {
     m_splitter->addWidget(m_editor);
     m_splitter->addWidget(m_preview);
@@ -20,6 +25,10 @@ MarkdownView::MarkdownView(QWidget *parent)
     setLayout(layout);
     m_splitter->setSizes(QList<int>() << width()/2 << width() /2);
     m_editor->initialize();
+    connect(m_editor, &MarkdownEditor::contentModified, this, &MarkdownView::documentModified);
+    
+    connect(m_convertTimer, &QTimer::timeout, this, &MarkdownView::convertTimeout);
+    m_convertTimer->start(g_settings->autoRefreshInterval());
 }
 
 void MarkdownView::openDocument()
@@ -132,6 +141,20 @@ void MarkdownView::redo()
     }
 }
 
+void MarkdownView::documentModified()
+{
+    m_modified = true;
+}
+
+void MarkdownView::convertTimeout()
+{
+    if (m_modified)
+    {
+        m_modified = false;
+        convert();
+    }
+}
+
 void MarkdownView::saveToFile(const QString &savePath)
 {
     QFile f(savePath);
@@ -140,4 +163,15 @@ void MarkdownView::saveToFile(const QString &savePath)
         f.write(m_editor->content());
         f.close();
     }
+}
+
+void MarkdownView::convert()
+{
+    QByteArray ba = m_editor->content();
+    QString s(ba);
+    GoString gs{ (const char *)s.constData(), s.length()};
+    GoString codeblockStyle { "xcode", 5};
+    auto res = ConvertToHTML(gs, codeblockStyle);
+    QString html((const QChar *)res.p, res.n);
+    m_preview->setHtml(html);
 }

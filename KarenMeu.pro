@@ -54,4 +54,19 @@ win32-*msvc* {
     QMAKE_LFLAGS += "/LTCG"
     QMAKE_CXXFLAGS_RELEASE += /Zi
     QMAKE_LFLAGS_RELEASE += /DEBUG
+
+    contains(QMAKE_HOST.arch, x86_64): {
+        LIBS += -L$$PWD/renderer/x64
+        INCLUDEPATH += $$PWD/renderer/x64
+    } else: {
+        LIBS += -L$$PWD/renderer/x86
+        INCLUDEPATH += $$PWD/renderer/x86
+    }
+
+} else: {
+    INCLUDEPATH += $$PWD/renderer
+    LIBS += -L$$PWD/renderer
 }
+    
+
+LIBS += -lrenderer

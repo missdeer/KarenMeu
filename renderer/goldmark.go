@@ -1,0 +1,36 @@
+package main
+
+import (
+	"C"
+	"bytes"
+
+	"github.com/alecthomas/chroma/formatters/html"
+	"github.com/yuin/goldmark"
+	highlighting "github.com/yuin/goldmark-highlighting"
+	"github.com/yuin/goldmark/parser"
+)
+
+//export ConvertToHTML
+func ConvertToHTML(md string, codeBlockStyle string) string {
+	markdown := goldmark.New(
+		goldmark.WithExtensions(
+			highlighting.NewHighlighting(
+				highlighting.WithStyle(codeBlockStyle),
+				highlighting.WithFormatOptions(
+					html.WithLineNumbers(),
+				),
+			),
+		),
+		goldmark.WithParserOptions(
+			parser.WithAutoHeadingID(),
+		),
+	)
+
+	var buf bytes.Buffer
+	if err := markdown.Convert([]byte(md), &buf); err != nil {
+		panic(err)
+	}
+	return buf.String()
+}
+
+func main() {}
