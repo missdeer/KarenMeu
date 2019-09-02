@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PreferenceDialog</class>
+ <widget class="QDialog" name="PreferenceDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>226</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Preference</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Preview Theme:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="cbPreviewTheme">
+     <item>
+      <property name="text">
+       <string>默认</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>橙心</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>墨黑</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>姹紫</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>嫩青</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>绿意</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>红绯</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Code block style:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="cbCodeBlockStyle">
+     <item>
+      <property name="text">
+       <string>abap</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>algol</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>algol_nu</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>api</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>arduino</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>autumn</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>borland</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>bw</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>colorful</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>dracula</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>emacs</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>friendly</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>fruity</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>github</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>igor</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>lovelace</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>manni</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>monokai</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>monokailight</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>murphy</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>native</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>paraiso-dark</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>paraiso-light</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>pastie</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>perldoc</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>pygments</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>rainbow_dash</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>rrt</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>solarized-dark</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>solarized-dark256</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>solarized-light</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>swapoff</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>tango</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>trac</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>vim</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>vs</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>xcode</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>PreferenceDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>PreferenceDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

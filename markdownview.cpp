@@ -184,5 +184,30 @@ void MarkdownView::convert()
     GoString codeblockStyle { (const char *)style.toStdString().c_str(), style.length()};
     auto res = ConvertToHTML(content, codeblockStyle);
     QString html = QString::fromUtf8(res);
-    m_preview->setHtml(html);
+    QString templater = R"(<!DOCTYPE html>
+                     <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                     <style type="text/css">
+                     body { background-color: transparent !important; }
+                     </style>
+                     <style type="text/css">%1</style><body>%2</body></html>)";
+    QString theme;
+    const QString& themeFile = g_settings->previewTheme();
+    QMap<QString, QString> m = {
+        { "墨黑", "black.css" },
+        { "姹紫", "purple.css" },
+        { "嫩青", "blue.css" },
+        { "橙心", "orange.css" },
+        { "红绯", "red.css" },
+        { "绿意", "green.css" },
+        { "默认", "default.css" },
+        };
+    QFile f(":/rc/theme/" + m[themeFile]);
+    if (f.open(QIODevice::ReadOnly))
+    {
+        QByteArray ba = f.readAll();
+        theme = QString(ba);
+        f.close();
+    }
+    QString r = templater.arg(theme, html);
+    m_preview->setHtml(r);
 }

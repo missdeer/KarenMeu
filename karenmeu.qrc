@@ -41,5 +41,12 @@
         <file>rc/images/redo.png</file>
         <file>rc/images/save_as.png</file>
         <file>rc/images/undo.png</file>
+        <file>rc/theme/black.css</file>
+        <file>rc/theme/blue.css</file>
+        <file>rc/theme/default.css</file>
+        <file>rc/theme/green.css</file>
+        <file>rc/theme/orange.css</file>
+        <file>rc/theme/purple.css</file>
+        <file>rc/theme/red.css</file>
     </qresource>
 </RCC>
