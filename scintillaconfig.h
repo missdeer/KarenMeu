@@ -14,9 +14,6 @@ public:
     void initEditorFolderStyle();
     void initLexerStyle(const QString &lang);
     void initEditorMargins();
-    void initInspectorMargins(bool binary);
-    void inttOuputWindowMargins();
-    void initMarkers();
 private:
     ScintillaEdit* m_sci;
     void applyStyle(const QDomElement& styleElem);

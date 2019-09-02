@@ -17,6 +17,7 @@ MarkdownView::MarkdownView(QWidget *parent)
     
     setLayout(layout);
     m_splitter->setSizes(QList<int>() << width()/2 << width() /2);
+    m_editor->initialize();
 }
 
 void MarkdownView::openDocument()

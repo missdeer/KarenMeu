@@ -12,6 +12,14 @@ public:
     void initialize();
     void setContent(const QString& content);
     void setContent(const QByteArray& content);
+    QByteArray content();
+signals:
+    void contentModified();
+private slots:
+    void linesAdded(int linesAdded);
+    void marginClicked(int position, int modifiers, int margin);
+    void modified(int type, int position, int length, int linesAdded,
+                  const QByteArray &text, int line, int foldNow, int foldPrev);
     
 private:
     ScintillaConfig m_sc;

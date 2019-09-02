@@ -8,5 +8,35 @@
         <file>rc/images/paste.png</file>
         <file>rc/images/save.png</file>
         <file>rc/images/preference.png</file>
+        <file>rc/sci/themes/Bespin.xml</file>
+        <file>rc/sci/themes/Black board.xml</file>
+        <file>rc/sci/themes/Choco.xml</file>
+        <file>rc/sci/themes/Deep Black.xml</file>
+        <file>rc/sci/themes/Dracula.xml</file>
+        <file>rc/sci/themes/Girly.xml</file>
+        <file>rc/sci/themes/Hello Kitty.xml</file>
+        <file>rc/sci/themes/HotFudgeSundae.xml</file>
+        <file>rc/sci/themes/khaki.xml</file>
+        <file>rc/sci/themes/Material-Dark.xml</file>
+        <file>rc/sci/themes/Mono Industrial.xml</file>
+        <file>rc/sci/themes/Monokai.xml</file>
+        <file>rc/sci/themes/MossyLawn.xml</file>
+        <file>rc/sci/themes/NauticalButNice.xml</file>
+        <file>rc/sci/themes/Navajo.xml</file>
+        <file>rc/sci/themes/Neon.xml</file>
+        <file>rc/sci/themes/Obsidian.xml</file>
+        <file>rc/sci/themes/Plastic Code Wrap.xml</file>
+        <file>rc/sci/themes/Ruby Blue.xml</file>
+        <file>rc/sci/themes/Solarized-light.xml</file>
+        <file>rc/sci/themes/Solarized.xml</file>
+        <file>rc/sci/themes/Twilight.xml</file>
+        <file>rc/sci/themes/Vibrant Ink.xml</file>
+        <file>rc/sci/themes/vim Dark Blue.xml</file>
+        <file>rc/sci/themes/VS2015-Dark.xml</file>
+        <file>rc/sci/themes/Zenburn.xml</file>
+        <file>rc/sci/functionList.xml</file>
+        <file>rc/sci/langs.model.xml</file>
+        <file>rc/sci/stylers.model.xml</file>
+        <file>rc/sci/themes/Default.xml</file>
     </qresource>
 </RCC>

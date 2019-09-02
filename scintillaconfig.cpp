@@ -1,3 +1,4 @@
+#include <QtCore>
 #include <QFile>
 #include <QDomDocument>
 #include <QDomElement>
@@ -79,17 +80,20 @@ void ScintillaConfig::initScintilla()
     m_sci->setCodePage(SC_CP_UTF8);
     m_sci->setWordChars("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_");
     m_sci->setZoom(1);
-    m_sci->setWhitespaceChars(NULL);
+    m_sci->setWhitespaceChars(nullptr);
     m_sci->setMouseDwellTime(2500);
 
     m_sci->setSavePoint();
     m_sci->setFontQuality( SC_EFF_QUALITY_ANTIALIASED);
 
     // apply global settings
-    QString themePath = ":/resource/sci/themes/" % g_settings->codeEditorTheme() % ".xml";
+    QString themePath = ":/rc/sci/themes/" % g_settings->codeEditorTheme() % ".xml";
     if (!QFile::exists(themePath))
-        themePath = ":/resource/sci/stylers.model.xml";
-    applyThemeStyle(themePath, "cpp");
+    {
+        qDebug() << themePath << "not exists";        
+        themePath = ":/rc/sci/stylers.model.xml";
+    }
+    applyThemeStyle(themePath, "markdown");
 }
 
 void ScintillaConfig::initEditorFolderStyle()
@@ -134,13 +138,16 @@ void ScintillaConfig::initEditorFolderStyle()
 void ScintillaConfig::initLexerStyle(const QString& lang)
 {
     // apply language specified settings
-    QString themePath = ":/resource/sci/themes/" % g_settings->codeEditorTheme() % ".xml";
+    QString themePath = ":/rc/sci/themes/" % g_settings->codeEditorTheme() % ".xml";
     if (!QFile::exists(themePath))
-        themePath = ":/resource/sci/stylers.model.xml";
+    {
+        qDebug() << themePath << "not exists";
+        themePath = ":/rc/sci/stylers.model.xml";
+    }
     applyThemeStyle(themePath, lang);
 
     // read configurations from langs.model.xml
-    QString configPath = ":/resource/sci/langs.model.xml";
+    QString configPath = ":/rc/sci/langs.model.xml";
     applyLanguageStyle(configPath, lang);
 }
 
@@ -165,54 +172,6 @@ void ScintillaConfig::initEditorMargins()
     m_sci->setFoldMarginHiColour(true, 0xFFFFFF);
 }
 
-void ScintillaConfig::initInspectorMargins(bool binary)
-{
-    m_sci->setMarginLeft(4);
-    //sci->setMarginRight(4);
-    m_sci->setMarginTypeN(0, SC_MARGIN_NUMBER);
-    m_sci->setMarginWidthN(0, binary ? 0 : 32);
-    m_sci->setMarginMaskN(0, 0);
-    m_sci->setMarginSensitiveN(0, false);
-
-    m_sci->setMarginTypeN(1, SC_MARGIN_TEXT);
-    m_sci->setMarginWidthN(1, binary ? 32 : 0);
-    m_sci->setMarginMaskN(1, ~SC_MASK_FOLDERS); //~SC_MASK_FOLDERS or 0x1FFFFFF or 33554431
-    m_sci->setMarginSensitiveN(1, false);
-}
-
-void ScintillaConfig::inttOuputWindowMargins()
-{
-    m_sci->setMarginWidthN(0, 0);
-    m_sci->setMarginWidthN(1, 0);
-    m_sci->setMarginWidthN(2, 0);
-}
-
-void ScintillaConfig::initMarkers()
-{
-    const int lineBackgroundColorCount = 12;
-    sptr_t lineBackgroundColors[lineBackgroundColorCount] = {
-        0xD3E4EF,
-        0xFEE5C8,
-        0xE8E7F1,
-        0xD7F0EB,
-        0xFEEEF5,
-        0xEDF8EA,
-        0xE4F3CA,
-        0xFFF9CC,
-        0xF2F2F1,
-        0xE8D3E7,
-        0xFFFFE4,
-        0xFED3CD,
-    };
-
-    for ( size_t i = 0; i < lineBackgroundColorCount; i++)
-    {
-        m_sci->markerDefine(static_cast<sptr_t>(i), SC_MARK_BACKGROUND);
-        m_sci->markerSetBack(static_cast<sptr_t>(i), lineBackgroundColors[i]);
-        m_sci->markerDeleteAll(static_cast<sptr_t>(i));
-    }
-}
-
 void ScintillaConfig::applyLanguageStyle(const QString &configPath, const QString& lang)
 {
     QDomDocument doc;
@@ -223,9 +182,6 @@ void ScintillaConfig::applyLanguageStyle(const QString &configPath, const QStrin
     int errLine;
     if (!doc.setContent(&file, &errMsg, &errLine))
     {
-#if !defined(QT_NO_DEBUG)
-        qDebug() << "parsing xml document failed:" << configPath << errMsg << errLine;
-#endif
         file.close();
         return;
     }
@@ -235,7 +191,7 @@ void ScintillaConfig::applyLanguageStyle(const QString &configPath, const QStrin
     QDomElement languagesElem = docElem.firstChildElement("Languages");
 
     QDomElement langElem = languagesElem.firstChildElement("Language");
-    while (!langElem.isNull() && langElem.attribute("name") != lang)
+    while (!langElem.isNull() && langElem.attribute("name").toLower() != lang.toLower())
         langElem = langElem.nextSiblingElement("Language");
 
     if (langElem.isNull())
@@ -271,9 +227,6 @@ void ScintillaConfig::applyThemeStyle(const QString &themePath, const QString& l
     int errLine;
     if (!doc.setContent(&file, &errMsg, &errLine))
     {
-#if !defined(QT_NO_DEBUG)
-        qDebug() << "parsing xml document failed:" << themePath << errMsg << errLine;
-#endif
         file.close();
         return;
     }
@@ -292,7 +245,7 @@ void ScintillaConfig::applyThemeStyle(const QString &themePath, const QString& l
 
     QDomElement lexerStylesElem = docElem.firstChildElement("LexerStyles");
     QDomElement lexerTypeElem = lexerStylesElem.firstChildElement("LexerType");
-    while (!lexerTypeElem.isNull() && lexerTypeElem.attribute("name") != lang)
+    while (!lexerTypeElem.isNull() && lexerTypeElem.attribute("name").toLower() != lang.toLower())
         lexerTypeElem = lexerTypeElem.nextSiblingElement("LexerType");
 
     if (lexerTypeElem.isNull())
