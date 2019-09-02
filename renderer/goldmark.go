@@ -3,6 +3,7 @@ package main
 import (
 	"C"
 	"bytes"
+	"log"
 
 	"github.com/alecthomas/chroma/formatters/html"
 	"github.com/yuin/goldmark"
@@ -11,7 +12,7 @@ import (
 )
 
 //export ConvertToHTML
-func ConvertToHTML(md string, codeBlockStyle string) string {
+func ConvertToHTML(md string, codeBlockStyle string) *C.char {
 	markdown := goldmark.New(
 		goldmark.WithExtensions(
 			highlighting.NewHighlighting(
@@ -28,9 +29,9 @@ func ConvertToHTML(md string, codeBlockStyle string) string {
 
 	var buf bytes.Buffer
 	if err := markdown.Convert([]byte(md), &buf); err != nil {
-		panic(err)
+		log.Println(err)
 	}
-	return buf.String()
+	return C.CString(buf.String())
 }
 
 func main() {}
