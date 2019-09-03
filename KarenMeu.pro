@@ -72,6 +72,13 @@ win32-*msvc* {
     INCLUDEPATH += $$PWD/renderer
     LIBS += -L$$PWD/renderer
 }
+
+macx: {
+    ICON = KarenMeu.icns
+    icon.path = $$PWD
+    #icon.files += cjlv.png
+    INSTALLS += icon
+}
     
 
 LIBS += -lrenderer
