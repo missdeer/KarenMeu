@@ -78,6 +78,7 @@ macx: {
     icon.path = $$PWD
     #icon.files += cjlv.png
     INSTALLS += icon
+    LIBS += -framework CoreFoundation -framework Security
 }
     
 
