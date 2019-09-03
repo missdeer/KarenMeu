@@ -19,6 +19,9 @@ typedef struct { const char *p; ptrdiff_t n; } _GoString_;
 
 
 
+#include <stdlib.h>
+
+
 
 
 /* End of preamble from import "C" comments.  */
@@ -65,7 +68,9 @@ extern "C" {
 #endif
 
 
-extern char* ConvertToHTML(GoString p0, GoString p1);
+extern char* ConvertToHTML(GoString p0, GoString p1, GoString p2, GoUint8 p3);
+
+extern void Free(char* p0);
 
 extern char* PremailerInliner(GoString p0);
 

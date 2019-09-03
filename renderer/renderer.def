@@ -3,3 +3,4 @@ EXPORTS
     Inliner
     PremailerInliner
     DouceurInliner
+    Free

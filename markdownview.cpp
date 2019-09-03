@@ -206,5 +206,7 @@ void MarkdownView::convert()
     
     auto res = ConvertToHTML(content, themeContent, styleContent, true);
     QString html = QString::fromUtf8(res);
+    qDebug() << QString(ba) << QString::fromUtf8(theme) << QString(style) << html;
     m_preview->setHtml(html);
+    Free(res);
 }

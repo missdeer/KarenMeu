@@ -103,7 +103,6 @@ func ConvertToHTML(md string, theme string, style string, lineNumbers bool) *C.c
 	if err != nil {
 		log.Println(err)
 		r := C.CString(md)
-		defer C.free(unsafe.Pointer(r))
 		return r
 	}
 
@@ -112,17 +111,21 @@ func ConvertToHTML(md string, theme string, style string, lineNumbers bool) *C.c
 	r, err := premailerEngine(s)
 	if err == nil {
 		re := C.CString(r)
-		defer C.free(unsafe.Pointer(re))
 		return re
 	}
+	log.Println(err)
 	r, err = douceurEngine(s)
 	if err == nil {
 		re := C.CString(r)
-		defer C.free(unsafe.Pointer(re))
 		return re
 	}
+	log.Println(err)
 
 	re := C.CString(md)
-	defer C.free(unsafe.Pointer(re))
 	return re
+}
+
+//export Free
+func Free(c *C.char) {
+    C.free(unsafe.Pointer(c))
 }
