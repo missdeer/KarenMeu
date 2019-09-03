@@ -23,57 +23,56 @@ import (
 
 var (
 	htmlTemplate = `<!DOCTYPE html>
-	<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<script>
-	function copyToClip(str) {
-	  function listener(e) {
-		e.clipboardData.setData("text/html", str);
-		e.clipboardData.setData("text/plain", str);
-		e.preventDefault();
-	  }
-	  document.addEventListener("copy", listener);
-	  document.execCommand("copy");
-	  document.removeEventListener("copy", listener);
-	};
-	</script>
-	<style type="text/css">
-	body { background-color: transparent !important; }
-	.wx-box {
-	  overflow-y: auto;
-	  margin: 0 auto;
-	  padding: 20px;
-	  width: 70%;
-	  height: 100%;
-	  box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
-	}
-	::-webkit-scrollbar {
-	  width: 6px;
-	  height: 6px;
-	}
-	::-webkit-scrollbar-track {
-	  border-radius: 3px;
-	  background: rgba(0, 0, 0, 0.06);
-	  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08);
-	}
-	::-webkit-scrollbar-thumb {
-	  border-radius: 3px;
-	  background: rgba(0, 0, 0, 0.12);
-	  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-	}
-	pre, pre span{
-	  overflow-x: scroll;
-	}
-	{{ .PreviewTheme }}
-	</style>
-	<body>
-	<div id="wx-box" class="wx-box">
-	<section>
-	{{ .FinalContent }}
-	</section>
-	</div>
-	</body>
-	</html>
-	`
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function copyToClip(str) {
+  function listener(e) {
+	e.clipboardData.setData("text/html", str);
+	e.clipboardData.setData("text/plain", str);
+	e.preventDefault();
+  }
+  document.addEventListener("copy", listener);
+  document.execCommand("copy");
+  document.removeEventListener("copy", listener);
+};
+</script>
+<style type="text/css">
+body { background-color: transparent !important; }
+.wx-box {
+  overflow-y: auto;
+  margin: 0 auto;
+  padding: 20px;
+  width: 70%;
+  height: 100%;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
+}
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.06);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08);
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.12);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+pre, pre span{
+  overflow-x: scroll;
+}
+{{ .PreviewTheme }}
+</style>
+<body>
+<div id="wx-box" class="wx-box">
+<section>
+{{ .FinalContent }}
+</section>
+</div>
+</body>
+</html>`
 	markdown goldmark.Markdown
 )
 
@@ -131,5 +130,5 @@ func ConvertToHTML(md string, theme string, style string, lineNumbers bool) *C.c
 
 //export Free
 func Free(c *C.char) {
-    C.free(unsafe.Pointer(c))
+	C.free(unsafe.Pointer(c))
 }
