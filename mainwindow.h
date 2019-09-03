@@ -30,6 +30,7 @@ protected:
 private:
     Ui::MainWindow *ui;
     MarkdownView *m_view;
+    void ApplySettingsToRenderer();
 };
 
 #endif // MAINWINDOW_H
