@@ -194,6 +194,7 @@
   
   /* 行内代码 */
   p code,li code {
+    font-size: 12px;
     color:rgb(271,93,108);
   }
   
@@ -202,6 +203,7 @@
    * 代码块换行 display:block;
    */
   pre span {
+    font-size: 12px;
   }
   
   /*

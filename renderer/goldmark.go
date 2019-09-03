@@ -33,5 +33,3 @@ func ConvertToHTML(md string, codeBlockStyle string) *C.char {
 	}
 	return C.CString(buf.String())
 }
-
-func main() {}

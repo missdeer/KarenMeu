@@ -113,6 +113,7 @@ figcaption {
 
 /* 行内代码 */
 p code, li code {
+  font-size: 12px;
 }
 
 /* 非微信代码块
@@ -120,6 +121,7 @@ p code, li code {
  * 代码块换行 display: block;
  */
 pre span {
+  font-size: 12px;
 }
 
 /*

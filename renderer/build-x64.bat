@@ -3,7 +3,7 @@ go version
 go env
 set GOARCH=amd64
 set CGO_ENABLED=1
-go build -buildmode=c-archive -o renderer.a goldmark.go
+go build -buildmode=c-archive -o renderer.a 
 gcc renderer.def renderer.a -shared -lwinmm -lWs2_32 -o renderer.dll -Wl,--out-implib,renderer.dll.a
 lib /def:renderer.def /name:renderer.dll /out:renderer.lib /MACHINE:X64
 mkdir x64

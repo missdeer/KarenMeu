@@ -201,10 +201,45 @@ void MarkdownView::convert()
     QString html = QString::fromUtf8(res);
     QString templater = R"(<!DOCTYPE html>
                      <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                     <script>
+                     function copyToClip(str) {
+                       function listener(e) {
+                         e.clipboardData.setData("text/html", str);
+                         e.clipboardData.setData("text/plain", str);
+                         e.preventDefault();
+                       }
+                       document.addEventListener("copy", listener);
+                       document.execCommand("copy");
+                       document.removeEventListener("copy", listener);
+                     };
+                     </script>            
                      <style type="text/css">
                      body { background-color: transparent !important; }
+                     .wx-box {
+                       overflow-y: auto;
+                       padding: 20px;
+                       width: 375px;
+                       height: 100%;
+                       box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
+                     }            
+                     ::-webkit-scrollbar {
+                       width: 6px;
+                       height: 6px;
+                     }
+                     ::-webkit-scrollbar-track {
+                       border-radius: 3px;
+                       background: rgba(0, 0, 0, 0.06);
+                       box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08);
+                     }
+                     ::-webkit-scrollbar-thumb {
+                       border-radius: 3px;
+                       background: rgba(0, 0, 0, 0.12);
+                       box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+                     }            
                      </style>
-                     <style type="text/css">%1</style><body>%2</body></html>)";
+                     <style type="text/css">%1</style><body>
+                     <button onclick='copyToClip(document.getElementById("wx-box").innerHTML)'>Copy</button>
+                     <div id="wx-box" class="wx-box"><section>%2</section></div></body></html>)";
     QString theme;
     const QString& themeFile = g_settings->previewTheme();
     QMap<QString, QString> m = {
@@ -224,5 +259,9 @@ void MarkdownView::convert()
         f.close();
     }
     QString r = templater.arg(theme, html);
-    m_preview->setHtml(r);
+    QByteArray rba = r.toUtf8();
+    GoString wholeHtml { (const char *)rba.data(), rba.length()};
+    auto inlinerHtml = Inliner(wholeHtml);
+    QString finalHtml = QString::fromUtf8(inlinerHtml);
+    m_preview->setHtml(finalHtml);
 }
