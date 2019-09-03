@@ -219,8 +219,9 @@ void MarkdownView::convert()
                      body { background-color: transparent !important; }
                      .wx-box {
                        overflow-y: auto;
+                       margin: 0 auto;
                        padding: 20px;
-                       width: 375px;
+                       width: 480px;
                        height: 100%;
                        box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
                      }            
@@ -237,10 +238,15 @@ void MarkdownView::convert()
                        border-radius: 3px;
                        background: rgba(0, 0, 0, 0.12);
                        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-                     }            
+                     }       
+                     pre, pre span{
+                       overflow-x: scroll;
+                     }
                      </style>
                      <style type="text/css">%1</style><body>
+                     <!--
                      <button onclick='copyToClip(document.getElementById("wx-box").innerHTML)'>Copy</button>
+                     -->
                      <div id="wx-box" class="wx-box"><section>%2</section></div></body></html>)";
     QString theme;
     const QString& themeFile = g_settings->previewTheme();
