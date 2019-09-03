@@ -42,7 +42,8 @@ bool MarkdownView::maybeSave()
     {
         int res = QMessageBox::question(this, tr("Confirm"), 
                                         tr("Modified document has not been saved, do you want to save it?"),
-                                        QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+                                        QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel,
+                                        QMessageBox::Yes);
         if (res == QMessageBox::Cancel)
             return false;
         if (res == QMessageBox::Yes)
@@ -99,7 +100,8 @@ void MarkdownView::newDocument()
         // prompt user to save document first
         int res = QMessageBox::question(this, tr("Confirm"), 
                                         tr("Modified document has not been saved, do you want to save it?"),
-                                        QMessageBox::Yes | QMessageBox::No);
+                                        QMessageBox::Yes | QMessageBox::No,
+                                        QMessageBox::Yes);
         if (res == QMessageBox::Yes)
             saveDocument();
     }
