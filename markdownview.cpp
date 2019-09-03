@@ -197,7 +197,14 @@ void MarkdownView::convert()
 {
     QByteArray ba = m_editor->content();
     GoString content{ (const char *)ba.data(), (ptrdiff_t)ba.size()};
-    auto res = ConvertToHTML(content);
+    
+    QByteArray theme = g_settings->previewThemeContent();
+    GoString themeContent { (const char *)theme.data(), (ptrdiff_t)theme.size()};
+    
+    QByteArray style = g_settings->codeBlockStyle().toUtf8();
+    GoString styleContent { (const char *)style.data(), (ptrdiff_t)style.size()};
+    
+    auto res = ConvertToHTML(content, themeContent, styleContent, true);
     QString html = QString::fromUtf8(res);
     m_preview->setHtml(html);
 }

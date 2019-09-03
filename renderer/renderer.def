@@ -3,7 +3,3 @@ EXPORTS
     Inliner
     PremailerInliner
     DouceurInliner
-    SetPreviewTheme
-    SetCodeBlockStyle
-    SetHTMLTempalte
-    EnableLineNumbers

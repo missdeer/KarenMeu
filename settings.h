@@ -35,6 +35,8 @@ public:
     const QString & codeBlockStyle() const;
     void setCodeBlockStyle(const QString &codeBlockStyle);
 
+    QByteArray previewThemeContent() const;
+    
 private:
     int m_autoRefreshInterval{1000}; // millisecond
     int m_editorZoomFactor{100}; // percent
@@ -44,6 +46,7 @@ private:
     QString m_codeInspectorFontFamily;
     QString m_codeInspectorTheme;
     QString m_previewTheme;
+    QByteArray m_previewThemeContent;
     QString m_codeBlockStyle;
 };
 

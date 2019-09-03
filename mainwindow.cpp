@@ -27,7 +27,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionUndo, &QAction::triggered, m_view, &MarkdownView::undo);
     connect(ui->actionRedo, &QAction::triggered, m_view, &MarkdownView::redo);
     connect(ui->actionSelectAll, &QAction::triggered, m_view, &MarkdownView::selectAll);
-    ApplySettingsToRenderer();
 }
 
 MainWindow::~MainWindow()
@@ -51,46 +50,11 @@ void MainWindow::on_actionAbout_triggered()
                        tr("KarenMeu is a Markdown based Wechat public account article editor for programmers."));
 }
 
-void MainWindow::ApplySettingsToRenderer()
-{
-    QByteArray theme;
-    const QString& themeFile = g_settings->previewTheme();
-    QMap<QString, QString> m = {
-        { "墨黑", "black.css" },
-        { "姹紫", "purple.css" },
-        { "嫩青", "blue.css" },
-        { "橙心", "orange.css" },
-        { "红绯", "red.css" },
-        { "绿意", "green.css" },
-        { "默认", "default.css" },
-        };
-    QFile f(":/rc/theme/" + m[themeFile]);
-    if (f.open(QIODevice::ReadOnly))
-    {
-        theme = f.readAll();
-        f.close();
-    }
-    qDebug() << "theme:" << themeFile << QString(theme);
-    GoString rawThemeContent { (const char *)theme.data(), theme.length()};
-    SetPreviewTheme(rawThemeContent);
-    
-    const QString& style = g_settings->codeBlockStyle();
-    qDebug() << "code block style:" << style;
-    GoString codeblockStyle { (const char *)style.toStdString().c_str(), style.length()};
-    SetCodeBlockStyle(codeblockStyle);
-    
-    //SetHTMLTempalte();
-    
-    EnableLineNumbers(true);    
-}
-
 void MainWindow::on_actionPreference_triggered()
 {
     PreferenceDialog dlg(this);
     if (dlg.exec() == QDialog::Accepted)
     {
-        ApplySettingsToRenderer();
-        
         m_view->forceConvert();
     }
 }

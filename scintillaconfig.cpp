@@ -90,7 +90,6 @@ void ScintillaConfig::initScintilla()
     QString themePath = ":/rc/sci/themes/" % g_settings->codeEditorTheme() % ".xml";
     if (!QFile::exists(themePath))
     {
-        qDebug() << themePath << "not exists";        
         themePath = ":/rc/sci/stylers.model.xml";
     }
     applyThemeStyle(themePath, "markdown");
@@ -141,7 +140,6 @@ void ScintillaConfig::initLexerStyle(const QString& lang)
     QString themePath = ":/rc/sci/themes/" % g_settings->codeEditorTheme() % ".xml";
     if (!QFile::exists(themePath))
     {
-        qDebug() << themePath << "not exists";
         themePath = ":/rc/sci/stylers.model.xml";
     }
     applyThemeStyle(themePath, lang);
