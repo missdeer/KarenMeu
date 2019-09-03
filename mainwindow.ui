@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -48,7 +48,7 @@
     <addaction name="actionCopy"/>
     <addaction name="actionCut"/>
     <addaction name="actionPaste"/>
-    <addaction name="actionSelect_All"/>
+    <addaction name="actionSelectAll"/>
     <addaction name="separator"/>
     <addaction name="actionPreference"/>
    </widget>
@@ -222,9 +222,12 @@
     <string>Ctrl+Y</string>
    </property>
   </action>
-  <action name="actionSelect_All">
+  <action name="actionSelectAll">
    <property name="text">
     <string>Select All</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
    </property>
   </action>
  </widget>

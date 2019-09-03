@@ -20,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionCut, &QAction::triggered, m_view, &MarkdownView::cut);
     connect(ui->actionCopy, &QAction::triggered, m_view, &MarkdownView::copy);
     connect(ui->actionPaste, &QAction::triggered, m_view, &MarkdownView::paste);
+    connect(ui->actionUndo, &QAction::triggered, m_view, &MarkdownView::undo);
+    connect(ui->actionRedo, &QAction::triggered, m_view, &MarkdownView::redo);
+    connect(ui->actionSelectAll, &QAction::triggered, m_view, &MarkdownView::selectAll);
 }
 
 MainWindow::~MainWindow()
