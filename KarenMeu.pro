@@ -53,6 +53,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     karenmeu.qrc
 
+RC_FILE = KarenMeu.rc
+
 win32-*msvc* {
     QMAKE_LFLAGS += "/LTCG"
     QMAKE_CXXFLAGS_RELEASE += /Zi
