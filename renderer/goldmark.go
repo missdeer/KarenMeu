@@ -35,17 +35,17 @@ var (
 	  document.execCommand("copy");
 	  document.removeEventListener("copy", listener);
 	};
-	</script>            
+	</script>
 	<style type="text/css">
 	body { background-color: transparent !important; }
 	.wx-box {
 	  overflow-y: auto;
 	  margin: 0 auto;
 	  padding: 20px;
-	  width: 480px;
+	  width: 70%;
 	  height: 100%;
 	  box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
-	}            
+	}
 	::-webkit-scrollbar {
 	  width: 6px;
 	  height: 6px;
@@ -59,7 +59,7 @@ var (
 	  border-radius: 3px;
 	  background: rgba(0, 0, 0, 0.12);
 	  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-	}       
+	}
 	pre, pre span{
 	  overflow-x: scroll;
 	}
