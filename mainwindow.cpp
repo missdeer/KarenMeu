@@ -1,6 +1,7 @@
 #include <QMessageBox>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QCloseEvent>
 #include "markdownview.h"
 #include "preferencedialog.h"
 #include "mainwindow.h"
@@ -52,5 +53,14 @@ void MainWindow::on_actionPreference_triggered()
     if (dlg.exec() == QDialog::Accepted)
     {
         m_view->forceConvert();
+    }
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (m_view->maybeSave()) {
+        event->accept();
+    } else {
+        event->ignore();
     }
 }

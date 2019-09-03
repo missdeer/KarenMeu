@@ -15,6 +15,7 @@ class MarkdownView : public QWidget
 public:
     explicit MarkdownView(QWidget *parent = nullptr);
     void forceConvert();
+    bool maybeSave();
 signals:
     
 public slots:

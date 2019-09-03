@@ -14,7 +14,7 @@ class MainWindow : public QMainWindow
     
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
     
 private slots:
     void on_actionExit_triggered();
@@ -25,6 +25,8 @@ private slots:
     
     void on_actionPreference_triggered();
     
+protected:
+    void closeEvent(QCloseEvent *event) override;
 private:
     Ui::MainWindow *ui;
     MarkdownView *m_view;

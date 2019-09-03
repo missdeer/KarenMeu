@@ -36,6 +36,21 @@ void MarkdownView::forceConvert()
     convert();
 }
 
+bool MarkdownView::maybeSave()
+{
+    if (m_editor->modify())
+    {
+        int res = QMessageBox::question(this, tr("Confirm"), 
+                                        tr("Modified document has not been saved, do you want to save it?"),
+                                        QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+        if (res == QMessageBox::Cancel)
+            return false;
+        if (res == QMessageBox::Yes)
+            saveDocument();
+    }
+    return true;
+}
+
 void MarkdownView::openDocument()
 {
     newDocument();
@@ -82,8 +97,8 @@ void MarkdownView::newDocument()
     if (m_editor->modify())
     {
         // prompt user to save document first
-        int res = QMessageBox::question(this, tr("Modified document has not been saved"), 
-                                        tr("Do you want to save it?"),
+        int res = QMessageBox::question(this, tr("Confirm"), 
+                                        tr("Modified document has not been saved, do you want to save it?"),
                                         QMessageBox::Yes | QMessageBox::No);
         if (res == QMessageBox::Yes)
             saveDocument();
