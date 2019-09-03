@@ -63,9 +63,16 @@ var (
 	pre, pre span{
 	  overflow-x: scroll;
 	}
+	{{ .PreviewTheme }}
 	</style>
-	<style type="text/css">{{ .PreviewTheme }}</style><body>
-	<div id="wx-box" class="wx-box"><section>{{ .FinalContent }}</section></div></body></html>
+	<body>
+	<div id="wx-box" class="wx-box">
+	<section>
+	{{ .FinalContent }}
+	</section>
+	</div>
+	</body>
+	</html>
 	`
 	markdown goldmark.Markdown
 )
