@@ -26,7 +26,7 @@ MarkdownView::MarkdownView(QWidget *parent)
     m_splitter->setSizes(QList<int>() << width()/2 << width() /2);
     m_editor->initialize();
     connect(m_editor, &MarkdownEditor::contentModified, this, &MarkdownView::documentModified);
-    
+
     connect(m_convertTimer, &QTimer::timeout, this, &MarkdownView::convertTimeout);
     m_convertTimer->start(g_settings->autoRefreshInterval());
 }
@@ -161,6 +161,11 @@ void MarkdownView::redo()
     else {
         m_preview->triggerPageAction(QWebEnginePage::Redo);
     }
+}
+
+void MarkdownView::copyAsHTML()
+{
+    m_preview->page()->runJavaScript(R"(copyToClip(document.getElementById('wx-box').innerHTML);)");
 }
 
 void MarkdownView::documentModified()

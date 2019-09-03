@@ -65,9 +65,6 @@ var (
 	}
 	</style>
 	<style type="text/css">{{ .PreviewTheme }}</style><body>
-	<!--
-	<button onclick='copyToClip(document.getElementById("wx-box").innerHTML)'>Copy</button>
-	-->
 	<div id="wx-box" class="wx-box"><section>{{ .FinalContent }}</section></div></body></html>
 	`
 	markdown goldmark.Markdown

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>706</width>
+    <height>448</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,8 +23,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
-     <height>21</height>
+     <width>706</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -49,6 +49,8 @@
     <addaction name="actionCut"/>
     <addaction name="actionPaste"/>
     <addaction name="actionSelectAll"/>
+    <addaction name="separator"/>
+    <addaction name="actionCopyAsHTML"/>
     <addaction name="separator"/>
     <addaction name="actionPreference"/>
    </widget>
@@ -77,6 +79,8 @@
    <addaction name="actionCopy"/>
    <addaction name="actionCut"/>
    <addaction name="actionPaste"/>
+   <addaction name="separator"/>
+   <addaction name="actionCopyAsHTML"/>
    <addaction name="separator"/>
    <addaction name="actionPreference"/>
   </widget>
@@ -228,6 +232,18 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="actionCopyAsHTML">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/copyAsHTML.png</normaloff>:/rc/images/copyAsHTML.png</iconset>
+   </property>
+   <property name="text">
+    <string>Copy As HTML</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+C</string>
    </property>
   </action>
  </widget>

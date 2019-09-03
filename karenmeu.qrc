@@ -48,5 +48,6 @@
         <file>rc/theme/orange.css</file>
         <file>rc/theme/purple.css</file>
         <file>rc/theme/red.css</file>
+        <file>rc/images/copyAsHTML.png</file>
     </qresource>
 </RCC>

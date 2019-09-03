@@ -29,6 +29,7 @@ public slots:
     void selectAll();
     void undo();
     void redo();
+    void copyAsHTML();
 
 private slots:
     void documentModified();

@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionUndo, &QAction::triggered, m_view, &MarkdownView::undo);
     connect(ui->actionRedo, &QAction::triggered, m_view, &MarkdownView::redo);
     connect(ui->actionSelectAll, &QAction::triggered, m_view, &MarkdownView::selectAll);
+    connect(ui->actionCopyAsHTML, &QAction::triggered, m_view, &MarkdownView::copyAsHTML);
 }
 
 MainWindow::~MainWindow()

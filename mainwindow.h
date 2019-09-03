@@ -24,7 +24,7 @@ private slots:
     void on_actionAbout_triggered();
     
     void on_actionPreference_triggered();
-    
+
 protected:
     void closeEvent(QCloseEvent *event) override;
 private:
