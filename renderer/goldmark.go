@@ -8,7 +8,11 @@ import (
 	"github.com/alecthomas/chroma/formatters/html"
 	"github.com/yuin/goldmark"
 	highlighting "github.com/yuin/goldmark-highlighting"
+	"github.com/yuin/goldmark-meta"
+	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/parser"
+	"github.com/yuin/goldmark/renderer"
+	"github.com/yuin/goldmark/util"
 )
 
 //export ConvertToHTML
@@ -21,9 +25,15 @@ func ConvertToHTML(md string, codeBlockStyle string) *C.char {
 					html.WithLineNumbers(),
 				),
 			),
+			meta.New(meta.WithTable()),
 		),
 		goldmark.WithParserOptions(
 			parser.WithAutoHeadingID(),
+		),
+		goldmark.WithRendererOptions(
+			renderer.WithNodeRenderers(
+				util.Prioritized(extension.NewTableHTMLRenderer(), 500),
+			),
 		),
 	)
 
