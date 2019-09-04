@@ -20,32 +20,6 @@ var (
 	htmlTemplate = `<!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
-body { background-color: transparent !important; }
-.wx-box {
-  overflow-y: auto;
-  margin: 0 auto;
-  padding: 20px;
-  width: 70%;
-  height: 100%;
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
-}
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  border-radius: 3px;
-  background: rgba(0, 0, 0, 0.06);
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08);
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  background: rgba(0, 0, 0, 0.12);
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-}
-pre, pre span{
-  overflow-x: scroll;
-}
 {{ .PreviewTheme }}
 </style>
 <body>
