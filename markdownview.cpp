@@ -27,6 +27,8 @@ MarkdownView::MarkdownView(QWidget *parent)
     m_editor->initialize();
     connect(m_editor, &MarkdownEditor::contentModified, this, &MarkdownView::documentModified);
 
+    m_preview->setContextMenuPolicy(Qt::NoContextMenu);
+    
     connect(m_convertTimer, &QTimer::timeout, this, &MarkdownView::convertTimeout);
     m_convertTimer->start(g_settings->autoRefreshInterval());
 }
