@@ -1,4 +1,4 @@
-#ifndef MARKDOWNVIEW_H
+﻿#ifndef MARKDOWNVIEW_H
 #define MARKDOWNVIEW_H
 
 #include <QWidget>
@@ -16,6 +16,8 @@ public:
     explicit MarkdownView(QWidget *parent = nullptr);
     void forceConvert();
     bool maybeSave();
+    void setThemeStyle();
+    
 signals:
     
 public slots:
@@ -34,6 +36,7 @@ public slots:
 private slots:
     void documentModified();
     void convertTimeout();
+    void previewLoadFinished(bool);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -49,6 +52,7 @@ private:
     void convert();
     void insertStyleSheet(const QString &name, const QString &source, bool immediately);
     void removeStyleSheet(const QString &name, bool immediately);
+    void setContent(const QString &html);
 };
 
 #endif // MARKDOWNVIEW_H

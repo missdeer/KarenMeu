@@ -56,6 +56,7 @@ void MainWindow::on_actionPreference_triggered()
     PreferenceDialog dlg(this);
     if (dlg.exec() == QDialog::Accepted)
     {
+        m_view->setThemeStyle();
         m_view->forceConvert();
     }
 }

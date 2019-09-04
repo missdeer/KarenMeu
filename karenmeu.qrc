@@ -86,5 +86,6 @@
         <file>rc/styles/vim.css</file>
         <file>rc/styles/vs.css</file>
         <file>rc/styles/xcode.css</file>
+        <file>rc/html/index.html</file>
     </qresource>
 </RCC>

@@ -30,6 +30,8 @@ MarkdownView::MarkdownView(QWidget *parent)
     connect(m_editor, &MarkdownEditor::contentModified, this, &MarkdownView::documentModified);
 
     m_preview->setContextMenuPolicy(Qt::NoContextMenu);
+    m_preview->load(QUrl("qrc:/rc/html/index.html"));
+    connect(m_preview, &QWebEngineView::loadFinished, this, &MarkdownView::previewLoadFinished);
     
     connect(m_convertTimer, &QTimer::timeout, this, &MarkdownView::convertTimeout);
     m_convertTimer->start(g_settings->autoRefreshInterval());
@@ -207,6 +209,25 @@ void MarkdownView::convertTimeout()
     }
 }
 
+void MarkdownView::setThemeStyle()
+{
+    const QString& style = g_settings->codeBlockStyle();
+    QFile f(":/rc/styles/" + style + ".css");
+    if (f.open(QIODevice::ReadOnly))
+    {
+        auto ba = f.readAll();
+        QByteArray themeContent = g_settings->previewThemeContent();
+        removeStyleSheet("theme", true);
+        insertStyleSheet("theme", QString::fromUtf8(themeContent + ba), true);
+        f.close();
+    }    
+}
+
+void MarkdownView::previewLoadFinished(bool)
+{
+    setThemeStyle();
+}
+
 void MarkdownView::resizeEvent(QResizeEvent *event)
 {
     m_splitter->setSizes(QList<int>() << width()/2 << width() /2);
@@ -223,13 +244,18 @@ void MarkdownView::saveToFile(const QString &savePath)
     }
 }
 
+void MarkdownView::setContent(const QString& html)
+{
+    QString s = QString::fromLatin1("(function() {"\
+                                    "    document.getElementById('content-container').innerHTML = '%1';"\
+                                    "})()").arg(html.simplified());
+    m_preview->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);    
+}
+
 void MarkdownView::convert()
 {
     QByteArray ba = m_editor->content();
     GoString content{ (const char *)ba.data(), (ptrdiff_t)ba.size()};
-    
-    QByteArray theme = g_settings->previewThemeContent();
-    GoString themeContent { (const char *)theme.data(), (ptrdiff_t)theme.size()};
     
     QByteArray style = g_settings->codeBlockStyle().toUtf8();
     GoString styleContent { (const char *)style.data(), (ptrdiff_t)style.size()};
@@ -237,7 +263,9 @@ void MarkdownView::convert()
     //auto res = Goldmark(content, themeContent, styleContent, true);
     auto res = Lute(content);
     QString html = QString::fromUtf8(res);
-    m_preview->setHtml(html);
+    
+    setContent(html);
+    
     Free(res);
 }
 
