@@ -4,7 +4,6 @@ import (
 	"C"
 	"bytes"
 	"log"
-	"strings"
 
 	"github.com/alecthomas/chroma/formatters/html"
 	"github.com/yuin/goldmark"
@@ -17,7 +16,7 @@ import (
 )
 
 //export Goldmark
-func Goldmark(md string, theme string, style string, lineNumbers bool) *C.char {
+func Goldmark(md string, style string, lineNumbers bool) *C.char {
 	options := []html.Option{}
 	if lineNumbers {
 		options = []html.Option{html.WithLineNumbers()}
@@ -49,22 +48,6 @@ func Goldmark(md string, theme string, style string, lineNumbers bool) *C.char {
 		return r
 	}
 
-	htmlTemplate := `<!DOCTYPE html>
-	<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<style type="text/css">
-	{{ .PreviewTheme }}
-	</style>
-	<body>
-	<div id="wx-box" class="wx-box">
-	<section>
-	{{ .FinalContent }}
-	</section>
-	</div>
-	</body>
-	</html>`
-	s := strings.Replace(htmlTemplate, `{{ .PreviewTheme }}`, theme, -1)
-	s = strings.Replace(s, `{{ .FinalContent }}`, buf.String(), -1)
-
-	re := C.CString(s)
+	re := C.CString(buf.String())
 	return re
 }

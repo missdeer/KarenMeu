@@ -11,7 +11,7 @@ import (
 func Lute(md string) *C.char {
 	luteEngine := lute.New(
 		lute.CodeSyntaxHighlight(true),
-		) 
+	)
 	html, err := luteEngine.MarkdownStr("KarenMeu", md)
 	if nil != err {
 		log.Println(err)
