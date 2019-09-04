@@ -6,6 +6,7 @@
 #include <QWebEngineView>
 #include <QWebEngineScript>
 #include <QWebEngineScriptCollection>
+#include <QWebChannel>
 #include <QTimer>
 #include "settings.h"
 #include "markdowneditor.h"
@@ -29,6 +30,10 @@ MarkdownView::MarkdownView(QWidget *parent)
     m_editor->initialize();
     connect(m_editor, &MarkdownEditor::contentModified, this, &MarkdownView::documentModified);
 
+    auto *channel = new QWebChannel(this);
+    channel->registerObject(QStringLiteral("content"), &m_renderedContent);
+    m_preview->page()->setWebChannel(channel);
+    
     m_preview->setContextMenuPolicy(Qt::NoContextMenu);
     m_preview->load(QUrl("qrc:/rc/html/index.html"));
     connect(m_preview, &QWebEngineView::loadFinished, this, &MarkdownView::previewLoadFinished);
@@ -216,7 +221,7 @@ void MarkdownView::setThemeStyle()
     if (f.open(QIODevice::ReadOnly))
     {
         auto ba = f.readAll();
-        QByteArray themeContent = g_settings->previewThemeContent();
+        auto themeContent = g_settings->previewThemeContent();
         removeStyleSheet("theme", true);
         insertStyleSheet("theme", QString::fromUtf8(themeContent + ba), true);
         f.close();
@@ -246,10 +251,7 @@ void MarkdownView::saveToFile(const QString &savePath)
 
 void MarkdownView::setContent(const QString& html)
 {
-    QString s = QString::fromLatin1("(function() {"\
-                                    "    document.getElementById('content-container').innerHTML = '%1';"\
-                                    "})()").arg(html.simplified());
-    m_preview->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);    
+    m_renderedContent.setText(html);   
 }
 
 void MarkdownView::convert()
@@ -260,7 +262,7 @@ void MarkdownView::convert()
     QByteArray style = g_settings->codeBlockStyle().toUtf8();
     GoString styleContent { (const char *)style.data(), (ptrdiff_t)style.size()};
     
-    //auto res = Goldmark(content, themeContent, styleContent, true);
+    //auto res = Goldmark(content, styleContent, true);
     auto res = Lute(content);
     QString html = QString::fromUtf8(res);
     

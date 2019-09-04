@@ -2,6 +2,7 @@
 #define MARKDOWNVIEW_H
 
 #include <QWidget>
+#include "rendereddocument.h"
 
 QT_FORWARD_DECLARE_CLASS(QSplitter);
 QT_FORWARD_DECLARE_CLASS(QWebEngineView);
@@ -47,6 +48,7 @@ private:
     QWebEngineView *m_preview;
     QTimer *m_convertTimer;
     QString m_savePath;
+    RenderedDocument m_renderedContent;
     
     void saveToFile(const QString &savePath);
     void convert();

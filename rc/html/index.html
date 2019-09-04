@@ -3,12 +3,29 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+    <script src="qrc:/qtwebchannel/qwebchannel.js"></script>
 <body>
     <div id="wx-box" class="wx-box">
         <section id="content-container" class="highlight-chroma">
         </section>
     </div>
+    <script>
+        'use strict';
+    
+        var placeholder = document.getElementById('content-container');
+    
+        var updateText = function(text) {
+            placeholder.innerHTML = text;
+        }
+    
+        new QWebChannel(qt.webChannelTransport,
+          function(channel) {
+            var content = channel.objects.content;
+            updateText(content.text);
+            content.textChanged.connect(updateText);
+          }
+        );
+        </script>
 </body>
 
 </html>

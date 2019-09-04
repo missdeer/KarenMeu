@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets network xml webengine webenginewidgets
+QT       += core gui widgets network xml webengine webenginewidgets webchannel
 
 TARGET = KarenMeu
 TEMPLATE = app
@@ -25,6 +25,7 @@ CONFIG += c++17
 include($$PWD/3rdparty/scintilla-latest.pri)
 
 SOURCES += \
+        rendereddocument.cpp \
         main.cpp \
         mainwindow.cpp \
         markdowneditor.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
         settings.cpp
 
 HEADERS += \
+        rendereddocument.h \
         mainwindow.h \
         markdowneditor.h \
         markdownview.h \
