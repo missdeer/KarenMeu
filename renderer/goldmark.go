@@ -1,15 +1,10 @@
 package main
 
-/*
-#include <stdlib.h>
-*/
-import "C"
-
 import (
+	"C"
 	"bytes"
 	"log"
 	"strings"
-	"unsafe"
 
 	"github.com/alecthomas/chroma/formatters/html"
 	"github.com/yuin/goldmark"
@@ -111,24 +106,7 @@ func ConvertToHTML(md string, theme string, style string, lineNumbers bool) *C.c
 
 	s := strings.Replace(htmlTemplate, `{{ .PreviewTheme }}`, theme, -1)
 	s = strings.Replace(s, `{{ .FinalContent }}`, buf.String(), -1)
-	r, err := premailerEngine(s)
-	if err == nil {
-		re := C.CString(r)
-		return re
-	}
-	log.Println(err)
-	r, err = douceurEngine(s)
-	if err == nil {
-		re := C.CString(r)
-		return re
-	}
-	log.Println(err)
 
-	re := C.CString(md)
+	re := C.CString(s)
 	return re
-}
-
-//export Free
-func Free(c *C.char) {
-	C.free(unsafe.Pointer(c))
 }
