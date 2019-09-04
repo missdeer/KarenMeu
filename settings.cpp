@@ -22,6 +22,7 @@ void Settings::save()
     settings.setValue("codeEditorTheme", m_codeEditorTheme);
     settings.setValue("previewTheme", m_previewTheme);
     settings.setValue("codeBlockStyle", m_codeBlockStyle);
+    settings.setValue("markdownEngine", m_markdownEngine);
     settings.sync();
 }
 
@@ -38,6 +39,7 @@ void Settings::load()
     m_codeEditorTheme = settings.value("codeEditorTheme", QString("Default")).toString();
     setPreviewTheme(settings.value("previewTheme", QString("默认")).toString());
     m_codeBlockStyle = settings.value("codeBlockStyle", QString("xcode")).toString();
+    m_markdownEngine = settings.value("markdownEngine", QString("Goldmark")).toString();
 }
 
 const QString & Settings::codeEditorFontFamily() const
@@ -118,6 +120,16 @@ void Settings::setCodeBlockStyle(const QString &codeBlockStyle)
 QByteArray Settings::previewThemeContent() const
 {
     return m_previewThemeContent;
+}
+
+const QString &Settings::markdownEngine() const
+{
+    return m_markdownEngine;
+}
+
+void Settings::setMarkdownEngine(const QString &markdownEngine)
+{
+    m_markdownEngine = markdownEngine;
 }
 
 

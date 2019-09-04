@@ -18,6 +18,7 @@ public:
     void forceConvert();
     bool maybeSave();
     void setThemeStyle();
+    void updateMarkdownEngine();
     
 signals:
     

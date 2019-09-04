@@ -9,6 +9,7 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) :
     ui->setupUi(this);
     ui->cbPreviewTheme->setCurrentText(g_settings->previewTheme());
     ui->cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
+    ui->cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());
 }
 
 PreferenceDialog::~PreferenceDialog()
@@ -20,5 +21,6 @@ void PreferenceDialog::accept()
 {
     g_settings->setPreviewTheme(ui->cbPreviewTheme->currentText());
     g_settings->setCodeBlockStyle(ui->cbCodeBlockStyle->currentText());
+    g_settings->setMarkdownEngine(ui->cbMarkdownEngine->currentText());
     QDialog::accept();
 }

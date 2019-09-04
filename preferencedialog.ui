@@ -15,6 +15,27 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Markdown Engine:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="cbMarkdownEngine">
+     <item>
+      <property name="text">
+       <string>Goldmark</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Lute</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Preview Theme:</string>

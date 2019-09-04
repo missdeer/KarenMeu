@@ -37,6 +37,9 @@ public:
 
     QByteArray previewThemeContent() const;
     
+    const QString & markdownEngine() const;
+    void setMarkdownEngine(const QString &markdownEngine);
+    
 private:
     int m_autoRefreshInterval{1000}; // millisecond
     int m_editorZoomFactor{100}; // percent
@@ -48,6 +51,7 @@ private:
     QString m_previewTheme;
     QByteArray m_previewThemeContent;
     QString m_codeBlockStyle;
+    QString m_markdownEngine;
 };
 
 inline Settings *g_settings = nullptr;

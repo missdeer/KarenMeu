@@ -13,6 +13,8 @@
 #include "markdownview.h"
 #include "renderer.h"
 
+std::function<char*(GoString, GoString, GoUint8)> markdownEngine;
+
 MarkdownView::MarkdownView(QWidget *parent) 
     : QWidget(parent)
     , m_splitter(new QSplitter(this))
@@ -216,20 +218,39 @@ void MarkdownView::convertTimeout()
 
 void MarkdownView::setThemeStyle()
 {
-    const QString& style = g_settings->codeBlockStyle();
-    QFile f(":/rc/styles/" + style + ".css");
-    if (f.open(QIODevice::ReadOnly))
+    QByteArray ba = g_settings->previewThemeContent();
+    if (g_settings->markdownEngine() == "Lute")
     {
-        auto ba = f.readAll();
-        auto themeContent = g_settings->previewThemeContent();
-        removeStyleSheet("theme", true);
-        insertStyleSheet("theme", QString::fromUtf8(themeContent + ba), true);
-        f.close();
-    }    
+        const QString& style = g_settings->codeBlockStyle();
+        QFile f(":/rc/styles/" + style + ".css");
+        if (f.open(QIODevice::ReadOnly))
+        {
+            ba.append(f.readAll());
+            f.close();
+        }    
+    }
+    removeStyleSheet("theme", true);
+    insertStyleSheet("theme", QString::fromUtf8(ba), true);
+}
+
+void MarkdownView::updateMarkdownEngine()
+{
+    if (g_settings->markdownEngine() == "Goldmark")
+    {
+        markdownEngine = [](GoString p0, GoString p1, GoUint8 p2)->char*{ return Goldmark(p0, p1, p2);};
+    }
+    else {
+        markdownEngine = [](GoString p0, GoString p1, GoUint8 p2)->char*{ 
+            Q_UNUSED(p1);
+            Q_UNUSED(p2);
+            return Lute(p0);
+        };
+    }
 }
 
 void MarkdownView::previewLoadFinished(bool)
 {
+    updateMarkdownEngine();
     setThemeStyle();
 }
 
@@ -262,8 +283,7 @@ void MarkdownView::convert()
     QByteArray style = g_settings->codeBlockStyle().toUtf8();
     GoString styleContent { (const char *)style.data(), (ptrdiff_t)style.size()};
     
-    //auto res = Goldmark(content, styleContent, true);
-    auto res = Lute(content);
+    auto res = markdownEngine(content, styleContent, true);
     QString html = QString::fromUtf8(res);
     
     setContent(html);

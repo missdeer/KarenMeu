@@ -57,6 +57,7 @@ void MainWindow::on_actionPreference_triggered()
     if (dlg.exec() == QDialog::Accepted)
     {
         m_view->setThemeStyle();
+        m_view->updateMarkdownEngine();
         m_view->forceConvert();
     }
 }
