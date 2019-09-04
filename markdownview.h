@@ -47,6 +47,8 @@ private:
     
     void saveToFile(const QString &savePath);
     void convert();
+    void insertStyleSheet(const QString &name, const QString &source, bool immediately);
+    void removeStyleSheet(const QString &name, bool immediately);
 };
 
 #endif // MARKDOWNVIEW_H

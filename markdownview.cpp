@@ -4,6 +4,8 @@
 #include <QMessageBox>
 #include <QSplitter>
 #include <QWebEngineView>
+#include <QWebEngineScript>
+#include <QWebEngineScriptCollection>
 #include <QTimer>
 #include "settings.h"
 #include "markdowneditor.h"
@@ -237,4 +239,39 @@ void MarkdownView::convert()
     QString html = QString::fromUtf8(res);
     m_preview->setHtml(html);
     Free(res);
+}
+
+void MarkdownView::insertStyleSheet(const QString &name, const QString &source, bool immediately)
+{
+    QWebEngineScript script;
+    QString s = QString::fromLatin1("(function() {"\
+                                    "    css = document.createElement('style');"\
+                                    "    css.type = 'text/css';"\
+                                    "    css.id = '%1';"\
+                                    "    document.head.appendChild(css);"\
+                                    "    css.innerText = '%2';"\
+                                    "})()").arg(name, source.simplified());
+    if (immediately)
+        m_preview->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);
+    
+    script.setName(name);
+    script.setSourceCode(s);
+    script.setInjectionPoint(QWebEngineScript::DocumentReady);
+    script.setRunsOnSubFrames(true);
+    script.setWorldId(QWebEngineScript::ApplicationWorld);
+    m_preview->page()->scripts().insert(script);
+}
+
+void MarkdownView::removeStyleSheet(const QString &name, bool immediately)
+{
+    QString s = QString::fromLatin1("(function() {"\
+                                    "    var element = document.getElementById('%1');"\
+                                    "    element.outerHTML = '';"\
+                                    "    delete element;"\
+                                    "})()").arg(name);
+    if (immediately)
+        m_preview->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);
+    
+    QWebEngineScript script = m_preview->page()->scripts().findScript(name);
+    m_preview->page()->scripts().remove(script);
 }
