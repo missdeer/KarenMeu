@@ -1,4 +1,6 @@
 #include <QtCore>
+#include <QApplication>
+#include <QClipboard>
 #include <QVBoxLayout>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -186,19 +188,11 @@ void MarkdownView::copyAsHTML()
         auto res = Inliner(content);
         // set back to webengine page
         QString r = QString::fromUtf8(res);
-        m_preview->page()->setHtml(r);
-        // copy it
-        m_preview->page()->runJavaScript(R"(function copyToClip(str) {
-                                         function listener(e) {
-                                           e.clipboardData.setData("text/html", str);
-                                           e.clipboardData.setData("text/plain", str);
-                                           e.preventDefault();
-                                         }
-                                         document.addEventListener("copy", listener);
-                                         document.execCommand("copy");
-                                         document.removeEventListener("copy", listener);
-                                         };
-                                         copyToClip(document.getElementById('wx-box').innerHTML);)");
+        
+        auto* md = new QMimeData;
+        md->setText(r);
+        md->setHtml(r);
+        QApplication::clipboard()->setMimeData(md, QClipboard::Clipboard);
     });
 }
 
