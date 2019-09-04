@@ -177,7 +177,17 @@ void MarkdownView::copyAsHTML()
         QString r = QString::fromUtf8(res);
         m_preview->page()->setHtml(r);
         // copy it
-        m_preview->page()->runJavaScript(R"(copyToClip(document.getElementById('wx-box').innerHTML);)");
+        m_preview->page()->runJavaScript(R"(function copyToClip(str) {
+                                         function listener(e) {
+                                           e.clipboardData.setData("text/html", str);
+                                           e.clipboardData.setData("text/plain", str);
+                                           e.preventDefault();
+                                         }
+                                         document.addEventListener("copy", listener);
+                                         document.execCommand("copy");
+                                         document.removeEventListener("copy", listener);
+                                         };
+                                         copyToClip(document.getElementById('wx-box').innerHTML);)");
     });
 }
 

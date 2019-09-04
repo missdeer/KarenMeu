@@ -19,18 +19,6 @@ import (
 var (
 	htmlTemplate = `<!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script>
-function copyToClip(str) {
-  function listener(e) {
-	e.clipboardData.setData("text/html", str);
-	e.clipboardData.setData("text/plain", str);
-	e.preventDefault();
-  }
-  document.addEventListener("copy", listener);
-  document.execCommand("copy");
-  document.removeEventListener("copy", listener);
-};
-</script>
 <style type="text/css">
 body { background-color: transparent !important; }
 .wx-box {
