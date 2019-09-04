@@ -167,7 +167,18 @@ void MarkdownView::redo()
 
 void MarkdownView::copyAsHTML()
 {
-    m_preview->page()->runJavaScript(R"(copyToClip(document.getElementById('wx-box').innerHTML);)");
+    // get whole origin html
+    m_preview->page()->toHtml([this](const QString& result) mutable {
+        // inline css
+        QByteArray ba = result.toUtf8();
+        GoString content { (const char *)ba.data(), (ptrdiff_t)ba.size()};
+        auto res = Inliner(content);
+        // set back to webengine page
+        QString r = QString::fromUtf8(res);
+        m_preview->page()->setHtml(r);
+        // copy it
+        m_preview->page()->runJavaScript(R"(copyToClip(document.getElementById('wx-box').innerHTML);)");
+    });
 }
 
 void MarkdownView::documentModified()
