@@ -223,8 +223,8 @@ void MarkdownView::setThemeStyle()
             f.close();
         }    
     }
-    removeStyleSheet("theme", true);
-    insertStyleSheet("theme", QString::fromUtf8(ba), true);
+    removeStyleSheet("theme");
+    insertStyleSheet("theme", QString::fromUtf8(ba));
 }
 
 void MarkdownView::updateMarkdownEngine()
@@ -266,7 +266,15 @@ void MarkdownView::saveToFile(const QString &savePath)
 
 void MarkdownView::setContent(const QString& html)
 {
-    m_renderedContent.setText(html);   
+    m_renderedContent.setText(html);
+
+    QString s = QString::fromLatin1("(function() {" \
+                                    "    var code = document.getElementsByTagName('code');" \
+                                    "    for (i = 0; i < code.length; i++) {" \
+                                    "      code[i].classList.add(\"highlight-chroma\");" \
+                                    "    }" \
+                                    "})()");
+    m_preview->page()->runJavaScript(s, QWebEngineScript::MainWorld);
 }
 
 void MarkdownView::convert()
@@ -285,7 +293,7 @@ void MarkdownView::convert()
     Free(res);
 }
 
-void MarkdownView::insertStyleSheet(const QString &name, const QString &source, bool immediately)
+void MarkdownView::insertStyleSheet(const QString &name, const QString &source)
 {
     QWebEngineScript script;
     QString s = QString::fromLatin1("(function() {"\
@@ -295,26 +303,25 @@ void MarkdownView::insertStyleSheet(const QString &name, const QString &source, 
                                     "    document.head.appendChild(css);"\
                                     "    css.innerText = '%2';"\
                                     "})()").arg(name, source.simplified());
-    if (immediately)
-        m_preview->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);
+    m_preview->page()->runJavaScript(s, QWebEngineScript::MainWorld);
     
     script.setName(name);
     script.setSourceCode(s);
     script.setInjectionPoint(QWebEngineScript::DocumentReady);
     script.setRunsOnSubFrames(true);
-    script.setWorldId(QWebEngineScript::ApplicationWorld);
+    script.setWorldId(QWebEngineScript::MainWorld);
     m_preview->page()->scripts().insert(script);
 }
 
-void MarkdownView::removeStyleSheet(const QString &name, bool immediately)
+void MarkdownView::removeStyleSheet(const QString &name)
 {
     QString s = QString::fromLatin1("(function() {"\
                                     "    var element = document.getElementById('%1');"\
                                     "    element.outerHTML = '';"\
                                     "    delete element;"\
                                     "})()").arg(name);
-    if (immediately)
-        m_preview->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);
+
+    m_preview->page()->runJavaScript(s, QWebEngineScript::MainWorld);
     
     QWebEngineScript script = m_preview->page()->scripts().findScript(name);
     m_preview->page()->scripts().remove(script);

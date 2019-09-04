@@ -53,8 +53,8 @@ private:
     
     void saveToFile(const QString &savePath);
     void convert();
-    void insertStyleSheet(const QString &name, const QString &source, bool immediately);
-    void removeStyleSheet(const QString &name, bool immediately);
+    void insertStyleSheet(const QString &name, const QString &source);
+    void removeStyleSheet(const QString &name);
     void setContent(const QString &html);
 };
 

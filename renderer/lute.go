@@ -4,14 +4,12 @@ import (
 	"C"
 	"log"
 
-	"github.com/b3log/lute"
+	"github.com/missdeer/lute"
 )
 
 //export Lute
 func Lute(md string) *C.char {
-	luteEngine := lute.New(
-		lute.CodeSyntaxHighlight(true),
-	)
+	luteEngine := lute.New()
 	html, err := luteEngine.MarkdownStr("KarenMeu", md)
 	if nil != err {
 		log.Println(err)
