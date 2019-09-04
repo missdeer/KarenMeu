@@ -16,25 +16,8 @@ import (
 	"github.com/yuin/goldmark/util"
 )
 
-var (
-	htmlTemplate = `<!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style type="text/css">
-{{ .PreviewTheme }}
-</style>
-<body>
-<div id="wx-box" class="wx-box">
-<section>
-{{ .FinalContent }}
-</section>
-</div>
-</body>
-</html>`
-	markdown goldmark.Markdown
-)
-
-//export ConvertToHTML
-func ConvertToHTML(md string, theme string, style string, lineNumbers bool) *C.char {
+//export Goldmark
+func Goldmark(md string, theme string, style string, lineNumbers bool) *C.char {
 	options := []html.Option{}
 	if lineNumbers {
 		options = []html.Option{html.WithLineNumbers()}
@@ -66,6 +49,19 @@ func ConvertToHTML(md string, theme string, style string, lineNumbers bool) *C.c
 		return r
 	}
 
+	htmlTemplate := `<!DOCTYPE html>
+	<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style type="text/css">
+	{{ .PreviewTheme }}
+	</style>
+	<body>
+	<div id="wx-box" class="wx-box">
+	<section>
+	{{ .FinalContent }}
+	</section>
+	</div>
+	</body>
+	</html>`
 	s := strings.Replace(htmlTemplate, `{{ .PreviewTheme }}`, theme, -1)
 	s = strings.Replace(s, `{{ .FinalContent }}`, buf.String(), -1)
 

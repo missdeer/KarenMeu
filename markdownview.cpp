@@ -232,7 +232,8 @@ void MarkdownView::convert()
     QByteArray style = g_settings->codeBlockStyle().toUtf8();
     GoString styleContent { (const char *)style.data(), (ptrdiff_t)style.size()};
     
-    auto res = ConvertToHTML(content, themeContent, styleContent, true);
+    //auto res = Goldmark(content, themeContent, styleContent, true);
+    auto res = Lute(content);
     QString html = QString::fromUtf8(res);
     m_preview->setHtml(html);
     Free(res);
