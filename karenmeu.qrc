@@ -49,5 +49,42 @@
         <file>rc/theme/purple.css</file>
         <file>rc/theme/red.css</file>
         <file>rc/images/copyAsHTML.png</file>
+        <file>rc/styles/abap.css</file>
+        <file>rc/styles/algol.css</file>
+        <file>rc/styles/algol_nu.css</file>
+        <file>rc/styles/arduino.css</file>
+        <file>rc/styles/autumn.css</file>
+        <file>rc/styles/borland.css</file>
+        <file>rc/styles/bw.css</file>
+        <file>rc/styles/colorful.css</file>
+        <file>rc/styles/dracula.css</file>
+        <file>rc/styles/emacs.css</file>
+        <file>rc/styles/friendly.css</file>
+        <file>rc/styles/fruity.css</file>
+        <file>rc/styles/github.css</file>
+        <file>rc/styles/igor.css</file>
+        <file>rc/styles/lovelace.css</file>
+        <file>rc/styles/main.go</file>
+        <file>rc/styles/manni.css</file>
+        <file>rc/styles/monokai.css</file>
+        <file>rc/styles/monokailight.css</file>
+        <file>rc/styles/murphy.css</file>
+        <file>rc/styles/native.css</file>
+        <file>rc/styles/paraiso-dark.css</file>
+        <file>rc/styles/paraiso-light.css</file>
+        <file>rc/styles/pastie.css</file>
+        <file>rc/styles/perldoc.css</file>
+        <file>rc/styles/pygments.css</file>
+        <file>rc/styles/rainbow_dash.css</file>
+        <file>rc/styles/rrt.css</file>
+        <file>rc/styles/solarized-dark.css</file>
+        <file>rc/styles/solarized-dark256.css</file>
+        <file>rc/styles/solarized-light.css</file>
+        <file>rc/styles/swapoff.css</file>
+        <file>rc/styles/tango.css</file>
+        <file>rc/styles/trac.css</file>
+        <file>rc/styles/vim.css</file>
+        <file>rc/styles/vs.css</file>
+        <file>rc/styles/xcode.css</file>
     </qresource>
 </RCC>
