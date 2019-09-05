@@ -104,5 +104,7 @@
         <file>rc/images/ul.png</file>
         <file>rc/images/exportashtml.png</file>
         <file>rc/images/exportaspdf.png</file>
+        <file>rc/images/shiftleft.png</file>
+        <file>rc/images/shiftright.png</file>
     </qresource>
 </RCC>

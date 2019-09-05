@@ -34,6 +34,8 @@ public slots:
     void formatHeader4();
     void formatHeader5();
     void formatHeader6();
+    void formatShiftRight();
+    void formatShiftLeft();
     
 private slots:
     void linesAdded(int linesAdded);
@@ -45,6 +47,7 @@ private:
     ScintillaConfig m_sc;
     void formatHeader(int level);
     void addLeadingString(const QByteArray& leadingStr);
+    void removeLeadingSpace();
 };
 
 #endif // MARKDOWNEDITOR_H

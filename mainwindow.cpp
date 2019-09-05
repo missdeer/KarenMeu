@@ -47,6 +47,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionHeader4, &QAction::triggered, m_view, &MarkdownView::formatHeader4);
     connect(ui->actionHeader5, &QAction::triggered, m_view, &MarkdownView::formatHeader5);
     connect(ui->actionHeader6, &QAction::triggered, m_view, &MarkdownView::formatHeader6);
+    connect(ui->actionShiftRight, &QAction::triggered, m_view, &MarkdownView::formatShiftRight);
+    connect(ui->actionShiftLeft, &QAction::triggered, m_view, &MarkdownView::formatShiftLeft);
 }
 
 MainWindow::~MainWindow()

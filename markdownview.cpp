@@ -50,6 +50,8 @@ MarkdownView::MarkdownView(QWidget *parent)
     connect(this, &MarkdownView::formatHeader4, m_editor, &MarkdownEditor::formatHeader4);
     connect(this, &MarkdownView::formatHeader5, m_editor, &MarkdownEditor::formatHeader5);
     connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor::formatHeader6);
+    connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor::formatShiftRight);
+    connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor::formatShiftLeft);
 
     auto *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);

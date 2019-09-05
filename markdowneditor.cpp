@@ -263,6 +263,16 @@ void MarkdownEditor::formatHeader6()
     formatHeader(6);
 }
 
+void MarkdownEditor::formatShiftRight()
+{
+    addLeadingString("  ");
+}
+
+void MarkdownEditor::formatShiftLeft()
+{
+    removeLeadingSpace();
+}
+
 void MarkdownEditor::linesAdded(int /*linesAdded*/)
 {
     auto* sci = qobject_cast<ScintillaEdit*>(sender());
@@ -336,10 +346,36 @@ void MarkdownEditor::addLeadingString(const QByteArray &leadingStr)
     auto endLine = lineFromPosition(endPos);
     for (auto line = endLine; line >= startLine; line--)
     {
-        auto lineText = getLine(line).trimmed();
+        auto lineText = getLine(line);
+        while (!lineText.isEmpty() && (*lineText.rbegin() == '\r' ||  *lineText.rbegin() == '\n'))
+            lineText.remove(lineText.length() -1, 1);
         auto lineStartPos = positionFromLine(line);
         auto lineEndPos = lineEndPosition(line);
         lineText = leadingStr + lineText;
+        setTargetRange(lineStartPos, lineEndPos);
+        replaceTarget(lineText.size(), lineText);
+    }
+    setSelectionStart(positionFromLine(startLine));
+    setSelectionEnd(lineEndPosition(endLine));
+    setCurrentPos(lineEndPosition(endLine));
+}
+
+void MarkdownEditor::removeLeadingSpace()
+{
+    UndoActionGuard uag(this);
+    auto startPos = selectionStart();
+    auto endPos = selectionEnd();
+    auto startLine = lineFromPosition(startPos);
+    auto endLine = lineFromPosition(endPos);
+    for (auto line = endLine; line >= startLine; line--)
+    {
+        auto lineText = getLine(line);
+        while (!lineText.isEmpty() && (*lineText.rbegin() == '\r' ||  *lineText.rbegin() == '\n'))
+            lineText.remove(lineText.length() -1, 1);
+        auto lineStartPos = positionFromLine(line);
+        auto lineEndPos = lineEndPosition(line);
+        for (int i = 0; i < 2 && !lineText.isEmpty() && lineText.at(0) == ' '; i++)
+            lineText.remove(0, 1);
         setTargetRange(lineStartPos, lineEndPos);
         replaceTarget(lineText.size(), lineText);
     }

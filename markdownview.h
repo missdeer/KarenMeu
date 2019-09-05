@@ -38,6 +38,8 @@ signals:
     void formatHeader4();
     void formatHeader5();
     void formatHeader6();
+    void formatShiftRight();
+    void formatShiftLeft();
     
 public slots:
     void openDocument();
