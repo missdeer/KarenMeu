@@ -34,8 +34,6 @@ public:
 
     const QString & codeBlockStyle() const;
     void setCodeBlockStyle(const QString &codeBlockStyle);
-
-    QByteArray previewThemeContent() const;
     
     const QString & markdownEngine() const;
     void setMarkdownEngine(const QString &markdownEngine);
@@ -49,7 +47,6 @@ private:
     QString m_codeInspectorFontFamily;
     QString m_codeInspectorTheme;
     QString m_previewTheme;
-    QByteArray m_previewThemeContent;
     QString m_codeBlockStyle;
     QString m_markdownEngine;
 };

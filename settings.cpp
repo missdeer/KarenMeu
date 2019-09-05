@@ -90,21 +90,6 @@ const QString &Settings::previewTheme() const
 void Settings::setPreviewTheme(const QString &previewTheme)
 {
     m_previewTheme = previewTheme;
-    QMap<QString, QString> m = {
-        { "墨黑", "black.css" },
-        { "姹紫", "purple.css" },
-        { "嫩青", "blue.css" },
-        { "橙心", "orange.css" },
-        { "红绯", "red.css" },
-        { "绿意", "green.css" },
-        { "默认", "default.css" },
-        };
-    QFile f(":/rc/theme/" + m[m_previewTheme]);
-    if (f.open(QIODevice::ReadOnly))
-    {
-        m_previewThemeContent = f.readAll();
-        f.close();
-    }
 }
 
 const QString &Settings::codeBlockStyle() const
@@ -115,11 +100,6 @@ const QString &Settings::codeBlockStyle() const
 void Settings::setCodeBlockStyle(const QString &codeBlockStyle)
 {
     m_codeBlockStyle = codeBlockStyle;
-}
-
-QByteArray Settings::previewThemeContent() const
-{
-    return m_previewThemeContent;
 }
 
 const QString &Settings::markdownEngine() const

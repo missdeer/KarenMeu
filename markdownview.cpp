@@ -268,7 +268,24 @@ void MarkdownView::convertTimeout()
 
 void MarkdownView::setThemeStyle()
 {
-    QByteArray ba = g_settings->previewThemeContent();
+    QByteArray ba;
+    const QString& previewTheme = g_settings->previewTheme();
+    QMap<QString, QString> m = {
+        { "墨黑", "black.css" },
+        { "姹紫", "purple.css" },
+        { "嫩青", "blue.css" },
+        { "橙心", "orange.css" },
+        { "红绯", "red.css" },
+        { "绿意", "green.css" },
+        { "默认", "default.css" },
+        };
+    QFile f(":/rc/theme/" + m[previewTheme]);
+    if (f.open(QIODevice::ReadOnly))
+    {
+        ba = f.readAll();
+        f.close();
+    }
+
     if (g_settings->markdownEngine() == "Lute")
     {
         const QString& style = g_settings->codeBlockStyle();
@@ -277,7 +294,7 @@ void MarkdownView::setThemeStyle()
         {
             ba.append(f.readAll());
             f.close();
-        }    
+        }
     }
     m_themeStyle.setText(QString::fromUtf8(ba));
 }
