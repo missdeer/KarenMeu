@@ -8,8 +8,8 @@ import (
 )
 
 //export Lute
-func Lute(md string) *C.char {
-	luteEngine := lute.New()
+func Lute(md string, style string) *C.char {
+	luteEngine := lute.New(lute.CodeSyntaxHighlight(true, true, style))
 	html, err := luteEngine.MarkdownStr("KarenMeu", md)
 	if nil != err {
 		log.Println(err)

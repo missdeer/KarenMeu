@@ -7,7 +7,7 @@ require (
 	github.com/alecthomas/chroma v0.6.6
 	github.com/aymerick/douceur v0.2.0
 	github.com/gorilla/css v1.0.0 // indirect
-	github.com/missdeer/lute v0.0.0-20190904145145-f508093e1e13
+	github.com/missdeer/lute v0.0.0-20190905092727-73cba3056d2c
 	github.com/vanng822/css v0.0.0-20190504095207-a21e860bcd04 // indirect
 	github.com/vanng822/go-premailer v0.0.0-20190504065308-ac25997d78c7
 	github.com/yuin/goldmark v1.1.0
