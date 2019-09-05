@@ -43,6 +43,8 @@ private slots:
     
 private:
     ScintillaConfig m_sc;
+    void formatHeader(int level);
+    void addLeadingString(const QByteArray& leadingStr);
 };
 
 #endif // MARKDOWNEDITOR_H
