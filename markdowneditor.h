@@ -21,6 +21,7 @@ public slots:
     void formatEmphasize();
     void formatStrikethrough();
     void formatInlineCode();
+    void formatCodeBlock();
     void formatComment();
     void formatOrderedList();
     void formatUnorderedList();

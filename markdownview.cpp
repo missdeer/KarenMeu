@@ -37,6 +37,7 @@ MarkdownView::MarkdownView(QWidget *parent)
     connect(this, &MarkdownView::formatStrong, m_editor, &MarkdownEditor::formatStrong);
     connect(this, &MarkdownView::formatEmphasize, m_editor, &MarkdownEditor::formatEmphasize);
     connect(this, &MarkdownView::formatInlineCode, m_editor, &MarkdownEditor::formatInlineCode);
+    connect(this, &MarkdownView::formatCodeBlock, m_editor, &MarkdownEditor::formatCodeBlock);
     connect(this, &MarkdownView::formatComment, m_editor, &MarkdownEditor::formatComment);
     connect(this, &MarkdownView::formatOrderedList, m_editor, &MarkdownEditor::formatOrderedList);
     connect(this, &MarkdownView::formatUnorderedList, m_editor, &MarkdownEditor::formatUnorderedList);

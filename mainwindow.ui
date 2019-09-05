@@ -77,6 +77,7 @@
     <addaction name="actionEmphasize"/>
     <addaction name="actionStrikethrough"/>
     <addaction name="actionInlineCode"/>
+    <addaction name="actionCodeBlock"/>
     <addaction name="actionComment"/>
     <addaction name="separator"/>
     <addaction name="actionOrderedList"/>
@@ -129,6 +130,7 @@
    <addaction name="actionEmphasize"/>
    <addaction name="actionStrikethrough"/>
    <addaction name="actionInlineCode"/>
+   <addaction name="actionCodeBlock"/>
    <addaction name="separator"/>
    <addaction name="actionOrderedList"/>
    <addaction name="actionUnorderedList"/>
@@ -555,6 +557,15 @@
    </property>
    <property name="text">
     <string>Strikethrough</string>
+   </property>
+  </action>
+  <action name="actionCodeBlock">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/codeblock.png</normaloff>:/rc/images/codeblock.png</iconset>
+   </property>
+   <property name="text">
+    <string>Code Block</string>
    </property>
   </action>
  </widget>

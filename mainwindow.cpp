@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionEmphasize, &QAction::triggered, m_view, &MarkdownView::formatEmphasize);
     connect(ui->actionStrikethrough, &QAction::triggered, m_view, &MarkdownView::formatStrikethrough);
     connect(ui->actionInlineCode, &QAction::triggered, m_view, &MarkdownView::formatInlineCode);
+    connect(ui->actionCodeBlock, &QAction::triggered, m_view, &MarkdownView::formatCodeBlock);
     connect(ui->actionComment, &QAction::triggered, m_view, &MarkdownView::formatComment);
     connect(ui->actionOrderedList, &QAction::triggered, m_view, &MarkdownView::formatOrderedList);
     connect(ui->actionUnorderedList, &QAction::triggered, m_view, &MarkdownView::formatUnorderedList);

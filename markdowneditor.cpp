@@ -144,6 +144,41 @@ void MarkdownEditor::formatInlineCode()
     }
 }
 
+void MarkdownEditor::formatCodeBlock()
+{
+    UndoActionGuard uag(this);
+    if (selectionEmpty())
+    {
+        // insert ```\n|\n```
+        auto pos = currentPos();
+        auto line = lineFromPosition(pos);
+        auto lineStartPos = positionFromLine(line);
+        auto lineEndPos = lineEndPosition(line);
+        
+        insertText(pos, "```\n\n```");
+        
+        if (pos != lineEndPos)
+            insertText(pos + 8, "\n");
+        
+        if (pos != lineStartPos)
+            insertText(pos, "\n");
+        
+        setCurrentPos(pos+4);
+        setSelectionStart(pos+4);
+        setSelectionEnd(pos+4);
+    }
+    else 
+    {
+        // replace selected text with ```\nselected text\n```\n
+        auto startPos = selectionStart();
+        auto text = getSelText();
+        replaceSel("```\n"+text+"\n```\n");
+        setSelectionStart(startPos+3);
+        setSelectionEnd(startPos+3);
+        setCurrentPos(startPos+3);
+    }
+}
+
 void MarkdownEditor::formatComment()
 {
     UndoActionGuard uag(this);
