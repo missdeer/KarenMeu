@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionRedo, &QAction::triggered, m_view, &MarkdownView::redo);
     connect(ui->actionSelectAll, &QAction::triggered, m_view, &MarkdownView::selectAll);
     connect(ui->actionCopyAsHTML, &QAction::triggered, m_view, &MarkdownView::copyAsHTML);
+    connect(ui->actionExportAsPDF, &QAction::triggered, m_view, &MarkdownView::exportAsPDF);
+    connect(ui->actionExportAsHTML, &QAction::triggered, m_view, &MarkdownView::exportAsHTML);
 }
 
 MainWindow::~MainWindow()

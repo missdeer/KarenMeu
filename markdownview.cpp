@@ -41,6 +41,7 @@ MarkdownView::MarkdownView(QWidget *parent)
     m_preview->setContextMenuPolicy(Qt::NoContextMenu);
     m_preview->load(QUrl("qrc:/rc/html/index.html"));
     connect(m_preview, &QWebEngineView::loadFinished, this, &MarkdownView::previewLoadFinished);
+    connect(m_preview->page(), &QWebEnginePage::pdfPrintingFinished, this, &MarkdownView::pdfPrintingFinished);
     
     connect(m_convertTimer, &QTimer::timeout, this, &MarkdownView::convertTimeout);
     m_convertTimer->start(g_settings->autoRefreshInterval());
@@ -181,7 +182,7 @@ void MarkdownView::redo()
 void MarkdownView::copyAsHTML()
 {
     // get whole origin html
-    m_preview->page()->toHtml([this](const QString& result) mutable {
+    m_preview->page()->toHtml([](const QString& result) mutable {
         // inline css
         QByteArray ba = result.toUtf8();
         GoString content { (const char *)ba.data(), (ptrdiff_t)ba.size()};
@@ -194,6 +195,36 @@ void MarkdownView::copyAsHTML()
         md->setHtml(r);
         QApplication::clipboard()->setMimeData(md, QClipboard::Clipboard);
     });
+}
+
+void MarkdownView::exportAsHTML()
+{
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Export As HTML"),
+                                                    "",
+                                                    tr("HTML file (*.html)"));
+    if (filePath.isEmpty())
+        return;
+    m_preview->page()->toHtml([filePath, this](const QString& result) mutable {
+        QFile f(filePath);
+        if (f.open(QIODevice::Truncate | QIODevice::WriteOnly))
+        {
+            QByteArray ba = result.toUtf8();
+            f.write(ba);
+            f.close();
+            QMessageBox::information(this, tr("HTML exported"),
+                                     tr("HTML file has been exported to %1 successfully.").arg(QDir::toNativeSeparators(filePath)), QMessageBox::Ok);
+        }
+    });
+}
+
+void MarkdownView::exportAsPDF()
+{
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Export As PDF"),
+                                                    "",
+                                                    tr("Adobe PDF file (*.pdf)"));
+    if (filePath.isEmpty())
+        return;
+    m_preview->page()->printToPdf(filePath);
 }
 
 void MarkdownView::documentModified()
@@ -246,6 +277,16 @@ void MarkdownView::previewLoadFinished(bool)
 {
     updateMarkdownEngine();
     setThemeStyle();
+}
+
+void MarkdownView::pdfPrintingFinished(const QString &filePath, bool success)
+{
+    if (success)
+        QMessageBox::information(this, tr("PDF exported"),
+                                 tr("PDF file has been exported to %1 successfully.").arg(QDir::toNativeSeparators(filePath)), QMessageBox::Ok);
+    else
+        QMessageBox::information(this, tr("PDF exporting failed"),
+                                 tr("PDF file has not been exported to %1.").arg(QDir::toNativeSeparators(filePath)), QMessageBox::Ok);
 }
 
 void MarkdownView::resizeEvent(QResizeEvent *event)

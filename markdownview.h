@@ -34,11 +34,14 @@ public slots:
     void undo();
     void redo();
     void copyAsHTML();
+    void exportAsHTML();
+    void exportAsPDF();
 
 private slots:
     void documentModified();
     void convertTimeout();
     void previewLoadFinished(bool);
+    void pdfPrintingFinished(const QString &filePath, bool success);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
