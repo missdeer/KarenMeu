@@ -75,6 +75,7 @@
     </property>
     <addaction name="actionStrong"/>
     <addaction name="actionEmphasize"/>
+    <addaction name="actionStrikethrough"/>
     <addaction name="actionInlineCode"/>
     <addaction name="actionComment"/>
     <addaction name="separator"/>
@@ -126,6 +127,7 @@
    <addaction name="separator"/>
    <addaction name="actionStrong"/>
    <addaction name="actionEmphasize"/>
+   <addaction name="actionStrikethrough"/>
    <addaction name="actionInlineCode"/>
    <addaction name="separator"/>
    <addaction name="actionOrderedList"/>
@@ -540,6 +542,15 @@
    </property>
    <property name="shortcut">
     <string>Alt+,</string>
+   </property>
+  </action>
+  <action name="actionStrikethrough">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/strikethrough.png</normaloff>:/rc/images/strikethrough.png</iconset>
+   </property>
+   <property name="text">
+    <string>Strikethrough</string>
    </property>
   </action>
  </widget>

@@ -106,5 +106,6 @@
         <file>rc/images/exportaspdf.png</file>
         <file>rc/images/shiftleft.png</file>
         <file>rc/images/shiftright.png</file>
+        <file>rc/images/strikethrough.png</file>
     </qresource>
 </RCC>

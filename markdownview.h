@@ -23,6 +23,7 @@ public:
 signals:
     void formatStrong();
     void formatEmphasize();
+    void formatStrikethrough();
     void formatInlineCode();
     void formatComment();
     void formatOrderedList();

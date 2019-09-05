@@ -96,6 +96,30 @@ void MarkdownEditor::formatEmphasize()
     }
 }
 
+void MarkdownEditor::formatStrikethrough()
+{
+    UndoActionGuard uag(this);
+    if (selectionEmpty())
+    {
+        // insert ~~|~~
+        auto pos = currentPos();
+        insertText(pos, "~~~~");
+        setCurrentPos(pos+2);
+        setSelectionStart(pos+2);
+        setSelectionEnd(pos+2);
+    }
+    else 
+    {
+        // replace selected text with ~~selected text~~
+        auto startPos = selectionStart();
+        auto endPos = selectionEnd();
+        auto text = getSelText();
+        replaceSel("~~"+text+"~~");
+        setSelectionStart(startPos+2);
+        setSelectionEnd(endPos+2);
+    }
+}
+
 void MarkdownEditor::formatInlineCode()
 {
     UndoActionGuard uag(this);

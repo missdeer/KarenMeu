@@ -19,6 +19,7 @@ signals:
 public slots:
     void formatStrong();
     void formatEmphasize();
+    void formatStrikethrough();
     void formatInlineCode();
     void formatComment();
     void formatOrderedList();
