@@ -107,5 +107,9 @@
         <file>rc/images/shiftleft.png</file>
         <file>rc/images/shiftright.png</file>
         <file>rc/images/strikethrough.png</file>
+        <file>rc/images/codeblock.png</file>
+        <file>rc/images/paragraph.png</file>
+        <file>rc/images/table.png</file>
+        <file>rc/images/todolist.png</file>
     </qresource>
 </RCC>

@@ -87,3 +87,9 @@ macx: {
     
 
 LIBS += -lrenderer
+
+DISTFILES += \
+    rc/images/codeblock.png \
+    rc/images/paragraph.png \
+    rc/images/table.png \
+    rc/images/todolist.png

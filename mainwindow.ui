@@ -432,6 +432,10 @@
    </property>
   </action>
   <action name="actionNewParagraph">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/paragraph.png</normaloff>:/rc/images/paragraph.png</iconset>
+   </property>
    <property name="text">
     <string>New Paragraph</string>
    </property>
