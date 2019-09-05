@@ -55,11 +55,12 @@ MarkdownView::MarkdownView(QWidget *parent)
     connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor::formatShiftRight);
     connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor::formatShiftLeft);
     
-    PreviewPage *page = new PreviewPage(this);
+    auto *page = new PreviewPage(this);
     m_preview->setPage(page);
     
     auto *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);
+    channel->registerObject(QStringLiteral("theme"), &m_themeStyle);
     m_preview->page()->setWebChannel(channel);
     
     m_preview->setContextMenuPolicy(Qt::NoContextMenu);
@@ -73,7 +74,7 @@ MarkdownView::MarkdownView(QWidget *parent)
 
 void MarkdownView::forceConvert()
 {
-    convert();
+    renderMarkdownToHTML();
 }
 
 bool MarkdownView::maybeSave()
@@ -261,7 +262,7 @@ void MarkdownView::convertTimeout()
     if (m_modified)
     {
         m_modified = false;
-        convert();
+        renderMarkdownToHTML();
     }
 }
 
@@ -278,8 +279,7 @@ void MarkdownView::setThemeStyle()
             f.close();
         }    
     }
-    removeStyleSheet("theme");
-    insertStyleSheet("theme", QString::fromUtf8(ba));
+    m_themeStyle.setText(QString::fromUtf8(ba));
 }
 
 void MarkdownView::updateMarkdownEngine()
@@ -290,9 +290,8 @@ void MarkdownView::updateMarkdownEngine()
     }
     else {
         markdownEngine = [](GoString p0, GoString p1, GoUint8 p2)->char*{ 
-            Q_UNUSED(p1);
             Q_UNUSED(p2);
-            return Lute(p0);
+            return Lute(p0, p1);
         };
     }
 }
@@ -342,7 +341,7 @@ void MarkdownView::setContent(const QString& html)
     m_preview->page()->runJavaScript(s, QWebEngineScript::MainWorld);
 }
 
-void MarkdownView::convert()
+void MarkdownView::renderMarkdownToHTML()
 {
     QByteArray ba = m_editor->content();
     GoString content{ (const char *)ba.data(), (ptrdiff_t)ba.size()};
@@ -356,38 +355,4 @@ void MarkdownView::convert()
     setContent(html);
     
     Free(res);
-}
-
-void MarkdownView::insertStyleSheet(const QString &name, const QString &source)
-{
-    QWebEngineScript script;
-    QString s = QString::fromLatin1("(function() {"\
-                                    "    css = document.createElement('style');"\
-                                    "    css.type = 'text/css';"\
-                                    "    css.id = '%1';"\
-                                    "    document.head.appendChild(css);"\
-                                    "    css.innerText = '%2';"\
-                                    "})()").arg(name, source.simplified());
-    m_preview->page()->runJavaScript(s, QWebEngineScript::MainWorld);
-    
-    script.setName(name);
-    script.setSourceCode(s);
-    script.setInjectionPoint(QWebEngineScript::DocumentReady);
-    script.setRunsOnSubFrames(true);
-    script.setWorldId(QWebEngineScript::MainWorld);
-    m_preview->page()->scripts().insert(script);
-}
-
-void MarkdownView::removeStyleSheet(const QString &name)
-{
-    QString s = QString::fromLatin1("(function() {"\
-                                    "    var element = document.getElementById('%1');"\
-                                    "    element.outerHTML = '';"\
-                                    "    delete element;"\
-                                    "})()").arg(name);
-
-    m_preview->page()->runJavaScript(s, QWebEngineScript::MainWorld);
-    
-    QWebEngineScript script = m_preview->page()->scripts().findScript(name);
-    m_preview->page()->scripts().remove(script);
 }

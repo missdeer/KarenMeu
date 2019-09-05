@@ -74,11 +74,10 @@ private:
     QTimer *m_convertTimer;
     QString m_savePath;
     RenderedDocument m_renderedContent;
+    RenderedDocument m_themeStyle;
     
     void saveToFile(const QString &savePath);
-    void convert();
-    void insertStyleSheet(const QString &name, const QString &source);
-    void removeStyleSheet(const QString &name);
+    void renderMarkdownToHTML();
     void setContent(const QString &html);
 };
 

@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="qrc:/qtwebchannel/qwebchannel.js"></script>
+    <style type="text/css" id="theme"></style>
 <body>
     <div id="wx-box" class="wx-box">
         <section id="content-container">
@@ -12,17 +13,26 @@
     <script>
         'use strict';
     
-        var placeholder = document.getElementById('content-container');
+        var contentPlaceholder = document.getElementById('content-container');
     
-        var updateText = function(text) {
-            placeholder.innerHTML = text;
+        var updateContent = function(text) {
+          contentPlaceholder.innerHTML = text;
+        }
+
+        var stylePlaceholder = document.getElementById('theme');
+        var updateTheme = function(text) {
+          stylePlaceholder.innerHTML = text;
         }
     
         new QWebChannel(qt.webChannelTransport,
           function(channel) {
             var content = channel.objects.content;
-            updateText(content.text);
-            content.textChanged.connect(updateText);
+            updateContent(content.text);
+            content.textChanged.connect(updateContent);
+
+            var theme = channel.objects.theme;
+            updateTheme(theme.text);
+            theme.textChanged.connect(updateTheme);
           }
         );
         </script>
