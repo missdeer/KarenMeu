@@ -13,6 +13,7 @@
 #include "settings.h"
 #include "markdowneditor.h"
 #include "markdownview.h"
+#include "previewpage.h"
 #include "renderer.h"
 
 std::function<char*(GoString, GoString, GoUint8)> markdownEngine;
@@ -52,7 +53,10 @@ MarkdownView::MarkdownView(QWidget *parent)
     connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor::formatHeader6);
     connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor::formatShiftRight);
     connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor::formatShiftLeft);
-
+    
+    PreviewPage *page = new PreviewPage(this);
+    m_preview->setPage(page);
+    
     auto *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);
     m_preview->page()->setWebChannel(channel);

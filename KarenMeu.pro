@@ -25,6 +25,7 @@ CONFIG += c++17
 include($$PWD/3rdparty/scintilla-latest.pri)
 
 SOURCES += \
+        previewpage.cpp \
         rendereddocument.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
         settings.cpp
 
 HEADERS += \
+        previewpage.h \
         rendereddocument.h \
         mainwindow.h \
         markdowneditor.h \
