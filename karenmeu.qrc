@@ -87,5 +87,22 @@
         <file>rc/styles/vs.css</file>
         <file>rc/styles/xcode.css</file>
         <file>rc/html/index.html</file>
+        <file>rc/images/emphasize.png</file>
+        <file>rc/images/strong.png</file>
+        <file>rc/images/code.png</file>
+        <file>rc/images/h1.png</file>
+        <file>rc/images/h2.png</file>
+        <file>rc/images/h3.png</file>
+        <file>rc/images/h4.png</file>
+        <file>rc/images/h5.png</file>
+        <file>rc/images/h6.png</file>
+        <file>rc/images/hr.png</file>
+        <file>rc/images/image.png</file>
+        <file>rc/images/link.png</file>
+        <file>rc/images/ol.png</file>
+        <file>rc/images/quote.png</file>
+        <file>rc/images/ul.png</file>
+        <file>rc/images/exportashtml.png</file>
+        <file>rc/images/exportaspdf.png</file>
     </qresource>
 </RCC>

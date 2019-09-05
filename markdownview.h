@@ -21,6 +21,23 @@ public:
     void updateMarkdownEngine();
     
 signals:
+    void formatStrong();
+    void formatEmphasize();
+    void formatInlineCode();
+    void formatComment();
+    void formatOrderedList();
+    void formatUnorderedList();
+    void formatBlockquote();
+    void formatHyperlink();
+    void formatImage();
+    void formatNewParagraph();
+    void formatHorizontalRule();
+    void formatHeader1();
+    void formatHeader2();
+    void formatHeader3();
+    void formatHeader4();
+    void formatHeader5();
+    void formatHeader6();
     
 public slots:
     void openDocument();

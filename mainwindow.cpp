@@ -30,6 +30,23 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionCopyAsHTML, &QAction::triggered, m_view, &MarkdownView::copyAsHTML);
     connect(ui->actionExportAsPDF, &QAction::triggered, m_view, &MarkdownView::exportAsPDF);
     connect(ui->actionExportAsHTML, &QAction::triggered, m_view, &MarkdownView::exportAsHTML);
+    connect(ui->actionStrong, &QAction::triggered, m_view, &MarkdownView::formatStrong);
+    connect(ui->actionEmphasize, &QAction::triggered, m_view, &MarkdownView::formatEmphasize);
+    connect(ui->actionInlineCode, &QAction::triggered, m_view, &MarkdownView::formatInlineCode);
+    connect(ui->actionComment, &QAction::triggered, m_view, &MarkdownView::formatComment);
+    connect(ui->actionOrderedList, &QAction::triggered, m_view, &MarkdownView::formatOrderedList);
+    connect(ui->actionUnorderedList, &QAction::triggered, m_view, &MarkdownView::formatUnorderedList);
+    connect(ui->actionBlockquote, &QAction::triggered, m_view, &MarkdownView::formatBlockquote);
+    connect(ui->actionHyperlink, &QAction::triggered, m_view, &MarkdownView::formatHyperlink);
+    connect(ui->actionImage, &QAction::triggered, m_view, &MarkdownView::formatImage);
+    connect(ui->actionNewParagraph, &QAction::triggered, m_view, &MarkdownView::formatNewParagraph);
+    connect(ui->actionHorizontalRule, &QAction::triggered, m_view, &MarkdownView::formatHorizontalRule);
+    connect(ui->actionHeader1, &QAction::triggered, m_view, &MarkdownView::formatHeader1);
+    connect(ui->actionHeader2, &QAction::triggered, m_view, &MarkdownView::formatHeader2);
+    connect(ui->actionHeader3, &QAction::triggered, m_view, &MarkdownView::formatHeader3);
+    connect(ui->actionHeader4, &QAction::triggered, m_view, &MarkdownView::formatHeader4);
+    connect(ui->actionHeader5, &QAction::triggered, m_view, &MarkdownView::formatHeader5);
+    connect(ui->actionHeader6, &QAction::triggered, m_view, &MarkdownView::formatHeader6);
 }
 
 MainWindow::~MainWindow()

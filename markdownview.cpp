@@ -33,6 +33,23 @@ MarkdownView::MarkdownView(QWidget *parent)
     m_splitter->setSizes(QList<int>() << width()/2 << width() /2);
     m_editor->initialize();
     connect(m_editor, &MarkdownEditor::contentModified, this, &MarkdownView::documentModified);
+    connect(this, &MarkdownView::formatStrong, m_editor, &MarkdownEditor::formatStrong);
+    connect(this, &MarkdownView::formatEmphasize, m_editor, &MarkdownEditor::formatEmphasize);
+    connect(this, &MarkdownView::formatInlineCode, m_editor, &MarkdownEditor::formatInlineCode);
+    connect(this, &MarkdownView::formatComment, m_editor, &MarkdownEditor::formatComment);
+    connect(this, &MarkdownView::formatOrderedList, m_editor, &MarkdownEditor::formatOrderedList);
+    connect(this, &MarkdownView::formatUnorderedList, m_editor, &MarkdownEditor::formatUnorderedList);
+    connect(this, &MarkdownView::formatBlockquote, m_editor, &MarkdownEditor::formatBlockquote);
+    connect(this, &MarkdownView::formatHyperlink, m_editor, &MarkdownEditor::formatHyperlink);
+    connect(this, &MarkdownView::formatImage, m_editor, &MarkdownEditor::formatImage);
+    connect(this, &MarkdownView::formatNewParagraph, m_editor, &MarkdownEditor::formatNewParagraph);
+    connect(this, &MarkdownView::formatHorizontalRule, m_editor, &MarkdownEditor::formatHorizontalRule);
+    connect(this, &MarkdownView::formatHeader1, m_editor, &MarkdownEditor::formatHeader1);
+    connect(this, &MarkdownView::formatHeader2, m_editor, &MarkdownEditor::formatHeader2);
+    connect(this, &MarkdownView::formatHeader3, m_editor, &MarkdownEditor::formatHeader3);
+    connect(this, &MarkdownView::formatHeader4, m_editor, &MarkdownEditor::formatHeader4);
+    connect(this, &MarkdownView::formatHeader5, m_editor, &MarkdownEditor::formatHeader5);
+    connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor::formatHeader6);
 
     auto *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);

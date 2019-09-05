@@ -4,7 +4,6 @@ MarkdownEditor::MarkdownEditor(QWidget *parent)
     : ScintillaEdit(parent)
     , m_sc(this)
 {
-    
 }
 
 void MarkdownEditor::initialize()
@@ -35,6 +34,91 @@ void MarkdownEditor::setContent(const QByteArray &content)
 QByteArray MarkdownEditor::content()
 {
     return getText(textLength() + 1);
+}
+
+void MarkdownEditor::formatStrong()
+{
+    
+}
+
+void MarkdownEditor::formatEmphasize()
+{
+    
+}
+
+void MarkdownEditor::formatInlineCode()
+{
+    
+}
+
+void MarkdownEditor::formatComment()
+{
+    
+}
+
+void MarkdownEditor::formatOrderedList()
+{
+    
+}
+
+void MarkdownEditor::formatUnorderedList()
+{
+    
+}
+
+void MarkdownEditor::formatBlockquote()
+{
+    
+}
+
+void MarkdownEditor::formatHyperlink()
+{
+    
+}
+
+void MarkdownEditor::formatImage()
+{
+    
+}
+
+void MarkdownEditor::formatNewParagraph()
+{
+    
+}
+
+void MarkdownEditor::formatHorizontalRule()
+{
+    
+}
+
+void MarkdownEditor::formatHeader1()
+{
+    
+}
+
+void MarkdownEditor::formatHeader2()
+{
+    
+}
+
+void MarkdownEditor::formatHeader3()
+{
+    
+}
+
+void MarkdownEditor::formatHeader4()
+{
+    
+}
+
+void MarkdownEditor::formatHeader5()
+{
+    
+}
+
+void MarkdownEditor::formatHeader6()
+{
+    
 }
 
 void MarkdownEditor::linesAdded(int /*linesAdded*/)
