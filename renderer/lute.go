@@ -9,7 +9,7 @@ import (
 
 //export Lute
 func Lute(md string, style string, lineNumbers bool) *C.char {
-	luteEngine := lute.New(lute.CodeSyntaxHighlight(true, true, lineNumbers, style))
+	luteEngine := lute.New(lute.CodeSyntaxHighlight(true, false, lineNumbers, style))
 	html, err := luteEngine.MarkdownStr("KarenMeu", md)
 	if nil != err {
 		log.Println(err)
