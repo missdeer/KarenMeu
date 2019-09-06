@@ -3,6 +3,7 @@
 /* package goldmark */
 
 
+
 #include <stddef.h> /* for ptrdiff_t below */
 
 #ifndef GO_CGO_EXPORT_PROLOGUE_H
@@ -18,7 +19,11 @@ typedef struct { const char *p; ptrdiff_t n; } _GoString_;
 
 
 
+
+
+
 #include <stdlib.h>
+
 
 
 /* End of preamble from import "C" comments.  */
@@ -73,7 +78,7 @@ extern char* DouceurInliner(GoString p0);
 
 extern char* Inliner(GoString p0);
 
-extern char* Lute(GoString p0);
+extern char* Lute(GoString p0, GoString p1);
 
 extern void Free(char* p0);
 
