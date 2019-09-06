@@ -16,7 +16,8 @@
 #include "previewpage.h"
 #include "renderer.h"
 
-std::function<char*(GoString, GoString, GoUint8)> markdownEngine;
+using pFMarkdownEngine = char *(*)(GoString, GoString, GoUint8); 
+pFMarkdownEngine markdownEngine = nullptr;
 
 MarkdownView::MarkdownView(QWidget *parent) 
     : QWidget(parent)
@@ -301,13 +302,12 @@ void MarkdownView::setThemeStyle()
 
 void MarkdownView::updateMarkdownEngine()
 {
-    if (g_settings->markdownEngine() == "Goldmark")
-    {
-        markdownEngine = std::bind(&Goldmark, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-    }
-    else {
-        markdownEngine = std::bind(&Lute, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-    }
+    QMap<QString, pFMarkdownEngine> m = {
+        { "Goldmark", &Goldmark},
+        { "Lute", &Lute},
+    };
+    
+    markdownEngine = m[g_settings->markdownEngine()];
 }
 
 void MarkdownView::previewLoadFinished(bool)
