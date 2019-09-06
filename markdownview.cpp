@@ -303,13 +303,10 @@ void MarkdownView::updateMarkdownEngine()
 {
     if (g_settings->markdownEngine() == "Goldmark")
     {
-        markdownEngine = [](GoString p0, GoString p1, GoUint8 p2)->char*{ return Goldmark(p0, p1, p2);};
+        markdownEngine = std::bind(&Goldmark, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
     }
     else {
-        markdownEngine = [](GoString p0, GoString p1, GoUint8 p2)->char*{ 
-            Q_UNUSED(p2);
-            return Lute(p0, p1);
-        };
+        markdownEngine = std::bind(&Lute, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
     }
 }
 
