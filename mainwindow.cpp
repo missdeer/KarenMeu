@@ -3,12 +3,16 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QCloseEvent>
+#include <QAction>
+#include <QMap>
 #include "markdownview.h"
 #include "preferencedialog.h"
 #include "renderer.h"
 #include "settings.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+using ActionLabelMap = QMap<QString, QAction *>;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -51,6 +55,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionHeader6, &QAction::triggered, m_view, &MarkdownView::formatHeader6);
     connect(ui->actionShiftRight, &QAction::triggered, m_view, &MarkdownView::formatShiftRight);
     connect(ui->actionShiftLeft, &QAction::triggered, m_view, &MarkdownView::formatShiftLeft);
+        
+    InitMarkdownEngineActions();
+    InitPreviewThemeActions();
+    InitCodeBlockStyleActions();
 }
 
 MainWindow::~MainWindow()
@@ -92,4 +100,48 @@ void MainWindow::closeEvent(QCloseEvent *event)
     } else {
         event->ignore();
     }
+}
+
+void MainWindow::InitMarkdownEngineActions()
+{
+    ActionLabelMap markdownEngineMap = {
+        { "Goldmark", ui->actionGoldmark},
+        { "Lute", ui->actionLute},
+    };
+    auto *markdownEngineGroup = new QActionGroup(this);
+    markdownEngineGroup->setExclusive(true);
+    for (const auto action : markdownEngineMap)
+    {
+        markdownEngineGroup->addAction(action);
+    }
+    auto markdownEngineAction = markdownEngineMap[g_settings->markdownEngine()];
+    markdownEngineAction->setChecked(true);    
+}
+
+void MainWindow::InitPreviewThemeActions()
+{
+    ActionLabelMap previewThemeMap = {
+        { "默认", ui->actionDefault },
+        { "橙心", ui->actionOrange },
+        { "墨黑", ui->actionInk },
+        { "姹紫", ui->actionPurple },
+        { "绿意", ui->actionGreen },
+        { "嫩青", ui->actionBlue },
+        { "红绯", ui->actionRed },
+    };
+    auto *previewThemeGroup = new QActionGroup(this);
+    previewThemeGroup->setEnabled(true);
+    for (const auto action : previewThemeMap)
+    {
+        previewThemeGroup->addAction(action);
+    }
+    auto previewThemeAction = previewThemeMap[g_settings->previewTheme()];
+    previewThemeAction->setChecked(true);    
+}
+
+void MainWindow::InitCodeBlockStyleActions()
+{
+    ActionLabelMap codeBlockStyleMap = {
+        
+    };
 }

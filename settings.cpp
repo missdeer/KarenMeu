@@ -35,7 +35,17 @@ void Settings::load()
     m_autoRefreshInterval = settings.value("autoRefreshInterval", 1000).toInt();
 #endif
     m_editorZoomFactor = settings.value("editorZoomFactor", 100).toInt();
-    m_codeEditorFontFamily = settings.value("codeEditorFontFamily", QString("Source Code Pro")).toString();
+    m_codeEditorFontFamily = settings.value("codeEditorFontFamily", 
+                                        #if defined(Q_OS_MAC) || defined (Q_OS_IOS)
+                                                    QString("Menlo")
+                                        #elif defined(Q_OS_WIN)
+                                                    QString("Consolas")
+                                        #elif defined(Q_OS_ANDROID)
+                                                    QString("Droid Sans Mono")
+                                        #else
+                                                    QString("Monospace")
+                                        #endif
+                                            ).toString();
     m_codeEditorTheme = settings.value("codeEditorTheme", QString("Default")).toString();
     setPreviewTheme(settings.value("previewTheme", QString("默认")).toString());
     m_codeBlockStyle = settings.value("codeBlockStyle", QString("xcode")).toString();
