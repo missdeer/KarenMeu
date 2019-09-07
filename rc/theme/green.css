@@ -186,7 +186,7 @@ pre, pre span{
    * 代码块不换行 display: -webkit-box !important;
    * 代码块换行 display: block;
    */
-  pre span {
+  pre span, pre code {
     font-size: 12px;
   }
   
