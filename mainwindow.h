@@ -37,9 +37,9 @@ protected:
 private:
     Ui::MainWindow *ui;
     MarkdownView *m_view;
-    void InitMarkdownEngineActions();
-    void InitPreviewThemeActions();
-    void InitCodeBlockStyleActions();
+    void UpdateMarkdownEngineActions(bool first);
+    void UpdatePreviewThemeActions(bool first);
+    void UpdateCodeBlockStyleActions(bool first);
 };
 
 #endif // MAINWINDOW_H

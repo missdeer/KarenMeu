@@ -59,9 +59,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionShiftRight, &QAction::triggered, m_view, &MarkdownView::formatShiftRight);
     connect(ui->actionShiftLeft, &QAction::triggered, m_view, &MarkdownView::formatShiftLeft);
         
-    InitMarkdownEngineActions();
-    InitPreviewThemeActions();
-    InitCodeBlockStyleActions();
+    UpdateMarkdownEngineActions(true);
+    UpdatePreviewThemeActions(true);
+    UpdateCodeBlockStyleActions(true);
 }
 
 MainWindow::~MainWindow()
@@ -73,7 +73,7 @@ void MainWindow::onMarkdownEngineChanged()
 {
     ActionLabelMap markdownEngineMap = {
         { ui->actionGoldmark, "Goldmark"},
-        { ui->actionLute, "Lute"},
+        { ui->actionLute,     "Lute"    },
         };
     auto action = qobject_cast<QAction*>(sender());
     auto name = markdownEngineMap[action];
@@ -106,7 +106,50 @@ void MainWindow::onPreviewThemeChanged()
 
 void MainWindow::onCodeBlockStyleChanged()
 {
-
+    ActionLabelMap codeBlockStyleMap = {
+        {ui->actionAbap            ,"abap"              },
+        {ui->actionAlgol           ,"algol"             },
+        {ui->actionAlgolNu         ,"algol_nu"          },
+        {ui->actionArduino         ,"arduino"           },
+        {ui->actionAutumn          ,"autumn"            },
+        {ui->actionBorland         ,"borland"           },
+        {ui->actionBW              ,"bw"                },
+        {ui->actionColorful        ,"colorful"          },
+        {ui->actionDracula         ,"dracula"           },
+        {ui->actionEmacs           ,"emacs"             },
+        {ui->actionFriendly        ,"friendly"          },
+        {ui->actionFruity          ,"fruity"            },
+        {ui->actionGithub          ,"github"            },
+        {ui->actionIgor            ,"igor"              },
+        {ui->actionLovelace        ,"lovelace"          },
+        {ui->actionManni           ,"manni"             },
+        {ui->actionMonokai         ,"monokai"           },
+        {ui->actionMonokaiLight    ,"monokailight"      },
+        {ui->actionMurphy          ,"murphy"            },
+        {ui->actionNative          ,"native"            },
+        {ui->actionParaisoDark     ,"paraiso-dark"      },
+        {ui->actionParaisoLight    ,"paraiso-light"     },
+        {ui->actionPastie          ,"pastie"            },
+        {ui->actionPerldoc         ,"perldoc"           },
+        {ui->actionPygments        ,"pygments"          },
+        {ui->actionRainbowDash     ,"rainbow_dash"      },
+        {ui->actionRRT             ,"rrt"               },
+        {ui->actionSolarizedDark   ,"solarized-dark"    },
+        {ui->actionSolarizedDark256,"solarized-dark256" },
+        {ui->actionSolarizedLight  ,"solarized-light"   },
+        {ui->actionSwapOff         ,"swapoff"           },
+        {ui->actionTango           ,"tango"             },
+        {ui->actionTrac            ,"trac"              },
+        {ui->actionVIM             ,"vim"               },
+        {ui->actionVS              ,"vs"                },
+        {ui->actionXcode           ,"xcode"             },
+        };
+    auto action = qobject_cast<QAction*>(sender());
+    auto name = codeBlockStyleMap[action];
+    Q_ASSERT(g_settings);
+    g_settings->setCodeBlockStyle(name);
+    Q_ASSERT(m_view);
+    m_view->forceConvert();
 }
 
 void MainWindow::on_actionExit_triggered()
@@ -130,6 +173,9 @@ void MainWindow::on_actionPreference_triggered()
     PreferenceDialog dlg(this);
     if (dlg.exec() == QDialog::Accepted)
     {
+        UpdateMarkdownEngineActions(false);
+        UpdatePreviewThemeActions(false);
+        UpdateCodeBlockStyleActions(false);
         m_view->setThemeStyle();
         m_view->updateMarkdownEngine();
         m_view->forceConvert();
@@ -145,24 +191,27 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
 }
 
-void MainWindow::InitMarkdownEngineActions()
+void MainWindow::UpdateMarkdownEngineActions(bool first)
 {
     LabelActionMap markdownEngineMap = {
         { "Goldmark", ui->actionGoldmark},
         { "Lute", ui->actionLute},
     };
-    auto *actionGroup = new QActionGroup(this);
-    actionGroup->setExclusive(true);
-    for (const auto action : markdownEngineMap)
+    if (first)
     {
-        actionGroup->addAction(action);
-        connect(action, &QAction::triggered, this, &MainWindow::onMarkdownEngineChanged);
+        auto *actionGroup = new QActionGroup(this);
+        actionGroup->setExclusive(true);
+        for (const auto action : markdownEngineMap)
+        {
+            actionGroup->addAction(action);
+            connect(action, &QAction::triggered, this, &MainWindow::onMarkdownEngineChanged);
+        }
     }
     auto action = markdownEngineMap[g_settings->markdownEngine()];
     action->setChecked(true);
 }
 
-void MainWindow::InitPreviewThemeActions()
+void MainWindow::UpdatePreviewThemeActions(bool first)
 {
     LabelActionMap previewThemeMap = {
         { "默认", ui->actionDefault },
@@ -173,28 +222,69 @@ void MainWindow::InitPreviewThemeActions()
         { "嫩青", ui->actionBlue },
         { "红绯", ui->actionRed },
     };
-    auto *actionGroup = new QActionGroup(this);
-    actionGroup->setEnabled(true);
-    for (const auto action : previewThemeMap)
+    if (first)
     {
-        actionGroup->addAction(action);
-        connect(action, &QAction::triggered, this, &MainWindow::onPreviewThemeChanged);
+        auto *actionGroup = new QActionGroup(this);
+        actionGroup->setEnabled(true);
+        for (const auto action : previewThemeMap)
+        {
+            actionGroup->addAction(action);
+            connect(action, &QAction::triggered, this, &MainWindow::onPreviewThemeChanged);
+        }
     }
     auto action = previewThemeMap[g_settings->previewTheme()];
     action->setChecked(true);
 }
 
-void MainWindow::InitCodeBlockStyleActions()
+void MainWindow::UpdateCodeBlockStyleActions(bool first)
 {
     LabelActionMap codeBlockStyleMap = {
-        
+        {"abap", ui->actionAbap},
+        {"algol", ui->actionAlgol},
+        {"algol_nu", ui->actionAlgolNu},
+        {"arduino", ui->actionArduino},
+        {"autumn", ui->actionAutumn},
+        {"borland", ui->actionBorland},
+        {"bw", ui->actionBW},
+        {"colorful", ui->actionColorful},
+        {"dracula", ui->actionDracula},
+        {"emacs", ui->actionEmacs},
+        {"friendly", ui->actionFriendly},
+        {"fruity", ui->actionFruity},
+        {"github", ui->actionGithub},
+        {"igor", ui->actionIgor},
+        {"lovelace", ui->actionLovelace},
+        {"manni", ui->actionManni},
+        {"monokai", ui->actionMonokai},
+        {"monokailight", ui->actionMonokaiLight},
+        {"murphy", ui->actionMurphy},
+        {"native", ui->actionNative},
+        {"paraiso-dark", ui->actionParaisoDark},
+        {"paraiso-light", ui->actionParaisoLight},
+        {"pastie", ui->actionPastie},
+        {"perldoc", ui->actionPerldoc},
+        {"pygments", ui->actionPygments},
+        {"rainbow_dash", ui->actionRainbowDash},
+        {"rrt", ui->actionRRT},
+        {"solarized-dark", ui->actionSolarizedDark},
+        {"solarized-dark256", ui->actionSolarizedDark256},
+        {"solarized-light", ui->actionSolarizedLight},
+        {"swapoff", ui->actionSwapOff},
+        {"tango", ui->actionTango},
+        {"trac", ui->actionTrac},
+        {"vim", ui->actionVIM},
+        {"vs", ui->actionVS},
+        {"xcode", ui->actionXcode},
     };
-    auto *actionGroup = new QActionGroup(this);
-    actionGroup->setEnabled(true);
-    for (const auto action : codeBlockStyleMap)
+    if (first)
     {
-        actionGroup->addAction(action);
-        connect(action, &QAction::triggered, this, &MainWindow::onCodeBlockStyleChanged);
+        auto *actionGroup = new QActionGroup(this);
+        actionGroup->setEnabled(true);
+        for (const auto action : codeBlockStyleMap)
+        {
+            actionGroup->addAction(action);
+            connect(action, &QAction::triggered, this, &MainWindow::onCodeBlockStyleChanged);
+        }
     }
     auto action = codeBlockStyleMap[g_settings->codeBlockStyle()];
     action->setChecked(true);
