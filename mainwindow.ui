@@ -99,7 +99,7 @@
     <addaction name="actionHeader5"/>
     <addaction name="actionHeader6"/>
    </widget>
-   <widget class="QMenu" name="menu_View">
+   <widget class="QMenu" name="menuView">
     <property name="title">
      <string>&amp;View</string>
     </property>
@@ -134,7 +134,7 @@
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
-   <addaction name="menu_View"/>
+   <addaction name="menuView"/>
    <addaction name="menuFormat"/>
    <addaction name="menuHelp"/>
   </widget>
