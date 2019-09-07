@@ -353,6 +353,11 @@ void MarkdownView::renderMarkdownToHTML()
     
     auto res = markdownEngine(content, styleContent, true);
     QString html = QString::fromUtf8(res);
+
+    // fix h1/h2/h3 tag for style
+    html = html.replace("<h1>", "<h1><span>").replace("</h1>", "</span></h1>")
+               .replace("<h2>", "<h2><span>").replace("</h2>", "</span></h2>")
+               .replace("<h3>", "<h3><span>").replace("</h3>", "</span></h3>");
     
     setContent(html);
     
