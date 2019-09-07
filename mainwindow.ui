@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>850</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -153,6 +153,15 @@
      <addaction name="actionPygments"/>
      <addaction name="actionRainbowDash"/>
      <addaction name="actionRRT"/>
+     <addaction name="actionSolarizedDark"/>
+     <addaction name="actionSolarizedDark256"/>
+     <addaction name="actionSolarizedLight"/>
+     <addaction name="actionSwapOff"/>
+     <addaction name="actionTango"/>
+     <addaction name="actionTrac"/>
+     <addaction name="actionVIM"/>
+     <addaction name="actionVS"/>
+     <addaction name="actionXcode"/>
     </widget>
     <addaction name="menuMarkdownEngine"/>
     <addaction name="menuRenderTheme"/>
@@ -709,133 +718,283 @@
    </property>
   </action>
   <action name="actionAlgol">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Algol</string>
    </property>
   </action>
   <action name="actionAlgolNu">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Algol Nu</string>
    </property>
   </action>
   <action name="actionArduino">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Arduino</string>
    </property>
   </action>
   <action name="actionAutumn">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Autumn</string>
    </property>
   </action>
   <action name="actionBorland">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Borland</string>
    </property>
   </action>
   <action name="actionBW">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>BW</string>
    </property>
   </action>
   <action name="actionColorful">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Colorful</string>
    </property>
   </action>
   <action name="actionDracula">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Dracula</string>
    </property>
   </action>
   <action name="actionEmacs">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Emacs</string>
    </property>
   </action>
   <action name="actionFriendly">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Friendly</string>
    </property>
   </action>
   <action name="actionFruity">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Fruity</string>
    </property>
   </action>
   <action name="actionGithub">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Github</string>
    </property>
   </action>
   <action name="actionIgor">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Igor</string>
    </property>
   </action>
   <action name="actionLovelace">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Lovelace</string>
    </property>
   </action>
   <action name="actionManni">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Manni</string>
    </property>
   </action>
   <action name="actionMonokai">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Monokai</string>
    </property>
   </action>
   <action name="actionMonokaiLight">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Monokai Light</string>
    </property>
   </action>
   <action name="actionMurphy">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Murphy</string>
    </property>
   </action>
   <action name="actionNative">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Native</string>
    </property>
   </action>
   <action name="actionParaisoDark">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Paraiso Dark</string>
    </property>
   </action>
   <action name="actionParaisoLight">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Paraiso Light</string>
    </property>
   </action>
   <action name="actionPastie">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Pastie</string>
    </property>
   </action>
   <action name="actionPerldoc">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Perldoc</string>
    </property>
   </action>
   <action name="actionPygments">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Pygments</string>
    </property>
   </action>
   <action name="actionRainbowDash">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>Rainbow Dash</string>
    </property>
   </action>
   <action name="actionRRT">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
    <property name="text">
     <string>RRT</string>
+   </property>
+  </action>
+  <action name="actionSolarizedDark">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
+   <property name="text">
+    <string>Solarized Dark</string>
+   </property>
+  </action>
+  <action name="actionSolarizedDark256">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
+   <property name="text">
+    <string>Solarized Dark256</string>
+   </property>
+  </action>
+  <action name="actionSolarizedLight">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
+   <property name="text">
+    <string>Solarized Light</string>
+   </property>
+  </action>
+  <action name="actionSwapOff">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
+   <property name="text">
+    <string>Swap Off</string>
+   </property>
+  </action>
+  <action name="actionTango">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
+   <property name="text">
+    <string>Tango</string>
+   </property>
+  </action>
+  <action name="actionTrac">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
+   <property name="text">
+    <string>Trac</string>
+   </property>
+  </action>
+  <action name="actionVIM">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
+   <property name="text">
+    <string>VIM</string>
+   </property>
+  </action>
+  <action name="actionVS">
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
+   <property name="text">
+    <string>VS</string>
+   </property>
+  </action>
+  <action name="actionXcode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Xcode</string>
    </property>
   </action>
  </widget>
