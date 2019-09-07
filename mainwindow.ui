@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>850</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -127,6 +127,32 @@
       <string>Code Block Style</string>
      </property>
      <addaction name="actionAbap"/>
+     <addaction name="actionAlgol"/>
+     <addaction name="actionAlgolNu"/>
+     <addaction name="actionArduino"/>
+     <addaction name="actionAutumn"/>
+     <addaction name="actionBorland"/>
+     <addaction name="actionBW"/>
+     <addaction name="actionColorful"/>
+     <addaction name="actionDracula"/>
+     <addaction name="actionEmacs"/>
+     <addaction name="actionFriendly"/>
+     <addaction name="actionFruity"/>
+     <addaction name="actionGithub"/>
+     <addaction name="actionIgor"/>
+     <addaction name="actionLovelace"/>
+     <addaction name="actionManni"/>
+     <addaction name="actionMonokai"/>
+     <addaction name="actionMonokaiLight"/>
+     <addaction name="actionMurphy"/>
+     <addaction name="actionNative"/>
+     <addaction name="actionParaisoDark"/>
+     <addaction name="actionParaisoLight"/>
+     <addaction name="actionPastie"/>
+     <addaction name="actionPerldoc"/>
+     <addaction name="actionPygments"/>
+     <addaction name="actionRainbowDash"/>
+     <addaction name="actionRRT"/>
     </widget>
     <addaction name="menuMarkdownEngine"/>
     <addaction name="menuRenderTheme"/>
@@ -680,6 +706,136 @@
    </property>
    <property name="text">
     <string>Abap</string>
+   </property>
+  </action>
+  <action name="actionAlgol">
+   <property name="text">
+    <string>Algol</string>
+   </property>
+  </action>
+  <action name="actionAlgolNu">
+   <property name="text">
+    <string>Algol Nu</string>
+   </property>
+  </action>
+  <action name="actionArduino">
+   <property name="text">
+    <string>Arduino</string>
+   </property>
+  </action>
+  <action name="actionAutumn">
+   <property name="text">
+    <string>Autumn</string>
+   </property>
+  </action>
+  <action name="actionBorland">
+   <property name="text">
+    <string>Borland</string>
+   </property>
+  </action>
+  <action name="actionBW">
+   <property name="text">
+    <string>BW</string>
+   </property>
+  </action>
+  <action name="actionColorful">
+   <property name="text">
+    <string>Colorful</string>
+   </property>
+  </action>
+  <action name="actionDracula">
+   <property name="text">
+    <string>Dracula</string>
+   </property>
+  </action>
+  <action name="actionEmacs">
+   <property name="text">
+    <string>Emacs</string>
+   </property>
+  </action>
+  <action name="actionFriendly">
+   <property name="text">
+    <string>Friendly</string>
+   </property>
+  </action>
+  <action name="actionFruity">
+   <property name="text">
+    <string>Fruity</string>
+   </property>
+  </action>
+  <action name="actionGithub">
+   <property name="text">
+    <string>Github</string>
+   </property>
+  </action>
+  <action name="actionIgor">
+   <property name="text">
+    <string>Igor</string>
+   </property>
+  </action>
+  <action name="actionLovelace">
+   <property name="text">
+    <string>Lovelace</string>
+   </property>
+  </action>
+  <action name="actionManni">
+   <property name="text">
+    <string>Manni</string>
+   </property>
+  </action>
+  <action name="actionMonokai">
+   <property name="text">
+    <string>Monokai</string>
+   </property>
+  </action>
+  <action name="actionMonokaiLight">
+   <property name="text">
+    <string>Monokai Light</string>
+   </property>
+  </action>
+  <action name="actionMurphy">
+   <property name="text">
+    <string>Murphy</string>
+   </property>
+  </action>
+  <action name="actionNative">
+   <property name="text">
+    <string>Native</string>
+   </property>
+  </action>
+  <action name="actionParaisoDark">
+   <property name="text">
+    <string>Paraiso Dark</string>
+   </property>
+  </action>
+  <action name="actionParaisoLight">
+   <property name="text">
+    <string>Paraiso Light</string>
+   </property>
+  </action>
+  <action name="actionPastie">
+   <property name="text">
+    <string>Pastie</string>
+   </property>
+  </action>
+  <action name="actionPerldoc">
+   <property name="text">
+    <string>Perldoc</string>
+   </property>
+  </action>
+  <action name="actionPygments">
+   <property name="text">
+    <string>Pygments</string>
+   </property>
+  </action>
+  <action name="actionRainbowDash">
+   <property name="text">
+    <string>Rainbow Dash</string>
+   </property>
+  </action>
+  <action name="actionRRT">
+   <property name="text">
+    <string>RRT</string>
    </property>
   </action>
  </widget>
