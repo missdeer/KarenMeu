@@ -78,7 +78,7 @@ extern char* DouceurInliner(GoString p0);
 
 extern char* Inliner(GoString p0);
 
-extern char* Lute(GoString p0, GoString p1);
+extern char* Lute(GoString p0, GoString p1, GoUint8 p2);
 
 extern void Free(char* p0);
 
