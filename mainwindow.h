@@ -15,8 +15,15 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
-    
+    MainWindow(const MainWindow&) = delete;
+    MainWindow(MainWindow&&) = delete;
+    void operator=(const MainWindow&) = delete;
+    void operator=(MainWindow&&) = delete;
 private slots:
+    void onMarkdownEngineChanged();
+    void onPreviewThemeChanged();
+    void onCodeBlockStyleChanged();
+
     void on_actionExit_triggered();
     
     void on_actionContent_triggered();

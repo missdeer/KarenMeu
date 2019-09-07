@@ -1,10 +1,12 @@
 #include <QtCore>
+#include <QCoreApplication>
 #include <QMessageBox>
 #include <QDesktopServices>
 #include <QUrl>
 #include <QCloseEvent>
 #include <QAction>
 #include <QMap>
+#include <QHash>
 #include "markdownview.h"
 #include "preferencedialog.h"
 #include "renderer.h"
@@ -12,7 +14,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-using ActionLabelMap = QMap<QString, QAction *>;
+using LabelActionMap = QMap<QString, QAction *>;
+using ActionLabelMap = QHash<QAction *, QString>;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -66,9 +69,49 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::onMarkdownEngineChanged()
+{
+    ActionLabelMap markdownEngineMap = {
+        { ui->actionGoldmark, "Goldmark"},
+        { ui->actionLute, "Lute"},
+        };
+    auto action = qobject_cast<QAction*>(sender());
+    auto name = markdownEngineMap[action];
+    Q_ASSERT(g_settings);
+    g_settings->setMarkdownEngine(name);
+    Q_ASSERT(m_view);
+    m_view->updateMarkdownEngine();
+    m_view->forceConvert();
+}
+
+void MainWindow::onPreviewThemeChanged()
+{
+    ActionLabelMap previewThemeMap = {
+        { ui->actionDefault,"默认" },
+        { ui->actionOrange ,"橙心" },
+        { ui->actionInk    ,"墨黑" },
+        { ui->actionPurple ,"姹紫" },
+        { ui->actionGreen  ,"绿意" },
+        { ui->actionBlue   ,"嫩青" },
+        { ui->actionRed    ,"红绯" },
+        };
+    auto action = qobject_cast<QAction*>(sender());
+    auto name = previewThemeMap[action];
+    Q_ASSERT(g_settings);
+    g_settings->setPreviewTheme(name);
+    Q_ASSERT(m_view);
+    m_view->setThemeStyle();
+    m_view->forceConvert();
+}
+
+void MainWindow::onCodeBlockStyleChanged()
+{
+
+}
+
 void MainWindow::on_actionExit_triggered()
 {
-    qApp->quit();
+    QCoreApplication::quit();
 }
 
 void MainWindow::on_actionContent_triggered()
@@ -104,23 +147,24 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::InitMarkdownEngineActions()
 {
-    ActionLabelMap markdownEngineMap = {
+    LabelActionMap markdownEngineMap = {
         { "Goldmark", ui->actionGoldmark},
         { "Lute", ui->actionLute},
     };
-    auto *markdownEngineGroup = new QActionGroup(this);
-    markdownEngineGroup->setExclusive(true);
+    auto *actionGroup = new QActionGroup(this);
+    actionGroup->setExclusive(true);
     for (const auto action : markdownEngineMap)
     {
-        markdownEngineGroup->addAction(action);
+        actionGroup->addAction(action);
+        connect(action, &QAction::triggered, this, &MainWindow::onMarkdownEngineChanged);
     }
-    auto markdownEngineAction = markdownEngineMap[g_settings->markdownEngine()];
-    markdownEngineAction->setChecked(true);    
+    auto action = markdownEngineMap[g_settings->markdownEngine()];
+    action->setChecked(true);
 }
 
 void MainWindow::InitPreviewThemeActions()
 {
-    ActionLabelMap previewThemeMap = {
+    LabelActionMap previewThemeMap = {
         { "默认", ui->actionDefault },
         { "橙心", ui->actionOrange },
         { "墨黑", ui->actionInk },
@@ -129,19 +173,29 @@ void MainWindow::InitPreviewThemeActions()
         { "嫩青", ui->actionBlue },
         { "红绯", ui->actionRed },
     };
-    auto *previewThemeGroup = new QActionGroup(this);
-    previewThemeGroup->setEnabled(true);
+    auto *actionGroup = new QActionGroup(this);
+    actionGroup->setEnabled(true);
     for (const auto action : previewThemeMap)
     {
-        previewThemeGroup->addAction(action);
+        actionGroup->addAction(action);
+        connect(action, &QAction::triggered, this, &MainWindow::onPreviewThemeChanged);
     }
-    auto previewThemeAction = previewThemeMap[g_settings->previewTheme()];
-    previewThemeAction->setChecked(true);    
+    auto action = previewThemeMap[g_settings->previewTheme()];
+    action->setChecked(true);
 }
 
 void MainWindow::InitCodeBlockStyleActions()
 {
-    ActionLabelMap codeBlockStyleMap = {
+    LabelActionMap codeBlockStyleMap = {
         
     };
+    auto *actionGroup = new QActionGroup(this);
+    actionGroup->setEnabled(true);
+    for (const auto action : codeBlockStyleMap)
+    {
+        actionGroup->addAction(action);
+        connect(action, &QAction::triggered, this, &MainWindow::onCodeBlockStyleChanged);
+    }
+    auto action = codeBlockStyleMap[g_settings->codeBlockStyle()];
+    action->setChecked(true);
 }
