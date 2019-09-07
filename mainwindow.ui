@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>850</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -99,8 +99,42 @@
     <addaction name="actionHeader5"/>
     <addaction name="actionHeader6"/>
    </widget>
+   <widget class="QMenu" name="menu_View">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+    <widget class="QMenu" name="menuMarkdownEngine">
+     <property name="title">
+      <string>Markdown Engine</string>
+     </property>
+     <addaction name="actionGoldmark"/>
+     <addaction name="actionLute"/>
+    </widget>
+    <widget class="QMenu" name="menuRenderTheme">
+     <property name="title">
+      <string>Render Theme</string>
+     </property>
+     <addaction name="actionDefault"/>
+     <addaction name="actionOrange"/>
+     <addaction name="actionInk"/>
+     <addaction name="actionPurple"/>
+     <addaction name="actionBlue"/>
+     <addaction name="actionGreen"/>
+     <addaction name="actionRed"/>
+    </widget>
+    <widget class="QMenu" name="menuCodeBlockStyle">
+     <property name="title">
+      <string>Code Block Style</string>
+     </property>
+     <addaction name="actionAbap"/>
+    </widget>
+    <addaction name="menuMarkdownEngine"/>
+    <addaction name="menuRenderTheme"/>
+    <addaction name="menuCodeBlockStyle"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menu_View"/>
    <addaction name="menuFormat"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -566,6 +600,86 @@
    </property>
    <property name="text">
     <string>Code Block</string>
+   </property>
+  </action>
+  <action name="actionGoldmark">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Goldmark</string>
+   </property>
+  </action>
+  <action name="actionLute">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Lute</string>
+   </property>
+  </action>
+  <action name="actionDefault">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Default</string>
+   </property>
+  </action>
+  <action name="actionOrange">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Orange</string>
+   </property>
+  </action>
+  <action name="actionInk">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Ink</string>
+   </property>
+  </action>
+  <action name="actionPurple">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Purple</string>
+   </property>
+  </action>
+  <action name="actionBlue">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Blue</string>
+   </property>
+  </action>
+  <action name="actionGreen">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Green</string>
+   </property>
+  </action>
+  <action name="actionRed">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Red</string>
+   </property>
+  </action>
+  <action name="actionAbap">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Abap</string>
    </property>
   </action>
  </widget>
