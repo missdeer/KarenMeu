@@ -7,6 +7,8 @@
 #include <QAction>
 #include <QMap>
 #include <QHash>
+#include <QLabel>
+#include <QComboBox>
 #include "markdownview.h"
 #include "preferencedialog.h"
 #include "renderer.h"
@@ -62,10 +64,15 @@ MainWindow::MainWindow(QWidget *parent) :
     UpdateMarkdownEngineActions(true);
     UpdatePreviewThemeActions(true);
     UpdateCodeBlockStyleActions(true);
+    InitEngineToolbar();
+    connect(m_cbMarkdownEngine, &QComboBox::currentTextChanged, this, &MainWindow::onMarkdownEngineCurrentTextChanged);
+    connect(m_cbPreviewTheme, &QComboBox::currentTextChanged, this, &MainWindow::onPreviewThemeCurrentTextChanged);
+    connect(m_cbCodeBlockStyle, &QComboBox::currentTextChanged, this, &MainWindow::onCodeBlockStyleCurrentTextChanged);
     
     auto *action = ui->menuMarkdownEngine->menuAction();
     ui->menuView->insertAction(action, ui->fileToolbar->toggleViewAction());
     ui->menuView->insertAction(action, ui->editToolbar->toggleViewAction());
+    ui->menuView->insertAction(action, ui->engineToolbar->toggleViewAction());
     ui->menuView->insertAction(action, ui->formatToolbar->toggleViewAction());
     ui->menuView->insertSeparator(action);
 }
@@ -90,6 +97,16 @@ void MainWindow::onMarkdownEngineChanged()
     m_view->forceConvert();
 }
 
+void MainWindow::onMarkdownEngineCurrentTextChanged(const QString &text)
+{
+    LabelActionMap markdownEngineMap = {
+        { "Goldmark", ui->actionGoldmark},
+        { "Lute", ui->actionLute},
+    };
+    auto action = markdownEngineMap[text];
+    action->triggered(true);
+}
+
 void MainWindow::onPreviewThemeChanged()
 {
     ActionLabelMap previewThemeMap = {
@@ -110,6 +127,22 @@ void MainWindow::onPreviewThemeChanged()
     m_view->forceConvert();
 }
 
+void MainWindow::onPreviewThemeCurrentTextChanged(const QString &text)
+{
+    LabelActionMap previewThemeMap = {
+        { "默认", ui->actionDefault },
+        { "橙心", ui->actionOrange },
+        { "墨黑", ui->actionInk },
+        { "姹紫", ui->actionPurple },
+        { "绿意", ui->actionGreen },
+        { "嫩青", ui->actionBlue },
+        { "红绯", ui->actionRed },
+    };
+    
+    auto action = previewThemeMap[text];
+    action->triggered(true);
+}
+
 void MainWindow::onCodeBlockStyleChanged()
 {
     ActionLabelMap codeBlockStyleMap = {
@@ -117,6 +150,7 @@ void MainWindow::onCodeBlockStyleChanged()
         {ui->actionAlgol           ,"algol"             },
         {ui->actionAlgolNu         ,"algol_nu"          },
         {ui->actionArduino         ,"arduino"           },
+        {ui->actionAPI             ,"api"               },
         {ui->actionAutumn          ,"autumn"            },
         {ui->actionBorland         ,"borland"           },
         {ui->actionBW              ,"bw"                },
@@ -158,6 +192,52 @@ void MainWindow::onCodeBlockStyleChanged()
     m_view->forceConvert();
 }
 
+void MainWindow::onCodeBlockStyleCurrentTextChanged(const QString &text)
+{
+    LabelActionMap codeBlockStyleMap = {
+        {"abap", ui->actionAbap},
+        {"algol", ui->actionAlgol},
+        {"algol_nu", ui->actionAlgolNu},
+        {"api", ui->actionAPI},
+        {"arduino", ui->actionArduino},
+        {"autumn", ui->actionAutumn},
+        {"borland", ui->actionBorland},
+        {"bw", ui->actionBW},
+        {"colorful", ui->actionColorful},
+        {"dracula", ui->actionDracula},
+        {"emacs", ui->actionEmacs},
+        {"friendly", ui->actionFriendly},
+        {"fruity", ui->actionFruity},
+        {"github", ui->actionGithub},
+        {"igor", ui->actionIgor},
+        {"lovelace", ui->actionLovelace},
+        {"manni", ui->actionManni},
+        {"monokai", ui->actionMonokai},
+        {"monokailight", ui->actionMonokaiLight},
+        {"murphy", ui->actionMurphy},
+        {"native", ui->actionNative},
+        {"paraiso-dark", ui->actionParaisoDark},
+        {"paraiso-light", ui->actionParaisoLight},
+        {"pastie", ui->actionPastie},
+        {"perldoc", ui->actionPerldoc},
+        {"pygments", ui->actionPygments},
+        {"rainbow_dash", ui->actionRainbowDash},
+        {"rrt", ui->actionRRT},
+        {"solarized-dark", ui->actionSolarizedDark},
+        {"solarized-dark256", ui->actionSolarizedDark256},
+        {"solarized-light", ui->actionSolarizedLight},
+        {"swapoff", ui->actionSwapOff},
+        {"tango", ui->actionTango},
+        {"trac", ui->actionTrac},
+        {"vim", ui->actionVIM},
+        {"vs", ui->actionVS},
+        {"xcode", ui->actionXcode},
+    };
+    
+    auto action = codeBlockStyleMap[text];
+    action->triggered(true);
+}
+
 void MainWindow::on_actionExit_triggered()
 {
     QCoreApplication::quit();
@@ -180,8 +260,11 @@ void MainWindow::on_actionPreference_triggered()
     if (dlg.exec() == QDialog::Accepted)
     {
         UpdateMarkdownEngineActions(false);
+        m_cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());
         UpdatePreviewThemeActions(false);
+        m_cbPreviewTheme->setCurrentText(g_settings->previewTheme());
         UpdateCodeBlockStyleActions(false);
+        m_cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
         m_view->setThemeStyle();
         m_view->updateMarkdownEngine();
         m_view->forceConvert();
@@ -248,6 +331,7 @@ void MainWindow::UpdateCodeBlockStyleActions(bool first)
         {"abap", ui->actionAbap},
         {"algol", ui->actionAlgol},
         {"algol_nu", ui->actionAlgolNu},
+        {"api", ui->actionAPI},
         {"arduino", ui->actionArduino},
         {"autumn", ui->actionAutumn},
         {"borland", ui->actionBorland},
@@ -294,4 +378,44 @@ void MainWindow::UpdateCodeBlockStyleActions(bool first)
     }
     auto action = codeBlockStyleMap[g_settings->codeBlockStyle()];
     action->setChecked(true);
+}
+
+void MainWindow::InitEngineToolbar()
+{
+    auto *label1 = new QLabel(tr("Markdown Engine:"), ui->engineToolbar);
+    ui->engineToolbar->addWidget(label1);
+    m_cbMarkdownEngine = new QComboBox(this);
+    m_cbMarkdownEngine->addItems(QStringList() << "Goldmark" << "Lute");
+    m_cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());
+    ui->engineToolbar->addWidget(m_cbMarkdownEngine);
+    
+    auto *label2 = new QLabel(tr("Preview Theme:"), ui->engineToolbar);
+    ui->engineToolbar->addWidget(label2);
+    m_cbPreviewTheme = new QComboBox(this);
+    m_cbPreviewTheme->addItems(QStringList() << "默认"<<"橙心"<<"墨黑"<<"姹紫"<<"绿意"<<"嫩青"<<"红绯");
+    m_cbPreviewTheme->setCurrentText(g_settings->previewTheme());
+    ui->engineToolbar->addWidget(m_cbPreviewTheme);
+    
+    auto *label3 = new QLabel(tr("Code Block Style:"), ui->engineToolbar);
+    ui->engineToolbar->addWidget(label3);
+    m_cbCodeBlockStyle = new QComboBox(this);
+    m_cbCodeBlockStyle->addItems(QStringList() << "abap"<<"algol"<<"algol_nu"<< "api"<<"arduino"<<"autumn"<<
+                                 "borland"<<"bw"<<
+                                 "colorful"<<
+                                 "dracula"<<
+                                 "emacs"<<
+                                 "friendly"<<"fruity"<<
+                                 "github"<<
+                                 "igor"<<
+                                 "lovelace"<<
+                                 "manni"<<"monokai"<<"monokailight"<<"murphy"<<
+                                 "native"<<
+                                 "paraiso-dark"<<"paraiso-light"<<"pastie"<<"perldoc"<<"pygments"<<
+                                 "rainbow_dash"<<"rrt"<<
+                                 "solarized-dark"<<"solarized-dark256" <<"solarized-light"<<"swapoff"<<
+                                 "tango"<<"trac"<<
+                                 "vim"<<"vs"<<
+                                 "xcode");
+    m_cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
+    ui->engineToolbar->addWidget(m_cbCodeBlockStyle);
 }

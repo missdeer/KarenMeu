@@ -129,6 +129,7 @@
      <addaction name="actionAbap"/>
      <addaction name="actionAlgol"/>
      <addaction name="actionAlgolNu"/>
+     <addaction name="actionAPI"/>
      <addaction name="actionArduino"/>
      <addaction name="actionAutumn"/>
      <addaction name="actionBorland"/>
@@ -242,6 +243,17 @@
    <addaction name="actionHeader4"/>
    <addaction name="actionHeader5"/>
    <addaction name="actionHeader6"/>
+  </widget>
+  <widget class="QToolBar" name="engineToolbar">
+   <property name="windowTitle">
+    <string>Engine Toolbar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
   </widget>
   <action name="actionNew">
    <property name="icon">
@@ -755,6 +767,11 @@
    </property>
    <property name="text">
     <string>Algol Nu</string>
+   </property>
+  </action>
+  <action name="actionAPI">
+   <property name="text">
+    <string>API</string>
    </property>
   </action>
   <action name="actionArduino">

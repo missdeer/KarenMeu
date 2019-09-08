@@ -8,6 +8,8 @@ class MainWindow;
 }
 class MarkdownView;
 
+QT_FORWARD_DECLARE_CLASS(QComboBox);
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -21,8 +23,11 @@ public:
     void operator=(MainWindow&&) = delete;
 private slots:
     void onMarkdownEngineChanged();
+    void onMarkdownEngineCurrentTextChanged(const QString& text);
     void onPreviewThemeChanged();
+    void onPreviewThemeCurrentTextChanged(const QString& text);
     void onCodeBlockStyleChanged();
+    void onCodeBlockStyleCurrentTextChanged(const QString& text);
 
     void on_actionExit_triggered();
     
@@ -37,9 +42,13 @@ protected:
 private:
     Ui::MainWindow *ui;
     MarkdownView *m_view;
+    QComboBox *m_cbMarkdownEngine;
+    QComboBox *m_cbPreviewTheme;
+    QComboBox *m_cbCodeBlockStyle;
     void UpdateMarkdownEngineActions(bool first);
     void UpdatePreviewThemeActions(bool first);
     void UpdateCodeBlockStyleActions(bool first);
+    void InitEngineToolbar();
 };
 
 #endif // MAINWINDOW_H
