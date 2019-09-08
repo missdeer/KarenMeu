@@ -62,6 +62,12 @@ MainWindow::MainWindow(QWidget *parent) :
     UpdateMarkdownEngineActions(true);
     UpdatePreviewThemeActions(true);
     UpdateCodeBlockStyleActions(true);
+    
+    auto *action = ui->menuMarkdownEngine->menuAction();
+    ui->menuView->insertAction(action, ui->fileToolbar->toggleViewAction());
+    ui->menuView->insertAction(action, ui->editToolbar->toggleViewAction());
+    ui->menuView->insertAction(action, ui->formatToolbar->toggleViewAction());
+    ui->menuView->insertSeparator(action);
 }
 
 MainWindow::~MainWindow()
