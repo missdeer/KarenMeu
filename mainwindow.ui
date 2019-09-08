@@ -187,7 +187,6 @@
    <addaction name="actionNew"/>
    <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
-   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="editToolbar">
@@ -208,8 +207,6 @@
    <addaction name="actionPaste"/>
    <addaction name="separator"/>
    <addaction name="actionCopyAsHTML"/>
-   <addaction name="separator"/>
-   <addaction name="actionPreference"/>
   </widget>
   <widget class="QToolBar" name="formatToolbar">
    <property name="windowTitle">
@@ -241,8 +238,6 @@
    <addaction name="actionHeader2"/>
    <addaction name="actionHeader3"/>
    <addaction name="actionHeader4"/>
-   <addaction name="actionHeader5"/>
-   <addaction name="actionHeader6"/>
   </widget>
   <widget class="QToolBar" name="engineToolbar">
    <property name="windowTitle">

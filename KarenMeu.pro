@@ -8,7 +8,7 @@ QT       += core gui widgets network xml webengine webenginewidgets webchannel
 
 TARGET = KarenMeu
 TEMPLATE = app
-DESTDIR = $$OUT_PWD
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -116,6 +116,7 @@ macx: {
     INSTALLS += icon
     LIBS += -framework CoreFoundation -framework Security
 
+    DESTDIR = $$OUT_PWD
 
     CONFIG(release, debug|release) : {
         QMAKE_INFO_PLIST = osxInfo.plist
