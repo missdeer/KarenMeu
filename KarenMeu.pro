@@ -8,7 +8,7 @@ QT       += core gui widgets network xml webengine webenginewidgets webchannel
 
 TARGET = KarenMeu
 TEMPLATE = app
-
+DESTDIR = $$OUT_PWD
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -129,9 +129,7 @@ macx: {
         qti18n.depends = translate
         qti18n.commands = '$(COPY_FILE) $$shell_path($$[QT_INSTALL_BINS]/../translations/qt_zh_CN.qm) $$shell_path($${DESTDIR}/$${TARGET}.app/Contents/Resources/translations/qt_zh_CN.qm)'
 
-        bundlei18n.depends = qti18n
-        bundlei18n.commands = '$(COPY_DIR) $$shell_path($${PWD}/../../mac/*.lproj) $$shell_path($${DESTDIR}/$${TARGET}.app/Contents/Resources/)'
-        QMAKE_BUNDLE_DATA += translate qti18n bundlei18n
+        QMAKE_BUNDLE_DATA += translate qti18n 
 
         deploy.commands += $$MACDEPLOYQT \"$${DESTDIR}/$${TARGET}.app\"
 
@@ -154,8 +152,7 @@ macx: {
         makedmg.depends += codesign
         makedmg.commands = hdiutil create -srcfolder \"$${DESTDIR}/$${TARGET}.app\" -volname \"$${TARGET}\" -format UDBZ \"$${DESTDIR}/$${TARGET}.dmg\" -ov -scrub -stretch 2g
 
-        QMAKE_EXTRA_TARGETS += deploy deploy_webengine deploy_appstore fixdeploy codesign makedmg bundlei18n
-        POST_TARGETDEPS += bundlei18n
+        QMAKE_EXTRA_TARGETS += deploy deploy_webengine deploy_appstore fixdeploy codesign makedmg 
     }
 }
 
