@@ -5,7 +5,6 @@
  .layout {
     font-size: 15px;
     letter-spacing: 0.05em;
-    color:#595959
 }
 body {
     background-color: transparent !important;
@@ -74,7 +73,7 @@ h2 span {
     color: #007d9c;
     padding: 3px 10px 1px;
     border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
+    border-top-left-radius: 5px;
     margin-right: 3px;
 }
 /* 二级标题修饰 请参考有实例的主题 */
@@ -108,7 +107,7 @@ li {
 blockquote {
     border-radius: 5px;
     margin: 10px 5px;
-    border-left: 10px solid #007d9c;
+    border-left: 20px solid #007d9c;
     border-right: 1px solid #007d9c;
     color: #003952;
     quotes: none;
@@ -128,9 +127,11 @@ strong {
 }
 /* 斜体 */
 em {
+    color:#007d9c;
 }
 /* 加粗斜体 */
 strong em {
+    color:#007d9c;
 }
 /* 删除线 */
 del {
