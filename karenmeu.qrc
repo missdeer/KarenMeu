@@ -74,5 +74,6 @@
         <file>rc/images/paragraph.png</file>
         <file>rc/images/table.png</file>
         <file>rc/images/todolist.png</file>
+        <file>rc/theme/gopher.css</file>
     </qresource>
 </RCC>

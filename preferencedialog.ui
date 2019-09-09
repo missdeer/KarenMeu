@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>226</height>
+    <height>244</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -77,6 +77,11 @@
      <item>
       <property name="text">
        <string>红绯</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Gopher</string>
       </property>
      </item>
     </widget>

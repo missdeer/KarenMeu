@@ -121,6 +121,7 @@
      <addaction name="actionBlue"/>
      <addaction name="actionGreen"/>
      <addaction name="actionRed"/>
+     <addaction name="actionGopher"/>
     </widget>
     <widget class="QMenu" name="menuCodeBlockStyle">
      <property name="title">
@@ -1055,6 +1056,14 @@
    </property>
    <property name="text">
     <string>Xcode</string>
+   </property>
+  </action>
+  <action name="actionGopher">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gopher</string>
    </property>
   </action>
  </widget>

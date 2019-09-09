@@ -117,6 +117,7 @@ void MainWindow::onPreviewThemeChanged()
         { ui->actionGreen  ,"绿意" },
         { ui->actionBlue   ,"嫩青" },
         { ui->actionRed    ,"红绯" },
+        { ui->actionGopher ,"Gopher"},
         };
     auto action = qobject_cast<QAction*>(sender());
     auto name = previewThemeMap[action];
@@ -137,6 +138,7 @@ void MainWindow::onPreviewThemeCurrentTextChanged(const QString &text)
         { "绿意", ui->actionGreen },
         { "嫩青", ui->actionBlue },
         { "红绯", ui->actionRed },
+        { "Gopher", ui->actionGopher},
     };
     
     auto action = previewThemeMap[text];
@@ -310,6 +312,7 @@ void MainWindow::UpdatePreviewThemeActions(bool first)
         { "绿意", ui->actionGreen },
         { "嫩青", ui->actionBlue },
         { "红绯", ui->actionRed },
+        { "Gopher", ui->actionGopher},
     };
     if (first)
     {
@@ -392,7 +395,7 @@ void MainWindow::InitEngineToolbar()
     auto *label2 = new QLabel(tr("Preview Theme:"), ui->engineToolbar);
     ui->engineToolbar->addWidget(label2);
     m_cbPreviewTheme = new QComboBox(this);
-    m_cbPreviewTheme->addItems(QStringList() << "默认"<<"橙心"<<"墨黑"<<"姹紫"<<"绿意"<<"嫩青"<<"红绯");
+    m_cbPreviewTheme->addItems(QStringList() << "默认"<<"橙心"<<"墨黑"<<"姹紫"<<"绿意"<<"嫩青"<<"红绯"<<"Gopher");
     m_cbPreviewTheme->setCurrentText(g_settings->previewTheme());
     ui->engineToolbar->addWidget(m_cbPreviewTheme);
     
