@@ -109,7 +109,9 @@ void MarkdownView::openDocument()
             QByteArray ba = f.readAll();
             m_editor->setContent(ba);
             m_editor->setSavePoint();
+            m_editor->emptyUndoBuffer();
             f.close();
+            m_savePath = fileName;
         }
     }
 }
@@ -149,6 +151,7 @@ void MarkdownView::newDocument()
     }
     m_editor->clear();
     m_editor->setSavePoint();
+    m_editor->emptyUndoBuffer();
 }
 
 void MarkdownView::copy()
