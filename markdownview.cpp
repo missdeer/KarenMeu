@@ -37,6 +37,7 @@ MarkdownView::MarkdownView(QWidget *parent)
     connect(m_editor, &MarkdownEditor::contentModified, this, &MarkdownView::documentModified);
     connect(this, &MarkdownView::formatStrong, m_editor, &MarkdownEditor::formatStrong);
     connect(this, &MarkdownView::formatEmphasize, m_editor, &MarkdownEditor::formatEmphasize);
+    connect(this, &MarkdownView::formatStrikethrough, m_editor, &MarkdownEditor::formatStrikethrough);
     connect(this, &MarkdownView::formatInlineCode, m_editor, &MarkdownEditor::formatInlineCode);
     connect(this, &MarkdownView::formatCodeBlock, m_editor, &MarkdownEditor::formatCodeBlock);
     connect(this, &MarkdownView::formatComment, m_editor, &MarkdownEditor::formatComment);
