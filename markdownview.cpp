@@ -11,7 +11,7 @@
 #include <QWebChannel>
 #include <QTimer>
 #include "settings.h"
-#include "markdowneditor.h"
+#include "markdowneditor2.h"
 #include "markdownview.h"
 #include "previewpage.h"
 #include "renderer.h"
@@ -22,7 +22,7 @@ pFMarkdownEngine markdownEngine = nullptr;
 MarkdownView::MarkdownView(QWidget *parent) 
     : QWidget(parent)
     , m_splitter(new QSplitter(this))
-    , m_editor(new MarkdownEditor(this))
+    , m_editor(new MarkdownEditor2(this))
     , m_preview(new QWebEngineView(this))
     , m_convertTimer(new QTimer)
 {
@@ -34,28 +34,28 @@ MarkdownView::MarkdownView(QWidget *parent)
     setLayout(layout);
     m_splitter->setSizes(QList<int>() << width()/2 << width() /2);
     m_editor->initialize();
-    connect(m_editor, &MarkdownEditor::contentModified, this, &MarkdownView::documentModified);
-    connect(this, &MarkdownView::formatStrong, m_editor, &MarkdownEditor::formatStrong);
-    connect(this, &MarkdownView::formatEmphasize, m_editor, &MarkdownEditor::formatEmphasize);
-    connect(this, &MarkdownView::formatStrikethrough, m_editor, &MarkdownEditor::formatStrikethrough);
-    connect(this, &MarkdownView::formatInlineCode, m_editor, &MarkdownEditor::formatInlineCode);
-    connect(this, &MarkdownView::formatCodeBlock, m_editor, &MarkdownEditor::formatCodeBlock);
-    connect(this, &MarkdownView::formatComment, m_editor, &MarkdownEditor::formatComment);
-    connect(this, &MarkdownView::formatOrderedList, m_editor, &MarkdownEditor::formatOrderedList);
-    connect(this, &MarkdownView::formatUnorderedList, m_editor, &MarkdownEditor::formatUnorderedList);
-    connect(this, &MarkdownView::formatBlockquote, m_editor, &MarkdownEditor::formatBlockquote);
-    connect(this, &MarkdownView::formatHyperlink, m_editor, &MarkdownEditor::formatHyperlink);
-    connect(this, &MarkdownView::formatImage, m_editor, &MarkdownEditor::formatImage);
-    connect(this, &MarkdownView::formatNewParagraph, m_editor, &MarkdownEditor::formatNewParagraph);
-    connect(this, &MarkdownView::formatHorizontalRule, m_editor, &MarkdownEditor::formatHorizontalRule);
-    connect(this, &MarkdownView::formatHeader1, m_editor, &MarkdownEditor::formatHeader1);
-    connect(this, &MarkdownView::formatHeader2, m_editor, &MarkdownEditor::formatHeader2);
-    connect(this, &MarkdownView::formatHeader3, m_editor, &MarkdownEditor::formatHeader3);
-    connect(this, &MarkdownView::formatHeader4, m_editor, &MarkdownEditor::formatHeader4);
-    connect(this, &MarkdownView::formatHeader5, m_editor, &MarkdownEditor::formatHeader5);
-    connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor::formatHeader6);
-    connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor::formatShiftRight);
-    connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor::formatShiftLeft);
+    connect(m_editor, &MarkdownEditor2::contentModified, this, &MarkdownView::documentModified);
+    connect(this, &MarkdownView::formatStrong, m_editor, &MarkdownEditor2::formatStrong);
+    connect(this, &MarkdownView::formatEmphasize, m_editor, &MarkdownEditor2::formatEmphasize);
+    connect(this, &MarkdownView::formatStrikethrough, m_editor, &MarkdownEditor2::formatStrikethrough);
+    connect(this, &MarkdownView::formatInlineCode, m_editor, &MarkdownEditor2::formatInlineCode);
+    connect(this, &MarkdownView::formatCodeBlock, m_editor, &MarkdownEditor2::formatCodeBlock);
+    connect(this, &MarkdownView::formatComment, m_editor, &MarkdownEditor2::formatComment);
+    connect(this, &MarkdownView::formatOrderedList, m_editor, &MarkdownEditor2::formatOrderedList);
+    connect(this, &MarkdownView::formatUnorderedList, m_editor, &MarkdownEditor2::formatUnorderedList);
+    connect(this, &MarkdownView::formatBlockquote, m_editor, &MarkdownEditor2::formatBlockquote);
+    connect(this, &MarkdownView::formatHyperlink, m_editor, &MarkdownEditor2::formatHyperlink);
+    connect(this, &MarkdownView::formatImage, m_editor, &MarkdownEditor2::formatImage);
+    connect(this, &MarkdownView::formatNewParagraph, m_editor, &MarkdownEditor2::formatNewParagraph);
+    connect(this, &MarkdownView::formatHorizontalRule, m_editor, &MarkdownEditor2::formatHorizontalRule);
+    connect(this, &MarkdownView::formatHeader1, m_editor, &MarkdownEditor2::formatHeader1);
+    connect(this, &MarkdownView::formatHeader2, m_editor, &MarkdownEditor2::formatHeader2);
+    connect(this, &MarkdownView::formatHeader3, m_editor, &MarkdownEditor2::formatHeader3);
+    connect(this, &MarkdownView::formatHeader4, m_editor, &MarkdownEditor2::formatHeader4);
+    connect(this, &MarkdownView::formatHeader5, m_editor, &MarkdownEditor2::formatHeader5);
+    connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor2::formatHeader6);
+    connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor2::formatShiftRight);
+    connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor2::formatShiftLeft);
     
     auto *page = new PreviewPage(this);
     m_preview->setPage(page);

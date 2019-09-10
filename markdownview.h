@@ -8,7 +8,7 @@ QT_FORWARD_DECLARE_CLASS(QSplitter);
 QT_FORWARD_DECLARE_CLASS(QWebEngineView);
 QT_FORWARD_DECLARE_CLASS(QTimer);
 QT_FORWARD_DECLARE_CLASS(QResizeEvent);
-class MarkdownEditor;
+class MarkdownEditor2;
 
 class MarkdownView : public QWidget
 {
@@ -69,7 +69,7 @@ protected:
 private:
     bool m_modified{false};
     QSplitter *m_splitter;
-    MarkdownEditor *m_editor;
+    MarkdownEditor2 *m_editor;
     QWebEngineView *m_preview;
     QTimer *m_convertTimer;
     QString m_savePath;
