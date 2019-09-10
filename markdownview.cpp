@@ -352,6 +352,8 @@ void MarkdownView::setContent(const QString& html)
 void MarkdownView::renderMarkdownToHTML()
 {
     QByteArray ba = m_editor->content();
+    if (ba.isEmpty())
+        return;
     GoString content{ (const char *)ba.data(), (ptrdiff_t)ba.size()};
     
     QByteArray style = g_settings->codeBlockStyle().toUtf8();
