@@ -112,14 +112,13 @@ win32-*msvc* {
 macx: {
     ICON = KarenMeu.icns
     icon.path = $$PWD
-    #icon.files += cjlv.png
+    icon.files += KarenMeu.png
     INSTALLS += icon
     LIBS += -framework CoreFoundation -framework Security
 
     DESTDIR = $$OUT_PWD
 
     CONFIG(release, debug|release) : {
-        QMAKE_INFO_PLIST = osxInfo.plist
         MACDEPLOYQT = $$[QT_INSTALL_BINS]/macdeployqt
 
         translate.depends = lrelease
