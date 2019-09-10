@@ -44,7 +44,22 @@ public slots:
     void formatShiftLeft();
     
 private:
-    bool m_modified{false};
+    
+    /**
+     * Attempts to undo the formatting on a selected string
+     *
+     * @param formatter
+     * @return
+     */
+    bool undoFormatting(const QString& formatter);
+    
+    /**
+     * Applies a formatter to a selected string
+     *
+     * @param formatter
+     */
+    void applyFormatter(const QString& formatter);
+    
 };
 
 #endif // MARKDOWNEDITOR2_H
