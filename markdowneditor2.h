@@ -60,6 +60,12 @@ private:
      */
     void applyFormatter(const QString& formatter);
     
+    int currentLineNumber();
+    
+    void replaceCurrentLineText(const QString& text);
+    
+    void formatHeading(const QString& heading);
+    
 };
 
 #endif // MARKDOWNEDITOR2_H

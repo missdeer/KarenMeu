@@ -80,9 +80,8 @@ void MarkdownEditor2::formatInlineCode()
 void MarkdownEditor2::formatCodeBlock()
 {
     QTextCursor c = textCursor();
-    QString selectedText = c.selection().toPlainText();
 
-    if (selectedText.isEmpty())
+    if (!c.hasSelection())
     {
         // insert multi-line code block if cursor is in an empty line
         if (c.atBlockStart() && c.atBlockEnd()) 
@@ -101,7 +100,8 @@ void MarkdownEditor2::formatCodeBlock()
     else 
     {
         bool addNewline = false;
-
+        
+        QString selectedText = c.selection().toPlainText();
         // if the selected text has multiple lines add a multi-line code block
         if (selectedText.contains("\n")) 
         {
@@ -135,54 +135,80 @@ void MarkdownEditor2::formatComment()
     else
     {
         QString text = cursor.selectedText();
+        // this only applies to the start of the selected block
+        text.replace(QRegularExpression("^"), "> ");
         
     }
 }
 
 void MarkdownEditor2::formatOrderedList()
 {
-    
+    formatHeading("* ");
 }
 
 void MarkdownEditor2::formatUnorderedList()
 {
-    
+    QTextCursor c = textCursor();
+    if (!c.hasSelection()) 
+    {
+        c.insertText("1. ");
+    } 
+    else
+    {
+        
+    }
+    setTextCursor(c);
 }
 
 void MarkdownEditor2::formatBlockquote()
 {
-    QTextCursor c = textCursor();
-    if (!c.hasSelection()) 
-    {
-        c.insertText("> ");
-        setTextCursor(c);
-    } 
-    else 
-    {
-        QString selectedText = c.selectedText();
-        // this only applies to the start of the selected block
-        selectedText.replace(QRegularExpression("^"), "> ");
-
-        // transform Unicode line endings
-        // this newline character seems to be used in multi-line selections
-        QString newLine = QString::fromUtf8(QByteArray::fromHex("e280a9"));
-        selectedText.replace(newLine, "\n> ");
-
-        // remove the block quote if it was placed at the end of the text
-        selectedText.remove(QRegularExpression("> $"));
-
-        c.insertText(selectedText);
-    }
+    formatHeading("> ");
 }
 
 void MarkdownEditor2::formatHyperlink()
 {
-    
+    QTextCursor c = textCursor();
+        
+    if (!c.hasSelection()) 
+    {
+        c.insertText("[]()");
+        c.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, 3);
+    } 
+    else 
+    {
+        QString selectedText = c.selectedText();
+        QRegularExpressionMatch match =
+                QRegularExpression(R"(^(\s*)(.+?)(\s*)$)").match(selectedText);
+        if (match.hasMatch()) 
+        {
+            c.insertText(match.captured(1) + "[" + match.captured(2) + "]()" + match.captured(3));
+            c.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, 1);
+        }
+    }
+    setTextCursor(c);
 }
 
 void MarkdownEditor2::formatImage()
 {
-    
+    QTextCursor c = textCursor();
+        
+    if (!c.hasSelection()) 
+    {
+        c.insertText("![]()");
+        c.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, 3);
+    } 
+    else 
+    {
+        QString selectedText = c.selectedText();
+        QRegularExpressionMatch match =
+                QRegularExpression(R"(^(\s*)(.+?)(\s*)$)").match(selectedText);
+        if (match.hasMatch()) 
+        {
+            c.insertText(match.captured(1) + "![" + match.captured(2) + "]()" + match.captured(3));
+            c.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, 1);
+        }
+    }
+    setTextCursor(c);
 }
 
 void MarkdownEditor2::formatNewParagraph()
@@ -197,37 +223,37 @@ void MarkdownEditor2::formatHorizontalRule()
 
 void MarkdownEditor2::formatHeader1()
 {
-    
+    formatHeading("# ");
 }
 
 void MarkdownEditor2::formatHeader2()
 {
-    
+    formatHeading("## ");
 }
 
 void MarkdownEditor2::formatHeader3()
 {
-    
+    formatHeading("### ");
 }
 
 void MarkdownEditor2::formatHeader4()
 {
-    
+    formatHeading("#### ");
 }
 
 void MarkdownEditor2::formatHeader5()
 {
-    
+    formatHeading("##### ");
 }
 
 void MarkdownEditor2::formatHeader6()
 {
-    
+    formatHeading("###### ");
 }
 
 void MarkdownEditor2::formatShiftRight()
 {
-    
+    formatHeading("  ");
 }
 
 void MarkdownEditor2::formatShiftLeft()
@@ -267,7 +293,6 @@ void MarkdownEditor2::applyFormatter(const QString &formatter)
         c.insertText(formatter.repeated(2));
         c.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor,
                        formatter.length());
-        setTextCursor(c);
     } 
     else 
     {
@@ -284,5 +309,59 @@ void MarkdownEditor2::applyFormatter(const QString &formatter)
             c.insertText(match.captured(1) + formatter + match.captured(2) +
                          formatter + match.captured(3));
         }
+    }
+    setTextCursor(c);
+}
+
+int MarkdownEditor2::currentLineNumber()
+{
+    QTextCursor cursor = textCursor();
+    
+    QTextDocument *doc = document();
+    QTextBlock blk = doc->findBlock(cursor.position());
+    QTextBlock blk2 = doc->begin();
+    
+    int i = 1;
+    while ( blk != blk2 ) {
+        blk2 = blk2.next();
+        i++;
+    }
+    
+    return i;
+}
+
+void MarkdownEditor2::replaceCurrentLineText(const QString &text)
+{    
+    QTextCursor cursor = textCursor();
+    cursor.movePosition(QTextCursor::StartOfLine);
+    cursor.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+    cursor.insertText(text);    
+}
+
+void MarkdownEditor2::formatHeading(const QString &heading)
+{
+    QTextCursor c = textCursor();
+    if (!c.hasSelection()) 
+    {
+        c.movePosition(QTextCursor::StartOfLine);
+        c.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+        c.insertText(heading + c.selectedText());
+        setTextCursor(c);
+    } 
+    else 
+    {
+        QString selectedText = c.selectedText();
+        // this only applies to the start of the selected block
+        selectedText.replace(QRegularExpression("^"), heading);
+
+        // transform Unicode line endings
+        // this newline character seems to be used in multi-line selections
+        QString newLine = QString::fromUtf8(QByteArray::fromHex("e280a9"));
+        selectedText.replace(newLine, "\n" + heading);
+
+        // remove the block quote if it was placed at the end of the text
+        selectedText.remove(QRegularExpression(heading + "$"));
+
+        c.insertText(selectedText);
     }
 }
