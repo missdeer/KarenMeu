@@ -1,3 +1,4 @@
+#include <QtCore>
 #include <QRegularExpression>
 #include <QTextDocumentFragment>
 #include "settings.h"
@@ -129,24 +130,17 @@ void MarkdownEditor2::formatComment()
     {
         // insert <!--|-->
         cursor.insertText("<!--\n\n-->\n");
-        cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::MoveAnchor, 5); 
-        setTextCursor(cursor);
     }
     else
     {
         QString text = cursor.selectedText();
-        // this only applies to the start of the selected block
-        text.replace(QRegularExpression("^"), "> ");
-        
+        cursor.insertText("\n<!--\n" + text + "\n-->\n");
     }
+    cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::MoveAnchor, 5); 
+    setTextCursor(cursor);
 }
 
 void MarkdownEditor2::formatOrderedList()
-{
-    formatHeading("* ");
-}
-
-void MarkdownEditor2::formatUnorderedList()
 {
     QTextCursor c = textCursor();
     if (!c.hasSelection()) 
@@ -155,9 +149,28 @@ void MarkdownEditor2::formatUnorderedList()
     } 
     else
     {
+        auto start = c.selectionStart();
+        auto end = c.selectionEnd();
+        c.setPosition(end);
+        auto endLine = currentLineNumber(&c);
+        c.setPosition(start);
         
+        for (int index = 1; currentLineNumber(&c) <= endLine; index++)
+        {
+            c.movePosition(QTextCursor::EndOfLine);
+            c.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
+            QString text = c.selectedText();
+            c.insertText(QString("%1. %2").arg(index).arg(text));
+            c.movePosition(QTextCursor::StartOfLine);
+            c.movePosition(QTextCursor::Down);
+        }
     }
     setTextCursor(c);
+}
+
+void MarkdownEditor2::formatUnorderedList()
+{
+    formatHeading("* ");
 }
 
 void MarkdownEditor2::formatBlockquote()
@@ -213,12 +226,18 @@ void MarkdownEditor2::formatImage()
 
 void MarkdownEditor2::formatNewParagraph()
 {
+    QTextCursor c = textCursor();
+    c.insertText("\n");
     
+    setTextCursor(c);
 }
 
 void MarkdownEditor2::formatHorizontalRule()
 {
+    QTextCursor c = textCursor();
+    c.insertText("---\n");
     
+    setTextCursor(c);
 }
 
 void MarkdownEditor2::formatHeader1()
@@ -258,7 +277,41 @@ void MarkdownEditor2::formatShiftRight()
 
 void MarkdownEditor2::formatShiftLeft()
 {
-    
+    QTextCursor c = textCursor();
+    if (!c.hasSelection()) 
+    {
+        c.movePosition(QTextCursor::StartOfLine);
+        c.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+        QString text = c.selectedText();
+        if (text.startsWith("  "))
+        {
+            text.remove(0, 2);
+            c.insertText(text);
+        }
+    } 
+    else 
+    {
+        auto start = c.selectionStart();
+        auto end = c.selectionEnd();
+        c.setPosition(end);
+        auto endLine = currentLineNumber(&c);
+        c.setPosition(start);
+        
+        for (int index = 1; currentLineNumber(&c) <= endLine; index++)
+        {
+            c.movePosition(QTextCursor::EndOfLine);
+            c.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
+            QString text = c.selectedText();
+            if (text.startsWith("  "))
+            {
+                text.remove(0, 2);
+                c.insertText(text);
+            }
+            c.movePosition(QTextCursor::StartOfLine);
+            c.movePosition(QTextCursor::Down);
+        }
+    }
+    setTextCursor(c);
 }
 
 bool MarkdownEditor2::undoFormatting(const QString &formatter) 
@@ -313,12 +366,10 @@ void MarkdownEditor2::applyFormatter(const QString &formatter)
     setTextCursor(c);
 }
 
-int MarkdownEditor2::currentLineNumber()
-{
-    QTextCursor cursor = textCursor();
-    
+int MarkdownEditor2::currentLineNumber(QTextCursor *cursor)
+{    
     QTextDocument *doc = document();
-    QTextBlock blk = doc->findBlock(cursor.position());
+    QTextBlock blk = doc->findBlock(cursor->position());
     QTextBlock blk2 = doc->begin();
     
     int i = 1;
@@ -346,22 +397,24 @@ void MarkdownEditor2::formatHeading(const QString &heading)
         c.movePosition(QTextCursor::StartOfLine);
         c.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
         c.insertText(heading + c.selectedText());
-        setTextCursor(c);
     } 
     else 
     {
-        QString selectedText = c.selectedText();
-        // this only applies to the start of the selected block
-        selectedText.replace(QRegularExpression("^"), heading);
-
-        // transform Unicode line endings
-        // this newline character seems to be used in multi-line selections
-        QString newLine = QString::fromUtf8(QByteArray::fromHex("e280a9"));
-        selectedText.replace(newLine, "\n" + heading);
-
-        // remove the block quote if it was placed at the end of the text
-        selectedText.remove(QRegularExpression(heading + "$"));
-
-        c.insertText(selectedText);
+        auto start = c.selectionStart();
+        auto end = c.selectionEnd();
+        c.setPosition(end);
+        auto endLine = currentLineNumber(&c);
+        c.setPosition(start);
+        
+        for (int index = 1; currentLineNumber(&c) <= endLine; index++)
+        {
+            c.movePosition(QTextCursor::EndOfLine);
+            c.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
+            QString text = c.selectedText();
+            c.insertText(heading + text);
+            c.movePosition(QTextCursor::StartOfLine);
+            c.movePosition(QTextCursor::Down);
+        }
     }
+    setTextCursor(c);
 }

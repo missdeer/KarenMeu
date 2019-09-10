@@ -60,7 +60,7 @@ private:
      */
     void applyFormatter(const QString& formatter);
     
-    int currentLineNumber();
+    int currentLineNumber(QTextCursor *cursor);
     
     void replaceCurrentLineText(const QString& text);
     
