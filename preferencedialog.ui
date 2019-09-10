@@ -283,6 +283,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QCheckBox" name="cbEnableLineNumbers">
+     <property name="text">
+      <string>Enable Line Numbers in Code Block</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>

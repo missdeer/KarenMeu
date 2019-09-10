@@ -23,6 +23,7 @@ void Settings::save()
     settings.setValue("previewTheme", m_previewTheme);
     settings.setValue("codeBlockStyle", m_codeBlockStyle);
     settings.setValue("markdownEngine", m_markdownEngine);
+    settings.setValue("enableLineNumbers", m_enableLineNumbers);
     settings.sync();
 }
 
@@ -50,6 +51,7 @@ void Settings::load()
     setPreviewTheme(settings.value("previewTheme", QString("默认")).toString());
     m_codeBlockStyle = settings.value("codeBlockStyle", QString("xcode")).toString();
     m_markdownEngine = settings.value("markdownEngine", QString("Goldmark")).toString();
+    m_enableLineNumbers = settings.value("enableLineNumbers", true).toBool();
 }
 
 const QString & Settings::codeEditorFontFamily() const
@@ -120,6 +122,16 @@ const QString &Settings::markdownEngine() const
 void Settings::setMarkdownEngine(const QString &markdownEngine)
 {
     m_markdownEngine = markdownEngine;
+}
+
+bool Settings::enableLineNumbers() const
+{
+    return m_enableLineNumbers;
+}
+
+void Settings::setEnableLineNumbers(bool enableLineNumbers)
+{
+    m_enableLineNumbers = enableLineNumbers;
 }
 
 

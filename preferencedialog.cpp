@@ -10,6 +10,7 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) :
     ui->cbPreviewTheme->setCurrentText(g_settings->previewTheme());
     ui->cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
     ui->cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());
+    ui->cbEnableLineNumbers->setChecked(g_settings->enableLineNumbers());
 }
 
 PreferenceDialog::~PreferenceDialog()
@@ -22,5 +23,6 @@ void PreferenceDialog::accept()
     g_settings->setPreviewTheme(ui->cbPreviewTheme->currentText());
     g_settings->setCodeBlockStyle(ui->cbCodeBlockStyle->currentText());
     g_settings->setMarkdownEngine(ui->cbMarkdownEngine->currentText());
+    g_settings->setEnableLineNumbers(ui->cbEnableLineNumbers->isChecked());
     QDialog::accept();
 }

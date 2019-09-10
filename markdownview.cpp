@@ -355,7 +355,7 @@ void MarkdownView::renderMarkdownToHTML()
     QByteArray style = g_settings->codeBlockStyle().toUtf8();
     GoString styleContent { (const char *)style.data(), (ptrdiff_t)style.size()};
     
-    auto res = markdownEngine(content, styleContent, true);
+    auto res = markdownEngine(content, styleContent, g_settings->enableLineNumbers());
     QString html = QString::fromUtf8(res);
 
     // fix h1/h2/h3 tag for style

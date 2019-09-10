@@ -38,7 +38,11 @@ public:
     const QString & markdownEngine() const;
     void setMarkdownEngine(const QString &markdownEngine);
     
+    bool enableLineNumbers() const;
+    void setEnableLineNumbers(bool enableLineNumbers);
+    
 private:
+    bool m_enableLineNumbers{true}; 
     int m_autoRefreshInterval{1000}; // millisecond
     int m_editorZoomFactor{100}; // percent
 

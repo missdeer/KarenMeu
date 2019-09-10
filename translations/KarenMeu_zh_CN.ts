@@ -642,7 +642,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1066"/>
         <source>Gopher</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="256"/>
@@ -815,7 +815,7 @@
     <message>
         <location filename="../preferencedialog.ui" line="84"/>
         <source>Gopher</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="92"/>
@@ -1006,6 +1006,11 @@
         <location filename="../preferencedialog.ui" line="280"/>
         <source>xcode</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="288"/>
+        <source>Enable Line Numbers in Code Block</source>
+        <translation>代码块中显示行号</translation>
     </message>
 </context>
 </TS>
