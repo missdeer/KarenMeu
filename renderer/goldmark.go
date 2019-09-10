@@ -30,9 +30,6 @@ func Goldmark(md string, style string, lineNumbers bool) *C.char {
 			),
 			meta.New(meta.WithTable()),
 		),
-		goldmark.WithParserOptions(
-			parser.WithAutoHeadingID(),
-		),
 		goldmark.WithRendererOptions(
 			renderer.WithNodeRenderers(
 				util.Prioritized(extension.NewTableHTMLRenderer(), 500),
