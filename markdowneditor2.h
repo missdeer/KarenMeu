@@ -15,6 +15,8 @@ public:
     bool modify();
     void setSavePoint();
     void emptyUndoBuffer();
+    void updateCodeEditorFont();
+    
 signals:
     void contentModified();
     

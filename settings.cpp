@@ -19,6 +19,7 @@ void Settings::save()
     settings.setValue("autoRefreshInterval", m_autoRefreshInterval);
     settings.setValue("editorZoomFactor", m_editorZoomFactor);
     settings.setValue("codeEditorFontFamily", m_codeEditorFontFamily);
+    settings.setValue("codeEditorFontPixelSize", m_codeEditorFontPixelSize);
     settings.setValue("codeEditorTheme", m_codeEditorTheme);
     settings.setValue("previewTheme", m_previewTheme);
     settings.setValue("codeBlockStyle", m_codeBlockStyle);
@@ -47,6 +48,7 @@ void Settings::load()
                                                     QString("Monospace")
                                         #endif
                                             ).toString();
+    m_codeEditorFontPixelSize = settings.value("codeEditorFontPixelSize", 14).toInt();
     m_codeEditorTheme = settings.value("codeEditorTheme", QString("Default")).toString();
     setPreviewTheme(settings.value("previewTheme", QString("默认")).toString());
     m_codeBlockStyle = settings.value("codeBlockStyle", QString("xcode")).toString();
@@ -132,6 +134,16 @@ bool Settings::enableLineNumbers() const
 void Settings::setEnableLineNumbers(bool enableLineNumbers)
 {
     m_enableLineNumbers = enableLineNumbers;
+}
+
+int Settings::codeEditorFontPixelSize() const
+{
+    return m_codeEditorFontPixelSize;
+}
+
+void Settings::setCodeEditorFontPixelSize(int codeEditorFontPixelSize)
+{
+    m_codeEditorFontPixelSize = codeEditorFontPixelSize;
 }
 
 

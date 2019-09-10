@@ -41,15 +41,17 @@ public:
     bool enableLineNumbers() const;
     void setEnableLineNumbers(bool enableLineNumbers);
     
+    int codeEditorFontPixelSize() const;
+    void setCodeEditorFontPixelSize(int codeEditorFontPixelSize);
+    
 private:
     bool m_enableLineNumbers{true}; 
     int m_autoRefreshInterval{1000}; // millisecond
     int m_editorZoomFactor{100}; // percent
 
+    int m_codeEditorFontPixelSize{14};
     QString m_codeEditorFontFamily;
     QString m_codeEditorTheme;
-    QString m_codeInspectorFontFamily;
-    QString m_codeInspectorTheme;
     QString m_previewTheme;
     QString m_codeBlockStyle;
     QString m_markdownEngine;

@@ -1,3 +1,4 @@
+#include "settings.h"
 #include "markdowneditor2.h"
 
 MarkdownEditor2::MarkdownEditor2(QWidget *parent)
@@ -11,12 +12,17 @@ MarkdownEditor2::MarkdownEditor2(QWidget *parent)
     connect(this, &QPlainTextEdit::textChanged, this, &MarkdownEditor2::contentModified);
 }
 
-void MarkdownEditor2::initialize()
+void MarkdownEditor2::updateCodeEditorFont()
 {
     QFont f(font());
-    f.setFamily("Yahei Source Code Pro");
-    f.setPixelSize(16);
-    setFont(f);
+    f.setFamily(g_settings->codeEditorFontFamily());
+    f.setPixelSize(g_settings->codeEditorFontPixelSize());
+    setFont(f);    
+}
+
+void MarkdownEditor2::initialize()
+{
+    updateCodeEditorFont();
 }
 
 void MarkdownEditor2::setContent(const QString &content)

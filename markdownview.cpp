@@ -291,6 +291,7 @@ void MarkdownView::setThemeStyle()
         m_themeStyle.setText(QString::fromUtf8(ba));
         f.close();
     }
+    m_editor->updateCodeEditorFont();
 }
 
 void MarkdownView::updateMarkdownEngine()
