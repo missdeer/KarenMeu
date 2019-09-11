@@ -7,6 +7,24 @@
 MarkdownEditor2::MarkdownEditor2(QWidget *parent)
     :QMarkdownTextEdit(parent)
 {
+    auto hl = highlighter();
+    QFont f;
+    f.setFamily(g_settings->codeEditorFontFamily());
+    f.setPointSize(g_settings->codeEditorFontPointSize());
+    
+    QTextCharFormat tcf;
+    tcf.setFont(f);
+    
+    tcf.setForeground(QBrush(QColor(0, 128, 255)));
+    tcf.setFontUnderline(true);    
+    hl->setTextFormat(MarkdownHighlighter::Link, tcf);
+    
+    tcf.setFontUnderline(false);    
+    tcf.setForeground(QBrush(Qt::black));
+    tcf.setBackground(QColor(220, 220, 220));
+    hl->setTextFormat(MarkdownHighlighter::CodeBlock, tcf);
+    hl->setTextFormat(MarkdownHighlighter::InlineCodeBlock, tcf);
+    
     connect(this, &QPlainTextEdit::modificationChanged, [this](bool changed){ 
         if (changed) 
             emit contentModified();
