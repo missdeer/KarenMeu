@@ -18,7 +18,7 @@ void MarkdownEditor2::updateCodeEditorFont()
 {
     QFont f(font());
     f.setFamily(g_settings->codeEditorFontFamily());
-    f.setPixelSize(g_settings->codeEditorFontPixelSize());
+    f.setPointSize(g_settings->codeEditorFontPointSize());
     setFont(f);    
 }
 

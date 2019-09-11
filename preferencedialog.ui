@@ -40,7 +40,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QSpinBox" name="sbFontPixelSize">
+      <widget class="QSpinBox" name="sbFontPointSize">
        <property name="minimum">
         <number>6</number>
        </property>

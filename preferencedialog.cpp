@@ -14,7 +14,7 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) :
     QFont f;
     f.setFamily(g_settings->codeEditorFontFamily());
     ui->cbCodeEditorFont->setCurrentFont(f);
-    ui->sbFontPixelSize->setValue(g_settings->codeEditorFontPixelSize());
+    ui->sbFontPointSize->setValue(g_settings->codeEditorFontPointSize());
 }
 
 PreferenceDialog::~PreferenceDialog()
@@ -29,6 +29,6 @@ void PreferenceDialog::accept()
     g_settings->setMarkdownEngine(ui->cbMarkdownEngine->currentText());
     g_settings->setEnableLineNumbers(ui->cbEnableLineNumbers->isChecked());
     g_settings->setCodeEditorFontFamily(ui->cbCodeEditorFont->currentFont().family());
-    g_settings->setCodeEditorFontPixelSize(ui->sbFontPixelSize->value());
+    g_settings->setCodeEditorFontPointSize(ui->sbFontPointSize->value());
     QDialog::accept();
 }
