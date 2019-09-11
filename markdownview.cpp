@@ -339,14 +339,6 @@ void MarkdownView::saveToFile(const QString &savePath)
 void MarkdownView::setContent(const QString& html)
 {
     m_renderedContent.setText(html);
-
-    QString s = QString::fromLatin1("(function() {" \
-                                    "    var code = document.getElementsByTagName('code');" \
-                                    "    for (i = 0; i < code.length; i++) {" \
-                                    "      code[i].classList.add(\"highlight-chroma\");" \
-                                    "    }" \
-                                    "})()");
-    m_preview->page()->runJavaScript(s, QWebEngineScript::MainWorld);
 }
 
 void MarkdownView::renderMarkdownToHTML()
