@@ -3,13 +3,53 @@
 #include <QWebEngineSettings>
 #include <QTranslator>
 #include <QDir>
+#include <QCommandLineParser>
+#include <QLibraryInfo>
 #include "mainwindow.h"
 #include "settings.h"
+
+#ifdef Q_OS_WIN
+#include <QFileInfo>
+#include <QSettings>
+
+// Helper function to register supported file types
+// This is needed to enable the application jump list to show the desired recent files
+static void associateFileTypes(const QStringList &fileTypes)
+{
+    QString displayName = QGuiApplication::applicationDisplayName();
+    QString filePath = QCoreApplication::applicationFilePath();
+    QString fileName = QFileInfo(filePath).fileName();
+
+    QSettings settings("HKEY_CURRENT_USER\\Software\\Classes\\Applications\\" + fileName, QSettings::NativeFormat);
+    settings.setValue("FriendlyAppName", displayName);
+
+    settings.beginGroup("SupportedTypes");
+    foreach (const QString& fileType, fileTypes)
+        settings.setValue(fileType, QString());
+    settings.endGroup();
+
+    settings.beginGroup("shell");
+    settings.beginGroup("open");
+    settings.setValue("FriendlyAppName", displayName);
+    settings.beginGroup("Command");
+    settings.setValue(".", QChar('"') + QDir::toNativeSeparators(filePath) + QString("\" \"%1\""));
+}
+#endif
+
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication a(argc, argv);
+    
+    a.setOrganizationName("MiniDump.Info");
+    a.setApplicationName("KarenMeu");
+    a.setApplicationDisplayName("KarenMeu");
+    a.setApplicationVersion("1.0");
+    
+#ifdef Q_OS_WIN
+    associateFileTypes(QStringList()<< ".markdown" << ".md" << ".mdown");
+#endif
     
     QString locale = "zh_CN";
     QTranslator translator;
@@ -59,7 +99,21 @@ int main(int argc, char *argv[])
 
     QWebEngineSettings::globalSettings()->setAttribute(QWebEngineSettings::JavascriptCanAccessClipboard, true);
     
-    MainWindow w;
+    // setup command line parser
+    QCommandLineParser parser;
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.addPositionalArgument("file", QApplication::translate("main", "The file to open."));
+    parser.process(a);
+
+    // get filename from command line arguments
+    QString fileName;
+    const QStringList cmdLineArgs = parser.positionalArguments();
+    if (!cmdLineArgs.isEmpty()) {
+        fileName = cmdLineArgs.at(0);
+    }
+    
+    MainWindow w(fileName);
     w.showMaximized();
     
     return a.exec();

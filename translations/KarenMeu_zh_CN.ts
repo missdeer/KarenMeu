@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="255"/>
+        <location filename="../mainwindow.cpp" line="257"/>
         <source>KarenMeu</source>
         <translation></translation>
     </message>
@@ -645,22 +645,22 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="256"/>
+        <location filename="../mainwindow.cpp" line="258"/>
         <source>KarenMeu is a Markdown based Wechat public account article editor for programmers.</source>
         <translation>KarenMeu是一款专为程序员设计的基于Markdown语法的微信公众号文章编辑器。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="388"/>
+        <location filename="../mainwindow.cpp" line="390"/>
         <source>Markdown Engine:</source>
         <translation>渲染引擎：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="395"/>
+        <location filename="../mainwindow.cpp" line="397"/>
         <source>Preview Theme:</source>
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="402"/>
+        <location filename="../mainwindow.cpp" line="404"/>
         <source>Code Block Style:</source>
         <translation>代码块风格：</translation>
     </message>
@@ -669,13 +669,13 @@
     <name>MarkdownView</name>
     <message>
         <location filename="../markdownview.cpp" line="86"/>
-        <location filename="../markdownview.cpp" line="146"/>
+        <location filename="../markdownview.cpp" line="134"/>
         <source>Confirm</source>
         <translation>确认</translation>
     </message>
     <message>
         <location filename="../markdownview.cpp" line="87"/>
-        <location filename="../markdownview.cpp" line="147"/>
+        <location filename="../markdownview.cpp" line="135"/>
         <source>Modified document has not been saved, do you want to save it?</source>
         <translation>文档被修改且尚未保存，要保存吗？</translation>
     </message>
@@ -686,66 +686,66 @@
     </message>
     <message>
         <location filename="../markdownview.cpp" line="104"/>
-        <source>Markdown files (*.md *.markdown);;All files (*.*)</source>
-        <translation>Markdown文档 (*.md *.markdown);;所有类型 (*.*)</translation>
+        <source>Markdown files (*.md *.markdown *.mdown);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="130"/>
+        <location filename="../markdownview.cpp" line="118"/>
         <source>Save Markdown file</source>
         <translation>保存Markdown文档</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="132"/>
+        <location filename="../markdownview.cpp" line="120"/>
         <source>Markdown file (*.md);;All files (*.*)</source>
         <translation>Markdown文档 (*.md);;所有类型 (*.*)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="232"/>
+        <location filename="../markdownview.cpp" line="220"/>
         <source>Export As HTML</source>
         <translation>导出为HTML</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="234"/>
+        <location filename="../markdownview.cpp" line="222"/>
         <source>HTML file (*.html)</source>
         <translation>HTML文档 (*.html)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="244"/>
+        <location filename="../markdownview.cpp" line="232"/>
         <source>HTML exported</source>
         <translation>HTML已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="245"/>
+        <location filename="../markdownview.cpp" line="233"/>
         <source>HTML file has been exported to %1 successfully.</source>
         <translation>HTML文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="252"/>
+        <location filename="../markdownview.cpp" line="240"/>
         <source>Export As PDF</source>
         <translation>导出为PDF</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="254"/>
+        <location filename="../markdownview.cpp" line="242"/>
         <source>Adobe PDF file (*.pdf)</source>
         <translation>Adobe PDF文档 (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="316"/>
+        <location filename="../markdownview.cpp" line="321"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="317"/>
+        <location filename="../markdownview.cpp" line="322"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="319"/>
+        <location filename="../markdownview.cpp" line="324"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="320"/>
+        <location filename="../markdownview.cpp" line="325"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>
@@ -1109,6 +1109,14 @@
         <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="240"/>
         <source>Replace all</source>
         <translation>全部替换</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../main.cpp" line="106"/>
+        <source>The file to open.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -15,7 +15,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
     
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(const QString& fileName, QWidget *parent = nullptr);
     ~MainWindow() override;
     MainWindow(const MainWindow&) = delete;
     MainWindow(MainWindow&&) = delete;

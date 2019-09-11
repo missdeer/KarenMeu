@@ -19,7 +19,7 @@ public:
     bool maybeSave();
     void setThemeStyle();
     void updateMarkdownEngine();
-    
+    void openFromFile(const QString& fileName);
 signals:
     void formatStrong();
     void formatEmphasize();

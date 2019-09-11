@@ -101,20 +101,8 @@ void MarkdownView::openDocument()
     
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open Markdown file"),
                                                     "",
-                                                    tr("Markdown files (*.md *.markdown);;All files (*.*)"));
-    if (QFile::exists(fileName))
-    {
-        QFile f(fileName);
-        if (f.open(QIODevice::ReadOnly))
-        {
-            QByteArray ba = f.readAll();
-            m_editor->setContent(ba);
-            m_editor->setSavePoint();
-            m_editor->emptyUndoBuffer();
-            f.close();
-            m_savePath = fileName;
-        }
-    }
+                                                    tr("Markdown files (*.md *.markdown *.mdown);;All files (*.*)"));
+    openFromFile(fileName);
 }
 
 void MarkdownView::saveDocument()
@@ -302,6 +290,23 @@ void MarkdownView::updateMarkdownEngine()
     };
     
     markdownEngine = m[g_settings->markdownEngine()];
+}
+
+void MarkdownView::openFromFile(const QString &fileName)
+{
+    if (QFile::exists(fileName))
+    {
+        QFile f(fileName);
+        if (f.open(QIODevice::ReadOnly))
+        {
+            QByteArray ba = f.readAll();
+            m_editor->setContent(ba);
+            m_editor->setSavePoint();
+            m_editor->emptyUndoBuffer();
+            f.close();
+            m_savePath = fileName;
+        }
+    }
 }
 
 void MarkdownView::previewLoadFinished(bool)
