@@ -69,7 +69,9 @@ MarkdownView::MarkdownView(QWidget *parent)
     m_preview->load(QUrl("qrc:/rc/html/index.html"));
     connect(m_preview, &QWebEngineView::loadFinished, this, &MarkdownView::previewLoadFinished);
     connect(m_preview->page(), &QWebEnginePage::pdfPrintingFinished, this, &MarkdownView::pdfPrintingFinished);
-    
+
+    updateMarkdownEngine();
+
     connect(m_convertTimer, &QTimer::timeout, this, &MarkdownView::convertTimeout);
     m_convertTimer->start(g_settings->autoRefreshInterval());
 }
