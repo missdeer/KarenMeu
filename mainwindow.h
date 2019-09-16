@@ -15,12 +15,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
     
 public:
-    explicit MainWindow(const QString& fileName, QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
     MainWindow(const MainWindow&) = delete;
     MainWindow(MainWindow&&) = delete;
     void operator=(const MainWindow&) = delete;
     void operator=(MainWindow&&) = delete;
+    void openFile(const QString& fileName);
 private slots:
     void onMarkdownEngineChanged();
     void onMarkdownEngineCurrentTextChanged(const QString& text);

@@ -45,5 +45,6 @@
         <file>rc/theme/purple.css</file>
         <file>rc/theme/red.css</file>
         <file>rc/theme/gopher.css</file>
+        <file>rc/sample.md</file>
     </qresource>
 </RCC>

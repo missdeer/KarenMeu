@@ -19,7 +19,7 @@
 using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
 
-MainWindow::MainWindow(const QString &fileName, QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     m_view(new MarkdownView(this))
@@ -75,13 +75,18 @@ MainWindow::MainWindow(const QString &fileName, QWidget *parent) :
     ui->menuView->insertAction(action, ui->engineToolbar->toggleViewAction());
     ui->menuView->insertAction(action, ui->formatToolbar->toggleViewAction());
     ui->menuView->insertSeparator(action);
-    
-    m_view->openFromFile(fileName);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::openFile(const QString &fileName)
+{
+    Q_ASSERT(m_view);
+
+    m_view->openFromFile(fileName);
 }
 
 void MainWindow::onMarkdownEngineChanged()

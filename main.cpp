@@ -42,10 +42,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication a(argc, argv);
     
-    a.setOrganizationName("MiniDump.Info");
-    a.setApplicationName("KarenMeu");
-    a.setApplicationDisplayName("KarenMeu");
-    a.setApplicationVersion("1.0");
+    QApplication::setOrganizationName("MiniDump.Info");
+    QApplication::setApplicationName("KarenMeu");
+    QApplication::setApplicationDisplayName("KarenMeu");
+    QApplication::setApplicationVersion("1.0");
     
 #ifdef Q_OS_WIN
     associateFileTypes(QStringList()<< ".markdown" << ".md" << ".mdown");
@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
     else
     {
         qDebug() << "loading " << locale << " from " << localeDirPath << " success";
-        if (!a.installTranslator(&translator))
+        if (!QApplication::installTranslator(&translator))
         {
             qDebug() << "installing translator failed ";
         }
@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
     else
     {
         qDebug() << "loading " << locale << " from " << localeDirPath << " success";
-        if (!a.installTranslator(&qtTranslator))
+        if (!QApplication::installTranslator(&qtTranslator))
         {
             qDebug() << "installing qt translator failed ";
         }
@@ -107,14 +107,14 @@ int main(int argc, char *argv[])
     parser.process(a);
 
     // get filename from command line arguments
-    QString fileName;
+    QString fileName = ":/rc/sample.md";
     const QStringList cmdLineArgs = parser.positionalArguments();
     if (!cmdLineArgs.isEmpty()) {
         fileName = cmdLineArgs.at(0);
     }
     
-    MainWindow w(fileName);
+    MainWindow w;
     w.showMaximized();
-    
-    return a.exec();
+    w.openFile(fileName);
+    return QApplication::exec();
 }
