@@ -15,6 +15,7 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) :
     f.setFamily(g_settings->codeEditorFontFamily());
     ui->cbCodeEditorFont->setCurrentFont(f);
     ui->sbFontPointSize->setValue(g_settings->codeEditorFontPointSize());
+    ui->cbPreviewMode->setCurrentText(g_settings->previewMode());
 }
 
 PreferenceDialog::~PreferenceDialog()
@@ -24,6 +25,7 @@ PreferenceDialog::~PreferenceDialog()
 
 void PreferenceDialog::accept()
 {
+    g_settings->setPreviewMode(ui->cbPreviewMode->currentText());
     g_settings->setPreviewTheme(ui->cbPreviewTheme->currentText());
     g_settings->setCodeBlockStyle(ui->cbCodeBlockStyle->currentText());
     g_settings->setMarkdownEngine(ui->cbMarkdownEngine->currentText());

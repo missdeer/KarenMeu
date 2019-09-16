@@ -730,22 +730,27 @@
         <translation>Adobe PDF文档 (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="321"/>
+        <location filename="../markdownview.cpp" line="279"/>
+        <source>Blog Post</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../markdownview.cpp" line="322"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="322"/>
+        <location filename="../markdownview.cpp" line="323"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="324"/>
+        <location filename="../markdownview.cpp" line="325"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="325"/>
+        <location filename="../markdownview.cpp" line="326"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>
@@ -819,8 +824,8 @@
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="127"/>
-        <source>Code block style:</source>
-        <translation>代码块风格：</translation>
+        <source>Code Block Style:</source>
+        <translation type="unfinished">代码块风格：</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="135"/>
@@ -1008,7 +1013,22 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="325"/>
+        <location filename="../preferencedialog.ui" line="323"/>
+        <source>Preview Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="331"/>
+        <source>Wechat Public Account Article</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="336"/>
+        <source>Blog Post</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="346"/>
         <source>Enable Line Numbers in Code Block</source>
         <translation>代码块中显示行号</translation>
     </message>
@@ -1109,6 +1129,34 @@
         <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="240"/>
         <source>Replace all</source>
         <translation>全部替换</translation>
+    </message>
+</context>
+<context>
+    <name>QSettings</name>
+    <message>
+        <location filename="../settings.cpp" line="53"/>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.cpp" line="54"/>
+        <source>默认</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.cpp" line="55"/>
+        <source>xcode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.cpp" line="56"/>
+        <source>Goldmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.cpp" line="58"/>
+        <source>Wechat Public Account Article</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -44,6 +44,9 @@ public:
     int codeEditorFontPointSize() const;
     void setCodeEditorFontPointSize(int codeEditorFontPointSize);
     
+    const QString & previewMode() const;
+    void setPreviewMode(const QString &previewMode);
+    
 private:
     bool m_enableLineNumbers{true}; 
     int m_autoRefreshInterval{1000}; // millisecond
@@ -55,6 +58,7 @@ private:
     QString m_previewTheme;
     QString m_codeBlockStyle;
     QString m_markdownEngine;
+    QString m_previewMode;
 };
 
 inline Settings *g_settings = nullptr;

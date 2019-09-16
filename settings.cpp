@@ -25,6 +25,7 @@ void Settings::save()
     settings.setValue("codeBlockStyle", m_codeBlockStyle);
     settings.setValue("markdownEngine", m_markdownEngine);
     settings.setValue("enableLineNumbers", m_enableLineNumbers);
+    settings.setValue("previewMode", m_previewMode);
     settings.sync();
 }
 
@@ -49,11 +50,12 @@ void Settings::load()
                                         #endif
                                             ).toString();
     m_codeEditorFontPointSize = settings.value("codeEditorFontPointSize", 14).toInt();
-    m_codeEditorTheme = settings.value("codeEditorTheme", QString("Default")).toString();
-    setPreviewTheme(settings.value("previewTheme", QString("默认")).toString());
-    m_codeBlockStyle = settings.value("codeBlockStyle", QString("xcode")).toString();
-    m_markdownEngine = settings.value("markdownEngine", QString("Goldmark")).toString();
+    m_codeEditorTheme = settings.value("codeEditorTheme", QSettings::tr("Default")).toString();
+    setPreviewTheme(settings.value("previewTheme", QSettings::tr("默认")).toString());
+    m_codeBlockStyle = settings.value("codeBlockStyle", QSettings::tr("xcode")).toString();
+    m_markdownEngine = settings.value("markdownEngine", QSettings::tr("Goldmark")).toString();
     m_enableLineNumbers = settings.value("enableLineNumbers", true).toBool();
+    m_previewMode = settings.value("previewMode", QSettings::tr("Wechat Public Account Article")).toString();
 }
 
 const QString & Settings::codeEditorFontFamily() const
@@ -144,6 +146,16 @@ int Settings::codeEditorFontPointSize() const
 void Settings::setCodeEditorFontPointSize(int codeEditorFontPointSize)
 {
     m_codeEditorFontPointSize = codeEditorFontPointSize;
+}
+
+const QString &Settings::previewMode() const
+{
+    return m_previewMode;
+}
+
+void Settings::setPreviewMode(const QString &previewMode)
+{
+    m_previewMode = previewMode;
 }
 
 

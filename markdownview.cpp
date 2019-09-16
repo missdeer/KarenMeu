@@ -276,6 +276,7 @@ void MarkdownView::setThemeStyle()
     if (f.open(QIODevice::ReadOnly))
     {
         QByteArray ba = f.readAll();
+        ba.replace("{{.width}}", g_settings->previewMode() == tr("Blog Post") ? "95" : "70");
         m_themeStyle.setText(QString::fromUtf8(ba));
         f.close();
     }
