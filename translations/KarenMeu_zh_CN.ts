@@ -687,7 +687,7 @@
     <message>
         <location filename="../markdownview.cpp" line="106"/>
         <source>Markdown files (*.md *.markdown *.mdown);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Markdown文档 (*.md *.markdown *.mdown);;所有类型 (*.*)</translation>
     </message>
     <message>
         <location filename="../markdownview.cpp" line="120"/>
@@ -732,7 +732,7 @@
     <message>
         <location filename="../markdownview.cpp" line="281"/>
         <source>Blog Post</source>
-        <translation type="unfinished"></translation>
+        <translation>博客文章</translation>
     </message>
     <message>
         <location filename="../markdownview.cpp" line="324"/>
@@ -825,7 +825,7 @@
     <message>
         <location filename="../preferencedialog.ui" line="127"/>
         <source>Code Block Style:</source>
-        <translation type="unfinished">代码块风格：</translation>
+        <translation>代码块风格：</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="135"/>
@@ -1015,17 +1015,17 @@
     <message>
         <location filename="../preferencedialog.ui" line="323"/>
         <source>Preview Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>预览模式：</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="331"/>
         <source>Wechat Public Account Article</source>
-        <translation type="unfinished"></translation>
+        <translation>微信公众号文章</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="336"/>
         <source>Blog Post</source>
-        <translation type="unfinished"></translation>
+        <translation>博客文章</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="346"/>
@@ -1136,27 +1136,27 @@
     <message>
         <location filename="../settings.cpp" line="53"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>默认</translation>
     </message>
     <message>
         <location filename="../settings.cpp" line="54"/>
         <source>默认</source>
-        <translation type="unfinished"></translation>
+        <translation>默认</translation>
     </message>
     <message>
         <location filename="../settings.cpp" line="55"/>
         <source>xcode</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../settings.cpp" line="56"/>
         <source>Goldmark</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../settings.cpp" line="58"/>
         <source>Wechat Public Account Article</source>
-        <translation type="unfinished"></translation>
+        <translation>微信公众号文章</translation>
     </message>
 </context>
 <context>
@@ -1164,7 +1164,7 @@
     <message>
         <location filename="../main.cpp" line="106"/>
         <source>The file to open.</source>
-        <translation type="unfinished"></translation>
+        <translation>打开文章</translation>
     </message>
 </context>
 </TS>
