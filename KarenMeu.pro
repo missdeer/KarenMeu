@@ -96,7 +96,10 @@ win32-*msvc* {
         QMAKE_CXXFLAGS += /Zi
         QMAKE_LFLAGS += /INCREMENTAL:NO /Debug
         WINDEPLOYQT = $$[QT_INSTALL_BINS]/windeployqt.exe
-    }
+        DESTDIR = $$OUT_PWD/release
+    } else : {
+        DESTDIR = $$OUT_PWD/debug
+	}
     translate.commands = '$(COPY_DIR) $$shell_path($$PWD/translations) $$shell_path($$DESTDIR/translations)'
 
     qti18n.depends = translate
