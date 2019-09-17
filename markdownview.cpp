@@ -341,6 +341,7 @@ void MarkdownView::saveToFile(const QString &savePath)
     {
         f.write(m_editor->content());
         f.close();
+        m_editor->setSavePoint();
     }
 }
 
