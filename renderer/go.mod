@@ -6,7 +6,7 @@ require (
 	github.com/PuerkitoBio/goquery v1.5.0 // indirect
 	github.com/alecthomas/chroma v0.6.6
 	github.com/aymerick/douceur v0.2.0
-	github.com/b3log/lute v0.0.0-20190916074902-acd63d4de384
+	github.com/b3log/lute v0.0.0-20190917084813-f898f75f05d4
 	github.com/gorilla/css v1.0.0 // indirect
 	github.com/vanng822/css v0.0.0-20190504095207-a21e860bcd04 // indirect
 	github.com/vanng822/go-premailer v0.0.0-20190504065308-ac25997d78c7
