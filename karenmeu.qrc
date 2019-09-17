@@ -37,11 +37,11 @@
         <file>rc/images/paragraph.png</file>
         <file>rc/images/table.png</file>
         <file>rc/images/todolist.png</file>
-        <file>rc/theme/black.css</file>
-        <file>rc/theme/blue.css</file>
+        <file>rc/theme/ink.css</file>
+        <file>rc/theme/cyan.css</file>
         <file>rc/theme/default.css</file>
         <file>rc/theme/green.css</file>
-        <file>rc/theme/orange.css</file>
+        <file>rc/theme/orangeHeart.css</file>
         <file>rc/theme/purple.css</file>
         <file>rc/theme/red.css</file>
         <file>rc/theme/gopher.css</file>

@@ -265,10 +265,10 @@ void MarkdownView::setThemeStyle()
 {
     const QString& previewTheme = g_settings->previewTheme();
     QMap<QString, QString> m = {
-        { "墨黑",    "black.css" },
+        { "墨黑",    "ink.css" },
         { "姹紫",    "purple.css" },
-        { "嫩青",    "blue.css" },
-        { "橙心",    "orange.css" },
+        { "嫩青",    "cyan.css" },
+        { "橙心",    "orangeHeart.css" },
         { "红绯",    "red.css" },
         { "绿意",    "green.css" },
         { "默认",    "default.css" },
