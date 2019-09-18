@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>850</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -103,71 +103,6 @@
     <property name="title">
      <string>&amp;View</string>
     </property>
-    <widget class="QMenu" name="menuMarkdownEngine">
-     <property name="title">
-      <string>Markdown Engine</string>
-     </property>
-     <addaction name="actionGoldmark"/>
-     <addaction name="actionLute"/>
-    </widget>
-    <widget class="QMenu" name="menuRenderTheme">
-     <property name="title">
-      <string>Render Theme</string>
-     </property>
-     <addaction name="actionDefault"/>
-     <addaction name="actionOrange"/>
-     <addaction name="actionInk"/>
-     <addaction name="actionPurple"/>
-     <addaction name="actionBlue"/>
-     <addaction name="actionGreen"/>
-     <addaction name="actionRed"/>
-     <addaction name="actionGopher"/>
-    </widget>
-    <widget class="QMenu" name="menuCodeBlockStyle">
-     <property name="title">
-      <string>Code Block Style</string>
-     </property>
-     <addaction name="actionAbap"/>
-     <addaction name="actionAlgol"/>
-     <addaction name="actionAlgolNu"/>
-     <addaction name="actionAPI"/>
-     <addaction name="actionArduino"/>
-     <addaction name="actionAutumn"/>
-     <addaction name="actionBorland"/>
-     <addaction name="actionBW"/>
-     <addaction name="actionColorful"/>
-     <addaction name="actionDracula"/>
-     <addaction name="actionEmacs"/>
-     <addaction name="actionFriendly"/>
-     <addaction name="actionFruity"/>
-     <addaction name="actionGithub"/>
-     <addaction name="actionIgor"/>
-     <addaction name="actionLovelace"/>
-     <addaction name="actionManni"/>
-     <addaction name="actionMonokai"/>
-     <addaction name="actionMonokaiLight"/>
-     <addaction name="actionMurphy"/>
-     <addaction name="actionNative"/>
-     <addaction name="actionParaisoDark"/>
-     <addaction name="actionParaisoLight"/>
-     <addaction name="actionPastie"/>
-     <addaction name="actionPerldoc"/>
-     <addaction name="actionPygments"/>
-     <addaction name="actionRainbowDash"/>
-     <addaction name="actionRRT"/>
-     <addaction name="actionSolarizedDark"/>
-     <addaction name="actionSolarizedDark256"/>
-     <addaction name="actionSolarizedLight"/>
-     <addaction name="actionSwapOff"/>
-     <addaction name="actionTango"/>
-     <addaction name="actionTrac"/>
-     <addaction name="actionVIM"/>
-     <addaction name="actionVS"/>
-     <addaction name="actionXcode"/>
-    </widget>
-    <addaction name="menuMarkdownEngine"/>
-    <addaction name="menuRenderTheme"/>
-    <addaction name="menuCodeBlockStyle"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -257,23 +192,6 @@
    <addaction name="actionHeader2"/>
    <addaction name="actionHeader3"/>
    <addaction name="actionHeader4"/>
-  </widget>
-  <widget class="QToolBar" name="engineToolbar">
-   <property name="windowTitle">
-    <string>Engine Toolbar</string>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>24</width>
-     <height>24</height>
-    </size>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
   </widget>
   <action name="actionNew">
    <property name="icon">

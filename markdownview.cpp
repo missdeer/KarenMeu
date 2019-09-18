@@ -264,24 +264,32 @@ void MarkdownView::convertTimeout()
 void MarkdownView::setThemeStyle()
 {
     const QString& previewTheme = g_settings->previewTheme();
-    QMap<QString, QString> m = {
-        { "墨黑",    "ink.css" },
-        { "姹紫",    "purple.css" },
-        { "嫩青",    "cyan.css" },
-        { "橙心",    "orangeHeart.css" },
-        { "红绯",    "red.css" },
-        { "绿意",    "green.css" },
-        { "默认",    "default.css" },
-        { "Gopher", "gopher.css"},
-        };
-    QFile f(":/rc/theme/" + m[previewTheme]);
-    if (f.open(QIODevice::ReadOnly))
+    QByteArray ba;
+    if (previewTheme == tr("Custom"))
     {
-        QByteArray ba = f.readAll();
-        ba.replace("{{.width}}", g_settings->previewMode() == tr("Blog Post") ? "95" : "70");
-        m_themeStyle.setText(QString::fromUtf8(ba));
-        f.close();
+        ba = g_settings->customPreviewThemeStyle();
     }
+    else
+    {
+        QMap<QString, QString> m = {
+            { "墨黑",    "ink.css" },
+            { "姹紫",    "purple.css" },
+            { "嫩青",    "cyan.css" },
+            { "橙心",    "orangeHeart.css" },
+            { "红绯",    "red.css" },
+            { "绿意",    "green.css" },
+            { "默认",    "default.css" },
+            { "Gopher", "gopher.css"},
+        };
+        QFile f(":/rc/theme/" + m[previewTheme]);
+        if (f.open(QIODevice::ReadOnly))
+        {
+            ba = f.readAll();
+            f.close();
+        }
+    }
+    ba.replace("{{.width}}", g_settings->previewMode() == tr("Blog Post") ? "95" : "70");
+    m_themeStyle.setText(QString::fromUtf8(ba));
     m_editor->updateCodeEditorFont();
 }
 
