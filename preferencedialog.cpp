@@ -1,4 +1,5 @@
 #include "settings.h"
+#include "previewthemeeditor.h"
 #include "preferencedialog.h"
 #include "ui_preferencedialog.h"
 
@@ -7,6 +8,12 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) :
     ui(new Ui::PreferenceDialog)
 {
     ui->setupUi(this);
+    auto *layout = new QVBoxLayout;
+    m_previewThemeEditor = new PreviewThemeEditor(ui->previewThemeEditorContainer);
+    layout->addWidget(m_previewThemeEditor);
+    layout->setMargin(0);
+    ui->previewThemeEditorContainer->setLayout(layout);
+    
     ui->cbPreviewTheme->setCurrentText(g_settings->previewTheme());
     ui->cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
     ui->cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());

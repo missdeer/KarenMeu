@@ -7,6 +7,8 @@ namespace Ui {
 class PreferenceDialog;
 }
 
+class PreviewThemeEditor;
+
 class PreferenceDialog : public QDialog
 {
     Q_OBJECT
@@ -18,6 +20,7 @@ protected:
      void accept() override;
 private:
     Ui::PreferenceDialog *ui;
+    PreviewThemeEditor* m_previewThemeEditor;
 };
 
 #endif // PREFERENCEDIALOG_H

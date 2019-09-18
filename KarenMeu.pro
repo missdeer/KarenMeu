@@ -23,24 +23,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++17
 
 include($$PWD/3rdparty/qmarkdowntextedit/qmarkdowntextedit.pri)
+include($$PWD/3rdparty/scintilla-latest.pri)
 
 SOURCES += \
         markdowneditor2.cpp \
         previewpage.cpp \
+        previewthemeeditor.cpp \
         rendereddocument.cpp \
         main.cpp \
         mainwindow.cpp \
         markdownview.cpp \
         preferencedialog.cpp \
+        scintillaconfig.cpp \
         settings.cpp
 
 HEADERS += \
         markdowneditor2.h \
         previewpage.h \
+        previewthemeeditor.h \
         rendereddocument.h \
         mainwindow.h \
         markdownview.h \
         preferencedialog.h \
+        scintillaconfig.h \
         settings.h
 
 FORMS += \
