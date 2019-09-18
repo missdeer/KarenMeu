@@ -37,11 +37,21 @@ void PreferenceDialog::accept()
     g_settings->setEnableLineNumbers(ui->cbEnableLineNumbers->isChecked());
     g_settings->setCodeEditorFontFamily(ui->cbCodeEditorFont->currentFont().family());
     g_settings->setCodeEditorFontPointSize(ui->sbFontPointSize->value());
+    if (ui->cbPreviewTheme->currentText() == tr("Custom"))
+    {
+        g_settings->setCustomPreviewThemeStyle(m_previewThemeEditor->content());
+    }
     QDialog::accept();
 }
 
 void PreferenceDialog::on_cbPreviewTheme_currentTextChanged(const QString &text)
 {
+    if (text == tr("Custom"))
+    {
+        m_previewThemeEditor->setContent(g_settings->customPreviewThemeStyle());
+        return;
+    }
+    
     QMap<QString, QString> m = {
         { "墨黑",    "ink.css" },
         { "姹紫",    "purple.css" },
@@ -69,5 +79,5 @@ void PreferenceDialog::setupPreviewThemeEditor()
     layout->setMargin(0);
     ui->previewThemeEditorContainer->setLayout(layout);    
     
-    m_previewThemeEditor->initialize();
+    m_previewThemeEditor->initialize();    
 }

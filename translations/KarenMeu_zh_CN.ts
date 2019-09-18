@@ -824,6 +824,8 @@
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="127"/>
+        <location filename="../preferencedialog.cpp" line="40"/>
+        <location filename="../preferencedialog.cpp" line="49"/>
         <source>Custom</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1139,27 +1141,27 @@
 <context>
     <name>QSettings</name>
     <message>
-        <location filename="../settings.cpp" line="53"/>
+        <location filename="../settings.cpp" line="54"/>
         <source>Default</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="54"/>
+        <location filename="../settings.cpp" line="55"/>
         <source>默认</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="55"/>
+        <location filename="../settings.cpp" line="56"/>
         <source>xcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="56"/>
+        <location filename="../settings.cpp" line="57"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="58"/>
+        <location filename="../settings.cpp" line="59"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>

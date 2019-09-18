@@ -26,6 +26,7 @@ void Settings::save()
     settings.setValue("markdownEngine", m_markdownEngine);
     settings.setValue("enableLineNumbers", m_enableLineNumbers);
     settings.setValue("previewMode", m_previewMode);
+    settings.setValue("customPreviewThemeStyle", m_customPreviewThemeStyle);
     settings.sync();
 }
 
@@ -56,6 +57,7 @@ void Settings::load()
     m_markdownEngine = settings.value("markdownEngine", QSettings::tr("Goldmark")).toString();
     m_enableLineNumbers = settings.value("enableLineNumbers", true).toBool();
     m_previewMode = settings.value("previewMode", QSettings::tr("Wechat Public Account Article")).toString();
+    m_customPreviewThemeStyle = settings.value("customPreviewThemeStyle").toByteArray();
 }
 
 const QString & Settings::codeEditorFontFamily() const
@@ -156,6 +158,16 @@ const QString &Settings::previewMode() const
 void Settings::setPreviewMode(const QString &previewMode)
 {
     m_previewMode = previewMode;
+}
+
+const QByteArray &Settings::customPreviewThemeStyle() const
+{
+    return m_customPreviewThemeStyle;
+}
+
+void Settings::setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeStyle)
+{
+    m_customPreviewThemeStyle = customPreviewThemeStyle;
 }
 
 

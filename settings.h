@@ -47,6 +47,9 @@ public:
     const QString & previewMode() const;
     void setPreviewMode(const QString &previewMode);
     
+    const QByteArray & customPreviewThemeStyle() const;
+    void setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeStyle);
+    
 private:
     bool m_enableLineNumbers{true}; 
     int m_autoRefreshInterval{1000}; // millisecond
@@ -59,6 +62,7 @@ private:
     QString m_codeBlockStyle;
     QString m_markdownEngine;
     QString m_previewMode;
+    QByteArray m_customPreviewThemeStyle;
 };
 
 inline Settings *g_settings = nullptr;
