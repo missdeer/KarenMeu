@@ -87,12 +87,12 @@ void ScintillaConfig::initScintilla()
     m_sci->setFontQuality( SC_EFF_QUALITY_ANTIALIASED);
 
     // apply global settings
-    QString themePath = ":/rc/sci/themes/" % g_settings->codeEditorTheme() % ".xml";
+    QString themePath = ":/rc/sci/themes/Default.xml";
     if (!QFile::exists(themePath))
     {
         themePath = ":/rc/sci/stylers.model.xml";
     }
-    applyThemeStyle(themePath, "markdown");
+    applyThemeStyle(themePath, "css");
 }
 
 void ScintillaConfig::initEditorFolderStyle()
@@ -137,7 +137,7 @@ void ScintillaConfig::initEditorFolderStyle()
 void ScintillaConfig::initLexerStyle(const QString& lang)
 {
     // apply language specified settings
-    QString themePath = ":/rc/sci/themes/" % g_settings->codeEditorTheme() % ".xml";
+    QString themePath = ":/rc/sci/themes/Default.xml";
     if (!QFile::exists(themePath))
     {
         themePath = ":/rc/sci/stylers.model.xml";

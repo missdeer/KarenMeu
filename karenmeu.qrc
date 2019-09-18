@@ -46,5 +46,16 @@
         <file>rc/theme/red.css</file>
         <file>rc/theme/gopher.css</file>
         <file>rc/sample.md</file>
+        <file>rc/sci/language/css.xml</file>
+        <file>rc/sci/language/html.xml</file>
+        <file>rc/sci/language/javascript.xml</file>
+        <file>rc/sci/language/xml.xml</file>
+        <file>rc/sci/language/yaml.xml</file>
+        <file>rc/sci/themes/Default.xml</file>
+        <file>rc/sci/themes/theme.model.xml</file>
+        <file>rc/sci/langmap.xml</file>
+        <file>rc/sci/langs.model.xml</file>
+        <file>rc/sci/langs.xml</file>
+        <file>rc/sci/stylers.model.xml</file>
     </qresource>
 </RCC>

@@ -18,9 +18,13 @@ public:
     ~PreferenceDialog() override;
 protected:
      void accept() override;
+private slots:
+     void on_cbPreviewTheme_currentTextChanged(const QString &text);
+     
 private:
     Ui::PreferenceDialog *ui;
     PreviewThemeEditor* m_previewThemeEditor;
+    void setupPreviewThemeEditor();
 };
 
 #endif // PREFERENCEDIALOG_H
