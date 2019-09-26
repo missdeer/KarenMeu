@@ -633,94 +633,94 @@
 <context>
     <name>MarkdownView</name>
     <message>
-        <location filename="../markdownview.cpp" line="88"/>
-        <location filename="../markdownview.cpp" line="136"/>
+        <location filename="../markdownview.cpp" line="90"/>
+        <location filename="../markdownview.cpp" line="138"/>
         <source>Confirm</source>
         <translation>确认</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="89"/>
-        <location filename="../markdownview.cpp" line="137"/>
+        <location filename="../markdownview.cpp" line="91"/>
+        <location filename="../markdownview.cpp" line="139"/>
         <source>Modified document has not been saved, do you want to save it?</source>
         <translation>文档被修改且尚未保存，要保存吗？</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="104"/>
+        <location filename="../markdownview.cpp" line="106"/>
         <source>Open Markdown file</source>
         <translation>打开Markdown文档</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="106"/>
+        <location filename="../markdownview.cpp" line="108"/>
         <source>Markdown files (*.md *.markdown *.mdown);;All files (*.*)</source>
         <translation>Markdown文档 (*.md *.markdown *.mdown);;所有类型 (*.*)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="120"/>
+        <location filename="../markdownview.cpp" line="122"/>
         <source>Save Markdown file</source>
         <translation>保存Markdown文档</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="122"/>
+        <location filename="../markdownview.cpp" line="124"/>
         <source>Markdown file (*.md);;All files (*.*)</source>
         <translation>Markdown文档 (*.md);;所有类型 (*.*)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="222"/>
+        <location filename="../markdownview.cpp" line="224"/>
         <source>Export As HTML</source>
         <translation>导出为HTML</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="224"/>
+        <location filename="../markdownview.cpp" line="226"/>
         <source>HTML file (*.html)</source>
         <translation>HTML文档 (*.html)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="234"/>
+        <location filename="../markdownview.cpp" line="236"/>
         <source>HTML exported</source>
         <translation>HTML已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="235"/>
+        <location filename="../markdownview.cpp" line="237"/>
         <source>HTML file has been exported to %1 successfully.</source>
         <translation>HTML文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="242"/>
+        <location filename="../markdownview.cpp" line="244"/>
         <source>Export As PDF</source>
         <translation>导出为PDF</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="244"/>
+        <location filename="../markdownview.cpp" line="246"/>
         <source>Adobe PDF file (*.pdf)</source>
         <translation>Adobe PDF文档 (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="268"/>
+        <location filename="../markdownview.cpp" line="270"/>
         <source>Custom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="291"/>
+        <location filename="../markdownview.cpp" line="293"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="332"/>
+        <location filename="../markdownview.cpp" line="334"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="333"/>
+        <location filename="../markdownview.cpp" line="335"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="335"/>
+        <location filename="../markdownview.cpp" line="337"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="336"/>
+        <location filename="../markdownview.cpp" line="338"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>

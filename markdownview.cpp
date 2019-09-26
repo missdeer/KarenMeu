@@ -59,16 +59,18 @@ MarkdownView::MarkdownView(QWidget *parent)
     
     auto *page = new PreviewPage(this);
     m_preview->setPage(page);
+    connect(m_editor, &MarkdownEditor2::scrollValueChanged, page, &PreviewPage::onEditorScrollMoved);
     
     auto *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);
     channel->registerObject(QStringLiteral("theme"), &m_themeStyle);
-    m_preview->page()->setWebChannel(channel);
+    page->setWebChannel(channel);
     
     m_preview->setContextMenuPolicy(Qt::NoContextMenu);
     m_preview->load(QUrl("qrc:/rc/html/index.html"));
     connect(m_preview, &QWebEngineView::loadFinished, this, &MarkdownView::previewLoadFinished);
-    connect(m_preview->page(), &QWebEnginePage::pdfPrintingFinished, this, &MarkdownView::pdfPrintingFinished);
+    connect(page, &QWebEnginePage::pdfPrintingFinished, this, &MarkdownView::pdfPrintingFinished);
+    
 
     updateMarkdownEngine();
 

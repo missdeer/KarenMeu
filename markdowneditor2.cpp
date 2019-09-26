@@ -1,6 +1,7 @@
 #include <QtCore>
 #include <QRegularExpression>
 #include <QTextDocumentFragment>
+#include <QScrollBar>
 #include "settings.h"
 #include "markdowneditor2.h"
 
@@ -30,6 +31,7 @@ MarkdownEditor2::MarkdownEditor2(QWidget *parent)
             emit contentModified();
     });
     connect(this, &QPlainTextEdit::textChanged, this, &MarkdownEditor2::contentModified);
+    connect(verticalScrollBar(), &QScrollBar::valueChanged, [this](int pos){ emit scrollValueChanged(pos, verticalScrollBar()->maximum());});
 }
 
 void MarkdownEditor2::updateCodeEditorFont()

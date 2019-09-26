@@ -59,6 +59,8 @@ class PreviewPage : public QWebEnginePage
 public:
     explicit PreviewPage(QObject *parent = nullptr) : QWebEnginePage(parent) {}
 
+public slots:
+    void onEditorScrollMoved(int pos, int max);
 protected:
     bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool isMainFrame);
 };

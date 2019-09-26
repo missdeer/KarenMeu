@@ -18,10 +18,6 @@ typedef struct { const char *p; ptrdiff_t n; } _GoString_;
 /* Start of preamble from import "C" comments.  */
 
 
-
-
-
-
 #include <stdlib.h>
 
 

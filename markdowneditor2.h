@@ -19,7 +19,7 @@ public:
     
 signals:
     void contentModified();
-    
+    void scrollValueChanged(int, int);
 public slots:
     void formatStrong();
     void formatEmphasize();
