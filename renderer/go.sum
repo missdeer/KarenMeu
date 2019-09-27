@@ -23,8 +23,8 @@ github.com/andybalholm/cascadia v1.0.0 h1:hOCXnnZ5A+3eVDX8pvgl4kofXv2ELss0bKcqRy
 github.com/andybalholm/cascadia v1.0.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/aymerick/douceur v0.2.0 h1:Mv+mAeH1Q+n9Fr+oyamOlAkUNPWPlA8PPGR0QAaYuPk=
 github.com/aymerick/douceur v0.2.0/go.mod h1:wlT5vV2O3h55X9m7iVYN0TBM0NH/MmbLnd30/FjWUq4=
-github.com/b3log/lute v0.0.0-20190922061740-a6de76dabec1 h1:Dw17xIbKZQKC14V2lXEc6oMJasH2TT2jOupIm7u2fag=
-github.com/b3log/lute v0.0.0-20190922061740-a6de76dabec1/go.mod h1:/FsW8UtWmaQx3lEZ2xQlDPZnTJ9Yi+6D2+keuPj9/VA=
+github.com/b3log/lute v0.0.0-20190926072341-aefc9bc6eedc h1:dlH/oRgPAqyDBbt8uBzXZoHj3YNKJM0c0tX6MVZ4sfo=
+github.com/b3log/lute v0.0.0-20190926072341-aefc9bc6eedc/go.mod h1:/FsW8UtWmaQx3lEZ2xQlDPZnTJ9Yi+6D2+keuPj9/VA=
 github.com/daaku/go.zipexe v1.0.0/go.mod h1:z8IiR6TsVLEYKwXAoE/I+8ys/sDkgTzSL0CLnGVd57E=
 github.com/danwakefield/fnmatch v0.0.0-20160403171240-cbb64ac3d964 h1:y5HC9v93H5EPKqaS1UYVg1uYah5Xf51mBfIoWehClUQ=
 github.com/danwakefield/fnmatch v0.0.0-20160403171240-cbb64ac3d964/go.mod h1:Xd9hchkHSWYkEqJwUGisez3G1QY8Ryz0sdWrLPMGjLk=

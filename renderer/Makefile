@@ -12,6 +12,7 @@ all: $(BINARY)
 $(BINARY): $(CHECKS)
 	GO111MODULE=on CGO_ENABLED=$(CGO_ENABLED) $(SYSTEM) go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY)
 	mv librenderer.h renderer.h
+	go mod tidy
 
 .PHONY: clean
 clean:
