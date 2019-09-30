@@ -38,10 +38,18 @@
      <addaction name="actionExportAsHTML"/>
      <addaction name="actionExportAsPDF"/>
     </widget>
+    <widget class="QMenu" name="menuRecentFiles">
+     <property name="title">
+      <string>Recent Files...</string>
+     </property>
+     <addaction name="actionClearRecentFilesList"/>
+     <addaction name="separator"/>
+    </widget>
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
+    <addaction name="menuRecentFiles"/>
     <addaction name="menuExport"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -982,6 +990,11 @@
    </property>
    <property name="text">
     <string>Gopher</string>
+   </property>
+  </action>
+  <action name="actionClearRecentFilesList">
+   <property name="text">
+    <string>Clear Recent Files List</string>
    </property>
   </action>
  </widget>

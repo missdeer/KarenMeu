@@ -9,6 +9,7 @@
 #include <QHash>
 #include <QLabel>
 #include <QComboBox>
+#include <QFileInfo>
 #include "markdownview.h"
 #include "preferencedialog.h"
 #include "renderer.h"
@@ -60,10 +61,19 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionHeader6, &QAction::triggered, m_view, &MarkdownView::formatHeader6);
     connect(ui->actionShiftRight, &QAction::triggered, m_view, &MarkdownView::formatShiftRight);
     connect(ui->actionShiftLeft, &QAction::triggered, m_view, &MarkdownView::formatShiftLeft);
+    connect(m_view, &MarkdownView::setCurrentFile, this, &MainWindow::setCurrentFile);
             
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
     ui->menuView->addAction(ui->editToolbar->toggleViewAction());
     ui->menuView->addAction(ui->formatToolbar->toggleViewAction());
+    
+    
+    for (int i = 0; i < MaxRecentFiles; ++i) {
+        recentFileActs[i] = new QAction(this);
+        recentFileActs[i]->setVisible(false);
+        connect(recentFileActs[i], &QAction::triggered, this, &MainWindow::openRecentFile);
+        ui->menuRecentFiles->addAction(recentFileActs[i]);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -112,4 +122,62 @@ void MainWindow::closeEvent(QCloseEvent *event)
     } else {
         event->ignore();
     }
+}
+
+void MainWindow::updateRecentFileActions()
+{
+    QSettings settings;
+    QStringList files = settings.value("recentFileList").toStringList();
+
+    int numRecentFiles = qMin(files.size(), (int)MaxRecentFiles);
+
+    for (int i = 0; i < numRecentFiles; ++i) 
+    {
+        QString text = tr("%1. %2").arg(i + 1).arg(strippedName(files[i]));
+        recentFileActs[i]->setText(text);
+        recentFileActs[i]->setData(files[i]);
+        recentFileActs[i]->setVisible(true);
+    }
+    for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
+        recentFileActs[j]->setVisible(false);
+
+    //separatorAct->setVisible(numRecentFiles > 0);
+}
+
+void MainWindow::setCurrentFile(const QString &fileName)
+{
+    m_curFile = fileName;
+    setWindowFilePath(m_curFile);
+    
+    QSettings settings;
+    QStringList files = settings.value("recentFileList").toStringList();
+    files.removeAll(fileName);
+    files.prepend(fileName);
+    while (files.size() > MaxRecentFiles)
+        files.removeLast();
+    
+    settings.setValue("recentFileList", files);
+    
+    updateRecentFileActions();
+}
+
+QString MainWindow::strippedName(const QString &fullFileName)
+{
+    return QFileInfo(fullFileName).fileName();
+}
+
+void MainWindow::openRecentFile()
+{
+    QAction *action = qobject_cast<QAction *>(sender());
+    if (action)
+        openFile(action->data().toString());
+}
+
+void MainWindow::on_actionClearRecentFilesList_triggered()
+{
+    QSettings settings;
+    QStringList files;
+    settings.setValue("recentFileList", files);
+    
+    updateRecentFileActions();
 }

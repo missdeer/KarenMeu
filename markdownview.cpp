@@ -310,6 +310,7 @@ void MarkdownView::openFromFile(const QString &fileName)
     if (QFile::exists(fileName))
     {
         QFile f(fileName);
+        QApplication::setOverrideCursor(Qt::WaitCursor);
         if (f.open(QIODevice::ReadOnly))
         {
             QByteArray ba = f.readAll();
@@ -319,6 +320,9 @@ void MarkdownView::openFromFile(const QString &fileName)
             f.close();
             m_savePath = fileName;
         }
+        QApplication::restoreOverrideCursor();
+        
+        emit setCurrentFile(fileName);
     }
 }
 
@@ -347,12 +351,16 @@ void MarkdownView::resizeEvent(QResizeEvent *event)
 void MarkdownView::saveToFile(const QString &savePath)
 {
     QFile f(savePath);
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     if (f.open(QIODevice::Truncate | QIODevice::WriteOnly))
     {
         f.write(m_editor->content());
         f.close();
         m_editor->setSavePoint();
     }
+    QApplication::restoreOverrideCursor();
+    
+    emit setCurrentFile(savePath);
 }
 
 void MarkdownView::setContent(const QString& html)

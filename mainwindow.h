@@ -31,11 +31,24 @@ private slots:
     
     void on_actionPreference_triggered();
     
+    void on_actionClearRecentFilesList_triggered();
+    
+    void setCurrentFile(const QString &fileName);
 protected:
     void closeEvent(QCloseEvent *event) override;
 private:
     Ui::MainWindow *ui;
     MarkdownView *m_view;
+    
+    QString m_curFile;
+    
+    enum { MaxRecentFiles = 10 };
+    QAction *recentFileActs[MaxRecentFiles];
+    
+    void updateRecentFileActions();    
+    QString strippedName(const QString &fullFileName);
+    
+    void openRecentFile();
 };
 
 #endif // MAINWINDOW_H

@@ -42,7 +42,7 @@ signals:
     void formatHeader6();
     void formatShiftRight();
     void formatShiftLeft();
-    
+    void setCurrentFile(const QString&);
 public slots:
     void openDocument();
     void saveDocument();
