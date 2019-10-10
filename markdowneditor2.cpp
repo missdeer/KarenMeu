@@ -2,6 +2,7 @@
 #include <QRegularExpression>
 #include <QTextDocumentFragment>
 #include <QScrollBar>
+#include <QCommonStyle>
 #include "TextDocument.h"
 #include "settings.h"
 #include "markdowneditor2.h"
@@ -9,6 +10,18 @@
 MarkdownEditor2::MarkdownEditor2(QWidget *parent)
     :MarkdownEditor(new TextDocument(parent), parent)
 {
+    setUseUnderlineForEmphasis(false);
+    setHighlightLineBreaks(true);
+    setEnableLargeHeadingSizes(true);
+    setAutoMatchEnabled(false);
+    setBulletPointCyclingEnabled(true);
+    setEditorWidth(EditorWidthFull);
+    setEditorCorners(InterfaceStyleRounded);
+    setBlockquoteStyle(BlockquoteStyleFancy);
+    setSpellCheckEnabled(false);
+    verticalScrollBar()->setStyle(new QCommonStyle());
+    horizontalScrollBar()->setStyle(new QCommonStyle());
+    
     connect(this, &QPlainTextEdit::modificationChanged, [this](bool changed){ 
         if (changed) 
             emit contentModified();

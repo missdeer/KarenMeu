@@ -28,6 +28,8 @@ MarkdownView::MarkdownView(QWidget *parent)
 {
     m_splitter->addWidget(m_editor);
     m_splitter->addWidget(m_preview);
+    m_splitter->setStyleSheet("QSplitter:handle { border: 0 }"
+                              "QSplitter { border: 0; margin: 0; padding: 0 }");
     auto *layout = new QVBoxLayout;
     layout->addWidget(m_splitter);
     
