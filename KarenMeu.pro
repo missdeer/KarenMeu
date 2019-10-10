@@ -31,6 +31,7 @@ SOURCES += \
         MarkdownTokenizer.cpp \
         TextDocument.cpp \
         Theme.cpp \
+        ThemeFactory.cpp \
         Token.cpp \
         markdowneditor.cpp \
         markdowneditor2.cpp \
@@ -59,6 +60,7 @@ HEADERS += \
         TextBlockData.h \
         TextDocument.h \
         Theme.h \
+        ThemeFactory.h \
         Token.h \
         markdowneditor.h \
         markdowneditor2.h \
