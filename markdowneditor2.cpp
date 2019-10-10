@@ -2,30 +2,13 @@
 #include <QRegularExpression>
 #include <QTextDocumentFragment>
 #include <QScrollBar>
+#include "TextDocument.h"
 #include "settings.h"
 #include "markdowneditor2.h"
 
 MarkdownEditor2::MarkdownEditor2(QWidget *parent)
-    :QMarkdownTextEdit(parent)
+    :MarkdownEditor(new TextDocument(parent), parent)
 {
-    auto hl = highlighter();
-    QFont f;
-    f.setFamily(g_settings->codeEditorFontFamily());
-    f.setPointSize(g_settings->codeEditorFontPointSize());
-    
-    QTextCharFormat tcf;
-    tcf.setFont(f);
-    
-    tcf.setForeground(QBrush(QColor(0, 128, 255)));
-    tcf.setFontUnderline(true);    
-    hl->setTextFormat(MarkdownHighlighter::Link, tcf);
-    
-    tcf.setFontUnderline(false);    
-    tcf.setForeground(QBrush(Qt::black));
-    tcf.setBackground(QColor(220, 220, 220));
-    hl->setTextFormat(MarkdownHighlighter::CodeBlock, tcf);
-    hl->setTextFormat(MarkdownHighlighter::InlineCodeBlock, tcf);
-    
     connect(this, &QPlainTextEdit::modificationChanged, [this](bool changed){ 
         if (changed) 
             emit contentModified();
@@ -37,10 +20,7 @@ MarkdownEditor2::MarkdownEditor2(QWidget *parent)
 
 void MarkdownEditor2::updateCodeEditorFont()
 {
-    QFont f(font());
-    f.setFamily(g_settings->codeEditorFontFamily());
-    f.setPointSize(g_settings->codeEditorFontPointSize());
-    setFont(f);    
+    setFont(g_settings->codeEditorFontFamily(), g_settings->codeEditorFontPointSize());    
 }
 
 void MarkdownEditor2::initialize()
@@ -51,12 +31,12 @@ void MarkdownEditor2::initialize()
 
 void MarkdownEditor2::setContent(const QString &content)
 {
-    setText(content);
+    setPlainText(content);
 }
 
 void MarkdownEditor2::setContent(const QByteArray &content)
 {
-    setText(content);
+    setPlainText(content);
 }
 
 QByteArray MarkdownEditor2::content()

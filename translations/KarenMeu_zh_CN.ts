@@ -646,6 +646,24 @@
     </message>
 </context>
 <context>
+    <name>MarkdownEditor</name>
+    <message>
+        <location filename="../markdowneditor.cpp" line="129"/>
+        <source>Add word to dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../markdowneditor.cpp" line="130"/>
+        <source>Check spelling...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../markdowneditor.cpp" line="823"/>
+        <source>No spelling suggestions found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MarkdownView</name>
     <message>
         <location filename="../markdownview.cpp" line="90"/>
@@ -1036,94 +1054,6 @@
     </message>
 </context>
 <context>
-    <name>QPlainTextEditSearchWidget</name>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="32"/>
-        <source>Find in text</source>
-        <translation>文本中查找</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="39"/>
-        <source>Replace with</source>
-        <translation>替换为</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="53"/>
-        <source>Find:</source>
-        <translation>查找：</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="63"/>
-        <source>Search backward</source>
-        <translation>反向搜索</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="80"/>
-        <source>Replace:</source>
-        <translation>替换：</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="90"/>
-        <source>Close search</source>
-        <translation>关闭搜索</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="107"/>
-        <source>Advanced search / replace text</source>
-        <translation>高级搜索/替换文本</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="127"/>
-        <source>Search forward</source>
-        <translation>正向搜索</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="144"/>
-        <source>Match case sensitive</source>
-        <translation>大小写敏感</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="164"/>
-        <source>Mode:</source>
-        <translation>模式：</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="193"/>
-        <source>Plain text</source>
-        <translation>纯文本</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="198"/>
-        <source>Whole words</source>
-        <translation>全字匹配</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="203"/>
-        <source>Regular expression</source>
-        <translation>正则表达式</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="224"/>
-        <source>Replace one text occurrence</source>
-        <translation>替换一处文本</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="227"/>
-        <source>Replace</source>
-        <translation>替换</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="237"/>
-        <source>Replace all text occurrences</source>
-        <translation>替换所有文本</translation>
-    </message>
-    <message>
-        <location filename="../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="240"/>
-        <source>Replace all</source>
-        <translation>全部替换</translation>
-    </message>
-</context>
-<context>
     <name>QSettings</name>
     <message>
         <location filename="../settings.cpp" line="54"/>
@@ -1149,6 +1079,84 @@
         <location filename="../settings.cpp" line="59"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
+    </message>
+</context>
+<context>
+    <name>SpellChecker</name>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="139"/>
+        <source>Check Spelling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="147"/>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="150"/>
+        <source>&amp;Ignore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="153"/>
+        <source>I&amp;gnore All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="158"/>
+        <source>&amp;Change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="161"/>
+        <source>C&amp;hange All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="176"/>
+        <source>Not in dictionary:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="184"/>
+        <source>Change to:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="200"/>
+        <source>Checking spelling...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="200"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="201"/>
+        <source>Please wait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="228"/>
+        <source>Continue checking at beginning of file?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../spelling/spell_checker.cpp" line="287"/>
+        <source>Spell check complete.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextDocument</name>
+    <message>
+        <location filename="../TextDocument.cpp" line="47"/>
+        <location filename="../TextDocument.cpp" line="74"/>
+        <location filename="../TextDocument.cpp" line="119"/>
+        <source>untitled</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

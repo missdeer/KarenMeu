@@ -1,9 +1,9 @@
 #ifndef MARKDOWNEDITOR2_H
 #define MARKDOWNEDITOR2_H
 
-#include "qmarkdowntextedit.h"
+#include "markdowneditor.h"
 
-class MarkdownEditor2 : public QMarkdownTextEdit
+class MarkdownEditor2 : public MarkdownEditor
 {
     Q_OBJECT
 public:

@@ -22,10 +22,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++17
 
-include($$PWD/3rdparty/qmarkdowntextedit/qmarkdowntextedit.pri)
 include($$PWD/3rdparty/scintilla-latest.pri)
 
 SOURCES += \
+        ColorHelper.cpp \
+        HighlightTokenizer.cpp \
+        MarkdownHighlighter.cpp \
+        MarkdownTokenizer.cpp \
+        TextDocument.cpp \
+        Theme.cpp \
+        Token.cpp \
+        markdowneditor.cpp \
         markdowneditor2.cpp \
         previewpage.cpp \
         previewthemeeditor.cpp \
@@ -35,9 +42,25 @@ SOURCES += \
         markdownview.cpp \
         preferencedialog.cpp \
         scintillaconfig.cpp \
-        settings.cpp
+        settings.cpp \
+        spelling/dictionary_manager.cpp \
+        spelling/spell_checker.cpp
 
 HEADERS += \
+        ColorHelper.h \
+        HighlightTokenizer.h \
+        HighlighterLineStates.h \
+        MarkdownEditorTypes.h \
+        MarkdownHighlighter.h \
+        MarkdownStates.h \
+        MarkdownStyles.h \
+        MarkdownTokenTypes.h \
+        MarkdownTokenizer.h \
+        TextBlockData.h \
+        TextDocument.h \
+        Theme.h \
+        Token.h \
+        markdowneditor.h \
         markdowneditor2.h \
         previewpage.h \
         previewthemeeditor.h \
@@ -46,11 +69,18 @@ HEADERS += \
         markdownview.h \
         preferencedialog.h \
         scintillaconfig.h \
-        settings.h
+        settings.h \
+        spelling/abstract_dictionary.h \
+        spelling/abstract_dictionary_provider.h \
+        spelling/dictionary_manager.h \
+        spelling/dictionary_ref.h \
+        spelling/spell_checker.h
 
 FORMS += \
         mainwindow.ui \
         preferencedialog.ui
+
+INCLUDEPATH += $$PWD $$PWD/spelling 
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -115,13 +145,38 @@ win32-*msvc* {
     LIBS += -L$$PWD/renderer
 }
 
+win32 {
+    INCLUDEPATH += $$PWD/spelling/hunspell
+
+    HEADERS += $$PWD/spelling/dictionary_provider_hunspell.h \
+        $$PWD/spelling/dictionary_provider_voikko.h
+
+    SOURCES += $$PWD/spelling/dictionary_provider_hunspell.cpp \
+        $$PWD/spelling/dictionary_provider_voikko.cpp \
+        $$PWD/spelling/hunspell/affentry.cxx \
+        $$PWD/spelling/hunspell/affixmgr.cxx \
+        $$PWD/spelling/hunspell/csutil.cxx \
+        $$PWD/spelling/hunspell/filemgr.cxx \
+        $$PWD/spelling/hunspell/hashmgr.cxx \
+        $$PWD/spelling/hunspell/hunspell.cxx \
+        $$PWD/spelling/hunspell/hunzip.cxx \
+        $$PWD/spelling/hunspell/phonet.cxx \
+        $$PWD/spelling/hunspell/replist.cxx \
+        $$PWD/spelling/hunspell/suggestmgr.cxx
+
+    DEFINES += HUNSPELL_STATIC
+} 
+
 macx: {
     ICON = KarenMeu.icns
     icon.path = $$PWD
     icon.files += KarenMeu.png
     INSTALLS += icon
-    LIBS += -framework CoreFoundation -framework Security
+    LIBS += -framework CoreFoundation -framework Security -framework AppKit
 
+    HEADERS += $$PWD/spelling/dictionary_provider_nsspellchecker.h
+
+    OBJECTIVE_SOURCES += $$PWD/spelling/dictionary_provider_nsspellchecker.mm
     DESTDIR = $$OUT_PWD
 
     CONFIG(release, debug|release) : {
@@ -160,7 +215,7 @@ macx: {
 
         QMAKE_EXTRA_TARGETS += deploy deploy_webengine deploy_appstore fixdeploy codesign makedmg 
     }
-}
+} 
 
 unix: !macx {
     translate.commands = '$(COPY_DIR) $$shell_path($$PWD/translations) $$shell_path($$DESTDIR)'
