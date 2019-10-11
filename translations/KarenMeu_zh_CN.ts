@@ -1056,79 +1056,79 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ThemeFactory.cpp" line="203"/>
+        <location filename="../ThemeFactory.cpp" line="198"/>
         <source>The specified theme does not exist in the file system: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="320"/>
+        <location filename="../ThemeFactory.cpp" line="315"/>
         <source>The specified theme is not available.  Try restarting the application.  If problem persists, please file a bug report.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="390"/>
+        <location filename="../ThemeFactory.cpp" line="385"/>
         <source>Could not delete %1 from theme.  Please try setting the theme file permissions to be writeable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="413"/>
+        <location filename="../ThemeFactory.cpp" line="408"/>
         <source>&apos;%1&apos; already exists.  Please choose another name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="423"/>
+        <location filename="../ThemeFactory.cpp" line="418"/>
         <source>&apos;%1&apos; theme already exists.  Please choose another name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="458"/>
+        <location filename="../ThemeFactory.cpp" line="453"/>
         <source>Failed to rename theme.  Please check file permissions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="503"/>
+        <location filename="../ThemeFactory.cpp" line="498"/>
         <source>Theme is read-only.  Please try renaming the theme, or setting the theme file to be writable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="543"/>
+        <location filename="../ThemeFactory.cpp" line="538"/>
         <source>Failed to remove old theme image.  Please check file permissions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="575"/>
+        <location filename="../ThemeFactory.cpp" line="570"/>
         <source>The old theme image file could not be removed from the theme directory.  Please check file permissions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="587"/>
+        <location filename="../ThemeFactory.cpp" line="582"/>
         <source>Theme image file could not be copied to the theme directory.  Please check file permissions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="606"/>
+        <location filename="../ThemeFactory.cpp" line="601"/>
         <source>Theme could not be saved to disk.  Please check file permissions or try renaming the theme.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="631"/>
+        <location filename="../ThemeFactory.cpp" line="626"/>
         <source>Untitled 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="644"/>
+        <location filename="../ThemeFactory.cpp" line="639"/>
         <source>Untitled %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="702"/>
-        <location filename="../ThemeFactory.cpp" line="724"/>
-        <location filename="../ThemeFactory.cpp" line="752"/>
+        <location filename="../ThemeFactory.cpp" line="697"/>
+        <location filename="../ThemeFactory.cpp" line="719"/>
+        <location filename="../ThemeFactory.cpp" line="747"/>
         <source>Invalid or missing value for %1 provided.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="732"/>
+        <location filename="../ThemeFactory.cpp" line="727"/>
         <source>Value for %1 is out of range.  Valid values are between %2 and %3, inclusive.</source>
         <translation type="unfinished"></translation>
     </message>

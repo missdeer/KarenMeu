@@ -55,21 +55,16 @@ const QString ThemeFactory::CLASSIC_DARK_THEME_NAME = QString("Classic Dark");
 const QString ThemeFactory::PLAINSTRACTION_LIGHT_THEME_NAME = QString("Plainstraction Light");
 const QString ThemeFactory::PLAINSTRACTION_DARK_THEME_NAME = QString("Plainstraction Dark");
 
-ThemeFactory* ThemeFactory::instance = NULL;
+ThemeFactory* ThemeFactory::instance = nullptr;
 
 ThemeFactory* ThemeFactory::getInstance()
 {
-    if (NULL == instance)
+    if (nullptr == instance)
     {
         instance = new ThemeFactory();
     }
 
     return instance;
-}
-
-ThemeFactory::~ThemeFactory()
-{
-    ;
 }
 
 void ThemeFactory::loadClassicLightTheme()

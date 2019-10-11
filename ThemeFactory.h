@@ -41,11 +41,6 @@ class ThemeFactory
         static ThemeFactory* getInstance();
 
         /**
-         * Destructor.
-         */
-        ~ThemeFactory();
-
-        /**
          * Gets the list of available theme names, including built-in themes
          * (listed at the front of the list).
          */
@@ -111,6 +106,11 @@ class ThemeFactory
         QDir themeDirectory;
 
         ThemeFactory();
+        
+        /**
+         * Destructor.
+         */
+        ~ThemeFactory() = default;
 
         void loadClassicLightTheme();
         void loadClassicDarkTheme();
