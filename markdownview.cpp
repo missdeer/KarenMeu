@@ -328,6 +328,16 @@ void MarkdownView::openFromFile(const QString &fileName)
     }
 }
 
+MarkdownEditor2 *MarkdownView::editor() 
+{ 
+    return m_editor; 
+}
+
+QSplitter *MarkdownView::splitter()
+{
+    return m_splitter;
+}
+
 void MarkdownView::previewLoadFinished(bool)
 {
     updateMarkdownEngine();

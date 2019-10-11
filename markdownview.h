@@ -20,6 +20,8 @@ public:
     void setThemeStyle();
     void updateMarkdownEngine();
     void openFromFile(const QString& fileName);
+    MarkdownEditor2 *editor();
+    QSplitter *splitter();
 signals:
     void formatStrong();
     void formatEmphasize();

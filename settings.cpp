@@ -1,6 +1,7 @@
 #include <QtCore>
 #include <QSettings>
 #include <QFile>
+#include "ThemeFactory.h"
 #include "settings.h"
 
 Settings::~Settings()
@@ -51,7 +52,9 @@ void Settings::load()
                                         #endif
                                             ).toString();
     m_codeEditorFontPointSize = settings.value("codeEditorFontPointSize", 14).toInt();
-    m_codeEditorTheme = settings.value("codeEditorTheme", QSettings::tr("Default")).toString();
+    m_codeEditorTheme = settings.value("codeEditorTheme", QSettings::tr("Classic Light")).toString();
+    QString err;
+    m_theme = ThemeFactory::getInstance()->loadTheme(m_codeEditorTheme, err);
     setPreviewTheme(settings.value("previewTheme", QSettings::tr("默认")).toString());
     m_codeBlockStyle = settings.value("codeBlockStyle", QSettings::tr("xcode")).toString();
     m_markdownEngine = settings.value("markdownEngine", QSettings::tr("Goldmark")).toString();
@@ -168,6 +171,11 @@ const QByteArray &Settings::customPreviewThemeStyle() const
 void Settings::setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeStyle)
 {
     m_customPreviewThemeStyle = customPreviewThemeStyle;
+}
+
+const Theme &Settings::theme() const
+{
+    return m_theme;
 }
 
 

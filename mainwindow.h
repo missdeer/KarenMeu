@@ -49,6 +49,7 @@ private:
     QString strippedName(const QString &fullFileName);
     
     void openRecentFile();
+    void applyTheme();
 };
 
 #endif // MAINWINDOW_H

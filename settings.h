@@ -2,6 +2,7 @@
 #define SETTINGS_H
 
 #include <QString>
+#include "Theme.h"
 
 class Settings
 {
@@ -50,6 +51,7 @@ public:
     const QByteArray & customPreviewThemeStyle() const;
     void setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeStyle);
     
+    const Theme &theme() const;
 private:
     bool m_enableLineNumbers{true}; 
     int m_autoRefreshInterval{1000}; // millisecond
@@ -63,6 +65,7 @@ private:
     QString m_markdownEngine;
     QString m_previewMode;
     QByteArray m_customPreviewThemeStyle;
+    Theme m_theme;
 };
 
 inline Settings *g_settings = nullptr;

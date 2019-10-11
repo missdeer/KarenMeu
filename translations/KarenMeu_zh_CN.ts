@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="103"/>
+        <location filename="../mainwindow.cpp" line="108"/>
         <source>KarenMeu</source>
         <translation></translation>
     </message>
@@ -635,12 +635,12 @@
         <translation>清除最近打开的文件列表</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="104"/>
+        <location filename="../mainwindow.cpp" line="109"/>
         <source>KarenMeu is a Markdown based Wechat public account article editor for programmers.</source>
         <translation>KarenMeu是一款专为程序员设计的基于Markdown语法的微信公众号文章编辑器。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="136"/>
+        <location filename="../mainwindow.cpp" line="141"/>
         <source>%1. %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -738,22 +738,22 @@
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="340"/>
+        <location filename="../markdownview.cpp" line="350"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="341"/>
+        <location filename="../markdownview.cpp" line="351"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="343"/>
+        <location filename="../markdownview.cpp" line="353"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="344"/>
+        <location filename="../markdownview.cpp" line="354"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>
@@ -1054,29 +1054,109 @@
     </message>
 </context>
 <context>
-    <name>QSettings</name>
+    <name>QObject</name>
     <message>
-        <location filename="../settings.cpp" line="54"/>
-        <source>Default</source>
-        <translation>默认</translation>
+        <location filename="../ThemeFactory.cpp" line="203"/>
+        <source>The specified theme does not exist in the file system: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../ThemeFactory.cpp" line="320"/>
+        <source>The specified theme is not available.  Try restarting the application.  If problem persists, please file a bug report.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="390"/>
+        <source>Could not delete %1 from theme.  Please try setting the theme file permissions to be writeable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="413"/>
+        <source>&apos;%1&apos; already exists.  Please choose another name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="423"/>
+        <source>&apos;%1&apos; theme already exists.  Please choose another name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="458"/>
+        <source>Failed to rename theme.  Please check file permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="503"/>
+        <source>Theme is read-only.  Please try renaming the theme, or setting the theme file to be writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="543"/>
+        <source>Failed to remove old theme image.  Please check file permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="575"/>
+        <source>The old theme image file could not be removed from the theme directory.  Please check file permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="587"/>
+        <source>Theme image file could not be copied to the theme directory.  Please check file permissions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="606"/>
+        <source>Theme could not be saved to disk.  Please check file permissions or try renaming the theme.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="631"/>
+        <source>Untitled 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="644"/>
+        <source>Untitled %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="702"/>
+        <location filename="../ThemeFactory.cpp" line="724"/>
+        <location filename="../ThemeFactory.cpp" line="752"/>
+        <source>Invalid or missing value for %1 provided.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ThemeFactory.cpp" line="732"/>
+        <source>Value for %1 is out of range.  Valid values are between %2 and %3, inclusive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QSettings</name>
+    <message>
         <location filename="../settings.cpp" line="55"/>
+        <source>Classic Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.cpp" line="58"/>
         <source>默认</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="56"/>
+        <location filename="../settings.cpp" line="59"/>
         <source>xcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="57"/>
+        <location filename="../settings.cpp" line="60"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="59"/>
+        <location filename="../settings.cpp" line="62"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>
