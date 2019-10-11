@@ -33,6 +33,15 @@ MarkdownEditor2::MarkdownEditor2(QWidget *parent)
 
 void MarkdownEditor2::updateCodeEditorFont()
 {
+    QStringList fonts;
+#if defined(Q_OS_WIN)
+    fonts << "Microsoft YaHei UI" << "Microsoft YaHei";
+#elif defined(Q_OS_MAC)
+    fonts << "PingFang SC" << "PingFang HK" << "PingFang TC";
+#else
+    fonts << "WenQuanYi Micro Hei";
+#endif
+    QFont::insertSubstitutions(g_settings->codeEditorFontFamily(), fonts);
     setFont(g_settings->codeEditorFontFamily(), g_settings->codeEditorFontPointSize());    
 }
 
