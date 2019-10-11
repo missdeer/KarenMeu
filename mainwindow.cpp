@@ -12,6 +12,7 @@
 #include <QFileInfo>
 #include <QGraphicsColorizeEffect>
 #include <QSplitter>
+#include <QPainter>
 #include "markdownview.h"
 #include "markdowneditor2.h"
 #include "preferencedialog.h"
@@ -191,7 +192,13 @@ void MainWindow::on_actionClearRecentFilesList_triggered()
 void MainWindow::applyTheme()
 {
     Q_ASSERT(g_settings);
-    const auto& theme = g_settings->theme();
+    auto& theme = g_settings->theme();
+    
+    if (EditorAspectStretch == theme.getEditorAspect())
+    {
+        theme.setBackgroundColor(theme.getEditorBackgroundColor());
+    }
+
     QString styleSheet;
     QTextStream stream(&styleSheet);
 
@@ -419,7 +426,22 @@ void MainWindow::applyTheme()
 
     m_view->editor()->setStyleSheet(styleSheet);
     styleSheet = "";
+    
+    // Wipe out old background image drawing material.
+    originalBackgroundImage = QPixmap();
+    adjustedBackgroundImage = QPixmap();
 
+    if
+    (
+        !theme.getBackgroundImageUrl().isNull() &&
+        !theme.getBackgroundImageUrl().isEmpty()
+    )
+    {
+        // Predraw background image for paintEvent()
+        originalBackgroundImage.load(theme.getBackgroundImageUrl());
+        predrawBackgroundImage();
+    }
+    
     stream
         << "#editorLayoutArea { background-color: transparent; border: 0; margin: 0 }"
         << "QMenuBar { background: transparent } "
@@ -448,4 +470,168 @@ void MainWindow::applyTheme()
         << "QSplitter::handle:horizontal { width: 0px; } ";
 
     m_view->splitter()->setStyleSheet(styleSheet);
+}
+
+void MainWindow::predrawBackgroundImage()
+{
+    qreal dpr = 1.0;
+
+#if QT_VERSION >= 0x050600
+    dpr = this->devicePixelRatioF();
+#endif
+
+    QPixmap image(originalBackgroundImage);
+
+#if QT_VERSION >= 0x050600
+    image.setDevicePixelRatio(dpr);
+#endif
+
+    adjustedBackgroundImage =
+        QPixmap
+        (
+            this->size() * dpr
+        );
+
+#if QT_VERSION >= 0x050600
+    adjustedBackgroundImage.setDevicePixelRatio(dpr);
+#endif
+    
+    Q_ASSERT(g_settings);
+    auto& theme = g_settings->theme();
+    adjustedBackgroundImage.fill(theme.getBackgroundColor().rgb());
+
+    QPainter painter(&adjustedBackgroundImage);
+    painter.setPen(Qt::NoPen);
+
+    if (PictureAspectTile == theme.getBackgroundImageAspect())
+    {
+        qreal inverseRatio = 1.0 / dpr;
+
+        painter.scale(inverseRatio, inverseRatio);
+        painter.fillRect
+        (
+            adjustedBackgroundImage.rect(),
+            image
+        );
+    }
+    else
+    {
+        Qt::AspectRatioMode aspectRatioMode = Qt::IgnoreAspectRatio;
+        bool scaleImage = true;
+
+        switch (theme.getBackgroundImageAspect())
+        {
+            case PictureAspectZoom:
+                aspectRatioMode = Qt::KeepAspectRatioByExpanding;
+                break;
+            case PictureAspectScale:
+                aspectRatioMode = Qt::KeepAspectRatio;
+                break;
+            case PictureAspectStretch:
+                aspectRatioMode = Qt::IgnoreAspectRatio;
+                break;
+            default:
+                // Centered
+                scaleImage = false;
+                break;
+        }
+
+        if (scaleImage)
+        {
+            image = image.scaled
+                (
+                    adjustedBackgroundImage.size(),
+                    aspectRatioMode,
+                    Qt::SmoothTransformation
+                );
+
+#if QT_VERSION >= 0x050600
+            image.setDevicePixelRatio(dpr);
+#endif
+        }
+
+        int xpos = (adjustedBackgroundImage.width() - image.width()) / (2.0 * dpr);
+        int ypos = (adjustedBackgroundImage.height() - image.height()) / (2.0 * dpr);
+
+        painter.drawPixmap
+        (
+            xpos,
+            ypos,
+            image
+        );
+    }
+
+    painter.end();
+}
+
+void MainWindow::resizeEvent(QResizeEvent* event)
+{
+    adjustEditorWidth(event->size().width());
+
+    if (!originalBackgroundImage.isNull())
+    {
+        predrawBackgroundImage();
+    }
+}
+
+void MainWindow::moveEvent(QMoveEvent* event)
+{
+    Q_UNUSED(event)
+
+    // Need to redraw the background image in case the window has moved
+    // onto a different screen where the device pixel ratio is different.
+    //
+    if (!originalBackgroundImage.isNull())
+    {
+        predrawBackgroundImage();
+    }
+}
+
+void MainWindow::paintEvent(QPaintEvent* event)
+{
+    Q_ASSERT(g_settings);
+    auto& theme = g_settings->theme();
+    
+    QPainter painter(this);
+    qreal dpr = 1.0;
+
+#if QT_VERSION >= 0x050600
+    dpr = devicePixelRatioF();
+#endif
+
+    QRect rect(event->rect().topLeft() * dpr, event->rect().size() * dpr);
+
+    painter.fillRect(rect, theme.getBackgroundColor().rgb());
+
+    if (!adjustedBackgroundImage.isNull())
+    {
+        painter.drawPixmap(0, 0, adjustedBackgroundImage);
+    }
+
+    if (EditorAspectStretch == theme.getEditorAspect())
+    {
+        painter.fillRect(this->rect(), theme.getEditorBackgroundColor());
+    }
+
+    painter.end();
+
+    QMainWindow::paintEvent(event);
+}
+
+void MainWindow::adjustEditorWidth(int width)
+{
+    int editorWidth = width;
+    
+    editorWidth /= 2;
+    
+    QList<int> sizes;
+    sizes.append(editorWidth);
+    sizes.append(editorWidth);
+    m_view->splitter()->setSizes(sizes);
+    
+    // Resize the editor's margins based on the size of the window.
+    m_view->editor()->setupPaperMargins(editorWidth);
+    
+    // Scroll to cursor position.
+    m_view->editor()->centerCursor();
 }

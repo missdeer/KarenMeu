@@ -173,10 +173,7 @@ void Settings::setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeSt
     m_customPreviewThemeStyle = customPreviewThemeStyle;
 }
 
-const Theme &Settings::theme() const
+Theme &Settings::theme()
 {
     return m_theme;
 }
-
-
-

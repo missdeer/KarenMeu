@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPixmap>
 
 namespace Ui {
 class MainWindow;
@@ -35,7 +36,10 @@ private slots:
     
     void setCurrentFile(const QString &fileName);
 protected:
+    void resizeEvent(QResizeEvent* event) override;
+    void moveEvent(QMoveEvent* event) override;
     void closeEvent(QCloseEvent *event) override;
+    void paintEvent(QPaintEvent* event) override;
 private:
     Ui::MainWindow *ui;
     MarkdownView *m_view;
@@ -45,11 +49,16 @@ private:
     enum { MaxRecentFiles = 10 };
     QAction *recentFileActs[MaxRecentFiles];
     
+    QPixmap originalBackgroundImage;
+    QPixmap adjustedBackgroundImage;
+    
     void updateRecentFileActions();    
     QString strippedName(const QString &fullFileName);
     
     void openRecentFile();
+    void adjustEditorWidth(int width);
     void applyTheme();
+    void predrawBackgroundImage();
 };
 
 #endif // MAINWINDOW_H

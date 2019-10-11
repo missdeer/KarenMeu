@@ -51,7 +51,7 @@ public:
     const QByteArray & customPreviewThemeStyle() const;
     void setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeStyle);
     
-    const Theme &theme() const;
+    Theme &theme() ;
 private:
     bool m_enableLineNumbers{true}; 
     int m_autoRefreshInterval{1000}; // millisecond

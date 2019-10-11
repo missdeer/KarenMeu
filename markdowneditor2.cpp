@@ -11,11 +11,11 @@ MarkdownEditor2::MarkdownEditor2(QWidget *parent)
     :MarkdownEditor(new TextDocument(parent), parent)
 {
     setUseUnderlineForEmphasis(false);
-    setHighlightLineBreaks(true);
+    setHighlightLineBreaks(false);
     setEnableLargeHeadingSizes(true);
     setAutoMatchEnabled(false);
     setBulletPointCyclingEnabled(true);
-    setEditorWidth(EditorWidthFull);
+    setEditorWidth(EditorWidthMedium);
     setEditorCorners(InterfaceStyleRounded);
     setBlockquoteStyle(BlockquoteStyleFancy);
     setSpellCheckEnabled(false);

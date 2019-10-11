@@ -26,7 +26,11 @@ MarkdownView::MarkdownView(QWidget *parent)
     , m_preview(new QWebEngineView(this))
     , m_convertTimer(new QTimer)
 {
-    m_splitter->addWidget(m_editor);
+    QWidget* editorPane = new QWidget(this);
+    editorPane->setObjectName("editorLayoutArea");
+    editorPane->setLayout(m_editor->getPreferredLayout());
+    
+    m_splitter->addWidget(editorPane);
     m_splitter->addWidget(m_preview);
     m_splitter->setStyleSheet("QSplitter:handle { border: 0 }"
                               "QSplitter { border: 0; margin: 0; padding: 0 }");
@@ -73,7 +77,6 @@ MarkdownView::MarkdownView(QWidget *parent)
     connect(m_preview, &QWebEngineView::loadFinished, this, &MarkdownView::previewLoadFinished);
     connect(page, &QWebEnginePage::pdfPrintingFinished, this, &MarkdownView::pdfPrintingFinished);
     
-
     updateMarkdownEngine();
 
     connect(m_convertTimer, &QTimer::timeout, this, &MarkdownView::convertTimeout);
