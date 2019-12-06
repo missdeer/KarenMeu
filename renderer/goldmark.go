@@ -8,7 +8,7 @@ import (
 	"github.com/alecthomas/chroma/formatters/html"
 	"github.com/yuin/goldmark"
 	highlighting "github.com/yuin/goldmark-highlighting"
-	"github.com/yuin/goldmark-meta"
+	meta "github.com/yuin/goldmark-meta"
 	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/parser"
 	"github.com/yuin/goldmark/renderer"
@@ -17,11 +17,7 @@ import (
 
 //export Goldmark
 func Goldmark(md string, style string, lineNumbers bool) *C.char {
-	options := []html.Option{}
-	if lineNumbers {
-		options = []html.Option{html.WithLineNumbers()}
-	}
-
+	options := []html.Option{html.WithLineNumbers(lineNumbers)}
 	markdown := goldmark.New(
 		goldmark.WithExtensions(
 			highlighting.NewHighlighting(
