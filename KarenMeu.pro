@@ -117,9 +117,9 @@ QMAKE_EXTRA_TARGETS += lupdate lrelease translate qti18n
 POST_TARGETDEPS += translate qti18n
 
 win32-*msvc* {
-    QMAKE_LFLAGS += "/LTCG"
+    #QMAKE_LFLAGS += "/LTCG"
     QMAKE_CXXFLAGS_RELEASE += /Zi
-    QMAKE_LFLAGS_RELEASE += /DEBUG
+    #QMAKE_LFLAGS_RELEASE += /DEBUG
 
     contains(QMAKE_HOST.arch, x86_64): {
         LIBS += -L$$PWD/renderer/x64
@@ -130,13 +130,11 @@ win32-*msvc* {
     }
 
     CONFIG(release, debug|release) : {
-        QMAKE_CXXFLAGS += /Zi
-        QMAKE_LFLAGS += /INCREMENTAL:NO /Debug
         WINDEPLOYQT = $$[QT_INSTALL_BINS]/windeployqt.exe
         DESTDIR = $$OUT_PWD/release
     } else : {
         DESTDIR = $$OUT_PWD/debug
-	}
+    }
     translate.commands = '$(COPY_DIR) $$shell_path($$PWD/translations) $$shell_path($$DESTDIR/translations)'
 
     qti18n.depends = translate
