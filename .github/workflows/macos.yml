@@ -43,7 +43,7 @@ jobs:
           cd ..
           mkdir build
           cd build
-          qmake -r CONFIG+=release CONFIG+=qtquickcompiler ../${{ env.targetName }}'.pro'
+          qmake -r CONFIG+=release CONFIG+=qtquickcompiler ../${{ env.targetName }}.pro
           make -j 2
           cd ..
       # tag 打包
