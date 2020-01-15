@@ -38,6 +38,9 @@ jobs:
           cd 3rdparty/scintilla/qt/ScintillaEdit
           python WidgetGen.py
           cd ../../../..
+          cd renderer
+          make
+          cd ..
           mkdir build
           cd build
           qmake -r CONFIG+=release CONFIG+=qtquickcompiler ../${{ env.targetName }}'.pro'
