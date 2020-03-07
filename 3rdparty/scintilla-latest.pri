@@ -85,6 +85,7 @@ SOURCES += \
     $$PWD/scintilla/lexers/LexCsound.cxx        \ 
     $$PWD/scintilla/lexers/LexCSS.cxx           \ 
     $$PWD/scintilla/lexers/LexD.cxx             \ 
+    $$PWD/scintilla/lexers/LexDataflex.cxx      \ 
     $$PWD/scintilla/lexers/LexDiff.cxx          \ 
     $$PWD/scintilla/lexers/LexDMAP.cxx          \ 
     $$PWD/scintilla/lexers/LexDMIS.cxx          \ 
@@ -101,6 +102,7 @@ SOURCES += \
     $$PWD/scintilla/lexers/LexGui4Cli.cxx       \ 
     $$PWD/scintilla/lexers/LexHaskell.cxx       \ 
     $$PWD/scintilla/lexers/LexHex.cxx           \ 
+    $$PWD/scintilla/lexers/LexHollywood.cxx     \ 
     $$PWD/scintilla/lexers/LexHTML.cxx          \ 
     $$PWD/scintilla/lexers/LexIndent.cxx        \ 
     $$PWD/scintilla/lexers/LexInno.cxx          \ 
@@ -141,6 +143,7 @@ SOURCES += \
     $$PWD/scintilla/lexers/LexPS.cxx            \ 
     $$PWD/scintilla/lexers/LexPython.cxx        \ 
     $$PWD/scintilla/lexers/LexR.cxx             \ 
+    $$PWD/scintilla/lexers/LexRaku.cxx          \ 
     $$PWD/scintilla/lexers/LexRebol.cxx         \ 
     $$PWD/scintilla/lexers/LexRegistry.cxx      \ 
     $$PWD/scintilla/lexers/LexRuby.cxx          \ 
