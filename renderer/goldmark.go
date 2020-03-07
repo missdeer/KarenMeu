@@ -10,7 +10,6 @@ import (
 	highlighting "github.com/yuin/goldmark-highlighting"
 	meta "github.com/yuin/goldmark-meta"
 	"github.com/yuin/goldmark/extension"
-	"github.com/yuin/goldmark/parser"
 	"github.com/yuin/goldmark/renderer"
 	"github.com/yuin/goldmark/util"
 )
@@ -34,7 +33,7 @@ func Goldmark(md string, style string, lineNumbers bool) *C.char {
 	)
 
 	var buf bytes.Buffer
-	err := markdown.Convert([]byte(md), &buf, parser.WithWorkers(8))
+	err := markdown.Convert([]byte(md), &buf)
 	if err != nil {
 		log.Println(err)
 		r := C.CString(md)
