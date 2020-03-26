@@ -1,5 +1,5 @@
-github.com/88250/lute v1.2.2 h1:5cIrL+e214c0btpbki10lhD8xD9MSrCk7kqQMofvgJM=
-github.com/88250/lute v1.2.2/go.mod h1:sAo/kdyurrs5Ol96TgJLjt+seV64QZLOM1dzs85eLoo=
+github.com/88250/lute v1.2.4 h1:Fe3ztZqigKSmyllUvPpCZc0XWgb9e5FJXbxZa5qgvls=
+github.com/88250/lute v1.2.4/go.mod h1:sAo/kdyurrs5Ol96TgJLjt+seV64QZLOM1dzs85eLoo=
 github.com/PuerkitoBio/goquery v1.5.0 h1:uGvmFXOA73IKluu/F84Xd1tt/z07GYm8X49XKHP7EJk=
 github.com/PuerkitoBio/goquery v1.5.0/go.mod h1:qD2PgZ9lccMbQlc7eEOjaeRlFQON7xY8kdmcsrnKqMg=
 github.com/alecthomas/assert v0.0.0-20170929043011-405dbfeb8e38 h1:smF2tmSOzy2Mm+0dGI2AIUHY+w0BUc+4tn40djz7+6U=
@@ -68,8 +68,8 @@ github.com/vanng822/go-premailer v0.0.0-20190504065308-ac25997d78c7 h1:BJcKf0TN6
 github.com/vanng822/go-premailer v0.0.0-20190504065308-ac25997d78c7/go.mod h1:JTFJA/t820uFDoyPpErFQ3rb3amdZoPtxcKervG0OE4=
 github.com/yuin/goldmark v1.1.0 h1:Z5ZerZZLUdCBKw7nhz0z14LMkpPvHmo7j2MdbzD39LI=
 github.com/yuin/goldmark v1.1.0/go.mod h1:hDgn8A2EV4OniExoeJs1fSrmEc/T7w8+Teyq8YkThxQ=
-github.com/yuin/goldmark v1.1.24 h1:K4FemPDr4x/ZcqldoXWnexTLfdMIy2eEfXxsLnotTRI=
-github.com/yuin/goldmark v1.1.24/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
+github.com/yuin/goldmark v1.1.25 h1:isv+Q6HQAmmL2Ofcmg8QauBmDPlUUnSoNhEcC940Rds=
+github.com/yuin/goldmark v1.1.25/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark-highlighting v0.0.0-20190830074347-93c30623ac23 h1:byGBknnKoxM5UWREM+u1fXwJE3lCuBsvRuDNw7HF0FM=
 github.com/yuin/goldmark-highlighting v0.0.0-20190830074347-93c30623ac23/go.mod h1:3FYTzt9w4R8wIZ1KUvvoCyOMYNcYzqLr6amkECg35Hc=
 github.com/yuin/goldmark-meta v0.0.0-20190830074258-9b1715badd41 h1:gNmYlpjUHogJE3x/onhO+mzJ8wqLFbZyykO7zVdGpzM=
