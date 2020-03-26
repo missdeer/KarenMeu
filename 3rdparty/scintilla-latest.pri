@@ -1,9 +1,3 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2011-05-05T12:41:23
-#
-#-------------------------------------------------
-
 QT       += core gui widgets
 
 CONFIG += c++17
@@ -177,12 +171,67 @@ HEADERS  += \
     $$PWD/scintilla/qt/ScintillaEdit/ScintillaDocument.h \
     $$PWD/scintilla/qt/ScintillaEditBase/ScintillaEditBase.h \
     $$PWD/scintilla/qt/ScintillaEditBase/ScintillaQt.h \
-    $$PWD/scintilla/src/*.h \
-    $$PWD/scintilla/lexlib/*.h \
-    $$PWD/scintilla/include/*.h
-
-
-OTHER_FILES +=
+    $$PWD/scintilla/src/AutoComplete.h \
+    $$PWD/scintilla/src/CallTip.h \
+    $$PWD/scintilla/src/CaseConvert.h \
+    $$PWD/scintilla/src/CaseFolder.h \
+    $$PWD/scintilla/src/Catalogue.h \
+    $$PWD/scintilla/src/CellBuffer.h \
+    $$PWD/scintilla/src/CharClassify.h \
+    $$PWD/scintilla/src/ContractionState.h \
+    $$PWD/scintilla/src/DBCS.h \
+    $$PWD/scintilla/src/Decoration.h \
+    $$PWD/scintilla/src/Document.h \
+    $$PWD/scintilla/src/EditModel.h \
+    $$PWD/scintilla/src/Editor.h \
+    $$PWD/scintilla/src/EditView.h \
+    $$PWD/scintilla/src/ElapsedPeriod.h \
+    $$PWD/scintilla/src/ExternalLexer.h \
+    $$PWD/scintilla/src/FontQuality.h \
+    $$PWD/scintilla/src/Indicator.h \
+    $$PWD/scintilla/src/IntegerRectangle.h \
+    $$PWD/scintilla/src/KeyMap.h \
+    $$PWD/scintilla/src/LineMarker.h \
+    $$PWD/scintilla/src/MarginView.h \
+    $$PWD/scintilla/src/Partitioning.h \
+    $$PWD/scintilla/src/PerLine.h \
+    $$PWD/scintilla/src/Position.h \
+    $$PWD/scintilla/src/PositionCache.h \
+    $$PWD/scintilla/src/RESearch.h \
+    $$PWD/scintilla/src/RunStyles.h \
+    $$PWD/scintilla/src/ScintillaBase.h \
+    $$PWD/scintilla/src/Selection.h \
+    $$PWD/scintilla/src/SparseVector.h \
+    $$PWD/scintilla/src/SplitVector.h \
+    $$PWD/scintilla/src/Style.h \
+    $$PWD/scintilla/src/UniConversion.h \
+    $$PWD/scintilla/src/UniqueString.h \
+    $$PWD/scintilla/src/ViewStyle.h \
+    $$PWD/scintilla/src/XPM.h \
+    $$PWD/scintilla/lexlib/Accessor.h          \
+    $$PWD/scintilla/lexlib/CatalogueModules.h  \
+    $$PWD/scintilla/lexlib/CharacterCategory.h \
+    $$PWD/scintilla/lexlib/CharacterSet.h      \
+    $$PWD/scintilla/lexlib/DefaultLexer.h      \
+    $$PWD/scintilla/lexlib/LexAccessor.h       \
+    $$PWD/scintilla/lexlib/LexerBase.h         \
+    $$PWD/scintilla/lexlib/LexerModule.h       \
+    $$PWD/scintilla/lexlib/LexerNoExceptions.h \
+    $$PWD/scintilla/lexlib/LexerSimple.h       \
+    $$PWD/scintilla/lexlib/OptionSet.h         \
+    $$PWD/scintilla/lexlib/PropSetSimple.h     \
+    $$PWD/scintilla/lexlib/SparseState.h       \
+    $$PWD/scintilla/lexlib/StringCopy.h        \
+    $$PWD/scintilla/lexlib/StyleContext.h      \
+    $$PWD/scintilla/lexlib/SubStyles.h         \
+    $$PWD/scintilla/lexlib/WordList.h          \
+    $$PWD/scintilla/include/ILexer.h       \
+    $$PWD/scintilla/include/ILoader.h      \
+    $$PWD/scintilla/include/Platform.h     \
+    $$PWD/scintilla/include/Sci_Position.h \
+    $$PWD/scintilla/include/SciLexer.h     \
+    $$PWD/scintilla/include/Scintilla.h    \
+    $$PWD/scintilla/include/ScintillaWidget.h
 
 INCLUDEPATH += $$PWD/scintilla/qt/ScintillaEdit \
     $$PWD/scintilla/qt/ScintillaEditBase \
