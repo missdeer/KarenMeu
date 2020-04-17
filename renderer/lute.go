@@ -2,7 +2,6 @@ package main
 
 import (
 	"C"
-	"log"
 
 	"github.com/88250/lute"
 )
@@ -14,9 +13,8 @@ func Lute(md string, style string, lineNumbers bool) *C.char {
 	luteEngine.CodeSyntaxHighlightInlineStyle = true
 	luteEngine.CodeSyntaxHighlightLineNum = lineNumbers
 	luteEngine.CodeSyntaxHighlightStyleName = style
-	html, err := luteEngine.MarkdownStr("KarenMeu", md)
-	if nil != err {
-		log.Println(err)
+	html := luteEngine.MarkdownStr("KarenMeu", md)
+	if html == "" {
 		r := C.CString(md)
 		return r
 	}
