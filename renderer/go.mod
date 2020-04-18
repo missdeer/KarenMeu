@@ -3,7 +3,7 @@ module goldmark
 go 1.12
 
 require (
-	github.com/88250/lute v1.2.10
+	github.com/88250/lute v1.3.0
 	github.com/PuerkitoBio/goquery v1.5.1 // indirect
 	github.com/alecthomas/chroma v0.7.2
 	github.com/aymerick/douceur v0.2.0
