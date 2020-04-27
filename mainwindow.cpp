@@ -486,11 +486,7 @@ void MainWindow::predrawBackgroundImage()
     image.setDevicePixelRatio(dpr);
 #endif
 
-    adjustedBackgroundImage =
-        QPixmap
-        (
-            this->size() * dpr
-        );
+    adjustedBackgroundImage = QPixmap(this->size() * dpr);
 
 #if QT_VERSION >= 0x050600
     adjustedBackgroundImage.setDevicePixelRatio(dpr);
