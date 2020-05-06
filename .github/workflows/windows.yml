@@ -73,7 +73,6 @@ jobs:
           cd ..
       # tag 打包
       - name: package
-        if: startsWith(github.event.ref, 'refs/tags/')
         env:
           VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
           archiveName: ${{ env.targetName }}-${{ matrix.qt_arch }}
@@ -94,6 +93,12 @@ jobs:
           echo "::set-env name=packageName::$name"
           # 打印环境变量packageName
           Write-Host 'packageName:'${env:packageName}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: ${{ env.targetName }}-${{ matrix.qt_arch }}
+          path: ${{ env.targetName }}-${{ matrix.qt_arch }}
       # tag 查询github-Release
       - name: queryReleaseWin
         id: queryReleaseWin
