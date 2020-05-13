@@ -46,10 +46,16 @@ jobs:
           cd ..
       # tag 打包
       - name: package
-        if: startsWith(github.event.ref, 'refs/tags/')
         run: |
-          # 拷贝依赖
-          macdeployqt "build/${targetName}.app" -qmldir=. -verbose=1 -dmg
+          cd build
+          macdeployqt "${{ env.targetName }}.app" -qmldir=. -verbose=1 -dmg
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: ${{ env.targetName }}-${{ matrix.qt_arch }}
+          path: "build/${{ env.targetName }}.dmg"
+          
       # tag 查询github-Release
       - name: queryRelease
         id: queryReleaseMacos
