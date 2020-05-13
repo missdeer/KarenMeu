@@ -3,7 +3,6 @@
 /* package goldmark */
 
 
-#line 1 "cgo-builtin-export-prolog"
 
 #include <stddef.h> /* for ptrdiff_t below */
 
@@ -19,21 +18,14 @@ typedef struct { const char *p; ptrdiff_t n; } _GoString_;
 /* Start of preamble from import "C" comments.  */
 
 
-
-
-
-#line 3 "main.go"
-
 #include <stdlib.h>
 
-#line 1 "cgo-generated-wrapper"
 
 
 /* End of preamble from import "C" comments.  */
 
 
 /* Start of boilerplate cgo prologue.  */
-#line 1 "cgo-gcc-export-header-prolog"
 
 #ifndef GO_CGO_PROLOGUE_H
 #define GO_CGO_PROLOGUE_H
@@ -48,11 +40,8 @@ typedef long long GoInt64;
 typedef unsigned long long GoUint64;
 typedef GoInt32 GoInt;
 typedef GoUint32 GoUint;
-typedef __SIZE_TYPE__ GoUintptr;
 typedef float GoFloat32;
 typedef double GoFloat64;
-typedef float _Complex GoComplex64;
-typedef double _Complex GoComplex128;
 
 /*
   static assertion to make sure the file is being used on architecture
