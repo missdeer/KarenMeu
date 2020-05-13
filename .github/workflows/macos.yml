@@ -24,6 +24,7 @@ jobs:
         uses: jurplel/install-qt-action@v2
         with:
           version: ${{ matrix.qt_ver }}
+          modules: qtwebengine
       
       - uses: actions/checkout@v2
         with:

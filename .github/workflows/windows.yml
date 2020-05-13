@@ -35,12 +35,11 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
-          # Version of Qt to install
           version: ${{ matrix.qt_ver }}
-          # Target platform for build
           target: ${{ matrix.qt_target }}
-          # Architecture for Windows/Android
           arch: ${{ matrix.qt_arch }}
+          modules: qtwebengine
+          
       # 拉取代码
       - uses: actions/checkout@v2
         with:
