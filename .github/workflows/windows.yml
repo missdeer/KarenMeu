@@ -1,29 +1,24 @@
 name: Windows
 on: 
-  # push代码时触发workflow
   push:
-    # 忽略README.md
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
-  # pull_request时触发workflow
+      - '.github/workflows/macos.yml'
   pull_request:
-    # 忽略README.md
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - '.github/workflows/macos.yml'
 jobs:
   build:
     name: Build
-    # 运行平台， windows-latest目前是windows server 2019
     runs-on: windows-latest
     strategy:
-      # 矩阵配置
       matrix:
         qt_ver: [5.14.2]
         qt_target: [desktop]
         qt_arch: [win64_msvc2017_64, win32_msvc2017]
-        # 额外设置msvc_arch
         include:
           - qt_arch: win64_msvc2017_64
             msvc_arch: x64
@@ -60,8 +55,8 @@ jobs:
           python WidgetGen.py
           cd ..\..\..\..
           cd renderer
-          call build-${{ matrix.qt_arch }}.bat
-          git checkout ${{ matrix.qt_arch }}
+          call build-${{ matrix.msvc_arch }}.bat
+          git checkout ${{ matrix.msvc_arch }}
           cd ..
           mkdir build
           cd build
@@ -77,7 +72,7 @@ jobs:
         run: |
           New-Item -ItemType Directory ${env:archiveName}
           Copy-Item build\Release\${env:targetName}'.exe' ${env:archiveName}\
-          Copy-Item renderer\${{ matrix.qt_arch }}\renderer.dll ${env:archiveName}\
+          Copy-Item renderer\${{ matrix.msvc_arch }}\renderer.dll ${env:archiveName}\
           windeployqt --qmldir . ${env:archiveName}\${env:targetName}'.exe'
           Compress-Archive -Path ${env:archiveName} ${env:archiveName}'.zip'
           $name = ${env:archiveName}

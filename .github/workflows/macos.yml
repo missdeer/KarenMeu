@@ -4,10 +4,12 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - '.github/workflows/windows.yml'
   pull_request:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
+      - '.github/workflows/windows.yml'
 jobs:
   build:
     name: Build
