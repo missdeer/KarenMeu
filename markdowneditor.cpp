@@ -35,6 +35,7 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QFileInfo>
+#include <QPainterPath>
 #include <QDir>
 
 #include "ColorHelper.h"
