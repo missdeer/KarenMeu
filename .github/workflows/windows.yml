@@ -31,12 +31,13 @@ jobs:
     # 步骤
     steps:
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v2.6.3
         with:
           version: ${{ matrix.qt_ver }}
           target: ${{ matrix.qt_target }}
           arch: ${{ matrix.qt_arch }}
           modules: qtwebengine
+          aqtversion: '>=0.9.0'
           
       # 拉取代码
       - uses: actions/checkout@v2
