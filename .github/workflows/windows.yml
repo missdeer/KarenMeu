@@ -31,7 +31,7 @@ jobs:
     # 步骤
     steps:
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2.6.3
+        uses: jurplel/install-qt-action@v2.7.1
         with:
           version: ${{ matrix.qt_ver }}
           target: ${{ matrix.qt_target }}
