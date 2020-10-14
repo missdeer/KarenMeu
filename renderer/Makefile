@@ -1,4 +1,4 @@
-# Makefile for building CoreDNS
+# Makefile for building renderer module
 GITCOMMIT:=$(shell git describe --dirty --always)
 BINARY:=librenderer.a
 SYSTEM:=
