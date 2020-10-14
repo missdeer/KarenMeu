@@ -648,17 +648,17 @@
 <context>
     <name>MarkdownEditor</name>
     <message>
-        <location filename="../markdowneditor.cpp" line="129"/>
+        <location filename="../markdowneditor.cpp" line="130"/>
         <source>Add word to dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../markdowneditor.cpp" line="130"/>
+        <location filename="../markdowneditor.cpp" line="131"/>
         <source>Check spelling...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../markdowneditor.cpp" line="823"/>
+        <location filename="../markdowneditor.cpp" line="824"/>
         <source>No spelling suggestions found</source>
         <translation type="unfinished"></translation>
     </message>
