@@ -16,7 +16,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        qt_ver: [5.15.0]
+        qt_ver: [5.15.1]
         qt_target: [desktop]
         qt_arch: [win64_msvc2019_64, win32_msvc2019]
         include:
@@ -73,7 +73,7 @@ jobs:
         run: |
           New-Item -ItemType Directory ${env:archiveName}
           Copy-Item build\Release\${env:targetName}'.exe' ${env:archiveName}\
-          Copy-Item renderer\${{ matrix.msvc_arch }}\renderer.dll ${env:archiveName}\
+          Copy-Item -Path renderer\${{ matrix.msvc_arch }}\*.dll -Destination ${env:archiveName}\
           windeployqt --qmldir . ${env:archiveName}\${env:targetName}'.exe'
           Compress-Archive -Path ${env:archiveName} ${env:archiveName}'.zip'
           $name = ${env:archiveName}
