@@ -37,17 +37,34 @@
         <file>rc/images/paragraph.png</file>
         <file>rc/images/table.png</file>
         <file>rc/images/todolist.png</file>
-        <file>rc/theme/ink.css</file>
-        <file>rc/theme/cyan.css</file>
-        <file>rc/theme/default.css</file>
-        <file>rc/theme/green.css</file>
-        <file>rc/theme/orangeHeart.css</file>
-        <file>rc/theme/purple.css</file>
-        <file>rc/theme/red.css</file>
-        <file>rc/theme/gopher.css</file>
+        <file>rc/theme/Gopher.css</file>
         <file>rc/sample.md</file>
         <file>rc/sci/themes/Default.xml</file>
         <file>rc/sci/langs.model.xml</file>
         <file>rc/sci/stylers.model.xml</file>
+        <file>rc/theme/Obsidian.css</file>
+        <file>rc/theme/Pornhub黄.css</file>
+        <file>rc/theme/WeChat-Format.css</file>
+        <file>rc/theme/全栈蓝.css</file>
+        <file>rc/theme/兰青.css</file>
+        <file>rc/theme/凝夜紫.css</file>
+        <file>rc/theme/前端之巅同款.css</file>
+        <file>rc/theme/姹紫.css</file>
+        <file>rc/theme/嫩青.css</file>
+        <file>rc/theme/山吹.css</file>
+        <file>rc/theme/极客黑.css</file>
+        <file>rc/theme/极简黑.css</file>
+        <file>rc/theme/橙心.css</file>
+        <file>rc/theme/橙蓝风.css</file>
+        <file>rc/theme/灵动蓝.css</file>
+        <file>rc/theme/科技蓝.css</file>
+        <file>rc/theme/简.css</file>
+        <file>rc/theme/红绯.css</file>
+        <file>rc/theme/绿意.css</file>
+        <file>rc/theme/草原绿.css</file>
+        <file>rc/theme/萌粉.css</file>
+        <file>rc/theme/萌绿.css</file>
+        <file>rc/theme/蓝莹.css</file>
+        <file>rc/theme/蔷薇紫.css</file>
     </qresource>
 </RCC>

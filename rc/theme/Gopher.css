@@ -2,11 +2,11 @@
  * 全文字体 font-family: ptima-Regular;
  * 英文换行 word-break: break-all;
  */
- .layout {
+#nice  .layout {
     font-size: 15px;
     letter-spacing: 0.05em;
 }
-body {
+#nice body {
     background-color: transparent !important;
 }
 .wx-box {
@@ -17,21 +17,21 @@ body {
     height: 100%;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
 }
-::-webkit-scrollbar {
+#nice ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
 }
-::-webkit-scrollbar-track {
+#nice ::-webkit-scrollbar-track {
     border-radius: 3px;
     background: rgba(0, 0, 0, 0.06);
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08);
 }
-::-webkit-scrollbar-thumb {
+#nice ::-webkit-scrollbar-thumb {
     border-radius: 3px;
     background: rgba(0, 0, 0, 0.12);
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
-pre, pre span{
+#nice pre, pre span{
     overflow-x: scroll;
 }
 /* 段落，下方未标注标签参数均同此处 * 上边距 margin-top: 5px;
@@ -44,29 +44,29 @@ pre, pre span{
 * 字体大小 font-size: 16px;
 * 首行缩进 text-indent: 2em;
 */
-p {
+#nice p {
     margin: 1em 4px;
 }
 /* 一级标题 */
-h1 {
+#nice h1 {
     margin: 1.2em 0 1em;
     padding: 0;
     font-weight: bold;
     color:#007d9c;
 }
 /* 一级标题内容 */
-h1 span {
+#nice h1 span {
 }
 /* 一级标题修饰 请参考有实例的主题 */
-h1:after {
+#nice h1:after {
 }
 /* 二级标题 */
-h2 {
+#nice h2 {
     border-bottom: 2px solid #e0ebf5;
     font-size: 1.3em;
 }
 /* 二级标题内容 */
-h2 span {
+#nice h2 span {
     display: inline-block;
     font-weight: bold;
     background: #e0ebf5;
@@ -77,7 +77,7 @@ h2 span {
     margin-right: 3px;
 }
 /* 二级标题修饰 请参考有实例的主题 */
-h2:after {
+#nice h2:after {
     display: inline-block;
     content: " ";
     vertical-align: bottom;
@@ -85,26 +85,26 @@ h2:after {
     border-right: 20px solid transparent;
 }
 /* 三级标题 */
-h3 {
+#nice h3 {
     margin: 1.2em 0 1em;
     padding: 0;
     font-weight: bold;
     color:#007d9c;
 }
 /* 三级标题内容 */
-h3 span {
+#nice h3 span {
 }
 /* 三级标题修饰 请参考有实例的主题 */
-h3:after {
+#nice h3:after {
 }
 /* 列表内容 */
-li {
+#nice li {
     margin: 10px;
 }
 /* 引用 * 左边缘颜色 border-left-color: black;
 * 背景色 background: gray;
 */
-blockquote {
+#nice blockquote {
     border-radius: 5px;
     margin: 10px 5px;
     border-left: 20px solid #007d9c;
@@ -114,31 +114,31 @@ blockquote {
     background:#e0ebf5
 }
 /* 引用文字 */
-blockquote p {
+#nice blockquote p {
 }
 /* 链接 */
-a {
+#nice a {
     color: #007d9c;
     text-decoration: none;
 }
 /* 加粗 */
-strong {
+#nice strong {
     color:#007d9c;
 }
 /* 斜体 */
-em {
+#nice em {
     color:#007d9c;
 }
 /* 加粗斜体 */
-strong em {
+#nice strong em {
     color:#007d9c;
 }
 /* 删除线 */
-del {
+#nice del {
 }
 /* 分隔线 * 粗细、样式和颜色 * border-top: 1px solid #3e3e3e;
 */
-hr {
+#nice hr {
     border: 1px solid #007d9c;
     margin: 1.5em auto;
 }
@@ -146,30 +146,30 @@ hr {
 * 居中 margin: 0 auto;
 * 居左 margin: 0 0;
 */
-img {
+#nice img {
 }
 /* 行内代码 */
-p code, li code {
+#nice p code, li code {
     font-size: 12px;
     color: #007d9c;
 }
 /* 非微信代码块 * 代码块不换行 display: -webkit-box !important;
 * 代码块换行 display: block;
 */
-pre span, pre code {
+#nice pre span, pre code {
     font-size: 12px;
 }
 /* * 表格内的单元格 * 字体大小 font-size: 16px;
 * 边框 border: 1px solid #ccc;
 * 内边距 padding: 5px 10px;
 */
-table tr th, table tr td {
+#nice table tr th, table tr td {
 }
 /* 脚注文字 */
-.footnote-word {
+#nice .footnote-word {
     color: #007d9c;
 }
 /* 脚注上标 */
-.footnote-ref {
+#nice .footnote-ref {
     color: #007d9c;
 }

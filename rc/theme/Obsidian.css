@@ -1,0 +1,300 @@
+/*自定义样式，实时生效*/
+
+/*自定义样式，实时生效*/
+
+/* 全局属性
+ * 页边距 padding: 30px;
+ * 全文字体 font-family: ptima-Regular;
+ * 英文换行 word-break: break-all;
+ */
+#nice {
+}
+
+/* 段落，下方未标注标签参数均同此处
+ * 上边距 margin-top: 5px;
+ * 下边距 margin-bottom: 5px;
+ * 行高 line-height: 26px;
+ * 对齐 text-align: left;
+ * 颜色 color: #3e3e3e;
+ * 字体大小 font-size: 16px;
+ * 首行缩进 text-indent: 2em;
+ */
+#nice p {
+  font-size: 17px;
+  word-spacing: 3px;
+  letter-spacing: 1px;
+}
+
+/* 一级标题 */
+#nice h1 {
+  border-bottom: 4px rgba(131, 252, 253) solid;
+  display: flex;
+  padding: 0;
+}
+
+/* 一级标题内容 */
+#nice h1 .content {
+  width: 100%;
+  display: flex;
+  color: rgba(131, 252, 253);
+  padding: 0.5rem 1rem;
+  background: #181a21 !important;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+/* 一级标题修饰 请参考有实例的主题 */
+#nice h1:after {
+}
+
+/* 二级标题 */
+#nice h2 {
+  border-bottom: 4px rgba(160, 249, 176) solid;
+  display: flex;
+  padding: 0;
+}
+
+/* 二级标题内容 */
+#nice h2 .content {
+  width: 100%;
+  display: flex;
+  color: rgba(160, 249, 176);
+  padding: 0.5rem 1rem;
+  background: #181a21 !important;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+/* 二级标题修饰 请参考有实例的主题 */
+#nice h2:after {
+}
+
+/* 三级标题 */
+#nice h3 {
+  border-bottom: 4px rgba(160, 249, 176) solid;
+  display: flex;
+  padding: 0;
+}
+
+/* 三级标题内容 */
+#nice h3 .content {
+  width: 100%;
+  display: flex;
+  color: rgba(160, 249, 176);
+  padding: 0.5rem 1rem;
+  background: #181a21 !important;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+/* 三级标题修饰 请参考有实例的主题 */
+#nice h3:after {
+}
+
+/* 无序列表整体样式
+ * list-style-type: square|circle|disc;
+ */
+#nice ul {
+}
+
+/* 有序列表整体样式
+ * list-style-type: upper-roman|lower-greek|lower-alpha;
+ */
+#nice ol {
+}
+
+/* 列表内容，不要设置li
+ */
+#nice li section {
+}
+
+/* 引用
+* 左边缘颜色 border-left-color: black;
+* 背景色 background: gray;
+*/
+#nice .multiquote-1 {
+  position: relative;
+  padding: 1rem 1.5rem;
+  color: #bdbdbd;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-bottom: 2em;
+  border-left: 3px #f4569d solid;
+  border-top: 3px #f4569d solid;
+  border-bottom: 2px #f4569d solid;
+  background: #181a21;
+}
+
+/* 引用文字 */
+#nice .multiquote-1 p {
+  color: #ededed !important;
+}
+
+#nice .multiquote-1 p:first-of-type::before {
+  content: '!! ';
+  font-style: italic;
+  font-weight: 700;
+  font-size: 18px;
+  color: #f4569d;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+#nice .multiquote-1 p strong {
+  color: #ededed !important;
+}
+
+#nice .multiquote-1 li {
+  color: #ededed !important;
+}
+
+#nice .multiquote-1 li section {
+  color: #ededed !important;
+}
+
+#nice .multiquote-1 p strong {
+  background: transparent !important;
+  border-bottom: none;
+}
+
+#nice .multiquote-1 li section strong {
+  color: #bdbdbd !important;
+  background: transparent !important;
+}
+
+#nice .multiquote-1 code {
+  background: rgba(244, 86, 157, 0.1);
+  color: rgba(244, 86, 157, 1) !important;
+}
+
+/* 链接
+ * border-bottom: 1px solid #009688;
+ */
+#nice a {
+}
+
+/* 加粗 */
+#nice strong {
+  font-weight: 600;
+  padding: 0 0.5rem;
+  border-bottom: 3px rgba(131, 252, 253, 0.6) solid;
+}
+
+/* 斜体 */
+#nice em {
+}
+
+/* 加粗斜体 */
+#nice em strong {
+}
+
+/* 删除线 */
+#nice del {
+}
+
+/* 分隔线
+* 粗细、样式和颜色
+* border-top: 1px solid #3e3e3e;
+*/
+#nice hr {
+  border-top: 1px dashed #dddddd;
+}
+
+/* 图片
+* 宽度 width: 80%;
+* 居中 margin: 0 auto;
+* 居左 margin: 0 0;
+*/
+#nice img {
+  border-radius: 5px;
+}
+
+/* 图片描述文字 */
+#nice figcaption {
+}
+
+/* 行内代码 */
+#nice p code,
+#nice li code {
+  color: #000000;
+  background: rgba(14, 210, 247, 0.15);
+}
+
+/* 非微信代码块
+ * 代码块不换行 display: -webkit-box !important;
+ * 代码块换行 display: block;
+ */
+#nice pre code {
+}
+
+/*
+ * 表格内的单元格
+ * 字体大小 font-size: 16px;
+ * 边框 border: 1px solid #ccc;
+ * 内边距 padding: 5px 10px;
+ */
+#nice table {
+  border: 1px solid rgba(14, 210, 247, 0.06);
+  margin: 1rem 0;
+}
+
+#nice table tr {
+  background: #363636;
+}
+
+#nice table tr:nth-child(2n) {
+  background: #1e1e1e;
+}
+
+#nice table thead td,
+#nice table thead th {
+  background-color: #10222e !important;
+  color: rgba(14, 210, 247, 0.85) !important;
+}
+
+#nice table tr th,
+#nice table tr td {
+  font-size: 16px;
+  border: 1px solid #545454;
+  padding: 5px 10px;
+  text-align: left;
+  color: #dedede;
+}
+
+/* 脚注文字 */
+#nice .footnote-word {
+}
+
+/* 脚注上标 */
+#nice .footnote-ref {
+}
+
+/* "参考资料"四个字
+ * 内容 content: "参考资料";
+ */
+#nice .footnotes-sep:before {
+}
+
+/* 参考资料编号 */
+#nice .footnote-num {
+}
+
+/* 参考资料文字 */
+#nice .footnote-item p {
+}
+
+/* 参考资料解释 */
+#nice .footnote-item p em {
+}
+
+/* 行间公式
+ * 最大宽度 max-width: 300% !important;
+ */
+#nice .block-equation svg {
+}
+
+/* 行内公式
+ */
+#nice .inline-equation svg {
+}

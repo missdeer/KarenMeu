@@ -1,17 +1,27 @@
+#include <QDir>
 #include <QFile>
-#include "settings.h"
-#include "previewthemeeditor.h"
+
 #include "preferencedialog.h"
+
+#include "previewthemeeditor.h"
+#include "settings.h"
 #include "ui_preferencedialog.h"
 
-
-PreferenceDialog::PreferenceDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::PreferenceDialog)
+PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui::PreferenceDialog)
 {
     ui->setupUi(this);
     setupPreviewThemeEditor();
-    
+
+    ui->cbPreviewTheme->clear();
+
+    QDir dir(":/rc/theme");
+    auto entries = dir.entryInfoList();
+    for (auto entry : entries)
+    {
+        ui->cbPreviewTheme->addItem(entry.baseName());
+    }
+    ui->cbPreviewTheme->addItem(tr("Custom"));
+
     ui->cbPreviewTheme->setCurrentText(g_settings->previewTheme());
     ui->cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
     ui->cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());
@@ -51,18 +61,8 @@ void PreferenceDialog::on_cbPreviewTheme_currentTextChanged(const QString &text)
         m_previewThemeEditor->setContent(g_settings->customPreviewThemeStyle());
         return;
     }
-    
-    QMap<QString, QString> m = {
-        { "墨黑",    "ink.css" },
-        { "姹紫",    "purple.css" },
-        { "嫩青",    "cyan.css" },
-        { "橙心",    "orangeHeart.css" },
-        { "红绯",    "red.css" },
-        { "绿意",    "green.css" },
-        { "默认",    "default.css" },
-        { "Gopher", "gopher.css"},
-        };
-    QFile f(":/rc/theme/" + m[text]);
+
+    QFile f(":/rc/theme/" + text + ".css");
     if (f.open(QIODevice::ReadOnly))
     {
         QByteArray ba = f.readAll();

@@ -271,20 +271,8 @@ void MarkdownView::setThemeStyle()
     if (previewTheme == tr("Custom"))
     {
         ba = g_settings->customPreviewThemeStyle();
-    }
-    else
-    {
-        QMap<QString, QString> m = {
-            { "墨黑",    "ink.css" },
-            { "姹紫",    "purple.css" },
-            { "嫩青",    "cyan.css" },
-            { "橙心",    "orangeHeart.css" },
-            { "红绯",    "red.css" },
-            { "绿意",    "green.css" },
-            { "默认",    "default.css" },
-            { "Gopher", "gopher.css"},
-        };
-        QFile f(":/rc/theme/" + m[previewTheme]);
+    } else {
+        QFile f(":/rc/theme/" + previewTheme + ".css");
         if (f.open(QIODevice::ReadOnly))
         {
             ba = f.readAll();

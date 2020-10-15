@@ -81,53 +81,7 @@
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="QComboBox" name="cbPreviewTheme">
-       <item>
-        <property name="text">
-         <string>默认</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>橙心</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>墨黑</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>姹紫</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>嫩青</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>绿意</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>红绯</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Gopher</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Custom</string>
-        </property>
-       </item>
-      </widget>
+      <widget class="QComboBox" name="cbPreviewTheme"/>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="label_6">

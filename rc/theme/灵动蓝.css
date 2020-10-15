@@ -1,0 +1,206 @@
+/*自定义样式，实时生效*/
+
+/* 全局属性 */
+.nice-wx-box {
+
+}
+
+#nice {
+  color: #333;
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+}
+
+/* 标题的通用设置 */
+#nice h1,
+#nice h2,
+#nice h3,
+#nice h4,
+#nice h5,
+#nice h6 {
+  padding: 30px 0;
+  margin: 0;
+  color: #135ce0;
+}
+
+/* 一级标题 */
+#nice h1 {
+  position: relative;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* 一级标题前缀，用来放背景图，支持透明度控制 */
+#nice h1 .prefix {
+  display: inline-block;
+  top: 0;
+  width: 60px;
+  height: 60px;
+  background: url(https://my-wechat.mdnice.com/ape_blue.svg);
+  background-size: 100% 100%;
+  opacity: .12;
+}
+
+/* 一级标题内容 */
+#nice h1 .content {
+  font-size: 22px;
+  display: block;
+  margin-top: -36px;
+}
+
+/* 二级标题 */
+#nice h2 {
+  position: relative;
+	font-size: 20px;
+}
+
+/* 二级标题前缀，有兴趣加内容的可以魔改 */
+#nice h2 .prefix {
+
+}
+
+/* 二级标题内容 */
+#nice h2 .content {
+	border-left: 4px solid;
+  padding-left: 10px;
+}
+
+/* 一二级标题之间间距控制一下 */
+#nice h1 + h2 {
+  padding-top: 0;
+}
+
+/* 三级标题 */
+#nice h3 {
+  font-size: 16px;
+}
+
+/* 段落 */
+#nice p {
+  font-size: 16px;
+  line-height: 2;
+  font-weight: 400;
+}
+
+/* 段落间距控制 */
+#nice p+p {
+  margin-top: 16px;
+}
+
+/* 无序列表 */
+#nice ul>li ul>li {
+  list-style: circle;
+}
+
+/* 无序列表内容行高 */
+#nice li section {
+  line-height: 2;
+}
+
+/* 引用 */
+#nice .multiquote-1 {
+  border-left-color: #b2aec5;
+  background: #fff9f9;
+}
+
+/* 引用文字 */
+#nice .multiquote-1 p {
+  color: #666;
+  line-height: 2;
+}
+
+/* 链接 */
+#nice a {
+  color: #036aca;
+  border-bottom: 0;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+/* 加粗 */
+#nice strong {
+  background: linear-gradient(to right ,#3299d2,#efbdb5);
+  color: #fff;
+  font-weight: 400;
+  padding: 0 4px;
+  display: inline-block;
+  border-radius: 4px;
+  margin: 0 2px;
+  letter-spacing: 1px;
+}
+
+/* 加粗斜体 */
+#nice em strong {
+  color: #fff;
+}
+
+/* 分隔线 */
+#nice hr {
+  border-top: 1px solid #135ce0;
+}
+
+/* 图片描述文字，隐藏了，如果需要，请删除display */
+#nice figcaption {
+  display: none;
+  opacity: .6;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+/* 行内代码 */
+#nice p code, li code {
+  color: #1394d8;
+  padding: 2px 6px;
+  word-break: normal;
+}
+
+/* 表格 */
+#nice table {
+  border-spacing: 0;
+}
+
+/*
+ * 表格内的单元格
+ */
+#nice table tr th {
+  background-color: #d4f1ff;
+}
+
+/* 脚注文字 */
+#nice .footnote-word {
+  color: #135ce0;
+  font-weight: 400;
+}
+
+/* 脚注上标 */
+#nice .footnote-ref {
+  color: #5ba1e2;
+  font-weight: 400;
+}
+
+/* 参考资料 */
+#nice .footnotes-sep:before {
+  text-align: center;
+  color: #135ce0;
+  content: "参考";
+}
+
+/* 参考编号 */
+#nice .footnote-num {
+  color: #666;
+}
+
+/* 参考文字 */
+#nice .footnote-item p { 
+  color: #999;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 13px;
+}
+
+/* 参考解释 */
+#nice .footnote-item p em {
+  color: #3375e2;
+  font-style: normal;
+  margin-left: 4px;
+}

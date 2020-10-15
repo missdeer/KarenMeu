@@ -733,27 +733,27 @@
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="294"/>
+        <location filename="../markdownview.cpp" line="282"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="349"/>
+        <location filename="../markdownview.cpp" line="337"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="350"/>
+        <location filename="../markdownview.cpp" line="338"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="352"/>
+        <location filename="../markdownview.cpp" line="340"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="353"/>
+        <location filename="../markdownview.cpp" line="341"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>
@@ -786,259 +786,219 @@
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="87"/>
-        <source>默认</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../preferencedialog.ui" line="92"/>
-        <source>橙心</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../preferencedialog.ui" line="97"/>
-        <source>墨黑</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../preferencedialog.ui" line="102"/>
-        <source>姹紫</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../preferencedialog.ui" line="107"/>
-        <source>嫩青</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../preferencedialog.ui" line="112"/>
-        <source>绿意</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../preferencedialog.ui" line="117"/>
-        <source>红绯</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../preferencedialog.ui" line="122"/>
-        <source>Gopher</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../preferencedialog.ui" line="127"/>
-        <location filename="../preferencedialog.cpp" line="40"/>
-        <location filename="../preferencedialog.cpp" line="49"/>
+        <location filename="../preferencedialog.cpp" line="23"/>
+        <location filename="../preferencedialog.cpp" line="50"/>
+        <location filename="../preferencedialog.cpp" line="59"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="156"/>
+        <location filename="../preferencedialog.ui" line="110"/>
         <source>Code Block Style:</source>
         <translation>代码块风格：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="164"/>
+        <location filename="../preferencedialog.ui" line="118"/>
         <source>abap</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="169"/>
+        <location filename="../preferencedialog.ui" line="123"/>
         <source>algol</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="174"/>
+        <location filename="../preferencedialog.ui" line="128"/>
         <source>algol_nu</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="179"/>
+        <location filename="../preferencedialog.ui" line="133"/>
         <source>api</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="184"/>
+        <location filename="../preferencedialog.ui" line="138"/>
         <source>arduino</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="189"/>
+        <location filename="../preferencedialog.ui" line="143"/>
         <source>autumn</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="194"/>
+        <location filename="../preferencedialog.ui" line="148"/>
         <source>borland</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="199"/>
+        <location filename="../preferencedialog.ui" line="153"/>
         <source>bw</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="204"/>
+        <location filename="../preferencedialog.ui" line="158"/>
         <source>colorful</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="209"/>
+        <location filename="../preferencedialog.ui" line="163"/>
         <source>dracula</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="214"/>
+        <location filename="../preferencedialog.ui" line="168"/>
         <source>emacs</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="219"/>
+        <location filename="../preferencedialog.ui" line="173"/>
         <source>friendly</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="224"/>
+        <location filename="../preferencedialog.ui" line="178"/>
         <source>fruity</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="229"/>
+        <location filename="../preferencedialog.ui" line="183"/>
         <source>github</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="234"/>
+        <location filename="../preferencedialog.ui" line="188"/>
         <source>igor</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="239"/>
+        <location filename="../preferencedialog.ui" line="193"/>
         <source>lovelace</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="244"/>
+        <location filename="../preferencedialog.ui" line="198"/>
         <source>manni</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="249"/>
+        <location filename="../preferencedialog.ui" line="203"/>
         <source>monokai</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="254"/>
+        <location filename="../preferencedialog.ui" line="208"/>
         <source>monokailight</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="259"/>
+        <location filename="../preferencedialog.ui" line="213"/>
         <source>murphy</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="264"/>
+        <location filename="../preferencedialog.ui" line="218"/>
         <source>native</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="269"/>
+        <location filename="../preferencedialog.ui" line="223"/>
         <source>paraiso-dark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="274"/>
+        <location filename="../preferencedialog.ui" line="228"/>
         <source>paraiso-light</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="279"/>
+        <location filename="../preferencedialog.ui" line="233"/>
         <source>pastie</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="284"/>
+        <location filename="../preferencedialog.ui" line="238"/>
         <source>perldoc</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="289"/>
+        <location filename="../preferencedialog.ui" line="243"/>
         <source>pygments</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="294"/>
+        <location filename="../preferencedialog.ui" line="248"/>
         <source>rainbow_dash</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="299"/>
+        <location filename="../preferencedialog.ui" line="253"/>
         <source>rrt</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="304"/>
+        <location filename="../preferencedialog.ui" line="258"/>
         <source>solarized-dark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="309"/>
+        <location filename="../preferencedialog.ui" line="263"/>
         <source>solarized-dark256</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="314"/>
+        <location filename="../preferencedialog.ui" line="268"/>
         <source>solarized-light</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="319"/>
+        <location filename="../preferencedialog.ui" line="273"/>
         <source>swapoff</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="324"/>
+        <location filename="../preferencedialog.ui" line="278"/>
         <source>tango</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="329"/>
+        <location filename="../preferencedialog.ui" line="283"/>
         <source>trac</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="334"/>
+        <location filename="../preferencedialog.ui" line="288"/>
         <source>vim</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="339"/>
+        <location filename="../preferencedialog.ui" line="293"/>
         <source>vs</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="344"/>
+        <location filename="../preferencedialog.ui" line="298"/>
         <source>xcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="135"/>
+        <location filename="../preferencedialog.ui" line="89"/>
         <source>Preview Mode:</source>
         <translation>预览模式：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="143"/>
+        <location filename="../preferencedialog.ui" line="97"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="148"/>
+        <location filename="../preferencedialog.ui" line="102"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="357"/>
+        <location filename="../preferencedialog.ui" line="311"/>
         <source>Enable Line Numbers in Code Block</source>
         <translation>代码块中显示行号</translation>
     </message>
