@@ -20,7 +20,7 @@
 
 :+1: :-1: :100: :1234: :1st_place_medal: :2nd_place_medal: :3rd_place_medal: :8ball: :a: :ab: :abc: :abcd: :accept: :aerial_tramway: :afghanistan: :airplane: :aland_islands: :alarm_clock: :albania: :alembic: :algeria: :alien: :ambulance: :american_samoa: :amphora: :anchor: :andorra: :angel: :anger: :angola: :angry: :anguilla: :anguished: :ant: :antarctica: :antigua_barbuda: :apple: :aquarius: :argentina: :aries: :armenia: :arrow_backward: :arrow_double_down: :arrow_double_up: :arrow_down: :arrow_down_small: :arrow_forward: :arrow_heading_down: :arrow_heading_up: :arrow_left: :arrow_lower_left: :arrow_lower_right: :arrow_right: :arrow_right_hook: :arrow_up: :arrow_up_down: :arrow_up_small: :arrow_upper_left: :arrow_upper_right: :arrows_clockwise: :arrows_counterclockwise: :art: :articulated_lorry: :artificial_satellite: :aruba: :asterisk: :astonished: :athletic_shoe: :atm: :atom_symbol: :australia: :austria: :avocado: :azerbaijan: 
 
-完整emoji列表参考：https://github.com/b3log/lute/blob/master/emoji_map.go
+完整emoji列表参考：https://github.com/88250/lute/blob/master/parse/emoji_map.go
 
 ## 二级标题
 
