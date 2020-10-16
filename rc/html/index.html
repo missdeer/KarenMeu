@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="qrc:/qtwebchannel/qwebchannel.js"></script>
     <style type="text/css">
-    .wx-box {
+    #wx-box {
         overflow-y: auto;
         margin: 0 auto;
         padding: 20px;
@@ -16,30 +16,26 @@
     </style>
     <style type="text/css" id="theme"></style>
 <body>
-    <div id="wx-box" class="wx-box">
+    <div id="wx-box">
         <section id="nice" class="layout" style="font-size: 16px; color: black; padding: 10px; line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; word-break: break-word; word-wrap: break-word; text-align: left; font-family: Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, 'PingFang SC', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
         </section>
     </div>
     <script>
         'use strict';
     
-        var contentPlaceholder = document.getElementById('nice');
-        var updateContent = function(text) {
-          contentPlaceholder.innerHTML = text;
+        function updateContent(text) {
+            document.getElementById('nice').innerHTML = text;
         }
 
-        var stylePlaceholder = document.getElementById('theme');
-        var updateTheme = function(text) {
-          stylePlaceholder.innerHTML = text;
+        function updateTheme(text) {
+            document.getElementById('theme').innerHTML = text;
         }
         
-        var styleWXBox = document.getElementById("wx-box");
-        var updateWXBoxWidth = function(width) {
-            styleWXBox.style.width=width;
+        function updateWXBoxWidth(width) {
+            document.getElementById("wx-box").style.width=width;
         }
     
-        new QWebChannel(qt.webChannelTransport,
-          function(channel) {
+        new QWebChannel(qt.webChannelTransport, function(channel) {
             var content = channel.objects.content;
             updateContent(content.text);
             content.textChanged.connect(updateContent);
