@@ -66,6 +66,7 @@ MarkdownView::MarkdownView(QWidget *parent)
     auto *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);
     channel->registerObject(QStringLiteral("theme"), &m_themeStyle);
+    channel->registerObject(QStringLiteral("wxboxwidth"), &m_wxboxWidth);
     page->setWebChannel(channel);
     
     m_preview->setContextMenuPolicy(Qt::NoContextMenu);
@@ -271,7 +272,9 @@ void MarkdownView::setThemeStyle()
     if (previewTheme == tr("Custom"))
     {
         ba = g_settings->customPreviewThemeStyle();
-    } else {
+    }
+    else
+    {
         QFile f(":/rc/theme/" + previewTheme + ".css");
         if (f.open(QIODevice::ReadOnly))
         {
@@ -279,7 +282,7 @@ void MarkdownView::setThemeStyle()
             f.close();
         }
     }
-    ba.replace("{{.width}}", g_settings->previewMode() == tr("Blog Post") ? "95" : "70");
+    m_wxboxWidth.setText(g_settings->previewMode() == tr("Blog Post") ? "95%" : "70%");
     m_themeStyle.setText(QString::fromUtf8(ba));
     m_editor->updateCodeEditorFont();
 }

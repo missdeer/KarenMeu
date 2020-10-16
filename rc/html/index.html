@@ -4,6 +4,16 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="qrc:/qtwebchannel/qwebchannel.js"></script>
+    <style type="text/css">
+    .wx-box {
+        overflow-y: auto;
+        margin: 0 auto;
+        padding: 20px;
+        width: 70%;
+        height: 100%;
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
+    }
+    </style>
     <style type="text/css" id="theme"></style>
 <body>
     <div id="wx-box" class="wx-box">
@@ -14,7 +24,6 @@
         'use strict';
     
         var contentPlaceholder = document.getElementById('nice');
-    
         var updateContent = function(text) {
           contentPlaceholder.innerHTML = text;
         }
@@ -22,6 +31,11 @@
         var stylePlaceholder = document.getElementById('theme');
         var updateTheme = function(text) {
           stylePlaceholder.innerHTML = text;
+        }
+        
+        var styleWXBox = document.getElementById("wx-box");
+        var updateWXBoxWidth = function(width) {
+            styleWXBox.style.width=width;
         }
     
         new QWebChannel(qt.webChannelTransport,
@@ -33,6 +47,10 @@
             var theme = channel.objects.theme;
             updateTheme(theme.text);
             theme.textChanged.connect(updateTheme);
+            
+            var wxboxwidth = channel.objects.wxboxwidth;
+            updateWXBoxWidth(wxboxwidth.text);
+            wxboxwidth.textChanged.connect(updateWXBoxWidth);
           }
         );
         </script>

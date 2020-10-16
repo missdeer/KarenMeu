@@ -77,6 +77,7 @@ private:
     QString m_savePath;
     RenderedDocument m_renderedContent;
     RenderedDocument m_themeStyle;
+    RenderedDocument m_wxboxWidth;
     
     void saveToFile(const QString &savePath);
     void renderMarkdownToHTML();
