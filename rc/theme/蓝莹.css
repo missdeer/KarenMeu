@@ -1,3 +1,12 @@
+
+.wx-box {
+    overflow-y: auto;
+    margin: 0 auto;
+    padding: 20px;
+    width: {{.width}}%;
+    height: 100%;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
+}
 /* 全局属性 */
 
 #nice {
