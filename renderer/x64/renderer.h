@@ -3,6 +3,7 @@
 /* package goldmark */
 
 
+#line 1 "cgo-builtin-export-prolog"
 
 #include <stddef.h> /* for ptrdiff_t below */
 
@@ -18,14 +19,21 @@ typedef struct { const char *p; ptrdiff_t n; } _GoString_;
 /* Start of preamble from import "C" comments.  */
 
 
+
+
+
+#line 3 "main.go"
+
 #include <stdlib.h>
 
+#line 1 "cgo-generated-wrapper"
 
 
 /* End of preamble from import "C" comments.  */
 
 
 /* Start of boilerplate cgo prologue.  */
+#line 1 "cgo-gcc-export-header-prolog"
 
 #ifndef GO_CGO_PROLOGUE_H
 #define GO_CGO_PROLOGUE_H
@@ -40,8 +48,11 @@ typedef long long GoInt64;
 typedef unsigned long long GoUint64;
 typedef GoInt64 GoInt;
 typedef GoUint64 GoUint;
+typedef __SIZE_TYPE__ GoUintptr;
 typedef float GoFloat32;
 typedef double GoFloat64;
+typedef float _Complex GoComplex64;
+typedef double _Complex GoComplex128;
 
 /*
   static assertion to make sure the file is being used on architecture
@@ -65,18 +76,12 @@ typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 extern "C" {
 #endif
 
-
-extern char* Goldmark(GoString p0, GoString p1, GoUint8 p2);
-
-extern char* PremailerInliner(GoString p0);
-
-extern char* DouceurInliner(GoString p0);
-
-extern char* Inliner(GoString p0);
-
-extern char* Lute(GoString p0, GoString p1, GoUint8 p2);
-
-extern void Free(char* p0);
+extern char* Goldmark(GoString md, GoString style, GoUint8 lineNumbers);
+extern char* PremailerInliner(GoString input);
+extern char* DouceurInliner(GoString input);
+extern char* Inliner(GoString input);
+extern char* Lute(GoString md, GoString style, GoUint8 lineNumbers);
+extern void Free(char* c);
 
 #ifdef __cplusplus
 }
