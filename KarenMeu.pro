@@ -178,7 +178,7 @@ macx: {
 
     OBJECTIVE_SOURCES += $$PWD/spelling/dictionary_provider_nsspellchecker.mm
     DESTDIR = $$OUT_PWD
-
+    QMAKE_INFO_PLIST = osxInfo.plist
     CONFIG(release, debug|release) : {
         MACDEPLOYQT = $$[QT_INSTALL_BINS]/macdeployqt
 
