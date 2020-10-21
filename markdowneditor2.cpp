@@ -33,7 +33,7 @@ MarkdownEditor2::MarkdownEditor2(QWidget *parent)
 
 void MarkdownEditor2::updateCodeEditorFont()
 {
-    QStringList fonts;
+    QStringList fonts = {g_settings->codeEditorFontFamily()};
 #if defined(Q_OS_WIN)
     fonts << "Microsoft YaHei UI" << "Microsoft YaHei";
 #elif defined(Q_OS_MAC)
