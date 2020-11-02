@@ -16,16 +16,25 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        qt_ver: [5.15.1]
-        qt_target: [desktop]
-        qt_arch: [win64_msvc2019_64, win32_msvc2019]
+        qt_ver: 5.15.1
+        qt_target: desktop
         include:
           - qt_arch: win64_msvc2019_64
             msvc_arch: x64
             qt_arch_install: msvc2019_64
+            mingw_arch: MINGW64 
+            mingw_prefix: mingw-w64-x86_64
+            toolchains: gcc
+            GOARCH: amd64
+            BUILDRP: build-x64.bat
           - qt_arch: win32_msvc2019
             msvc_arch: x86
             qt_arch_install: msvc2019_32
+            mingw_arch: MINGW32
+            mingw_prefix: mingw-w64-i686
+            toolchains: gcc
+            GOARCH: 386
+            BUILDRP: build-x86.bat
     env:
       targetName: KarenMeu
     # 步骤
@@ -39,32 +48,48 @@ jobs:
           modules: qtwebengine
           aqtversion: '>=0.9.0'
           
+      - uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          msystem: ${{ matrix.mingw_arch }}
+          install: zip make git ${{ matrix.mingw_prefix }}-${{ matrix.toolchains }} ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-zstd
+
       # 拉取代码
       - uses: actions/checkout@v2
         with:
+          fetch-depth: 1
           ref: ${{ github.head_ref }}
           submodules: true
-          
+       
+
       # 编译msvc
+      - name: generate scintilla headers
+        shell: cmd
+        run: |
+          cd 3rdparty\scintilla\qt\ScintillaEdit
+          python WidgetGen.py
+          cd ..\..\..\..
+          
+      - name: Build Go executables
+        shell: msys2 {0}
+        run: |
+          cd renderer
+          env GOARCH=${{ matrix.GOARCH }} PATH=$PATH:/${{ matrix.mingw_arch }}/bin:/C/hostedtoolcache/windows/go/${{ env.go_version }}/x64/bin go build -v -buildmode=c-archive -ldflags="-s -w -X main.GitCommit=$(GITCOMMIT)" -o librenderer.a
+          ./update-def.sh
+          cd ..
+
       - name: build-msvc
         shell: cmd
         env:
           vc_arch: ${{ matrix.msvc_arch }}
         run: |
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
-          cd 3rdparty\scintilla\qt\ScintillaEdit
-          python WidgetGen.py
-          cd ..\..\..\..
-          cd renderer
-          call build-${{ matrix.msvc_arch }}.bat
-          git checkout ${{ matrix.msvc_arch }}
-          cd ..
           mkdir build
           cd build
           qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
           nmake
           cd ..
-      # tag 打包
+
       - name: package
         env:
           VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'

@@ -121,14 +121,6 @@ win32-*msvc* {
     QMAKE_CXXFLAGS_RELEASE += /Zi
     #QMAKE_LFLAGS_RELEASE += /DEBUG
 
-    contains(QMAKE_HOST.arch, x86_64): {
-        LIBS += -L$$PWD/renderer/x64
-        INCLUDEPATH += $$PWD/renderer/x64
-    } else: {
-        LIBS += -L$$PWD/renderer/x86
-        INCLUDEPATH += $$PWD/renderer/x86
-    }
-
     CONFIG(release, debug|release) : {
         WINDEPLOYQT = $$[QT_INSTALL_BINS]/windeployqt.exe
         DESTDIR = $$OUT_PWD/release
@@ -139,11 +131,9 @@ win32-*msvc* {
 
     qti18n.depends = translate
     qti18n.commands = '$(COPY_FILE) $$shell_path($$[QT_INSTALL_BINS]/../translations/qt_zh_CN.qm) $$shell_path($${DESTDIR}/translations/qt_zh_CN.qm)'
-
-} else: {
-    INCLUDEPATH += $$PWD/renderer
-    LIBS += -L$$PWD/renderer
 }
+INCLUDEPATH += $$PWD/renderer
+LIBS += -L$$PWD/renderer
 
 win32 {
     INCLUDEPATH += $$PWD/spelling/hunspell
