@@ -1,4 +1,4 @@
-module goldmark
+module github.com/missdeer/KarenMeu/renderer
 
 go 1.12
 
