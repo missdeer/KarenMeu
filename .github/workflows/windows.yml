@@ -80,6 +80,7 @@ jobs:
         run: |
           set PATH=D:\a\_temp\msys\msys64\${{ matrix.mingw_arch }}\bin;%PATH%
           set GOARCH=${{ matrix.GOARCH }}
+          cd renderer
           go build -v -buildmode=c-archive  -ldflags="-s -w" -o renderer.a 
 
       - name: update cgo headers
