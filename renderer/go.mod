@@ -1,6 +1,6 @@
 module github.com/missdeer/KarenMeu/renderer
 
-go 1.12
+go 1.15
 
 require (
 	github.com/88250/lute v1.6.5
