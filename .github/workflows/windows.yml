@@ -35,24 +35,30 @@ jobs:
             BUILDRP: build-x86.bat
     env:
       targetName: KarenMeu
+      go_version: 1.15.3
       qt_ver: 5.15.1
       qt_target: desktop
     # 步骤
     steps:
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2.7.1
+        uses: jurplel/install-qt-action@v2
         with:
           version: ${{ env.qt_ver }}
           target: ${{ env.qt_target }}
           arch: ${{ matrix.qt_arch }}
           modules: qtwebengine
-          aqtversion: '>=0.9.0'
           
       - uses: msys2/setup-msys2@v2
         with:
           update: true
           msystem: ${{ matrix.mingw_arch }}
           install: zip make git ${{ matrix.mingw_prefix }}-${{ matrix.toolchains }} ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-zstd
+
+      - name: Set up Go 1.15
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ env.go_version }}
+        id: go
 
       # 拉取代码
       - uses: actions/checkout@v2
@@ -74,7 +80,7 @@ jobs:
         shell: msys2 {0}
         run: |
           cd renderer
-          env GOARCH=${{ matrix.GOARCH }} PATH=$PATH:/${{ matrix.mingw_arch }}/bin:/C/hostedtoolcache/windows/go/${{ env.go_version }}/x64/bin go build -v -buildmode=c-archive -ldflags="-s -w -X main.GitCommit=$(GITCOMMIT)" -o librenderer.a
+          env GOARCH=${{ matrix.GOARCH }} PATH=$PATH:/${{ matrix.mingw_arch }}/bin:/C/hostedtoolcache/windows/go/${{ env.go_version }}/x64/bin go build -v -buildmode=c-archive -ldflags="-s -w" -o librenderer.a
           ./update-def.sh
           cd ..
 
