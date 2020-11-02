@@ -81,6 +81,7 @@ jobs:
         run: |
           cd renderer
           env GOARCH=${{ matrix.GOARCH }} PATH=$PATH:/${{ matrix.mingw_arch }}/bin:/C/hostedtoolcache/windows/go/${{ env.go_version }}/x64/bin go build -v -buildmode=c-archive -ldflags="-s -w" -o librenderer.a
+          mv librenderer.h renderer.h
           ./update-def.sh
           cd ..
 
