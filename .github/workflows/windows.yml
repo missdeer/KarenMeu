@@ -78,10 +78,16 @@ jobs:
         env:
           vc_arch: ${{ matrix.msvc_arch }}
         run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
           set PATH=D:\a\_temp\msys\msys64\${{ matrix.mingw_arch }}\bin;%PATH%
           set GOARCH=${{ matrix.GOARCH }}
+          set GOOS=windows
+          set CGO_ENABLED=1
           cd renderer
+          dir
+          go env
           go build -v -buildmode=c-archive  -ldflags="-s -w" -o renderer.a 
+          cd ..
 
       - name: update cgo headers
         shell: msys2 {0}
