@@ -71,6 +71,7 @@ jobs:
         run: |
           cd 3rdparty\scintilla\qt\ScintillaEdit
           python WidgetGen.py
+          dir
           cd ..\..\..\..
 
       - name: Build Go executables
@@ -84,9 +85,9 @@ jobs:
           set GOOS=windows
           set CGO_ENABLED=1
           cd renderer
-          dir
           go env
           go build -v -buildmode=c-archive  -ldflags="-s -w" -o renderer.a 
+          dir
           cd ..
 
       - name: update cgo headers
@@ -94,6 +95,7 @@ jobs:
         run: |
           cd renderer
           ./update-def.sh
+          dir
           cd ..
 
       - name: Generate import lib
@@ -106,6 +108,7 @@ jobs:
           set PATH=D:\a\_temp\msys\msys64\${{ matrix.mingw_arch }}\bin;%PATH%
           gcc renderer.def renderer.a -shared -lwinmm -lWs2_32 -o renderer.dll -Wl,--out-implib,renderer.dll.a
           lib /def:renderer.def /name:renderer.dll /out:renderer.lib /MACHINE:${{ matrix.msvc_arch }}
+          dir
           cd ..
 
       - name: build-msvc
@@ -128,7 +131,7 @@ jobs:
         run: |
           New-Item -ItemType Directory ${env:archiveName}
           Copy-Item build\Release\${env:targetName}'.exe' ${env:archiveName}\
-          Copy-Item -Path renderer\${{ matrix.msvc_arch }}\*.dll -Destination ${env:archiveName}\
+          Copy-Item -Path renderer\*.dll -Destination ${env:archiveName}\
           windeployqt --qmldir . ${env:archiveName}\${env:targetName}'.exe'
           Compress-Archive -Path ${env:archiveName} ${env:archiveName}'.zip'
           $name = ${env:archiveName}
