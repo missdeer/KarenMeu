@@ -47,7 +47,7 @@
     <message>
         <location filename="../mainwindow.ui" line="117"/>
         <source>&amp;Dock</source>
-        <translation type="unfinished"></translation>
+        <translation>停靠栏(&amp;D)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="129"/>
@@ -647,17 +647,17 @@
     <message>
         <location filename="../mainwindow.cpp" line="147"/>
         <source>%1. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1. %2</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="570"/>
         <source>File System</source>
-        <translation type="unfinished"></translation>
+        <translation>文件系统</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="587"/>
         <source>Cloud</source>
-        <translation type="unfinished"></translation>
+        <translation>云服务</translation>
     </message>
 </context>
 <context>
@@ -665,17 +665,17 @@
     <message>
         <location filename="../markdowneditor.cpp" line="130"/>
         <source>Add word to dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>添加单词到词典</translation>
     </message>
     <message>
         <location filename="../markdowneditor.cpp" line="131"/>
         <source>Check spelling...</source>
-        <translation type="unfinished"></translation>
+        <translation>检查拼写...</translation>
     </message>
     <message>
         <location filename="../markdowneditor.cpp" line="824"/>
         <source>No spelling suggestions found</source>
-        <translation type="unfinished"></translation>
+        <translation>没有发现建议的拼写</translation>
     </message>
 </context>
 <context>
@@ -1033,79 +1033,79 @@
     <message>
         <location filename="../ThemeFactory.cpp" line="198"/>
         <source>The specified theme does not exist in the file system: </source>
-        <translation type="unfinished"></translation>
+        <translation>文件系统中没有找到指定的主题：</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="315"/>
         <source>The specified theme is not available.  Try restarting the application.  If problem persists, please file a bug report.</source>
-        <translation type="unfinished"></translation>
+        <translation>指定的主题无效。请尝试重启程序。如果问题仍然存在，请创建一个问题报告。</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="385"/>
         <source>Could not delete %1 from theme.  Please try setting the theme file permissions to be writeable.</source>
-        <translation type="unfinished"></translation>
+        <translation>主题中无法删除%1。请尝试将主题文件权限设置为可写。</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="408"/>
         <source>&apos;%1&apos; already exists.  Please choose another name.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1已存在。请另选一个名字。</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="418"/>
         <source>&apos;%1&apos; theme already exists.  Please choose another name.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1已存在。请另选一个名字。</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="453"/>
         <source>Failed to rename theme.  Please check file permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>主题重命名失败。请检查文件权限。</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="498"/>
         <source>Theme is read-only.  Please try renaming the theme, or setting the theme file to be writable.</source>
-        <translation type="unfinished"></translation>
+        <translation>主题只读。请尝试重命名主题，或将主题文件设置为可写。</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="538"/>
         <source>Failed to remove old theme image.  Please check file permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>删除旧的主题图片失败。请检查文件权限。</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="570"/>
         <source>The old theme image file could not be removed from the theme directory.  Please check file permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法从主题目录中删除旧的主题图片文件。请检查文件权限。</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="582"/>
         <source>Theme image file could not be copied to the theme directory.  Please check file permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法将主题图片文件复制到主题目录中。请检查文件权限。</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="601"/>
         <source>Theme could not be saved to disk.  Please check file permissions or try renaming the theme.</source>
-        <translation type="unfinished"></translation>
+        <translation>主题无法保存到磁盘。请检查文件权限或尝试重命名主题。</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="626"/>
         <source>Untitled 1</source>
-        <translation type="unfinished"></translation>
+        <translation>未命名1</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="639"/>
         <source>Untitled %1</source>
-        <translation type="unfinished"></translation>
+        <translation>未命名%1</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="697"/>
         <location filename="../ThemeFactory.cpp" line="719"/>
         <location filename="../ThemeFactory.cpp" line="747"/>
         <source>Invalid or missing value for %1 provided.</source>
-        <translation type="unfinished"></translation>
+        <translation>提供了无效或缺少值给%1。</translation>
     </message>
     <message>
         <location filename="../ThemeFactory.cpp" line="727"/>
         <source>Value for %1 is out of range.  Valid values are between %2 and %3, inclusive.</source>
-        <translation type="unfinished"></translation>
+        <translation>值%1超出范围。有效的值为%2到%3之间。</translation>
     </message>
 </context>
 <context>
@@ -1113,7 +1113,7 @@
     <message>
         <location filename="../settings.cpp" line="55"/>
         <source>Classic Light</source>
-        <translation type="unfinished"></translation>
+        <translation>经典亮</translation>
     </message>
     <message>
         <location filename="../settings.cpp" line="58"/>
@@ -1141,67 +1141,67 @@
     <message>
         <location filename="../spelling/spell_checker.cpp" line="139"/>
         <source>Check Spelling</source>
-        <translation type="unfinished"></translation>
+        <translation>检查拼写</translation>
     </message>
     <message>
         <location filename="../spelling/spell_checker.cpp" line="147"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>添加</translation>
     </message>
     <message>
         <location filename="../spelling/spell_checker.cpp" line="150"/>
         <source>&amp;Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略</translation>
     </message>
     <message>
         <location filename="../spelling/spell_checker.cpp" line="153"/>
         <source>I&amp;gnore All</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略全部</translation>
     </message>
     <message>
         <location filename="../spelling/spell_checker.cpp" line="158"/>
         <source>&amp;Change</source>
-        <translation type="unfinished"></translation>
+        <translation>修改</translation>
     </message>
     <message>
         <location filename="../spelling/spell_checker.cpp" line="161"/>
         <source>C&amp;hange All</source>
-        <translation type="unfinished"></translation>
+        <translation>修改全部</translation>
     </message>
     <message>
         <location filename="../spelling/spell_checker.cpp" line="176"/>
         <source>Not in dictionary:</source>
-        <translation type="unfinished"></translation>
+        <translation>不在词典内：</translation>
     </message>
     <message>
         <location filename="../spelling/spell_checker.cpp" line="184"/>
         <source>Change to:</source>
-        <translation type="unfinished"></translation>
+        <translation>修改为：</translation>
     </message>
     <message>
         <location filename="../spelling/spell_checker.cpp" line="200"/>
         <source>Checking spelling...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在检查拼写...</translation>
     </message>
     <message>
         <location filename="../spelling/spell_checker.cpp" line="200"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../spelling/spell_checker.cpp" line="201"/>
         <source>Please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>请稍等</translation>
     </message>
     <message>
         <location filename="../spelling/spell_checker.cpp" line="228"/>
         <source>Continue checking at beginning of file?</source>
-        <translation type="unfinished"></translation>
+        <translation>继续从文件开始进行检查？</translation>
     </message>
     <message>
         <location filename="../spelling/spell_checker.cpp" line="287"/>
         <source>Spell check complete.</source>
-        <translation type="unfinished"></translation>
+        <translation>拼写检查完成。</translation>
     </message>
 </context>
 <context>
@@ -1211,7 +1211,7 @@
         <location filename="../TextDocument.cpp" line="74"/>
         <location filename="../TextDocument.cpp" line="119"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>未命名</translation>
     </message>
 </context>
 <context>
