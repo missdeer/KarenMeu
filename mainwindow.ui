@@ -112,10 +112,16 @@
      <string>&amp;View</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuDock">
+    <property name="title">
+     <string>&amp;Dock</string>
+    </property>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuView"/>
    <addaction name="menuFormat"/>
+   <addaction name="menuDock"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="fileToolbar">

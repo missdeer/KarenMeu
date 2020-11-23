@@ -1,26 +1,29 @@
-#include <QtCore>
-#include <QCoreApplication>
-#include <QMessageBox>
-#include <QDesktopServices>
-#include <QUrl>
-#include <QCloseEvent>
-#include <QAction>
-#include <QMap>
-#include <QHash>
-#include <QLabel>
-#include <QComboBox>
-#include <QFileInfo>
-#include <QGraphicsColorizeEffect>
-#include <QSplitter>
-#include <QPainter>
-#include "markdownview.h"
+#include "mainwindow.h"
+#include "ColorHelper.h"
 #include "markdowneditor2.h"
+#include "markdownview.h"
 #include "preferencedialog.h"
 #include "renderer.h"
 #include "settings.h"
-#include "ColorHelper.h"
-#include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QAction>
+#include <QCloseEvent>
+#include <QComboBox>
+#include <QCoreApplication>
+#include <QDesktopServices>
+#include <QDockWidget>
+#include <QFileInfo>
+#include <QFileSystemModel>
+#include <QGraphicsColorizeEffect>
+#include <QHash>
+#include <QLabel>
+#include <QMap>
+#include <QMessageBox>
+#include <QPainter>
+#include <QSplitter>
+#include <QTreeView>
+#include <QUrl>
+#include <QtCore>
 
 using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
@@ -71,14 +74,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
     ui->menuView->addAction(ui->editToolbar->toggleViewAction());
     ui->menuView->addAction(ui->formatToolbar->toggleViewAction());
-    
-    
+
     for (int i = 0; i < MaxRecentFiles; ++i) {
         recentFileActs[i] = new QAction(this);
         recentFileActs[i]->setVisible(false);
         connect(recentFileActs[i], &QAction::triggered, this, &MainWindow::openRecentFile);
         ui->menuRecentFiles->addAction(recentFileActs[i]);
     }
+
+    setupDockPanels();
+
     applyTheme();
 }
 
@@ -558,6 +563,34 @@ void MainWindow::predrawBackgroundImage()
     }
 
     painter.end();
+}
+
+void MainWindow::setupDockPanels()
+{
+    auto *fsDock = new QDockWidget(tr("File System"), this);
+    fsDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::TopDockWidgetArea
+                            | Qt::BottomDockWidgetArea);
+    m_fsView = new QTreeView(fsDock);
+    QFileSystemModel *model = new QFileSystemModel(m_fsView);
+    model->setRootPath(QDir::currentPath());
+    model->setNameFilters(QStringList() << "*.md"
+                                        << "*.markdown"
+                                        << "*.mdown");
+    m_fsView->setModel(model);
+    for (int i = 1; i < model->columnCount(); ++i)
+        m_fsView->hideColumn(i);
+    fsDock->setWidget(m_fsView);
+    addDockWidget(Qt::LeftDockWidgetArea, fsDock);
+    ui->menuDock->addAction(fsDock->toggleViewAction());
+    fsDock->close();
+
+    auto *cloudDock = new QDockWidget(tr("Cloud"), this);
+    cloudDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+    m_cloudView = new QTreeView(cloudDock);
+    cloudDock->setWidget(m_cloudView);
+    addDockWidget(Qt::LeftDockWidgetArea, cloudDock);
+    ui->menuDock->addAction(cloudDock->toggleViewAction());
+    cloudDock->close();
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event)

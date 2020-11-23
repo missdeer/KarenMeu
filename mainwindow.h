@@ -10,6 +10,7 @@ class MainWindow;
 class MarkdownView;
 
 QT_FORWARD_DECLARE_CLASS(QComboBox);
+QT_FORWARD_DECLARE_CLASS(QTreeView);
 
 class MainWindow : public QMainWindow
 {
@@ -43,9 +44,11 @@ protected:
 private:
     Ui::MainWindow *ui;
     MarkdownView *m_view;
-    
+    QTreeView *m_fsView;
+    QTreeView *m_cloudView;
+
     QString m_curFile;
-    
+
     enum { MaxRecentFiles = 10 };
     QAction *recentFileActs[MaxRecentFiles];
     
@@ -59,6 +62,7 @@ private:
     void adjustEditorWidth(int width);
     void applyTheme();
     void predrawBackgroundImage();
+    void setupDockPanels();
 };
 
 #endif // MAINWINDOW_H
