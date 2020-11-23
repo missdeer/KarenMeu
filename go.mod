@@ -1,4 +1,4 @@
-module github.com/missdeer/KarenMeu/renderer
+module github.com/missdeer/KarenMeu
 
 go 1.15
 
