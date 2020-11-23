@@ -97,6 +97,7 @@ void MainWindow::openFile(const QString &fileName)
 {
     Q_ASSERT(m_view);
 
+    m_view->newDocument();
     m_view->openFromFile(fileName);
 }
 
