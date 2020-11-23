@@ -16,6 +16,7 @@
 #include <QFileSystemModel>
 #include <QGraphicsColorizeEffect>
 #include <QHash>
+#include <QHeaderView>
 #include <QLabel>
 #include <QMap>
 #include <QMessageBox>
@@ -576,13 +577,14 @@ void MainWindow::setupDockPanels()
     model->setNameFilters(QStringList() << "*.md"
                                         << "*.markdown"
                                         << "*.mdown");
+    model->sort(0);
     m_fsView->setModel(model);
     for (int i = 1; i < model->columnCount(); ++i)
         m_fsView->hideColumn(i);
+    m_fsView->header()->hide();
     fsDock->setWidget(m_fsView);
     addDockWidget(Qt::LeftDockWidgetArea, fsDock);
     ui->menuDock->addAction(fsDock->toggleViewAction());
-    fsDock->close();
 
     auto *cloudDock = new QDockWidget(tr("Cloud"), this);
     cloudDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
@@ -590,7 +592,6 @@ void MainWindow::setupDockPanels()
     cloudDock->setWidget(m_cloudView);
     addDockWidget(Qt::LeftDockWidgetArea, cloudDock);
     ui->menuDock->addAction(cloudDock->toggleViewAction());
-    cloudDock->close();
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event)
