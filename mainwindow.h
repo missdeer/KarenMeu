@@ -11,6 +11,7 @@ class MarkdownView;
 
 QT_FORWARD_DECLARE_CLASS(QComboBox);
 QT_FORWARD_DECLARE_CLASS(QTreeView);
+QT_FORWARD_DECLARE_CLASS(QFileSystemModel);
 
 class MainWindow : public QMainWindow
 {
@@ -36,6 +37,9 @@ private slots:
     void on_actionClearRecentFilesList_triggered();
     
     void setCurrentFile(const QString &fileName);
+
+    void onFileSystemItemActivated(const QModelIndex &index);
+
 protected:
     void resizeEvent(QResizeEvent* event) override;
     void moveEvent(QMoveEvent* event) override;
@@ -44,6 +48,7 @@ protected:
 private:
     Ui::MainWindow *ui;
     MarkdownView *m_view;
+    QFileSystemModel *m_fsModel;
     QTreeView *m_fsView;
     QTreeView *m_cloudView;
 

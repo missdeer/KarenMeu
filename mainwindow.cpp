@@ -167,10 +167,21 @@ void MainWindow::setCurrentFile(const QString &fileName)
     files.prepend(fileName);
     while (files.size() > MaxRecentFiles)
         files.removeLast();
-    
+
     settings.setValue("recentFileList", files);
-    
+
     updateRecentFileActions();
+}
+
+void MainWindow::onFileSystemItemActivated(const QModelIndex &index)
+{
+    auto fi = m_fsModel->fileInfo(index);
+    if (fi.isFile()
+        && (fi.fileName().endsWith(".md", Qt::CaseInsensitive)
+            || fi.fileName().endsWith(".markdown", Qt::CaseInsensitive)
+            || fi.fileName().endsWith(".mdown", Qt::CaseInsensitive))) {
+        openFile(fi.absoluteFilePath());
+    }
 }
 
 QString MainWindow::strippedName(const QString &fullFileName)
@@ -572,16 +583,17 @@ void MainWindow::setupDockPanels()
     fsDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::TopDockWidgetArea
                             | Qt::BottomDockWidgetArea);
     m_fsView = new QTreeView(fsDock);
-    QFileSystemModel *model = new QFileSystemModel(m_fsView);
-    model->setRootPath(QDir::currentPath());
-    model->setNameFilters(QStringList() << "*.md"
-                                        << "*.markdown"
-                                        << "*.mdown");
-    model->sort(0);
-    m_fsView->setModel(model);
-    for (int i = 1; i < model->columnCount(); ++i)
+    m_fsModel = new QFileSystemModel(m_fsView);
+    m_fsModel->setRootPath(QDir::currentPath());
+    m_fsModel->setNameFilters(QStringList() << "*.md"
+                                            << "*.markdown"
+                                            << "*.mdown");
+    m_fsModel->sort(0);
+    m_fsView->setModel(m_fsModel);
+    for (int i = 1; i < m_fsModel->columnCount(); ++i)
         m_fsView->hideColumn(i);
     m_fsView->header()->hide();
+    connect(m_fsView, &QTreeView::activated, this, &MainWindow::onFileSystemItemActivated);
     fsDock->setWidget(m_fsView);
     addDockWidget(Qt::LeftDockWidgetArea, fsDock);
     ui->menuDock->addAction(fsDock->toggleViewAction());
