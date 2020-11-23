@@ -2,7 +2,7 @@
 GITCOMMIT:=$(shell git describe --dirty --always)
 BINARY:=librenderer.a
 SYSTEM:=
-CHECKS:=lute.go main.go inliner.go goldmark.go go.mod
+CHECKS:=lute.go main.go inliner.go goldmark.go ../go.mod
 BUILDOPTS:=-v -buildmode=c-archive 
 CGO_ENABLED:=1
 
