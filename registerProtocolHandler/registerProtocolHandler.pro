@@ -20,5 +20,8 @@ RC_FILE = registerProtocolHandler.rc
 win32-*msvc*: {
     QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
 } else : {
+    DEFINES += NTDDI_VERSION=NTDDI_VISTA
     RC_FILE += manifest.rc
 }
+
+LIBS += -lole32
