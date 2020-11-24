@@ -129,5 +129,10 @@ jobs:
           mkdir ${{ env.targetName }}-${{ matrix.qt_arch }}
           copy build\Release\${env:targetName}'.exe' ${{ env.targetName }}-${{ matrix.qt_arch }}\
           copy renderer\renderer.dll ${{ env.targetName }}-${{ matrix.qt_arch }}\
-          windeployqt ${{ env.targetName }}-${{ matrix.qt_arch }}\${env:targetName}'.exe'
-          7z a ${{ env.targetName }}-${{ matrix.qt_arch }}.zip ${{ env.targetName }}-${{ matrix.qt_arch }}
+          windeployqt ${{ env.targetName }}-${{ matrix.qt_arch }}\${{ env.targetName }}'.exe'
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          path: ${{ env.targetName }}-${{ matrix.qt_arch }}
+          name: ${{ env.targetName }}-${{ matrix.qt_arch }}
