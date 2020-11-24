@@ -125,11 +125,13 @@ jobs:
 
       - name: package
         shell: cmd
+        env:
+          target_dir: ${{ env.targetName }}-${{ matrix.qt_arch }}
         run: |
-          mkdir ${{ env.targetName }}-${{ matrix.qt_arch }}
-          copy build\Release\${env:targetName}'.exe' ${{ env.targetName }}-${{ matrix.qt_arch }}\
-          copy renderer\renderer.dll ${{ env.targetName }}-${{ matrix.qt_arch }}\
-          windeployqt ${{ env.targetName }}-${{ matrix.qt_arch }}\${{ env.targetName }}'.exe'
+          mkdir %target_dir%
+          copy build\Release\${{ env.targetName }}.exe %target_dir%\
+          copy renderer\renderer.dll %target_dir%\
+          windeployqt %target_dir%\${{ env.targetName }}.exe
 
       - name: upload artifact
         uses: actions/upload-artifact@v1
