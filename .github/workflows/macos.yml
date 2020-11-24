@@ -56,5 +56,5 @@ jobs:
         uses: actions/upload-artifact@v1.0.0
         with:
           name: ${{ env.targetName }}-${{ matrix.qt_arch }}
-          path: "build/${{ env.targetName }}.dmg"
+          path: "build/client/${{ env.targetName }}.dmg"
           
