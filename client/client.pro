@@ -164,7 +164,10 @@ macx: {
     INSTALLS += icon
     LIBS += -framework CoreFoundation -framework Security -framework AppKit
 
-    HEADERS += $$PWD/spelling/dictionary_provider_nsspellchecker.h
+    HEADERS += $$PWD/spelling/dictionary_provider_nsspellchecker.h \
+        $$PWD/macapplication.h
+
+    SOURCES += $$PWD/macapplication.cpp
 
     OBJECTIVE_SOURCES += $$PWD/spelling/dictionary_provider_nsspellchecker.mm
     DESTDIR = $$OUT_PWD

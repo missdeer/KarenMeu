@@ -36,17 +36,25 @@ static void associateFileTypes(const QStringList &fileTypes)
 }
 #endif
 
+#if defined(Q_OS_MAC)
+#    include <QFileOpenEvent>
+
+#    include "macapplication.h"
+#endif
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setOrganizationName("MiniDump.Info");
+    QCoreApplication::setApplicationName("KarenMeu");
+    QCoreApplication::setApplicationVersion("1.0");
+
+#if defined(Q_OS_MAC)
+    MacApplication a(argc, argv);
+#else
     QApplication a(argc, argv);
-    
-    QApplication::setOrganizationName("MiniDump.Info");
-    QApplication::setApplicationName("KarenMeu");
-    QApplication::setApplicationDisplayName("KarenMeu");
-    QApplication::setApplicationVersion("1.0");
-    
+#endif
+
 #ifdef Q_OS_WIN
     associateFileTypes(QStringList()<< ".markdown" << ".md" << ".mdown");
 #endif
@@ -116,5 +124,10 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.showMaximized();
     w.openFile(fileName);
+
+#if defined(Q_OS_MAC)
+    a.connect(&a, &MacApplication::openFile, &w, &MainWindow::openFile);
+#endif
+
     return QApplication::exec();
 }

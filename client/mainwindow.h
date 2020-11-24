@@ -23,8 +23,11 @@ public:
     MainWindow(const MainWindow&) = delete;
     MainWindow(MainWindow&&) = delete;
     void operator=(const MainWindow&) = delete;
-    void operator=(MainWindow&&) = delete;
+    void operator=(MainWindow &&) = delete;
+
+public slots:
     void openFile(const QString& fileName);
+
 private slots:
     void on_actionExit_triggered();
     

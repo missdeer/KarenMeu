@@ -655,7 +655,7 @@
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="606"/>
+        <location filename="../mainwindow.cpp" line="602"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>
@@ -1217,7 +1217,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="106"/>
+        <location filename="../main.cpp" line="114"/>
         <source>The file to open.</source>
         <translation>打开文章</translation>
     </message>
