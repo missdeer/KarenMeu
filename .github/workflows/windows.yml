@@ -124,13 +124,10 @@ jobs:
           cd ..
 
       - name: package
-        env:
-          VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
-          archiveName: ${{ env.targetName }}-${{ matrix.qt_arch }}
         shell: cmd
         run: |
-          mkdir ${env:archiveName}
-          copy build\Release\${env:targetName}'.exe' ${env:archiveName}\
-          copy renderer\renderer.dll -Destination ${env:archiveName}\
-          windeployqt ${env:archiveName}\${env:targetName}'.exe'
-          7z a ${env:archiveName}'.zip' ${env:archiveName}
+          mkdir ${{ env.targetName }}-${{ matrix.qt_arch }}
+          copy build\Release\${env:targetName}'.exe' ${{ env.targetName }}-${{ matrix.qt_arch }}\
+          copy renderer\renderer.dll ${{ env.targetName }}-${{ matrix.qt_arch }}\
+          windeployqt ${{ env.targetName }}-${{ matrix.qt_arch }}\${env:targetName}'.exe'
+          7z a ${{ env.targetName }}-${{ matrix.qt_arch }}.zip ${{ env.targetName }}-${{ matrix.qt_arch }}
