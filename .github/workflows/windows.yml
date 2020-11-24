@@ -130,6 +130,7 @@ jobs:
         run: |
           mkdir %target_dir%
           copy build\client\Release\${{ env.targetName }}.exe %target_dir%\
+          copy build\registerProtocolHandler\Release\registerProtocolHandler.exe %target_dir%\
           copy renderer\renderer.dll %target_dir%\
           windeployqt %target_dir%\${{ env.targetName }}.exe
 
