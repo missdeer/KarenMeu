@@ -1,0 +1,1012 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>850</width>
+    <height>540</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>KarenMeu</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="karenmeu.qrc">
+    <normaloff>:/KarenMeu.png</normaloff>:/KarenMeu.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>850</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <widget class="QMenu" name="menuExport">
+     <property name="title">
+      <string>Export...</string>
+     </property>
+     <addaction name="actionExportAsHTML"/>
+     <addaction name="actionExportAsPDF"/>
+    </widget>
+    <widget class="QMenu" name="menuRecentFiles">
+     <property name="title">
+      <string>Recent Files...</string>
+     </property>
+     <addaction name="actionClearRecentFilesList"/>
+     <addaction name="separator"/>
+    </widget>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
+    <addaction name="menuRecentFiles"/>
+    <addaction name="menuExport"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="separator"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionPaste"/>
+    <addaction name="actionSelectAll"/>
+    <addaction name="separator"/>
+    <addaction name="actionCopyAsHTML"/>
+    <addaction name="separator"/>
+    <addaction name="actionPreference"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionContent"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuFormat">
+    <property name="title">
+     <string>Format</string>
+    </property>
+    <addaction name="actionStrong"/>
+    <addaction name="actionEmphasize"/>
+    <addaction name="actionStrikethrough"/>
+    <addaction name="actionInlineCode"/>
+    <addaction name="actionCodeBlock"/>
+    <addaction name="actionComment"/>
+    <addaction name="separator"/>
+    <addaction name="actionOrderedList"/>
+    <addaction name="actionUnorderedList"/>
+    <addaction name="actionBlockquote"/>
+    <addaction name="separator"/>
+    <addaction name="actionHyperlink"/>
+    <addaction name="actionImage"/>
+    <addaction name="actionHorizontalRule"/>
+    <addaction name="actionNewParagraph"/>
+    <addaction name="separator"/>
+    <addaction name="actionShiftRight"/>
+    <addaction name="actionShiftLeft"/>
+    <addaction name="separator"/>
+    <addaction name="actionHeader1"/>
+    <addaction name="actionHeader2"/>
+    <addaction name="actionHeader3"/>
+    <addaction name="actionHeader4"/>
+    <addaction name="actionHeader5"/>
+    <addaction name="actionHeader6"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuDock">
+    <property name="title">
+     <string>&amp;Dock</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuView"/>
+   <addaction name="menuFormat"/>
+   <addaction name="menuDock"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QToolBar" name="fileToolbar">
+   <property name="windowTitle">
+    <string>File Toolbar</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNew"/>
+   <addaction name="actionOpen"/>
+   <addaction name="actionSave"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="editToolbar">
+   <property name="windowTitle">
+    <string>Edit Toolbar</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionUndo"/>
+   <addaction name="actionRedo"/>
+   <addaction name="separator"/>
+   <addaction name="actionCopy"/>
+   <addaction name="actionCut"/>
+   <addaction name="actionPaste"/>
+   <addaction name="separator"/>
+   <addaction name="actionCopyAsHTML"/>
+  </widget>
+  <widget class="QToolBar" name="formatToolbar">
+   <property name="windowTitle">
+    <string>Format Toolbar</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>24</width>
+     <height>24</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionStrong"/>
+   <addaction name="actionEmphasize"/>
+   <addaction name="actionStrikethrough"/>
+   <addaction name="actionInlineCode"/>
+   <addaction name="actionCodeBlock"/>
+   <addaction name="separator"/>
+   <addaction name="actionOrderedList"/>
+   <addaction name="actionUnorderedList"/>
+   <addaction name="actionBlockquote"/>
+   <addaction name="actionHyperlink"/>
+   <addaction name="actionImage"/>
+   <addaction name="actionHorizontalRule"/>
+   <addaction name="separator"/>
+   <addaction name="actionShiftLeft"/>
+   <addaction name="actionShiftRight"/>
+   <addaction name="separator"/>
+   <addaction name="actionHeader1"/>
+   <addaction name="actionHeader2"/>
+   <addaction name="actionHeader3"/>
+   <addaction name="actionHeader4"/>
+  </widget>
+  <action name="actionNew">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/new.png</normaloff>:/rc/images/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/open.png</normaloff>:/rc/images/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/save.png</normaloff>:/rc/images/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/save_as.png</normaloff>:/rc/images/save_as.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save &amp;As...</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/copy.png</normaloff>:/rc/images/copy.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Copy</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/cut.png</normaloff>:/rc/images/cut.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cu&amp;t</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/paste.png</normaloff>:/rc/images/paste.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Paste</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionContent">
+   <property name="text">
+    <string>&amp;Content...</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About...</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
+   </property>
+  </action>
+  <action name="actionPreference">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/preference.png</normaloff>:/rc/images/preference.png</iconset>
+   </property>
+   <property name="text">
+    <string>Preference...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+X</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/undo.png</normaloff>:/rc/images/undo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/redo.png</normaloff>:/rc/images/redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Redo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
+   </property>
+  </action>
+  <action name="actionSelectAll">
+   <property name="text">
+    <string>Select All</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="actionCopyAsHTML">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/copyAsHTML.png</normaloff>:/rc/images/copyAsHTML.png</iconset>
+   </property>
+   <property name="text">
+    <string>Copy As HTML</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+C</string>
+   </property>
+  </action>
+  <action name="actionExportAsHTML">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/exportashtml.png</normaloff>:/rc/images/exportashtml.png</iconset>
+   </property>
+   <property name="text">
+    <string>HTML</string>
+   </property>
+  </action>
+  <action name="actionExportAsPDF">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/exportaspdf.png</normaloff>:/rc/images/exportaspdf.png</iconset>
+   </property>
+   <property name="text">
+    <string>PDF</string>
+   </property>
+  </action>
+  <action name="actionStrong">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/strong.png</normaloff>:/rc/images/strong.png</iconset>
+   </property>
+   <property name="text">
+    <string>Strong</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
+   </property>
+  </action>
+  <action name="actionEmphasize">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/emphasize.png</normaloff>:/rc/images/emphasize.png</iconset>
+   </property>
+   <property name="text">
+    <string>Emphasize</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="actionInlineCode">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/code.png</normaloff>:/rc/images/code.png</iconset>
+   </property>
+   <property name="text">
+    <string>Inline Code</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+K</string>
+   </property>
+  </action>
+  <action name="actionComment">
+   <property name="text">
+    <string>Comment</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+/</string>
+   </property>
+  </action>
+  <action name="actionOrderedList">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/ol.png</normaloff>:/rc/images/ol.png</iconset>
+   </property>
+   <property name="text">
+    <string>Ordered List</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+O</string>
+   </property>
+  </action>
+  <action name="actionUnorderedList">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/ul.png</normaloff>:/rc/images/ul.png</iconset>
+   </property>
+   <property name="text">
+    <string>Unordered List</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+U</string>
+   </property>
+  </action>
+  <action name="actionBlockquote">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/quote.png</normaloff>:/rc/images/quote.png</iconset>
+   </property>
+   <property name="text">
+    <string>Blockquote</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+B</string>
+   </property>
+  </action>
+  <action name="actionHyperlink">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/link.png</normaloff>:/rc/images/link.png</iconset>
+   </property>
+   <property name="text">
+    <string>Hyperlink</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+K</string>
+   </property>
+  </action>
+  <action name="actionImage">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/image.png</normaloff>:/rc/images/image.png</iconset>
+   </property>
+   <property name="text">
+    <string>Image</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+I</string>
+   </property>
+  </action>
+  <action name="actionNewParagraph">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/paragraph.png</normaloff>:/rc/images/paragraph.png</iconset>
+   </property>
+   <property name="text">
+    <string>New Paragraph</string>
+   </property>
+  </action>
+  <action name="actionHeader1">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/h1.png</normaloff>:/rc/images/h1.png</iconset>
+   </property>
+   <property name="text">
+    <string>Header 1</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+1</string>
+   </property>
+  </action>
+  <action name="actionHeader2">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/h2.png</normaloff>:/rc/images/h2.png</iconset>
+   </property>
+   <property name="text">
+    <string>Header 2</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+2</string>
+   </property>
+  </action>
+  <action name="actionHeader3">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/h3.png</normaloff>:/rc/images/h3.png</iconset>
+   </property>
+   <property name="text">
+    <string>Header 3</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+3</string>
+   </property>
+  </action>
+  <action name="actionHeader4">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/h4.png</normaloff>:/rc/images/h4.png</iconset>
+   </property>
+   <property name="text">
+    <string>Header 4</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+4</string>
+   </property>
+  </action>
+  <action name="actionHeader5">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/h5.png</normaloff>:/rc/images/h5.png</iconset>
+   </property>
+   <property name="text">
+    <string>Header 5</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+5</string>
+   </property>
+  </action>
+  <action name="actionHeader6">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/h6.png</normaloff>:/rc/images/h6.png</iconset>
+   </property>
+   <property name="text">
+    <string>Header 6</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+6</string>
+   </property>
+  </action>
+  <action name="actionHorizontalRule">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/hr.png</normaloff>:/rc/images/hr.png</iconset>
+   </property>
+   <property name="text">
+    <string>Horizontal Rule</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
+  </action>
+  <action name="actionShiftRight">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/shiftright.png</normaloff>:/rc/images/shiftright.png</iconset>
+   </property>
+   <property name="text">
+    <string>Shift Right</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+.</string>
+   </property>
+  </action>
+  <action name="actionShiftLeft">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/shiftleft.png</normaloff>:/rc/images/shiftleft.png</iconset>
+   </property>
+   <property name="text">
+    <string>Shift Left</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+,</string>
+   </property>
+  </action>
+  <action name="actionStrikethrough">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/strikethrough.png</normaloff>:/rc/images/strikethrough.png</iconset>
+   </property>
+   <property name="text">
+    <string>Strikethrough</string>
+   </property>
+  </action>
+  <action name="actionCodeBlock">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/codeblock.png</normaloff>:/rc/images/codeblock.png</iconset>
+   </property>
+   <property name="text">
+    <string>Code Block</string>
+   </property>
+  </action>
+  <action name="actionGoldmark">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Goldmark</string>
+   </property>
+  </action>
+  <action name="actionLute">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Lute</string>
+   </property>
+  </action>
+  <action name="actionDefault">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>默认</string>
+   </property>
+  </action>
+  <action name="actionOrange">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>橙心</string>
+   </property>
+  </action>
+  <action name="actionInk">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>墨黑</string>
+   </property>
+  </action>
+  <action name="actionPurple">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>姹紫</string>
+   </property>
+  </action>
+  <action name="actionBlue">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>嫩青</string>
+   </property>
+  </action>
+  <action name="actionGreen">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>绿意</string>
+   </property>
+  </action>
+  <action name="actionRed">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>红绯</string>
+   </property>
+  </action>
+  <action name="actionAbap">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Abap</string>
+   </property>
+  </action>
+  <action name="actionAlgol">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Algol</string>
+   </property>
+  </action>
+  <action name="actionAlgolNu">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Algol Nu</string>
+   </property>
+  </action>
+  <action name="actionAPI">
+   <property name="text">
+    <string>API</string>
+   </property>
+  </action>
+  <action name="actionArduino">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Arduino</string>
+   </property>
+  </action>
+  <action name="actionAutumn">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Autumn</string>
+   </property>
+  </action>
+  <action name="actionBorland">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Borland</string>
+   </property>
+  </action>
+  <action name="actionBW">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>BW</string>
+   </property>
+  </action>
+  <action name="actionColorful">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Colorful</string>
+   </property>
+  </action>
+  <action name="actionDracula">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Dracula</string>
+   </property>
+  </action>
+  <action name="actionEmacs">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Emacs</string>
+   </property>
+  </action>
+  <action name="actionFriendly">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Friendly</string>
+   </property>
+  </action>
+  <action name="actionFruity">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Fruity</string>
+   </property>
+  </action>
+  <action name="actionGithub">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Github</string>
+   </property>
+  </action>
+  <action name="actionIgor">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Igor</string>
+   </property>
+  </action>
+  <action name="actionLovelace">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Lovelace</string>
+   </property>
+  </action>
+  <action name="actionManni">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Manni</string>
+   </property>
+  </action>
+  <action name="actionMonokai">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Monokai</string>
+   </property>
+  </action>
+  <action name="actionMonokaiLight">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Monokai Light</string>
+   </property>
+  </action>
+  <action name="actionMurphy">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Murphy</string>
+   </property>
+  </action>
+  <action name="actionNative">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Native</string>
+   </property>
+  </action>
+  <action name="actionParaisoDark">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Paraiso Dark</string>
+   </property>
+  </action>
+  <action name="actionParaisoLight">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Paraiso Light</string>
+   </property>
+  </action>
+  <action name="actionPastie">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Pastie</string>
+   </property>
+  </action>
+  <action name="actionPerldoc">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Perldoc</string>
+   </property>
+  </action>
+  <action name="actionPygments">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Pygments</string>
+   </property>
+  </action>
+  <action name="actionRainbowDash">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Rainbow Dash</string>
+   </property>
+  </action>
+  <action name="actionRRT">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>RRT</string>
+   </property>
+  </action>
+  <action name="actionSolarizedDark">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Solarized Dark</string>
+   </property>
+  </action>
+  <action name="actionSolarizedDark256">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Solarized Dark256</string>
+   </property>
+  </action>
+  <action name="actionSolarizedLight">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Solarized Light</string>
+   </property>
+  </action>
+  <action name="actionSwapOff">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Swap Off</string>
+   </property>
+  </action>
+  <action name="actionTango">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Tango</string>
+   </property>
+  </action>
+  <action name="actionTrac">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Trac</string>
+   </property>
+  </action>
+  <action name="actionVIM">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>VIM</string>
+   </property>
+  </action>
+  <action name="actionVS">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>VS</string>
+   </property>
+  </action>
+  <action name="actionXcode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Xcode</string>
+   </property>
+  </action>
+  <action name="actionGopher">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gopher</string>
+   </property>
+  </action>
+  <action name="actionClearRecentFilesList">
+   <property name="text">
+    <string>Clear Recent Files List</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="karenmeu.qrc"/>
+ </resources>
+ <connections/>
+</ui>

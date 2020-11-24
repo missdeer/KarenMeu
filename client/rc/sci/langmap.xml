@@ -1,0 +1,58 @@
+<AinesmileLanguageMap>
+	<language name="normal" pattern="" suffix="txt"/>
+	<language name="actionscript" pattern="" suffix="as mx"/>
+	<language name="ada" pattern="" suffix="ada ads adb"/>
+	<language name="asm" pattern="" suffix="asm"/>
+	<language name="asp" pattern="" suffix="asp"/>
+	<language name="autoit" pattern="" suffix="au3"/>
+	<language name="bash" pattern="" suffix="sh bsh"/>
+	<language name="batch" pattern="" suffix="bat cmd nt"/>
+	<language name="c" pattern="" suffix="c"/>
+	<language name="caml" pattern="" suffix="ml mli sml thy"/>
+	<language name="cmake" pattern="" suffix="cmake"/>
+	<language name="cobol" pattern="" suffix="cbl cbd cdb cdc cob"/>
+	<language name="cpp" pattern="" suffix="h hpp hxx cpp cxx cc"/>
+	<language name="cs" pattern="" suffix="cs"/>
+	<language name="css" pattern="" suffix="css"/>
+	<language name="d" pattern="" suffix="d"/>
+	<language name="diff" pattern="" suffix="diff patch"/>
+	<language name="fortran" pattern="" suffix="f for f90 f95 f2k"/>
+	<language name="gui4cli" pattern="" suffix=""/>
+	<language name="haskell" pattern="" suffix="hs lhs as las"/>
+	<language name="html" pattern="" suffix="html htm shtml shtm xhtml hta"/>
+	<language name="ini" pattern="" suffix="ini inf reg url"/>
+	<language name="inno" pattern="" suffix="iss"/>
+	<language name="java" pattern="" suffix="java"/>
+	<language name="javascript" pattern="" suffix="js"/>
+	<language name="jsp" pattern="" suffix="jsp"/>
+	<language name="kix" pattern="" suffix="kix"/>
+	<language name="lisp" pattern="" suffix="lsp lisp"/>
+	<language name="lua" pattern="" suffix="lua"/>
+	<language name="makefile" pattern="" suffix="mak"/>
+	<language name="matlab" pattern="" suffix="m"/>
+	<language name="nfo" pattern="" suffix="nfo"/>
+	<language name="nsis" pattern="" suffix="nsi nsh"/>
+	<language name="objc" pattern="" suffix=""/>
+	<language name="pascal" pattern="" suffix="pas inc"/>
+	<language name="perl" pattern="" suffix="pl pm plx"/>
+	<language name="php" pattern="" suffix="php php3 phtml"/>
+	<language name="postscript" pattern="" suffix="ps"/>
+	<language name="powershell" pattern="" suffix="ps1"/>
+	<language name="props" pattern="" suffix="properties"/>
+	<language name="python" pattern="" suffix="py pyw"/>
+	<language name="r" pattern="" suffix="r"/>
+	<language name="rc" pattern="" suffix="rc"/>
+	<language name="ruby" pattern="" suffix="rb rbw"/>
+	<language name="scheme" pattern="" suffix="scm smd ss"/>
+	<language name="smalltalk" pattern="" suffix="st"/>
+	<language name="sql" pattern="" suffix="sql"/>
+	<language name="tcl" pattern="" suffix="tcl"/>
+	<language name="tex" pattern="" suffix="tex"/>
+	<language name="vb" pattern="" suffix="vb vbs"/>
+	<language name="verilog" pattern="" suffix="v"/>
+	<language name="vhdl" pattern="" suffix="vhd vhdl"/>
+	<language name="xml" pattern="" suffix="xml xsml xsl xsd kml wsdl"/>
+	<language name="yaml" pattern="" suffix="yml"/>
+	<language name="searchResult" pattern="" suffix=""/>
+</AinesmileLanguageMap>
+
