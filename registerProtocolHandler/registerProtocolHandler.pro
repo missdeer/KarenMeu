@@ -15,13 +15,14 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RC_FILE = registerProtocolHandler.rc
+win32: {
+    LIBS += -lole32
+    RC_FILE = registerProtocolHandler.rc
 
-win32-*msvc*: {
-    QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
-} else : {
-    DEFINES += NTDDI_VERSION=NTDDI_VISTA
-    RC_FILE += manifest.rc
+    win32-*msvc*: {
+        QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
+    } else : {
+        DEFINES += NTDDI_VERSION=NTDDI_VISTA
+        RC_FILE += manifest.rc
+    }
 }
-
-LIBS += -lole32

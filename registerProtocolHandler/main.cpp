@@ -1,17 +1,15 @@
-#include <shobjidl.h>
-
 #include <QCoreApplication>
 #include <QDir>
 #include <QSettings>
 
-#if QT_VERSION_MAJOR >= 5
+#ifdef WIN32
+#    include <shobjidl.h>
+
 #    ifdef WIN64
 QSettings::Format RegFormat = QSettings::Registry64Format;
 #    else
 QSettings::Format RegFormat = QSettings::Registry32Format;
 #    endif
-#else
-QSettings::Format RegFormat = QSettings::NativeFormat;
 #endif
 
 #define APPLICATION_ID "KarenMeu"

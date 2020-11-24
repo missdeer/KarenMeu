@@ -655,7 +655,7 @@
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="602"/>
+        <location filename="../mainwindow.cpp" line="606"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>
