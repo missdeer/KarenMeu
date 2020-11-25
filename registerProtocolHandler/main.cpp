@@ -13,6 +13,7 @@ QSettings::Format RegFormat = QSettings::Registry32Format;
 #endif
 
 #define APPLICATION_ID "KarenMeu"
+#define APPLICATION_FILENAME APPLICATION_ID ".exe"
 #define REGKEYFORMAT_ASSOCFILE APPLICATION_ID ".AssocFile.%1"
 
 #ifdef EXECUTE_ON_UAC
@@ -33,6 +34,30 @@ QSettings::Format RegFormat = QSettings::Registry32Format;
 #    define REGKEY_APPLICATION_INAPP REGKEY_CLASSES "\\Applications\\" APPLICATION_ID ".exe"
 #endif
 
+#if defined(Q_OS_WIN)
+#    include <QFileInfo>
+#    include <QSettings>
+
+// Helper function to register supported file types
+// This is needed to enable the application jump list to show the desired recent files
+static void associateFileTypes(const QStringList &fileTypes)
+{
+    QSettings settings("HKEY_CURRENT_USER\\Software\\Classes\\Applications\\" APPLICATION_FILENAME, RegFormat);
+    settings.setValue("FriendlyAppName", APPLICATION_ID);
+
+    settings.beginGroup("SupportedTypes");
+    foreach (const QString &fileType, fileTypes)
+        settings.setValue(fileType, QString());
+    settings.endGroup();
+
+    settings.beginGroup("shell");
+    settings.beginGroup("open");
+    settings.setValue("FriendlyAppName", APPLICATION_ID);
+    settings.beginGroup("Command");
+    settings.setValue(".", QChar('"') + QDir::toNativeSeparators(QCoreApplication::applicationDirPath()) + QString("\\KarenMeu.exe\" \"%1\""));
+}
+#endif
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -47,8 +72,15 @@ int main(int argc, char *argv[])
     mxOpenKey.setValue(".", QChar('"') + QDir::toNativeSeparators(QCoreApplication::applicationDirPath()) + QString("\\KarenMeu.exe\" \"%1\""));
     mxKey.sync();
 
+    associateFileTypes(QStringList() << ".markdown"
+                                     << ".md"
+                                     << ".mdown");
+
     QStringList formats    = {"markdown"};
     QStringList extensions = {".markdown", ".md", ".mdown"};
+
+    associateFileTypes(extensions);
+
     // assoiation for each extension
     foreach (const QString &fmt, formats)
     {

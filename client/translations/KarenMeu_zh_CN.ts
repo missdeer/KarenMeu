@@ -1217,7 +1217,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="114"/>
+        <location filename="../main.cpp" line="77"/>
         <source>The file to open.</source>
         <translation>打开文章</translation>
     </message>

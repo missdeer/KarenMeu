@@ -8,34 +8,6 @@
 #include "mainwindow.h"
 #include "settings.h"
 
-#ifdef Q_OS_WIN
-#include <QFileInfo>
-#include <QSettings>
-
-// Helper function to register supported file types
-// This is needed to enable the application jump list to show the desired recent files
-static void associateFileTypes(const QStringList &fileTypes)
-{
-    QString displayName = QGuiApplication::applicationDisplayName();
-    QString filePath = QCoreApplication::applicationFilePath();
-    QString fileName = QFileInfo(filePath).fileName();
-
-    QSettings settings("HKEY_CURRENT_USER\\Software\\Classes\\Applications\\" + fileName, QSettings::NativeFormat);
-    settings.setValue("FriendlyAppName", displayName);
-
-    settings.beginGroup("SupportedTypes");
-    foreach (const QString& fileType, fileTypes)
-        settings.setValue(fileType, QString());
-    settings.endGroup();
-
-    settings.beginGroup("shell");
-    settings.beginGroup("open");
-    settings.setValue("FriendlyAppName", displayName);
-    settings.beginGroup("Command");
-    settings.setValue(".", QChar('"') + QDir::toNativeSeparators(filePath) + QString("\" \"%1\""));
-}
-#endif
-
 #if defined(Q_OS_MAC)
 #    include <QFileOpenEvent>
 
@@ -49,24 +21,16 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("KarenMeu");
     QCoreApplication::setApplicationVersion("1.0");
 
-#if defined(Q_OS_MAC)
-    MacApplication a(argc, argv);
-#else
-    QApplication a(argc, argv);
-#endif
-
-#ifdef Q_OS_WIN
-    associateFileTypes(QStringList()<< ".markdown" << ".md" << ".mdown");
-#endif
-    
-    QString locale = "zh_CN";
+    QString     locale = "zh_CN";
     QTranslator translator;
     QTranslator qtTranslator;
 
     // main application and dynamic linked library locale
 #if defined(Q_OS_MAC)
+    MacApplication a(argc, argv);
     QString localeDirPath = QApplication::applicationDirPath() + "/../Resources/translations";
 #else
+    QApplication a(argc, argv);
     QString localeDirPath = QApplication::applicationDirPath() + "/translations";
     if (!QDir(localeDirPath).exists())
     {
@@ -100,10 +64,9 @@ int main(int argc, char *argv[])
             qDebug() << "installing qt translator failed ";
         }
     }
-    
-    Settings settings;
-    settings.initialize();
-    g_settings = &settings;
+
+    g_settings.reset(new Settings);
+    g_settings->initialize();
 
     QWebEngineSettings::globalSettings()->setAttribute(QWebEngineSettings::JavascriptCanAccessClipboard, true);
     

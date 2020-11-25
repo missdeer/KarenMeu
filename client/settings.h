@@ -1,7 +1,9 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include <QSharedPointer>
 #include <QString>
+
 #include "Theme.h"
 
 class Settings
@@ -68,6 +70,6 @@ private:
     Theme m_theme;
 };
 
-inline Settings *g_settings = nullptr;
+inline QSharedPointer<Settings> g_settings;
 
 #endif // SETTINGS_H
