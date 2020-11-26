@@ -1,7 +1,7 @@
-#include <QtCore>
 #include <QDesktopServices>
-#include "previewpage.h"
+#include <QtCore>
 
+#include "previewpage.h"
 
 void PreviewPage::onEditorScrollMoved(int pos, int max)
 {

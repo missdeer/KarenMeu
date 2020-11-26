@@ -1,5 +1,5 @@
-#include "scintillaconfig.h"
 #include "previewthemeeditor.h"
+#include "scintillaconfig.h"
 
 PreviewThemeEditor::PreviewThemeEditor(QWidget *parent)
     : ScintillaEdit(parent)

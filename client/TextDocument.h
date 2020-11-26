@@ -20,10 +20,10 @@
 #ifndef MARKUPDOCUMENT_H
 #define MARKUPDOCUMENT_H
 
-#include <QTextDocument>
-#include <QString>
 #include <QDateTime>
+#include <QString>
 #include <QTextBlock>
+#include <QTextDocument>
 
 /**
  * Text document that maintains timestamp, read-only state, and new vs.

@@ -1,20 +1,21 @@
-#include <QtCore>
 #include <QApplication>
 #include <QClipboard>
-#include <QVBoxLayout>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSplitter>
-#include <QWebEngineView>
+#include <QTimer>
+#include <QVBoxLayout>
+#include <QWebChannel>
 #include <QWebEngineScript>
 #include <QWebEngineScriptCollection>
-#include <QWebChannel>
-#include <QTimer>
-#include "settings.h"
-#include "markdowneditor2.h"
+#include <QWebEngineView>
+#include <QtCore>
+
 #include "markdownview.h"
+#include "markdowneditor2.h"
 #include "previewpage.h"
 #include "renderer.h"
+#include "settings.h"
 
 using pFMarkdownEngine = char *(*)(GoString, GoString, GoUint8); 
 pFMarkdownEngine markdownEngine = nullptr;

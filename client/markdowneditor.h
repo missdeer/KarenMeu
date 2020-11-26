@@ -20,23 +20,23 @@
 #ifndef MARKDOWN_EDITOR_H
 #define MARKDOWN_EDITOR_H
 
+#include <QGridLayout>
+#include <QLayout>
+#include <QListWidget>
 #include <QObject>
 #include <QPlainTextEdit>
-#include <QString>
+#include <QRegularExpression>
 #include <QResizeEvent>
 #include <QSize>
-#include <QLayout>
-#include <QGridLayout>
+#include <QString>
 #include <QTextCursor>
-#include <QListWidget>
-#include <QRegularExpression>
 
 #include "MarkdownEditorTypes.h"
 #include "MarkdownStyles.h"
 #include "TextDocument.h"
 #include "Theme.h"
-#include "spelling/dictionary_ref.h"
 #include "spelling/dictionary_manager.h"
+#include "spelling/dictionary_ref.h"
 
 class MarkdownHighlighter;
 

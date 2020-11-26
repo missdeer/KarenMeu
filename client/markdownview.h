@@ -2,6 +2,7 @@
 #define MARKDOWNVIEW_H
 
 #include <QWidget>
+
 #include "rendereddocument.h"
 
 QT_FORWARD_DECLARE_CLASS(QSplitter);

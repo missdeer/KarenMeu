@@ -20,10 +20,10 @@
 #ifndef THEME_FACTORY_H
 #define THEME_FACTORY_H
 
-#include <QString>
-#include <QStringList>
 #include <QDir>
 #include <QList>
+#include <QString>
+#include <QStringList>
 
 #include "Theme.h"
 

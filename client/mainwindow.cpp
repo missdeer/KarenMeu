@@ -1,11 +1,3 @@
-#include "mainwindow.h"
-#include "ColorHelper.h"
-#include "markdowneditor2.h"
-#include "markdownview.h"
-#include "preferencedialog.h"
-#include "renderer.h"
-#include "settings.h"
-#include "ui_mainwindow.h"
 #include <QAction>
 #include <QCloseEvent>
 #include <QComboBox>
@@ -25,6 +17,15 @@
 #include <QTreeView>
 #include <QUrl>
 #include <QtCore>
+
+#include "mainwindow.h"
+#include "ColorHelper.h"
+#include "markdowneditor2.h"
+#include "markdownview.h"
+#include "preferencedialog.h"
+#include "renderer.h"
+#include "settings.h"
+#include "ui_mainwindow.h"
 
 using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;

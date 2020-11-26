@@ -1,12 +1,13 @@
-#include <QtCore>
-#include <QFile>
 #include <QDomDocument>
 #include <QDomElement>
+#include <QFile>
 #include <QFontDatabase>
 #include <QStringBuilder>
-#include "settings.h"
-#include "ScintillaEdit.h"
+#include <QtCore>
+
 #include "scintillaconfig.h"
+#include "ScintillaEdit.h"
+#include "settings.h"
 
 void ScintillaConfig::initScintilla()
 {

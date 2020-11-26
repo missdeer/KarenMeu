@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="116"/>
+        <location filename="../mainwindow.cpp" line="117"/>
         <source>KarenMeu</source>
         <translation></translation>
     </message>
@@ -640,22 +640,22 @@
         <translation>清除最近打开的文件列表</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="117"/>
+        <location filename="../mainwindow.cpp" line="118"/>
         <source>KarenMeu is a Markdown based Wechat public account article editor for programmers.</source>
         <translation>KarenMeu是一款专为程序员设计的基于Markdown语法的微信公众号文章编辑器。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="149"/>
+        <location filename="../mainwindow.cpp" line="150"/>
         <source>%1. %2</source>
         <translation>%1. %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="583"/>
+        <location filename="../mainwindow.cpp" line="584"/>
         <source>File System</source>
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="602"/>
+        <location filename="../mainwindow.cpp" line="603"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>
@@ -681,94 +681,94 @@
 <context>
     <name>MarkdownView</name>
     <message>
-        <location filename="../markdownview.cpp" line="92"/>
-        <location filename="../markdownview.cpp" line="140"/>
+        <location filename="../markdownview.cpp" line="93"/>
+        <location filename="../markdownview.cpp" line="141"/>
         <source>Confirm</source>
         <translation>确认</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="93"/>
-        <location filename="../markdownview.cpp" line="141"/>
+        <location filename="../markdownview.cpp" line="94"/>
+        <location filename="../markdownview.cpp" line="142"/>
         <source>Modified document has not been saved, do you want to save it?</source>
         <translation>文档被修改且尚未保存，要保存吗？</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="108"/>
+        <location filename="../markdownview.cpp" line="109"/>
         <source>Open Markdown file</source>
         <translation>打开Markdown文档</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="110"/>
+        <location filename="../markdownview.cpp" line="111"/>
         <source>Markdown files (*.md *.markdown *.mdown);;All files (*.*)</source>
         <translation>Markdown文档 (*.md *.markdown *.mdown);;所有类型 (*.*)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="124"/>
+        <location filename="../markdownview.cpp" line="125"/>
         <source>Save Markdown file</source>
         <translation>保存Markdown文档</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="126"/>
+        <location filename="../markdownview.cpp" line="127"/>
         <source>Markdown file (*.md);;All files (*.*)</source>
         <translation>Markdown文档 (*.md);;所有类型 (*.*)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="226"/>
+        <location filename="../markdownview.cpp" line="227"/>
         <source>Export As HTML</source>
         <translation>导出为HTML</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="228"/>
+        <location filename="../markdownview.cpp" line="229"/>
         <source>HTML file (*.html)</source>
         <translation>HTML文档 (*.html)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="238"/>
+        <location filename="../markdownview.cpp" line="239"/>
         <source>HTML exported</source>
         <translation>HTML已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="239"/>
+        <location filename="../markdownview.cpp" line="240"/>
         <source>HTML file has been exported to %1 successfully.</source>
         <translation>HTML文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="246"/>
+        <location filename="../markdownview.cpp" line="247"/>
         <source>Export As PDF</source>
         <translation>导出为PDF</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="248"/>
+        <location filename="../markdownview.cpp" line="249"/>
         <source>Adobe PDF file (*.pdf)</source>
         <translation>Adobe PDF文档 (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="272"/>
+        <location filename="../markdownview.cpp" line="273"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="285"/>
+        <location filename="../markdownview.cpp" line="286"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="340"/>
+        <location filename="../markdownview.cpp" line="341"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="341"/>
+        <location filename="../markdownview.cpp" line="342"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="343"/>
+        <location filename="../markdownview.cpp" line="344"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="344"/>
+        <location filename="../markdownview.cpp" line="345"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>
@@ -801,9 +801,9 @@
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="23"/>
-        <location filename="../preferencedialog.cpp" line="50"/>
-        <location filename="../preferencedialog.cpp" line="59"/>
+        <location filename="../preferencedialog.cpp" line="22"/>
+        <location filename="../preferencedialog.cpp" line="49"/>
+        <location filename="../preferencedialog.cpp" line="58"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
@@ -1031,79 +1031,79 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ThemeFactory.cpp" line="198"/>
+        <location filename="../ThemeFactory.cpp" line="180"/>
         <source>The specified theme does not exist in the file system: </source>
         <translation>文件系统中没有找到指定的主题：</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="315"/>
+        <location filename="../ThemeFactory.cpp" line="297"/>
         <source>The specified theme is not available.  Try restarting the application.  If problem persists, please file a bug report.</source>
         <translation>指定的主题无效。请尝试重启程序。如果问题仍然存在，请创建一个问题报告。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="385"/>
+        <location filename="../ThemeFactory.cpp" line="367"/>
         <source>Could not delete %1 from theme.  Please try setting the theme file permissions to be writeable.</source>
         <translation>主题中无法删除%1。请尝试将主题文件权限设置为可写。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="408"/>
+        <location filename="../ThemeFactory.cpp" line="390"/>
         <source>&apos;%1&apos; already exists.  Please choose another name.</source>
         <translation>%1已存在。请另选一个名字。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="418"/>
+        <location filename="../ThemeFactory.cpp" line="400"/>
         <source>&apos;%1&apos; theme already exists.  Please choose another name.</source>
         <translation>%1已存在。请另选一个名字。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="453"/>
+        <location filename="../ThemeFactory.cpp" line="435"/>
         <source>Failed to rename theme.  Please check file permissions.</source>
         <translation>主题重命名失败。请检查文件权限。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="498"/>
+        <location filename="../ThemeFactory.cpp" line="480"/>
         <source>Theme is read-only.  Please try renaming the theme, or setting the theme file to be writable.</source>
         <translation>主题只读。请尝试重命名主题，或将主题文件设置为可写。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="538"/>
+        <location filename="../ThemeFactory.cpp" line="520"/>
         <source>Failed to remove old theme image.  Please check file permissions.</source>
         <translation>删除旧的主题图片失败。请检查文件权限。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="570"/>
+        <location filename="../ThemeFactory.cpp" line="552"/>
         <source>The old theme image file could not be removed from the theme directory.  Please check file permissions.</source>
         <translation>无法从主题目录中删除旧的主题图片文件。请检查文件权限。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="582"/>
+        <location filename="../ThemeFactory.cpp" line="564"/>
         <source>Theme image file could not be copied to the theme directory.  Please check file permissions.</source>
         <translation>无法将主题图片文件复制到主题目录中。请检查文件权限。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="601"/>
+        <location filename="../ThemeFactory.cpp" line="583"/>
         <source>Theme could not be saved to disk.  Please check file permissions or try renaming the theme.</source>
         <translation>主题无法保存到磁盘。请检查文件权限或尝试重命名主题。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="626"/>
+        <location filename="../ThemeFactory.cpp" line="608"/>
         <source>Untitled 1</source>
         <translation>未命名1</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="639"/>
+        <location filename="../ThemeFactory.cpp" line="621"/>
         <source>Untitled %1</source>
         <translation>未命名%1</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="697"/>
-        <location filename="../ThemeFactory.cpp" line="719"/>
-        <location filename="../ThemeFactory.cpp" line="747"/>
+        <location filename="../ThemeFactory.cpp" line="679"/>
+        <location filename="../ThemeFactory.cpp" line="701"/>
+        <location filename="../ThemeFactory.cpp" line="729"/>
         <source>Invalid or missing value for %1 provided.</source>
         <translation>提供了无效或缺少值给%1。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="727"/>
+        <location filename="../ThemeFactory.cpp" line="709"/>
         <source>Value for %1 is out of range.  Valid values are between %2 and %3, inclusive.</source>
         <translation>值%1超出范围。有效的值为%2到%3之间。</translation>
     </message>
@@ -1111,27 +1111,27 @@
 <context>
     <name>QSettings</name>
     <message>
-        <location filename="../settings.cpp" line="55"/>
+        <location filename="../settings.cpp" line="56"/>
         <source>Classic Light</source>
         <translation>经典亮</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="58"/>
+        <location filename="../settings.cpp" line="59"/>
         <source>默认</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="59"/>
+        <location filename="../settings.cpp" line="60"/>
         <source>xcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="60"/>
+        <location filename="../settings.cpp" line="61"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="62"/>
+        <location filename="../settings.cpp" line="63"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>
@@ -1207,9 +1207,9 @@
 <context>
     <name>TextDocument</name>
     <message>
-        <location filename="../TextDocument.cpp" line="47"/>
-        <location filename="../TextDocument.cpp" line="74"/>
-        <location filename="../TextDocument.cpp" line="119"/>
+        <location filename="../TextDocument.cpp" line="28"/>
+        <location filename="../TextDocument.cpp" line="55"/>
+        <location filename="../TextDocument.cpp" line="100"/>
         <source>untitled</source>
         <translation>未命名</translation>
     </message>
@@ -1217,7 +1217,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="78"/>
         <source>The file to open.</source>
         <translation>打开文章</translation>
     </message>

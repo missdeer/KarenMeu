@@ -1,11 +1,12 @@
-#include <QtCore>
-#include <QRegularExpression>
-#include <QTextDocumentFragment>
-#include <QScrollBar>
 #include <QCommonStyle>
+#include <QRegularExpression>
+#include <QScrollBar>
+#include <QTextDocumentFragment>
+#include <QtCore>
+
+#include "markdowneditor2.h"
 #include "TextDocument.h"
 #include "settings.h"
-#include "markdowneditor2.h"
 
 MarkdownEditor2::MarkdownEditor2(QWidget *parent)
     :MarkdownEditor(new TextDocument(parent), parent)

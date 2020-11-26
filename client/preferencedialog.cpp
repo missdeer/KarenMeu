@@ -2,7 +2,6 @@
 #include <QFile>
 
 #include "preferencedialog.h"
-
 #include "previewthemeeditor.h"
 #include "settings.h"
 #include "ui_preferencedialog.h"

@@ -1,10 +1,11 @@
-#include <QtCore>
 #include <QApplication>
-#include <QWebEngineSettings>
-#include <QTranslator>
-#include <QDir>
 #include <QCommandLineParser>
+#include <QDir>
 #include <QLibraryInfo>
+#include <QTranslator>
+#include <QWebEngineSettings>
+#include <QtCore>
+
 #include "mainwindow.h"
 #include "settings.h"
 

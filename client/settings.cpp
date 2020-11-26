@@ -1,8 +1,9 @@
-#include <QtCore>
-#include <QSettings>
 #include <QFile>
-#include "ThemeFactory.h"
+#include <QSettings>
+#include <QtCore>
+
 #include "settings.h"
+#include "ThemeFactory.h"
 
 Settings::~Settings()
 {

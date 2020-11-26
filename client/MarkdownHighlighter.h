@@ -22,11 +22,11 @@
 
 #include <QSyntaxHighlighter>
 
-#include "spelling/dictionary_ref.h"
-#include "MarkdownTokenizer.h"
 #include "MarkdownStyles.h"
-#include "Token.h"
+#include "MarkdownTokenizer.h"
 #include "TextDocument.h"
+#include "Token.h"
+#include "spelling/dictionary_ref.h"
 
 class QColor;
 class QRegularExpression;

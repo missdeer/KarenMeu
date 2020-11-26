@@ -1,35 +1,17 @@
-/***********************************************************************
- *
- * Copyright (C) 2014-2018 wereturtle
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- ***********************************************************************/
+#include <cstdio>
 
-#include <QSettings>
-#include <QDesktopServices>
-#include <stdio.h>
-#include <QCoreApplication>
-#include <QDir>
-#include <QString>
-#include <QFileInfo>
-#include <QVariant>
 #include <QColor>
+#include <QCoreApplication>
+#include <QDesktopServices>
+#include <QDir>
+#include <QFileInfo>
 #include <QMap>
-#include <QStack>
-#include <QStringList>
 #include <QObject>
+#include <QSettings>
+#include <QStack>
+#include <QString>
+#include <QStringList>
+#include <QVariant>
 
 #include "ThemeFactory.h"
 

@@ -20,8 +20,8 @@
 #ifndef THEME_H
 #define THEME_H
 
-#include <QString>
 #include <QColor>
+#include <QString>
 
 enum EditorAspect
 {

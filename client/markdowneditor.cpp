@@ -19,32 +19,32 @@
  *
  ***********************************************************************/
 
-#include <QTextStream>
-#include <QString>
-#include <QMimeData>
-#include <QScrollBar>
-#include <QTextBoundaryFinder>
+#include <QApplication>
+#include <QChar>
+#include <QColor>
+#include <QDesktopWidget>
+#include <QDir>
+#include <QFileInfo>
 #include <QHeaderView>
 #include <QMenu>
-#include <QChar>
-#include <QTimer>
-#include <QColor>
-#include <QApplication>
-#include <QDesktopWidget>
-#include <QUrl>
-#include <QPixmap>
+#include <QMimeData>
 #include <QPainter>
-#include <QFileInfo>
 #include <QPainterPath>
-#include <QDir>
+#include <QPixmap>
+#include <QScrollBar>
+#include <QString>
+#include <QTextBoundaryFinder>
+#include <QTextStream>
+#include <QTimer>
+#include <QUrl>
 
-#include "ColorHelper.h"
 #include "markdowneditor.h"
+#include "ColorHelper.h"
+#include "MarkdownHighlighter.h"
 #include "MarkdownStates.h"
 #include "MarkdownTokenizer.h"
-#include "MarkdownHighlighter.h"
-#include "spelling/dictionary_ref.h"
 #include "spelling/dictionary_manager.h"
+#include "spelling/dictionary_ref.h"
 #include "spelling/spell_checker.h"
 
 #define GW_TEXT_FADE_FACTOR 1.5

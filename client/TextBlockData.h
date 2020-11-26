@@ -21,8 +21,8 @@
 #define TEXTBLOCKDATA_H
 
 #include <QObject>
-#include <QTextBlockUserData>
 #include <QTextBlock>
+#include <QTextBlockUserData>
 
 #include "TextDocument.h"
 
