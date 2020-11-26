@@ -36,7 +36,7 @@ jobs:
     env:
       targetName: KarenMeu
       go_version: 1.15.3
-      qt_ver: 5.15.1
+      qt_ver: 5.15.2
       qt_target: desktop
     # 步骤
     steps:
