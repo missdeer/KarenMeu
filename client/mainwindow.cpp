@@ -16,9 +16,11 @@
 #include <QSplitter>
 #include <QTreeView>
 #include <QUrl>
+#include <QWindowStateChangeEvent>
 #include <QtCore>
 
 #include "mainwindow.h"
+
 #include "ColorHelper.h"
 #include "markdowneditor2.h"
 #include "markdownview.h"
@@ -660,6 +662,41 @@ void MainWindow::paintEvent(QPaintEvent* event)
     painter.end();
 
     QMainWindow::paintEvent(event);
+}
+
+void MainWindow::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::WindowStateChange)
+    {
+        QList<QToolBar *> toolbars = {ui->fileToolbar, ui->editToolbar, ui->formatToolbar};
+        if (windowState() & Qt::WindowFullScreen)
+        {
+            auto actions = ui->menuView->actions();
+            for (auto tb : toolbars)
+            {
+                if (tb->isVisible())
+                {
+                    m_visibleToolbars.append(tb);
+                    tb->setVisible(false);
+                }
+            }
+            event->accept();
+            return;
+        }
+
+        QWindowStateChangeEvent *e = static_cast<QWindowStateChangeEvent *>(event);
+        if (e->oldState() & Qt::WindowFullScreen)
+        {
+            for (auto a : m_visibleToolbars)
+            {
+                a->setVisible(true);
+            }
+            m_visibleToolbars.clear();
+            event->accept();
+            return;
+        }
+    }
+    event->ignore();
 }
 
 void MainWindow::adjustEditorWidth(int width)

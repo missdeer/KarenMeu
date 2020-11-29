@@ -48,12 +48,15 @@ protected:
     void moveEvent(QMoveEvent* event) override;
     void closeEvent(QCloseEvent *event) override;
     void paintEvent(QPaintEvent* event) override;
+    void changeEvent(QEvent *event) override;
+
 private:
     Ui::MainWindow *ui;
     MarkdownView *m_view;
     QFileSystemModel *m_fsModel;
     QTreeView *m_fsView;
     QTreeView *m_cloudView;
+    QList<QToolBar *> m_visibleToolbars;
 
     QString m_curFile;
 
