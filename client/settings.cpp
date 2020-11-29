@@ -5,11 +5,6 @@
 #include "settings.h"
 #include "ThemeFactory.h"
 
-Settings::~Settings()
-{
-    save();
-}
-
 void Settings::initialize()
 {
     load();

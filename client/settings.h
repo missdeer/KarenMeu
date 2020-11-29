@@ -9,13 +9,6 @@
 class Settings
 {
 public:
-    Settings() = default;
-    Settings(const Settings&) = delete;
-    void operator=(const Settings&) = delete;
-    Settings(Settings&&) = delete;
-    void operator=(Settings&&) = delete;
-    ~Settings();
-
     void save();
     void load();
     void initialize();

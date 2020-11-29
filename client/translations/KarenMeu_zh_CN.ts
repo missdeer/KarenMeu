@@ -1111,27 +1111,27 @@
 <context>
     <name>QSettings</name>
     <message>
-        <location filename="../settings.cpp" line="56"/>
+        <location filename="../settings.cpp" line="51"/>
         <source>Classic Light</source>
         <translation>经典亮</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="59"/>
+        <location filename="../settings.cpp" line="54"/>
         <source>默认</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="60"/>
+        <location filename="../settings.cpp" line="55"/>
         <source>xcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="61"/>
+        <location filename="../settings.cpp" line="56"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="63"/>
+        <location filename="../settings.cpp" line="58"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>
