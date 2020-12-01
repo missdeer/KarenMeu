@@ -10,8 +10,10 @@
 #include <QWebEngineScriptCollection>
 #include <QWebEngineView>
 #include <QtCore>
+#include <algorithm>
 
 #include "markdownview.h"
+
 #include "markdowneditor2.h"
 #include "previewpage.h"
 #include "renderer.h"
@@ -376,8 +378,35 @@ void MarkdownView::renderMarkdownToHTML()
     QByteArray ba = m_editor->content();
     if (ba.isEmpty())
         return;
-    GoString content{ (const char *)ba.data(), (ptrdiff_t)ba.size()};
-    
+
+    QByteArray temp = ba;
+    temp.replace('\r', ' ');
+    QList<QByteArray> lines = temp.split('\n');
+
+    QRegularExpression reBegin("\\s*\\-{3,}");
+    auto               match = reBegin.match(QString(lines[0]));
+    if (match.hasMatch())
+    {
+        QRegularExpression reEnd("^\\s*\\-{3,}$");
+        int                endLine = 0;
+        for (int i = 1; i < lines.length(); i++)
+        {
+            match = reEnd.match(QString(lines[i]));
+            if (match.hasMatch())
+            {
+                endLine = i;
+                break;
+            }
+        }
+        if (endLine)
+        {
+            lines = lines.mid(endLine + 1);
+        }
+        ba = lines.join('\n');
+    }
+
+    GoString content {(const char *)ba.data(), (ptrdiff_t)ba.size()};
+
     QByteArray style = g_settings->codeBlockStyle().toUtf8();
     GoString styleContent { (const char *)style.data(), (ptrdiff_t)style.size()};
     
