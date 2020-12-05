@@ -48,7 +48,7 @@ void Settings::load()
                                         #endif
                                             ).toString();
     m_codeEditorFontPointSize = settings.value("codeEditorFontPointSize", 14).toInt();
-    m_codeEditorTheme = settings.value("codeEditorTheme", QSettings::tr("Classic Light")).toString();
+    m_codeEditorTheme         = settings.value("codeEditorTheme", ThemeFactory::PLAINSTRACTION_LIGHT_THEME_NAME).toString();
     QString err;
     m_theme = ThemeFactory::getInstance()->loadTheme(m_codeEditorTheme, err);
     setPreviewTheme(settings.value("previewTheme", QSettings::tr("默认")).toString());

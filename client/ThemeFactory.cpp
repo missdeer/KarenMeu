@@ -32,14 +32,14 @@
 #define GW_HUD_FOREGROUND_COLOR "HUD/foregroundColor"
 #define GW_HUD_BACKGROUND_COLOR "HUD/backgroundColor"
 
-const QString ThemeFactory::CLASSIC_LIGHT_THEME_NAME = QString("Classic Light");
-const QString ThemeFactory::CLASSIC_DARK_THEME_NAME = QString("Classic Dark");
+const QString ThemeFactory::CLASSIC_LIGHT_THEME_NAME        = QString("Classic Light");
+const QString ThemeFactory::CLASSIC_DARK_THEME_NAME         = QString("Classic Dark");
 const QString ThemeFactory::PLAINSTRACTION_LIGHT_THEME_NAME = QString("Plainstraction Light");
-const QString ThemeFactory::PLAINSTRACTION_DARK_THEME_NAME = QString("Plainstraction Dark");
+const QString ThemeFactory::PLAINSTRACTION_DARK_THEME_NAME  = QString("Plainstraction Dark");
 
-ThemeFactory* ThemeFactory::instance = nullptr;
+ThemeFactory *ThemeFactory::instance = nullptr;
 
-ThemeFactory* ThemeFactory::getInstance()
+ThemeFactory *ThemeFactory::getInstance()
 {
     if (nullptr == instance)
     {
@@ -141,7 +141,7 @@ QStringList ThemeFactory::getAvailableThemes() const
 {
     QStringList themeNames;
 
-    for (const auto& theme : builtInThemes)
+    for (const auto &theme : builtInThemes)
     {
         themeNames.append(theme.getName());
     }
@@ -156,7 +156,7 @@ Theme ThemeFactory::getDefaultTheme() const
     return loadTheme(CLASSIC_LIGHT_THEME_NAME, err);
 }
 
-Theme ThemeFactory::loadTheme(const QString& name, QString& err) const
+Theme ThemeFactory::loadTheme(const QString &name, QString &err) const
 {
     err = QString();
 
@@ -170,51 +170,46 @@ Theme ThemeFactory::loadTheme(const QString& name, QString& err) const
 
     if (customThemeNames.contains(name))
     {
-        QString themeFilePath = themeDirectoryPath + QString("/") +
-            name + QString("/theme.cfg");
+        QString themeFilePath = themeDirectoryPath + QString("/") + name + QString("/theme.cfg");
 
         QFileInfo themeFileInfo(themeFilePath);
 
         if (!themeFileInfo.exists())
         {
-            err = QObject::tr("The specified theme does not exist in the file system: ") +
-                themeFilePath;
+            err = QObject::tr("The specified theme does not exist in the file system: ") + themeFilePath;
             return builtInThemes[0];
         }
 
         QSettings themeSettings(themeFilePath, QSettings::IniFormat);
-        int editorBackgroundAlpha;
-        int editorAspect;
-        int backgroundImageAspect;
-        QString backgroundImageUrl;
-        QColor editorBackgroundColor;
-        QColor spellingErrorColor;
-        QColor backgroundColor;
-        QColor hudForegroundColor;
-        QColor hudBackgroundColor;
-        QColor defaultTextColor;
-        QColor markupColor;
-        QColor linkColor;
-        QColor headingColor;
-        QColor emphasisColor;
-        QColor blockquoteColor;
-        QColor codeColor;
+        int       editorBackgroundAlpha;
+        int       editorAspect;
+        int       backgroundImageAspect;
+        QString   backgroundImageUrl;
+        QColor    editorBackgroundColor;
+        QColor    spellingErrorColor;
+        QColor    backgroundColor;
+        QColor    hudForegroundColor;
+        QColor    hudBackgroundColor;
+        QColor    defaultTextColor;
+        QColor    markupColor;
+        QColor    linkColor;
+        QColor    headingColor;
+        QColor    emphasisColor;
+        QColor    blockquoteColor;
+        QColor    codeColor;
 
         // Load and validate the theme contents.
-        if
-        (
-            !extractIntSetting(themeSettings, GW_EDITOR_ASPECT, editorAspect, EditorAspectFirst, EditorAspectLast, err)
-            || !extractColorSetting(themeSettings, GW_EDITOR_BACKGROUND_COLOR, editorBackgroundColor, err)
-            || !extractIntSetting(themeSettings, GW_EDITOR_BACKGROUND_OPACITY, editorBackgroundAlpha, 0, 255, err)
-            || !extractColorSetting(themeSettings, GW_SPELLING_ERROR_COLOR, spellingErrorColor, err)
-            || !extractIntSetting(themeSettings, GW_IMAGE_ASPECT, backgroundImageAspect, PictureAspectFirst, PictureAspectLast, err)
-            || !extractColorSetting(themeSettings, GW_BACKGROUND_COLOR, backgroundColor, err)
-            || !extractColorSetting(themeSettings, GW_HUD_FOREGROUND_COLOR, hudForegroundColor, err)
-            || !extractColorSetting(themeSettings, GW_HUD_BACKGROUND_COLOR, hudBackgroundColor, err)
-            || !extractColorSetting(themeSettings, GW_DEFAULT_TEXT_COLOR, defaultTextColor, err)
-            || !extractColorSetting(themeSettings, GW_MARKUP_COLOR, markupColor, err)
-            || !extractColorSetting(themeSettings, GW_LINK_COLOR, linkColor, err)
-        )
+        if (!extractIntSetting(themeSettings, GW_EDITOR_ASPECT, editorAspect, EditorAspectFirst, EditorAspectLast, err) ||
+            !extractColorSetting(themeSettings, GW_EDITOR_BACKGROUND_COLOR, editorBackgroundColor, err) ||
+            !extractIntSetting(themeSettings, GW_EDITOR_BACKGROUND_OPACITY, editorBackgroundAlpha, 0, 255, err) ||
+            !extractColorSetting(themeSettings, GW_SPELLING_ERROR_COLOR, spellingErrorColor, err) ||
+            !extractIntSetting(themeSettings, GW_IMAGE_ASPECT, backgroundImageAspect, PictureAspectFirst, PictureAspectLast, err) ||
+            !extractColorSetting(themeSettings, GW_BACKGROUND_COLOR, backgroundColor, err) ||
+            !extractColorSetting(themeSettings, GW_HUD_FOREGROUND_COLOR, hudForegroundColor, err) ||
+            !extractColorSetting(themeSettings, GW_HUD_BACKGROUND_COLOR, hudBackgroundColor, err) ||
+            !extractColorSetting(themeSettings, GW_DEFAULT_TEXT_COLOR, defaultTextColor, err) ||
+            !extractColorSetting(themeSettings, GW_MARKUP_COLOR, markupColor, err) ||
+            !extractColorSetting(themeSettings, GW_LINK_COLOR, linkColor, err))
         {
             // Return error.
             return builtInThemes[0];
@@ -223,27 +218,24 @@ Theme ThemeFactory::loadTheme(const QString& name, QString& err) const
         // If theme colors added after 1.5.0 are missing, clear the error message and set
         // default colors for backwards compatiblity with older themes.
         //
-        if
-        (
-            !extractColorSetting(themeSettings, GW_HEADING_COLOR, headingColor, err)
-            || !extractColorSetting(themeSettings, GW_EMPHASIS_COLOR, emphasisColor, err)
-            || !extractColorSetting(themeSettings, GW_BLOCKQUOTE_COLOR, blockquoteColor, err)
-            || !extractColorSetting(themeSettings, GW_CODE_COLOR, codeColor, err)
-        )
+        if (!extractColorSetting(themeSettings, GW_HEADING_COLOR, headingColor, err) ||
+            !extractColorSetting(themeSettings, GW_EMPHASIS_COLOR, emphasisColor, err) ||
+            !extractColorSetting(themeSettings, GW_BLOCKQUOTE_COLOR, blockquoteColor, err) ||
+            !extractColorSetting(themeSettings, GW_CODE_COLOR, codeColor, err))
         {
-            err = QString();
-            headingColor = defaultTextColor;
-            emphasisColor = defaultTextColor;
+            err             = QString();
+            headingColor    = defaultTextColor;
+            emphasisColor   = defaultTextColor;
             blockquoteColor = defaultTextColor;
-            codeColor = defaultTextColor;
+            codeColor       = defaultTextColor;
         }
 
         Theme theme;
-        theme.setEditorAspect((EditorAspect) editorAspect);
+        theme.setEditorAspect((EditorAspect)editorAspect);
         editorBackgroundColor.setAlpha(editorBackgroundAlpha);
         theme.setEditorBackgroundColor(editorBackgroundColor);
         theme.setSpellingErrorColor(spellingErrorColor);
-        theme.setBackgroundImageAspect((PictureAspect) backgroundImageAspect);
+        theme.setBackgroundImageAspect((PictureAspect)backgroundImageAspect);
         theme.setBackgroundColor(backgroundColor);
         theme.setHudForegroundColor(hudForegroundColor);
         theme.setHudBackgroundColor(hudBackgroundColor);
@@ -258,11 +250,7 @@ Theme ThemeFactory::loadTheme(const QString& name, QString& err) const
         // Check if the picture aspect is set to be a background image (not None), that
         // the background image URL is set.
         //
-        if
-        (
-            (PictureAspectNone != theme.getBackgroundImageAspect())
-            && !extractStringSetting(themeSettings, GW_IMAGE_URL, backgroundImageUrl, err)
-        )
+        if ((PictureAspectNone != theme.getBackgroundImageAspect()) && !extractStringSetting(themeSettings, GW_IMAGE_URL, backgroundImageUrl, err))
         {
             // Return error.
             return builtInThemes[0];
@@ -276,16 +264,9 @@ Theme ThemeFactory::loadTheme(const QString& name, QString& err) const
         // If the background image file path is relative and located in the same directory
         // as the theme file, then fill out the full path for the the background image URL.
         //
-        if
-        (
-            !theme.getBackgroundImageUrl().isNull() &&
-            !theme.getBackgroundImageUrl().isEmpty() &&
-            imgFileInfo.isRelative()
-        )
+        if (!theme.getBackgroundImageUrl().isNull() && !theme.getBackgroundImageUrl().isEmpty() && imgFileInfo.isRelative())
         {
-            theme.setBackgroundImageUrl(getDirectoryForTheme(name).path() +
-                QString("/") +
-                theme.getBackgroundImageUrl());
+            theme.setBackgroundImageUrl(getDirectoryForTheme(name).path() + QString("/") + theme.getBackgroundImageUrl());
         }
 
         // Return success.
@@ -295,12 +276,12 @@ Theme ThemeFactory::loadTheme(const QString& name, QString& err) const
     else
     {
         err = QObject::tr("The specified theme is not available.  Try restarting the application.  "
-            "If problem persists, please file a bug report.");
+                          "If problem persists, please file a bug report.");
         return builtInThemes[0];
     }
 }
 
-void ThemeFactory::deleteTheme(const QString& name, QString& err)
+void ThemeFactory::deleteTheme(const QString &name, QString &err)
 {
     err = QString();
 
@@ -328,7 +309,8 @@ void ThemeFactory::deleteTheme(const QString& name, QString& err)
             {
                 QDir dir(fileInfo.filePath());
 
-                QFileInfoList fileList = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
+                QFileInfoList fileList =
+                    dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
 
                 // Add files in the current directory to the file deletion stack.
                 for (QFileInfoList::iterator fileIter = fileList.begin(); fileIter != fileList.end(); fileIter++)
@@ -349,7 +331,7 @@ void ThemeFactory::deleteTheme(const QString& name, QString& err)
         // Pop files from the file deletion stack and delete them.
         while (!fileDeleteStack.isEmpty())
         {
-            bool result;
+            bool      result;
             QFileInfo fileInfo = fileDeleteStack.pop();
 
             if (fileInfo.isDir())
@@ -365,7 +347,7 @@ void ThemeFactory::deleteTheme(const QString& name, QString& err)
             if (!result)
             {
                 err = QObject::tr("Could not delete %1 from theme.  Please try setting the theme file permissions to be writeable.")
-                    .arg(fileInfo.filePath());
+                          .arg(fileInfo.filePath());
                 return;
             }
         }
@@ -375,7 +357,7 @@ void ThemeFactory::deleteTheme(const QString& name, QString& err)
     customThemeNames.removeOne(name);
 }
 
-void ThemeFactory::saveTheme(const QString& name, Theme& theme, QString& err)
+void ThemeFactory::saveTheme(const QString &name, Theme &theme, QString &err)
 {
     err = QString();
 
@@ -408,21 +390,14 @@ void ThemeFactory::saveTheme(const QString& name, Theme& theme, QString& err)
             // If there's a background image, set the image URL to be the in the
             // new theme directory to which we are renaming the theme.
             //
-            if
-            (
-                (PictureAspectNone != theme.getBackgroundImageAspect()) &&
-                !theme.getBackgroundImageUrl().isNull() &&
-                !theme.getBackgroundImageUrl().isEmpty()
-            )
+            if ((PictureAspectNone != theme.getBackgroundImageAspect()) && !theme.getBackgroundImageUrl().isNull() &&
+                !theme.getBackgroundImageUrl().isEmpty())
             {
                 QFileInfo oldImgFileInfo(theme.getBackgroundImageUrl());
 
                 if (oldImgFileInfo.dir() == oldThemeDir)
                 {
-                    backgroundImageUrl =
-                        this->getDirectoryForTheme(theme.getName()).path() +
-                        QString("/") +
-                        oldImgFileInfo.fileName();
+                    backgroundImageUrl = this->getDirectoryForTheme(theme.getName()).path() + QString("/") + oldImgFileInfo.fileName();
                 }
             }
 
@@ -444,7 +419,7 @@ void ThemeFactory::saveTheme(const QString& name, Theme& theme, QString& err)
                 if (name == customThemeNames[i])
                 {
                     customThemeNames[i] = theme.getName();
-                    qSort(customThemeNames.begin(), customThemeNames.end());
+                    std::sort(customThemeNames.begin(), customThemeNames.end());
                     break;
                 }
             }
@@ -458,19 +433,18 @@ void ThemeFactory::saveTheme(const QString& name, Theme& theme, QString& err)
         isNewTheme = true;
     }
 
-    QString themeFilePath = themeDirectoryPath + QString("/") +
-        theme.getName() + QString("/theme.cfg");
+    QString themeFilePath = themeDirectoryPath + QString("/") + theme.getName() + QString("/theme.cfg");
 
     // Load original theme settings so we can clean up the old background image
     // later, if any.
     Theme oldTheme;
-    bool oldThemeExists = true;
-    oldTheme = this->loadTheme(theme.getName(), err);
+    bool  oldThemeExists = true;
+    oldTheme             = this->loadTheme(theme.getName(), err);
 
     if (!err.isNull())
     {
         oldThemeExists = false;
-        err = QString();
+        err            = QString();
     }
 
     QSettings settings(themeFilePath, QSettings::IniFormat);
@@ -481,7 +455,7 @@ void ThemeFactory::saveTheme(const QString& name, Theme& theme, QString& err)
         return;
     }
 
-    settings.setValue(GW_EDITOR_ASPECT, QVariant((int) theme.getEditorAspect()));
+    settings.setValue(GW_EDITOR_ASPECT, QVariant((int)theme.getEditorAspect()));
     settings.setValue(GW_EDITOR_BACKGROUND_COLOR, QVariant(theme.getEditorBackgroundColor().name()));
     settings.setValue(GW_EDITOR_BACKGROUND_OPACITY, QVariant(theme.getEditorBackgroundColor().alpha()));
     settings.setValue(GW_SPELLING_ERROR_COLOR, QVariant(theme.getSpellingErrorColor().name()));
@@ -492,12 +466,12 @@ void ThemeFactory::saveTheme(const QString& name, Theme& theme, QString& err)
     settings.setValue(GW_EMPHASIS_COLOR, QVariant(theme.getEmphasisColor().name()));
     settings.setValue(GW_BLOCKQUOTE_COLOR, QVariant(theme.getBlockquoteColor().name()));
     settings.setValue(GW_CODE_COLOR, QVariant(theme.getCodeColor().name()));
-    settings.setValue(GW_IMAGE_ASPECT, QVariant((int) theme.getBackgroundImageAspect()));
+    settings.setValue(GW_IMAGE_ASPECT, QVariant((int)theme.getBackgroundImageAspect()));
     settings.setValue(GW_BACKGROUND_COLOR, QVariant(theme.getBackgroundColor().name()));
     settings.setValue(GW_HUD_FOREGROUND_COLOR, QVariant(theme.getHudForegroundColor().name()));
     settings.setValue(GW_HUD_BACKGROUND_COLOR, QVariant(theme.getHudBackgroundColor().name()));
 
-    QDir themeDir = this->getDirectoryForTheme(theme.getName());
+    QDir      themeDir = this->getDirectoryForTheme(theme.getName());
     QFileInfo imgFileInfo(theme.getBackgroundImageUrl());
 
     // Delete any old background images.
@@ -505,15 +479,10 @@ void ThemeFactory::saveTheme(const QString& name, Theme& theme, QString& err)
     {
         QFileInfo oldImgFileInfo(oldTheme.getBackgroundImageUrl());
 
-        if
-        (
-            oldImgFileInfo.exists() &&
-            (oldImgFileInfo.dir() == themeDir) &&
-            (imgFileInfo != oldImgFileInfo)
-        )
+        if (oldImgFileInfo.exists() && (oldImgFileInfo.dir() == themeDir) && (imgFileInfo != oldImgFileInfo))
         {
             QFile oldImgFile(oldTheme.getBackgroundImageUrl());
-            bool result = oldImgFile.remove();
+            bool  result = oldImgFile.remove();
 
             if (!result)
             {
@@ -526,15 +495,10 @@ void ThemeFactory::saveTheme(const QString& name, Theme& theme, QString& err)
     // If there's a background image, copy the image to the theme's directory, and set the background image URL
     // to point to it.
     //
-    if
-    (
-        (PictureAspectNone != theme.getBackgroundImageAspect()) &&
-        !theme.getBackgroundImageUrl().isNull() &&
-        !theme.getBackgroundImageUrl().isEmpty()
-    )
+    if ((PictureAspectNone != theme.getBackgroundImageAspect()) && !theme.getBackgroundImageUrl().isNull() &&
+        !theme.getBackgroundImageUrl().isEmpty())
     {
-        QFileInfo imgCopyFileInfo(themeDir.path() + QString("/") +
-            imgFileInfo.fileName());
+        QFileInfo imgCopyFileInfo(themeDir.path() + QString("/") + imgFileInfo.fileName());
 
         // Copy the image to the theme directory if it's not already there.
         if (themeDir != imgFileInfo.dir())
@@ -545,24 +509,24 @@ void ThemeFactory::saveTheme(const QString& name, Theme& theme, QString& err)
             if (imgCopyFileInfo.exists())
             {
                 QFile imgCopyFile(imgCopyFileInfo.filePath());
-                bool result = imgCopyFile.remove();
+                bool  result = imgCopyFile.remove();
 
                 if (!result)
                 {
                     err = QObject::tr("The old theme image file could not be removed from the theme directory.  Please check file permissions.");
-                    settings.setValue("Background/imageAspect", QVariant((int) PictureAspectNone));
+                    settings.setValue("Background/imageAspect", QVariant((int)PictureAspectNone));
                     return;
                 }
             }
 
             // Now copy the new image file to the theme directory.
             QFile imgFile(theme.getBackgroundImageUrl());
-            bool result = imgFile.copy(imgCopyFileInfo.filePath());
+            bool  result = imgFile.copy(imgCopyFileInfo.filePath());
 
             if (!result)
             {
                 err = QObject::tr("Theme image file could not be copied to the theme directory.  Please check file permissions.");
-                settings.setValue(GW_IMAGE_ASPECT, QVariant((int) PictureAspectNone));
+                settings.setValue(GW_IMAGE_ASPECT, QVariant((int)PictureAspectNone));
                 return;
             }
             else
@@ -587,7 +551,7 @@ void ThemeFactory::saveTheme(const QString& name, Theme& theme, QString& err)
     if (isNewTheme)
     {
         customThemeNames.append(theme.getName());
-        qSort(customThemeNames.begin(), customThemeNames.end());
+        std::sort(customThemeNames.begin(), customThemeNames.end());
     }
 }
 
@@ -596,7 +560,7 @@ QDir ThemeFactory::getThemeDirectory() const
     return themeDirectory;
 }
 
-QDir ThemeFactory::getDirectoryForTheme(const QString& name) const
+QDir ThemeFactory::getDirectoryForTheme(const QString &name) const
 {
     QDir themeDir(this->themeDirectoryPath + QString("/") + name);
 
@@ -605,9 +569,9 @@ QDir ThemeFactory::getDirectoryForTheme(const QString& name) const
 
 QString ThemeFactory::generateUntitledThemeName() const
 {
-    QString name = QObject::tr("Untitled 1");
-    int count = 1;
-    bool availableNameFound = false;
+    QString name               = QObject::tr("Untitled 1");
+    int     count              = 1;
+    bool    availableNameFound = false;
 
     while (!availableNameFound)
     {
@@ -618,7 +582,7 @@ QString ThemeFactory::generateUntitledThemeName() const
             if (name == this->customThemeNames[i])
             {
                 count++;
-                name = QObject::tr("Untitled %1").arg(count);
+                name     = QObject::tr("Untitled %1").arg(count);
                 tryAgain = true;
                 break;
             }
@@ -636,7 +600,7 @@ QString ThemeFactory::generateUntitledThemeName() const
 ThemeFactory::ThemeFactory()
 {
     themeDirectoryPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    themeDirectory = QDir(themeDirectoryPath);
+    themeDirectory     = QDir(themeDirectoryPath);
 
     if (!themeDirectory.exists())
     {
@@ -646,13 +610,13 @@ ThemeFactory::ThemeFactory()
     themeDirectory.setFilter(QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable | QDir::Writable);
     themeDirectory.setSorting(QDir::Name);
 
-    QFileInfoList themeFiles = themeDirectory.entryInfoList();
-    QMap<QString, QString> sortedThemes;
+    QFileInfoList               themeFiles = themeDirectory.entryInfoList();
+    QMultiMap<QString, QString> sortedThemes;
 
-    for (int i = 0; i < themeFiles.size(); i++)
+    for (const auto &fi : themeFiles)
     {
-        QString baseName = themeFiles[i].fileName();
-        sortedThemes.insertMulti(baseName.toLower(), baseName);
+        QString baseName = fi.fileName();
+        sortedThemes.insert(baseName.toLower(), baseName);
     }
 
     customThemeNames = sortedThemes.values();
@@ -664,13 +628,7 @@ ThemeFactory::ThemeFactory()
     loadPlainstractionDarkTheme();
 }
 
-bool ThemeFactory::extractColorSetting
-(
-    const QSettings& settings,
-    const QString& key,
-    QColor& value,
-    QString& err
-) const
+bool ThemeFactory::extractColorSetting(const QSettings &settings, const QString &key, QColor &value, QString &err) const
 {
     QVariant variantValue = settings.value(key);
 
@@ -684,15 +642,7 @@ bool ThemeFactory::extractColorSetting
     return true;
 }
 
-bool ThemeFactory::extractIntSetting
-(
-    const QSettings& settings,
-    const QString& key,
-    int& value,
-    int min,
-    int max,
-    QString& err
-) const
+bool ThemeFactory::extractIntSetting(const QSettings &settings, const QString &key, int &value, int min, int max, QString &err) const
 {
     QVariant variantValue = settings.value(key);
 
@@ -714,13 +664,7 @@ bool ThemeFactory::extractIntSetting
     return true;
 }
 
-bool ThemeFactory::extractStringSetting
-(
-    const QSettings& settings,
-    const QString& key,
-    QString& value,
-    QString& err
-) const
+bool ThemeFactory::extractStringSetting(const QSettings &settings, const QString &key, QString &value, QString &err) const
 {
     QVariant variantValue = settings.value(key);
 

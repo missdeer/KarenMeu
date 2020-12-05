@@ -93,11 +93,12 @@ class ThemeFactory
          */
         QString generateUntitledThemeName() const;
 
-    private:
         static const QString CLASSIC_LIGHT_THEME_NAME;
         static const QString CLASSIC_DARK_THEME_NAME;
         static const QString PLAINSTRACTION_LIGHT_THEME_NAME;
         static const QString PLAINSTRACTION_DARK_THEME_NAME;
+
+    private:
         static ThemeFactory* instance;
 
         QList<Theme> builtInThemes;

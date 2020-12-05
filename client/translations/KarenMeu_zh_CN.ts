@@ -1031,90 +1031,85 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ThemeFactory.cpp" line="180"/>
+        <location filename="../ThemeFactory.cpp" line="179"/>
         <source>The specified theme does not exist in the file system: </source>
         <translation>文件系统中没有找到指定的主题：</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="297"/>
+        <location filename="../ThemeFactory.cpp" line="278"/>
         <source>The specified theme is not available.  Try restarting the application.  If problem persists, please file a bug report.</source>
         <translation>指定的主题无效。请尝试重启程序。如果问题仍然存在，请创建一个问题报告。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="367"/>
+        <location filename="../ThemeFactory.cpp" line="349"/>
         <source>Could not delete %1 from theme.  Please try setting the theme file permissions to be writeable.</source>
         <translation>主题中无法删除%1。请尝试将主题文件权限设置为可写。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="390"/>
+        <location filename="../ThemeFactory.cpp" line="372"/>
         <source>&apos;%1&apos; already exists.  Please choose another name.</source>
         <translation>%1已存在。请另选一个名字。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="400"/>
+        <location filename="../ThemeFactory.cpp" line="382"/>
         <source>&apos;%1&apos; theme already exists.  Please choose another name.</source>
         <translation>%1已存在。请另选一个名字。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="435"/>
+        <location filename="../ThemeFactory.cpp" line="410"/>
         <source>Failed to rename theme.  Please check file permissions.</source>
         <translation>主题重命名失败。请检查文件权限。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="480"/>
+        <location filename="../ThemeFactory.cpp" line="454"/>
         <source>Theme is read-only.  Please try renaming the theme, or setting the theme file to be writable.</source>
         <translation>主题只读。请尝试重命名主题，或将主题文件设置为可写。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="520"/>
+        <location filename="../ThemeFactory.cpp" line="489"/>
         <source>Failed to remove old theme image.  Please check file permissions.</source>
         <translation>删除旧的主题图片失败。请检查文件权限。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="552"/>
+        <location filename="../ThemeFactory.cpp" line="516"/>
         <source>The old theme image file could not be removed from the theme directory.  Please check file permissions.</source>
         <translation>无法从主题目录中删除旧的主题图片文件。请检查文件权限。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="564"/>
+        <location filename="../ThemeFactory.cpp" line="528"/>
         <source>Theme image file could not be copied to the theme directory.  Please check file permissions.</source>
         <translation>无法将主题图片文件复制到主题目录中。请检查文件权限。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="583"/>
+        <location filename="../ThemeFactory.cpp" line="547"/>
         <source>Theme could not be saved to disk.  Please check file permissions or try renaming the theme.</source>
         <translation>主题无法保存到磁盘。请检查文件权限或尝试重命名主题。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="608"/>
+        <location filename="../ThemeFactory.cpp" line="572"/>
         <source>Untitled 1</source>
         <translation>未命名1</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="621"/>
+        <location filename="../ThemeFactory.cpp" line="585"/>
         <source>Untitled %1</source>
         <translation>未命名%1</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="679"/>
-        <location filename="../ThemeFactory.cpp" line="701"/>
-        <location filename="../ThemeFactory.cpp" line="729"/>
+        <location filename="../ThemeFactory.cpp" line="637"/>
+        <location filename="../ThemeFactory.cpp" line="651"/>
+        <location filename="../ThemeFactory.cpp" line="673"/>
         <source>Invalid or missing value for %1 provided.</source>
         <translation>提供了无效或缺少值给%1。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="709"/>
+        <location filename="../ThemeFactory.cpp" line="659"/>
         <source>Value for %1 is out of range.  Valid values are between %2 and %3, inclusive.</source>
         <translation>值%1超出范围。有效的值为%2到%3之间。</translation>
     </message>
 </context>
 <context>
     <name>QSettings</name>
-    <message>
-        <location filename="../settings.cpp" line="51"/>
-        <source>Classic Light</source>
-        <translation>经典亮</translation>
-    </message>
     <message>
         <location filename="../settings.cpp" line="54"/>
         <source>默认</source>
