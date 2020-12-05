@@ -16,13 +16,13 @@ class MarkdownView : public QWidget
     Q_OBJECT
 public:
     explicit MarkdownView(QWidget *parent = nullptr);
-    void forceConvert();
-    bool maybeSave();
-    void setThemeStyle();
-    void updateMarkdownEngine();
-    void openFromFile(const QString& fileName);
+    void             forceConvert();
+    bool             maybeSave();
+    void             setThemeStyle();
+    void             updateMarkdownEngine();
+    void             openFromFile(const QString &fileName);
     MarkdownEditor2 *editor();
-    QSplitter *splitter();
+    QSplitter *      splitter();
 signals:
     void formatStrong();
     void formatEmphasize();
@@ -45,7 +45,7 @@ signals:
     void formatHeader6();
     void formatShiftRight();
     void formatShiftLeft();
-    void setCurrentFile(const QString&);
+    void setCurrentFile(const QString &);
 public slots:
     void openDocument();
     void saveDocument();
@@ -69,17 +69,18 @@ private slots:
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
+
 private:
-    bool m_modified{false};
-    QSplitter *m_splitter;
+    bool             m_modified {false};
+    QSplitter *      m_splitter;
     MarkdownEditor2 *m_editor;
-    QWebEngineView *m_preview;
-    QTimer *m_convertTimer;
-    QString m_savePath;
+    QWebEngineView * m_preview;
+    QTimer *         m_convertTimer;
+    QString          m_savePath;
     RenderedDocument m_renderedContent;
     RenderedDocument m_themeStyle;
     RenderedDocument m_wxboxWidth;
-    
+
     void saveToFile(const QString &savePath);
     void renderMarkdownToHTML();
     void setContent(const QString &html);

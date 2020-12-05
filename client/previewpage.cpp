@@ -9,9 +9,7 @@ void PreviewPage::onEditorScrollMoved(int pos, int max)
     runJavaScript(ScrollJavaScript.arg(pos).arg(max));
 }
 
-bool PreviewPage::acceptNavigationRequest(const QUrl &url,
-                                          QWebEnginePage::NavigationType /*type*/,
-                                          bool /*isMainFrame*/)
+bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType /*type*/, bool /*isMainFrame*/)
 {
     // Only allow qrc:/index.html.
     if (url.scheme() == QString("qrc"))

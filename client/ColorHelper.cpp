@@ -3,109 +3,48 @@
 
 #include "ColorHelper.h"
 
-QColor ColorHelper::applyAlpha(const QColor& foreground, const QColor& background)
+QColor ColorHelper::applyAlpha(const QColor &foreground, const QColor &background)
 {
     QColor blendedColor(0, 0, 0);
 
-    blendedColor.setRed
-    (
-        applyAlphaToChannel
-        (
-            foreground.red(),
-            background.red(),
-            foreground.alphaF()
-        )
-    );
+    blendedColor.setRed(applyAlphaToChannel(foreground.red(), background.red(), foreground.alphaF()));
 
-    blendedColor.setGreen
-    (
-        applyAlphaToChannel
-        (
-            foreground.green(),
-            background.green(),
-            foreground.alphaF()
-        )
-    );
+    blendedColor.setGreen(applyAlphaToChannel(foreground.green(), background.green(), foreground.alphaF()));
 
-    blendedColor.setBlue
-    (
-        applyAlphaToChannel
-        (
-            foreground.blue(),
-            background.blue(),
-            foreground.alphaF()
-        )
-    );
+    blendedColor.setBlue(applyAlphaToChannel(foreground.blue(), background.blue(), foreground.alphaF()));
 
     return blendedColor;
 }
 
-QColor ColorHelper::applyAlpha
-(
-    const QColor& foreground,
-    const QColor& background,
-    int alpha
-)
+QColor ColorHelper::applyAlpha(const QColor &foreground, const QColor &background, int alpha)
 {
     if ((alpha < 0) || alpha > 255)
     {
         qCritical("ColorHelper::applyAlpha: alpha value must be "
-            "between 0 and 255. Value provided = %d",
-            alpha);
+                  "between 0 and 255. Value provided = %d",
+                  alpha);
     }
 
     QColor blendedColor(0, 0, 0);
-    qreal normalizedAlpha = alpha / 255.0;
+    qreal  normalizedAlpha = alpha / 255.0;
 
-    blendedColor.setRed
-    (
-        applyAlphaToChannel
-        (
-            foreground.red(),
-            background.red(),
-            normalizedAlpha
-        )
-    );
+    blendedColor.setRed(applyAlphaToChannel(foreground.red(), background.red(), normalizedAlpha));
 
-    blendedColor.setGreen
-    (
-        applyAlphaToChannel
-        (
-            foreground.green(),
-            background.green(),
-            normalizedAlpha
-        )
-    );
+    blendedColor.setGreen(applyAlphaToChannel(foreground.green(), background.green(), normalizedAlpha));
 
-    blendedColor.setBlue
-    (
-        applyAlphaToChannel
-        (
-            foreground.blue(),
-            background.blue(),
-            normalizedAlpha
-        )
-    );
+    blendedColor.setBlue(applyAlphaToChannel(foreground.blue(), background.blue(), normalizedAlpha));
 
     return blendedColor;
 }
 
-
-QString ColorHelper::toRgbString(const QColor& color)
+QString ColorHelper::toRgbString(const QColor &color)
 {
-    return QString("rgb(%1, %2, %3)")
-        .arg(color.red())
-        .arg(color.green())
-        .arg(color.blue());
+    return QString("rgb(%1, %2, %3)").arg(color.red()).arg(color.green()).arg(color.blue());
 }
 
-QString ColorHelper::toRgbaString(const QColor& color)
+QString ColorHelper::toRgbaString(const QColor &color)
 {
-    return QString("rgba(%1, %2, %3, %4)")
-        .arg(color.red())
-        .arg(color.green())
-        .arg(color.blue())
-        .arg(color.alpha());
+    return QString("rgba(%1, %2, %3, %4)").arg(color.red()).arg(color.green()).arg(color.blue()).arg(color.alpha());
 }
 
 // Algorithm taken from *Grokking the GIMP* by Carey Bunks,
@@ -116,7 +55,7 @@ QString ColorHelper::toRgbaString(const QColor& color)
 // Copyright (c) 2000 by New Riders Publishing, www.newriders.com
 // ISBN 0-7357-0924-6.
 //
-double ColorHelper::getLuminance(const QColor& color)
+double ColorHelper::getLuminance(const QColor &color)
 {
     QColor c = color;
 
@@ -129,12 +68,7 @@ double ColorHelper::getLuminance(const QColor& color)
     return (0.30 * c.redF()) + (0.59 * c.greenF()) + (0.11 * c.blueF());
 }
 
-QColor ColorHelper::lightenToMatchContrastRatio
-(
-    const QColor& foreground,
-    const QColor& background,
-    double contrastRatio
-)
+QColor ColorHelper::lightenToMatchContrastRatio(const QColor &foreground, const QColor &background, double contrastRatio)
 {
     double fgBrightness = getLuminance(foreground);
     double bgBrightness = getLuminance(background);
@@ -143,7 +77,7 @@ QColor ColorHelper::lightenToMatchContrastRatio
     if (bgBrightness > fgBrightness)
     {
         double actualContrastRatio = bgBrightness / fgBrightness;
-        double colorFactor = contrastRatio / actualContrastRatio;
+        double colorFactor         = contrastRatio / actualContrastRatio;
 
         QColor result = foreground;
 

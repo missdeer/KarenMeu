@@ -1,24 +1,3 @@
-/***********************************************************************
- *
- * Copyright (C) 2014-2018 wereturtle
- * Copyright (C) 2009, 2010, 2011, 2012, 2013, 2014 Graeme Gott <graeme@gottcode.org>
- * Copyright (C) Dmitry Shachnev 2012
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- ***********************************************************************/
-
 #include <QApplication>
 #include <QChar>
 #include <QColor>
@@ -49,13 +28,13 @@
 
 #define GW_TEXT_FADE_FACTOR 1.5
 
-MarkdownEditor::MarkdownEditor(TextDocument* textDocument, QWidget* parent)
+MarkdownEditor::MarkdownEditor(TextDocument *textDocument, QWidget *parent)
     : QPlainTextEdit(parent),
-        textDocument(textDocument),
-        dictionary(DictionaryManager::instance().requestDictionary()),
-        autoMatchEnabled(true),
-        bulletPointCyclingEnabled(true),
-        mouseButtonDown(false)
+      textDocument(textDocument),
+      dictionary(DictionaryManager::instance().requestDictionary()),
+      autoMatchEnabled(true),
+      bulletPointCyclingEnabled(true),
+      mouseButtonDown(false)
 {
     setDocument(textDocument);
 
@@ -80,20 +59,20 @@ MarkdownEditor::MarkdownEditor(TextDocument* textDocument, QWidget* parent)
 
     this->setWordWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    
+
     // Make sure QPlainTextEdit does not draw a cursor.  (We'll paint it manually.)
     setCursorWidth(0);
-    
+
     setCenterOnScroll(true);
     ensureCursorVisible();
     spellCheckEnabled = false;
     installEventFilter(this);
     viewport()->installEventFilter(this);
     hemingwayModeEnabled = false;
-    focusMode = FocusModeDisabled;
-    insertSpacesForTabs = false;
+    focusMode            = FocusModeDisabled;
+    insertSpacesForTabs  = false;
     setTabulationWidth(4);
-    editorWidth = EditorWidthMedium;
+    editorWidth   = EditorWidthMedium;
     editorCorners = InterfaceStyleRounded;
 
     markupPairs.insert('"', '"');
@@ -124,68 +103,56 @@ MarkdownEditor::MarkdownEditor(TextDocument* textDocument, QWidget* parent)
     nonEmptyMarkupPairs.insert('<', '>');
 
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(onCursorPositionChanged()));
-    connect(this->document(), SIGNAL(contentsChange(int,int,int)), this, SLOT(onContentsChanged(int,int,int)));
+    connect(this->document(), SIGNAL(contentsChange(int, int, int)), this, SLOT(onContentsChanged(int, int, int)));
     connect(this, SIGNAL(selectionChanged()), this, SLOT(onSelectionChanged()));
 
     addWordToDictionaryAction = new QAction(tr("Add word to dictionary"), this);
-    checkSpellingAction = new QAction(tr("Check spelling..."), this);
+    checkSpellingAction       = new QAction(tr("Check spelling..."), this);
 
     typingPausedSignalSent = true;
-    typingHasPaused = true;
+    typingHasPaused        = true;
 
     typingTimer = new QTimer(this);
-    connect
-    (
-        typingTimer,
-        SIGNAL(timeout()),
-        this,
-        SLOT(checkIfTypingPaused())
-    );
+    connect(typingTimer, SIGNAL(timeout()), this, SLOT(checkIfTypingPaused()));
     typingTimer->start(1000);
 
-    setColorScheme
-    (
-        QColor(Qt::black),
-        QColor(Qt::white),
-        QColor(Qt::black),
-        QColor(Qt::blue),
-        QColor(Qt::black),
-        QColor(Qt::black),
-        QColor(Qt::black),
-        QColor(Qt::black),
-        QColor(Qt::red)
-    );
+    setColorScheme(QColor(Qt::black),
+                   QColor(Qt::white),
+                   QColor(Qt::black),
+                   QColor(Qt::blue),
+                   QColor(Qt::black),
+                   QColor(Qt::black),
+                   QColor(Qt::black),
+                   QColor(Qt::black),
+                   QColor(Qt::red));
 
     textCursorVisible = true;
-    
+
     cursorBlinkTimer = new QTimer(this);
     connect(cursorBlinkTimer, SIGNAL(timeout()), this, SLOT(toggleCursorBlink()));
     cursorBlinkTimer->start(500);
 }
 
-MarkdownEditor::~MarkdownEditor()
-{
+MarkdownEditor::~MarkdownEditor() {}
 
-}
-
-void MarkdownEditor::paintEvent(QPaintEvent* event)
+void MarkdownEditor::paintEvent(QPaintEvent *event)
 {
     QPainter painter(viewport());
-    QRect viewportRect = viewport()->rect();
+    QRect    viewportRect = viewport()->rect();
     painter.fillRect(viewportRect, Qt::transparent);
 
-    QPointF offset(contentOffset());
+    QPointF    offset(contentOffset());
     QTextBlock block = firstVisibleBlock();
 
     bool firstVisible = true;
 
-    QRectF blockAreaRect; // Code or block quote rect.
-    bool inBlockArea = false;
-    BlockType blockType = BlockTypeNone;
-    bool clipTop = false;
-    bool drawBlock = false;
-    int dy = 0;
-    bool done = false;
+    QRectF    blockAreaRect; // Code or block quote rect.
+    bool      inBlockArea = false;
+    BlockType blockType   = BlockTypeNone;
+    bool      clipTop     = false;
+    bool      drawBlock   = false;
+    int       dy          = 0;
+    bool      done        = false;
 
     int cornerRadius = 5;
 
@@ -213,8 +180,8 @@ void MarkdownEditor::paintEvent(QPaintEvent* event)
         if (!inBlockArea && atBlockAreaStart(block, blockType))
         {
             blockAreaRect = r;
-            dy = 0;
-            inBlockArea = true;
+            dy            = 0;
+            inBlockArea   = true;
 
             BlockType prevType;
 
@@ -224,12 +191,7 @@ void MarkdownEditor::paintEvent(QPaintEvent* event)
             // its top clipped by the viewport and will need to be
             // drawn specially.
             //
-            if
-            (
-                firstVisible
-                && atBlockAreaStart(block.previous(), prevType)
-                && (blockType == prevType)
-            )
+            if (firstVisible && atBlockAreaStart(block.previous(), prevType) && (blockType == prevType))
             {
                 clipTop = true;
             }
@@ -237,7 +199,7 @@ void MarkdownEditor::paintEvent(QPaintEvent* event)
         // Else if the block ends a text block area...
         else if (inBlockArea && atBlockAreaEnd(block, blockType))
         {
-            drawBlock = true;
+            drawBlock   = true;
             inBlockArea = false;
             blockAreaRect.setHeight(dy);
         }
@@ -247,7 +209,7 @@ void MarkdownEditor::paintEvent(QPaintEvent* event)
         //
         if (inBlockArea && (block == this->document()->lastBlock()))
         {
-            drawBlock = true;
+            drawBlock   = true;
             inBlockArea = false;
             dy += r.height();
             blockAreaRect.setHeight(dy);
@@ -307,14 +269,14 @@ void MarkdownEditor::paintEvent(QPaintEvent* event)
         //
         if (block.text().isRightToLeft())
         {
-            QTextLayout* layout = block.layout();
-            QTextOption opt = document()->defaultTextOption();
-            opt = QTextOption(Qt::AlignRight);
+            QTextLayout *layout = block.layout();
+            QTextOption  opt    = document()->defaultTextOption();
+            opt                 = QTextOption(Qt::AlignRight);
             opt.setTextDirection(Qt::RightToLeft);
             layout->setTextOption(opt);
         }
 
-        block = block.next();
+        block        = block.next();
         firstVisible = false;
     }
 
@@ -332,20 +294,20 @@ void MarkdownEditor::paintEvent(QPaintEvent* event)
         // QPlainTextEdit will not draw another cursor underneath this one.)
         QRect r = cursorRect();
         r.setWidth(2);
-        
+
         QPainter painter(viewport());
         painter.fillRect(r, QBrush(cursorColor));
         painter.end();
     }
 }
 
-void MarkdownEditor::setDictionary(const QString& language)
+void MarkdownEditor::setDictionary(const QString &language)
 {
     dictionary = DictionaryManager::instance().requestDictionary(language);
     highlighter->setDictionary(dictionary);
 }
 
-QLayout* MarkdownEditor::getPreferredLayout()
+QLayout *MarkdownEditor::getPreferredLayout()
 {
     return preferredLayout;
 }
@@ -388,32 +350,19 @@ void MarkdownEditor::setFocusMode(FocusMode mode)
     }
 }
 
-void MarkdownEditor::setColorScheme
-(
-    const QColor& defaultTextColor,
-    const QColor& backgroundColor,
-    const QColor& markupColor,
-    const QColor& linkColor,
-    const QColor& headingColor,
-    const QColor& emphasisColor,
-    const QColor& blockquoteColor,
-    const QColor& codeColor,
-    const QColor& spellingErrorColor
-)
+void MarkdownEditor::setColorScheme(const QColor &defaultTextColor,
+                                    const QColor &backgroundColor,
+                                    const QColor &markupColor,
+                                    const QColor &linkColor,
+                                    const QColor &headingColor,
+                                    const QColor &emphasisColor,
+                                    const QColor &blockquoteColor,
+                                    const QColor &codeColor,
+                                    const QColor &spellingErrorColor)
 {
-    highlighter->setColorScheme
-    (
-        defaultTextColor,
-        backgroundColor,
-        markupColor,
-        linkColor,
-        headingColor,
-        emphasisColor,
-        blockquoteColor,
-        codeColor,
-        spellingErrorColor
-    );
-    
+    highlighter->setColorScheme(
+        defaultTextColor, backgroundColor, markupColor, linkColor, headingColor, emphasisColor, blockquoteColor, codeColor, spellingErrorColor);
+
     this->cursorColor = linkColor;
 
     blockColor = defaultTextColor;
@@ -443,7 +392,7 @@ void MarkdownEditor::setAspect(EditorAspect aspect)
     this->aspect = aspect;
 }
 
-void MarkdownEditor::setFont(const QString& family, double pointSize)
+void MarkdownEditor::setFont(const QString &family, double pointSize)
 {
     QFont font(family, pointSize);
     QPlainTextEdit::setFont(font);
@@ -477,23 +426,23 @@ void MarkdownEditor::setupPaperMargins(int width)
         return;
     }
 
-    int screenWidth = QApplication::desktop()->screenGeometry().width();
+    int screenWidth         = QApplication::desktop()->screenGeometry().width();
     int proposedEditorWidth = width;
-    int margin = 0;
+    int margin              = 0;
 
     switch (editorWidth)
     {
-        case EditorWidthNarrow:
-            proposedEditorWidth = screenWidth / 3;
-            break;
-        case EditorWidthMedium:
-            proposedEditorWidth = screenWidth / 2;
-            break;
-        case EditorWidthWide:
-            proposedEditorWidth = 2 * (screenWidth / 3);
-            break;
-        default:
-            break;
+    case EditorWidthNarrow:
+        proposedEditorWidth = screenWidth / 3;
+        break;
+    case EditorWidthMedium:
+        proposedEditorWidth = screenWidth / 2;
+        break;
+    case EditorWidthWide:
+        proposedEditorWidth = 2 * (screenWidth / 3);
+        break;
+    default:
+        break;
     }
 
     if (proposedEditorWidth <= width)
@@ -513,7 +462,7 @@ void MarkdownEditor::setupPaperMargins(int width)
     }
 }
 
-void MarkdownEditor::dragEnterEvent(QDragEnterEvent* e)
+void MarkdownEditor::dragEnterEvent(QDragEnterEvent *e)
 {
     if (e->mimeData()->hasUrls())
     {
@@ -525,44 +474,35 @@ void MarkdownEditor::dragEnterEvent(QDragEnterEvent* e)
     }
 }
 
-void MarkdownEditor::dragMoveEvent(QDragMoveEvent* e)
+void MarkdownEditor::dragMoveEvent(QDragMoveEvent *e)
 {
     e->acceptProposedAction();
 }
 
-void MarkdownEditor::dragLeaveEvent(QDragLeaveEvent* e)
+void MarkdownEditor::dragLeaveEvent(QDragLeaveEvent *e)
 {
     e->accept();
 }
 
-void MarkdownEditor::dropEvent(QDropEvent* e)
+void MarkdownEditor::dropEvent(QDropEvent *e)
 {
     if (e->mimeData()->hasUrls() && (e->mimeData()->urls().size() == 1))
     {
         e->acceptProposedAction();
 
-        QUrl url = e->mimeData()->urls().first();
-        QString path = url.toLocalFile();
-        bool isRelativePath = false;
+        QUrl    url            = e->mimeData()->urls().first();
+        QString path           = url.toLocalFile();
+        bool    isRelativePath = false;
 
         QFileInfo fileInfo(path);
-        QString fileExtension = fileInfo.suffix().toLower();
+        QString   fileExtension = fileInfo.suffix().toLower();
 
         QTextCursor dropCursor = cursorForPosition(e->pos());
 
         // If the file extension indicates an image type, then insert an
         // image link into the text.
-        if
-        (
-            (fileExtension == "jpg") ||
-            (fileExtension == "jpeg") ||
-            (fileExtension == "gif") ||
-            (fileExtension == "bmp") ||
-            (fileExtension == "png") ||
-            (fileExtension == "tif") ||
-            (fileExtension == "tiff") ||
-            (fileExtension == "svg")
-        )
+        if ((fileExtension == "jpg") || (fileExtension == "jpeg") || (fileExtension == "gif") || (fileExtension == "bmp") ||
+            (fileExtension == "png") || (fileExtension == "tif") || (fileExtension == "tiff") || (fileExtension == "svg"))
         {
             if (!textDocument->isNew())
             {
@@ -570,7 +510,7 @@ void MarkdownEditor::dropEvent(QDropEvent* e)
 
                 if (docInfo.exists())
                 {
-                    path = docInfo.dir().relativeFilePath(path);
+                    path           = docInfo.dir().relativeFilePath(path);
                     isRelativePath = true;
                 }
             }
@@ -587,17 +527,9 @@ void MarkdownEditor::dropEvent(QDropEvent* e)
             // a dummy drop event with dummy MIME data, otherwise the parent
             // class will insert the file path into the document.
             //
-            QMimeData* dummyMimeData = new QMimeData();
+            QMimeData *dummyMimeData = new QMimeData();
             dummyMimeData->setText("");
-            QDropEvent* dummyEvent =
-                new QDropEvent
-                (
-                    e->pos(),
-                    e->possibleActions(),
-                    dummyMimeData,
-                    e->mouseButtons(),
-                    e->keyboardModifiers()
-                );
+            QDropEvent *dummyEvent = new QDropEvent(e->pos(), e->possibleActions(), dummyMimeData, e->mouseButtons(), e->keyboardModifiers());
             QPlainTextEdit::dropEvent(dummyEvent);
 
             delete dummyEvent;
@@ -618,7 +550,7 @@ void MarkdownEditor::dropEvent(QDropEvent* e)
 /*
  * This method contains a code snippet that was lifted and modified from ReText
  */
-void MarkdownEditor::keyPressEvent(QKeyEvent* e)
+void MarkdownEditor::keyPressEvent(QKeyEvent *e)
 {
     int key = e->key();
 
@@ -626,79 +558,79 @@ void MarkdownEditor::keyPressEvent(QKeyEvent* e)
 
     switch (key)
     {
-        case Qt::Key_Return:
-            if (!cursor.hasSelection())
+    case Qt::Key_Return:
+        if (!cursor.hasSelection())
+        {
+            if (e->modifiers() & Qt::ShiftModifier)
             {
-                if (e->modifiers() & Qt::ShiftModifier)
-                {
-                    // Insert Markdown-style line break
-                    cursor.insertText("  ");
-                    highlighter->rehighlightBlock(cursor.block());
-                }
+                // Insert Markdown-style line break
+                cursor.insertText("  ");
+                highlighter->rehighlightBlock(cursor.block());
+            }
 
-                if (e->modifiers() & Qt::ControlModifier)
-                {
-                    cursor.insertText("\n");
-                }
-                else
-                {
-                    handleCarriageReturn();
-                }
+            if (e->modifiers() & Qt::ControlModifier)
+            {
+                cursor.insertText("\n");
             }
             else
             {
-                QPlainTextEdit::keyPressEvent(e);
+                handleCarriageReturn();
             }
-            break;
-        case Qt::Key_Delete:
-            if (!hemingwayModeEnabled)
+        }
+        else
+        {
+            QPlainTextEdit::keyPressEvent(e);
+        }
+        break;
+    case Qt::Key_Delete:
+        if (!hemingwayModeEnabled)
+        {
+            QPlainTextEdit::keyPressEvent(e);
+        }
+        break;
+    case Qt::Key_Backspace:
+        if (!hemingwayModeEnabled)
+        {
+            if (!handleBackspaceKey())
             {
                 QPlainTextEdit::keyPressEvent(e);
             }
-            break;
-        case Qt::Key_Backspace:
-            if (!hemingwayModeEnabled)
-            {
-                if (!handleBackspaceKey())
-                {
-                    QPlainTextEdit::keyPressEvent(e);
-                }
-            }
-            break;
-        case Qt::Key_Tab:
-            if (!handleWhitespaceInEmptyMatch('\t'))
-            {
-                indentText();
-            }
-            break;
-        case Qt::Key_Backtab:
-            unindentText();
-            break;
-        case Qt::Key_Space:
-            if (!handleWhitespaceInEmptyMatch(' '))
-            {
-                QPlainTextEdit::keyPressEvent(e);
-            }
-            break;
-        default:
-            if (e->text().size() == 1)
-            {
-                QChar ch = e->text().at(0);
+        }
+        break;
+    case Qt::Key_Tab:
+        if (!handleWhitespaceInEmptyMatch('\t'))
+        {
+            indentText();
+        }
+        break;
+    case Qt::Key_Backtab:
+        unindentText();
+        break;
+    case Qt::Key_Space:
+        if (!handleWhitespaceInEmptyMatch(' '))
+        {
+            QPlainTextEdit::keyPressEvent(e);
+        }
+        break;
+    default:
+        if (e->text().size() == 1)
+        {
+            QChar ch = e->text().at(0);
 
-                if (!handleEndPairCharacterTyped(ch) && !insertPairedCharacters(ch))
-                {
-                    QPlainTextEdit::keyPressEvent(e);
-                }
-            }
-            else
+            if (!handleEndPairCharacterTyped(ch) && !insertPairedCharacters(ch))
             {
                 QPlainTextEdit::keyPressEvent(e);
             }
-            break;
+        }
+        else
+        {
+            QPlainTextEdit::keyPressEvent(e);
+        }
+        break;
     }
 }
 
-bool MarkdownEditor::eventFilter(QObject* watched, QEvent* event)
+bool MarkdownEditor::eventFilter(QObject *watched, QEvent *event)
 {
     if (event->type() == QEvent::MouseButtonPress)
     {
@@ -720,7 +652,7 @@ bool MarkdownEditor::eventFilter(QObject* watched, QEvent* event)
     else
     {
         // Check spelling of text block under mouse
-        QContextMenuEvent* contextEvent = static_cast<QContextMenuEvent*>(event);
+        QContextMenuEvent *contextEvent = static_cast<QContextMenuEvent *>(event);
 
         // If the context menu event was triggered by pressing the menu key,
         // use the current text cursor rather than the event position to get
@@ -739,36 +671,27 @@ bool MarkdownEditor::eventFilter(QObject* watched, QEvent* event)
         }
 
         QTextCharFormat::UnderlineStyle spellingErrorUnderlineStyle =
-            (QTextCharFormat::UnderlineStyle)
-            QApplication::style()->styleHint
-            (
-                QStyle::SH_SpellCheckUnderlineStyle
-            );
+            (QTextCharFormat::UnderlineStyle)QApplication::style()->styleHint(QStyle::SH_SpellCheckUnderlineStyle);
 
         // Get the formatting for the cursor position under the mouse,
         // and see if it has the spell check error underline style.
         //
-        bool wordHasSpellingError = false;
-        int blockPosition = cursorForWord.positionInBlock();
-        QList<QTextLayout::FormatRange> formatList =
-                cursorForWord.block().layout()->additionalFormats();
-        int mispelledWordStartPos = 0;
-        int mispelledWordLength = 0;
+        bool                            wordHasSpellingError  = false;
+        int                             blockPosition         = cursorForWord.positionInBlock();
+        QList<QTextLayout::FormatRange> formatList            = cursorForWord.block().layout()->additionalFormats();
+        int                             mispelledWordStartPos = 0;
+        int                             mispelledWordLength   = 0;
 
         for (int i = 0; i < formatList.length(); i++)
         {
             QTextLayout::FormatRange formatRange = formatList[i];
 
-            if
-            (
-                (blockPosition >= formatRange.start)
-                && (blockPosition <= (formatRange.start + formatRange.length))
-                && (formatRange.format.underlineStyle() == spellingErrorUnderlineStyle)
-            )
+            if ((blockPosition >= formatRange.start) && (blockPosition <= (formatRange.start + formatRange.length)) &&
+                (formatRange.format.underlineStyle() == spellingErrorUnderlineStyle))
             {
                 mispelledWordStartPos = formatRange.start;
-                mispelledWordLength = formatRange.length;
-                wordHasSpellingError = true;
+                mispelledWordLength   = formatRange.length;
+                wordHasSpellingError  = true;
                 break;
             }
         }
@@ -782,23 +705,13 @@ bool MarkdownEditor::eventFilter(QObject* watched, QEvent* event)
         }
 
         // Select the misspelled word.
-        cursorForWord.movePosition
-        (
-            QTextCursor::PreviousCharacter,
-            QTextCursor::MoveAnchor,
-            blockPosition - mispelledWordStartPos
-        );
-        cursorForWord.movePosition
-        (
-            QTextCursor::NextCharacter,
-            QTextCursor::KeepAnchor,
-            mispelledWordLength
-        );
+        cursorForWord.movePosition(QTextCursor::PreviousCharacter, QTextCursor::MoveAnchor, blockPosition - mispelledWordStartPos);
+        cursorForWord.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor, mispelledWordLength);
 
-        wordUnderMouse = cursorForWord.selectedText();
+        wordUnderMouse          = cursorForWord.selectedText();
         QStringList suggestions = dictionary.suggestions(wordUnderMouse);
-        QMenu* popupMenu = createStandardContextMenu();
-        QAction* firstAction = popupMenu->actions().first();
+        QMenu *     popupMenu   = createStandardContextMenu();
+        QAction *   firstAction = popupMenu->actions().first();
 
         spellingActions.clear();
 
@@ -806,7 +719,7 @@ bool MarkdownEditor::eventFilter(QObject* watched, QEvent* event)
         {
             for (int i = 0; i < suggestions.size(); i++)
             {
-                QAction* suggestionAction = new QAction(suggestions[i], this);
+                QAction *suggestionAction = new QAction(suggestions[i], this);
 
                 // Need the following line because KDE Plasma 5 will insert a hidden ampersand
                 // into the menu text as a keyboard accelerator.  Go off of the data in the
@@ -820,8 +733,7 @@ bool MarkdownEditor::eventFilter(QObject* watched, QEvent* event)
         }
         else
         {
-            QAction* noSuggestionsAction =
-                new QAction(tr("No spelling suggestions found"), this);
+            QAction *noSuggestionsAction = new QAction(tr("No spelling suggestions found"), this);
             noSuggestionsAction->setEnabled(false);
             spellingActions.append(noSuggestionsAction);
             popupMenu->insertAction(firstAction, noSuggestionsAction);
@@ -834,7 +746,7 @@ bool MarkdownEditor::eventFilter(QObject* watched, QEvent* event)
         popupMenu->insertSeparator(firstAction);
 
         // Show menu
-        connect(popupMenu, SIGNAL(triggered(QAction*)), this, SLOT(suggestSpelling(QAction*)));
+        connect(popupMenu, SIGNAL(triggered(QAction *)), this, SLOT(suggestSpelling(QAction *)));
 
         QPoint menuPos;
 
@@ -945,7 +857,7 @@ void MarkdownEditor::insertComment()
     if (cursor.hasSelection())
     {
         QString text = cursor.selectedText();
-        text = QString("<!-- " + text + " -->");
+        text         = QString("<!-- " + text + " -->");
         cursor.insertText(text);
     }
     else
@@ -995,18 +907,18 @@ void MarkdownEditor::createBlockquote()
 void MarkdownEditor::removeBlockquote()
 {
     QTextCursor cursor = this->textCursor();
-    QTextBlock block;
-    QTextBlock end;
+    QTextBlock  block;
+    QTextBlock  end;
 
     if (cursor.hasSelection())
     {
         block = this->document()->findBlock(cursor.selectionStart());
-        end = this->document()->findBlock(cursor.selectionEnd()).next();
+        end   = this->document()->findBlock(cursor.selectionEnd()).next();
     }
     else
     {
         block = cursor.block();
-        end = block.next();
+        end   = block.next();
     }
 
     cursor.beginEditBlock();
@@ -1042,7 +954,7 @@ void MarkdownEditor::indentText()
     if (cursor.hasSelection())
     {
         QTextBlock block = this->document()->findBlock(cursor.selectionStart());
-        QTextBlock end = this->document()->findBlock(cursor.selectionEnd()).next();
+        QTextBlock end   = this->document()->findBlock(cursor.selectionEnd()).next();
 
         cursor.beginEditBlock();
 
@@ -1073,98 +985,79 @@ void MarkdownEditor::indentText()
     }
     else
     {
-        int indent = tabWidth;
-        QString indentText = "";
+        int                     indent     = tabWidth;
+        QString                 indentText = "";
         QRegularExpressionMatch match;
 
         cursor.beginEditBlock();
 
         switch (cursor.block().userState())
         {
-            case MarkdownStateNumberedList:
-                match = emptyNumberedListRegex.match(cursor.block().text());
+        case MarkdownStateNumberedList:
+            match = emptyNumberedListRegex.match(cursor.block().text());
 
-                if (match.hasMatch())
-                {
-                    QStringList capture = match.capturedTexts();
-
-                    // Restart numbering for the nested list.
-                    if (capture.size() == 2)
-                    {
-                        QRegularExpression numberRegex("\\d+");
-
-                        cursor.movePosition(QTextCursor::StartOfBlock);
-                        cursor.movePosition
-                        (
-                            QTextCursor::EndOfBlock,
-                            QTextCursor::KeepAnchor
-                        );
-
-                        QString replacementText = cursor.selectedText();
-                        replacementText =
-                            replacementText.replace
-                            (
-                                numberRegex,
-                                "1"
-                            );
-
-                        cursor.insertText(replacementText);
-                        cursor.movePosition(QTextCursor::StartOfBlock);
-                    }
-                }
-                break;
-            case MarkdownStateBulletPointList:
+            if (match.hasMatch())
             {
-                if (emptyTaskListRegex.match(cursor.block().text()).hasMatch())
+                QStringList capture = match.capturedTexts();
+
+                // Restart numbering for the nested list.
+                if (capture.size() == 2)
                 {
+                    QRegularExpression numberRegex("\\d+");
+
+                    cursor.movePosition(QTextCursor::StartOfBlock);
+                    cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::KeepAnchor);
+
+                    QString replacementText = cursor.selectedText();
+                    replacementText         = replacementText.replace(numberRegex, "1");
+
+                    cursor.insertText(replacementText);
                     cursor.movePosition(QTextCursor::StartOfBlock);
                 }
-                else if (emptyBulletListRegex.match(cursor.block().text()).hasMatch())
+            }
+            break;
+        case MarkdownStateBulletPointList: {
+            if (emptyTaskListRegex.match(cursor.block().text()).hasMatch())
+            {
+                cursor.movePosition(QTextCursor::StartOfBlock);
+            }
+            else if (emptyBulletListRegex.match(cursor.block().text()).hasMatch())
+            {
+                if (bulletPointCyclingEnabled)
                 {
-                    if (bulletPointCyclingEnabled)
+                    QChar oldBulletPoint = cursor.block().text().trimmed().at(0);
+                    QChar newBulletPoint = oldBulletPoint;
                     {
-                        QChar oldBulletPoint = cursor.block().text().trimmed().at(0);
-                        QChar newBulletPoint = oldBulletPoint;
+                        if (oldBulletPoint == '*')
                         {
-                            if (oldBulletPoint == '*')
-                            {
-                                newBulletPoint = '-';
-                            }
-                            else if (oldBulletPoint == '-')
-                            {
-                                newBulletPoint = '+';
-                            }
-                            else
-                            {
-                                newBulletPoint = '*';
-                            }
+                            newBulletPoint = '-';
                         }
-
-                        cursor.movePosition(QTextCursor::StartOfBlock);
-                        cursor.movePosition
-                        (
-                            QTextCursor::EndOfBlock,
-                            QTextCursor::KeepAnchor
-                        );
-
-                        QString replacementText = cursor.selectedText();
-                        replacementText =
-                            replacementText.replace
-                            (
-                                oldBulletPoint,
-                                newBulletPoint
-                            );
-                        cursor.insertText(replacementText);
+                        else if (oldBulletPoint == '-')
+                        {
+                            newBulletPoint = '+';
+                        }
+                        else
+                        {
+                            newBulletPoint = '*';
+                        }
                     }
 
                     cursor.movePosition(QTextCursor::StartOfBlock);
+                    cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::KeepAnchor);
+
+                    QString replacementText = cursor.selectedText();
+                    replacementText         = replacementText.replace(oldBulletPoint, newBulletPoint);
+                    cursor.insertText(replacementText);
                 }
 
-                break;
+                cursor.movePosition(QTextCursor::StartOfBlock);
             }
-            default:
-                indent = tabWidth - (cursor.positionInBlock() % tabWidth);
-                break;
+
+            break;
+        }
+        default:
+            indent = tabWidth - (cursor.positionInBlock() % tabWidth);
+            break;
         }
 
         if (this->insertSpacesForTabs)
@@ -1188,18 +1081,18 @@ void MarkdownEditor::indentText()
 void MarkdownEditor::unindentText()
 {
     QTextCursor cursor = this->textCursor();
-    QTextBlock block;
-    QTextBlock end;
+    QTextBlock  block;
+    QTextBlock  end;
 
     if (cursor.hasSelection())
     {
         block = this->document()->findBlock(cursor.selectionStart());
-        end = this->document()->findBlock(cursor.selectionEnd()).next();
+        end   = this->document()->findBlock(cursor.selectionEnd()).next();
     }
     else
     {
         block = cursor.block();
-        end = block.next();
+        end   = block.next();
     }
 
     cursor.beginEditBlock();
@@ -1216,11 +1109,7 @@ void MarkdownEditor::unindentText()
         {
             int pos = 0;
 
-            while
-            (
-                (this->document()->characterAt(cursor.position()) == ' ')
-                && (pos < tabWidth)
-            )
+            while ((this->document()->characterAt(cursor.position()) == ' ') && (pos < tabWidth))
             {
                 pos += 1;
                 cursor.deleteChar();
@@ -1230,12 +1119,8 @@ void MarkdownEditor::unindentText()
         block = block.next();
     }
 
-    if
-    (
-        (MarkdownStateBulletPointList == cursor.block().userState())
-        && (emptyBulletListRegex.match(cursor.block().text()).hasMatch())
-        && bulletPointCyclingEnabled
-    )
+    if ((MarkdownStateBulletPointList == cursor.block().userState()) && (emptyBulletListRegex.match(cursor.block().text()).hasMatch()) &&
+        bulletPointCyclingEnabled)
     {
         QChar oldBulletPoint = cursor.block().text().trimmed().at(0);
         QChar newBulletPoint;
@@ -1254,22 +1139,12 @@ void MarkdownEditor::unindentText()
         }
 
         cursor.movePosition(QTextCursor::StartOfBlock);
-        cursor.movePosition
-        (
-            QTextCursor::EndOfBlock,
-            QTextCursor::KeepAnchor
-        );
+        cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::KeepAnchor);
 
         QString replacementText = cursor.selectedText();
-        replacementText =
-            replacementText.replace
-            (
-                oldBulletPoint,
-                newBulletPoint
-            );
+        replacementText         = replacementText.replace(oldBulletPoint, newBulletPoint);
         cursor.insertText(replacementText);
     }
-
 
     cursor.endEditBlock();
 }
@@ -1277,18 +1152,18 @@ void MarkdownEditor::unindentText()
 bool MarkdownEditor::toggleTaskComplete()
 {
     QTextCursor cursor = textCursor();
-    QTextBlock block;
-    QTextBlock end;
+    QTextBlock  block;
+    QTextBlock  end;
 
     if (cursor.hasSelection())
     {
         block = this->document()->findBlock(cursor.selectionStart());
-        end = this->document()->findBlock(cursor.selectionEnd()).next();
+        end   = this->document()->findBlock(cursor.selectionEnd()).next();
     }
     else
     {
         block = cursor.block();
-        end = block.next();
+        end   = block.next();
     }
 
     cursor.beginEditBlock();
@@ -1297,11 +1172,7 @@ bool MarkdownEditor::toggleTaskComplete()
     {
         QRegularExpressionMatch match;
 
-        if
-        (
-            (block.userState() == MarkdownStateBulletPointList)
-            && (block.text().indexOf(taskListRegex, 0, &match) == 0)
-        )
+        if ((block.userState() == MarkdownStateBulletPointList) && (block.text().indexOf(taskListRegex, 0, &match) == 0))
         {
             QStringList capture = match.capturedTexts();
 
@@ -1309,7 +1180,7 @@ bool MarkdownEditor::toggleTaskComplete()
             {
                 QChar value = capture.at(1)[0];
                 QChar replacement;
-                int index = block.text().indexOf(" [");
+                int   index = block.text().indexOf(" [");
 
                 if (index >= 0)
                 {
@@ -1327,12 +1198,7 @@ bool MarkdownEditor::toggleTaskComplete()
 
                 cursor.setPosition(block.position());
                 cursor.movePosition(QTextCursor::StartOfBlock);
-                cursor.movePosition
-                (
-                    QTextCursor::Right,
-                    QTextCursor::MoveAnchor,
-                    index
-                );
+                cursor.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor, index);
 
                 cursor.deleteChar();
                 cursor.insertText(replacement);
@@ -1427,7 +1293,6 @@ void MarkdownEditor::increaseFontSize()
 
     setFont(this->font().family(), fontSize);
     emit fontSizeChanged(fontSize);
-
 }
 
 void MarkdownEditor::decreaseFontSize()
@@ -1444,7 +1309,7 @@ void MarkdownEditor::decreaseFontSize()
     emit fontSizeChanged(fontSize);
 }
 
-void MarkdownEditor::suggestSpelling(QAction* action)
+void MarkdownEditor::suggestSpelling(QAction *action)
 {
     if (action == addWordToDictionaryAction)
     {
@@ -1478,7 +1343,7 @@ void MarkdownEditor::onContentsChanged(int position, int charsAdded, int charsRe
     //
     if (typingHasPaused)
     {
-        typingHasPaused = false;
+        typingHasPaused        = false;
         typingPausedSignalSent = false;
         emit typingResumed();
     }
@@ -1490,12 +1355,7 @@ void MarkdownEditor::onSelectionChanged()
 
     if (cursor.hasSelection())
     {
-        emit textSelected
-        (
-            cursor.selectedText(),
-            cursor.selectionStart(),
-            cursor.selectionEnd()
-        );
+        emit textSelected(cursor.selectedText(), cursor.selectionStart(), cursor.selectionEnd());
     }
     else
     {
@@ -1520,89 +1380,89 @@ void MarkdownEditor::focusText()
 
         switch (focusMode)
         {
-            case FocusModeCurrentLine: // Current line
-                beforeFadedSelection.cursor.movePosition(QTextCursor::StartOfLine);
-                canFadePrevious = beforeFadedSelection.cursor.movePosition(QTextCursor::Up);
-                beforeFadedSelection.cursor.movePosition(QTextCursor::EndOfLine);
-                beforeFadedSelection.cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
+        case FocusModeCurrentLine: // Current line
+            beforeFadedSelection.cursor.movePosition(QTextCursor::StartOfLine);
+            canFadePrevious = beforeFadedSelection.cursor.movePosition(QTextCursor::Up);
+            beforeFadedSelection.cursor.movePosition(QTextCursor::EndOfLine);
+            beforeFadedSelection.cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
 
-                if (canFadePrevious)
-                {
-                    selections.append(beforeFadedSelection);
-                }
-
-                afterFadedSelection.cursor.movePosition(QTextCursor::EndOfLine);
-                afterFadedSelection.cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-                selections.append(afterFadedSelection);
-                break;
-
-            case FocusModeThreeLines: // Current line and previous two lines
-                beforeFadedSelection.cursor.movePosition(QTextCursor::StartOfLine);
-                canFadePrevious = beforeFadedSelection.cursor.movePosition(QTextCursor::Up, QTextCursor::MoveAnchor, 2);
-                beforeFadedSelection.cursor.movePosition(QTextCursor::EndOfLine);
-                beforeFadedSelection.cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
-
-                if (canFadePrevious)
-                {
-                    selections.append(beforeFadedSelection);
-                }
-
-                afterFadedSelection.cursor.movePosition(QTextCursor::Down);
-                afterFadedSelection.cursor.movePosition(QTextCursor::EndOfLine);
-                afterFadedSelection.cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-                selections.append(afterFadedSelection);
-                break;
-
-            case FocusModeParagraph: // Current paragraph
-                canFadePrevious = beforeFadedSelection.cursor.movePosition(QTextCursor::StartOfBlock);
-                beforeFadedSelection.cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
-                selections.append(beforeFadedSelection);
-                afterFadedSelection.cursor.movePosition(QTextCursor::EndOfBlock);
-                afterFadedSelection.cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-                selections.append(afterFadedSelection);
-                break;
-
-            case FocusModeSentence: // Current sentence
+            if (canFadePrevious)
             {
-                QTextBoundaryFinder boundaryFinder(QTextBoundaryFinder::Sentence, this->textCursor().block().text());
-                int currentPos = this->textCursor().positionInBlock();
-                int lastSentencePos = 0;
-                int nextSentencePos = 0;
-
-                boundaryFinder.setPosition(currentPos);
-                lastSentencePos = boundaryFinder.toPreviousBoundary();
-                boundaryFinder.setPosition(currentPos);
-                nextSentencePos = boundaryFinder.toNextBoundary();
-
-                if (lastSentencePos < 0)
-                {
-                    beforeFadedSelection.cursor.movePosition(QTextCursor::StartOfBlock);
-                }
-                else
-                {
-                    beforeFadedSelection.cursor.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, currentPos - lastSentencePos);
-                }
-
-                beforeFadedSelection.cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
                 selections.append(beforeFadedSelection);
-
-                if (nextSentencePos < 0)
-                {
-                    afterFadedSelection.cursor.movePosition(QTextCursor::EndOfBlock);
-                }
-                else
-                {
-                    afterFadedSelection.cursor.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor, nextSentencePos - currentPos);
-                }
-
-                afterFadedSelection.cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
-                selections.append(afterFadedSelection);
-
-                break;
             }
-            // `FocusModeTypewriter` implicitly handeled here as we don't highlight anything but center the current line.
-            default:
-                break;
+
+            afterFadedSelection.cursor.movePosition(QTextCursor::EndOfLine);
+            afterFadedSelection.cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+            selections.append(afterFadedSelection);
+            break;
+
+        case FocusModeThreeLines: // Current line and previous two lines
+            beforeFadedSelection.cursor.movePosition(QTextCursor::StartOfLine);
+            canFadePrevious = beforeFadedSelection.cursor.movePosition(QTextCursor::Up, QTextCursor::MoveAnchor, 2);
+            beforeFadedSelection.cursor.movePosition(QTextCursor::EndOfLine);
+            beforeFadedSelection.cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
+
+            if (canFadePrevious)
+            {
+                selections.append(beforeFadedSelection);
+            }
+
+            afterFadedSelection.cursor.movePosition(QTextCursor::Down);
+            afterFadedSelection.cursor.movePosition(QTextCursor::EndOfLine);
+            afterFadedSelection.cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+            selections.append(afterFadedSelection);
+            break;
+
+        case FocusModeParagraph: // Current paragraph
+            canFadePrevious = beforeFadedSelection.cursor.movePosition(QTextCursor::StartOfBlock);
+            beforeFadedSelection.cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
+            selections.append(beforeFadedSelection);
+            afterFadedSelection.cursor.movePosition(QTextCursor::EndOfBlock);
+            afterFadedSelection.cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+            selections.append(afterFadedSelection);
+            break;
+
+        case FocusModeSentence: // Current sentence
+        {
+            QTextBoundaryFinder boundaryFinder(QTextBoundaryFinder::Sentence, this->textCursor().block().text());
+            int                 currentPos      = this->textCursor().positionInBlock();
+            int                 lastSentencePos = 0;
+            int                 nextSentencePos = 0;
+
+            boundaryFinder.setPosition(currentPos);
+            lastSentencePos = boundaryFinder.toPreviousBoundary();
+            boundaryFinder.setPosition(currentPos);
+            nextSentencePos = boundaryFinder.toNextBoundary();
+
+            if (lastSentencePos < 0)
+            {
+                beforeFadedSelection.cursor.movePosition(QTextCursor::StartOfBlock);
+            }
+            else
+            {
+                beforeFadedSelection.cursor.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, currentPos - lastSentencePos);
+            }
+
+            beforeFadedSelection.cursor.movePosition(QTextCursor::Start, QTextCursor::KeepAnchor);
+            selections.append(beforeFadedSelection);
+
+            if (nextSentencePos < 0)
+            {
+                afterFadedSelection.cursor.movePosition(QTextCursor::EndOfBlock);
+            }
+            else
+            {
+                afterFadedSelection.cursor.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor, nextSentencePos - currentPos);
+            }
+
+            afterFadedSelection.cursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+            selections.append(afterFadedSelection);
+
+            break;
+        }
+        // `FocusModeTypewriter` implicitly handeled here as we don't highlight anything but center the current line.
+        default:
+            break;
         }
 
         this->setExtraSelections(selections);
@@ -1646,28 +1506,23 @@ void MarkdownEditor::onCursorPositionChanged()
 {
     if (!mouseButtonDown)
     {
-        QRect cursor = this->cursorRect();
+        QRect cursor   = this->cursorRect();
         QRect viewport = this->viewport()->rect();
-        int bottom = viewport.bottom() - this->fontMetrics().height();
+        int   bottom   = viewport.bottom() - this->fontMetrics().height();
 
-        if
-        (
-            (focusMode != FocusModeDisabled) ||
-            (cursor.bottom() >= bottom) ||
-            (cursor.top() <= viewport.top())
-        )
+        if ((focusMode != FocusModeDisabled) || (cursor.bottom() >= bottom) || (cursor.top() <= viewport.top()))
         {
             centerCursor();
         }
     }
-    
+
     // Set the text cursor back to visible and reset the blink timer so that
     // the cursor is always visible whenever it moves to a new position.
     //
     textCursorVisible = true;
     cursorBlinkTimer->stop();
     cursorBlinkTimer->start();
-    
+
     // Update widget to ensure cursor is drawn.
     update();
 
@@ -1682,9 +1537,9 @@ void MarkdownEditor::toggleCursorBlink()
 
 void MarkdownEditor::handleCarriageReturn()
 {
-    QString autoInsertText = "";
-    QTextCursor cursor = this->textCursor();
-    bool endList = false;
+    QString     autoInsertText = "";
+    QTextCursor cursor         = this->textCursor();
+    bool        endList        = false;
 
     if (cursor.positionInBlock() < (cursor.block().length() - 1))
     {
@@ -1701,83 +1556,77 @@ void MarkdownEditor::handleCarriageReturn()
 
         switch (cursor.block().userState())
         {
-            case MarkdownStateNumberedList:
-            {
-                autoInsertText = getPriorMarkdownBlockItemStart(numberedListRegex, match);
-                QStringList capture = match.capturedTexts();
+        case MarkdownStateNumberedList: {
+            autoInsertText      = getPriorMarkdownBlockItemStart(numberedListRegex, match);
+            QStringList capture = match.capturedTexts();
 
-                if (!autoInsertText.isEmpty() && (capture.size() == 2))
+            if (!autoInsertText.isEmpty() && (capture.size() == 2))
+            {
+                // If the line of text is an empty list item, end the list.
+                if (cursor.block().text().length() == autoInsertText.length())
                 {
-                    // If the line of text is an empty list item, end the list.
-                    if (cursor.block().text().length() == autoInsertText.length())
-                    {
-                        endList = true;
-                    }
-                    // Else auto-increment the list number.
-                    else
-                    {
-                        QRegularExpression numberRegex("\\d+");
-                        int number = capture.at(1).toInt();
-                        number++;
-                        autoInsertText =
-                            autoInsertText.replace
-                            (
-                                numberRegex,
-                                QString("%1").arg(number)
-                            );
-                    }
+                    endList = true;
                 }
+                // Else auto-increment the list number.
                 else
+                {
+                    QRegularExpression numberRegex("\\d+");
+                    int                number = capture.at(1).toInt();
+                    number++;
+                    autoInsertText = autoInsertText.replace(numberRegex, QString("%1").arg(number));
+                }
+            }
+            else
+            {
+                autoInsertText = getPriorIndentation();
+            }
+            break;
+        }
+        case MarkdownStateBulletPointList:
+            // Check for GFM task list before checking for bullet point.
+            autoInsertText = getPriorMarkdownBlockItemStart(taskListRegex, match);
+
+            // If the string is empty, then it wasn't a GFM task list item.
+            // Treat it as a normal bullet point.
+            //
+            if (autoInsertText.isEmpty())
+            {
+                autoInsertText = getPriorMarkdownBlockItemStart(bulletListRegex, match);
+
+                if (autoInsertText.isEmpty())
                 {
                     autoInsertText = getPriorIndentation();
                 }
-                break;
+                // If the line of text is an empty list item, end the list.
+                else if (cursor.block().text().length() == autoInsertText.length())
+                {
+                    endList = true;
+                }
             }
-            case MarkdownStateBulletPointList:
-                // Check for GFM task list before checking for bullet point.
-                autoInsertText = getPriorMarkdownBlockItemStart(taskListRegex, match);
-
-                // If the string is empty, then it wasn't a GFM task list item.
-                // Treat it as a normal bullet point.
-                //
-                if (autoInsertText.isEmpty())
+            else // string not empty - GFM task list item
+            {
+                // If the line of text is an empty list item, end the list.
+                if (cursor.block().text().length() == autoInsertText.length())
                 {
-                    autoInsertText = getPriorMarkdownBlockItemStart(bulletListRegex, match);
-
-                    if (autoInsertText.isEmpty())
-                    {
-                        autoInsertText = getPriorIndentation();
-                    }
-                    // If the line of text is an empty list item, end the list.
-                    else if (cursor.block().text().length() == autoInsertText.length())
-                    {
-                        endList = true;
-                    }
+                    endList = true;
                 }
-                else // string not empty - GFM task list item
+                else
                 {
-                    // If the line of text is an empty list item, end the list.
-                    if (cursor.block().text().length() == autoInsertText.length())
-                    {
-                        endList = true;
-                    }
-                    else
-                    {
-                        // In case the previous line had a completed task with
-                        // an X checking it off, make sure a completed task
-                        // isn't added as the new task (remove the x and replace
-                        // with a space).
-                        //
-                        autoInsertText = autoInsertText.replace('x', ' ');
-                    }
+                    // In case the previous line had a completed task with
+                    // an X checking it off, make sure a completed task
+                    // isn't added as the new task (remove the x and replace
+                    // with a space).
+                    //
+                    autoInsertText = autoInsertText.replace('x', ' ');
                 }
-                break;
-            case MarkdownStateBlockquote:
-                autoInsertText = getPriorMarkdownBlockItemStart(blockquoteRegex, match);
-                break;
-            default:
-                autoInsertText = getPriorIndentation();
-                break;
+            }
+            break;
+        case MarkdownStateBlockquote:
+            autoInsertText = getPriorMarkdownBlockItemStart(blockquoteRegex, match);
+            break;
+        default:
+            autoInsertText = getPriorIndentation();
+            break;
         }
     }
 
@@ -1807,69 +1656,54 @@ bool MarkdownEditor::handleBackspaceKey()
 
     switch (cursor.block().userState())
     {
-        case MarkdownStateNumberedList:
+    case MarkdownStateNumberedList: {
+        if (emptyNumberedListRegex.match(textCursor().block().text()).hasMatch())
         {
-            if (emptyNumberedListRegex.match(textCursor().block().text()).hasMatch())
-            {
-                backtrackIndex = cursor.block().text().indexOf(QRegularExpression("\\d"));
-            }
-            break;
+            backtrackIndex = cursor.block().text().indexOf(QRegularExpression("\\d"));
         }
-        case MarkdownStateBulletPointList:
-            if
-            (
-                emptyBulletListRegex.match(cursor.block().text()).hasMatch()
-                || emptyTaskListRegex.match(cursor.block().text()).hasMatch()
-            )
-            {
-                backtrackIndex = cursor.block().text().indexOf(QRegularExpression("[+*-]"));
-            }
-            break;
-        case MarkdownStateBlockquote:
-            if (emptyBlockquoteRegex.match(cursor.block().text()).hasMatch())
-            {
-                backtrackIndex = cursor.block().text().lastIndexOf('>');
-            }
-            break;
-        default:
-            // If the first character in an automatched set is being
-            // deleted, then delete the second matching one along with it.
-            //
-            if (autoMatchEnabled && (cursor.positionInBlock() > 0))
-            {
-                QString blockText = cursor.block().text();
+        break;
+    }
+    case MarkdownStateBulletPointList:
+        if (emptyBulletListRegex.match(cursor.block().text()).hasMatch() || emptyTaskListRegex.match(cursor.block().text()).hasMatch())
+        {
+            backtrackIndex = cursor.block().text().indexOf(QRegularExpression("[+*-]"));
+        }
+        break;
+    case MarkdownStateBlockquote:
+        if (emptyBlockquoteRegex.match(cursor.block().text()).hasMatch())
+        {
+            backtrackIndex = cursor.block().text().lastIndexOf('>');
+        }
+        break;
+    default:
+        // If the first character in an automatched set is being
+        // deleted, then delete the second matching one along with it.
+        //
+        if (autoMatchEnabled && (cursor.positionInBlock() > 0))
+        {
+            QString blockText = cursor.block().text();
 
-                if (cursor.positionInBlock() < blockText.length())
+            if (cursor.positionInBlock() < blockText.length())
+            {
+                QChar currentChar  = blockText[cursor.positionInBlock()];
+                QChar previousChar = blockText[cursor.positionInBlock() - 1];
+
+                if (markupPairs.value(previousChar) == currentChar)
                 {
-                    QChar currentChar = blockText[cursor.positionInBlock()];
-                    QChar previousChar = blockText[cursor.positionInBlock() - 1];
-
-                    if (markupPairs.value(previousChar) == currentChar)
-                    {
-                        cursor.movePosition(QTextCursor::Left);
-                        cursor.movePosition
-                        (
-                            QTextCursor::Right,
-                            QTextCursor::KeepAnchor,
-                            2
-                        );
-                        cursor.removeSelectedText();
-                        return true;
-                    }
+                    cursor.movePosition(QTextCursor::Left);
+                    cursor.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, 2);
+                    cursor.removeSelectedText();
+                    return true;
                 }
             }
-            break;
+        }
+        break;
     }
 
     if (backtrackIndex >= 0)
     {
         cursor.movePosition(QTextCursor::StartOfBlock);
-        cursor.movePosition
-        (
-            QTextCursor::Right,
-            QTextCursor::MoveAnchor,
-            backtrackIndex
-        );
+        cursor.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor, backtrackIndex);
 
         cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::KeepAnchor);
         cursor.removeSelectedText();
@@ -1880,21 +1714,21 @@ bool MarkdownEditor::handleBackspaceKey()
 }
 
 // Algorithm lifted from ReText.
-void MarkdownEditor::insertPrefixForBlocks(const QString& prefix)
+void MarkdownEditor::insertPrefixForBlocks(const QString &prefix)
 {
     QTextCursor cursor = this->textCursor();
-    QTextBlock block;
-    QTextBlock end;
+    QTextBlock  block;
+    QTextBlock  end;
 
     if (cursor.hasSelection())
     {
         block = this->document()->findBlock(cursor.selectionStart());
-        end = this->document()->findBlock(cursor.selectionEnd()).next();
+        end   = this->document()->findBlock(cursor.selectionEnd()).next();
     }
     else
     {
         block = cursor.block();
-        end = block.next();
+        end   = block.next();
     }
 
     cursor.beginEditBlock();
@@ -1912,18 +1746,18 @@ void MarkdownEditor::insertPrefixForBlocks(const QString& prefix)
 void MarkdownEditor::createNumberedList(const QChar marker)
 {
     QTextCursor cursor = this->textCursor();
-    QTextBlock block;
-    QTextBlock end;
+    QTextBlock  block;
+    QTextBlock  end;
 
     if (cursor.hasSelection())
     {
         block = this->document()->findBlock(cursor.selectionStart());
-        end = this->document()->findBlock(cursor.selectionEnd()).next();
+        end   = this->document()->findBlock(cursor.selectionEnd()).next();
     }
     else
     {
         block = cursor.block();
-        end = block.next();
+        end   = block.next();
     }
 
     cursor.beginEditBlock();
@@ -1943,22 +1777,17 @@ void MarkdownEditor::createNumberedList(const QChar marker)
 
 bool MarkdownEditor::insertPairedCharacters(const QChar firstChar)
 {
-    if
-    (
-        autoMatchEnabled
-        && markupPairs.contains(firstChar)
-        && autoMatchFilter.value(firstChar)
-    )
+    if (autoMatchEnabled && markupPairs.contains(firstChar) && autoMatchFilter.value(firstChar))
     {
-        QChar lastChar = markupPairs.value(firstChar);
-        QTextCursor cursor = this->textCursor();
-        QTextBlock block;
-        QTextBlock end;
+        QChar       lastChar = markupPairs.value(firstChar);
+        QTextCursor cursor   = this->textCursor();
+        QTextBlock  block;
+        QTextBlock  end;
 
         if (cursor.hasSelection())
         {
             block = this->document()->findBlock(cursor.selectionStart());
-            end = this->document()->findBlock(cursor.selectionEnd());
+            end   = this->document()->findBlock(cursor.selectionEnd());
 
             // Only surround selection with matched characters if the
             // selection belongs to the same block.
@@ -1974,11 +1803,7 @@ bool MarkdownEditor::insertPairedCharacters(const QChar firstChar)
 
                 cursor = this->textCursor();
                 cursor.setPosition(cursor.selectionStart());
-                cursor.setPosition
-                (
-                    textCursor().selectionEnd() - 1,
-                    QTextCursor::KeepAnchor
-                );
+                cursor.setPosition(textCursor().selectionEnd() - 1, QTextCursor::KeepAnchor);
                 setTextCursor(cursor);
                 return true;
             }
@@ -1986,8 +1811,8 @@ bool MarkdownEditor::insertPairedCharacters(const QChar firstChar)
         else
         {
             // Get the previous character.  Ensure that it is whitespace.
-            int blockPos = cursor.positionInBlock();
-            bool doMatch = true;
+            int  blockPos = cursor.positionInBlock();
+            bool doMatch  = true;
 
             // If not at the beginning of the line...
             if (blockPos > 0)
@@ -2005,14 +1830,14 @@ bool MarkdownEditor::insertPairedCharacters(const QChar firstChar)
                     //
                     switch (firstChar.toLatin1())
                     {
-                        case '(':
-                        case '[':
-                        case '{':
-                        case '<':
-                            break;
-                        default:
-                            doMatch = false;
-                            break;
+                    case '(':
+                    case '[':
+                    case '{':
+                    case '<':
+                        break;
+                    default:
+                        doMatch = false;
+                        break;
                     }
                 }
             }
@@ -2055,8 +1880,8 @@ bool MarkdownEditor::handleEndPairCharacterTyped(const QChar ch)
     if (lookAhead)
     {
         QTextCursor cursor = this->textCursor();
-        QString text = cursor.block().text();
-        int pos = cursor.positionInBlock();
+        QString     text   = cursor.block().text();
+        int         pos    = cursor.positionInBlock();
 
         if (pos < (text.length()))
         {
@@ -2079,18 +1904,12 @@ bool MarkdownEditor::handleEndPairCharacterTyped(const QChar ch)
 bool MarkdownEditor::handleWhitespaceInEmptyMatch(const QChar whitespace)
 {
     QTextCursor cursor = this->textCursor();
-    QTextBlock block = cursor.block();
-    QString text = block.text();
-    int pos = cursor.positionInBlock();
+    QTextBlock  block  = cursor.block();
+    QString     text   = block.text();
+    int         pos    = cursor.positionInBlock();
 
-    if
-    (
-        (text.length() > 0) &&
-        (pos > 0) &&
-        (pos < text.length()) &&
-        nonEmptyMarkupPairs.contains(text[pos - 1]) &&
-        (text[pos] == nonEmptyMarkupPairs.value(text[pos - 1]))
-    )
+    if ((text.length() > 0) && (pos > 0) && (pos < text.length()) && nonEmptyMarkupPairs.contains(text[pos - 1]) &&
+        (text[pos] == nonEmptyMarkupPairs.value(text[pos - 1])))
     {
         cursor.deleteChar();
         cursor.insertText(whitespace);
@@ -2100,15 +1919,15 @@ bool MarkdownEditor::handleWhitespaceInEmptyMatch(const QChar whitespace)
     return false;
 }
 
-void MarkdownEditor::insertFormattingMarkup(const QString& markup)
+void MarkdownEditor::insertFormattingMarkup(const QString &markup)
 {
     QTextCursor cursor = this->textCursor();
 
     if (cursor.hasSelection())
     {
-        int start = cursor.selectionStart();
-        int end = cursor.selectionEnd() + markup.length();
-        QTextCursor c = cursor;
+        int         start = cursor.selectionStart();
+        int         end   = cursor.selectionEnd() + markup.length();
+        QTextCursor c     = cursor;
         c.beginEditBlock();
         c.setPosition(start);
         c.insertText(markup);
@@ -2134,9 +1953,9 @@ void MarkdownEditor::insertFormattingMarkup(const QString& markup)
 
 QString MarkdownEditor::getPriorIndentation()
 {
-    QString indent = "";
+    QString     indent = "";
     QTextCursor cursor = this->textCursor();
-    QTextBlock block = cursor.block();
+    QTextBlock  block  = cursor.block();
 
     QString text = block.text();
 
@@ -2155,14 +1974,10 @@ QString MarkdownEditor::getPriorIndentation()
     return indent;
 }
 
-QString MarkdownEditor::getPriorMarkdownBlockItemStart
-(
-    const QRegularExpression& itemRegex,
-    QRegularExpressionMatch& match
-)
+QString MarkdownEditor::getPriorMarkdownBlockItemStart(const QRegularExpression &itemRegex, QRegularExpressionMatch &match)
 {
     QTextCursor cursor = this->textCursor();
-    QTextBlock block = cursor.block();
+    QTextBlock  block  = cursor.block();
 
     QString text = block.text();
 
@@ -2174,7 +1989,7 @@ QString MarkdownEditor::getPriorMarkdownBlockItemStart
     return QString("");
 }
 
-bool MarkdownEditor::atBlockAreaStart(const QTextBlock& block, MarkdownEditor::BlockType& type) const
+bool MarkdownEditor::atBlockAreaStart(const QTextBlock &block, MarkdownEditor::BlockType &type) const
 {
     if (!block.isValid())
     {
@@ -2198,41 +2013,32 @@ bool MarkdownEditor::atBlockAreaStart(const QTextBlock& block, MarkdownEditor::B
     return false;
 }
 
-bool MarkdownEditor::atBlockAreaEnd(const QTextBlock& block, const MarkdownEditor::BlockType type) const
+bool MarkdownEditor::atBlockAreaEnd(const QTextBlock &block, const MarkdownEditor::BlockType type) const
 {
     switch (type)
     {
-        case BlockTypeCode:
-            return atCodeBlockEnd(block);
-        case BlockTypeQuote:
-            return !isBlockquote(block);
-        default:
-            return true;
+    case BlockTypeCode:
+        return atCodeBlockEnd(block);
+    case BlockTypeQuote:
+        return !isBlockquote(block);
+    default:
+        return true;
     }
 }
 
-bool MarkdownEditor::atCodeBlockStart(const QTextBlock& block) const
+bool MarkdownEditor::atCodeBlockStart(const QTextBlock &block) const
 {
-    return
-        (
-            (MarkdownStateCodeBlock == block.userState())
-            || (MarkdownStateInGithubCodeFence == block.userState())
-            || (MarkdownStateInPandocCodeFence == block.userState())
-        );
+    return ((MarkdownStateCodeBlock == block.userState()) || (MarkdownStateInGithubCodeFence == block.userState()) ||
+            (MarkdownStateInPandocCodeFence == block.userState()));
 }
 
-bool MarkdownEditor::atCodeBlockEnd(const QTextBlock& block) const
+bool MarkdownEditor::atCodeBlockEnd(const QTextBlock &block) const
 {
-    return
-        (
-            (MarkdownStateCodeBlock != block.userState())
-            && (MarkdownStateInPandocCodeFence != block.userState())
-            && (MarkdownStateInGithubCodeFence != block.userState())
-            && (MarkdownStateCodeFenceEnd != block.userState())
-        );
+    return ((MarkdownStateCodeBlock != block.userState()) && (MarkdownStateInPandocCodeFence != block.userState()) &&
+            (MarkdownStateInGithubCodeFence != block.userState()) && (MarkdownStateCodeFenceEnd != block.userState()));
 }
 
-bool MarkdownEditor::isBlockquote(const QTextBlock& block) const
+bool MarkdownEditor::isBlockquote(const QTextBlock &block) const
 {
     return (MarkdownStateBlockquote == block.userState());
 }

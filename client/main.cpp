@@ -29,10 +29,10 @@ int main(int argc, char *argv[])
     // main application and dynamic linked library locale
 #if defined(Q_OS_MAC)
     MacApplication a(argc, argv);
-    QString localeDirPath = QApplication::applicationDirPath() + "/../Resources/translations";
+    QString        localeDirPath = QApplication::applicationDirPath() + "/../Resources/translations";
 #else
     QApplication a(argc, argv);
-    QString localeDirPath = QApplication::applicationDirPath() + "/translations";
+    QString      localeDirPath = QApplication::applicationDirPath() + "/translations";
     if (!QDir(localeDirPath).exists())
     {
         localeDirPath = QApplication::applicationDirPath() + "/../translations";
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     g_settings->initialize();
 
     QWebEngineSettings::globalSettings()->setAttribute(QWebEngineSettings::JavascriptCanAccessClipboard, true);
-    
+
     // setup command line parser
     QCommandLineParser parser;
     parser.addHelpOption();
@@ -79,12 +79,13 @@ int main(int argc, char *argv[])
     parser.process(a);
 
     // get filename from command line arguments
-    QString fileName = ":/rc/sample.md";
+    QString           fileName    = ":/rc/sample.md";
     const QStringList cmdLineArgs = parser.positionalArguments();
-    if (!cmdLineArgs.isEmpty()) {
+    if (!cmdLineArgs.isEmpty())
+    {
         fileName = cmdLineArgs.at(0);
     }
-    
+
     MainWindow w;
     w.showMaximized();
     w.openFile(fileName);

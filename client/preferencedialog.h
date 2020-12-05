@@ -3,8 +3,9 @@
 
 #include <QDialog>
 
-namespace Ui {
-class PreferenceDialog;
+namespace Ui
+{
+    class PreferenceDialog;
 }
 
 class PreviewThemeEditor;
@@ -16,15 +17,16 @@ class PreferenceDialog : public QDialog
 public:
     explicit PreferenceDialog(QWidget *parent = nullptr);
     ~PreferenceDialog() override;
+
 protected:
-     void accept() override;
+    void accept() override;
 private slots:
-     void on_cbPreviewTheme_currentTextChanged(const QString &text);
-     
+    void on_cbPreviewTheme_currentTextChanged(const QString &text);
+
 private:
     Ui::PreferenceDialog *ui;
-    PreviewThemeEditor* m_previewThemeEditor;
-    void setupPreviewThemeEditor();
+    PreviewThemeEditor *  m_previewThemeEditor;
+    void                  setupPreviewThemeEditor();
 };
 
 #endif // PREFERENCEDIALOG_H

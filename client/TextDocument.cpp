@@ -5,28 +5,25 @@
 
 #include "TextDocument.h"
 
-TextDocument::TextDocument(QObject* parent)
-    : QTextDocument(parent)
+TextDocument::TextDocument(QObject *parent) : QTextDocument(parent)
 {
     initializeUntitledDocument();
 }
 
-TextDocument::TextDocument(const QString& text, QObject* parent)
-    : QTextDocument(text, parent)
+TextDocument::TextDocument(const QString &text, QObject *parent) : QTextDocument(text, parent)
 {
     initializeUntitledDocument();
 }
 
 TextDocument::~TextDocument()
 {
-    QPlainTextDocumentLayout* documentLayout =
-        new QPlainTextDocumentLayout(this);
+    QPlainTextDocumentLayout *documentLayout = new QPlainTextDocumentLayout(this);
     this->setDocumentLayout(documentLayout);
 
-    filePath = QString();
+    filePath     = QString();
     readOnlyFlag = false;
-    displayName = tr("untitled");
-    timestamp = QDateTime::currentDateTime();
+    displayName  = tr("untitled");
+    timestamp    = QDateTime::currentDateTime();
 }
 
 QString TextDocument::getDisplayName() const
@@ -39,12 +36,12 @@ QString TextDocument::getFilePath() const
     return filePath;
 }
 
-void TextDocument::setFilePath(const QString& path)
+void TextDocument::setFilePath(const QString &path)
 {
     if (!path.isNull() && !path.isEmpty())
     {
         QFileInfo fileInfo(path);
-        filePath = fileInfo.absoluteFilePath();
+        filePath    = fileInfo.absoluteFilePath();
         displayName = fileInfo.fileName();
     }
     else
@@ -78,12 +75,12 @@ QDateTime TextDocument::getTimestamp() const
     return timestamp;
 }
 
-void TextDocument::setTimestamp(const QDateTime& timestamp)
+void TextDocument::setTimestamp(const QDateTime &timestamp)
 {
     this->timestamp = timestamp;
 }
 
-void TextDocument::notifyTextBlockRemoved(const QTextBlock& block)
+void TextDocument::notifyTextBlockRemoved(const QTextBlock &block)
 {
     emit textBlockRemoved(block.position());
     emit textBlockRemoved(block);
@@ -91,12 +88,11 @@ void TextDocument::notifyTextBlockRemoved(const QTextBlock& block)
 
 void TextDocument::initializeUntitledDocument()
 {
-    QPlainTextDocumentLayout* documentLayout =
-        new QPlainTextDocumentLayout(this);
+    QPlainTextDocumentLayout *documentLayout = new QPlainTextDocumentLayout(this);
     this->setDocumentLayout(documentLayout);
 
-    filePath = QString();
+    filePath     = QString();
     readOnlyFlag = false;
-    displayName = tr("untitled");
-    timestamp = QDateTime::currentDateTime();
+    displayName  = tr("untitled");
+    timestamp    = QDateTime::currentDateTime();
 }

@@ -1,7 +1,7 @@
-#include <QString>
 #include <QChar>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QString>
 
 #include "MarkdownTokenizer.h"
 #include "MarkdownStates.h"
@@ -13,7 +13,6 @@
 static const QChar DUMMY_CHAR('$');
 
 static const int MAX_MARKDOWN_HEADING_LEVEL = 6;
-
 
 MarkdownTokenizer::MarkdownTokenizer()
 {
@@ -62,92 +61,46 @@ MarkdownTokenizer::~MarkdownTokenizer()
     ;
 }
 
-void MarkdownTokenizer::tokenize
-(
-    const QString& text,
-    int currentState,
-    int previousState,
-    const int nextState
-)
+void MarkdownTokenizer::tokenize(const QString &text, int currentState, int previousState, const int nextState)
 {
-    this->currentState = currentState;
+    this->currentState  = currentState;
     this->previousState = previousState;
-    this->nextState = nextState;
+    this->nextState     = nextState;
 
-    if
-    (
-        tokenizeCodeBlock(text)
-    )
+    if (tokenizeCodeBlock(text))
     {
         ; // No further tokenizing required
     }
-    else if
-    (
-        (MarkdownStateComment != previousState)
-        && paragraphBreakRegex.match(text).hasMatch()
-    )
+    else if ((MarkdownStateComment != previousState) && paragraphBreakRegex.match(text).hasMatch())
     {
-        if
-        (
-            (MarkdownStateListLineBreak == previousState)
-            || (MarkdownStateNumberedList == previousState)
-            || (MarkdownStateBulletPointList == previousState)
-        )
+        if ((MarkdownStateListLineBreak == previousState) || (MarkdownStateNumberedList == previousState) ||
+            (MarkdownStateBulletPointList == previousState))
         {
             setState(MarkdownStateListLineBreak);
         }
-        else if
-        (
-            (MarkdownStateCodeBlock != previousState)
-            ||
-            (
-                !text.startsWith("\t")
-                && !text.endsWith("    ")
-            )
-        )
+        else if ((MarkdownStateCodeBlock != previousState) || (!text.startsWith("\t") && !text.endsWith("    ")))
         {
             setState(MarkdownStateParagraphBreak);
         }
 
         tokenizeLineBreak(text);
     }
-    else if
-    (
-        tokenizeSetextHeadingLine2(text)
-        || tokenizeMultilineComment(text)
-        || tokenizeHorizontalRule(text)
-        || tokenizeTableDivider(text)
-    )
+    else if (tokenizeSetextHeadingLine2(text) || tokenizeMultilineComment(text) || tokenizeHorizontalRule(text) || tokenizeTableDivider(text))
     {
         ; // No further tokenizing required
     }
-    else if
-    (
-        tokenizeAtxHeading(text)
-        || tokenizeSetextHeadingLine1(text)
-        || tokenizeBlockquote(text)
-        || tokenizeNumberedList(text)
-        || tokenizeBulletPointList(text)
-    )
+    else if (tokenizeAtxHeading(text) || tokenizeSetextHeadingLine1(text) || tokenizeBlockquote(text) || tokenizeNumberedList(text) ||
+             tokenizeBulletPointList(text))
     {
         tokenizeLineBreak(text);
         tokenizeInline(text);
     }
     else
     {
-        if
-        (
-            (MarkdownStateListLineBreak == previousState)
-            || (MarkdownStateNumberedList == previousState)
-            || (MarkdownStateBulletPointList == previousState)
-        )
+        if ((MarkdownStateListLineBreak == previousState) || (MarkdownStateNumberedList == previousState) ||
+            (MarkdownStateBulletPointList == previousState))
         {
-            if
-            (
-                !tokenizeNumberedList(text)
-                && !tokenizeBulletPointList(text)
-                && (text.startsWith("\t") || text.startsWith("    "))
-            )
+            if (!tokenizeNumberedList(text) && !tokenizeBulletPointList(text) && (text.startsWith("\t") || text.startsWith("    ")))
             {
                 setState(previousState);
             }
@@ -169,31 +122,18 @@ void MarkdownTokenizer::tokenize
     // first line is reprocessed.  Otherwise, it will still show up in the
     // document as a heading.
     //
-    if
-    (
-        (
-            (previousState == MarkdownStateSetextHeading1Line1)
-            && (this->getState() != MarkdownStateSetextHeading1Line2)
-        )
-        ||
-        (
-            (previousState == MarkdownStateSetextHeading2Line1)
-            && (this->getState() != MarkdownStateSetextHeading2Line2)
-        )
-    )
+    if (((previousState == MarkdownStateSetextHeading1Line1) && (this->getState() != MarkdownStateSetextHeading1Line2)) ||
+        ((previousState == MarkdownStateSetextHeading2Line1) && (this->getState() != MarkdownStateSetextHeading2Line2)))
     {
         this->requestBacktrack();
     }
 }
 
-bool MarkdownTokenizer::tokenizeSetextHeadingLine1
-(
-    const QString& text
-)
+bool MarkdownTokenizer::tokenizeSetextHeadingLine1(const QString &text)
 {
     // Check the next line's state to see if this is a setext-style heading.
     //
-    int level = 0;
+    int   level = 0;
     Token token;
 
     if (MarkdownStateSetextHeading1Line2 == nextState)
@@ -220,25 +160,22 @@ bool MarkdownTokenizer::tokenizeSetextHeadingLine1
     return false;
 }
 
-bool MarkdownTokenizer::tokenizeSetextHeadingLine2
-(
-    const QString& text
-)
+bool MarkdownTokenizer::tokenizeSetextHeadingLine2(const QString &text)
 {
-    int level = 0;
-    bool setextMatch = false;
+    int   level       = 0;
+    bool  setextMatch = false;
     Token token;
 
     if (MarkdownStateSetextHeading1Line1 == previousState)
     {
-        level = 1;
+        level       = 1;
         setextMatch = heading1SetextRegex.match(text).hasMatch();
         setState(MarkdownStateSetextHeading1Line2);
         token.setType(TokenSetextHeading1Line2);
     }
     else if (MarkdownStateSetextHeading2Line1 == previousState)
     {
-        level = 2;
+        level       = 2;
         setextMatch = heading2SetextRegex.match(text).hasMatch();
         setState(MarkdownStateSetextHeading2Line2);
         token.setType(TokenSetextHeading2Line2);
@@ -291,22 +228,17 @@ bool MarkdownTokenizer::tokenizeSetextHeadingLine2
     return false;
 }
 
-bool MarkdownTokenizer::tokenizeAtxHeading(const QString& text)
+bool MarkdownTokenizer::tokenizeAtxHeading(const QString &text)
 {
-    QString escapedText = dummyOutEscapeCharacters(text);
-    int trailingPoundCount = 0;
+    QString escapedText        = dummyOutEscapeCharacters(text);
+    int     trailingPoundCount = 0;
 
     int level = 0;
 
     // Count the number of pound signs at the front of the string,
     // up to the maximum allowed, to determine the heading level.
     //
-    for
-    (
-        int i = 0;
-        ((i < escapedText.length()) && (i < MAX_MARKDOWN_HEADING_LEVEL));
-        i++
-    )
+    for (int i = 0; ((i < escapedText.length()) && (i < MAX_MARKDOWN_HEADING_LEVEL)); i++)
     {
         if (QChar('#') == escapedText[i])
         {
@@ -338,7 +270,7 @@ bool MarkdownTokenizer::tokenizeAtxHeading(const QString& text)
         Token token;
         token.setPosition(0);
         token.setLength(text.length());
-        token.setType((MarkdownTokenType) (TokenAtxHeading1 + level - 1));
+        token.setType((MarkdownTokenType)(TokenAtxHeading1 + level - 1));
         token.setOpeningMarkupLength(level);
         token.setClosingMarkupLength(trailingPoundCount);
         this->addToken(token);
@@ -349,36 +281,18 @@ bool MarkdownTokenizer::tokenizeAtxHeading(const QString& text)
     return false;
 }
 
-bool MarkdownTokenizer::tokenizeNumberedList
-(
-    const QString& text
-)
+bool MarkdownTokenizer::tokenizeNumberedList(const QString &text)
 {
-    if
-    (
-        (
-            (
-                (MarkdownStateParagraphBreak == previousState)
-                || (MarkdownStateUnknown == previousState)
-                || (MarkdownStateCodeBlock == previousState)
-                || (MarkdownStateCodeFenceEnd == previousState)
-            )
-            && numberedListRegex.match(text).hasMatch()
-        )
-        ||
-        (
-            (
-                (MarkdownStateListLineBreak == previousState)
-                || (MarkdownStateNumberedList == previousState)
-                || (MarkdownStateBulletPointList == previousState)
-            )
-            && numberedNestedListRegex.match(text).hasMatch()
-        )
-    )
+    if ((((MarkdownStateParagraphBreak == previousState) || (MarkdownStateUnknown == previousState) || (MarkdownStateCodeBlock == previousState) ||
+          (MarkdownStateCodeFenceEnd == previousState)) &&
+         numberedListRegex.match(text).hasMatch()) ||
+        (((MarkdownStateListLineBreak == previousState) || (MarkdownStateNumberedList == previousState) ||
+          (MarkdownStateBulletPointList == previousState)) &&
+         numberedNestedListRegex.match(text).hasMatch()))
     {
-        int periodIndex = text.indexOf(QChar('.'));
+        int periodIndex  = text.indexOf(QChar('.'));
         int parenthIndex = text.indexOf(QChar(')'));
-        int index = -1;
+        int index        = -1;
 
         if (periodIndex < 0)
         {
@@ -415,26 +329,16 @@ bool MarkdownTokenizer::tokenizeNumberedList
     return false;
 }
 
-bool MarkdownTokenizer::tokenizeBulletPointList
-(
-    const QString& text
-)
+bool MarkdownTokenizer::tokenizeBulletPointList(const QString &text)
 {
-    bool foundBulletChar = false;
-    int bulletCharIndex = -1;
-    int spaceCount = 0;
+    bool foundBulletChar                = false;
+    int  bulletCharIndex                = -1;
+    int  spaceCount                     = 0;
     bool whitespaceFoundAfterBulletChar = false;
 
-    if
-    (
-        (MarkdownStateUnknown != previousState)
-        && (MarkdownStateParagraphBreak != previousState)
-        && (MarkdownStateListLineBreak != previousState)
-        && (MarkdownStateNumberedList != previousState)
-        && (MarkdownStateBulletPointList != previousState)
-        && (MarkdownStateCodeBlock != previousState)
-        && (MarkdownStateCodeFenceEnd != previousState)
-    )
+    if ((MarkdownStateUnknown != previousState) && (MarkdownStateParagraphBreak != previousState) && (MarkdownStateListLineBreak != previousState) &&
+        (MarkdownStateNumberedList != previousState) && (MarkdownStateBulletPointList != previousState) &&
+        (MarkdownStateCodeBlock != previousState) && (MarkdownStateCodeFenceEnd != previousState))
     {
         return false;
     }
@@ -464,20 +368,10 @@ bool MarkdownTokenizer::tokenizeBulletPointList
                 // exceed three, as that would indicate a code block rather
                 // than a bullet point list.
                 //
-                if
-                (
-                    (spaceCount > 3)
-                    && (MarkdownStateNumberedList != previousState)
-                    && (MarkdownStateBulletPointList != previousState)
-                    && (MarkdownStateListLineBreak != previousState)
-                    &&
-                    (
-                        (MarkdownStateParagraphBreak == previousState)
-                        || (MarkdownStateUnknown == previousState)
-                        || (MarkdownStateCodeBlock == previousState)
-                        || (MarkdownStateCodeFenceEnd == previousState)
-                    )
-                )
+                if ((spaceCount > 3) && (MarkdownStateNumberedList != previousState) && (MarkdownStateBulletPointList != previousState) &&
+                    (MarkdownStateListLineBreak != previousState) &&
+                    ((MarkdownStateParagraphBreak == previousState) || (MarkdownStateUnknown == previousState) ||
+                     (MarkdownStateCodeBlock == previousState) || (MarkdownStateCodeFenceEnd == previousState)))
                 {
                     return false;
                 }
@@ -494,11 +388,7 @@ bool MarkdownTokenizer::tokenizeBulletPointList
                 whitespaceFoundAfterBulletChar = true;
                 break;
             }
-            else if
-            (
-                (MarkdownStateParagraphBreak == previousState)
-                || (MarkdownStateUnknown == previousState)
-            )
+            else if ((MarkdownStateParagraphBreak == previousState) || (MarkdownStateUnknown == previousState))
             {
                 // If this list item is the first in the list, ensure that
                 // no tab character preceedes the bullet point, as that would
@@ -507,12 +397,7 @@ bool MarkdownTokenizer::tokenizeBulletPointList
                 return false;
             }
         }
-        else if
-        (
-            (QChar('+') == text[i])
-            || (QChar('-') == text[i])
-            || (QChar('*') == text[i])
-        )
+        else if ((QChar('+') == text[i]) || (QChar('-') == text[i]) || (QChar('*') == text[i]))
         {
             foundBulletChar = true;
             bulletCharIndex = i;
@@ -538,7 +423,7 @@ bool MarkdownTokenizer::tokenizeBulletPointList
     return false;
 }
 
-bool MarkdownTokenizer::tokenizeHorizontalRule(const QString& text)
+bool MarkdownTokenizer::tokenizeHorizontalRule(const QString &text)
 {
     if (hruleRegex.match(text).hasMatch())
     {
@@ -554,65 +439,58 @@ bool MarkdownTokenizer::tokenizeHorizontalRule(const QString& text)
     return false;
 }
 
-bool MarkdownTokenizer::tokenizeLineBreak(const QString& text)
+bool MarkdownTokenizer::tokenizeLineBreak(const QString &text)
 {
     switch (currentState)
     {
+    case MarkdownStateParagraph:
+    case MarkdownStateBlockquote:
+    case MarkdownStateNumberedList:
+    case MarkdownStateBulletPointList:
+    case MarkdownStateParagraphBreak:
+    case MarkdownStateListLineBreak:
+        switch (previousState)
+        {
         case MarkdownStateParagraph:
         case MarkdownStateBlockquote:
         case MarkdownStateNumberedList:
         case MarkdownStateBulletPointList:
-        case MarkdownStateParagraphBreak:
-        case MarkdownStateListLineBreak:
-            switch (previousState)
-            {
-                case MarkdownStateParagraph:
-                case MarkdownStateBlockquote:
-                case MarkdownStateNumberedList:
-                case MarkdownStateBulletPointList:
-                    this->requestBacktrack();
-                    break;
-                default:
-                    break;
-            }
+            this->requestBacktrack();
+            break;
+        default:
+            break;
+        }
 
-            switch (nextState)
+        switch (nextState)
+        {
+        case MarkdownStateParagraph:
+        case MarkdownStateBlockquote:
+        case MarkdownStateNumberedList:
+        case MarkdownStateBulletPointList:
+            if (lineBreakRegex.match(text).hasMatch())
             {
-                case MarkdownStateParagraph:
-                case MarkdownStateBlockquote:
-                case MarkdownStateNumberedList:
-                case MarkdownStateBulletPointList:
-                    if (lineBreakRegex.match(text).hasMatch())
-                    {
-                        Token token;
-                        token.setType(TokenLineBreak);
-                        token.setPosition(text.length()-1);
-                        token.setLength(1);
-                        this->addToken(token);
-                        return true;   
-                    }
-                    break;
-                default:
-                    break;
+                Token token;
+                token.setType(TokenLineBreak);
+                token.setPosition(text.length() - 1);
+                token.setLength(1);
+                this->addToken(token);
+                return true;
             }
             break;
         default:
             break;
+        }
+        break;
+    default:
+        break;
     }
 
     return false;
 }
 
-bool MarkdownTokenizer::tokenizeBlockquote
-(
-    const QString& text
-)
+bool MarkdownTokenizer::tokenizeBlockquote(const QString &text)
 {
-    if
-    (
-        (MarkdownStateBlockquote == previousState)
-        || blockquoteRegex.match(text).hasMatch()
-    )
+    if ((MarkdownStateBlockquote == previousState) || blockquoteRegex.match(text).hasMatch())
     {
         // Find any '>' characters at the front of the line.
         int markupLength = 0;
@@ -650,31 +528,14 @@ bool MarkdownTokenizer::tokenizeBlockquote
     return false;
 }
 
-bool MarkdownTokenizer::tokenizeCodeBlock
-(
-    const QString& text
-)
+bool MarkdownTokenizer::tokenizeCodeBlock(const QString &text)
 {
-    if
-    (
-        (MarkdownStateInGithubCodeFence == previousState)
-        || (MarkdownStateInPandocCodeFence == previousState)
-    )
+    if ((MarkdownStateInGithubCodeFence == previousState) || (MarkdownStateInPandocCodeFence == previousState))
     {
         setState(previousState);
 
-        if
-        (
-            (
-                (MarkdownStateInGithubCodeFence == previousState)
-                && githubCodeFenceEndRegex.match(text).hasMatch()
-            )
-            ||
-            (
-                (MarkdownStateInPandocCodeFence == previousState)
-                && pandocCodeFenceEndRegex.match(text).hasMatch()
-            )
-        )
+        if (((MarkdownStateInGithubCodeFence == previousState) && githubCodeFenceEndRegex.match(text).hasMatch()) ||
+            ((MarkdownStateInPandocCodeFence == previousState) && pandocCodeFenceEndRegex.match(text).hasMatch()))
         {
             Token token;
             token.setType(TokenCodeFenceEnd);
@@ -694,15 +555,9 @@ bool MarkdownTokenizer::tokenizeCodeBlock
 
         return true;
     }
-    else if
-    (
-        (
-            (MarkdownStateCodeBlock == previousState)
-            || (MarkdownStateParagraphBreak == previousState)
-            || (MarkdownStateUnknown == previousState)
-        )
-        && (text.startsWith("\t") || text.startsWith("    "))
-    )
+    else if (((MarkdownStateCodeBlock == previousState) || (MarkdownStateParagraphBreak == previousState) ||
+              (MarkdownStateUnknown == previousState)) &&
+             (text.startsWith("\t") || text.startsWith("    ")))
     {
         Token token;
         token.setType(TokenCodeBlock);
@@ -712,16 +567,10 @@ bool MarkdownTokenizer::tokenizeCodeBlock
         setState(MarkdownStateCodeBlock);
         return true;
     }
-    else if
-    (
-        (MarkdownStateParagraphBreak == previousState)
-        || (MarkdownStateParagraph == previousState)
-        || (MarkdownStateUnknown == previousState)
-        || (MarkdownStateListLineBreak == previousState)
-        || (MarkdownStateCodeFenceEnd == previousState)
-    )
+    else if ((MarkdownStateParagraphBreak == previousState) || (MarkdownStateParagraph == previousState) || (MarkdownStateUnknown == previousState) ||
+             (MarkdownStateListLineBreak == previousState) || (MarkdownStateCodeFenceEnd == previousState))
     {
-        bool foundCodeFenceStart = false;
+        bool  foundCodeFenceStart = false;
         Token token;
 
         if (githubCodeFenceStartRegex.match(text).hasMatch())
@@ -749,15 +598,12 @@ bool MarkdownTokenizer::tokenizeCodeBlock
     return false;
 }
 
-bool MarkdownTokenizer::tokenizeMultilineComment
-(
-    const QString& text
-)
+bool MarkdownTokenizer::tokenizeMultilineComment(const QString &text)
 {
     if (MarkdownStateComment == previousState)
     {
         // Find the end of the comment, if any.
-        int index = text.indexOf("-->");
+        int   index = text.indexOf("-->");
         Token token;
         token.setType(TokenHtmlComment);
         token.setPosition(0);
@@ -785,17 +631,14 @@ bool MarkdownTokenizer::tokenizeMultilineComment
     return false;
 }
 
-bool MarkdownTokenizer::tokenizeInline
-(
-    const QString& text
-)
+bool MarkdownTokenizer::tokenizeInline(const QString &text)
 {
     QString escapedText = dummyOutEscapeCharacters(text);
 
     // Check if the line is a reference definition.
     if (referenceDefinitionRegex.match(escapedText).hasMatch())
     {
-        int colonIndex = escapedText.indexOf(':');
+        int   colonIndex = escapedText.indexOf(':');
         Token token;
         token.setType(TokenReferenceDefinition);
         token.setPosition(0);
@@ -837,15 +680,15 @@ bool MarkdownTokenizer::tokenizeInline
     return true;
 }
 
-void MarkdownTokenizer::tokenizeVerbatim(QString& text)
+void MarkdownTokenizer::tokenizeVerbatim(QString &text)
 {
     QRegularExpressionMatch match = verbatimRegex.match(text);
-    int index = match.capturedStart();
+    int                     index = match.capturedStart();
 
     while ((match.hasMatch()) && (index >= 0))
     {
-        QString end = "";
-        int count = match.capturedLength();
+        QString end   = "";
+        int     count = match.capturedLength();
 
         // Search for the matching end, which should have the same number
         // of back ticks as the start.
@@ -891,7 +734,7 @@ void MarkdownTokenizer::tokenizeVerbatim(QString& text)
     }
 }
 
-void MarkdownTokenizer::tokenizeHtmlComments(QString& text)
+void MarkdownTokenizer::tokenizeHtmlComments(QString &text)
 {
     // Check for the end of a multiline comment so that it doesn't get further
     // tokenized. Don't bother formatting the comment itself, however, because
@@ -909,11 +752,11 @@ void MarkdownTokenizer::tokenizeHtmlComments(QString& text)
 
     // Now check for inline comments (non-multiline).
     QRegularExpressionMatch match;
-    int commentStart = text.indexOf(htmlInlineCommentRegex, 0, &match);
+    int                     commentStart = text.indexOf(htmlInlineCommentRegex, 0, &match);
 
     while (commentStart >= 0)
     {
-        int commentLength = match.capturedLength();
+        int   commentLength = match.capturedLength();
         Token token;
 
         token.setType(TokenHtmlComment);
@@ -929,12 +772,7 @@ void MarkdownTokenizer::tokenizeHtmlComments(QString& text)
             text[i] = DUMMY_CHAR;
         }
 
-        commentStart = text.indexOf
-            (
-                htmlInlineCommentRegex,
-                commentStart + commentLength,
-                &match
-            );
+        commentStart = text.indexOf(htmlInlineCommentRegex, commentStart + commentLength, &match);
     }
 
     // Find multiline comment start, if any.
@@ -960,32 +798,14 @@ void MarkdownTokenizer::tokenizeHtmlComments(QString& text)
     }
 }
 
-void MarkdownTokenizer::tokenizeTableHeaderRow(QString& text)
+void MarkdownTokenizer::tokenizeTableHeaderRow(QString &text)
 {
-    if
-    (
-        (
-            (MarkdownStateParagraphBreak == previousState) ||
-            (MarkdownStateListLineBreak == previousState) ||
-            (MarkdownStateSetextHeading1Line2 == previousState) ||
-            (MarkdownStateSetextHeading2Line2 == previousState) ||
-            (MarkdownStateAtxHeading1 == previousState) ||
-            (MarkdownStateAtxHeading2 == previousState) ||
-            (MarkdownStateAtxHeading3 == previousState) ||
-            (MarkdownStateAtxHeading4 == previousState) ||
-            (MarkdownStateAtxHeading5 == previousState) ||
-            (MarkdownStateAtxHeading6 == previousState) ||
-            (MarkdownStateHorizontalRule == previousState) ||
-            (MarkdownStateCodeFenceEnd == previousState) ||
-            (MarkdownStateUnknown == previousState)
-        )
-        &&
-        (
-            (MarkdownStateParagraph == getState()) ||
-            (MarkdownStateUnknown == getState())
-        )
-        && (MarkdownStatePipeTableDivider == nextState)
-    )
+    if (((MarkdownStateParagraphBreak == previousState) || (MarkdownStateListLineBreak == previousState) ||
+         (MarkdownStateSetextHeading1Line2 == previousState) || (MarkdownStateSetextHeading2Line2 == previousState) ||
+         (MarkdownStateAtxHeading1 == previousState) || (MarkdownStateAtxHeading2 == previousState) || (MarkdownStateAtxHeading3 == previousState) ||
+         (MarkdownStateAtxHeading4 == previousState) || (MarkdownStateAtxHeading5 == previousState) || (MarkdownStateAtxHeading6 == previousState) ||
+         (MarkdownStateHorizontalRule == previousState) || (MarkdownStateCodeFenceEnd == previousState) || (MarkdownStateUnknown == previousState)) &&
+        ((MarkdownStateParagraph == getState()) || (MarkdownStateUnknown == getState())) && (MarkdownStatePipeTableDivider == nextState))
     {
         setState(MarkdownStatePipeTableHeader);
 
@@ -1032,7 +852,7 @@ void MarkdownTokenizer::tokenizeTableHeaderRow(QString& text)
     }
 }
 
-bool MarkdownTokenizer::tokenizeTableDivider(const QString& text)
+bool MarkdownTokenizer::tokenizeTableDivider(const QString &text)
 {
     if (MarkdownStatePipeTableHeader == previousState)
     {
@@ -1074,13 +894,9 @@ bool MarkdownTokenizer::tokenizeTableDivider(const QString& text)
     return false;
 }
 
-void MarkdownTokenizer::tokenizeTableRow(QString& text)
+void MarkdownTokenizer::tokenizeTableRow(QString &text)
 {
-    if
-    (
-        (MarkdownStatePipeTableDivider == previousState) ||
-        (MarkdownStatePipeTableRow == previousState)
-    )
+    if ((MarkdownStatePipeTableDivider == previousState) || (MarkdownStatePipeTableRow == previousState))
     {
         setState(MarkdownStatePipeTableRow);
 
@@ -1106,23 +922,20 @@ void MarkdownTokenizer::tokenizeTableRow(QString& text)
     }
 }
 
-void MarkdownTokenizer::tokenizeMatches
-(
-    MarkdownTokenType tokenType,
-    QString& text,
-    QRegularExpression& regex,
-    const int markupStartCount,
-    const int markupEndCount,
-    const bool replaceMarkupChars,
-    const bool replaceAllChars
-)
+void MarkdownTokenizer::tokenizeMatches(MarkdownTokenType   tokenType,
+                                        QString &           text,
+                                        QRegularExpression &regex,
+                                        const int           markupStartCount,
+                                        const int           markupEndCount,
+                                        const bool          replaceMarkupChars,
+                                        const bool          replaceAllChars)
 {
     QRegularExpressionMatch match;
-    int index = text.indexOf(regex, 0, &match);
+    int                     index = text.indexOf(regex, 0, &match);
 
     while (match.hasMatch() && (index >= 0))
     {
-        int length = match.capturedLength();
+        int   length = match.capturedLength();
         Token token;
 
         token.setType(tokenType);
@@ -1164,9 +977,9 @@ void MarkdownTokenizer::tokenizeMatches
     }
 }
 
-QString MarkdownTokenizer::dummyOutEscapeCharacters(const QString& text) const
+QString MarkdownTokenizer::dummyOutEscapeCharacters(const QString &text) const
 {
-    bool escape = false;
+    bool    escape      = false;
     QString escapedText = text;
 
     for (int i = 0; i < text.length(); i++)
@@ -1174,7 +987,7 @@ QString MarkdownTokenizer::dummyOutEscapeCharacters(const QString& text) const
         if (escape)
         {
             escapedText[i] = DUMMY_CHAR; // Use a dummy character.
-            escape = false;
+            escape         = false;
         }
         else if (QChar('\\') == text[i])
         {

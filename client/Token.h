@@ -1,22 +1,3 @@
-/***********************************************************************
- *
- * Copyright (C) 2014-2017 wereturtle
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- ***********************************************************************/
-
 #ifndef TOKEN_H_
 #define TOKEN_H_
 
@@ -46,80 +27,69 @@
  */
 class Token
 {
-    public:
-        /**
-         * Constructor.
-         */
-        Token();
+public:
+    /**
+     * Returns the token type.
+     */
+    int getType() const;
 
-        /**
-         * Destructor.
-         */
-        ~Token();
+    /**
+     * Sets the token type.
+     */
+    void setType(int type);
 
-        /**
-         * Returns the token type.
-         */
-        int getType() const;
+    /**
+     * Gets the starting position of the token in the text (i.e., the
+     * column number in a line).
+     */
+    int getPosition() const;
 
-        /**
-         * Sets the token type.
-         */
-        void setType(int type);
+    /**
+     * Sets the starting position of the token in the text (i.e., the
+     * column number in a line).
+     */
+    void setPosition(int position);
 
-        /**
-         * Gets the starting position of the token in the text (i.e., the
-         * column number in a line).
-         */
-        int getPosition() const;
+    /**
+     * Gets the length (in characters) of the token.
+     */
+    int getLength() const;
 
-        /**
-         * Sets the starting position of the token in the text (i.e., the
-         * column number in a line).
-         */
-        void setPosition(int position);
+    /**
+     * Sets the length (in characters) of the token.
+     */
+    void setLength(int length);
 
-        /**
-         * Gets the length (in characters) of the token.
-         */
-        int getLength() const;
+    /**
+     * If the token begins with markup characters, gets the length of
+     * the markup.  Otherwise, returns 0.
+     */
+    int getOpeningMarkupLength() const;
 
-        /**
-         * Sets the length (in characters) of the token.
-         */
-        void setLength(int length);
+    /**
+     * If the token begins with markup characters, gets the length of
+     * the markup.  Defaults to 0 if not set.
+     */
+    void setOpeningMarkupLength(int length);
 
-        /**
-         * If the token begins with markup characters, gets the length of
-         * the markup.  Otherwise, returns 0.
-         */
-        int getOpeningMarkupLength() const;
+    /**
+     * If the token ends with markup characters, gets the length of
+     * the markup.  Otherwise, returns 0.
+     */
+    int getClosingMarkupLength() const;
 
-        /**
-         * If the token begins with markup characters, gets the length of
-         * the markup.  Defaults to 0 if not set.
-         */
-        void setOpeningMarkupLength(int length);
+    /**
+     * If the token ends with markup characters, gets the length of
+     * the markup.  Defaults to 0 if not set.
+     */
+    void setClosingMarkupLength(int length);
 
-        /**
-         * If the token ends with markup characters, gets the length of
-         * the markup.  Otherwise, returns 0.
-         */
-        int getClosingMarkupLength() const;
-
-        /**
-         * If the token ends with markup characters, gets the length of
-         * the markup.  Defaults to 0 if not set.
-         */
-        void setClosingMarkupLength(int length);
-
-
-    private:
-        int type;
-        int position;
-        int length;
-        int openingMarkupLength;
-        int closingMarkupLength;
+private:
+    int type {-1};
+    int position {0};
+    int length {0};
+    int openingMarkupLength {0};
+    int closingMarkupLength {0};
 };
 
 #endif

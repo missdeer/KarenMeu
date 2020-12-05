@@ -35,31 +35,33 @@ void Settings::load()
 #else
     m_autoRefreshInterval = settings.value("autoRefreshInterval", 1000).toInt();
 #endif
-    m_editorZoomFactor = settings.value("editorZoomFactor", 100).toInt();
-    m_codeEditorFontFamily = settings.value("codeEditorFontFamily", 
-                                        #if defined(Q_OS_MAC) || defined (Q_OS_IOS)
-                                                    QString("Menlo")
-                                        #elif defined(Q_OS_WIN)
-                                                    QString("Consolas")
-                                        #elif defined(Q_OS_ANDROID)
-                                                    QString("Droid Sans Mono")
-                                        #else
-                                                    QString("Monospace")
-                                        #endif
-                                            ).toString();
+    m_editorZoomFactor     = settings.value("editorZoomFactor", 100).toInt();
+    m_codeEditorFontFamily = settings
+                                 .value("codeEditorFontFamily",
+#if defined(Q_OS_MAC) || defined(Q_OS_IOS)
+                                        QString("Menlo")
+#elif defined(Q_OS_WIN)
+                                        QString("Consolas")
+#elif defined(Q_OS_ANDROID)
+                                        QString("Droid Sans Mono")
+#else
+                                        QString("Monospace")
+#endif
+                                            )
+                                 .toString();
     m_codeEditorFontPointSize = settings.value("codeEditorFontPointSize", 14).toInt();
     m_codeEditorTheme         = settings.value("codeEditorTheme", ThemeFactory::PLAINSTRACTION_LIGHT_THEME_NAME).toString();
     QString err;
     m_theme = ThemeFactory::getInstance()->loadTheme(m_codeEditorTheme, err);
     setPreviewTheme(settings.value("previewTheme", QSettings::tr("默认")).toString());
-    m_codeBlockStyle = settings.value("codeBlockStyle", QSettings::tr("xcode")).toString();
-    m_markdownEngine = settings.value("markdownEngine", QSettings::tr("Goldmark")).toString();
-    m_enableLineNumbers = settings.value("enableLineNumbers", true).toBool();
-    m_previewMode = settings.value("previewMode", QSettings::tr("Wechat Public Account Article")).toString();
+    m_codeBlockStyle          = settings.value("codeBlockStyle", QSettings::tr("xcode")).toString();
+    m_markdownEngine          = settings.value("markdownEngine", QSettings::tr("Goldmark")).toString();
+    m_enableLineNumbers       = settings.value("enableLineNumbers", true).toBool();
+    m_previewMode             = settings.value("previewMode", QSettings::tr("Wechat Public Account Article")).toString();
     m_customPreviewThemeStyle = settings.value("customPreviewThemeStyle").toByteArray();
 }
 
-const QString & Settings::codeEditorFontFamily() const
+const QString &Settings::codeEditorFontFamily() const
 {
     return m_codeEditorFontFamily;
 }
@@ -69,7 +71,7 @@ void Settings::setCodeEditorFontFamily(const QString &codeEditorFontFamily)
     m_codeEditorFontFamily = codeEditorFontFamily;
 }
 
-const QString & Settings::codeEditorTheme() const
+const QString &Settings::codeEditorTheme() const
 {
     return m_codeEditorTheme;
 }

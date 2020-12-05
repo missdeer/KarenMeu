@@ -3,15 +3,9 @@
 #include "HighlightTokenizer.h"
 #include "HighlighterLineStates.h"
 
-HighlightTokenizer::HighlightTokenizer()
-{
+HighlightTokenizer::HighlightTokenizer() {}
 
-}
-
-HighlightTokenizer::~HighlightTokenizer()
-{
-
-}
+HighlightTokenizer::~HighlightTokenizer() {}
 
 QList<Token> HighlightTokenizer::getTokens() const
 {
@@ -32,10 +26,10 @@ void HighlightTokenizer::clear()
 {
     tokens.clear();
     backtrack = false;
-    state = HIGHLIGHTER_LINE_STATE_UNKNOWN;
+    state     = HIGHLIGHTER_LINE_STATE_UNKNOWN;
 }
 
-void HighlightTokenizer::addToken(const Token& token)
+void HighlightTokenizer::addToken(const Token &token)
 {
     // Insert tokens sorted by position to aid with nested formatting.
     tokens.insertMulti(token.getPosition(), token);
@@ -51,7 +45,7 @@ void HighlightTokenizer::requestBacktrack()
     backtrack = true;
 }
 
-bool HighlightTokenizer::tokenLessThan(const Token& t1, const Token& t2)
+bool HighlightTokenizer::tokenLessThan(const Token &t1, const Token &t2)
 {
     return t1.getPosition() < t2.getPosition();
 }

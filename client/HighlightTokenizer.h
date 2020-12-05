@@ -20,9 +20,9 @@
 #ifndef HIGHLIGHT_TOKENIZER_H
 #define HIGHLIGHT_TOKENIZER_H
 
-#include <QString>
 #include <QList>
 #include <QMap>
+#include <QString>
 
 #include "Token.h"
 
@@ -58,96 +58,89 @@
  */
 class HighlightTokenizer
 {
-    public:
-        /**
-         * Constructor.
-         */
-        HighlightTokenizer();
+public:
+    /**
+     * Constructor.
+     */
+    HighlightTokenizer();
 
-        /**
-         * Destructor.
-         */
-        virtual ~HighlightTokenizer();
+    /**
+     * Destructor.
+     */
+    virtual ~HighlightTokenizer();
 
-        /**
-         * Tokenizes the given line of text.  After calling this method, call
-         * getTokens() to fetch the tokens that were parsed.  Likewise, call
-         * getState() to determine the line state for the end of the line,
-         * which you can pass this method as the value of the previousState
-         * parameter along with the text of the next line in the document.
-         * Call backtrackRequested() to see if the tokenizer needs to backtrack
-         * one line in order to correctly tokenize the current line.  Finally,
-         * call clear() to clean up the tokens and state for the next call.
-         *
-         * text - the line of text to be tokenized
-         * currentState - the current state of the line being passed in from the
-         *                last time it was tokenized (if at all)
-         * previousState - the line state of the end of the previous line
-         *                 in the document
-         * nextState - the line state of the next line in the document
-         *
-         * Note that the above line states are intended to be used as the
-         * states in QSyntaxHighlighter.  Reading the Qt documentation for
-         * that class should clarify the usage of this class.
-         */
-        virtual void tokenize
-        (
-            const QString& text,
-            int currentState,
-            int previousState,
-            int nextState
-        ) = 0;
+    /**
+     * Tokenizes the given line of text.  After calling this method, call
+     * getTokens() to fetch the tokens that were parsed.  Likewise, call
+     * getState() to determine the line state for the end of the line,
+     * which you can pass this method as the value of the previousState
+     * parameter along with the text of the next line in the document.
+     * Call backtrackRequested() to see if the tokenizer needs to backtrack
+     * one line in order to correctly tokenize the current line.  Finally,
+     * call clear() to clean up the tokens and state for the next call.
+     *
+     * text - the line of text to be tokenized
+     * currentState - the current state of the line being passed in from the
+     *                last time it was tokenized (if at all)
+     * previousState - the line state of the end of the previous line
+     *                 in the document
+     * nextState - the line state of the next line in the document
+     *
+     * Note that the above line states are intended to be used as the
+     * states in QSyntaxHighlighter.  Reading the Qt documentation for
+     * that class should clarify the usage of this class.
+     */
+    virtual void tokenize(const QString &text, int currentState, int previousState, int nextState) = 0;
 
-        /**
-         * Returns the tokens produced by calling tokenize().
-         */
-        QList<Token> getTokens() const;
+    /**
+     * Returns the tokens produced by calling tokenize().
+     */
+    QList<Token> getTokens() const;
 
-        /**
-         * Returns the line state at the end of the line that was tokenized
-         * by calling tokenize().
-         */
-        int getState() const;
+    /**
+     * Returns the line state at the end of the line that was tokenized
+     * by calling tokenize().
+     */
+    int getState() const;
 
-        /**
-         * Returns true if the tokenizer needs to backtrack one line in order
-         * to successfully tokenize the current line.
-         */
-        bool backtrackRequested() const;
+    /**
+     * Returns true if the tokenizer needs to backtrack one line in order
+     * to successfully tokenize the current line.
+     */
+    bool backtrackRequested() const;
 
-        /**
-         * Clears the line state, tokens, and backtrack request flag.
-         */
-        void clear();
+    /**
+     * Clears the line state, tokens, and backtrack request flag.
+     */
+    void clear();
 
-    protected:
-        /**
-         * Call this method to add the given token to the list that will be
-         * returned by getTokens().
-         */
-        void addToken(const Token& token);
+protected:
+    /**
+     * Call this method to add the given token to the list that will be
+     * returned by getTokens().
+     */
+    void addToken(const Token &token);
 
-        /**
-         * Call this method to set the current line state for the line.
-         */
-        void setState(int state);
+    /**
+     * Call this method to set the current line state for the line.
+     */
+    void setState(int state);
 
-        /**
-         * Call this method to ensure backtrackRequested() returns true
-         * rather than false.
-         */
-        void requestBacktrack();
+    /**
+     * Call this method to ensure backtrackRequested() returns true
+     * rather than false.
+     */
+    void requestBacktrack();
 
-    private:
-        int state;
-        QMap<int, Token> tokens;
-        bool backtrack;
+private:
+    int              state;
+    QMap<int, Token> tokens;
+    bool             backtrack;
 
-        /*
-         * Compares two tokens' positions for sorting.
-         */
-        static bool tokenLessThan(const Token& t1, const Token& t2);
-
+    /*
+     * Compares two tokens' positions for sorting.
+     */
+    static bool tokenLessThan(const Token &t1, const Token &t2);
 };
 
 #endif

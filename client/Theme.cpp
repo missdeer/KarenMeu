@@ -2,29 +2,18 @@
 
 #include "Theme.h"
 
-Theme::Theme()
-    : builtInFlag(false)
-{
+Theme::Theme() : builtInFlag(false) {}
 
-}
+Theme::Theme(const QString &name, bool builtIn) : name(name), builtInFlag(builtIn) {}
 
-Theme::Theme(const QString& name, bool builtIn)
-    : name(name), builtInFlag(builtIn)
-{
-
-}
-
-Theme::~Theme()
-{
-
-}
+Theme::~Theme() {}
 
 QString Theme::getName() const
 {
     return name;
 }
 
-void Theme::setName(const QString& value)
+void Theme::setName(const QString &value)
 {
     name = value;
 }
@@ -44,7 +33,7 @@ QColor Theme::getDefaultTextColor() const
     return defaultTextColor;
 }
 
-void Theme::setDefaultTextColor(const QColor& value)
+void Theme::setDefaultTextColor(const QColor &value)
 {
     defaultTextColor = value;
 }
@@ -54,7 +43,7 @@ QColor Theme::getMarkupColor() const
     return markupColor;
 }
 
-void Theme::setMarkupColor(const QColor& value)
+void Theme::setMarkupColor(const QColor &value)
 {
     markupColor = value;
 }
@@ -64,7 +53,7 @@ QColor Theme::getLinkColor() const
     return linkColor;
 }
 
-void Theme::setLinkColor(const QColor& value)
+void Theme::setLinkColor(const QColor &value)
 {
     linkColor = value;
 }
@@ -74,7 +63,7 @@ QColor Theme::getHeadingColor() const
     return headingColor;
 }
 
-void Theme::setHeadingColor(const QColor& value)
+void Theme::setHeadingColor(const QColor &value)
 {
     headingColor = value;
 }
@@ -84,7 +73,7 @@ QColor Theme::getEmphasisColor() const
     return emphasisColor;
 }
 
-void Theme::setEmphasisColor(const QColor& value)
+void Theme::setEmphasisColor(const QColor &value)
 {
     emphasisColor = value;
 }
@@ -94,7 +83,7 @@ QColor Theme::getBlockquoteColor() const
     return blockquoteColor;
 }
 
-void Theme::setBlockquoteColor(const QColor& value)
+void Theme::setBlockquoteColor(const QColor &value)
 {
     blockquoteColor = value;
 }
@@ -104,7 +93,7 @@ QColor Theme::getCodeColor() const
     return codeColor;
 }
 
-void Theme::setCodeColor(const QColor& value)
+void Theme::setCodeColor(const QColor &value)
 {
     codeColor = value;
 }
@@ -114,7 +103,7 @@ QColor Theme::getSpellingErrorColor() const
     return spellingErrorColor;
 }
 
-void Theme::setSpellingErrorColor(const QColor& value)
+void Theme::setSpellingErrorColor(const QColor &value)
 {
     spellingErrorColor = value;
 }
@@ -129,9 +118,7 @@ void Theme::setEditorAspect(const EditorAspect value)
     if ((value < EditorAspectFirst) || (value > EditorAspectLast))
     {
         editorAspect = EditorAspectFirst;
-        qCritical() << "Theme editor aspect value of " << value
-                    << " is out of range. Defaulting to value of "
-                    << editorAspect;
+        qCritical() << "Theme editor aspect value of " << value << " is out of range. Defaulting to value of " << editorAspect;
     }
     else
     {
@@ -149,9 +136,7 @@ void Theme::setBackgroundImageAspect(const PictureAspect value)
     if ((value < PictureAspectFirst) || (value > PictureAspectLast))
     {
         backgroundImageAspect = PictureAspectFirst;
-        qCritical() << "Theme background image aspect value of " << value
-                    << " is out of range. Defaulting to value of "
-                    << backgroundImageAspect;
+        qCritical() << "Theme background image aspect value of " << value << " is out of range. Defaulting to value of " << backgroundImageAspect;
     }
     else
     {
@@ -164,7 +149,7 @@ QString Theme::getBackgroundImageUrl() const
     return backgroundImageUrl;
 }
 
-void Theme::setBackgroundImageUrl(const QString& value)
+void Theme::setBackgroundImageUrl(const QString &value)
 {
     backgroundImageUrl = value;
 }
@@ -174,7 +159,7 @@ QColor Theme::getBackgroundColor() const
     return backgroundColor;
 }
 
-void Theme::setBackgroundColor(const QColor& value)
+void Theme::setBackgroundColor(const QColor &value)
 {
     backgroundColor = value;
 }
@@ -184,7 +169,7 @@ QColor Theme::getEditorBackgroundColor() const
     return editorBackgroundColor;
 }
 
-void Theme::setEditorBackgroundColor(const QColor& value)
+void Theme::setEditorBackgroundColor(const QColor &value)
 {
     editorBackgroundColor = value;
 }
@@ -194,7 +179,7 @@ QColor Theme::getHudForegroundColor() const
     return hudForegroundColor;
 }
 
-void Theme::setHudForegroundColor(const QColor& value)
+void Theme::setHudForegroundColor(const QColor &value)
 {
     hudForegroundColor = value;
 }
@@ -204,8 +189,7 @@ QColor Theme::getHudBackgroundColor() const
     return hudBackgroundColor;
 }
 
-void Theme::setHudBackgroundColor(const QColor& value)
+void Theme::setHudBackgroundColor(const QColor &value)
 {
     hudBackgroundColor = value;
 }
-

@@ -8,15 +8,15 @@ class MarkdownEditor2 : public MarkdownEditor
     Q_OBJECT
 public:
     explicit MarkdownEditor2(QWidget *parent = nullptr);
-    void initialize();
-    void setContent(const QString& content);
-    void setContent(const QByteArray& content);
+    void       initialize();
+    void       setContent(const QString &content);
+    void       setContent(const QByteArray &content);
     QByteArray content();
-    bool modify();
-    void setSavePoint();
-    void emptyUndoBuffer();
-    void updateCodeEditorFont();
-    
+    bool       modify();
+    void       setSavePoint();
+    void       emptyUndoBuffer();
+    void       updateCodeEditorFont();
+
 signals:
     void contentModified();
     void scrollValueChanged(int, int);
@@ -42,30 +42,28 @@ public slots:
     void formatHeader6();
     void formatShiftRight();
     void formatShiftLeft();
-    
+
 private:
-    
     /**
      * Attempts to undo the formatting on a selected string
      *
      * @param formatter
      * @return
      */
-    bool undoFormatting(const QString& formatter);
-    
+    bool undoFormatting(const QString &formatter);
+
     /**
      * Applies a formatter to a selected string
      *
      * @param formatter
      */
-    void applyFormatter(const QString& formatter);
-    
+    void applyFormatter(const QString &formatter);
+
     int currentLineNumber(QTextCursor *cursor);
-    
-    void replaceCurrentLineText(const QString& text);
-    
-    void formatHeading(const QString& heading);
-    
+
+    void replaceCurrentLineText(const QString &text);
+
+    void formatHeading(const QString &heading);
 };
 
 #endif // MARKDOWNEDITOR2_H

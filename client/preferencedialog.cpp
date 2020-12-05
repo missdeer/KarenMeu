@@ -72,11 +72,11 @@ void PreferenceDialog::on_cbPreviewTheme_currentTextChanged(const QString &text)
 
 void PreferenceDialog::setupPreviewThemeEditor()
 {
-    auto *layout = new QVBoxLayout;
+    auto *layout         = new QVBoxLayout;
     m_previewThemeEditor = new PreviewThemeEditor(ui->previewThemeEditorContainer);
     layout->addWidget(m_previewThemeEditor);
     layout->setMargin(0);
-    ui->previewThemeEditorContainer->setLayout(layout);    
-    
-    m_previewThemeEditor->initialize();    
+    ui->previewThemeEditorContainer->setLayout(layout);
+
+    m_previewThemeEditor->initialize();
 }

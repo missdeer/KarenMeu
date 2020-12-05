@@ -20,7 +20,6 @@
 #include <QtCore>
 
 #include "mainwindow.h"
-
 #include "ColorHelper.h"
 #include "markdowneditor2.h"
 #include "markdownview.h"
@@ -32,10 +31,7 @@
 using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    m_view(new MarkdownView(this))
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), m_view(new MarkdownView(this))
 {
     ui->setupUi(this);
     setCentralWidget(m_view);
@@ -74,12 +70,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionShiftRight, &QAction::triggered, m_view, &MarkdownView::formatShiftRight);
     connect(ui->actionShiftLeft, &QAction::triggered, m_view, &MarkdownView::formatShiftLeft);
     connect(m_view, &MarkdownView::setCurrentFile, this, &MainWindow::setCurrentFile);
-            
+
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
     ui->menuView->addAction(ui->editToolbar->toggleViewAction());
     ui->menuView->addAction(ui->formatToolbar->toggleViewAction());
 
-    for (int i = 0; i < MaxRecentFiles; ++i) {
+    for (int i = 0; i < MaxRecentFiles; ++i)
+    {
         recentFileActs[i] = new QAction(this);
         recentFileActs[i]->setVisible(false);
         connect(recentFileActs[i], &QAction::triggered, this, &MainWindow::openRecentFile);
@@ -116,8 +113,7 @@ void MainWindow::on_actionContent_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::about(this, tr("KarenMeu"),
-                       tr("KarenMeu is a Markdown based Wechat public account article editor for programmers."));
+    QMessageBox::about(this, tr("KarenMeu"), tr("KarenMeu is a Markdown based Wechat public account article editor for programmers."));
 }
 
 void MainWindow::on_actionPreference_triggered()
@@ -133,21 +129,24 @@ void MainWindow::on_actionPreference_triggered()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    if (m_view->maybeSave()) {
+    if (m_view->maybeSave())
+    {
         event->accept();
-    } else {
+    }
+    else
+    {
         event->ignore();
     }
 }
 
 void MainWindow::updateRecentFileActions()
 {
-    QSettings settings;
+    QSettings   settings;
     QStringList files = settings.value("recentFileList").toStringList();
 
     int numRecentFiles = qMin(files.size(), (int)MaxRecentFiles);
 
-    for (int i = 0; i < numRecentFiles; ++i) 
+    for (int i = 0; i < numRecentFiles; ++i)
     {
         QString text = tr("%1. %2").arg(i + 1).arg(strippedName(files[i]));
         recentFileActs[i]->setText(text);
@@ -157,15 +156,15 @@ void MainWindow::updateRecentFileActions()
     for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
         recentFileActs[j]->setVisible(false);
 
-    //separatorAct->setVisible(numRecentFiles > 0);
+    // separatorAct->setVisible(numRecentFiles > 0);
 }
 
 void MainWindow::setCurrentFile(const QString &fileName)
 {
     m_curFile = fileName;
     setWindowFilePath(m_curFile);
-    
-    QSettings settings;
+
+    QSettings   settings;
     QStringList files = settings.value("recentFileList").toStringList();
     files.removeAll(fileName);
     files.prepend(fileName);
@@ -180,10 +179,9 @@ void MainWindow::setCurrentFile(const QString &fileName)
 void MainWindow::onFileSystemItemActivated(const QModelIndex &index)
 {
     auto fi = m_fsModel->fileInfo(index);
-    if (fi.isFile()
-        && (fi.fileName().endsWith(".md", Qt::CaseInsensitive)
-            || fi.fileName().endsWith(".markdown", Qt::CaseInsensitive)
-            || fi.fileName().endsWith(".mdown", Qt::CaseInsensitive))) {
+    if (fi.isFile() && (fi.fileName().endsWith(".md", Qt::CaseInsensitive) || fi.fileName().endsWith(".markdown", Qt::CaseInsensitive) ||
+                        fi.fileName().endsWith(".mdown", Qt::CaseInsensitive)))
+    {
         openFile(fi.absoluteFilePath());
     }
 }
@@ -202,25 +200,24 @@ void MainWindow::openRecentFile()
 
 void MainWindow::on_actionClearRecentFilesList_triggered()
 {
-    QSettings settings;
+    QSettings   settings;
     QStringList files;
     settings.setValue("recentFileList", files);
-    
+
     updateRecentFileActions();
 }
-
 
 void MainWindow::applyTheme()
 {
     Q_ASSERT(g_settings);
-    auto& theme = g_settings->theme();
-    
+    auto &theme = g_settings->theme();
+
     if (EditorAspectStretch == theme.getEditorAspect())
     {
         theme.setBackgroundColor(theme.getEditorBackgroundColor());
     }
 
-    QString styleSheet;
+    QString     styleSheet;
     QTextStream stream(&styleSheet);
 
     double fgBrightness = ColorHelper::getLuminance(theme.getDefaultTextColor());
@@ -235,22 +232,13 @@ void MainWindow::applyTheme()
         // Create a UI chrome color based on a lightened editor text color,
         // such that the new color achieves a lower contrast ratio.
         //
-        chromeFgColor = ColorHelper::lightenToMatchContrastRatio
-            (
-                theme.getDefaultTextColor(),
-                theme.getEditorBackgroundColor(),
-                2.1
-            );
+        chromeFgColor = ColorHelper::lightenToMatchContrastRatio(theme.getDefaultTextColor(), theme.getEditorBackgroundColor(), 2.1);
 
         // Slightly blend the new UI chrome color with the editor background color
         // to help it match the theme better.
         //
         chromeFgColor.setAlpha(220);
-        chromeFgColor = ColorHelper::applyAlpha
-            (
-                chromeFgColor,
-                theme.getEditorBackgroundColor()
-            );
+        chromeFgColor = ColorHelper::applyAlpha(chromeFgColor, theme.getEditorBackgroundColor());
 
         // Blend the UI chrome color with the background color even further for
         // the scroll bar color, as the scroll bar will otherwise tend to
@@ -258,23 +246,18 @@ void MainWindow::applyTheme()
         //
         scrollBarColor = chromeFgColor;
         scrollBarColor.setAlpha(200);
-        scrollBarColor = ColorHelper::applyAlpha
-            (
-                scrollBarColor,
-                theme.getEditorBackgroundColor()
-            );
-
+        scrollBarColor = ColorHelper::applyAlpha(scrollBarColor, theme.getEditorBackgroundColor());
     }
     // Else if the foreground color is brighter than the background color...
     else
     {
-        chromeFgColor = chromeFgColor.darker(120);
+        chromeFgColor  = chromeFgColor.darker(120);
         scrollBarColor = chromeFgColor;
     }
 
-    QString scrollbarColorRGB = ColorHelper::toRgbString(scrollBarColor);
-    QColor scrollBarHoverColor = theme.getLinkColor();
-    QString scrollBarHoverRGB = ColorHelper::toRgbString(scrollBarHoverColor);
+    QString scrollbarColorRGB   = ColorHelper::toRgbString(scrollBarColor);
+    QColor  scrollBarHoverColor = theme.getLinkColor();
+    QString scrollBarHoverRGB   = ColorHelper::toRgbString(scrollBarHoverColor);
 
     QString backgroundColorRGBA;
 
@@ -284,15 +267,12 @@ void MainWindow::applyTheme()
     }
     else
     {
-        backgroundColorRGBA =
-            ColorHelper::toRgbaString(theme.getEditorBackgroundColor());
+        backgroundColorRGBA = ColorHelper::toRgbaString(theme.getEditorBackgroundColor());
     }
 
-    QString editorSelectionFgColorRGB =
-        ColorHelper::toRgbString(theme.getEditorBackgroundColor());
+    QString editorSelectionFgColorRGB = ColorHelper::toRgbString(theme.getEditorBackgroundColor());
 
-    QString editorSelectionBgColorRGB =
-        ColorHelper::toRgbString(theme.getDefaultTextColor());
+    QString editorSelectionBgColorRGB = ColorHelper::toRgbString(theme.getDefaultTextColor());
 
     QString menuBarItemFgColorRGB;
     QString menuBarItemBgColorRGBA;
@@ -314,26 +294,25 @@ void MainWindow::applyTheme()
 
     if (EditorAspectStretch == theme.getEditorAspect())
     {
-        fullScreenIcon = ":/resources/images/fullscreen-dark.svg";
-        focusIcon = ":/resources/images/focus-dark.svg";
-        hemingwayIcon = ":/resources/images/hemingway-dark.svg";
-        htmlPreviewIcon = ":/resources/images/html-preview-dark.svg";
-        hideOpenHudsIcon = ":/resources/images/hide-huds-dark.svg";
-        copyHtmlIcon = ":/resources/images/copy-html-dark.svg";
-        exportIcon = ":/resources/images/export-dark.svg";
+        fullScreenIcon      = ":/resources/images/fullscreen-dark.svg";
+        focusIcon           = ":/resources/images/focus-dark.svg";
+        hemingwayIcon       = ":/resources/images/hemingway-dark.svg";
+        htmlPreviewIcon     = ":/resources/images/html-preview-dark.svg";
+        hideOpenHudsIcon    = ":/resources/images/hide-huds-dark.svg";
+        copyHtmlIcon        = ":/resources/images/copy-html-dark.svg";
+        exportIcon          = ":/resources/images/export-dark.svg";
         markdownOptionsIcon = ":/resources/images/configure-dark.svg";
 
         QColor buttonPressColor(chromeFgColor);
         buttonPressColor.setAlpha(30);
 
-        menuBarItemFgColorRGB = ColorHelper::toRgbString(chromeFgColor);
-        menuBarItemBgColorRGBA = "transparent";
-        menuBarItemFgPressColorRGB = menuBarItemFgColorRGB;
-        menuBarItemBgPressColorRGBA =
-            ColorHelper::toRgbaString(buttonPressColor);
+        menuBarItemFgColorRGB       = ColorHelper::toRgbString(chromeFgColor);
+        menuBarItemBgColorRGBA      = "transparent";
+        menuBarItemFgPressColorRGB  = menuBarItemFgColorRGB;
+        menuBarItemBgPressColorRGBA = ColorHelper::toRgbaString(buttonPressColor);
 
-        statusBarItemFgColorRGB = menuBarItemFgColorRGB;
-        statusBarButtonFgPressHoverColorRGB = menuBarItemFgPressColorRGB;
+        statusBarItemFgColorRGB              = menuBarItemFgColorRGB;
+        statusBarButtonFgPressHoverColorRGB  = menuBarItemFgPressColorRGB;
         statusBarButtonBgPressHoverColorRGBA = menuBarItemBgPressColorRGBA;
 
         // Remove menu bar text drop shadow effect.
@@ -346,26 +325,26 @@ void MainWindow::applyTheme()
         //
         QColor chromeFgColor = QColor("#e5e8e8");
 
-        menuBarItemFgColorRGB = ColorHelper::toRgbString(chromeFgColor);
-        menuBarItemBgColorRGBA = "transparent";
+        menuBarItemFgColorRGB      = ColorHelper::toRgbString(chromeFgColor);
+        menuBarItemBgColorRGBA     = "transparent";
         menuBarItemFgPressColorRGB = menuBarItemFgColorRGB;
         chromeFgColor.setAlpha(50);
         menuBarItemBgPressColorRGBA = ColorHelper::toRgbaString(chromeFgColor);
 
-        fullScreenIcon = ":/resources/images/fullscreen-light.svg";
-        focusIcon = ":/resources/images/focus-light.svg";
-        hemingwayIcon = ":/resources/images/hemingway-light.svg";
-        htmlPreviewIcon = ":/resources/images/html-preview-light.svg";
-        hideOpenHudsIcon = ":/resources/images/hide-huds-light.svg";
-        copyHtmlIcon = ":/resources/images/copy-html-light.svg";
-        exportIcon = ":/resources/images/export-light.svg";
+        fullScreenIcon      = ":/resources/images/fullscreen-light.svg";
+        focusIcon           = ":/resources/images/focus-light.svg";
+        hemingwayIcon       = ":/resources/images/hemingway-light.svg";
+        htmlPreviewIcon     = ":/resources/images/html-preview-light.svg";
+        hideOpenHudsIcon    = ":/resources/images/hide-huds-light.svg";
+        copyHtmlIcon        = ":/resources/images/copy-html-light.svg";
+        exportIcon          = ":/resources/images/export-light.svg";
         markdownOptionsIcon = ":/resources/images/configure-light.svg";
 
-        statusBarItemFgColorRGB = menuBarItemFgColorRGB;
-        statusBarButtonFgPressHoverColorRGB = menuBarItemFgPressColorRGB;
+        statusBarItemFgColorRGB              = menuBarItemFgColorRGB;
+        statusBarButtonFgPressHoverColorRGB  = menuBarItemFgPressColorRGB;
         statusBarButtonBgPressHoverColorRGBA = menuBarItemBgPressColorRGBA;
-                
-        QGraphicsDropShadowEffect* menuBarTextDropShadowEffect = new QGraphicsDropShadowEffect();
+
+        QGraphicsDropShadowEffect *menuBarTextDropShadowEffect = new QGraphicsDropShadowEffect();
         menuBarTextDropShadowEffect->setColor(QColor(Qt::black));
         menuBarTextDropShadowEffect->setBlurRadius(3.5);
         menuBarTextDropShadowEffect->setXOffset(1.0);
@@ -379,105 +358,66 @@ void MainWindow::applyTheme()
     m_view->editor()->setAspect(theme.getEditorAspect());
     styleSheet = "";
 
-    QString corners = "";
-    QString scrollBarRadius = "0px";
+    QString corners           = "";
+    QString scrollBarRadius   = "0px";
     QString scrollAreaPadding = "3px 3px 0px 3px";
 
     if (EditorAspectCenter == theme.getEditorAspect())
     {
         scrollAreaPadding = "3px";
-        corners = "border-radius: 8;";
+        corners           = "border-radius: 8;";
     }
-        
+
     scrollBarRadius = "4px";
 
-    QString defaultTextColorRGB =
-        ColorHelper::toRgbString(theme.getDefaultTextColor());
+    QString defaultTextColorRGB = ColorHelper::toRgbString(theme.getDefaultTextColor());
 
-    stream
-        << "QPlainTextEdit { border: 0; "
-        << corners
-        << "margin: 0; padding: 5px; background-color: "
-        << backgroundColorRGBA
-        << "; color: "
-        << defaultTextColorRGB
-        << "; selection-color: "
-        << editorSelectionFgColorRGB
-        << "; selection-background-color: "
-        << editorSelectionBgColorRGB
-        << " } "
-        << "QAbstractScrollArea::corner { background: transparent } "
-        << "QAbstractScrollArea { padding: "
-        << scrollAreaPadding
-        << "; margin: 0 } "
-        << "QScrollBar::horizontal { border: 0; background: transparent; height: 8px; margin: 0 } "
-        << "QScrollBar::handle:horizontal { border: 0; background: "
-        << scrollbarColorRGB
-        << "; min-width: 50px; border-radius: "
-        << scrollBarRadius
-        << "; } "
-        << "QScrollBar::vertical { border: 0; background: transparent; width: 8px; margin: 0 } "
-        << "QScrollBar::handle:vertical { border: 0; background: "
-        << scrollbarColorRGB
-        << "; min-height: 50px; border-radius: "
-        << scrollBarRadius
-        << "; } "
-        << "QScrollBar::handle:vertical:hover { background: "
-        << scrollBarHoverRGB
-        << " } "
-        << "QScrollBar::handle:horizontal:hover { background: "
-        << scrollBarHoverRGB
-        << " } "
-        << "QScrollBar::add-line { background: transparent; border: 0 } "
-        << "QScrollBar::sub-line { background: transparent; border: 0 } "
-        ;
+    stream << "QPlainTextEdit { border: 0; " << corners << "margin: 0; padding: 5px; background-color: " << backgroundColorRGBA
+           << "; color: " << defaultTextColorRGB << "; selection-color: " << editorSelectionFgColorRGB
+           << "; selection-background-color: " << editorSelectionBgColorRGB << " } "
+           << "QAbstractScrollArea::corner { background: transparent } "
+           << "QAbstractScrollArea { padding: " << scrollAreaPadding << "; margin: 0 } "
+           << "QScrollBar::horizontal { border: 0; background: transparent; height: 8px; margin: 0 } "
+           << "QScrollBar::handle:horizontal { border: 0; background: " << scrollbarColorRGB
+           << "; min-width: 50px; border-radius: " << scrollBarRadius << "; } "
+           << "QScrollBar::vertical { border: 0; background: transparent; width: 8px; margin: 0 } "
+           << "QScrollBar::handle:vertical { border: 0; background: " << scrollbarColorRGB << "; min-height: 50px; border-radius: " << scrollBarRadius
+           << "; } "
+           << "QScrollBar::handle:vertical:hover { background: " << scrollBarHoverRGB << " } "
+           << "QScrollBar::handle:horizontal:hover { background: " << scrollBarHoverRGB << " } "
+           << "QScrollBar::add-line { background: transparent; border: 0 } "
+           << "QScrollBar::sub-line { background: transparent; border: 0 } ";
 
-    m_view->editor()->setColorScheme
-    (
-        theme.getDefaultTextColor(),
-        theme.getEditorBackgroundColor(),
-        theme.getMarkupColor(),
-        theme.getLinkColor(),
-        theme.getHeadingColor(),
-        theme.getEmphasisColor(),
-        theme.getBlockquoteColor(),
-        theme.getCodeColor(),
-        theme.getSpellingErrorColor()
-    );
+    m_view->editor()->setColorScheme(theme.getDefaultTextColor(),
+                                     theme.getEditorBackgroundColor(),
+                                     theme.getMarkupColor(),
+                                     theme.getLinkColor(),
+                                     theme.getHeadingColor(),
+                                     theme.getEmphasisColor(),
+                                     theme.getBlockquoteColor(),
+                                     theme.getCodeColor(),
+                                     theme.getSpellingErrorColor());
 
     m_view->editor()->setStyleSheet(styleSheet);
     styleSheet = "";
-    
+
     // Wipe out old background image drawing material.
     originalBackgroundImage = QPixmap();
     adjustedBackgroundImage = QPixmap();
 
-    if
-    (
-        !theme.getBackgroundImageUrl().isNull() &&
-        !theme.getBackgroundImageUrl().isEmpty()
-    )
+    if (!theme.getBackgroundImageUrl().isNull() && !theme.getBackgroundImageUrl().isEmpty())
     {
         // Predraw background image for paintEvent()
         originalBackgroundImage.load(theme.getBackgroundImageUrl());
         predrawBackgroundImage();
     }
-    
-    stream
-        << "#editorLayoutArea { background-color: transparent; border: 0; margin: 0 }"
-        << "QMenuBar { background: transparent } "
-        << "QMenuBar::item { background: "
-        << menuBarItemBgColorRGBA
-        << "; color: "
-        << menuBarItemFgColorRGB
-        << "; padding: 4px 6px 4px 6px } "
-        << "QMenuBar::item:pressed { background-color: "
-        << menuBarItemBgPressColorRGBA
-        << "; color: "
-        << menuBarItemFgPressColorRGB
-        << "; border-radius: 3px"
-        << " } "
-        ;
+
+    stream << "#editorLayoutArea { background-color: transparent; border: 0; margin: 0 }"
+           << "QMenuBar { background: transparent } "
+           << "QMenuBar::item { background: " << menuBarItemBgColorRGBA << "; color: " << menuBarItemFgColorRGB << "; padding: 4px 6px 4px 6px } "
+           << "QMenuBar::item:pressed { background-color: " << menuBarItemBgPressColorRGBA << "; color: " << menuBarItemFgPressColorRGB
+           << "; border-radius: 3px"
+           << " } ";
 
     // Do not call this->setStyleSheet().  Calling it more than once in a run
     // (i.e., when changing a theme) causes a crash in Qt 5.11.  Instead,
@@ -486,9 +426,8 @@ void MainWindow::applyTheme()
     qApp->setStyleSheet(styleSheet);
     styleSheet = "";
 
-    stream
-        << "QSplitter::handle:vertical { height: 0px; } "
-        << "QSplitter::handle:horizontal { width: 0px; } ";
+    stream << "QSplitter::handle:vertical { height: 0px; } "
+           << "QSplitter::handle:horizontal { width: 0px; } ";
 
     m_view->splitter()->setStyleSheet(styleSheet);
 }
@@ -512,9 +451,9 @@ void MainWindow::predrawBackgroundImage()
 #if QT_VERSION >= 0x050600
     adjustedBackgroundImage.setDevicePixelRatio(dpr);
 #endif
-    
+
     Q_ASSERT(g_settings);
-    auto& theme = g_settings->theme();
+    auto &theme = g_settings->theme();
     adjustedBackgroundImage.fill(theme.getBackgroundColor().rgb());
 
     QPainter painter(&adjustedBackgroundImage);
@@ -525,42 +464,33 @@ void MainWindow::predrawBackgroundImage()
         qreal inverseRatio = 1.0 / dpr;
 
         painter.scale(inverseRatio, inverseRatio);
-        painter.fillRect
-        (
-            adjustedBackgroundImage.rect(),
-            image
-        );
+        painter.fillRect(adjustedBackgroundImage.rect(), image);
     }
     else
     {
         Qt::AspectRatioMode aspectRatioMode = Qt::IgnoreAspectRatio;
-        bool scaleImage = true;
+        bool                scaleImage      = true;
 
         switch (theme.getBackgroundImageAspect())
         {
-            case PictureAspectZoom:
-                aspectRatioMode = Qt::KeepAspectRatioByExpanding;
-                break;
-            case PictureAspectScale:
-                aspectRatioMode = Qt::KeepAspectRatio;
-                break;
-            case PictureAspectStretch:
-                aspectRatioMode = Qt::IgnoreAspectRatio;
-                break;
-            default:
-                // Centered
-                scaleImage = false;
-                break;
+        case PictureAspectZoom:
+            aspectRatioMode = Qt::KeepAspectRatioByExpanding;
+            break;
+        case PictureAspectScale:
+            aspectRatioMode = Qt::KeepAspectRatio;
+            break;
+        case PictureAspectStretch:
+            aspectRatioMode = Qt::IgnoreAspectRatio;
+            break;
+        default:
+            // Centered
+            scaleImage = false;
+            break;
         }
 
         if (scaleImage)
         {
-            image = image.scaled
-                (
-                    adjustedBackgroundImage.size(),
-                    aspectRatioMode,
-                    Qt::SmoothTransformation
-                );
+            image = image.scaled(adjustedBackgroundImage.size(), aspectRatioMode, Qt::SmoothTransformation);
 
 #if QT_VERSION >= 0x050600
             image.setDevicePixelRatio(dpr);
@@ -570,12 +500,7 @@ void MainWindow::predrawBackgroundImage()
         int xpos = (adjustedBackgroundImage.width() - image.width()) / (2.0 * dpr);
         int ypos = (adjustedBackgroundImage.height() - image.height()) / (2.0 * dpr);
 
-        painter.drawPixmap
-        (
-            xpos,
-            ypos,
-            image
-        );
+        painter.drawPixmap(xpos, ypos, image);
     }
 
     painter.end();
@@ -584,9 +509,8 @@ void MainWindow::predrawBackgroundImage()
 void MainWindow::setupDockPanels()
 {
     auto *fsDock = new QDockWidget(tr("File System"), this);
-    fsDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::TopDockWidgetArea
-                            | Qt::BottomDockWidgetArea);
-    m_fsView = new QTreeView(fsDock);
+    fsDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
+    m_fsView  = new QTreeView(fsDock);
     m_fsModel = new QFileSystemModel(m_fsView);
     m_fsModel->setRootPath(QDir::currentPath());
     m_fsModel->setNameFilters(QStringList() << "*.md"
@@ -610,7 +534,7 @@ void MainWindow::setupDockPanels()
     ui->menuDock->addAction(cloudDock->toggleViewAction());
 }
 
-void MainWindow::resizeEvent(QResizeEvent* event)
+void MainWindow::resizeEvent(QResizeEvent *event)
 {
     adjustEditorWidth(event->size().width());
 
@@ -620,7 +544,7 @@ void MainWindow::resizeEvent(QResizeEvent* event)
     }
 }
 
-void MainWindow::moveEvent(QMoveEvent* event)
+void MainWindow::moveEvent(QMoveEvent *event)
 {
     Q_UNUSED(event)
 
@@ -633,13 +557,13 @@ void MainWindow::moveEvent(QMoveEvent* event)
     }
 }
 
-void MainWindow::paintEvent(QPaintEvent* event)
+void MainWindow::paintEvent(QPaintEvent *event)
 {
     Q_ASSERT(g_settings);
-    auto& theme = g_settings->theme();
-    
+    auto &theme = g_settings->theme();
+
     QPainter painter(this);
-    qreal dpr = 1.0;
+    qreal    dpr = 1.0;
 
 #if QT_VERSION >= 0x050600
     dpr = devicePixelRatioF();
@@ -702,17 +626,17 @@ void MainWindow::changeEvent(QEvent *event)
 void MainWindow::adjustEditorWidth(int width)
 {
     int editorWidth = width;
-    
+
     editorWidth /= 2;
-    
+
     QList<int> sizes;
     sizes.append(editorWidth);
     sizes.append(editorWidth);
     m_view->splitter()->setSizes(sizes);
-    
+
     // Resize the editor's margins based on the size of the window.
     m_view->editor()->setupPaperMargins(editorWidth);
-    
+
     // Scroll to cursor position.
     m_view->editor()->centerCursor();
 }
