@@ -41,12 +41,15 @@ jobs:
           cd renderer
           make
           cd ..
+          cd server
+          go build -ldflags="-s -w" -o KarenMeuCloud
+          cd ..
           mkdir build
           cd build
           qmake -r CONFIG+=release CONFIG+=qtquickcompiler ../${{ env.targetName }}.pro
           make -j 2
           cd ..
-      # tag 打包
+
       - name: package
         run: |
           cd build
