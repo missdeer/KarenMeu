@@ -1,6 +1,6 @@
-# Makefile for building renderer module
+# Makefile for building utils module
 GITCOMMIT:=$(shell git describe --dirty --always)
-BINARY:=librenderer.a
+BINARY:=libutils.a
 SYSTEM:=
 CHECKS:=lute.go main.go inliner.go goldmark.go ../go.mod
 BUILDOPTS:=-v -buildmode=c-archive 
@@ -11,7 +11,7 @@ all: $(BINARY)
 
 $(BINARY): $(CHECKS)
 	GO111MODULE=on CGO_ENABLED=$(CGO_ENABLED) $(SYSTEM) go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY)
-	mv librenderer.h renderer.h
+	mv libutils.h utils.h
 	go mod tidy
 
 .PHONY: clean

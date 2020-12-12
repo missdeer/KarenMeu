@@ -1,5 +1,3 @@
-#include <algorithm>
-
 #include <QApplication>
 #include <QClipboard>
 #include <QFileDialog>
@@ -12,12 +10,14 @@
 #include <QWebEngineScriptCollection>
 #include <QWebEngineView>
 #include <QtCore>
+#include <algorithm>
 
 #include "markdownview.h"
+
 #include "markdowneditor2.h"
 #include "previewpage.h"
-#include "renderer.h"
 #include "settings.h"
+#include "utils.h"
 
 using pFMarkdownEngine          = char *(*)(GoString, GoString, GoUint8);
 pFMarkdownEngine markdownEngine = nullptr;
