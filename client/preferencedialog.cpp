@@ -78,5 +78,5 @@ void PreferenceDialog::setupPreviewThemeEditor()
     layout->setMargin(0);
     ui->previewThemeEditorContainer->setLayout(layout);
 
-    m_previewThemeEditor->initialize();
+    m_previewThemeEditor->initialize("css");
 }

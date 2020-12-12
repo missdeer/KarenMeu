@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="119"/>
+        <location filename="../mainwindow.cpp" line="122"/>
         <source>KarenMeu</source>
         <translation></translation>
     </message>
@@ -401,13 +401,13 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="638"/>
-        <location filename="../mainwindow.cpp" line="606"/>
+        <location filename="../mainwindow.cpp" line="655"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="646"/>
-        <location filename="../mainwindow.cpp" line="606"/>
+        <location filename="../mainwindow.cpp" line="655"/>
         <source>Lute</source>
         <translation></translation>
     </message>
@@ -642,57 +642,87 @@
         <translation>清除最近打开的文件列表</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="589"/>
+        <location filename="../mainwindow.cpp" line="591"/>
+        <source>Google Translate</source>
+        <translation>谷歌翻译</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="597"/>
+        <source>Baidu Translate</source>
+        <translation>百度翻译</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="603"/>
+        <source>Youdao Translate</source>
+        <translation>有道翻译</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="609"/>
+        <source>Youdao Dictionary</source>
+        <translation>有道词典</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="619"/>
+        <source>Preview HTML</source>
+        <translation>预览HTML</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="626"/>
+        <source>Custom Theme Editor</source>
+        <translation>自定义主题编辑器</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="638"/>
         <source>Mode:</source>
         <translation>预览模式：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="592"/>
+        <location filename="../mainwindow.cpp" line="641"/>
         <source>Engine:</source>
         <translation>渲染引擎：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="595"/>
+        <location filename="../mainwindow.cpp" line="644"/>
         <source>Code Block Style:</source>
         <translation>代码块风格：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="598"/>
+        <location filename="../mainwindow.cpp" line="647"/>
         <source>Preview Theme:</source>
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="602"/>
+        <location filename="../mainwindow.cpp" line="651"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="602"/>
+        <location filename="../mainwindow.cpp" line="651"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="658"/>
+        <location filename="../mainwindow.cpp" line="707"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="119"/>
+        <location filename="../mainwindow.cpp" line="122"/>
         <source>KarenMeu is a Markdown based Wechat public account article editor for programmers.</source>
         <translation>KarenMeu是一款专为程序员设计的基于Markdown语法的微信公众号文章编辑器。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="160"/>
+        <location filename="../mainwindow.cpp" line="163"/>
         <source>%1. %2</source>
         <translation>%1. %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="561"/>
+        <location filename="../mainwindow.cpp" line="566"/>
         <source>File System</source>
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="579"/>
+        <location filename="../mainwindow.cpp" line="583"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>
@@ -820,7 +850,7 @@
     <message>
         <location filename="../preferencedialog.ui" line="30"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>风格</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="72"/>
@@ -1042,7 +1072,7 @@
     <message>
         <location filename="../preferencedialog.ui" line="333"/>
         <source>Cloud</source>
-        <translation type="unfinished">云服务</translation>
+        <translation>云服务</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="103"/>

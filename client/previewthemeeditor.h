@@ -10,7 +10,7 @@ class PreviewThemeEditor : public ScintillaEdit
     Q_OBJECT
 public:
     explicit PreviewThemeEditor(QWidget *parent);
-    void       initialize();
+    void       initialize(const QString &lexer);
     void       setContent(const QByteArray &content);
     QByteArray content();
 
@@ -22,6 +22,7 @@ private slots:
 
 private:
     ScintillaConfig *m_sc;
+    QString          m_lexer;
 };
 
 #endif // PREVIEWTHEMEEDITOR_H

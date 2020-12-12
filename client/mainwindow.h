@@ -9,9 +9,11 @@ namespace Ui
     class MainWindow;
 }
 class MarkdownView;
+class PreviewThemeEditor;
 
 QT_FORWARD_DECLARE_CLASS(QComboBox);
 QT_FORWARD_DECLARE_CLASS(QTreeView);
+QT_FORWARD_DECLARE_CLASS(QPlainTextEdit);
 QT_FORWARD_DECLARE_CLASS(QFileSystemModel);
 
 class MainWindow : public QMainWindow
@@ -66,6 +68,12 @@ private:
     QComboBox *       m_cbMarkdownEngine;
     QComboBox *       m_cbCodeBlockStyle;
     QComboBox *       m_cbPreviewTheme;
+    QPlainTextEdit *    m_googleTranslateEditor;
+    QPlainTextEdit *    m_baiduTranslateEditor;
+    QPlainTextEdit *    m_youdaoTranslateEditor;
+    QPlainTextEdit *    m_youdaoDictionaryEditor;
+    PreviewThemeEditor *m_previewHTMLEditor;
+    PreviewThemeEditor *m_customPreivewThemeEditor;
     QList<QToolBar *> m_visibleToolbars;
 
     QString m_curFile;

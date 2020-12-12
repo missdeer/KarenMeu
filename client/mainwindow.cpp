@@ -13,6 +13,7 @@
 #include <QMap>
 #include <QMessageBox>
 #include <QPainter>
+#include <QPlainTextEdit>
 #include <QSplitter>
 #include <QTreeView>
 #include <QUrl>
@@ -20,10 +21,12 @@
 #include <QtCore>
 
 #include "mainwindow.h"
+
 #include "ColorHelper.h"
 #include "markdowneditor2.h"
 #include "markdownview.h"
 #include "preferencedialog.h"
+#include "previewthemeeditor.h"
 #include "renderer.h"
 #include "settings.h"
 #include "ui_mainwindow.h"
@@ -558,9 +561,10 @@ void MainWindow::setupDockPanels()
 {
     ui->menuView->addSeparator();
 
+    setDockOptions(QMainWindow::AnimatedDocks | QMainWindow::AllowTabbedDocks | QMainWindow::GroupedDragging);
+
     auto *fsDock = new QDockWidget(tr("File System"), this);
-    fsDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
-    m_fsView  = new QTreeView(fsDock);
+    m_fsView     = new QTreeView(fsDock);
     m_fsModel = new QFileSystemModel(m_fsView);
     m_fsModel->setRootPath(QDir::currentPath());
     m_fsModel->setNameFilters(QStringList() << "*.md"
@@ -577,11 +581,56 @@ void MainWindow::setupDockPanels()
     ui->menuView->addAction(fsDock->toggleViewAction());
 
     auto *cloudDock = new QDockWidget(tr("Cloud"), this);
-    cloudDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    m_cloudView = new QTreeView(cloudDock);
+    m_cloudView     = new QTreeView(cloudDock);
     cloudDock->setWidget(m_cloudView);
     addDockWidget(Qt::LeftDockWidgetArea, cloudDock);
     ui->menuView->addAction(cloudDock->toggleViewAction());
+
+    tabifyDockWidget(fsDock, cloudDock);
+
+    auto *googleTranslateDock = new QDockWidget(tr("Google Translate"), this);
+    m_googleTranslateEditor   = new QPlainTextEdit(googleTranslateDock);
+    googleTranslateDock->setWidget(m_googleTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, googleTranslateDock);
+    ui->menuView->addAction(googleTranslateDock->toggleViewAction());
+
+    auto *baiduTranslateDock = new QDockWidget(tr("Baidu Translate"), this);
+    m_baiduTranslateEditor   = new QPlainTextEdit(baiduTranslateDock);
+    baiduTranslateDock->setWidget(m_baiduTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, baiduTranslateDock);
+    ui->menuView->addAction(baiduTranslateDock->toggleViewAction());
+
+    auto *youdaoTranslateDock = new QDockWidget(tr("Youdao Translate"), this);
+    m_youdaoTranslateEditor   = new QPlainTextEdit(youdaoTranslateDock);
+    youdaoTranslateDock->setWidget(m_youdaoTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, youdaoTranslateDock);
+    ui->menuView->addAction(youdaoTranslateDock->toggleViewAction());
+
+    auto *youdaoDictionaryDock = new QDockWidget(tr("Youdao Dictionary"), this);
+    m_youdaoDictionaryEditor   = new QPlainTextEdit(youdaoDictionaryDock);
+    youdaoDictionaryDock->setWidget(m_youdaoDictionaryEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, youdaoDictionaryDock);
+    ui->menuView->addAction(youdaoDictionaryDock->toggleViewAction());
+
+    tabifyDockWidget(googleTranslateDock, baiduTranslateDock);
+    tabifyDockWidget(baiduTranslateDock, youdaoTranslateDock);
+    tabifyDockWidget(youdaoTranslateDock, youdaoDictionaryDock);
+
+    auto *previewHTMLDock = new QDockWidget(tr("Preview HTML"), this);
+    m_previewHTMLEditor   = new PreviewThemeEditor(previewHTMLDock);
+    m_previewHTMLEditor->initialize("html");
+    previewHTMLDock->setWidget(m_previewHTMLEditor);
+    addDockWidget(Qt::RightDockWidgetArea, previewHTMLDock);
+    ui->menuView->addAction(previewHTMLDock->toggleViewAction());
+
+    auto *customThemeEditorDock = new QDockWidget(tr("Custom Theme Editor"), this);
+    m_customPreivewThemeEditor  = new PreviewThemeEditor(customThemeEditorDock);
+    m_customPreivewThemeEditor->initialize("css");
+    customThemeEditorDock->setWidget(m_customPreivewThemeEditor);
+    addDockWidget(Qt::RightDockWidgetArea, customThemeEditorDock);
+    ui->menuView->addAction(customThemeEditorDock->toggleViewAction());
+
+    tabifyDockWidget(previewHTMLDock, customThemeEditorDock);
 }
 
 void MainWindow::setupOptionToolbar()
