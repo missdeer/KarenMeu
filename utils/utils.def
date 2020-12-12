@@ -1,7 +1,7 @@
 EXPORTS
+    Lute
     Goldmark
+    Free
     PremailerInliner
     DouceurInliner
     Inliner
-    Lute
-    Free
