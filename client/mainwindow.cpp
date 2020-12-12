@@ -74,6 +74,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
     ui->menuView->addAction(ui->editToolbar->toggleViewAction());
     ui->menuView->addAction(ui->formatToolbar->toggleViewAction());
+    ui->menuView->addAction(ui->optionToolbar->toggleViewAction());
 
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
@@ -555,6 +556,8 @@ void MainWindow::predrawBackgroundImage()
 
 void MainWindow::setupDockPanels()
 {
+    ui->menuView->addSeparator();
+
     auto *fsDock = new QDockWidget(tr("File System"), this);
     fsDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
     m_fsView  = new QTreeView(fsDock);
@@ -571,30 +574,30 @@ void MainWindow::setupDockPanels()
     connect(m_fsView, &QTreeView::activated, this, &MainWindow::onFileSystemItemActivated);
     fsDock->setWidget(m_fsView);
     addDockWidget(Qt::LeftDockWidgetArea, fsDock);
-    ui->menuDock->addAction(fsDock->toggleViewAction());
+    ui->menuView->addAction(fsDock->toggleViewAction());
 
     auto *cloudDock = new QDockWidget(tr("Cloud"), this);
     cloudDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     m_cloudView = new QTreeView(cloudDock);
     cloudDock->setWidget(m_cloudView);
     addDockWidget(Qt::LeftDockWidgetArea, cloudDock);
-    ui->menuDock->addAction(cloudDock->toggleViewAction());
+    ui->menuView->addAction(cloudDock->toggleViewAction());
 }
 
 void MainWindow::setupOptionToolbar()
 {
-    ui->optionToolBar->addWidget(new QLabel(tr("Mode:")));
-    m_cbPreviewMode = new QComboBox(ui->optionToolBar);
-    ui->optionToolBar->addWidget(m_cbPreviewMode);
-    ui->optionToolBar->addWidget(new QLabel(tr("Engine:")));
-    m_cbMarkdownEngine = new QComboBox(ui->optionToolBar);
-    ui->optionToolBar->addWidget(m_cbMarkdownEngine);
-    ui->optionToolBar->addWidget(new QLabel(tr("Code Block Style:")));
-    m_cbCodeBlockStyle = new QComboBox(ui->optionToolBar);
-    ui->optionToolBar->addWidget(m_cbCodeBlockStyle);
-    ui->optionToolBar->addWidget(new QLabel(tr("Preview Theme:")));
-    m_cbPreviewTheme = new QComboBox(ui->optionToolBar);
-    ui->optionToolBar->addWidget(m_cbPreviewTheme);
+    ui->optionToolbar->addWidget(new QLabel(tr("Mode:")));
+    m_cbPreviewMode = new QComboBox(ui->optionToolbar);
+    ui->optionToolbar->addWidget(m_cbPreviewMode);
+    ui->optionToolbar->addWidget(new QLabel(tr("Engine:")));
+    m_cbMarkdownEngine = new QComboBox(ui->optionToolbar);
+    ui->optionToolbar->addWidget(m_cbMarkdownEngine);
+    ui->optionToolbar->addWidget(new QLabel(tr("Code Block Style:")));
+    m_cbCodeBlockStyle = new QComboBox(ui->optionToolbar);
+    ui->optionToolbar->addWidget(m_cbCodeBlockStyle);
+    ui->optionToolbar->addWidget(new QLabel(tr("Preview Theme:")));
+    m_cbPreviewTheme = new QComboBox(ui->optionToolbar);
+    ui->optionToolbar->addWidget(m_cbPreviewTheme);
 
     m_cbPreviewMode->addItems(QStringList({tr("Wechat Public Account Article"), tr("Blog Post")}));
     m_cbPreviewMode->setCurrentText(g_settings->previewMode());
