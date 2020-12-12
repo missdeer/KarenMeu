@@ -18,7 +18,8 @@ public:
     explicit MarkdownView(QWidget *parent = nullptr);
     void             forceConvert();
     bool             maybeSave();
-    void             setThemeStyle();
+    void             updatePreviewTheme();
+    void             updatePreviewMode();
     void             updateMarkdownEngine();
     void             openFromFile(const QString &fileName);
     MarkdownEditor2 *editor();

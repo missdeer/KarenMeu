@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="116"/>
+        <location filename="../mainwindow.cpp" line="118"/>
         <source>KarenMeu</source>
         <translation></translation>
     </message>
@@ -65,597 +65,639 @@
         <translation>格式工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="216"/>
+        <location filename="../mainwindow.ui" line="212"/>
+        <source>Options Toolbar</source>
+        <translation>选项工具栏</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="227"/>
         <source>&amp;New</source>
         <translation>新建(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="219"/>
+        <location filename="../mainwindow.ui" line="230"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="228"/>
+        <location filename="../mainwindow.ui" line="239"/>
         <source>&amp;Open...</source>
         <translation>打开(&amp;O)...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="231"/>
+        <location filename="../mainwindow.ui" line="242"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="240"/>
+        <location filename="../mainwindow.ui" line="251"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="243"/>
+        <location filename="../mainwindow.ui" line="254"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="252"/>
+        <location filename="../mainwindow.ui" line="263"/>
         <source>Save &amp;As...</source>
         <translation>另存为(&amp;A)...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="257"/>
+        <location filename="../mainwindow.ui" line="268"/>
         <source>E&amp;xit</source>
         <translation>退出(&amp;X)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="269"/>
+        <location filename="../mainwindow.ui" line="280"/>
         <source>&amp;Copy</source>
         <translation>复制(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="272"/>
+        <location filename="../mainwindow.ui" line="283"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="281"/>
+        <location filename="../mainwindow.ui" line="292"/>
         <source>Cu&amp;t</source>
         <translation>剪切(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="284"/>
+        <location filename="../mainwindow.ui" line="295"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="293"/>
+        <location filename="../mainwindow.ui" line="304"/>
         <source>&amp;Paste</source>
         <translation>粘贴(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="296"/>
+        <location filename="../mainwindow.ui" line="307"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="301"/>
+        <location filename="../mainwindow.ui" line="312"/>
         <source>&amp;Content...</source>
         <translation>内容(&amp;C)...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="306"/>
+        <location filename="../mainwindow.ui" line="317"/>
         <source>&amp;About...</source>
         <translation>关于(&amp;A)...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="318"/>
+        <location filename="../mainwindow.ui" line="329"/>
         <source>Preference...</source>
         <translation>偏好设置...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="321"/>
+        <location filename="../mainwindow.ui" line="332"/>
         <source>Ctrl+Alt+X</source>
         <translation>Ctrl+Alt+X</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="333"/>
+        <location filename="../mainwindow.ui" line="344"/>
         <source>Undo</source>
         <translation>撤消</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="336"/>
+        <location filename="../mainwindow.ui" line="347"/>
         <source>Ctrl+Z</source>
         <translation>Ctrl+Z</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="345"/>
+        <location filename="../mainwindow.ui" line="356"/>
         <source>Redo</source>
         <translation>重做</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="348"/>
+        <location filename="../mainwindow.ui" line="359"/>
         <source>Ctrl+Y</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="353"/>
+        <location filename="../mainwindow.ui" line="364"/>
         <source>Select All</source>
         <translation>全选</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="356"/>
+        <location filename="../mainwindow.ui" line="367"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="365"/>
+        <location filename="../mainwindow.ui" line="376"/>
         <source>Copy As HTML</source>
         <translation>复制为HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="368"/>
+        <location filename="../mainwindow.ui" line="379"/>
         <source>Ctrl+Alt+C</source>
         <translation>Ctrl+Alt+C</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="377"/>
+        <location filename="../mainwindow.ui" line="388"/>
         <source>HTML</source>
         <translation>HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="386"/>
+        <location filename="../mainwindow.ui" line="397"/>
         <source>PDF</source>
         <translation>PDF</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="395"/>
+        <location filename="../mainwindow.ui" line="406"/>
         <source>Strong</source>
         <translation>加粗</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="398"/>
+        <location filename="../mainwindow.ui" line="409"/>
         <source>Ctrl+B</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="407"/>
+        <location filename="../mainwindow.ui" line="418"/>
         <source>Emphasize</source>
         <translation>强调</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="410"/>
+        <location filename="../mainwindow.ui" line="421"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="419"/>
+        <location filename="../mainwindow.ui" line="430"/>
         <source>Inline Code</source>
         <translation>行内代码</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="422"/>
+        <location filename="../mainwindow.ui" line="433"/>
         <source>Ctrl+Shift+K</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="427"/>
+        <location filename="../mainwindow.ui" line="438"/>
         <source>Comment</source>
         <translation>注释</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="430"/>
+        <location filename="../mainwindow.ui" line="441"/>
         <source>Ctrl+/</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="439"/>
+        <location filename="../mainwindow.ui" line="450"/>
         <source>Ordered List</source>
         <translation>有序列表</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="442"/>
+        <location filename="../mainwindow.ui" line="453"/>
         <source>Ctrl+Shift+O</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="451"/>
+        <location filename="../mainwindow.ui" line="462"/>
         <source>Unordered List</source>
         <translation>无序列表</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="454"/>
+        <location filename="../mainwindow.ui" line="465"/>
         <source>Ctrl+Shift+U</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="463"/>
+        <location filename="../mainwindow.ui" line="474"/>
         <source>Blockquote</source>
         <translation>块引用</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="466"/>
+        <location filename="../mainwindow.ui" line="477"/>
         <source>Ctrl+Shift+B</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="475"/>
+        <location filename="../mainwindow.ui" line="486"/>
         <source>Hyperlink</source>
         <translation>超链接</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="478"/>
+        <location filename="../mainwindow.ui" line="489"/>
         <source>Ctrl+K</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="487"/>
+        <location filename="../mainwindow.ui" line="498"/>
         <source>Image</source>
         <translation>图片</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="490"/>
+        <location filename="../mainwindow.ui" line="501"/>
         <source>Ctrl+Shift+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="499"/>
+        <location filename="../mainwindow.ui" line="510"/>
         <source>New Paragraph</source>
         <translation>新段落</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="508"/>
+        <location filename="../mainwindow.ui" line="519"/>
         <source>Header 1</source>
         <translation>一级标题</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="511"/>
+        <location filename="../mainwindow.ui" line="522"/>
         <source>Ctrl+1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="520"/>
+        <location filename="../mainwindow.ui" line="531"/>
         <source>Header 2</source>
         <translation>二级标题</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="523"/>
+        <location filename="../mainwindow.ui" line="534"/>
         <source>Ctrl+2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="532"/>
+        <location filename="../mainwindow.ui" line="543"/>
         <source>Header 3</source>
         <translation>三级标题</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="535"/>
+        <location filename="../mainwindow.ui" line="546"/>
         <source>Ctrl+3</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="544"/>
+        <location filename="../mainwindow.ui" line="555"/>
         <source>Header 4</source>
         <translation>四级标题</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="547"/>
+        <location filename="../mainwindow.ui" line="558"/>
         <source>Ctrl+4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="556"/>
+        <location filename="../mainwindow.ui" line="567"/>
         <source>Header 5</source>
         <translation>五级标题</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="559"/>
+        <location filename="../mainwindow.ui" line="570"/>
         <source>Ctrl+5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="568"/>
+        <location filename="../mainwindow.ui" line="579"/>
         <source>Header 6</source>
         <translation>六级标题</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="571"/>
+        <location filename="../mainwindow.ui" line="582"/>
         <source>Ctrl+6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="580"/>
+        <location filename="../mainwindow.ui" line="591"/>
         <source>Horizontal Rule</source>
         <translation>横线</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="583"/>
+        <location filename="../mainwindow.ui" line="594"/>
         <source>Ctrl+H</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="592"/>
+        <location filename="../mainwindow.ui" line="603"/>
         <source>Shift Right</source>
         <translation>右移</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="595"/>
+        <location filename="../mainwindow.ui" line="606"/>
         <source>Alt+.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="604"/>
+        <location filename="../mainwindow.ui" line="615"/>
         <source>Shift Left</source>
         <translation>左移</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="607"/>
+        <location filename="../mainwindow.ui" line="618"/>
         <source>Alt+,</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="616"/>
+        <location filename="../mainwindow.ui" line="627"/>
         <source>Strikethrough</source>
         <translation>删除线</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="625"/>
+        <location filename="../mainwindow.ui" line="636"/>
         <source>Code Block</source>
         <translation>代码块</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="633"/>
+        <location filename="../mainwindow.ui" line="644"/>
+        <location filename="../mainwindow.cpp" line="603"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="641"/>
+        <location filename="../mainwindow.ui" line="652"/>
+        <location filename="../mainwindow.cpp" line="603"/>
         <source>Lute</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="649"/>
+        <location filename="../mainwindow.ui" line="660"/>
         <source>默认</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="657"/>
+        <location filename="../mainwindow.ui" line="668"/>
         <source>橙心</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="665"/>
+        <location filename="../mainwindow.ui" line="676"/>
         <source>墨黑</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="673"/>
+        <location filename="../mainwindow.ui" line="684"/>
         <source>姹紫</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="681"/>
+        <location filename="../mainwindow.ui" line="692"/>
         <source>嫩青</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="689"/>
+        <location filename="../mainwindow.ui" line="700"/>
         <source>绿意</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="697"/>
+        <location filename="../mainwindow.ui" line="708"/>
         <source>红绯</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="705"/>
+        <location filename="../mainwindow.ui" line="716"/>
         <source>Abap</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="713"/>
+        <location filename="../mainwindow.ui" line="724"/>
         <source>Algol</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="721"/>
+        <location filename="../mainwindow.ui" line="732"/>
         <source>Algol Nu</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="726"/>
+        <location filename="../mainwindow.ui" line="737"/>
         <source>API</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="734"/>
+        <location filename="../mainwindow.ui" line="745"/>
         <source>Arduino</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="742"/>
+        <location filename="../mainwindow.ui" line="753"/>
         <source>Autumn</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="750"/>
+        <location filename="../mainwindow.ui" line="761"/>
         <source>Borland</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="758"/>
+        <location filename="../mainwindow.ui" line="769"/>
         <source>BW</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="766"/>
+        <location filename="../mainwindow.ui" line="777"/>
         <source>Colorful</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="774"/>
+        <location filename="../mainwindow.ui" line="785"/>
         <source>Dracula</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="782"/>
+        <location filename="../mainwindow.ui" line="793"/>
         <source>Emacs</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="790"/>
+        <location filename="../mainwindow.ui" line="801"/>
         <source>Friendly</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="798"/>
+        <location filename="../mainwindow.ui" line="809"/>
         <source>Fruity</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="806"/>
+        <location filename="../mainwindow.ui" line="817"/>
         <source>Github</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="814"/>
+        <location filename="../mainwindow.ui" line="825"/>
         <source>Igor</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="822"/>
+        <location filename="../mainwindow.ui" line="833"/>
         <source>Lovelace</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="830"/>
+        <location filename="../mainwindow.ui" line="841"/>
         <source>Manni</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="838"/>
+        <location filename="../mainwindow.ui" line="849"/>
         <source>Monokai</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="846"/>
+        <location filename="../mainwindow.ui" line="857"/>
         <source>Monokai Light</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="854"/>
+        <location filename="../mainwindow.ui" line="865"/>
         <source>Murphy</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="862"/>
+        <location filename="../mainwindow.ui" line="873"/>
         <source>Native</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="870"/>
+        <location filename="../mainwindow.ui" line="881"/>
         <source>Paraiso Dark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="878"/>
+        <location filename="../mainwindow.ui" line="889"/>
         <source>Paraiso Light</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="886"/>
+        <location filename="../mainwindow.ui" line="897"/>
         <source>Pastie</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="894"/>
+        <location filename="../mainwindow.ui" line="905"/>
         <source>Perldoc</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="902"/>
+        <location filename="../mainwindow.ui" line="913"/>
         <source>Pygments</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="910"/>
+        <location filename="../mainwindow.ui" line="921"/>
         <source>Rainbow Dash</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="918"/>
+        <location filename="../mainwindow.ui" line="929"/>
         <source>RRT</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="926"/>
+        <location filename="../mainwindow.ui" line="937"/>
         <source>Solarized Dark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="934"/>
+        <location filename="../mainwindow.ui" line="945"/>
         <source>Solarized Dark256</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="942"/>
+        <location filename="../mainwindow.ui" line="953"/>
         <source>Solarized Light</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="950"/>
+        <location filename="../mainwindow.ui" line="961"/>
         <source>Swap Off</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="958"/>
+        <location filename="../mainwindow.ui" line="969"/>
         <source>Tango</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="966"/>
+        <location filename="../mainwindow.ui" line="977"/>
         <source>Trac</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="974"/>
+        <location filename="../mainwindow.ui" line="985"/>
         <source>VIM</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="982"/>
+        <location filename="../mainwindow.ui" line="993"/>
         <source>VS</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="990"/>
+        <location filename="../mainwindow.ui" line="1001"/>
         <source>Xcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="998"/>
+        <location filename="../mainwindow.ui" line="1009"/>
         <source>Gopher</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1003"/>
+        <location filename="../mainwindow.ui" line="1014"/>
         <source>Clear Recent Files List</source>
         <translation>清除最近打开的文件列表</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="116"/>
+        <location filename="../mainwindow.cpp" line="586"/>
+        <source>Mode:</source>
+        <translation>预览模式：</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="589"/>
+        <source>Engine:</source>
+        <translation>渲染引擎：</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="592"/>
+        <source>Code Block Style:</source>
+        <translation>代码块风格：</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="595"/>
+        <source>Preview Theme:</source>
+        <translation>预览主题：</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="599"/>
+        <source>Wechat Public Account Article</source>
+        <translation>微信公众号文章</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="599"/>
+        <source>Blog Post</source>
+        <translation>博客文章</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="655"/>
+        <source>Custom</source>
+        <translation>自定义</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="118"/>
         <source>KarenMeu is a Markdown based Wechat public account article editor for programmers.</source>
         <translation>KarenMeu是一款专为程序员设计的基于Markdown语法的微信公众号文章编辑器。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="151"/>
+        <location filename="../mainwindow.cpp" line="159"/>
         <source>%1. %2</source>
         <translation>%1. %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="511"/>
+        <location filename="../mainwindow.cpp" line="558"/>
         <source>File System</source>
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="529"/>
+        <location filename="../mainwindow.cpp" line="576"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>
@@ -748,27 +790,27 @@
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="291"/>
+        <location filename="../markdownview.cpp" line="297"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="347"/>
+        <location filename="../markdownview.cpp" line="351"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="347"/>
+        <location filename="../markdownview.cpp" line="351"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="350"/>
+        <location filename="../markdownview.cpp" line="354"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="350"/>
+        <location filename="../markdownview.cpp" line="354"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>

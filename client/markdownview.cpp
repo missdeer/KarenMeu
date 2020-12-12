@@ -271,7 +271,7 @@ void MarkdownView::convertTimeout()
     }
 }
 
-void MarkdownView::setThemeStyle()
+void MarkdownView::updatePreviewTheme()
 {
     const QString &previewTheme = g_settings->previewTheme();
     QByteArray     ba;
@@ -288,9 +288,13 @@ void MarkdownView::setThemeStyle()
             f.close();
         }
     }
-    m_wxboxWidth.setText(g_settings->previewMode() == tr("Blog Post") ? "95%" : "70%");
     m_themeStyle.setText(QString::fromUtf8(ba));
     m_editor->updateCodeEditorFont();
+}
+
+void MarkdownView::updatePreviewMode()
+{
+    m_wxboxWidth.setText(g_settings->previewMode() == tr("Blog Post") ? "95%" : "70%");
 }
 
 void MarkdownView::updateMarkdownEngine()
@@ -337,7 +341,7 @@ QSplitter *MarkdownView::splitter()
 void MarkdownView::previewLoadFinished(bool)
 {
     updateMarkdownEngine();
-    setThemeStyle();
+    updatePreviewTheme();
 }
 
 void MarkdownView::pdfPrintingFinished(const QString &filePath, bool success)

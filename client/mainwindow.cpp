@@ -83,6 +83,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->menuRecentFiles->addAction(recentFileActs[i]);
     }
 
+    setupOptionToolbar();
+
     setupDockPanels();
 
     applyTheme();
@@ -121,8 +123,14 @@ void MainWindow::on_actionPreference_triggered()
     PreferenceDialog dlg(this);
     if (dlg.exec() == QDialog::Accepted)
     {
-        m_view->setThemeStyle();
+        m_cbPreviewMode->setCurrentText(g_settings->previewMode());
+        m_cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());
+        m_cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
+        m_cbPreviewTheme->setCurrentText(g_settings->previewTheme());
+
+        m_view->updatePreviewTheme();
         m_view->updateMarkdownEngine();
+        m_view->updatePreviewMode();
         m_view->forceConvert();
     }
 }
@@ -183,6 +191,45 @@ void MainWindow::onFileSystemItemActivated(const QModelIndex &index)
                         fi.fileName().endsWith(".mdown", Qt::CaseInsensitive)))
     {
         openFile(fi.absoluteFilePath());
+    }
+}
+
+void MainWindow::onCurrentPreviewModeChanged(const QString &text)
+{
+    if (g_settings->previewMode() != text)
+    {
+        g_settings->setPreviewMode(text);
+        m_view->updatePreviewMode();
+        m_view->forceConvert();
+    }
+}
+
+void MainWindow::onCurrentMarkdownEngineChanged(const QString &text)
+{
+    if (g_settings->markdownEngine() != text)
+    {
+        g_settings->setMarkdownEngine(text);
+        m_view->updateMarkdownEngine();
+        m_view->forceConvert();
+    }
+}
+
+void MainWindow::onCurrentCodeBlockStyleChanged(const QString &text)
+{
+    if (g_settings->codeBlockStyle() != text)
+    {
+        g_settings->setCodeBlockStyle(text);
+        m_view->forceConvert();
+    }
+}
+
+void MainWindow::onCurrentPreviewThemeChanged(const QString &text)
+{
+    if (g_settings->previewTheme() != text)
+    {
+        g_settings->setPreviewTheme(text);
+        m_view->updatePreviewTheme();
+        m_view->forceConvert();
     }
 }
 
@@ -532,6 +579,82 @@ void MainWindow::setupDockPanels()
     cloudDock->setWidget(m_cloudView);
     addDockWidget(Qt::LeftDockWidgetArea, cloudDock);
     ui->menuDock->addAction(cloudDock->toggleViewAction());
+}
+
+void MainWindow::setupOptionToolbar()
+{
+    ui->optionToolBar->addWidget(new QLabel(tr("Mode:")));
+    m_cbPreviewMode = new QComboBox(ui->optionToolBar);
+    ui->optionToolBar->addWidget(m_cbPreviewMode);
+    ui->optionToolBar->addWidget(new QLabel(tr("Engine:")));
+    m_cbMarkdownEngine = new QComboBox(ui->optionToolBar);
+    ui->optionToolBar->addWidget(m_cbMarkdownEngine);
+    ui->optionToolBar->addWidget(new QLabel(tr("Code Block Style:")));
+    m_cbCodeBlockStyle = new QComboBox(ui->optionToolBar);
+    ui->optionToolBar->addWidget(m_cbCodeBlockStyle);
+    ui->optionToolBar->addWidget(new QLabel(tr("Preview Theme:")));
+    m_cbPreviewTheme = new QComboBox(ui->optionToolBar);
+    ui->optionToolBar->addWidget(m_cbPreviewTheme);
+
+    m_cbPreviewMode->addItems(QStringList({tr("Wechat Public Account Article"), tr("Blog Post")}));
+    m_cbPreviewMode->setCurrentText(g_settings->previewMode());
+    connect(m_cbPreviewMode, &QComboBox::currentTextChanged, this, &MainWindow::onCurrentPreviewModeChanged);
+
+    m_cbMarkdownEngine->addItems(QStringList({tr("Goldmark"), tr("Lute")}));
+    m_cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());
+    connect(m_cbMarkdownEngine, &QComboBox::currentTextChanged, this, &MainWindow::onCurrentMarkdownEngineChanged);
+
+    m_cbCodeBlockStyle->addItems(QStringList({
+        "abap",
+        "algol",
+        "algol_nu",
+        "api",
+        "arduino",
+        "autumn",
+        "borland",
+        "bw",
+        "colorful",
+        "dracula",
+        "emacs",
+        "friendly",
+        "fruity",
+        "github",
+        "igor",
+        "lovelace",
+        "manni",
+        "monokai",
+        "monokailight",
+        "murphy",
+        "native",
+        "paraiso-dark",
+        "paraiso-light",
+        "pastie",
+        "perldoc",
+        "pygments",
+        "rainbow_dash",
+        "rrt",
+        "solarized-dark",
+        "solarized-dark256",
+        "solarized-light",
+        "swapoff",
+        "tango",
+        "trac",
+        "vim",
+        "vs",
+        "xcode",
+    }));
+    m_cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
+    connect(m_cbCodeBlockStyle, &QComboBox::currentTextChanged, this, &MainWindow::onCurrentCodeBlockStyleChanged);
+
+    QDir dir(":/rc/theme");
+    auto entries = dir.entryInfoList();
+    for (auto entry : entries)
+    {
+        m_cbPreviewTheme->addItem(entry.baseName());
+    }
+    m_cbPreviewTheme->addItem(tr("Custom"));
+    m_cbPreviewTheme->setCurrentText(g_settings->previewTheme());
+    connect(m_cbPreviewTheme, &QComboBox::currentTextChanged, this, &MainWindow::onCurrentPreviewThemeChanged);
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)

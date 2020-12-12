@@ -44,6 +44,11 @@ private slots:
 
     void onFileSystemItemActivated(const QModelIndex &index);
 
+    void onCurrentPreviewModeChanged(const QString &text);
+    void onCurrentMarkdownEngineChanged(const QString &text);
+    void onCurrentCodeBlockStyleChanged(const QString &text);
+    void onCurrentPreviewThemeChanged(const QString &text);
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void moveEvent(QMoveEvent *event) override;
@@ -57,6 +62,10 @@ private:
     QFileSystemModel *m_fsModel;
     QTreeView *       m_fsView;
     QTreeView *       m_cloudView;
+    QComboBox *       m_cbPreviewMode;
+    QComboBox *       m_cbMarkdownEngine;
+    QComboBox *       m_cbCodeBlockStyle;
+    QComboBox *       m_cbPreviewTheme;
     QList<QToolBar *> m_visibleToolbars;
 
     QString m_curFile;
@@ -78,6 +87,7 @@ private:
     void applyTheme();
     void predrawBackgroundImage();
     void setupDockPanels();
+    void setupOptionToolbar();
 };
 
 #endif // MAINWINDOW_H

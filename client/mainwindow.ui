@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>850</width>
-    <height>540</height>
+    <width>1283</width>
+    <height>671</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,8 +23,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>850</width>
-     <height>21</height>
+     <width>1283</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -206,6 +206,17 @@
    <addaction name="actionHeader2"/>
    <addaction name="actionHeader3"/>
    <addaction name="actionHeader4"/>
+  </widget>
+  <widget class="QToolBar" name="optionToolBar">
+   <property name="windowTitle">
+    <string>Options Toolbar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
   </widget>
   <action name="actionNew">
    <property name="icon">
