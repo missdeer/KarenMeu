@@ -38,7 +38,7 @@ jobs:
           cd 3rdparty/scintilla/qt/ScintillaEdit
           python WidgetGen.py
           cd ../../../..
-          cd renderer
+          cd utils
           make
           cd ..
           cd server
