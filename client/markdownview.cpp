@@ -317,146 +317,43 @@ void MarkdownView::updateMarkdownEngine()
 void MarkdownView::updateMacStyleCodeBlock()
 {
     std::map<QString, QString> styleBackground = {
-        {
-            "abap",
-            "#ffffff",
-        },
-        {
-            "algol",
-            "#ffffff",
-        },
-        {
-            "algol_nu",
-            "#ffffff",
-        },
-        {
-            "arduino",
-            "#ffffff",
-        },
-        {
-            "autumn",
-            "#ffffff",
-        },
-        {
-            "borland",
-            "#ffffff",
-        },
-        {
-            "bw",
-            "#ffffff",
-        },
-        {
-            "colorful",
-            "#ffffff",
-        },
-        {
-            "dracula",
-            "#282a36",
-        },
-        {
-            "emacs",
-            "#f8f8f8",
-        },
-        {
-            "friendly",
-            "#f0f0f0",
-        },
-        {
-            "fruity",
-            "#111111",
-        },
-        {
-            "github",
-            "#ffffff",
-        },
-        {
-            "igor",
-            "#ffffff",
-        },
-        {
-            "lovelace",
-            "#ffffff",
-        },
-        {
-            "manni",
-            "#f0f3f3",
-        },
-        {
-            "monokai",
-            "#272822",
-        },
-        {
-            "monokailight",
-            "#fafafa",
-        },
-        {
-            "murphy",
-            "#ffffff",
-        },
-        {
-            "native",
-            "#202020",
-        },
-        {
-            "paraiso-dark",
-            "#2f1e2e",
-        },
-        {
-            "paraiso-light",
-            "#e7e9db",
-        },
-        {
-            "pastie",
-            "#ffffff",
-        },
-        {
-            "perldoc",
-            "#eeeedd",
-        },
-        {
-            "rainbow_dash",
-            "#ffffff",
-        },
-        {
-            "rrt",
-            "#000000",
-        },
-        {
-            "solarized-dark",
-            "#002B36",
-        },
-        {
-            "solarized-dark256",
-            "#1c1c1c",
-        },
-        {
-            "solarized-light",
-            "#eee8d5",
-        },
-        {
-            "swapoff",
-            "#black",
-        },
-        {
-            "tango",
-            "#f8f8f8",
-        },
-        {
-            "trac",
-            "#ffffff",
-        },
-        {
-            "vim",
-            "#000000",
-        },
-        {
-            "vs",
-            "#ffffff",
-        },
-        {
-            "xcode",
-            "#ffffff",
-        },
+        {"abap", "#ffffff"},
+        {"algol", "#ffffff"},
+        {"algol_nu", "#ffffff"},
+        {"arduino", "#ffffff"},
+        {"autumn", "#ffffff"},
+        {"api", "#000000"},
+        {"borland", "#ffffff"},
+        {"bw", "#ffffff"},
+        {"colorful", "#ffffff"},
+        {"dracula", "#282a36"},
+        {"emacs", "#f8f8f8"},
+        {"friendly", "#f0f0f0"},
+        {"fruity", "#111111"},
+        {"github", "#ffffff"},
+        {"igor", "#ffffff"},
+        {"lovelace", "#ffffff"},
+        {"manni", "#f0f3f3"},
+        {"monokai", "#272822"},
+        {"monokailight", "#fafafa"},
+        {"murphy", "#ffffff"},
+        {"native", "#202020"},
+        {"paraiso-dark", "#2f1e2e"},
+        {"paraiso-light", "#e7e9db"},
+        {"pastie", "#ffffff"},
+        {"perldoc", "#eeeedd"},
+        {"pygments", "#ffffff"},
+        {"rainbow_dash", "#ffffff"},
+        {"rrt", "#000000"},
+        {"solarized-dark", "#002B36"},
+        {"solarized-dark256", "#1c1c1c"},
+        {"solarized-light", "#eee8d5"},
+        {"swapoff", "#black"},
+        {"tango", "#f8f8f8"},
+        {"trac", "#ffffff"},
+        {"vim", "#000000"},
+        {"vs", "#ffffff"},
+        {"xcode", "#ffffff"},
     };
     QString backgroundColor = "#000000";
     if (styleBackground.find(g_settings->codeBlockStyle()) != styleBackground.end())

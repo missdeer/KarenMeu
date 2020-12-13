@@ -825,22 +825,22 @@
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="530"/>
+        <location filename="../markdownview.cpp" line="427"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="530"/>
+        <location filename="../markdownview.cpp" line="427"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="533"/>
+        <location filename="../markdownview.cpp" line="430"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="533"/>
+        <location filename="../markdownview.cpp" line="430"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>
