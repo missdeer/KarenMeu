@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include <QApplication>
 #include <QClipboard>
 #include <QFileDialog>
@@ -10,12 +12,11 @@
 #include <QWebEngineScriptCollection>
 #include <QWebEngineView>
 #include <QtCore>
-#include <algorithm>
 
 #include "markdownview.h"
-
 #include "markdowneditor2.h"
 #include "previewpage.h"
+#include "previewthemeeditor.h"
 #include "settings.h"
 #include "utils.h"
 
@@ -76,6 +77,9 @@ MarkdownView::MarkdownView(QWidget *parent)
     m_preview->load(QUrl("qrc:/rc/html/index.html"));
     connect(m_preview, &QWebEngineView::loadFinished, this, &MarkdownView::previewLoadFinished);
     connect(page, &QWebEnginePage::pdfPrintingFinished, this, &MarkdownView::pdfPrintingFinished);
+
+    auto *devToolPage = new QWebEnginePage;
+    page->setDevToolsPage(devToolPage);
 
     updateMarkdownEngine();
 
@@ -361,6 +365,21 @@ void MarkdownView::resizeEvent(QResizeEvent *event)
     QWidget::resizeEvent(event);
 }
 
+void MarkdownView::setCustomPreivewThemeEditor(PreviewThemeEditor *customPreivewThemeEditor)
+{
+    m_customPreivewThemeEditor = customPreivewThemeEditor;
+}
+
+QWebEnginePage *MarkdownView::devToolPage()
+{
+    return m_preview->page()->devToolsPage();
+}
+
+void MarkdownView::setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor)
+{
+    m_previewHTMLEditor = previewHTMLEditor;
+}
+
 void MarkdownView::saveToFile(const QString &savePath)
 {
     QFile f(savePath);
@@ -379,6 +398,8 @@ void MarkdownView::saveToFile(const QString &savePath)
 void MarkdownView::setContent(const QString &html)
 {
     m_renderedContent.setText(html);
+    Q_ASSERT(m_previewHTMLEditor);
+    m_previewHTMLEditor->setContent(html.toUtf8());
 }
 
 void MarkdownView::renderMarkdownToHTML()

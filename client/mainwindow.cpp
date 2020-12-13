@@ -17,6 +17,7 @@
 #include <QSplitter>
 #include <QTreeView>
 #include <QUrl>
+#include <QWebEngineView>
 #include <QWindowStateChangeEvent>
 #include <QtCore>
 
@@ -622,6 +623,7 @@ void MainWindow::setupDockPanels()
     previewHTMLDock->setWidget(m_previewHTMLEditor);
     addDockWidget(Qt::RightDockWidgetArea, previewHTMLDock);
     ui->menuView->addAction(previewHTMLDock->toggleViewAction());
+    m_view->setPreviewHTMLEditor(m_previewHTMLEditor);
 
     auto *customThemeEditorDock = new QDockWidget(tr("Custom Theme Editor"), this);
     m_customPreivewThemeEditor  = new PreviewThemeEditor(customThemeEditorDock);
@@ -629,7 +631,16 @@ void MainWindow::setupDockPanels()
     customThemeEditorDock->setWidget(m_customPreivewThemeEditor);
     addDockWidget(Qt::RightDockWidgetArea, customThemeEditorDock);
     ui->menuView->addAction(customThemeEditorDock->toggleViewAction());
+    m_view->setCustomPreivewThemeEditor(m_customPreivewThemeEditor);
 
+    auto *devToolDock = new QDockWidget(tr("DevTool"), this);
+    auto *devToolView = new QWebEngineView(devToolDock);
+    devToolView->setPage(m_view->devToolPage());
+    devToolDock->setWidget(devToolView);
+    addDockWidget(Qt::RightDockWidgetArea, devToolDock);
+    ui->menuView->addAction(devToolDock->toggleViewAction());
+
+    tabifyDockWidget(previewHTMLDock, devToolDock);
     tabifyDockWidget(previewHTMLDock, customThemeEditorDock);
 }
 

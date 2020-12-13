@@ -5,7 +5,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="122"/>
+        <location filename="../mainwindow.cpp" line="123"/>
         <source>KarenMeu</source>
         <translation></translation>
     </message>
@@ -401,13 +401,13 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="638"/>
-        <location filename="../mainwindow.cpp" line="655"/>
+        <location filename="../mainwindow.cpp" line="666"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="646"/>
-        <location filename="../mainwindow.cpp" line="655"/>
+        <location filename="../mainwindow.cpp" line="666"/>
         <source>Lute</source>
         <translation></translation>
     </message>
@@ -642,87 +642,92 @@
         <translation>清除最近打开的文件列表</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="591"/>
+        <location filename="../mainwindow.cpp" line="592"/>
         <source>Google Translate</source>
         <translation>谷歌翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="597"/>
+        <location filename="../mainwindow.cpp" line="598"/>
         <source>Baidu Translate</source>
         <translation>百度翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="603"/>
+        <location filename="../mainwindow.cpp" line="604"/>
         <source>Youdao Translate</source>
         <translation>有道翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="609"/>
+        <location filename="../mainwindow.cpp" line="610"/>
         <source>Youdao Dictionary</source>
         <translation>有道词典</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="619"/>
+        <location filename="../mainwindow.cpp" line="636"/>
+        <source>DevTool</source>
+        <translation>开发者工具</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="620"/>
         <source>Preview HTML</source>
         <translation>预览HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="626"/>
+        <location filename="../mainwindow.cpp" line="628"/>
         <source>Custom Theme Editor</source>
         <translation>自定义主题编辑器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="638"/>
+        <location filename="../mainwindow.cpp" line="649"/>
         <source>Mode:</source>
         <translation>预览模式：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="641"/>
+        <location filename="../mainwindow.cpp" line="652"/>
         <source>Engine:</source>
         <translation>渲染引擎：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="644"/>
+        <location filename="../mainwindow.cpp" line="655"/>
         <source>Code Block Style:</source>
         <translation>代码块风格：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="647"/>
+        <location filename="../mainwindow.cpp" line="658"/>
         <source>Preview Theme:</source>
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="651"/>
+        <location filename="../mainwindow.cpp" line="662"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="651"/>
+        <location filename="../mainwindow.cpp" line="662"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="707"/>
+        <location filename="../mainwindow.cpp" line="718"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="122"/>
+        <location filename="../mainwindow.cpp" line="123"/>
         <source>KarenMeu is a Markdown based Wechat public account article editor for programmers.</source>
         <translation>KarenMeu是一款专为程序员设计的基于Markdown语法的微信公众号文章编辑器。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="163"/>
+        <location filename="../mainwindow.cpp" line="164"/>
         <source>%1. %2</source>
         <translation>%1. %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="566"/>
+        <location filename="../mainwindow.cpp" line="567"/>
         <source>File System</source>
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="583"/>
+        <location filename="../mainwindow.cpp" line="584"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>
@@ -748,94 +753,94 @@
 <context>
     <name>MarkdownView</name>
     <message>
-        <location filename="../markdownview.cpp" line="96"/>
-        <location filename="../markdownview.cpp" line="142"/>
+        <location filename="../markdownview.cpp" line="100"/>
+        <location filename="../markdownview.cpp" line="146"/>
         <source>Confirm</source>
         <translation>确认</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="97"/>
-        <location filename="../markdownview.cpp" line="143"/>
+        <location filename="../markdownview.cpp" line="101"/>
+        <location filename="../markdownview.cpp" line="147"/>
         <source>Modified document has not been saved, do you want to save it?</source>
         <translation>文档被修改且尚未保存，要保存吗？</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="113"/>
+        <location filename="../markdownview.cpp" line="117"/>
         <source>Open Markdown file</source>
         <translation>打开Markdown文档</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="113"/>
+        <location filename="../markdownview.cpp" line="117"/>
         <source>Markdown files (*.md *.markdown *.mdown);;All files (*.*)</source>
         <translation>Markdown文档 (*.md *.markdown *.mdown);;所有类型 (*.*)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="127"/>
+        <location filename="../markdownview.cpp" line="131"/>
         <source>Save Markdown file</source>
         <translation>保存Markdown文档</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="127"/>
+        <location filename="../markdownview.cpp" line="131"/>
         <source>Markdown file (*.md);;All files (*.*)</source>
         <translation>Markdown文档 (*.md);;所有类型 (*.*)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="234"/>
+        <location filename="../markdownview.cpp" line="238"/>
         <source>Export As HTML</source>
         <translation>导出为HTML</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="234"/>
+        <location filename="../markdownview.cpp" line="238"/>
         <source>HTML file (*.html)</source>
         <translation>HTML文档 (*.html)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="245"/>
+        <location filename="../markdownview.cpp" line="249"/>
         <source>HTML exported</source>
         <translation>HTML已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="246"/>
+        <location filename="../markdownview.cpp" line="250"/>
         <source>HTML file has been exported to %1 successfully.</source>
         <translation>HTML文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="254"/>
+        <location filename="../markdownview.cpp" line="258"/>
         <source>Export As PDF</source>
         <translation>导出为PDF</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="254"/>
+        <location filename="../markdownview.cpp" line="258"/>
         <source>Adobe PDF file (*.pdf)</source>
         <translation>Adobe PDF文档 (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="278"/>
+        <location filename="../markdownview.cpp" line="282"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="297"/>
+        <location filename="../markdownview.cpp" line="301"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="352"/>
+        <location filename="../markdownview.cpp" line="356"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="352"/>
+        <location filename="../markdownview.cpp" line="356"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="355"/>
+        <location filename="../markdownview.cpp" line="359"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="355"/>
+        <location filename="../markdownview.cpp" line="359"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>
