@@ -21,15 +21,14 @@
 #include <QtCore>
 
 #include "mainwindow.h"
-
 #include "ColorHelper.h"
 #include "markdowneditor2.h"
 #include "markdownview.h"
 #include "preferencedialog.h"
 #include "previewthemeeditor.h"
-#include "renderer.h"
 #include "settings.h"
 #include "ui_mainwindow.h"
+#include "utils.h"
 
 using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
@@ -91,11 +90,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     setupDockPanels();
 
-    applyTheme();
+    applyMarkdownEditorTheme();
 }
 
 MainWindow::~MainWindow()
 {
+    g_settings->save();
     delete ui;
 }
 
@@ -258,7 +258,7 @@ void MainWindow::on_actionClearRecentFilesList_triggered()
     updateRecentFileActions();
 }
 
-void MainWindow::applyTheme()
+void MainWindow::applyMarkdownEditorTheme()
 {
     Q_ASSERT(g_settings);
     auto &theme = g_settings->theme();

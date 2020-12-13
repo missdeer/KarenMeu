@@ -92,7 +92,7 @@ private:
 
     void openRecentFile();
     void adjustEditorWidth(int width);
-    void applyTheme();
+    void applyMarkdownEditorTheme();
     void predrawBackgroundImage();
     void setupDockPanels();
     void setupOptionToolbar();

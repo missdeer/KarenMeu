@@ -341,6 +341,7 @@ QSplitter *MarkdownView::splitter()
 void MarkdownView::previewLoadFinished(bool)
 {
     updateMarkdownEngine();
+    updatePreviewMode();
     updatePreviewTheme();
 }
 
