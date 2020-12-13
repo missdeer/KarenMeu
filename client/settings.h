@@ -48,8 +48,12 @@ public:
 
     Theme &theme();
 
+    bool macTerminalStyleCodeBlock() const;
+    void setMacTerminalStyleCodeBlock(bool macTerminalStyleCodeBlock);
+
 private:
     bool m_enableLineNumbers {true};
+    bool m_macTerminalStyleCodeBlock {true};
     int  m_autoRefreshInterval {1000}; // millisecond
     int  m_editorZoomFactor {100};     // percent
 

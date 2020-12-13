@@ -23,6 +23,7 @@ public:
     void             updatePreviewTheme();
     void             updatePreviewMode();
     void             updateMarkdownEngine();
+    void             updateMacStyleCodeBlock();
     void             openFromFile(const QString &fileName);
     MarkdownEditor2 *editor();
     QSplitter *      splitter();
@@ -84,10 +85,11 @@ private:
     QTimer *            m_convertTimer;
     PreviewThemeEditor *m_previewHTMLEditor;
     PreviewThemeEditor *m_customPreivewThemeEditor;
-    QString          m_savePath;
-    RenderedDocument m_renderedContent;
-    RenderedDocument m_themeStyle;
-    RenderedDocument m_wxboxWidth;
+    QString             m_savePath;
+    RenderedDocument    m_renderedContent;
+    RenderedDocument    m_themeStyle;
+    RenderedDocument    m_wxboxWidth;
+    RenderedDocument    m_macStyleCodeBlock;
 
     void saveToFile(const QString &savePath);
     void renderMarkdownToHTML();

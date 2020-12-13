@@ -136,6 +136,7 @@ void MainWindow::on_actionPreference_triggered()
         m_view->updatePreviewTheme();
         m_view->updateMarkdownEngine();
         m_view->updatePreviewMode();
+        m_view->updateMacStyleCodeBlock();
         m_view->forceConvert();
     }
 }

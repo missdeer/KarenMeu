@@ -71,6 +71,7 @@ MarkdownView::MarkdownView(QWidget *parent)
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);
     channel->registerObject(QStringLiteral("theme"), &m_themeStyle);
     channel->registerObject(QStringLiteral("wxboxwidth"), &m_wxboxWidth);
+    channel->registerObject(QStringLiteral("macStyleCodeBlock"), &m_macStyleCodeBlock);
     page->setWebChannel(channel);
 
     m_preview->setContextMenuPolicy(Qt::NoContextMenu);
@@ -282,6 +283,7 @@ void MarkdownView::updatePreviewTheme()
     if (previewTheme == tr("Custom"))
     {
         ba = g_settings->customPreviewThemeStyle();
+        m_customPreivewThemeEditor->setContent(ba);
     }
     else
     {
@@ -291,6 +293,7 @@ void MarkdownView::updatePreviewTheme()
             ba = f.readAll();
             f.close();
         }
+        m_customPreivewThemeEditor->clearAll();
     }
     m_themeStyle.setText(QString::fromUtf8(ba));
     m_editor->updateCodeEditorFont();
@@ -309,6 +312,176 @@ void MarkdownView::updateMarkdownEngine()
     };
 
     markdownEngine = m[g_settings->markdownEngine()];
+}
+
+void MarkdownView::updateMacStyleCodeBlock()
+{
+    std::map<QString, QString> styleBackground = {
+        {
+            "abap",
+            "#ffffff",
+        },
+        {
+            "algol",
+            "#ffffff",
+        },
+        {
+            "algol_nu",
+            "#ffffff",
+        },
+        {
+            "arduino",
+            "#ffffff",
+        },
+        {
+            "autumn",
+            "#ffffff",
+        },
+        {
+            "borland",
+            "#ffffff",
+        },
+        {
+            "bw",
+            "#ffffff",
+        },
+        {
+            "colorful",
+            "#ffffff",
+        },
+        {
+            "dracula",
+            "#282a36",
+        },
+        {
+            "emacs",
+            "#f8f8f8",
+        },
+        {
+            "friendly",
+            "#f0f0f0",
+        },
+        {
+            "fruity",
+            "#111111",
+        },
+        {
+            "github",
+            "#ffffff",
+        },
+        {
+            "igor",
+            "#ffffff",
+        },
+        {
+            "lovelace",
+            "#ffffff",
+        },
+        {
+            "manni",
+            "#f0f3f3",
+        },
+        {
+            "monokai",
+            "#272822",
+        },
+        {
+            "monokailight",
+            "#fafafa",
+        },
+        {
+            "murphy",
+            "#ffffff",
+        },
+        {
+            "native",
+            "#202020",
+        },
+        {
+            "paraiso-dark",
+            "#2f1e2e",
+        },
+        {
+            "paraiso-light",
+            "#e7e9db",
+        },
+        {
+            "pastie",
+            "#ffffff",
+        },
+        {
+            "perldoc",
+            "#eeeedd",
+        },
+        {
+            "rainbow_dash",
+            "#ffffff",
+        },
+        {
+            "rrt",
+            "#000000",
+        },
+        {
+            "solarized-dark",
+            "#002B36",
+        },
+        {
+            "solarized-dark256",
+            "#1c1c1c",
+        },
+        {
+            "solarized-light",
+            "#eee8d5",
+        },
+        {
+            "swapoff",
+            "#black",
+        },
+        {
+            "tango",
+            "#f8f8f8",
+        },
+        {
+            "trac",
+            "#ffffff",
+        },
+        {
+            "vim",
+            "#000000",
+        },
+        {
+            "vs",
+            "#ffffff",
+        },
+        {
+            "xcode",
+            "#ffffff",
+        },
+    };
+    QString backgroundColor = "#000000";
+    if (styleBackground.find(g_settings->codeBlockStyle()) != styleBackground.end())
+        backgroundColor = styleBackground[g_settings->codeBlockStyle()];
+    QString macStyle =
+        QString("#nice .macpre {                                                                                                       \n"
+                "  margin: 12px auto;                                                                                                  \n"
+                "  box-shadow: 0 1px 2px -2px rgba(0,0,0,.16), 0 3px 6px 0 rgba(0,0,0,.12), 0 5px 12px 4px rgba(0,0,0,.09) !important; \n"
+                "  border-radius: 5px;                                                                                                 \n"
+                "}                                                                                                                     \n"
+                "#nice .macpre:before {                                                                                                \n"
+                "  content: '';                                                                                                        \n"
+                "  display:%1;                                                                                                         \n"
+                "  background: url(./point.png);                                                                                       \n"
+                "  height: 30px;                                                                                                       \n"
+                "  width: 100%;                                                                                                        \n"
+                "  background-size:40px;                                                                                               \n"
+                "  background-repeat: no-repeat;                                                                                       \n"
+                "  background-color: %2;                                                                                               \n"
+                "  margin-bottom: -7px;                                                                                                \n"
+                "  border-radius: 5px;                                                                                                 \n"
+                "  background-position: 10px 10px;                                                                                     \n"
+                "}                                                                                                                     ")
+            .arg(g_settings->macTerminalStyleCodeBlock() ? "block" : "none", backgroundColor);
+    m_macStyleCodeBlock.setText(macStyle);
 }
 
 void MarkdownView::openFromFile(const QString &fileName)
@@ -346,6 +519,7 @@ void MarkdownView::previewLoadFinished(bool)
 {
     updateMarkdownEngine();
     updatePreviewMode();
+    updateMacStyleCodeBlock();
     updatePreviewTheme();
 }
 
@@ -450,6 +624,11 @@ void MarkdownView::renderMarkdownToHTML()
                .replace("<h3>", "<h3><span>")
                .replace("</h3>", "</span></h3>");
 
+    if (g_settings->macTerminalStyleCodeBlock())
+    {
+        updateMacStyleCodeBlock();
+        html = html.replace("<pre", "<pre class=\"macpre\"");
+    }
     setContent(html);
 
     Free(res);

@@ -22,6 +22,7 @@ void Settings::save()
     settings.setValue("codeBlockStyle", m_codeBlockStyle);
     settings.setValue("markdownEngine", m_markdownEngine);
     settings.setValue("enableLineNumbers", m_enableLineNumbers);
+    settings.setValue("macTerminalStyleCodeBlock", m_macTerminalStyleCodeBlock);
     settings.setValue("previewMode", m_previewMode);
     settings.setValue("customPreviewThemeStyle", m_customPreviewThemeStyle);
     settings.sync();
@@ -56,8 +57,9 @@ void Settings::load()
     setPreviewTheme(settings.value("previewTheme", QSettings::tr("默认")).toString());
     m_codeBlockStyle          = settings.value("codeBlockStyle", QSettings::tr("xcode")).toString();
     m_markdownEngine          = settings.value("markdownEngine", QSettings::tr("Goldmark")).toString();
-    m_enableLineNumbers       = settings.value("enableLineNumbers", true).toBool();
-    m_previewMode             = settings.value("previewMode", QSettings::tr("Wechat Public Account Article")).toString();
+    m_enableLineNumbers         = settings.value("enableLineNumbers", true).toBool();
+    m_macTerminalStyleCodeBlock = settings.value("macTerminalStyleCodeBlock", true).toBool();
+    m_previewMode               = settings.value("previewMode", QSettings::tr("Wechat Public Account Article")).toString();
     m_customPreviewThemeStyle = settings.value("customPreviewThemeStyle").toByteArray();
 }
 
@@ -174,4 +176,14 @@ void Settings::setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeSt
 Theme &Settings::theme()
 {
     return m_theme;
+}
+
+bool Settings::macTerminalStyleCodeBlock() const
+{
+    return m_macTerminalStyleCodeBlock;
+}
+
+void Settings::setMacTerminalStyleCodeBlock(bool macTerminalStyleCodeBlock)
+{
+    m_macTerminalStyleCodeBlock = macTerminalStyleCodeBlock;
 }

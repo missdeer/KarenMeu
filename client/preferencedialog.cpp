@@ -25,6 +25,7 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui
     ui->cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
     ui->cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());
     ui->cbEnableLineNumbers->setChecked(g_settings->enableLineNumbers());
+    ui->cbMacTerminalStyleCodeBlock->setChecked(g_settings->macTerminalStyleCodeBlock());
     QFont f;
     f.setFamily(g_settings->codeEditorFontFamily());
     ui->cbCodeEditorFont->setCurrentFont(f);
@@ -44,6 +45,7 @@ void PreferenceDialog::accept()
     g_settings->setCodeBlockStyle(ui->cbCodeBlockStyle->currentText());
     g_settings->setMarkdownEngine(ui->cbMarkdownEngine->currentText());
     g_settings->setEnableLineNumbers(ui->cbEnableLineNumbers->isChecked());
+    g_settings->setMacTerminalStyleCodeBlock(ui->cbMacTerminalStyleCodeBlock->isChecked());
     g_settings->setCodeEditorFontFamily(ui->cbCodeEditorFont->currentFont().family());
     g_settings->setCodeEditorFontPointSize(ui->sbFontPointSize->value());
     if (ui->cbPreviewTheme->currentText() == tr("Custom"))

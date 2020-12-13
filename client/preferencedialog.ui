@@ -23,7 +23,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabStyle">
       <attribute name="title">
@@ -323,6 +323,13 @@
         <widget class="QCheckBox" name="cbEnableLineNumbers">
          <property name="text">
           <string>Enable Line Numbers in Code Block</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="cbMacTerminalStyleCodeBlock">
+         <property name="text">
+          <string>Mac Terminal Style Code Block</string>
          </property>
         </widget>
        </item>
