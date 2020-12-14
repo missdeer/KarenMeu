@@ -879,8 +879,8 @@
     </message>
     <message>
         <location filename="../preferencedialog.cpp" line="22"/>
-        <location filename="../preferencedialog.cpp" line="51"/>
-        <location filename="../preferencedialog.cpp" line="60"/>
+        <location filename="../preferencedialog.cpp" line="55"/>
+        <location filename="../preferencedialog.cpp" line="67"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
@@ -1083,6 +1083,21 @@
         <location filename="../preferencedialog.ui" line="340"/>
         <source>Cloud</source>
         <translation>云服务</translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="346"/>
+        <source>Server:</source>
+        <translation>服务器：</translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="356"/>
+        <source>Username:</source>
+        <translation>用户名：</translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="366"/>
+        <source>Password:</source>
+        <translation>密码：</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="103"/>

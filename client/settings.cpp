@@ -213,3 +213,42 @@ void Settings::setMainWindowGeometry(const QByteArray &geometry)
     settings.setValue("mainWindowGeometry", geometry);
     settings.sync();
 }
+
+QString Settings::cloudServerAddress()
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    return settings.value("cloudServerAddress").toString();
+}
+
+void Settings::setCloudServerAddress(const QString &server)
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    settings.setValue("cloudServerAddress", server);
+    settings.sync();
+}
+
+QString Settings::cloudUsername()
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    return settings.value("cloudUsername").toString();
+}
+
+void Settings::setCloudUsername(const QString &username)
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    settings.setValue("cloudUsername", username);
+    settings.sync();
+}
+
+QString Settings::cloudPassword()
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    return settings.value("cloudPassword").toString();
+}
+
+void Settings::setCloudPassword(const QString &password)
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    settings.setValue("cloudPassword", password);
+    settings.sync();
+}

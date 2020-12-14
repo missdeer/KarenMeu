@@ -57,6 +57,15 @@ public:
     QByteArray mainWindowGeometry();
     void       setMainWindowGeometry(const QByteArray &geometry);
 
+    QString cloudServerAddress();
+    void    setCloudServerAddress(const QString &server);
+
+    QString cloudUsername();
+    void    setCloudUsername(const QString &username);
+
+    QString cloudPassword();
+    void    setCloudPassword(const QString &password);
+
 private:
     bool m_enableLineNumbers {true};
     bool m_macTerminalStyleCodeBlock {true};

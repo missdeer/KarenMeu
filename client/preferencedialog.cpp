@@ -31,6 +31,10 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui
     ui->cbCodeEditorFont->setCurrentFont(f);
     ui->sbFontPointSize->setValue(g_settings->codeEditorFontPointSize());
     ui->cbPreviewMode->setCurrentText(g_settings->previewMode());
+
+    ui->edtCloudServerAddress->setText(g_settings->cloudServerAddress());
+    ui->edtCloudUsername->setText(g_settings->cloudUsername());
+    ui->edtCloudPassword->setText(g_settings->cloudPassword());
 }
 
 PreferenceDialog::~PreferenceDialog()
@@ -52,6 +56,9 @@ void PreferenceDialog::accept()
     {
         g_settings->setCustomPreviewThemeStyle(m_previewThemeEditor->content());
     }
+    g_settings->setCloudServerAddress(ui->edtCloudServerAddress->text());
+    g_settings->setCloudUsername(ui->edtCloudUsername->text());
+    g_settings->setCloudPassword(ui->edtCloudPassword->text());
     QDialog::accept();
 }
 
