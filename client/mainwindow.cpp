@@ -98,12 +98,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     auto mainWindowGeometry = g_settings->mainWindowGeometry();
     restoreGeometry(mainWindowGeometry);
-
-    auto actions = ui->menuView->actions();
-    for (auto action : actions)
-    {
-        emit action->triggered();
-    }
 }
 
 MainWindow::~MainWindow()
@@ -583,6 +577,7 @@ void MainWindow::setupDockPanels()
     setDockOptions(QMainWindow::AnimatedDocks | QMainWindow::AllowTabbedDocks | QMainWindow::GroupedDragging);
 
     auto *fsDock = new QDockWidget(tr("File System"), this);
+    fsDock->setObjectName("fsDock");
     m_fsView     = new QTreeView(fsDock);
     m_fsModel = new QFileSystemModel(m_fsView);
     m_fsModel->setRootPath(QDir::currentPath());
@@ -600,6 +595,7 @@ void MainWindow::setupDockPanels()
     ui->menuView->addAction(fsDock->toggleViewAction());
 
     auto *cloudDock = new QDockWidget(tr("Cloud"), this);
+    cloudDock->setObjectName("cloudDock");
     m_cloudView     = new QTreeView(cloudDock);
     cloudDock->setWidget(m_cloudView);
     addDockWidget(Qt::LeftDockWidgetArea, cloudDock);
@@ -608,24 +604,28 @@ void MainWindow::setupDockPanels()
     tabifyDockWidget(fsDock, cloudDock);
 
     auto *googleTranslateDock = new QDockWidget(tr("Google Translate"), this);
-    m_googleTranslateEditor   = new QPlainTextEdit(googleTranslateDock);
+    googleTranslateDock->setObjectName("googleTranslate");
+    m_googleTranslateEditor = new QPlainTextEdit(googleTranslateDock);
     googleTranslateDock->setWidget(m_googleTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, googleTranslateDock);
     ui->menuView->addAction(googleTranslateDock->toggleViewAction());
 
     auto *baiduTranslateDock = new QDockWidget(tr("Baidu Translate"), this);
+    baiduTranslateDock->setObjectName("baiduTranslateDock");
     m_baiduTranslateEditor   = new QPlainTextEdit(baiduTranslateDock);
     baiduTranslateDock->setWidget(m_baiduTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, baiduTranslateDock);
     ui->menuView->addAction(baiduTranslateDock->toggleViewAction());
 
     auto *youdaoTranslateDock = new QDockWidget(tr("Youdao Translate"), this);
+    youdaoTranslateDock->setObjectName("youdaoTranslateDock");
     m_youdaoTranslateEditor   = new QPlainTextEdit(youdaoTranslateDock);
     youdaoTranslateDock->setWidget(m_youdaoTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, youdaoTranslateDock);
     ui->menuView->addAction(youdaoTranslateDock->toggleViewAction());
 
     auto *youdaoDictionaryDock = new QDockWidget(tr("Youdao Dictionary"), this);
+    youdaoDictionaryDock->setObjectName("youdaoDictionaryDock");
     m_youdaoDictionaryEditor   = new QPlainTextEdit(youdaoDictionaryDock);
     youdaoDictionaryDock->setWidget(m_youdaoDictionaryEditor);
     addDockWidget(Qt::BottomDockWidgetArea, youdaoDictionaryDock);
@@ -636,6 +636,7 @@ void MainWindow::setupDockPanels()
     tabifyDockWidget(youdaoTranslateDock, youdaoDictionaryDock);
 
     auto *previewHTMLDock = new QDockWidget(tr("Preview HTML"), this);
+    previewHTMLDock->setObjectName("previewHTMLDock");
     m_previewHTMLEditor   = new PreviewThemeEditor(previewHTMLDock);
     m_previewHTMLEditor->initialize("html");
     previewHTMLDock->setWidget(m_previewHTMLEditor);
@@ -644,6 +645,7 @@ void MainWindow::setupDockPanels()
     m_view->setPreviewHTMLEditor(m_previewHTMLEditor);
 
     auto *customThemeEditorDock = new QDockWidget(tr("Custom Theme Editor"), this);
+    customThemeEditorDock->setObjectName("customThemeEditorDock");
     m_customPreivewThemeEditor  = new PreviewThemeEditor(customThemeEditorDock);
     m_customPreivewThemeEditor->initialize("css");
     customThemeEditorDock->setWidget(m_customPreivewThemeEditor);
@@ -652,6 +654,7 @@ void MainWindow::setupDockPanels()
     m_view->setCustomPreivewThemeEditor(m_customPreivewThemeEditor);
 
     auto *devToolDock = new QDockWidget(tr("DevTool"), this);
+    devToolDock->setObjectName("devToolDock");
     auto *devToolView = new QWebEngineView(devToolDock);
     devToolView->setPage(m_view->devToolPage());
     devToolDock->setWidget(devToolView);
