@@ -11,3 +11,28 @@ type Folder struct {
 	UserID uint
 	DBConn *gorm.DB `gorm:"-"`
 }
+
+func (u *Folder) Add() error {
+	return u.DBConn.Create(u).Error
+}
+
+func (u *Folder) Delete() error {
+	return u.DBConn.Unscoped().Delete(u).Error
+}
+
+func (u *Folder) Update() error {
+	return u.DBConn.Save(u).Error
+}
+
+func (u *Folder) First() error {
+	return u.DBConn.First(u).Error
+}
+
+func (u *Folder) Last() error {
+	return u.DBConn.Last(u).Error
+}
+
+func (u *Folder) Take() error {
+	return u.DBConn.Take(u).Error
+}
+
