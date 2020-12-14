@@ -88,6 +88,12 @@ MarkdownView::MarkdownView(QWidget *parent)
     m_convertTimer->start(g_settings->autoRefreshInterval());
 }
 
+MarkdownView::~MarkdownView()
+{
+    Q_ASSERT(m_preview && m_preview->page() && m_preview->page()->devToolsPage());
+    delete m_preview->page()->devToolsPage();
+}
+
 void MarkdownView::forceConvert()
 {
     renderMarkdownToHTML();

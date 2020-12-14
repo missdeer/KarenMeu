@@ -18,6 +18,7 @@ class MarkdownView : public QWidget
     Q_OBJECT
 public:
     explicit MarkdownView(QWidget *parent = nullptr);
+    ~MarkdownView();
     void             forceConvert();
     bool             maybeSave();
     void             updatePreviewTheme();
