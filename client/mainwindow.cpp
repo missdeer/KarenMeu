@@ -98,6 +98,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     auto mainWindowGeometry = g_settings->mainWindowGeometry();
     restoreGeometry(mainWindowGeometry);
+
+    auto actions = ui->menuView->actions();
+    for (auto action : actions)
+    {
+        emit action->triggered();
+    }
 }
 
 MainWindow::~MainWindow()
