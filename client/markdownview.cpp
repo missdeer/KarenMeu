@@ -479,6 +479,7 @@ void MarkdownView::renderMarkdownToHTML()
     if (ba.isEmpty())
         return;
 
+    // remove leading YAML header for Jekyll files
     QByteArray temp = ba;
     temp.replace('\r', ' ');
     QList<QByteArray> lines = temp.split('\n');
@@ -504,6 +505,7 @@ void MarkdownView::renderMarkdownToHTML()
         }
         ba = lines.join('\n');
     }
+    // TODO: add YAML header back to final HTML
 
     GoString content {(const char *)ba.data(), (ptrdiff_t)ba.size()};
 
