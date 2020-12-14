@@ -61,22 +61,23 @@ protected:
     void changeEvent(QEvent *event) override;
 
 private:
-    Ui::MainWindow *  ui;
-    MarkdownView *    m_view;
-    QFileSystemModel *m_fsModel;
-    QTreeView *       m_fsView;
-    QTreeView *       m_cloudView;
-    QComboBox *       m_cbPreviewMode;
-    QComboBox *       m_cbMarkdownEngine;
-    QComboBox *       m_cbCodeBlockStyle;
-    QComboBox *       m_cbPreviewTheme;
-    QPlainTextEdit *    m_googleTranslateEditor;
-    QPlainTextEdit *    m_baiduTranslateEditor;
-    QPlainTextEdit *    m_youdaoTranslateEditor;
-    QPlainTextEdit *    m_youdaoDictionaryEditor;
-    PreviewThemeEditor *m_previewHTMLEditor;
+    Ui::MainWindow *              ui;
+    MarkdownView *                m_view;
+    QFileSystemModel *            m_fsModel;
+    QTreeView *                   m_fsView;
+    QTreeView *                   m_cloudView;
+    QComboBox *                   m_cbPreviewMode;
+    QComboBox *                   m_cbMarkdownEngine;
+    QComboBox *                   m_cbCodeBlockStyle;
+    QComboBox *                   m_cbPreviewTheme;
+    QPlainTextEdit *              m_googleTranslateEditor;
+    QPlainTextEdit *              m_baiduTranslateEditor;
+    QPlainTextEdit *              m_youdaoTranslateEditor;
+    QPlainTextEdit *              m_sogouTranslateEditor;
+    QPlainTextEdit *              m_youdaoDictionaryEditor;
+    PreviewThemeEditor *          m_previewHTMLEditor;
     CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;
-    QList<QToolBar *> m_visibleToolbars;
+    QList<QToolBar *>             m_visibleToolbars;
 
     QString m_curFile;
 

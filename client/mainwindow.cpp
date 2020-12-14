@@ -635,6 +635,13 @@ void MainWindow::setupDockPanels()
     addDockWidget(Qt::BottomDockWidgetArea, youdaoTranslateDock);
     ui->menuView->addAction(youdaoTranslateDock->toggleViewAction());
 
+    auto *sogouTranslateDock = new QDockWidget(tr("Sogou Translate"), this);
+    sogouTranslateDock->setObjectName("sogouTranslateDock");
+    m_sogouTranslateEditor = new QPlainTextEdit(sogouTranslateDock);
+    sogouTranslateDock->setWidget(m_sogouTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, sogouTranslateDock);
+    ui->menuView->addAction(sogouTranslateDock->toggleViewAction());
+
     auto *youdaoDictionaryDock = new QDockWidget(tr("Youdao Dictionary"), this);
     youdaoDictionaryDock->setObjectName("youdaoDictionaryDock");
     m_youdaoDictionaryEditor   = new QPlainTextEdit(youdaoDictionaryDock);
@@ -644,7 +651,8 @@ void MainWindow::setupDockPanels()
 
     tabifyDockWidget(googleTranslateDock, baiduTranslateDock);
     tabifyDockWidget(baiduTranslateDock, youdaoTranslateDock);
-    tabifyDockWidget(youdaoTranslateDock, youdaoDictionaryDock);
+    tabifyDockWidget(youdaoTranslateDock, sogouTranslateDock);
+    tabifyDockWidget(sogouTranslateDock, youdaoDictionaryDock);
 
     auto *previewHTMLDock = new QDockWidget(tr("Preview HTML"), this);
     previewHTMLDock->setObjectName("previewHTMLDock");
