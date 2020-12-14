@@ -13,13 +13,14 @@ public:
     explicit CustomPreviewThemeEditWidget(QWidget *parent = nullptr);
 
     PreviewThemeEditor *editor() const;
-
+    QByteArray          content();
 private slots:
     void onSave();
     void onImportFromFile();
     void onExportToFile();
 
 signals:
+    void contentModified();
 
 private:
     QToolBar *          m_toolbar;

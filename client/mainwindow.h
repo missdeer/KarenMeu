@@ -51,6 +51,7 @@ private slots:
     void onCurrentMarkdownEngineChanged(const QString &text);
     void onCurrentCodeBlockStyleChanged(const QString &text);
     void onCurrentPreviewThemeChanged(const QString &text);
+    void onCustomPreviewThemeChanged();
 
 protected:
     void resizeEvent(QResizeEvent *event) override;

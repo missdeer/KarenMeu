@@ -284,7 +284,7 @@ void MarkdownView::convertTimeout()
 
 void MarkdownView::updatePreviewTheme()
 {
-    const QString &previewTheme = g_settings->previewTheme();
+    const auto &   previewTheme = g_settings->previewTheme();
     QByteArray     ba;
     if (previewTheme == tr("Custom"))
     {

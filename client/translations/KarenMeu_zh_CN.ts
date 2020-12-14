@@ -4,27 +4,27 @@
 <context>
     <name>CustomPreviewThemeEditWidget</name>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="36"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="48"/>
         <source>Import from css file</source>
         <translation>从CSS文件导入</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="41"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="61"/>
         <source>Export to css file</source>
         <translation>导出到CSS文件</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="52"/>
-        <source>Save</source>
-        <translation>保存</translation>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="80"/>
+        <source>Save to configuration</source>
+        <translation>保存到配置项</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="54"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="82"/>
         <source>Import From File</source>
         <translation>从文件导入</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="56"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="84"/>
         <source>Export To File</source>
         <translation>导出到文件</translation>
     </message>
@@ -429,13 +429,13 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="638"/>
-        <location filename="../mainwindow.cpp" line="688"/>
+        <location filename="../mainwindow.cpp" line="698"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="646"/>
-        <location filename="../mainwindow.cpp" line="688"/>
+        <location filename="../mainwindow.cpp" line="698"/>
         <source>Lute</source>
         <translation></translation>
     </message>
@@ -670,72 +670,73 @@
         <translation>清除最近打开的文件列表</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="608"/>
+        <location filename="../mainwindow.cpp" line="617"/>
         <source>Google Translate</source>
         <translation>谷歌翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="615"/>
+        <location filename="../mainwindow.cpp" line="624"/>
         <source>Baidu Translate</source>
         <translation>百度翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="622"/>
+        <location filename="../mainwindow.cpp" line="631"/>
         <source>Youdao Translate</source>
         <translation>有道翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="629"/>
+        <location filename="../mainwindow.cpp" line="638"/>
         <source>Youdao Dictionary</source>
         <translation>有道词典</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="657"/>
+        <location filename="../mainwindow.cpp" line="667"/>
         <source>DevTool</source>
         <translation>开发者工具</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="640"/>
+        <location filename="../mainwindow.cpp" line="649"/>
         <source>Preview HTML</source>
         <translation>预览HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="649"/>
+        <location filename="../mainwindow.cpp" line="658"/>
         <source>Custom Theme Editor</source>
         <translation>自定义主题编辑器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="671"/>
+        <location filename="../mainwindow.cpp" line="681"/>
         <source>Mode:</source>
         <translation>预览模式：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="674"/>
+        <location filename="../mainwindow.cpp" line="684"/>
         <source>Engine:</source>
         <translation>渲染引擎：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="677"/>
+        <location filename="../mainwindow.cpp" line="687"/>
         <source>Code Block Style:</source>
         <translation>代码块风格：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="680"/>
+        <location filename="../mainwindow.cpp" line="690"/>
         <source>Preview Theme:</source>
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="684"/>
+        <location filename="../mainwindow.cpp" line="694"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="684"/>
+        <location filename="../mainwindow.cpp" line="694"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="740"/>
+        <location filename="../mainwindow.cpp" line="257"/>
+        <location filename="../mainwindow.cpp" line="750"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
@@ -750,12 +751,12 @@
         <translation>%1. %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="581"/>
+        <location filename="../mainwindow.cpp" line="590"/>
         <source>File System</source>
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="599"/>
+        <location filename="../mainwindow.cpp" line="608"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>

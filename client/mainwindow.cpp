@@ -252,6 +252,15 @@ void MainWindow::onCurrentPreviewThemeChanged(const QString &text)
     }
 }
 
+void MainWindow::onCustomPreviewThemeChanged()
+{
+    if (g_settings->previewTheme() == tr("Custom"))
+    {
+        m_view->updatePreviewTheme();
+        m_view->forceConvert();
+    }
+}
+
 QString MainWindow::strippedName(const QString &fullFileName)
 {
     return QFileInfo(fullFileName).fileName();
@@ -653,6 +662,7 @@ void MainWindow::setupDockPanels()
     addDockWidget(Qt::RightDockWidgetArea, customThemeEditorDock);
     ui->menuView->addAction(customThemeEditorDock->toggleViewAction());
     m_view->setCustomPreivewThemeEditor(m_customPreivewThemeEditor->editor());
+    connect(m_customPreivewThemeEditor, &CustomPreviewThemeEditWidget::contentModified, this, &MainWindow::onCustomPreviewThemeChanged);
 
     auto *devToolDock = new QDockWidget(tr("DevTool"), this);
     devToolDock->setObjectName("devToolDock");
