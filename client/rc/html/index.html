@@ -4,6 +4,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="qrc:/qtwebchannel/qwebchannel.js"></script>
+    <style type="text/css" id="theme"></style>
+    <style type="text/css" id="macStyle"></style>
     <style type="text/css">
     #wx-box {
         overflow-y: auto;
@@ -14,7 +16,6 @@
         box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
     }
     </style>
-    <style type="text/css" id="theme"></style>
 <body>
     <div id="wx-box">
         <section id="nice" class="layout" style="font-size: 16px; color: black; padding: 10px; line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; word-break: break-word; word-wrap: break-word; text-align: left; font-family: Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, 'PingFang SC', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
@@ -34,6 +35,10 @@
         function updateWXBoxWidth(width) {
             document.getElementById("wx-box").style.width=width;
         }
+        
+        function updateMacStyleCodeBlock(text) {
+            document.getElementById('macStyle').innerHTML = text;
+        }
     
         new QWebChannel(qt.webChannelTransport, function(channel) {
             var content = channel.objects.content;
@@ -47,6 +52,10 @@
             var wxboxwidth = channel.objects.wxboxwidth;
             updateWXBoxWidth(wxboxwidth.text);
             wxboxwidth.textChanged.connect(updateWXBoxWidth);
+            
+            var macStyleCodeBlock = channel.objects.macStyleCodeBlock;
+            updateMacStyleCodeBlock(macStyleCodeBlock.text);
+            macStyleCodeBlock.textChanged.connect(updateMacStyleCodeBlock);
           }
         );
         </script>

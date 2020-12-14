@@ -6,9 +6,11 @@ import (
 
 type User struct {
 	gorm.Model
-	Name     string   `gorm:"unique;not null"`
-	Password string   `gorm:"not null"`
-	DBConn   *gorm.DB `gorm:"-"`
+	Name        string `gorm:"unique;not null"`
+	Password    string `gorm:"not null"`
+	IsActivated bool
+	IsAdmin     bool
+	DBConn      *gorm.DB `gorm:"-"`
 }
 
 func (u *User) Add() error {

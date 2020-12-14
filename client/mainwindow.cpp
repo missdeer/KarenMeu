@@ -13,9 +13,11 @@
 #include <QMap>
 #include <QMessageBox>
 #include <QPainter>
+#include <QPlainTextEdit>
 #include <QSplitter>
 #include <QTreeView>
 #include <QUrl>
+#include <QWebEngineView>
 #include <QWindowStateChangeEvent>
 #include <QtCore>
 
@@ -24,9 +26,10 @@
 #include "markdowneditor2.h"
 #include "markdownview.h"
 #include "preferencedialog.h"
-#include "renderer.h"
+#include "previewthemeeditor.h"
 #include "settings.h"
 #include "ui_mainwindow.h"
+#include "utils.h"
 
 using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
@@ -74,6 +77,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
     ui->menuView->addAction(ui->editToolbar->toggleViewAction());
     ui->menuView->addAction(ui->formatToolbar->toggleViewAction());
+    ui->menuView->addAction(ui->optionToolbar->toggleViewAction());
 
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
@@ -83,13 +87,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->menuRecentFiles->addAction(recentFileActs[i]);
     }
 
+    setupOptionToolbar();
+
     setupDockPanels();
 
-    applyTheme();
+    applyMarkdownEditorTheme();
 }
 
 MainWindow::~MainWindow()
 {
+    g_settings->save();
     delete ui;
 }
 
@@ -121,8 +128,15 @@ void MainWindow::on_actionPreference_triggered()
     PreferenceDialog dlg(this);
     if (dlg.exec() == QDialog::Accepted)
     {
-        m_view->setThemeStyle();
+        m_cbPreviewMode->setCurrentText(g_settings->previewMode());
+        m_cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());
+        m_cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
+        m_cbPreviewTheme->setCurrentText(g_settings->previewTheme());
+
+        m_view->updatePreviewTheme();
         m_view->updateMarkdownEngine();
+        m_view->updatePreviewMode();
+        m_view->updateMacStyleCodeBlock();
         m_view->forceConvert();
     }
 }
@@ -186,6 +200,45 @@ void MainWindow::onFileSystemItemActivated(const QModelIndex &index)
     }
 }
 
+void MainWindow::onCurrentPreviewModeChanged(const QString &text)
+{
+    if (g_settings->previewMode() != text)
+    {
+        g_settings->setPreviewMode(text);
+        m_view->updatePreviewMode();
+        m_view->forceConvert();
+    }
+}
+
+void MainWindow::onCurrentMarkdownEngineChanged(const QString &text)
+{
+    if (g_settings->markdownEngine() != text)
+    {
+        g_settings->setMarkdownEngine(text);
+        m_view->updateMarkdownEngine();
+        m_view->forceConvert();
+    }
+}
+
+void MainWindow::onCurrentCodeBlockStyleChanged(const QString &text)
+{
+    if (g_settings->codeBlockStyle() != text)
+    {
+        g_settings->setCodeBlockStyle(text);
+        m_view->forceConvert();
+    }
+}
+
+void MainWindow::onCurrentPreviewThemeChanged(const QString &text)
+{
+    if (g_settings->previewTheme() != text)
+    {
+        g_settings->setPreviewTheme(text);
+        m_view->updatePreviewTheme();
+        m_view->forceConvert();
+    }
+}
+
 QString MainWindow::strippedName(const QString &fullFileName)
 {
     return QFileInfo(fullFileName).fileName();
@@ -207,7 +260,7 @@ void MainWindow::on_actionClearRecentFilesList_triggered()
     updateRecentFileActions();
 }
 
-void MainWindow::applyTheme()
+void MainWindow::applyMarkdownEditorTheme()
 {
     Q_ASSERT(g_settings);
     auto &theme = g_settings->theme();
@@ -508,9 +561,12 @@ void MainWindow::predrawBackgroundImage()
 
 void MainWindow::setupDockPanels()
 {
+    ui->menuView->addSeparator();
+
+    setDockOptions(QMainWindow::AnimatedDocks | QMainWindow::AllowTabbedDocks | QMainWindow::GroupedDragging);
+
     auto *fsDock = new QDockWidget(tr("File System"), this);
-    fsDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea | Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
-    m_fsView  = new QTreeView(fsDock);
+    m_fsView     = new QTreeView(fsDock);
     m_fsModel = new QFileSystemModel(m_fsView);
     m_fsModel->setRootPath(QDir::currentPath());
     m_fsModel->setNameFilters(QStringList() << "*.md"
@@ -524,14 +580,145 @@ void MainWindow::setupDockPanels()
     connect(m_fsView, &QTreeView::activated, this, &MainWindow::onFileSystemItemActivated);
     fsDock->setWidget(m_fsView);
     addDockWidget(Qt::LeftDockWidgetArea, fsDock);
-    ui->menuDock->addAction(fsDock->toggleViewAction());
+    ui->menuView->addAction(fsDock->toggleViewAction());
 
     auto *cloudDock = new QDockWidget(tr("Cloud"), this);
-    cloudDock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    m_cloudView = new QTreeView(cloudDock);
+    m_cloudView     = new QTreeView(cloudDock);
     cloudDock->setWidget(m_cloudView);
     addDockWidget(Qt::LeftDockWidgetArea, cloudDock);
-    ui->menuDock->addAction(cloudDock->toggleViewAction());
+    ui->menuView->addAction(cloudDock->toggleViewAction());
+
+    tabifyDockWidget(fsDock, cloudDock);
+
+    auto *googleTranslateDock = new QDockWidget(tr("Google Translate"), this);
+    m_googleTranslateEditor   = new QPlainTextEdit(googleTranslateDock);
+    googleTranslateDock->setWidget(m_googleTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, googleTranslateDock);
+    ui->menuView->addAction(googleTranslateDock->toggleViewAction());
+
+    auto *baiduTranslateDock = new QDockWidget(tr("Baidu Translate"), this);
+    m_baiduTranslateEditor   = new QPlainTextEdit(baiduTranslateDock);
+    baiduTranslateDock->setWidget(m_baiduTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, baiduTranslateDock);
+    ui->menuView->addAction(baiduTranslateDock->toggleViewAction());
+
+    auto *youdaoTranslateDock = new QDockWidget(tr("Youdao Translate"), this);
+    m_youdaoTranslateEditor   = new QPlainTextEdit(youdaoTranslateDock);
+    youdaoTranslateDock->setWidget(m_youdaoTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, youdaoTranslateDock);
+    ui->menuView->addAction(youdaoTranslateDock->toggleViewAction());
+
+    auto *youdaoDictionaryDock = new QDockWidget(tr("Youdao Dictionary"), this);
+    m_youdaoDictionaryEditor   = new QPlainTextEdit(youdaoDictionaryDock);
+    youdaoDictionaryDock->setWidget(m_youdaoDictionaryEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, youdaoDictionaryDock);
+    ui->menuView->addAction(youdaoDictionaryDock->toggleViewAction());
+
+    tabifyDockWidget(googleTranslateDock, baiduTranslateDock);
+    tabifyDockWidget(baiduTranslateDock, youdaoTranslateDock);
+    tabifyDockWidget(youdaoTranslateDock, youdaoDictionaryDock);
+
+    auto *previewHTMLDock = new QDockWidget(tr("Preview HTML"), this);
+    m_previewHTMLEditor   = new PreviewThemeEditor(previewHTMLDock);
+    m_previewHTMLEditor->initialize("html");
+    previewHTMLDock->setWidget(m_previewHTMLEditor);
+    addDockWidget(Qt::RightDockWidgetArea, previewHTMLDock);
+    ui->menuView->addAction(previewHTMLDock->toggleViewAction());
+    m_view->setPreviewHTMLEditor(m_previewHTMLEditor);
+
+    auto *customThemeEditorDock = new QDockWidget(tr("Custom Theme Editor"), this);
+    m_customPreivewThemeEditor  = new PreviewThemeEditor(customThemeEditorDock);
+    m_customPreivewThemeEditor->initialize("css");
+    customThemeEditorDock->setWidget(m_customPreivewThemeEditor);
+    addDockWidget(Qt::RightDockWidgetArea, customThemeEditorDock);
+    ui->menuView->addAction(customThemeEditorDock->toggleViewAction());
+    m_view->setCustomPreivewThemeEditor(m_customPreivewThemeEditor);
+
+    auto *devToolDock = new QDockWidget(tr("DevTool"), this);
+    auto *devToolView = new QWebEngineView(devToolDock);
+    devToolView->setPage(m_view->devToolPage());
+    devToolDock->setWidget(devToolView);
+    addDockWidget(Qt::RightDockWidgetArea, devToolDock);
+    ui->menuView->addAction(devToolDock->toggleViewAction());
+
+    tabifyDockWidget(previewHTMLDock, devToolDock);
+    tabifyDockWidget(previewHTMLDock, customThemeEditorDock);
+}
+
+void MainWindow::setupOptionToolbar()
+{
+    ui->optionToolbar->addWidget(new QLabel(tr("Mode:")));
+    m_cbPreviewMode = new QComboBox(ui->optionToolbar);
+    ui->optionToolbar->addWidget(m_cbPreviewMode);
+    ui->optionToolbar->addWidget(new QLabel(tr("Engine:")));
+    m_cbMarkdownEngine = new QComboBox(ui->optionToolbar);
+    ui->optionToolbar->addWidget(m_cbMarkdownEngine);
+    ui->optionToolbar->addWidget(new QLabel(tr("Code Block Style:")));
+    m_cbCodeBlockStyle = new QComboBox(ui->optionToolbar);
+    ui->optionToolbar->addWidget(m_cbCodeBlockStyle);
+    ui->optionToolbar->addWidget(new QLabel(tr("Preview Theme:")));
+    m_cbPreviewTheme = new QComboBox(ui->optionToolbar);
+    ui->optionToolbar->addWidget(m_cbPreviewTheme);
+
+    m_cbPreviewMode->addItems(QStringList({tr("Wechat Public Account Article"), tr("Blog Post")}));
+    m_cbPreviewMode->setCurrentText(g_settings->previewMode());
+    connect(m_cbPreviewMode, &QComboBox::currentTextChanged, this, &MainWindow::onCurrentPreviewModeChanged);
+
+    m_cbMarkdownEngine->addItems(QStringList({tr("Goldmark"), tr("Lute")}));
+    m_cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());
+    connect(m_cbMarkdownEngine, &QComboBox::currentTextChanged, this, &MainWindow::onCurrentMarkdownEngineChanged);
+
+    m_cbCodeBlockStyle->addItems(QStringList({
+        "abap",
+        "algol",
+        "algol_nu",
+        "api",
+        "arduino",
+        "autumn",
+        "borland",
+        "bw",
+        "colorful",
+        "dracula",
+        "emacs",
+        "friendly",
+        "fruity",
+        "github",
+        "igor",
+        "lovelace",
+        "manni",
+        "monokai",
+        "monokailight",
+        "murphy",
+        "native",
+        "paraiso-dark",
+        "paraiso-light",
+        "pastie",
+        "perldoc",
+        "pygments",
+        "rainbow_dash",
+        "rrt",
+        "solarized-dark",
+        "solarized-dark256",
+        "solarized-light",
+        "swapoff",
+        "tango",
+        "trac",
+        "vim",
+        "vs",
+        "xcode",
+    }));
+    m_cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
+    connect(m_cbCodeBlockStyle, &QComboBox::currentTextChanged, this, &MainWindow::onCurrentCodeBlockStyleChanged);
+
+    QDir dir(":/rc/theme");
+    auto entries = dir.entryInfoList();
+    for (auto entry : entries)
+    {
+        m_cbPreviewTheme->addItem(entry.baseName());
+    }
+    m_cbPreviewTheme->addItem(tr("Custom"));
+    m_cbPreviewTheme->setCurrentText(g_settings->previewTheme());
+    connect(m_cbPreviewTheme, &QComboBox::currentTextChanged, this, &MainWindow::onCurrentPreviewThemeChanged);
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)

@@ -132,8 +132,8 @@ win32-*msvc* {
     qti18n.depends = translate
     qti18n.commands = '$(COPY_FILE) $$shell_path($$[QT_INSTALL_BINS]/../translations/qt_zh_CN.qm) $$shell_path($${DESTDIR}/translations/qt_zh_CN.qm)'
 }
-INCLUDEPATH += $$PWD/../renderer
-LIBS += -L$$PWD/../renderer
+INCLUDEPATH += $$PWD/../utils
+LIBS += -L$$PWD/../utils
 
 win32 {
     INCLUDEPATH += $$PWD/spelling/hunspell
@@ -214,7 +214,7 @@ unix: !macx {
     translate.commands = '$(COPY_DIR) $$shell_path($$PWD/translations) $$shell_path($$DESTDIR)'
 }    
 
-LIBS += -lrenderer
+LIBS += -lutils
 
 DISTFILES += \
     rc/images/codeblock.png \

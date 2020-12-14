@@ -9,9 +9,11 @@ namespace Ui
     class MainWindow;
 }
 class MarkdownView;
+class PreviewThemeEditor;
 
 QT_FORWARD_DECLARE_CLASS(QComboBox);
 QT_FORWARD_DECLARE_CLASS(QTreeView);
+QT_FORWARD_DECLARE_CLASS(QPlainTextEdit);
 QT_FORWARD_DECLARE_CLASS(QFileSystemModel);
 
 class MainWindow : public QMainWindow
@@ -44,6 +46,11 @@ private slots:
 
     void onFileSystemItemActivated(const QModelIndex &index);
 
+    void onCurrentPreviewModeChanged(const QString &text);
+    void onCurrentMarkdownEngineChanged(const QString &text);
+    void onCurrentCodeBlockStyleChanged(const QString &text);
+    void onCurrentPreviewThemeChanged(const QString &text);
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void moveEvent(QMoveEvent *event) override;
@@ -57,6 +64,16 @@ private:
     QFileSystemModel *m_fsModel;
     QTreeView *       m_fsView;
     QTreeView *       m_cloudView;
+    QComboBox *       m_cbPreviewMode;
+    QComboBox *       m_cbMarkdownEngine;
+    QComboBox *       m_cbCodeBlockStyle;
+    QComboBox *       m_cbPreviewTheme;
+    QPlainTextEdit *    m_googleTranslateEditor;
+    QPlainTextEdit *    m_baiduTranslateEditor;
+    QPlainTextEdit *    m_youdaoTranslateEditor;
+    QPlainTextEdit *    m_youdaoDictionaryEditor;
+    PreviewThemeEditor *m_previewHTMLEditor;
+    PreviewThemeEditor *m_customPreivewThemeEditor;
     QList<QToolBar *> m_visibleToolbars;
 
     QString m_curFile;
@@ -75,9 +92,10 @@ private:
 
     void openRecentFile();
     void adjustEditorWidth(int width);
-    void applyTheme();
+    void applyMarkdownEditorTheme();
     void predrawBackgroundImage();
     void setupDockPanels();
+    void setupOptionToolbar();
 };
 
 #endif // MAINWINDOW_H

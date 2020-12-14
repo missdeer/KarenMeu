@@ -9,7 +9,9 @@ QT_FORWARD_DECLARE_CLASS(QSplitter);
 QT_FORWARD_DECLARE_CLASS(QWebEngineView);
 QT_FORWARD_DECLARE_CLASS(QTimer);
 QT_FORWARD_DECLARE_CLASS(QResizeEvent);
+QT_FORWARD_DECLARE_CLASS(QWebEnginePage);
 class MarkdownEditor2;
+class PreviewThemeEditor;
 
 class MarkdownView : public QWidget
 {
@@ -18,11 +20,16 @@ public:
     explicit MarkdownView(QWidget *parent = nullptr);
     void             forceConvert();
     bool             maybeSave();
-    void             setThemeStyle();
+    void             updatePreviewTheme();
+    void             updatePreviewMode();
     void             updateMarkdownEngine();
+    void             updateMacStyleCodeBlock();
     void             openFromFile(const QString &fileName);
     MarkdownEditor2 *editor();
     QSplitter *      splitter();
+    void             setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor);
+    void             setCustomPreivewThemeEditor(PreviewThemeEditor *customPreivewThemeEditor);
+    QWebEnginePage * devToolPage();
 signals:
     void formatStrong();
     void formatEmphasize();
@@ -75,11 +82,14 @@ private:
     QSplitter *      m_splitter;
     MarkdownEditor2 *m_editor;
     QWebEngineView * m_preview;
-    QTimer *         m_convertTimer;
-    QString          m_savePath;
-    RenderedDocument m_renderedContent;
-    RenderedDocument m_themeStyle;
-    RenderedDocument m_wxboxWidth;
+    QTimer *            m_convertTimer;
+    PreviewThemeEditor *m_previewHTMLEditor;
+    PreviewThemeEditor *m_customPreivewThemeEditor;
+    QString             m_savePath;
+    RenderedDocument    m_renderedContent;
+    RenderedDocument    m_themeStyle;
+    RenderedDocument    m_wxboxWidth;
+    RenderedDocument    m_macStyleCodeBlock;
 
     void saveToFile(const QString &savePath);
     void renderMarkdownToHTML();

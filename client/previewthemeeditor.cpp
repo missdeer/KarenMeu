@@ -3,11 +3,12 @@
 
 PreviewThemeEditor::PreviewThemeEditor(QWidget *parent) : ScintillaEdit(parent), m_sc(new ScintillaConfig(this)) {}
 
-void PreviewThemeEditor::initialize()
+void PreviewThemeEditor::initialize(const QString &lexer)
 {
+    m_lexer = lexer;
     m_sc->initScintilla();
     m_sc->initEditorMargins();
-    m_sc->initLexerStyle("css");
+    m_sc->initLexerStyle(lexer);
 
     connect(this, &ScintillaEdit::modified, this, &PreviewThemeEditor::modified);
 }
@@ -17,7 +18,7 @@ void PreviewThemeEditor::setContent(const QByteArray &content)
     setText(content.data());
 
     emptyUndoBuffer();
-    m_sc->initLexerStyle("css");
+    m_sc->initLexerStyle(m_lexer);
     colourise(0, -1);
 }
 
