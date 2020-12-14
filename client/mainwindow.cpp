@@ -74,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionHeader6, &QAction::triggered, m_view, &MarkdownView::formatHeader6);
     connect(ui->actionShiftRight, &QAction::triggered, m_view, &MarkdownView::formatShiftRight);
     connect(ui->actionShiftLeft, &QAction::triggered, m_view, &MarkdownView::formatShiftLeft);
-    connect(m_view, &MarkdownView::setCurrentFile, this, &MainWindow::setCurrentFile);
+    connect(m_view, &MarkdownView::setCurrentFile, this, &MainWindow::onSetCurrentFile);
 
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
     ui->menuView->addAction(ui->editToolbar->toggleViewAction());
@@ -186,10 +186,12 @@ void MainWindow::updateRecentFileActions()
     // separatorAct->setVisible(numRecentFiles > 0);
 }
 
-void MainWindow::setCurrentFile(const QString &fileName)
+void MainWindow::onSetCurrentFile(const QString &fileName)
 {
     m_curFile = fileName;
     setWindowFilePath(m_curFile);
+
+    setWindowTitle(QString("%1 - KarenMeu").arg(QFileInfo(m_curFile).fileName()));
 
     QSettings   settings;
     QStringList files = settings.value("recentFileList").toStringList();
@@ -866,3 +868,7 @@ void MainWindow::adjustEditorWidth(int width)
     // Scroll to cursor position.
     m_view->editor()->centerCursor();
 }
+
+void MainWindow::on_actionDictionary_triggered() {}
+
+void MainWindow::on_actionTranslate_triggered() {}

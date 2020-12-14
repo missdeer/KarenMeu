@@ -43,7 +43,7 @@ private slots:
 
     void on_actionClearRecentFilesList_triggered();
 
-    void setCurrentFile(const QString &fileName);
+    void onSetCurrentFile(const QString &fileName);
 
     void onFileSystemItemActivated(const QModelIndex &index);
 
@@ -52,6 +52,10 @@ private slots:
     void onCurrentCodeBlockStyleChanged(const QString &text);
     void onCurrentPreviewThemeChanged(const QString &text);
     void onCustomPreviewThemeChanged();
+
+    void on_actionDictionary_triggered();
+
+    void on_actionTranslate_triggered();
 
 protected:
     void resizeEvent(QResizeEvent *event) override;

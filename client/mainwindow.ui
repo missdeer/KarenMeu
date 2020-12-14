@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>1283</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -112,10 +112,29 @@
      <string>&amp;View</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuTranslation">
+    <property name="title">
+     <string>Translation</string>
+    </property>
+    <widget class="QMenu" name="menuTranslate">
+     <property name="title">
+      <string>Translate</string>
+     </property>
+     <addaction name="actionTranslate"/>
+     <addaction name="separator"/>
+     <addaction name="actionGoogle"/>
+     <addaction name="actionBaidu"/>
+     <addaction name="actionYoudao"/>
+     <addaction name="actionSogou"/>
+    </widget>
+    <addaction name="menuTranslate"/>
+    <addaction name="actionDictionary"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuView"/>
    <addaction name="menuFormat"/>
+   <addaction name="menuTranslation"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="fileToolbar">
@@ -1006,6 +1025,60 @@
   <action name="actionClearRecentFilesList">
    <property name="text">
     <string>Clear Recent Files List</string>
+   </property>
+  </action>
+  <action name="actionDictionary">
+   <property name="text">
+    <string>Dictionary</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+D</string>
+   </property>
+  </action>
+  <action name="actionTranslate">
+   <property name="text">
+    <string>Translate</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+T</string>
+   </property>
+  </action>
+  <action name="actionGoogle">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Google</string>
+   </property>
+  </action>
+  <action name="actionBaidu">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Baidu</string>
+   </property>
+  </action>
+  <action name="actionYoudao">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Youdao</string>
+   </property>
+  </action>
+  <action name="actionSogou">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Sogou</string>
    </property>
   </action>
  </widget>
