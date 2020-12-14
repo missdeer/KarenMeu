@@ -187,3 +187,29 @@ void Settings::setMacTerminalStyleCodeBlock(bool macTerminalStyleCodeBlock)
 {
     m_macTerminalStyleCodeBlock = macTerminalStyleCodeBlock;
 }
+
+QByteArray Settings::mainWindowState()
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    return settings.value("mainWindowState").toByteArray();
+}
+
+void Settings::setMainWindowState(const QByteArray &state)
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    settings.setValue("mainWindowState", state);
+    settings.sync();
+}
+
+QByteArray Settings::mainWindowGeometry()
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    return settings.value("mainWindowGeometry").toByteArray();
+}
+
+void Settings::setMainWindowGeometry(const QByteArray &geometry)
+{
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    settings.setValue("mainWindowGeometry", geometry);
+    settings.sync();
+}

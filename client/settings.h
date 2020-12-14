@@ -51,12 +51,17 @@ public:
     bool macTerminalStyleCodeBlock() const;
     void setMacTerminalStyleCodeBlock(bool macTerminalStyleCodeBlock);
 
+    QByteArray mainWindowState();
+    void       setMainWindowState(const QByteArray &state);
+
+    QByteArray mainWindowGeometry();
+    void       setMainWindowGeometry(const QByteArray &geometry);
+
 private:
     bool m_enableLineNumbers {true};
     bool m_macTerminalStyleCodeBlock {true};
     int  m_autoRefreshInterval {1000}; // millisecond
     int  m_editorZoomFactor {100};     // percent
-
     int        m_codeEditorFontPointSize {14};
     QString    m_codeEditorFontFamily;
     QString    m_codeEditorTheme;

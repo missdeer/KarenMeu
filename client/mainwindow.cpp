@@ -92,10 +92,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     setupDockPanels();
 
     applyMarkdownEditorTheme();
+
+    auto mainWindowState = g_settings->mainWindowState();
+    restoreState(mainWindowState);
+
+    auto mainWindowGeometry = g_settings->mainWindowGeometry();
+    restoreGeometry(mainWindowGeometry);
 }
 
 MainWindow::~MainWindow()
 {
+    auto mainWindowState = saveState();
+    g_settings->setMainWindowState(mainWindowState);
+    auto mainWindowGeometry = saveGeometry();
+    g_settings->setMainWindowGeometry(mainWindowGeometry);
+
     g_settings->save();
     delete ui;
 }
