@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QNetworkAccessManager>
 #include <QPixmap>
 
 namespace Ui
@@ -11,6 +12,7 @@ namespace Ui
 class MarkdownView;
 class PreviewThemeEditor;
 class CustomPreviewThemeEditWidget;
+class Youdao;
 
 QT_FORWARD_DECLARE_CLASS(QComboBox);
 QT_FORWARD_DECLARE_CLASS(QTreeView);
@@ -42,6 +44,9 @@ private slots:
     void on_actionPreference_triggered();
 
     void on_actionClearRecentFilesList_triggered();
+    void on_actionDictionary_triggered();
+
+    void on_actionTranslate_triggered();
 
     void onSetCurrentFile(const QString &fileName);
 
@@ -53,9 +58,7 @@ private slots:
     void onCurrentPreviewThemeChanged(const QString &text);
     void onCustomPreviewThemeChanged();
 
-    void on_actionDictionary_triggered();
-
-    void on_actionTranslate_triggered();
+    void onYoudaoResult(QString res);
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -82,6 +85,7 @@ private:
     PreviewThemeEditor *          m_previewHTMLEditor;
     CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;
     QList<QToolBar *>             m_visibleToolbars;
+    Youdao *                      m_youdao;
 
     QString m_curFile;
 
@@ -93,10 +97,10 @@ private:
 
     QPixmap originalBackgroundImage;
     QPixmap adjustedBackgroundImage;
+    QNetworkAccessManager m_nam;
 
     void    updateRecentFileActions();
     QString strippedName(const QString &fullFileName);
-
     void openRecentFile();
     void adjustEditorWidth(int width);
     void applyMarkdownEditorTheme();

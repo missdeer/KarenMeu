@@ -413,6 +413,14 @@ MarkdownEditor2 *MarkdownView::editor()
     return m_editor;
 }
 
+QString MarkdownView::selectedText() const
+{
+    Q_ASSERT(m_editor);
+    QTextCursor c = m_editor->textCursor();
+
+    return c.selectedText();
+}
+
 QSplitter *MarkdownView::splitter()
 {
     return m_splitter;

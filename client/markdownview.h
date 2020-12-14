@@ -27,6 +27,7 @@ public:
     void             updateMacStyleCodeBlock();
     void             openFromFile(const QString &fileName);
     MarkdownEditor2 *editor();
+    QString          selectedText() const;
     QSplitter *      splitter();
     void             setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor);
     void             setCustomPreivewThemeEditor(PreviewThemeEditor *customPreivewThemeEditor);

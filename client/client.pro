@@ -46,7 +46,8 @@ SOURCES += \
         scintillaconfig.cpp \
         settings.cpp \
         spelling/dictionary_manager.cpp \
-        spelling/spell_checker.cpp
+        spelling/spell_checker.cpp \
+        youdao.cpp
 
 HEADERS += \
         ColorHelper.h \
@@ -78,7 +79,8 @@ HEADERS += \
         spelling/abstract_dictionary_provider.h \
         spelling/dictionary_manager.h \
         spelling/dictionary_ref.h \
-        spelling/spell_checker.h
+        spelling/spell_checker.h \
+        youdao.h
 
 FORMS += \
         mainwindow.ui \

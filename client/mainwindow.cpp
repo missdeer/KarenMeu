@@ -32,11 +32,12 @@
 #include "settings.h"
 #include "ui_mainwindow.h"
 #include "utils.h"
+#include "youdao.h"
 
 using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), m_view(new MarkdownView(this))
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), m_view(new MarkdownView(this)), m_youdao(new Youdao(m_nam))
 {
     ui->setupUi(this);
     setCentralWidget(m_view);
@@ -75,6 +76,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionShiftRight, &QAction::triggered, m_view, &MarkdownView::formatShiftRight);
     connect(ui->actionShiftLeft, &QAction::triggered, m_view, &MarkdownView::formatShiftLeft);
     connect(m_view, &MarkdownView::setCurrentFile, this, &MainWindow::onSetCurrentFile);
+    connect(m_youdao, &Youdao::result, this, &MainWindow::onYoudaoResult);
 
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
     ui->menuView->addAction(ui->editToolbar->toggleViewAction());
@@ -261,6 +263,13 @@ void MainWindow::onCustomPreviewThemeChanged()
         m_view->updatePreviewTheme();
         m_view->forceConvert();
     }
+}
+
+void MainWindow::onYoudaoResult(QString res)
+{
+    Q_ASSERT(m_youdaoDictionaryEditor);
+    m_youdaoDictionaryEditor->clear();
+    m_youdaoDictionaryEditor->appendPlainText(res);
 }
 
 QString MainWindow::strippedName(const QString &fullFileName)
@@ -860,6 +869,7 @@ void MainWindow::adjustEditorWidth(int width)
     QList<int> sizes;
     sizes.append(editorWidth);
     sizes.append(editorWidth);
+    Q_ASSERT(m_view);
     m_view->splitter()->setSizes(sizes);
 
     // Resize the editor's margins based on the size of the window.
@@ -869,6 +879,19 @@ void MainWindow::adjustEditorWidth(int width)
     m_view->editor()->centerCursor();
 }
 
-void MainWindow::on_actionDictionary_triggered() {}
+void MainWindow::on_actionDictionary_triggered()
+{
+    Q_ASSERT(m_view);
+    QString text = m_view->selectedText();
+    if (!text.isEmpty())
+    {
+        Q_ASSERT(m_youdao);
+        m_youdao->query(text);
+    }
+}
 
-void MainWindow::on_actionTranslate_triggered() {}
+void MainWindow::on_actionTranslate_triggered()
+{
+    Q_ASSERT(m_view);
+    QString text = m_view->selectedText();
+}
