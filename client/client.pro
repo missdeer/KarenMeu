@@ -33,6 +33,7 @@ SOURCES += \
         Theme.cpp \
         ThemeFactory.cpp \
         Token.cpp \
+        custompreviewthemeeditwidget.cpp \
         markdowneditor.cpp \
         markdowneditor2.cpp \
         previewpage.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
         Theme.h \
         ThemeFactory.h \
         Token.h \
+        custompreviewthemeeditwidget.h \
         markdowneditor.h \
         markdowneditor2.h \
         previewpage.h \

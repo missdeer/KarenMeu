@@ -10,6 +10,7 @@ namespace Ui
 }
 class MarkdownView;
 class PreviewThemeEditor;
+class CustomPreviewThemeEditWidget;
 
 QT_FORWARD_DECLARE_CLASS(QComboBox);
 QT_FORWARD_DECLARE_CLASS(QTreeView);
@@ -73,7 +74,7 @@ private:
     QPlainTextEdit *    m_youdaoTranslateEditor;
     QPlainTextEdit *    m_youdaoDictionaryEditor;
     PreviewThemeEditor *m_previewHTMLEditor;
-    PreviewThemeEditor *m_customPreivewThemeEditor;
+    CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;
     QList<QToolBar *> m_visibleToolbars;
 
     QString m_curFile;

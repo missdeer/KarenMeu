@@ -67,5 +67,7 @@
         <file>rc/theme/蓝莹.css</file>
         <file>rc/theme/蔷薇紫.css</file>
         <file>rc/html/point.png</file>
+        <file>rc/images/export.png</file>
+        <file>rc/images/import.png</file>
     </qresource>
 </RCC>

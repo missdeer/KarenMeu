@@ -22,7 +22,9 @@
 #include <QtCore>
 
 #include "mainwindow.h"
+
 #include "ColorHelper.h"
+#include "custompreviewthemeeditwidget.h"
 #include "markdowneditor2.h"
 #include "markdownview.h"
 #include "preferencedialog.h"
@@ -646,12 +648,11 @@ void MainWindow::setupDockPanels()
 
     auto *customThemeEditorDock = new QDockWidget(tr("Custom Theme Editor"), this);
     customThemeEditorDock->setObjectName("customThemeEditorDock");
-    m_customPreivewThemeEditor  = new PreviewThemeEditor(customThemeEditorDock);
-    m_customPreivewThemeEditor->initialize("css");
+    m_customPreivewThemeEditor = new CustomPreviewThemeEditWidget(customThemeEditorDock);
     customThemeEditorDock->setWidget(m_customPreivewThemeEditor);
     addDockWidget(Qt::RightDockWidgetArea, customThemeEditorDock);
     ui->menuView->addAction(customThemeEditorDock->toggleViewAction());
-    m_view->setCustomPreivewThemeEditor(m_customPreivewThemeEditor);
+    m_view->setCustomPreivewThemeEditor(m_customPreivewThemeEditor->editor());
 
     auto *devToolDock = new QDockWidget(tr("DevTool"), this);
     devToolDock->setObjectName("devToolDock");
