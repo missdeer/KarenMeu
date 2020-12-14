@@ -69,5 +69,9 @@
         <file>rc/html/point.png</file>
         <file>rc/images/export.png</file>
         <file>rc/images/import.png</file>
+        <file>rc/images/baidu.png</file>
+        <file>rc/images/google.ico</file>
+        <file>rc/images/sogou.ico</file>
+        <file>rc/images/youdao.ico</file>
     </qresource>
 </RCC>

@@ -1050,6 +1050,10 @@
    <property name="checked">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/google.ico</normaloff>:/rc/images/google.ico</iconset>
+   </property>
    <property name="text">
     <string>Google</string>
    </property>
@@ -1058,6 +1062,10 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/baidu.png</normaloff>:/rc/images/baidu.png</iconset>
+   </property>
    <property name="text">
     <string>Baidu</string>
    </property>
@@ -1065,6 +1073,10 @@
   <action name="actionYoudao">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/youdao.ico</normaloff>:/rc/images/youdao.ico</iconset>
    </property>
    <property name="text">
     <string>Youdao</string>
@@ -1076,6 +1088,10 @@
    </property>
    <property name="checked">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/sogou.ico</normaloff>:/rc/images/sogou.ico</iconset>
    </property>
    <property name="text">
     <string>Sogou</string>
