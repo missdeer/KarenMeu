@@ -23,6 +23,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++17
 
 include($$PWD/../3rdparty/scintilla-latest.pri)
+include($$PWD/../3rdparty/vtextedit/src/editor/editor_export.pri)
+include($$PWD/../3rdparty/vtextedit/src/libs/syntax-highlighting/syntax-highlighting_export.pri)
 
 SOURCES += \
         $$PWD/markdowneditor2/ColorHelper.cpp \
@@ -30,8 +32,8 @@ SOURCES += \
         $$PWD/markdowneditor2/MarkdownHighlighter.cpp \
         $$PWD/markdowneditor2/MarkdownTokenizer.cpp \
         $$PWD/markdowneditor2/TextDocument.cpp \
-        $$PWD/markdowneditor2/Theme.cpp \
-        $$PWD/markdowneditor2/ThemeFactory.cpp \
+        $$PWD/markdowneditor2/MarkdownEditorTheme.cpp \
+        $$PWD/markdowneditor2/MarkdownEditorThemeFactory.cpp \
         $$PWD/markdowneditor2/Token.cpp \
         $$PWD/markdowneditor2/markdowneditor.cpp \
         $$PWD/markdowneditor2/markdowneditor2.cpp \
@@ -61,8 +63,8 @@ HEADERS += \
         $$PWD/markdowneditor2/MarkdownTokenizer.h \
         $$PWD/markdowneditor2/TextBlockData.h \
         $$PWD/markdowneditor2/TextDocument.h \
-        $$PWD/markdowneditor2/Theme.h \
-        $$PWD/markdowneditor2/ThemeFactory.h \
+        $$PWD/markdowneditor2/MarkdownEditorTheme.h \
+        $$PWD/markdowneditor2/MarkdownEditorThemeFactory.h \
         $$PWD/markdowneditor2/Token.h \
         $$PWD/markdowneditor2/markdowneditor.h \
         $$PWD/markdowneditor2/markdowneditor2.h \

@@ -1,5 +1,3 @@
-#include <cstdio>
-
 #include <QColor>
 #include <QCoreApplication>
 #include <QDesktopServices>
@@ -12,8 +10,9 @@
 #include <QString>
 #include <QStringList>
 #include <QVariant>
+#include <cstdio>
 
-#include "ThemeFactory.h"
+#include "MarkdownEditorThemeFactory.h"
 
 #define GW_EDITOR_ASPECT "Editor/aspect"
 #define GW_EDITOR_BACKGROUND_COLOR "Editor/backgroundColor"
@@ -32,26 +31,26 @@
 #define GW_HUD_FOREGROUND_COLOR "HUD/foregroundColor"
 #define GW_HUD_BACKGROUND_COLOR "HUD/backgroundColor"
 
-const QString ThemeFactory::CLASSIC_LIGHT_THEME_NAME        = QString("Classic Light");
-const QString ThemeFactory::CLASSIC_DARK_THEME_NAME         = QString("Classic Dark");
-const QString ThemeFactory::PLAINSTRACTION_LIGHT_THEME_NAME = QString("Plainstraction Light");
-const QString ThemeFactory::PLAINSTRACTION_DARK_THEME_NAME  = QString("Plainstraction Dark");
+const QString MarkdownEditorThemeFactory::CLASSIC_LIGHT_THEME_NAME        = QString("Classic Light");
+const QString MarkdownEditorThemeFactory::CLASSIC_DARK_THEME_NAME         = QString("Classic Dark");
+const QString MarkdownEditorThemeFactory::PLAINSTRACTION_LIGHT_THEME_NAME = QString("Plainstraction Light");
+const QString MarkdownEditorThemeFactory::PLAINSTRACTION_DARK_THEME_NAME  = QString("Plainstraction Dark");
 
-ThemeFactory *ThemeFactory::instance = nullptr;
+MarkdownEditorThemeFactory *MarkdownEditorThemeFactory::instance = nullptr;
 
-ThemeFactory *ThemeFactory::getInstance()
+MarkdownEditorThemeFactory *MarkdownEditorThemeFactory::getInstance()
 {
     if (nullptr == instance)
     {
-        instance = new ThemeFactory();
+        instance = new MarkdownEditorThemeFactory();
     }
 
     return instance;
 }
 
-void ThemeFactory::loadClassicLightTheme()
+void MarkdownEditorThemeFactory::loadClassicLightTheme()
 {
-    Theme theme(CLASSIC_LIGHT_THEME_NAME);
+    MarkdownEditorTheme theme(CLASSIC_LIGHT_THEME_NAME);
     theme.setBackgroundColor("#eff0f1");
     theme.setBackgroundImageAspect(PictureAspectNone);
     theme.setHudBackgroundColor("#31363b");
@@ -71,9 +70,9 @@ void ThemeFactory::loadClassicLightTheme()
     builtInThemes.append(theme);
 }
 
-void ThemeFactory::loadClassicDarkTheme()
+void MarkdownEditorThemeFactory::loadClassicDarkTheme()
 {
-    Theme theme(CLASSIC_DARK_THEME_NAME);
+    MarkdownEditorTheme theme(CLASSIC_DARK_THEME_NAME);
     theme.setBackgroundColor("#151719");
     theme.setBackgroundImageAspect(PictureAspectNone);
     theme.setHudBackgroundColor("#152F3D");
@@ -93,9 +92,9 @@ void ThemeFactory::loadClassicDarkTheme()
     builtInThemes.append(theme);
 }
 
-void ThemeFactory::loadPlainstractionLightTheme()
+void MarkdownEditorThemeFactory::loadPlainstractionLightTheme()
 {
-    Theme theme(PLAINSTRACTION_LIGHT_THEME_NAME);
+    MarkdownEditorTheme theme(PLAINSTRACTION_LIGHT_THEME_NAME);
     theme.setBackgroundColor("#ffffff");
     theme.setBackgroundImageAspect(PictureAspectNone);
     theme.setHudBackgroundColor("#eff0f1");
@@ -115,9 +114,9 @@ void ThemeFactory::loadPlainstractionLightTheme()
     builtInThemes.append(theme);
 }
 
-void ThemeFactory::loadPlainstractionDarkTheme()
+void MarkdownEditorThemeFactory::loadPlainstractionDarkTheme()
 {
-    Theme theme(PLAINSTRACTION_DARK_THEME_NAME);
+    MarkdownEditorTheme theme(PLAINSTRACTION_DARK_THEME_NAME);
     theme.setBackgroundColor("#141414");
     theme.setBackgroundImageAspect(PictureAspectNone);
     theme.setHudBackgroundColor("#1e262d");
@@ -137,7 +136,7 @@ void ThemeFactory::loadPlainstractionDarkTheme()
     builtInThemes.append(theme);
 }
 
-QStringList ThemeFactory::getAvailableThemes() const
+QStringList MarkdownEditorThemeFactory::getAvailableThemes() const
 {
     QStringList themeNames;
 
@@ -150,13 +149,13 @@ QStringList ThemeFactory::getAvailableThemes() const
     return themeNames;
 }
 
-Theme ThemeFactory::getDefaultTheme() const
+MarkdownEditorTheme MarkdownEditorThemeFactory::getDefaultTheme() const
 {
     QString err;
     return loadTheme(CLASSIC_LIGHT_THEME_NAME, err);
 }
 
-Theme ThemeFactory::loadTheme(const QString &name, QString &err) const
+MarkdownEditorTheme MarkdownEditorThemeFactory::loadTheme(const QString &name, QString &err) const
 {
     err = QString();
 
@@ -230,7 +229,7 @@ Theme ThemeFactory::loadTheme(const QString &name, QString &err) const
             codeColor       = defaultTextColor;
         }
 
-        Theme theme;
+        MarkdownEditorTheme theme;
         theme.setEditorAspect((EditorAspect)editorAspect);
         editorBackgroundColor.setAlpha(editorBackgroundAlpha);
         theme.setEditorBackgroundColor(editorBackgroundColor);
@@ -281,7 +280,7 @@ Theme ThemeFactory::loadTheme(const QString &name, QString &err) const
     }
 }
 
-void ThemeFactory::deleteTheme(const QString &name, QString &err)
+void MarkdownEditorThemeFactory::deleteTheme(const QString &name, QString &err)
 {
     err = QString();
 
@@ -357,7 +356,7 @@ void ThemeFactory::deleteTheme(const QString &name, QString &err)
     customThemeNames.removeOne(name);
 }
 
-void ThemeFactory::saveTheme(const QString &name, Theme &theme, QString &err)
+void MarkdownEditorThemeFactory::saveTheme(const QString &name, MarkdownEditorTheme &theme, QString &err)
 {
     err = QString();
 
@@ -437,7 +436,7 @@ void ThemeFactory::saveTheme(const QString &name, Theme &theme, QString &err)
 
     // Load original theme settings so we can clean up the old background image
     // later, if any.
-    Theme oldTheme;
+    MarkdownEditorTheme oldTheme;
     bool  oldThemeExists = true;
     oldTheme             = this->loadTheme(theme.getName(), err);
 
@@ -555,19 +554,19 @@ void ThemeFactory::saveTheme(const QString &name, Theme &theme, QString &err)
     }
 }
 
-QDir ThemeFactory::getThemeDirectory() const
+QDir MarkdownEditorThemeFactory::getThemeDirectory() const
 {
     return themeDirectory;
 }
 
-QDir ThemeFactory::getDirectoryForTheme(const QString &name) const
+QDir MarkdownEditorThemeFactory::getDirectoryForTheme(const QString &name) const
 {
     QDir themeDir(this->themeDirectoryPath + QString("/") + name);
 
     return themeDir.path();
 }
 
-QString ThemeFactory::generateUntitledThemeName() const
+QString MarkdownEditorThemeFactory::generateUntitledThemeName() const
 {
     QString name               = QObject::tr("Untitled 1");
     int     count              = 1;
@@ -597,7 +596,7 @@ QString ThemeFactory::generateUntitledThemeName() const
     return name;
 }
 
-ThemeFactory::ThemeFactory()
+MarkdownEditorThemeFactory::MarkdownEditorThemeFactory()
 {
     themeDirectoryPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     themeDirectory     = QDir(themeDirectoryPath);
@@ -628,7 +627,7 @@ ThemeFactory::ThemeFactory()
     loadPlainstractionDarkTheme();
 }
 
-bool ThemeFactory::extractColorSetting(const QSettings &settings, const QString &key, QColor &value, QString &err) const
+bool MarkdownEditorThemeFactory::extractColorSetting(const QSettings &settings, const QString &key, QColor &value, QString &err) const
 {
     QVariant variantValue = settings.value(key);
 
@@ -642,7 +641,7 @@ bool ThemeFactory::extractColorSetting(const QSettings &settings, const QString 
     return true;
 }
 
-bool ThemeFactory::extractIntSetting(const QSettings &settings, const QString &key, int &value, int min, int max, QString &err) const
+bool MarkdownEditorThemeFactory::extractIntSetting(const QSettings &settings, const QString &key, int &value, int min, int max, QString &err) const
 {
     QVariant variantValue = settings.value(key);
 
@@ -664,7 +663,7 @@ bool ThemeFactory::extractIntSetting(const QSettings &settings, const QString &k
     return true;
 }
 
-bool ThemeFactory::extractStringSetting(const QSettings &settings, const QString &key, QString &value, QString &err) const
+bool MarkdownEditorThemeFactory::extractStringSetting(const QSettings &settings, const QString &key, QString &value, QString &err) const
 {
     QVariant variantValue = settings.value(key);
 

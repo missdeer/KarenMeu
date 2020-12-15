@@ -6,20 +6,20 @@
 #include <QString>
 #include <QStringList>
 
-#include "Theme.h"
+#include "MarkdownEditorTheme.h"
 
 class QSettings;
 
 /**
  * Singleton class to fetch themes, either built-in or from the hard disk.
  */
-class ThemeFactory
+class MarkdownEditorThemeFactory
 {
 public:
     /**
      * Gets the single instance of this class.
      */
-    static ThemeFactory *getInstance();
+    static MarkdownEditorThemeFactory *getInstance();
 
     /**
      * Gets the list of available theme names, including built-in themes
@@ -30,7 +30,7 @@ public:
     /**
      * Gets the default theme.
      */
-    Theme getDefaultTheme() const;
+    MarkdownEditorTheme getDefaultTheme() const;
 
     /**
      * Returns the theme with the given name.  If an error occurs, the
@@ -39,7 +39,7 @@ public:
      * occurs while loading the desired theme, err will be set to a null
      * QString.
      */
-    Theme loadTheme(const QString &name, QString &err) const;
+    MarkdownEditorTheme loadTheme(const QString &name, QString &err) const;
 
     /**
      * Deletes the theme with the given name from the hard disk.  Note
@@ -57,7 +57,7 @@ public:
      * will be populated with an error message string.  Otherwise, err will
      * be set to a null QString.
      */
-    void saveTheme(const QString &name, Theme &theme, QString &err);
+    void saveTheme(const QString &name, MarkdownEditorTheme &theme, QString &err);
 
     /**
      * Gets the theme storage location directory.
@@ -80,19 +80,19 @@ public:
     static const QString PLAINSTRACTION_DARK_THEME_NAME;
 
 private:
-    static ThemeFactory *instance;
+    static MarkdownEditorThemeFactory *instance;
 
-    QList<Theme> builtInThemes;
+    QList<MarkdownEditorTheme> builtInThemes;
     QStringList  customThemeNames;
     QString      themeDirectoryPath;
     QDir         themeDirectory;
 
-    ThemeFactory();
+    MarkdownEditorThemeFactory();
 
     /**
      * Destructor.
      */
-    ~ThemeFactory() = default;
+    ~MarkdownEditorThemeFactory() = default;
 
     void loadClassicLightTheme();
     void loadClassicDarkTheme();

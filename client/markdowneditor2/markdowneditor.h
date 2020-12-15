@@ -12,10 +12,10 @@
 #include <QString>
 #include <QTextCursor>
 
+#include "MarkdownEditorTheme.h"
 #include "MarkdownEditorTypes.h"
 #include "MarkdownStyles.h"
 #include "TextDocument.h"
-#include "Theme.h"
 #include "spelling/dictionary_manager.h"
 #include "spelling/dictionary_ref.h"
 

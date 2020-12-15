@@ -3,7 +3,8 @@
 #include <QtCore>
 
 #include "settings.h"
-#include "ThemeFactory.h"
+
+#include "MarkdownEditorThemeFactory.h"
 
 void Settings::initialize()
 {
@@ -55,9 +56,9 @@ void Settings::load()
                                             )
                                  .toString();
     m_codeEditorFontPointSize = settings.value("codeEditorFontPointSize", 14).toInt();
-    m_codeEditorTheme         = settings.value("codeEditorTheme", ThemeFactory::PLAINSTRACTION_LIGHT_THEME_NAME).toString();
+    m_codeEditorTheme         = settings.value("codeEditorTheme", MarkdownEditorThemeFactory::PLAINSTRACTION_LIGHT_THEME_NAME).toString();
     QString err;
-    m_theme = ThemeFactory::getInstance()->loadTheme(m_codeEditorTheme, err);
+    m_theme = MarkdownEditorThemeFactory::getInstance()->loadTheme(m_codeEditorTheme, err);
     setPreviewTheme(settings.value("previewTheme", QSettings::tr("默认")).toString());
     m_codeBlockStyle          = settings.value("codeBlockStyle", QSettings::tr("xcode")).toString();
     m_markdownEngine          = settings.value("markdownEngine", QSettings::tr("Goldmark")).toString();
@@ -181,7 +182,7 @@ void Settings::setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeSt
     m_customPreviewThemeStyle = customPreviewThemeStyle;
 }
 
-Theme &Settings::theme()
+MarkdownEditorTheme &Settings::theme()
 {
     return m_theme;
 }

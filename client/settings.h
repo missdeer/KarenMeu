@@ -4,7 +4,7 @@
 #include <QSharedPointer>
 #include <QString>
 
-#include "Theme.h"
+#include "MarkdownEditorTheme.h"
 
 class Settings
 {
@@ -46,7 +46,7 @@ public:
     const QByteArray &customPreviewThemeStyle() const;
     void              setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeStyle);
 
-    Theme &theme();
+    MarkdownEditorTheme &theme();
 
     bool macTerminalStyleCodeBlock() const;
     void setMacTerminalStyleCodeBlock(bool macTerminalStyleCodeBlock);
@@ -79,10 +79,10 @@ public:
     void setEnableSogouTranslate(bool enableSogouTranslate);
 
 private:
-    bool       m_enableGoogleTranslate {true};
-    bool       m_enableBaiduTranslate {false};
-    bool       m_enableYoudaoTranslate {true};
-    bool       m_enableSogouTranslate {false};
+    bool                m_enableGoogleTranslate {true};
+    bool                m_enableBaiduTranslate {false};
+    bool                m_enableYoudaoTranslate {true};
+    bool                m_enableSogouTranslate {false};
     bool m_enableLineNumbers {true};
     bool m_macTerminalStyleCodeBlock {true};
     int  m_autoRefreshInterval {1000}; // millisecond
@@ -95,7 +95,7 @@ private:
     QString    m_markdownEngine;
     QString    m_previewMode;
     QByteArray m_customPreviewThemeStyle;
-    Theme      m_theme;
+    MarkdownEditorTheme m_theme;
 };
 
 inline QSharedPointer<Settings> g_settings;

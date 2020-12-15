@@ -34,12 +34,12 @@ enum PictureAspect
 /**
  * Encapsulates a theme for customizing the look and feel of the application.
  */
-class Theme
+class MarkdownEditorTheme
 {
 public:
-    Theme();
-    Theme(const QString &name, bool builtIn = true);
-    ~Theme();
+    MarkdownEditorTheme();
+    MarkdownEditorTheme(const QString &name, bool builtIn = true);
+    ~MarkdownEditorTheme();
 
     QString getName() const;
     void    setName(const QString &value);
