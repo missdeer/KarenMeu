@@ -614,14 +614,18 @@ void MainWindow::setupDockPanels()
     connect(m_fsView, &QTreeView::activated, this, &MainWindow::onFileSystemItemActivated);
     fsDock->setWidget(m_fsView);
     addDockWidget(Qt::LeftDockWidgetArea, fsDock);
-    ui->menuView->addAction(fsDock->toggleViewAction());
+    auto toggleViewAction = fsDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+F"));
+    ui->menuView->addAction(toggleViewAction);
 
     auto *cloudDock = new QDockWidget(tr("Cloud"), this);
     cloudDock->setObjectName("cloudDock");
     m_cloudView     = new QTreeView(cloudDock);
     cloudDock->setWidget(m_cloudView);
     addDockWidget(Qt::LeftDockWidgetArea, cloudDock);
-    ui->menuView->addAction(cloudDock->toggleViewAction());
+    toggleViewAction = cloudDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+C"));
+    ui->menuView->addAction(toggleViewAction);
 
     tabifyDockWidget(fsDock, cloudDock);
 
@@ -630,35 +634,45 @@ void MainWindow::setupDockPanels()
     m_googleTranslateEditor = new QPlainTextEdit(googleTranslateDock);
     googleTranslateDock->setWidget(m_googleTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, googleTranslateDock);
-    ui->menuView->addAction(googleTranslateDock->toggleViewAction());
+    toggleViewAction = googleTranslateDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+G"));
+    ui->menuView->addAction(toggleViewAction);
 
     auto *baiduTranslateDock = new QDockWidget(tr("Baidu Translate"), this);
     baiduTranslateDock->setObjectName("baiduTranslateDock");
     m_baiduTranslateEditor   = new QPlainTextEdit(baiduTranslateDock);
     baiduTranslateDock->setWidget(m_baiduTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, baiduTranslateDock);
-    ui->menuView->addAction(baiduTranslateDock->toggleViewAction());
+    toggleViewAction = baiduTranslateDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+B"));
+    ui->menuView->addAction(toggleViewAction);
 
     auto *youdaoTranslateDock = new QDockWidget(tr("Youdao Translate"), this);
     youdaoTranslateDock->setObjectName("youdaoTranslateDock");
     m_youdaoTranslateEditor   = new QPlainTextEdit(youdaoTranslateDock);
     youdaoTranslateDock->setWidget(m_youdaoTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, youdaoTranslateDock);
-    ui->menuView->addAction(youdaoTranslateDock->toggleViewAction());
+    toggleViewAction = youdaoTranslateDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+Y"));
+    ui->menuView->addAction(toggleViewAction);
 
     auto *sogouTranslateDock = new QDockWidget(tr("Sogou Translate"), this);
     sogouTranslateDock->setObjectName("sogouTranslateDock");
     m_sogouTranslateEditor = new QPlainTextEdit(sogouTranslateDock);
     sogouTranslateDock->setWidget(m_sogouTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, sogouTranslateDock);
-    ui->menuView->addAction(sogouTranslateDock->toggleViewAction());
+    toggleViewAction = sogouTranslateDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+S"));
+    ui->menuView->addAction(toggleViewAction);
 
     auto *youdaoDictionaryDock = new QDockWidget(tr("Youdao Dictionary"), this);
     youdaoDictionaryDock->setObjectName("youdaoDictionaryDock");
     m_youdaoDictionaryEditor   = new QPlainTextEdit(youdaoDictionaryDock);
     youdaoDictionaryDock->setWidget(m_youdaoDictionaryEditor);
     addDockWidget(Qt::BottomDockWidgetArea, youdaoDictionaryDock);
-    ui->menuView->addAction(youdaoDictionaryDock->toggleViewAction());
+    toggleViewAction = youdaoDictionaryDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+D"));
+    ui->menuView->addAction(toggleViewAction);
 
     tabifyDockWidget(googleTranslateDock, baiduTranslateDock);
     tabifyDockWidget(baiduTranslateDock, youdaoTranslateDock);
@@ -671,7 +685,9 @@ void MainWindow::setupDockPanels()
     m_previewHTMLEditor->initialize("html");
     previewHTMLDock->setWidget(m_previewHTMLEditor);
     addDockWidget(Qt::RightDockWidgetArea, previewHTMLDock);
-    ui->menuView->addAction(previewHTMLDock->toggleViewAction());
+    toggleViewAction = previewHTMLDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+H"));
+    ui->menuView->addAction(toggleViewAction);
     m_view->setPreviewHTMLEditor(m_previewHTMLEditor);
 
     auto *customThemeEditorDock = new QDockWidget(tr("Custom Theme Editor"), this);
@@ -679,7 +695,9 @@ void MainWindow::setupDockPanels()
     m_customPreivewThemeEditor = new CustomPreviewThemeEditWidget(customThemeEditorDock);
     customThemeEditorDock->setWidget(m_customPreivewThemeEditor);
     addDockWidget(Qt::RightDockWidgetArea, customThemeEditorDock);
-    ui->menuView->addAction(customThemeEditorDock->toggleViewAction());
+    toggleViewAction = customThemeEditorDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+T"));
+    ui->menuView->addAction(toggleViewAction);
     m_view->setCustomPreivewThemeEditor(m_customPreivewThemeEditor->editor());
     connect(m_customPreivewThemeEditor, &CustomPreviewThemeEditWidget::contentModified, this, &MainWindow::onCustomPreviewThemeChanged);
 
@@ -689,7 +707,9 @@ void MainWindow::setupDockPanels()
     devToolView->setPage(m_view->devToolPage());
     devToolDock->setWidget(devToolView);
     addDockWidget(Qt::RightDockWidgetArea, devToolDock);
-    ui->menuView->addAction(devToolDock->toggleViewAction());
+    toggleViewAction = devToolDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("F12"));
+    ui->menuView->addAction(toggleViewAction);
 
     tabifyDockWidget(previewHTMLDock, devToolDock);
     tabifyDockWidget(previewHTMLDock, customThemeEditorDock);
