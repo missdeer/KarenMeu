@@ -33,6 +33,12 @@ jobs:
           ref: ${{ github.head_ref }}
           submodules: true
           
+      - run: |
+          cd 3rdparty/vtextedit
+          git pull
+          git submodule init
+          git submodule update
+          
       - name: build macos
         run: |
           cd 3rdparty/scintilla/qt/ScintillaEdit
