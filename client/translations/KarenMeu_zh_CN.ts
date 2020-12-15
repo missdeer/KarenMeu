@@ -1334,6 +1334,16 @@
         <source>[Web] </source>
         <translation>【网络用语】</translation>
     </message>
+    <message>
+        <location filename="../main.cpp" line="75"/>
+        <source>Critical error</source>
+        <translation>严重错误</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="75"/>
+        <source>SSL not supported, some features may not work as expected.</source>
+        <translation>不支持SSL，一些功能可能无法正常工作。</translation>
+    </message>
 </context>
 <context>
     <name>QSettings</name>
@@ -1439,7 +1449,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="78"/>
+        <location filename="../main.cpp" line="86"/>
         <source>The file to open.</source>
         <translation>打开文章</translation>
     </message>
