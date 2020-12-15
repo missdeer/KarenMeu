@@ -2,3 +2,6 @@
 	path = 3rdparty/scintilla
 	url = https://github.com/amezin/scintilla.git
 	branch = upstream
+[submodule "3rdparty/vtextedit"]
+	path = 3rdparty/vtextedit
+	url = https://github.com/vnotex/vtextedit.git
