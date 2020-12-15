@@ -335,6 +335,79 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tabTranslation">
+      <attribute name="title">
+       <string>Translation</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Translation Service</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QCheckBox" name="cbGoogleTranslate">
+            <property name="text">
+             <string>Google Translate</string>
+            </property>
+            <property name="icon">
+             <iconset resource="karenmeu.qrc">
+              <normaloff>:/rc/images/google.ico</normaloff>:/rc/images/google.ico</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbBaiduTranslate">
+            <property name="text">
+             <string>Baidu Translate</string>
+            </property>
+            <property name="icon">
+             <iconset resource="karenmeu.qrc">
+              <normaloff>:/rc/images/baidu.png</normaloff>:/rc/images/baidu.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbYoudaoTranslate">
+            <property name="text">
+             <string>Youdao Translate</string>
+            </property>
+            <property name="icon">
+             <iconset resource="karenmeu.qrc">
+              <normaloff>:/rc/images/youdao.ico</normaloff>:/rc/images/youdao.ico</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbSogouTranslate">
+            <property name="text">
+             <string>Sogou Translate</string>
+            </property>
+            <property name="icon">
+             <iconset resource="karenmeu.qrc">
+              <normaloff>:/rc/images/sogou.ico</normaloff>:/rc/images/sogou.ico</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="tabCloud">
       <attribute name="title">
        <string>Cloud</string>
@@ -390,7 +463,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="karenmeu.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

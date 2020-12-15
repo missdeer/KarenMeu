@@ -60,6 +60,14 @@ private slots:
 
     void onYoudaoResult(QString res);
 
+    void on_actionGoogle_triggered();
+
+    void on_actionBaidu_triggered();
+
+    void on_actionYoudao_triggered();
+
+    void on_actionSogou_triggered();
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void moveEvent(QMoveEvent *event) override;
@@ -107,6 +115,7 @@ private:
     void predrawBackgroundImage();
     void setupDockPanels();
     void setupOptionToolbar();
+    void    updateTranslationActions();
 };
 
 #endif // MAINWINDOW_H

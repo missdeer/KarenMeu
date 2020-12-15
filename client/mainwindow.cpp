@@ -91,6 +91,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->menuRecentFiles->addAction(recentFileActs[i]);
     }
 
+    updateTranslationActions();
+
     setupOptionToolbar();
 
     setupDockPanels();
@@ -138,6 +140,14 @@ void MainWindow::on_actionAbout_triggered()
     QMessageBox::about(this, tr("KarenMeu"), tr("KarenMeu is a Markdown based Wechat public account article editor for programmers."));
 }
 
+void MainWindow::updateTranslationActions()
+{
+    ui->actionGoogle->setChecked(g_settings->enableGoogleTranslate());
+    ui->actionBaidu->setChecked(g_settings->enableBaiduTranslate());
+    ui->actionSogou->setChecked(g_settings->enableSogouTranslate());
+    ui->actionYoudao->setChecked(g_settings->enableYoudaoTranslate());
+}
+
 void MainWindow::on_actionPreference_triggered()
 {
     PreferenceDialog dlg(this);
@@ -147,6 +157,8 @@ void MainWindow::on_actionPreference_triggered()
         m_cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());
         m_cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
         m_cbPreviewTheme->setCurrentText(g_settings->previewTheme());
+
+        updateTranslationActions();
 
         m_view->updatePreviewTheme();
         m_view->updateMarkdownEngine();
@@ -914,4 +926,24 @@ void MainWindow::on_actionTranslate_triggered()
 {
     Q_ASSERT(m_view);
     QString text = m_view->selectedText();
+}
+
+void MainWindow::on_actionGoogle_triggered()
+{
+    g_settings->setEnableGoogleTranslate(ui->actionGoogle->isChecked());
+}
+
+void MainWindow::on_actionBaidu_triggered()
+{
+    g_settings->setEnableBaiduTranslate(ui->actionBaidu->isChecked());
+}
+
+void MainWindow::on_actionYoudao_triggered()
+{
+    g_settings->setEnableYoudaoTranslate(ui->actionYoudao->isChecked());
+}
+
+void MainWindow::on_actionSogou_triggered()
+{
+    g_settings->setEnableSogouTranslate(ui->actionSogou->isChecked());
 }

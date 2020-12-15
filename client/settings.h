@@ -66,7 +66,23 @@ public:
     QString cloudPassword();
     void    setCloudPassword(const QString &password);
 
+    bool enableGoogleTranslate() const;
+    void setEnableGoogleTranslate(bool enableGoogleTranslate);
+
+    bool enableBaiduTranslate() const;
+    void setEnableBaiduTranslate(bool enableBaiduTranslate);
+
+    bool enableYoudaoTranslate() const;
+    void setEnableYoudaoTranslate(bool enableYoudaoTranslate);
+
+    bool enableSogouTranslate() const;
+    void setEnableSogouTranslate(bool enableSogouTranslate);
+
 private:
+    bool       m_enableGoogleTranslate {true};
+    bool       m_enableBaiduTranslate {false};
+    bool       m_enableYoudaoTranslate {true};
+    bool       m_enableSogouTranslate {false};
     bool m_enableLineNumbers {true};
     bool m_macTerminalStyleCodeBlock {true};
     int  m_autoRefreshInterval {1000}; // millisecond

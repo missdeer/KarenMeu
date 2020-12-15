@@ -35,6 +35,11 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui
     ui->edtCloudServerAddress->setText(g_settings->cloudServerAddress());
     ui->edtCloudUsername->setText(g_settings->cloudUsername());
     ui->edtCloudPassword->setText(g_settings->cloudPassword());
+
+    ui->cbBaiduTranslate->setChecked(g_settings->enableBaiduTranslate());
+    ui->cbGoogleTranslate->setChecked(g_settings->enableGoogleTranslate());
+    ui->cbYoudaoTranslate->setChecked(g_settings->enableYoudaoTranslate());
+    ui->cbSogouTranslate->setChecked(g_settings->enableSogouTranslate());
 }
 
 PreferenceDialog::~PreferenceDialog()
@@ -59,6 +64,11 @@ void PreferenceDialog::accept()
     g_settings->setCloudServerAddress(ui->edtCloudServerAddress->text());
     g_settings->setCloudUsername(ui->edtCloudUsername->text());
     g_settings->setCloudPassword(ui->edtCloudPassword->text());
+
+    g_settings->setEnableGoogleTranslate(ui->cbGoogleTranslate->isChecked());
+    g_settings->setEnableBaiduTranslate(ui->cbBaiduTranslate->isChecked());
+    g_settings->setEnableSogouTranslate(ui->cbSogouTranslate->isChecked());
+    g_settings->setEnableYoudaoTranslate(ui->cbYoudaoTranslate->isChecked());
     QDialog::accept();
 }
 

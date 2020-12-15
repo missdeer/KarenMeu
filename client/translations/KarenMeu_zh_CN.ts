@@ -33,7 +33,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="138"/>
+        <location filename="../mainwindow.cpp" line="140"/>
         <source>KarenMeu</source>
         <translation></translation>
     </message>
@@ -440,13 +440,13 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="657"/>
-        <location filename="../mainwindow.cpp" line="737"/>
+        <location filename="../mainwindow.cpp" line="749"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="665"/>
-        <location filename="../mainwindow.cpp" line="737"/>
+        <location filename="../mainwindow.cpp" line="749"/>
         <source>Lute</source>
         <translation></translation>
     </message>
@@ -716,98 +716,98 @@
         <translation>搜狗翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="632"/>
+        <location filename="../mainwindow.cpp" line="644"/>
         <source>Google Translate</source>
         <translation>谷歌翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="641"/>
+        <location filename="../mainwindow.cpp" line="653"/>
         <source>Baidu Translate</source>
         <translation>百度翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="650"/>
+        <location filename="../mainwindow.cpp" line="662"/>
         <source>Youdao Translate</source>
         <translation>有道翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="668"/>
+        <location filename="../mainwindow.cpp" line="680"/>
         <source>Youdao Dictionary</source>
         <translation>有道词典</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="704"/>
+        <location filename="../mainwindow.cpp" line="716"/>
         <source>DevTool</source>
         <translation>开发者工具</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="682"/>
+        <location filename="../mainwindow.cpp" line="694"/>
         <source>Preview HTML</source>
         <translation>预览HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="659"/>
+        <location filename="../mainwindow.cpp" line="671"/>
         <source>Sogou Translate</source>
         <translation>搜狗翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="693"/>
+        <location filename="../mainwindow.cpp" line="705"/>
         <source>Custom Theme Editor</source>
         <translation>自定义主题编辑器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="720"/>
+        <location filename="../mainwindow.cpp" line="732"/>
         <source>Mode:</source>
         <translation>预览模式：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="723"/>
+        <location filename="../mainwindow.cpp" line="735"/>
         <source>Engine:</source>
         <translation>渲染引擎：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="726"/>
+        <location filename="../mainwindow.cpp" line="738"/>
         <source>Code Block Style:</source>
         <translation>代码块风格：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="729"/>
+        <location filename="../mainwindow.cpp" line="741"/>
         <source>Preview Theme:</source>
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="733"/>
+        <location filename="../mainwindow.cpp" line="745"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="733"/>
+        <location filename="../mainwindow.cpp" line="745"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="261"/>
-        <location filename="../mainwindow.cpp" line="789"/>
+        <location filename="../mainwindow.cpp" line="273"/>
+        <location filename="../mainwindow.cpp" line="801"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="138"/>
+        <location filename="../mainwindow.cpp" line="140"/>
         <source>KarenMeu is a Markdown based Wechat public account article editor for programmers.</source>
         <translation>KarenMeu是一款专为程序员设计的基于Markdown语法的微信公众号文章编辑器。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="192"/>
         <source>%1. %2</source>
         <translation>%1. %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="601"/>
+        <location filename="../mainwindow.cpp" line="613"/>
         <source>File System</source>
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="621"/>
+        <location filename="../mainwindow.cpp" line="633"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>
@@ -959,8 +959,8 @@
     </message>
     <message>
         <location filename="../preferencedialog.cpp" line="22"/>
-        <location filename="../preferencedialog.cpp" line="55"/>
-        <location filename="../preferencedialog.cpp" line="67"/>
+        <location filename="../preferencedialog.cpp" line="60"/>
+        <location filename="../preferencedialog.cpp" line="77"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
@@ -1161,21 +1161,51 @@
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="340"/>
+        <source>Translation</source>
+        <translation>翻译</translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="346"/>
+        <source>Translation Service</source>
+        <translation>翻译服务</translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="352"/>
+        <source>Google Translate</source>
+        <translation>谷歌翻译</translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="363"/>
+        <source>Baidu Translate</source>
+        <translation>百度翻译</translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="374"/>
+        <source>Youdao Translate</source>
+        <translation>有道翻译</translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="385"/>
+        <source>Sogou Translate</source>
+        <translation>搜狗翻译</translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="413"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="346"/>
+        <location filename="../preferencedialog.ui" line="419"/>
         <source>Server:</source>
         <translation>服务器：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="356"/>
+        <location filename="../preferencedialog.ui" line="429"/>
         <source>Username:</source>
         <translation>用户名：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="366"/>
+        <location filename="../preferencedialog.ui" line="439"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>
@@ -1308,22 +1338,22 @@
 <context>
     <name>QSettings</name>
     <message>
-        <location filename="../settings.cpp" line="57"/>
+        <location filename="../settings.cpp" line="61"/>
         <source>默认</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="58"/>
+        <location filename="../settings.cpp" line="62"/>
         <source>xcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="59"/>
+        <location filename="../settings.cpp" line="63"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="62"/>
+        <location filename="../settings.cpp" line="66"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>

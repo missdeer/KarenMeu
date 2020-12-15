@@ -25,6 +25,10 @@ void Settings::save()
     settings.setValue("macTerminalStyleCodeBlock", m_macTerminalStyleCodeBlock);
     settings.setValue("previewMode", m_previewMode);
     settings.setValue("customPreviewThemeStyle", m_customPreviewThemeStyle);
+    settings.setValue("googleTranslate", m_enableGoogleTranslate);
+    settings.setValue("baiduTranslate", m_enableBaiduTranslate);
+    settings.setValue("youdaoTranslate", m_enableYoudaoTranslate);
+    settings.setValue("sogouTranslate", m_enableSogouTranslate);
     settings.sync();
 }
 
@@ -61,6 +65,10 @@ void Settings::load()
     m_macTerminalStyleCodeBlock = settings.value("macTerminalStyleCodeBlock", true).toBool();
     m_previewMode               = settings.value("previewMode", QSettings::tr("Wechat Public Account Article")).toString();
     m_customPreviewThemeStyle = settings.value("customPreviewThemeStyle").toByteArray();
+    m_enableGoogleTranslate     = settings.value("googleTranslate", true).toBool();
+    m_enableBaiduTranslate      = settings.value("baiduTranslate", false).toBool();
+    m_enableYoudaoTranslate     = settings.value("youdaoTranslate", true).toBool();
+    m_enableSogouTranslate      = settings.value("sogouTranslate", false).toBool();
 }
 
 const QString &Settings::codeEditorFontFamily() const
@@ -251,4 +259,44 @@ void Settings::setCloudPassword(const QString &password)
     QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
     settings.setValue("cloudPassword", password);
     settings.sync();
+}
+
+bool Settings::enableGoogleTranslate() const
+{
+    return m_enableGoogleTranslate;
+}
+
+void Settings::setEnableGoogleTranslate(bool enableGoogleTranslate)
+{
+    m_enableGoogleTranslate = enableGoogleTranslate;
+}
+
+bool Settings::enableBaiduTranslate() const
+{
+    return m_enableBaiduTranslate;
+}
+
+void Settings::setEnableBaiduTranslate(bool enableBaiduTranslate)
+{
+    m_enableBaiduTranslate = enableBaiduTranslate;
+}
+
+bool Settings::enableYoudaoTranslate() const
+{
+    return m_enableYoudaoTranslate;
+}
+
+void Settings::setEnableYoudaoTranslate(bool enableYoudaoTranslate)
+{
+    m_enableYoudaoTranslate = enableYoudaoTranslate;
+}
+
+bool Settings::enableSogouTranslate() const
+{
+    return m_enableSogouTranslate;
+}
+
+void Settings::setEnableSogouTranslate(bool enableSogouTranslate)
+{
+    m_enableSogouTranslate = enableSogouTranslate;
 }
