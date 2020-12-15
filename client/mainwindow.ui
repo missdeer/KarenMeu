@@ -1052,7 +1052,7 @@
    </property>
    <property name="icon">
     <iconset resource="karenmeu.qrc">
-     <normaloff>:/rc/images/google.ico</normaloff>:/rc/images/google.ico</iconset>
+     <normaloff>:/rc/images/google.png</normaloff>:/rc/images/google.png</iconset>
    </property>
    <property name="text">
     <string>Google</string>
@@ -1076,7 +1076,7 @@
    </property>
    <property name="icon">
     <iconset resource="karenmeu.qrc">
-     <normaloff>:/rc/images/youdao.ico</normaloff>:/rc/images/youdao.ico</iconset>
+     <normaloff>:/rc/images/youdao.png</normaloff>:/rc/images/youdao.png</iconset>
    </property>
    <property name="text">
     <string>Youdao</string>
@@ -1091,7 +1091,7 @@
    </property>
    <property name="icon">
     <iconset resource="karenmeu.qrc">
-     <normaloff>:/rc/images/sogou.ico</normaloff>:/rc/images/sogou.ico</iconset>
+     <normaloff>:/rc/images/sogou.png</normaloff>:/rc/images/sogou.png</iconset>
    </property>
    <property name="text">
     <string>Sogou</string>

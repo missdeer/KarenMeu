@@ -70,8 +70,8 @@
         <file>rc/images/export.png</file>
         <file>rc/images/import.png</file>
         <file>rc/images/baidu.png</file>
-        <file>rc/images/google.ico</file>
-        <file>rc/images/sogou.ico</file>
-        <file>rc/images/youdao.ico</file>
+        <file>rc/images/google.png</file>
+        <file>rc/images/sogou.png</file>
+        <file>rc/images/youdao.png</file>
     </qresource>
 </RCC>
