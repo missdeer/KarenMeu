@@ -530,15 +530,12 @@ void MarkdownView::renderMarkdownToHTML()
     QString html = QString::fromUtf8(res);
 
     // fix h1/h2/h3 tag for style
-    if (g_settings->markdownEngine() == "Lute")
-    {
-        html = html.replace(QRegularExpression("<h1 id=\".*\">"), "<h1><span>")
-                   .replace("</h1>", "</span></h1>")
-                   .replace(QRegularExpression("<h2 id=\".*\">"), "<h2><span>")
-                   .replace("</h2>", "</span></h2>")
-                   .replace(QRegularExpression("<h3 id=\".*\">"), "<h3><span>")
-                   .replace("</h3>", "</span></h3>");
-    }
+    html = html.replace(QRegularExpression("<h1(\\s+id=\".*\")?>"), "<h1\\1><span>")
+               .replace("</h1>", "</span></h1>")
+               .replace(QRegularExpression("<h2(\\s+id=\".*\")?>"), "<h2\\1><span>")
+               .replace("</h2>", "</span></h2>")
+               .replace(QRegularExpression("<h3(\\s+id=\".*\")?>"), "<h3\\1><span>")
+               .replace("</h3>", "</span></h3>");
 
     if (g_settings->macTerminalStyleCodeBlock())
     {
