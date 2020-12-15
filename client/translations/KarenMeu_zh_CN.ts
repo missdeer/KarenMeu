@@ -1348,22 +1348,22 @@
 <context>
     <name>QSettings</name>
     <message>
-        <location filename="../settings.cpp" line="62"/>
+        <location filename="../settings.cpp" line="65"/>
         <source>默认</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="63"/>
+        <location filename="../settings.cpp" line="66"/>
         <source>xcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="64"/>
+        <location filename="../settings.cpp" line="67"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="67"/>
+        <location filename="../settings.cpp" line="70"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>

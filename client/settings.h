@@ -4,6 +4,10 @@
 #include <QSharedPointer>
 #include <QString>
 
+#include <vtextedit/markdowneditorconfig.h>
+#include <vtextedit/vmarkdowneditor.h>
+#include <vtextedit/vtexteditor.h>
+
 #include "MarkdownEditorTheme.h"
 
 class Settings
@@ -78,24 +82,35 @@ public:
     bool enableSogouTranslate() const;
     void setEnableSogouTranslate(bool enableSogouTranslate);
 
+    QSharedPointer<vte::TextEditorConfig> textEditorConfig() const;
+
+    QSharedPointer<vte::MarkdownEditorConfig> markdownEditorConfig() const;
+
 private:
-    bool                m_enableGoogleTranslate {true};
-    bool                m_enableBaiduTranslate {false};
-    bool                m_enableYoudaoTranslate {true};
-    bool                m_enableSogouTranslate {false};
+    bool m_enableGoogleTranslate {true};
+    bool m_enableBaiduTranslate {false};
+    bool m_enableYoudaoTranslate {true};
+    bool m_enableSogouTranslate {false};
     bool m_enableLineNumbers {true};
     bool m_macTerminalStyleCodeBlock {true};
-    int  m_autoRefreshInterval {1000}; // millisecond
-    int  m_editorZoomFactor {100};     // percent
-    int        m_codeEditorFontPointSize {14};
-    QString    m_codeEditorFontFamily;
-    QString    m_codeEditorTheme;
-    QString    m_previewTheme;
-    QString    m_codeBlockStyle;
-    QString    m_markdownEngine;
-    QString    m_previewMode;
+
+    int m_autoRefreshInterval {1000}; // millisecond
+    int m_editorZoomFactor {100};     // percent
+    int m_codeEditorFontPointSize {14};
+
+    QString m_codeEditorFontFamily;
+    QString m_codeEditorTheme;
+    QString m_previewTheme;
+    QString m_codeBlockStyle;
+    QString m_markdownEngine;
+    QString m_previewMode;
+
     QByteArray m_customPreviewThemeStyle;
+
     MarkdownEditorTheme m_theme;
+
+    QSharedPointer<vte::TextEditorConfig>     m_textEditorConfig;
+    QSharedPointer<vte::MarkdownEditorConfig> m_markdownEditorConfig;
 };
 
 inline QSharedPointer<Settings> g_settings;

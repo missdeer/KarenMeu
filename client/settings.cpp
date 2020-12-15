@@ -9,6 +9,9 @@
 void Settings::initialize()
 {
     load();
+
+    m_textEditorConfig     = QSharedPointer<vte::TextEditorConfig>::create();
+    m_markdownEditorConfig = QSharedPointer<vte::MarkdownEditorConfig>::create(m_textEditorConfig);
 }
 
 void Settings::save()
@@ -300,4 +303,14 @@ bool Settings::enableSogouTranslate() const
 void Settings::setEnableSogouTranslate(bool enableSogouTranslate)
 {
     m_enableSogouTranslate = enableSogouTranslate;
+}
+
+QSharedPointer<vte::TextEditorConfig> Settings::textEditorConfig() const
+{
+    return m_textEditorConfig;
+}
+
+QSharedPointer<vte::MarkdownEditorConfig> Settings::markdownEditorConfig() const
+{
+    return m_markdownEditorConfig;
 }

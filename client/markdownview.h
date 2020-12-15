@@ -11,6 +11,7 @@ QT_FORWARD_DECLARE_CLASS(QTimer);
 QT_FORWARD_DECLARE_CLASS(QResizeEvent);
 QT_FORWARD_DECLARE_CLASS(QWebEnginePage);
 class MarkdownEditor2;
+class MarkdownEditor3;
 class PreviewThemeEditor;
 
 class MarkdownView : public QWidget
