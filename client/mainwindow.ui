@@ -1028,6 +1028,10 @@
    </property>
   </action>
   <action name="actionDictionary">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/dict.png</normaloff>:/rc/images/dict.png</iconset>
+   </property>
    <property name="text">
     <string>Dictionary</string>
    </property>
@@ -1036,6 +1040,10 @@
    </property>
   </action>
   <action name="actionTranslate">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/translate.png</normaloff>:/rc/images/translate.png</iconset>
+   </property>
    <property name="text">
     <string>Translate</string>
    </property>

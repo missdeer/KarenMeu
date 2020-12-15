@@ -73,5 +73,7 @@
         <file>rc/images/google.png</file>
         <file>rc/images/sogou.png</file>
         <file>rc/images/youdao.png</file>
+        <file>rc/images/dict.png</file>
+        <file>rc/images/translate.png</file>
     </qresource>
 </RCC>
