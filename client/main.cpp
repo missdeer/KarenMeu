@@ -8,6 +8,8 @@
 #include <QWebEngineSettings>
 #include <QtCore>
 
+#include <vtextedit/vtexteditor.h>
+
 #include "mainwindow.h"
 #include "settings.h"
 
@@ -93,6 +95,8 @@ int main(int argc, char *argv[])
     {
         fileName = cmdLineArgs.at(0);
     }
+
+    vte::VTextEditor::addSyntaxCustomSearchPaths(QStringList(QStringLiteral(":/rc/syntax")));
 
     MainWindow w;
     w.showMaximized();
