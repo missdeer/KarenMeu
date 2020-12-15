@@ -815,17 +815,17 @@
 <context>
     <name>MarkdownEditor</name>
     <message>
-        <location filename="../markdowneditor.cpp" line="109"/>
+        <location filename="../markdowneditor2/markdowneditor.cpp" line="109"/>
         <source>Add word to dictionary</source>
         <translation>添加单词到词典</translation>
     </message>
     <message>
-        <location filename="../markdowneditor.cpp" line="110"/>
+        <location filename="../markdowneditor2/markdowneditor.cpp" line="110"/>
         <source>Check spelling...</source>
         <translation>检查拼写...</translation>
     </message>
     <message>
-        <location filename="../markdowneditor.cpp" line="736"/>
+        <location filename="../markdowneditor2/markdowneditor.cpp" line="736"/>
         <source>No spelling suggestions found</source>
         <translation>没有发现建议的拼写</translation>
     </message>
@@ -1243,79 +1243,79 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ThemeFactory.cpp" line="179"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="179"/>
         <source>The specified theme does not exist in the file system: </source>
         <translation>文件系统中没有找到指定的主题：</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="278"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="278"/>
         <source>The specified theme is not available.  Try restarting the application.  If problem persists, please file a bug report.</source>
         <translation>指定的主题无效。请尝试重启程序。如果问题仍然存在，请创建一个问题报告。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="349"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="349"/>
         <source>Could not delete %1 from theme.  Please try setting the theme file permissions to be writeable.</source>
         <translation>主题中无法删除%1。请尝试将主题文件权限设置为可写。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="372"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="372"/>
         <source>&apos;%1&apos; already exists.  Please choose another name.</source>
         <translation>%1已存在。请另选一个名字。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="382"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="382"/>
         <source>&apos;%1&apos; theme already exists.  Please choose another name.</source>
         <translation>%1已存在。请另选一个名字。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="410"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="410"/>
         <source>Failed to rename theme.  Please check file permissions.</source>
         <translation>主题重命名失败。请检查文件权限。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="454"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="454"/>
         <source>Theme is read-only.  Please try renaming the theme, or setting the theme file to be writable.</source>
         <translation>主题只读。请尝试重命名主题，或将主题文件设置为可写。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="489"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="489"/>
         <source>Failed to remove old theme image.  Please check file permissions.</source>
         <translation>删除旧的主题图片失败。请检查文件权限。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="516"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="516"/>
         <source>The old theme image file could not be removed from the theme directory.  Please check file permissions.</source>
         <translation>无法从主题目录中删除旧的主题图片文件。请检查文件权限。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="528"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="528"/>
         <source>Theme image file could not be copied to the theme directory.  Please check file permissions.</source>
         <translation>无法将主题图片文件复制到主题目录中。请检查文件权限。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="547"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="547"/>
         <source>Theme could not be saved to disk.  Please check file permissions or try renaming the theme.</source>
         <translation>主题无法保存到磁盘。请检查文件权限或尝试重命名主题。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="572"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="572"/>
         <source>Untitled 1</source>
         <translation>未命名1</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="585"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="585"/>
         <source>Untitled %1</source>
         <translation>未命名%1</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="637"/>
-        <location filename="../ThemeFactory.cpp" line="651"/>
-        <location filename="../ThemeFactory.cpp" line="673"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="637"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="651"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="673"/>
         <source>Invalid or missing value for %1 provided.</source>
         <translation>提供了无效或缺少值给%1。</translation>
     </message>
     <message>
-        <location filename="../ThemeFactory.cpp" line="659"/>
+        <location filename="../markdowneditor2/ThemeFactory.cpp" line="659"/>
         <source>Value for %1 is out of range.  Valid values are between %2 and %3, inclusive.</source>
         <translation>值%1超出范围。有效的值为%2到%3之间。</translation>
     </message>
@@ -1371,67 +1371,67 @@
 <context>
     <name>SpellChecker</name>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="139"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="139"/>
         <source>Check Spelling</source>
         <translation>检查拼写</translation>
     </message>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="147"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="147"/>
         <source>&amp;Add</source>
         <translation>添加</translation>
     </message>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="150"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="150"/>
         <source>&amp;Ignore</source>
         <translation>忽略</translation>
     </message>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="153"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="153"/>
         <source>I&amp;gnore All</source>
         <translation>忽略全部</translation>
     </message>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="158"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="158"/>
         <source>&amp;Change</source>
         <translation>修改</translation>
     </message>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="161"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="161"/>
         <source>C&amp;hange All</source>
         <translation>修改全部</translation>
     </message>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="176"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="176"/>
         <source>Not in dictionary:</source>
         <translation>不在词典内：</translation>
     </message>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="184"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="184"/>
         <source>Change to:</source>
         <translation>修改为：</translation>
     </message>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="200"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="200"/>
         <source>Checking spelling...</source>
         <translation>正在检查拼写...</translation>
     </message>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="200"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="200"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="201"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="201"/>
         <source>Please wait</source>
         <translation>请稍等</translation>
     </message>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="228"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="228"/>
         <source>Continue checking at beginning of file?</source>
         <translation>继续从文件开始进行检查？</translation>
     </message>
     <message>
-        <location filename="../spelling/spell_checker.cpp" line="287"/>
+        <location filename="../markdowneditor2/spelling/spell_checker.cpp" line="287"/>
         <source>Spell check complete.</source>
         <translation>拼写检查完成。</translation>
     </message>
@@ -1439,9 +1439,9 @@
 <context>
     <name>TextDocument</name>
     <message>
-        <location filename="../TextDocument.cpp" line="25"/>
-        <location filename="../TextDocument.cpp" line="52"/>
-        <location filename="../TextDocument.cpp" line="96"/>
+        <location filename="../markdowneditor2/TextDocument.cpp" line="25"/>
+        <location filename="../markdowneditor2/TextDocument.cpp" line="52"/>
+        <location filename="../markdowneditor2/TextDocument.cpp" line="96"/>
         <source>untitled</source>
         <translation>未命名</translation>
     </message>

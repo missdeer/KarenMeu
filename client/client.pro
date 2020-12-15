@@ -25,68 +25,68 @@ CONFIG += c++17
 include($$PWD/../3rdparty/scintilla-latest.pri)
 
 SOURCES += \
-        ColorHelper.cpp \
-        HighlightTokenizer.cpp \
-        MarkdownHighlighter.cpp \
-        MarkdownTokenizer.cpp \
-        TextDocument.cpp \
-        Theme.cpp \
-        ThemeFactory.cpp \
-        Token.cpp \
-        custompreviewthemeeditwidget.cpp \
-        markdowneditor.cpp \
-        markdowneditor2.cpp \
-        previewpage.cpp \
-        previewthemeeditor.cpp \
-        rendereddocument.cpp \
-        main.cpp \
-        mainwindow.cpp \
-        markdownview.cpp \
-        preferencedialog.cpp \
-        scintillaconfig.cpp \
-        settings.cpp \
-        spelling/dictionary_manager.cpp \
-        spelling/spell_checker.cpp \
-        youdao.cpp
+        $$PWD/markdowneditor2/ColorHelper.cpp \
+        $$PWD/markdowneditor2/HighlightTokenizer.cpp \
+        $$PWD/markdowneditor2/MarkdownHighlighter.cpp \
+        $$PWD/markdowneditor2/MarkdownTokenizer.cpp \
+        $$PWD/markdowneditor2/TextDocument.cpp \
+        $$PWD/markdowneditor2/Theme.cpp \
+        $$PWD/markdowneditor2/ThemeFactory.cpp \
+        $$PWD/markdowneditor2/Token.cpp \
+        $$PWD/markdowneditor2/markdowneditor.cpp \
+        $$PWD/markdowneditor2/markdowneditor2.cpp \
+        $$PWD/custompreviewthemeeditwidget.cpp \
+        $$PWD/previewpage.cpp \
+        $$PWD/previewthemeeditor.cpp \
+        $$PWD/rendereddocument.cpp \
+        $$PWD/main.cpp \
+        $$PWD/mainwindow.cpp \
+        $$PWD/markdownview.cpp \
+        $$PWD/preferencedialog.cpp \
+        $$PWD/scintillaconfig.cpp \
+        $$PWD/settings.cpp \
+        $$PWD/markdowneditor2/spelling/dictionary_manager.cpp \
+        $$PWD/markdowneditor2/spelling/spell_checker.cpp \
+        $$PWD/youdao.cpp
 
 HEADERS += \
-        ColorHelper.h \
-        HighlightTokenizer.h \
-        HighlighterLineStates.h \
-        MarkdownEditorTypes.h \
-        MarkdownHighlighter.h \
-        MarkdownStates.h \
-        MarkdownStyles.h \
-        MarkdownTokenTypes.h \
-        MarkdownTokenizer.h \
-        TextBlockData.h \
-        TextDocument.h \
-        Theme.h \
-        ThemeFactory.h \
-        Token.h \
-        custompreviewthemeeditwidget.h \
-        markdowneditor.h \
-        markdowneditor2.h \
-        previewpage.h \
-        previewthemeeditor.h \
-        rendereddocument.h \
-        mainwindow.h \
-        markdownview.h \
-        preferencedialog.h \
-        scintillaconfig.h \
-        settings.h \
-        spelling/abstract_dictionary.h \
-        spelling/abstract_dictionary_provider.h \
-        spelling/dictionary_manager.h \
-        spelling/dictionary_ref.h \
-        spelling/spell_checker.h \
-        youdao.h
+        $$PWD/markdowneditor2/ColorHelper.h \
+        $$PWD/markdowneditor2/HighlightTokenizer.h \
+        $$PWD/markdowneditor2/HighlighterLineStates.h \
+        $$PWD/markdowneditor2/MarkdownEditorTypes.h \
+        $$PWD/markdowneditor2/MarkdownHighlighter.h \
+        $$PWD/markdowneditor2/MarkdownStates.h \
+        $$PWD/markdowneditor2/MarkdownStyles.h \
+        $$PWD/markdowneditor2/MarkdownTokenTypes.h \
+        $$PWD/markdowneditor2/MarkdownTokenizer.h \
+        $$PWD/markdowneditor2/TextBlockData.h \
+        $$PWD/markdowneditor2/TextDocument.h \
+        $$PWD/markdowneditor2/Theme.h \
+        $$PWD/markdowneditor2/ThemeFactory.h \
+        $$PWD/markdowneditor2/Token.h \
+        $$PWD/markdowneditor2/markdowneditor.h \
+        $$PWD/markdowneditor2/markdowneditor2.h \
+        $$PWD/custompreviewthemeeditwidget.h \
+        $$PWD/previewpage.h \
+        $$PWD/previewthemeeditor.h \
+        $$PWD/rendereddocument.h \
+        $$PWD/mainwindow.h \
+        $$PWD/markdownview.h \
+        $$PWD/preferencedialog.h \
+        $$PWD/scintillaconfig.h \
+        $$PWD/settings.h \
+        $$PWD/markdowneditor2/spelling/abstract_dictionary.h \
+        $$PWD/markdowneditor2/spelling/abstract_dictionary_provider.h \
+        $$PWD/markdowneditor2/spelling/dictionary_manager.h \
+        $$PWD/markdowneditor2/spelling/dictionary_ref.h \
+        $$PWD/markdowneditor2/spelling/spell_checker.h \
+        $$PWD/youdao.h
 
 FORMS += \
-        mainwindow.ui \
-        preferencedialog.ui
+        $$PWD/mainwindow.ui \
+        $$PWD/preferencedialog.ui
 
-INCLUDEPATH += $$PWD $$PWD/spelling 
+INCLUDEPATH += $$PWD $$PWD/markdowneditor2 $$PWD/markdowneditor2/spelling
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -140,23 +140,23 @@ INCLUDEPATH += $$PWD/../utils
 LIBS += -L$$PWD/../utils
 
 win32 {
-    INCLUDEPATH += $$PWD/spelling/hunspell
+    INCLUDEPATH += $$PWD/markdowneditor2/spelling/hunspell
 
-    HEADERS += $$PWD/spelling/dictionary_provider_hunspell.h \
-        $$PWD/spelling/dictionary_provider_voikko.h
+    HEADERS += $$PWD/markdowneditor2/spelling/dictionary_provider_hunspell.h \
+        $$PWD/markdowneditor2/spelling/dictionary_provider_voikko.h
 
-    SOURCES += $$PWD/spelling/dictionary_provider_hunspell.cpp \
-        $$PWD/spelling/dictionary_provider_voikko.cpp \
-        $$PWD/spelling/hunspell/affentry.cxx \
-        $$PWD/spelling/hunspell/affixmgr.cxx \
-        $$PWD/spelling/hunspell/csutil.cxx \
-        $$PWD/spelling/hunspell/filemgr.cxx \
-        $$PWD/spelling/hunspell/hashmgr.cxx \
-        $$PWD/spelling/hunspell/hunspell.cxx \
-        $$PWD/spelling/hunspell/hunzip.cxx \
-        $$PWD/spelling/hunspell/phonet.cxx \
-        $$PWD/spelling/hunspell/replist.cxx \
-        $$PWD/spelling/hunspell/suggestmgr.cxx
+    SOURCES += $$PWD/markdowneditor2/spelling/dictionary_provider_hunspell.cpp \
+        $$PWD/markdowneditor2/spelling/dictionary_provider_voikko.cpp \
+        $$PWD/markdowneditor2/spelling/hunspell/affentry.cxx \
+        $$PWD/markdowneditor2/spelling/hunspell/affixmgr.cxx \
+        $$PWD/markdowneditor2/spelling/hunspell/csutil.cxx \
+        $$PWD/markdowneditor2/spelling/hunspell/filemgr.cxx \
+        $$PWD/markdowneditor2/spelling/hunspell/hashmgr.cxx \
+        $$PWD/markdowneditor2/spelling/hunspell/hunspell.cxx \
+        $$PWD/markdowneditor2/spelling/hunspell/hunzip.cxx \
+        $$PWD/markdowneditor2/spelling/hunspell/phonet.cxx \
+        $$PWD/markdowneditor2/spelling/hunspell/replist.cxx \
+        $$PWD/markdowneditor2/spelling/hunspell/suggestmgr.cxx
 
     DEFINES += HUNSPELL_STATIC
 } 
@@ -168,12 +168,12 @@ macx: {
     INSTALLS += icon
     LIBS += -framework CoreFoundation -framework Security -framework AppKit
 
-    HEADERS += $$PWD/spelling/dictionary_provider_nsspellchecker.h \
+    HEADERS += $$PWD/markdowneditor2/spelling/dictionary_provider_nsspellchecker.h \
         $$PWD/macapplication.h
 
     SOURCES += $$PWD/macapplication.cpp
 
-    OBJECTIVE_SOURCES += $$PWD/spelling/dictionary_provider_nsspellchecker.mm
+    OBJECTIVE_SOURCES += $$PWD/markdowneditor2/spelling/dictionary_provider_nsspellchecker.mm
     DESTDIR = $$OUT_PWD
     QMAKE_INFO_PLIST = osxInfo.plist
     CONFIG(release, debug|release) : {
@@ -219,9 +219,3 @@ unix: !macx {
 }    
 
 LIBS += -lutils
-
-DISTFILES += \
-    rc/images/codeblock.png \
-    rc/images/paragraph.png \
-    rc/images/table.png \
-    rc/images/todolist.png
