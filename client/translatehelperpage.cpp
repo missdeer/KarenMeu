@@ -10,6 +10,10 @@ TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) :
 
 void TranslateHelperPage::translate(const QString &text)
 {
+    if (m_state == THS_LOADINGPAGE)
+    {
+        action(QWebEnginePage::Stop);
+    }
     m_originalText                          = text;
     std::map<TranslateService, QUrl> tsUrls = {
         {TST_GOOGLE, QUrl::fromUserInput("https://translate.google.com/?sl=auto&tl=zh-CN&text=" + text.toUtf8().toPercentEncoding())},
@@ -85,10 +89,15 @@ void TranslateHelperPage::requestGoogle()
 
 void TranslateHelperPage::requestBaidu()
 {
-    QTimer::singleShot(1000, [this]() {
-        runJavaScript("let ele = document.getElementsByClassName(\"target-output\");\n ele[0].innerText;\n",
-                      [this](const QVariant &v2) { emit translated(v2.toString()); });
-    });
+    runJavaScript(QString("document.getElementById(\"baidu_translate_input\").value= \"%1\";\n"
+                          "document.getElementById(\"translate-button\").click();\n")
+                      .arg(m_originalText.replace("\"", "\\\"")),
+                  [this](const QVariant &) {
+                      QTimer::singleShot(1000, [this]() {
+                          runJavaScript("let ele = document.getElementsByClassName(\"target-output\");\n ele[0].innerText;\n",
+                                        [this](const QVariant &v2) { emit translated(v2.toString()); });
+                      });
+                  });
 }
 
 void TranslateHelperPage::requestSogou()
