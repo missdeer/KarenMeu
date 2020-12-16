@@ -59,6 +59,13 @@ jobs:
       - name: package
         run: |
           cd build
+          if [ ! -d client/${{ env.targetName }}.app/Contents/Frameworks ]; then mkdir -p client/${{ env.targetName }}.app/Contents/Frameworks; fi
+          if [ ! -d client/${{ env.targetName }}.app/Contents/Frameworks/ScintillaEdit.framework ]; then cp -R 3rdparty/scintilla/bin/ScintillaEdit.framework client/${{ env.targetName }}.app/Contents/Frameworks/; fi
+          if [ ! -d client/${{ env.targetName }}.app/Contents/Frameworks/VSyntaxHighlighting.framework ]; then cp -R 3rdparty/vtextedit/src/libs/syntax-highlighting/VSyntaxHighlighting.framework client/${{ env.targetName }}.app/Contents/Frameworks/; fi
+          if [ ! -d client/${{ env.targetName }}.app/Contents/Frameworks/VTextEdit.framework ]; then cp -R 3rdparty/vtextedit/src/editor/VTextEdit.framework client/${{ env.targetName }}.app/Contents/Frameworks/; fi
+          install_name_tool -change @executable_path/../Frameworks/ScintillaEdit.framework/Versions/4/ScintillaEdit @rpath/ScintillaEdit.framework/Versions/4/ScintillaEdit client/${{ env.targetName }}.app/Contents/MacOS/${{ env.targetName }}
+          install_name_tool -change VSyntaxHighlighting.framework/Versions/1/VSyntaxHighlighting @rpath/VSyntaxHighlighting.framework/Versions/1/VSyntaxHighlighting client/${{ env.targetName }}.app/Contents/MacOS/${{ env.targetName }} 
+          install_name_tool -change VTextEdit.framework/Versions/1/VTextEdit @rpath/VTextEdit.framework/Versions/1/VTextEdit client/${{ env.targetName }}.app/Contents/MacOS/${{ env.targetName }}
           macdeployqt "client/${{ env.targetName }}.app" -qmldir=. -verbose=1 -dmg
           
       - name: Upload artifact
