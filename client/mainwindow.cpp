@@ -281,7 +281,8 @@ void MainWindow::onYoudaoResult(QString res)
 {
     Q_ASSERT(m_youdaoDictionaryEditor);
     m_youdaoDictionaryEditor->clear();
-    m_youdaoDictionaryEditor->appendPlainText(res);
+    m_youdaoDictionaryEditor->appendHtml(res);
+    m_youdaoDictionaryEditor->moveCursor(QTextCursor::Start);
 }
 
 QString MainWindow::strippedName(const QString &fullFileName)

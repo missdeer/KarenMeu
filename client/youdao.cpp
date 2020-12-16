@@ -57,9 +57,9 @@ void Youdao::onFinished()
         return;
     }
 
-    QJsonDocument d = QJsonDocument::fromJson("[]");
-    Q_ASSERT(d.isArray());
-    QJsonArray arr = d.array();
+    QString     output;
+    QTextStream ts(&output);
+    ts.setCodec("UTF-8");
 
     auto query = o["query"].toString();
     auto translation = o["translation"].toArray();
@@ -76,19 +76,12 @@ void Youdao::onFinished()
     if (basic["uk-phonetic"].isString())
         trans.append("UK [" + basic["uk-phonetic"].toString() +"]");
 
-    QVariantMap m;
-    m.insert("title", trans.join("; "));
-    m.insert("description", QObject::tr("[Translation] ") + query);
-    arr.append(QJsonObject::fromVariantMap(m));
+    ts << QString("<h2>%1 %2</h2>").arg(QObject::tr("[Translation]"), query) << QString("<p>%1</p><br>").arg(trans.join("; "));
 
     auto explains = basic["explains"].toArray();
     for (auto e : explains)
     {
-        auto i = e.toString();
-        QVariantMap m;
-        m.insert("title", i);
-        m.insert("description", QObject::tr("[Explain] ") + query);
-        arr.append(QJsonObject::fromVariantMap(m));
+        ts << QString("<h2>%1 %2</h2>").arg(QObject::tr("[Explain]"), query) << QString("<p>%1</p><br>").arg(e.toString());
     }
 
     auto web = o["web"].toArray();
@@ -102,17 +95,8 @@ void Youdao::onFinished()
         {
             value.append(v.toString());
         }
-        QVariantMap m;
-        m.insert("title", value.join("; "));
-        m.insert("description", QObject::tr("[Web] ") + key);
-        arr.append(QJsonObject::fromVariantMap(m));
+        ts << QString("<h2>%1 %2</h2>").arg(QObject::tr("[Web]"), key) << QString("<p>%1</p><br>").arg(value.join("; "));
     }
-
-    d.setArray(arr);
-    QString     output;
-    QTextStream ts(&output);
-    ts.setCodec("UTF-8");
-    ts << QString(d.toJson(QJsonDocument::Indented));
     emit result(output);
 }
 
