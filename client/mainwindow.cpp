@@ -30,6 +30,7 @@
 #include "preferencedialog.h"
 #include "previewthemeeditor.h"
 #include "settings.h"
+#include "translatehelperpage.h"
 #include "ui_mainwindow.h"
 #include "utils.h"
 #include "youdao.h"
@@ -37,7 +38,7 @@
 using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), m_view(new MarkdownView(this)), m_youdao(new Youdao(m_nam))
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), m_view(new MarkdownView(this)), m_youdaoDict(new Youdao(m_nam))
 {
     ui->setupUi(this);
     setCentralWidget(m_view);
@@ -76,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionShiftRight, &QAction::triggered, m_view, &MarkdownView::formatShiftRight);
     connect(ui->actionShiftLeft, &QAction::triggered, m_view, &MarkdownView::formatShiftLeft);
     connect(m_view, &MarkdownView::setCurrentFile, this, &MainWindow::onSetCurrentFile);
-    connect(m_youdao, &Youdao::result, this, &MainWindow::onYoudaoResult);
+    connect(m_youdaoDict, &Youdao::result, this, &MainWindow::onYoudaoDictResult);
 
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
     ui->menuView->addAction(ui->editToolbar->toggleViewAction());
@@ -146,6 +147,14 @@ void MainWindow::updateTranslationActions()
     ui->actionBaidu->setChecked(g_settings->enableBaiduTranslate());
     ui->actionSogou->setChecked(g_settings->enableSogouTranslate());
     ui->actionYoudao->setChecked(g_settings->enableYoudaoTranslate());
+}
+
+void MainWindow::showDictTranslateResult(QPlainTextEdit *editor, const QString &res)
+{
+    Q_ASSERT(editor);
+    editor->clear();
+    editor->appendHtml(res);
+    editor->moveCursor(QTextCursor::Start);
 }
 
 void MainWindow::on_actionPreference_triggered()
@@ -277,12 +286,29 @@ void MainWindow::onCustomPreviewThemeChanged()
     }
 }
 
-void MainWindow::onYoudaoResult(QString res)
+void MainWindow::onYoudaoDictResult(QString res)
 {
-    Q_ASSERT(m_youdaoDictionaryEditor);
-    m_youdaoDictionaryEditor->clear();
-    m_youdaoDictionaryEditor->appendHtml(res);
-    m_youdaoDictionaryEditor->moveCursor(QTextCursor::Start);
+    showDictTranslateResult(m_youdaoDictionaryEditor, res);
+}
+
+void MainWindow::onYoudaoTranslated(QString res)
+{
+    showDictTranslateResult(m_youdaoTranslateEditor, res);
+}
+
+void MainWindow::onGoogleTranslated(QString res)
+{
+    showDictTranslateResult(m_googleTranslateEditor, res);
+}
+
+void MainWindow::onBaiduTranslated(QString res)
+{
+    showDictTranslateResult(m_baiduTranslateEditor, res);
+}
+
+void MainWindow::onSogouTranslated(QString res)
+{
+    showDictTranslateResult(m_sogouTranslateEditor, res);
 }
 
 QString MainWindow::strippedName(const QString &fullFileName)
@@ -918,8 +944,8 @@ void MainWindow::on_actionDictionary_triggered()
     QString text = m_view->selectedText();
     if (!text.isEmpty())
     {
-        Q_ASSERT(m_youdao);
-        m_youdao->query(text);
+        Q_ASSERT(m_youdaoDict);
+        m_youdaoDict->query(text);
     }
 }
 
@@ -927,6 +953,48 @@ void MainWindow::on_actionTranslate_triggered()
 {
     Q_ASSERT(m_view);
     QString text = m_view->selectedText();
+    if (text.isEmpty())
+        return;
+    if (g_settings->enableGoogleTranslate())
+    {
+        if (!m_googleTranslate)
+        {
+            m_googleTranslate = new TranslateHelperPage(TST_GOOGLE, this);
+            connect(m_googleTranslate, &TranslateHelperPage::translated, this, &MainWindow::onGoogleTranslated);
+        }
+        Q_ASSERT(m_googleTranslate);
+        m_googleTranslate->translate(text);
+    }
+    if (g_settings->enableBaiduTranslate())
+    {
+        if (!m_baiduTranslate)
+        {
+            m_baiduTranslate = new TranslateHelperPage(TST_BAIDU, this);
+            connect(m_baiduTranslate, &TranslateHelperPage::translated, this, &MainWindow::onBaiduTranslated);
+        }
+        Q_ASSERT(m_baiduTranslate);
+        m_baiduTranslate->translate(text);
+    }
+    if (g_settings->enableSogouTranslate())
+    {
+        if (!m_sogouTranslate)
+        {
+            m_sogouTranslate = new TranslateHelperPage(TST_SOGOU, this);
+            connect(m_sogouTranslate, &TranslateHelperPage::translated, this, &MainWindow::onSogouTranslated);
+        }
+        Q_ASSERT(m_sogouTranslate);
+        m_sogouTranslate->translate(text);
+    }
+    if (g_settings->enableYoudaoTranslate())
+    {
+        if (!m_youdaoTranslate)
+        {
+            m_youdaoTranslate = new TranslateHelperPage(TST_YOUDAO, this);
+            connect(m_youdaoTranslate, &TranslateHelperPage::translated, this, &MainWindow::onYoudaoTranslated);
+        }
+        Q_ASSERT(m_youdaoTranslate);
+        m_youdaoTranslate->translate(text);
+    }
 }
 
 void MainWindow::on_actionGoogle_triggered()

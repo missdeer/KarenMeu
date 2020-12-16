@@ -49,7 +49,8 @@ SOURCES += \
         $$PWD/settings.cpp \
         $$PWD/markdowneditor2/spelling/dictionary_manager.cpp \
         $$PWD/markdowneditor2/spelling/spell_checker.cpp \
-        $$PWD/youdao.cpp
+        $$PWD/youdao.cpp \
+        translatehelperpage.cpp
 
 HEADERS += \
         $$PWD/markdowneditor2/ColorHelper.h \
@@ -82,7 +83,8 @@ HEADERS += \
         $$PWD/markdowneditor2/spelling/dictionary_manager.h \
         $$PWD/markdowneditor2/spelling/dictionary_ref.h \
         $$PWD/markdowneditor2/spelling/spell_checker.h \
-        $$PWD/youdao.h
+        $$PWD/youdao.h \
+        translatehelperpage.h
 
 FORMS += \
         $$PWD/mainwindow.ui \

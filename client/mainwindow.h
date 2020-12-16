@@ -13,6 +13,7 @@ class MarkdownView;
 class PreviewThemeEditor;
 class CustomPreviewThemeEditWidget;
 class Youdao;
+class TranslateHelperPage;
 
 QT_FORWARD_DECLARE_CLASS(QComboBox);
 QT_FORWARD_DECLARE_CLASS(QTreeView);
@@ -57,8 +58,11 @@ private slots:
     void onCurrentCodeBlockStyleChanged(const QString &text);
     void onCurrentPreviewThemeChanged(const QString &text);
     void onCustomPreviewThemeChanged();
-
-    void onYoudaoResult(QString res);
+    void onYoudaoDictResult(QString res);
+    void onYoudaoTranslated(QString res);
+    void onGoogleTranslated(QString res);
+    void onBaiduTranslated(QString res);
+    void onSogouTranslated(QString res);
 
     void on_actionGoogle_triggered();
 
@@ -93,7 +97,11 @@ private:
     PreviewThemeEditor *          m_previewHTMLEditor;
     CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;
     QList<QToolBar *>             m_visibleToolbars;
-    Youdao *                      m_youdao;
+    Youdao *                      m_youdaoDict;
+    TranslateHelperPage *         m_googleTranslate {nullptr};
+    TranslateHelperPage *         m_baiduTranslate {nullptr};
+    TranslateHelperPage *         m_sogouTranslate {nullptr};
+    TranslateHelperPage *         m_youdaoTranslate {nullptr};
 
     QString m_curFile;
 
@@ -103,19 +111,20 @@ private:
     };
     QAction *recentFileActs[MaxRecentFiles];
 
-    QPixmap originalBackgroundImage;
-    QPixmap adjustedBackgroundImage;
+    QPixmap               originalBackgroundImage;
+    QPixmap               adjustedBackgroundImage;
     QNetworkAccessManager m_nam;
 
     void    updateRecentFileActions();
     QString strippedName(const QString &fullFileName);
-    void openRecentFile();
-    void adjustEditorWidth(int width);
-    void applyMarkdownEditorTheme();
-    void predrawBackgroundImage();
-    void setupDockPanels();
-    void setupOptionToolbar();
+    void    openRecentFile();
+    void    adjustEditorWidth(int width);
+    void    applyMarkdownEditorTheme();
+    void    predrawBackgroundImage();
+    void    setupDockPanels();
+    void    setupOptionToolbar();
     void    updateTranslationActions();
+    void    showDictTranslateResult(QPlainTextEdit *editor, const QString &res);
 };
 
 #endif // MAINWINDOW_H
