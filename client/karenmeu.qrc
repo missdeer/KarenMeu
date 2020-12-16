@@ -385,5 +385,6 @@
         <file>rc/syntax/yang.xml</file>
         <file>rc/syntax/zonnon.xml</file>
         <file>rc/syntax/zsh.xml</file>
+        <file>rc/syntax/makefile.xml</file>
     </qresource>
 </RCC>
