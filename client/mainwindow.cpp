@@ -940,6 +940,8 @@ void MainWindow::adjustEditorWidth(int width)
 
 void MainWindow::on_actionDictionary_triggered()
 {
+    Q_ASSERT(m_youdaoDictionaryEditor);
+    m_youdaoDictionaryEditor->clear();
     Q_ASSERT(m_view);
     QString text = m_view->selectedText();
     if (!text.isEmpty())
@@ -957,6 +959,8 @@ void MainWindow::on_actionTranslate_triggered()
         return;
     if (g_settings->enableGoogleTranslate())
     {
+        Q_ASSERT(m_googleTranslateEditor);
+        m_googleTranslateEditor->clear();
         if (!m_googleTranslate)
         {
             m_googleTranslate = new TranslateHelperPage(TST_GOOGLE, this);
@@ -967,6 +971,8 @@ void MainWindow::on_actionTranslate_triggered()
     }
     if (g_settings->enableBaiduTranslate())
     {
+        Q_ASSERT(m_baiduTranslateEditor);
+        m_baiduTranslateEditor->clear();
         if (!m_baiduTranslate)
         {
             m_baiduTranslate = new TranslateHelperPage(TST_BAIDU, this);
@@ -977,6 +983,8 @@ void MainWindow::on_actionTranslate_triggered()
     }
     if (g_settings->enableSogouTranslate())
     {
+        Q_ASSERT(m_sogouTranslateEditor);
+        m_sogouTranslateEditor->clear();
         if (!m_sogouTranslate)
         {
             m_sogouTranslate = new TranslateHelperPage(TST_SOGOU, this);
@@ -987,6 +995,8 @@ void MainWindow::on_actionTranslate_triggered()
     }
     if (g_settings->enableYoudaoTranslate())
     {
+        Q_ASSERT(m_youdaoTranslateEditor);
+        m_youdaoTranslateEditor->clear();
         if (!m_youdaoTranslate)
         {
             m_youdaoTranslate = new TranslateHelperPage(TST_YOUDAO, this);
