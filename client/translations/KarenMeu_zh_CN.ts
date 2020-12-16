@@ -4,27 +4,27 @@
 <context>
     <name>CustomPreviewThemeEditWidget</name>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="48"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="49"/>
         <source>Import from css file</source>
         <translation>从CSS文件导入</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="61"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="62"/>
         <source>Export to css file</source>
         <translation>导出到CSS文件</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="80"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="81"/>
         <source>Save to configuration</source>
         <translation>保存到配置项</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="82"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="83"/>
         <source>Import From File</source>
         <translation>从文件导入</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="84"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="85"/>
         <source>Export To File</source>
         <translation>导出到文件</translation>
     </message>
@@ -33,7 +33,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="141"/>
+        <location filename="../mainwindow.cpp" line="142"/>
         <source>KarenMeu</source>
         <translation></translation>
     </message>
@@ -440,13 +440,13 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="657"/>
-        <location filename="../mainwindow.cpp" line="776"/>
+        <location filename="../mainwindow.cpp" line="762"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="665"/>
-        <location filename="../mainwindow.cpp" line="776"/>
+        <location filename="../mainwindow.cpp" line="762"/>
         <source>Lute</source>
         <translation></translation>
     </message>
@@ -716,98 +716,98 @@
         <translation>搜狗翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="671"/>
+        <location filename="../mainwindow.cpp" line="653"/>
         <source>Google Translate</source>
         <translation>谷歌翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="680"/>
+        <location filename="../mainwindow.cpp" line="663"/>
         <source>Baidu Translate</source>
         <translation>百度翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="689"/>
+        <location filename="../mainwindow.cpp" line="673"/>
         <source>Youdao Translate</source>
         <translation>有道翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="707"/>
+        <location filename="../mainwindow.cpp" line="693"/>
         <source>Youdao Dictionary</source>
         <translation>有道词典</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="743"/>
+        <location filename="../mainwindow.cpp" line="729"/>
         <source>DevTool</source>
         <translation>开发者工具</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="721"/>
+        <location filename="../mainwindow.cpp" line="707"/>
         <source>Preview HTML</source>
         <translation>预览HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="698"/>
+        <location filename="../mainwindow.cpp" line="683"/>
         <source>Sogou Translate</source>
         <translation>搜狗翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="732"/>
+        <location filename="../mainwindow.cpp" line="718"/>
         <source>Custom Theme Editor</source>
         <translation>自定义主题编辑器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="759"/>
+        <location filename="../mainwindow.cpp" line="745"/>
         <source>Mode:</source>
         <translation>预览模式：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="762"/>
+        <location filename="../mainwindow.cpp" line="748"/>
         <source>Engine:</source>
         <translation>渲染引擎：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="765"/>
+        <location filename="../mainwindow.cpp" line="751"/>
         <source>Code Block Style:</source>
         <translation>代码块风格：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="768"/>
+        <location filename="../mainwindow.cpp" line="754"/>
         <source>Preview Theme:</source>
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="772"/>
+        <location filename="../mainwindow.cpp" line="758"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="772"/>
+        <location filename="../mainwindow.cpp" line="758"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="282"/>
-        <location filename="../mainwindow.cpp" line="828"/>
+        <location filename="../mainwindow.cpp" line="283"/>
+        <location filename="../mainwindow.cpp" line="814"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="141"/>
+        <location filename="../mainwindow.cpp" line="142"/>
         <source>KarenMeu is a Markdown based Wechat public account article editor for programmers.</source>
         <translation>KarenMeu是一款专为程序员设计的基于Markdown语法的微信公众号文章编辑器。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="201"/>
+        <location filename="../mainwindow.cpp" line="202"/>
         <source>%1. %2</source>
         <translation>%1. %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="640"/>
+        <location filename="../mainwindow.cpp" line="621"/>
         <source>File System</source>
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="660"/>
+        <location filename="../mainwindow.cpp" line="641"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>
@@ -905,22 +905,22 @@
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="441"/>
+        <location filename="../markdownview.cpp" line="445"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="441"/>
+        <location filename="../markdownview.cpp" line="445"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="444"/>
+        <location filename="../markdownview.cpp" line="448"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="444"/>
+        <location filename="../markdownview.cpp" line="448"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>
@@ -1444,6 +1444,19 @@
         <location filename="../markdowneditor2/TextDocument.cpp" line="96"/>
         <source>untitled</source>
         <translation>未命名</translation>
+    </message>
+</context>
+<context>
+    <name>TranslateOutputWidget</name>
+    <message>
+        <location filename="../translateoutputwidget.cpp" line="76"/>
+        <source>Translate</source>
+        <translation>翻译</translation>
+    </message>
+    <message>
+        <location filename="../translateoutputwidget.cpp" line="78"/>
+        <source>Refresh</source>
+        <translation>刷新</translation>
     </message>
 </context>
 <context>

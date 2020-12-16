@@ -23,17 +23,23 @@ void TranslateHelperPage::translate(const QString &text)
     qDebug() << QUrl::fromUserInput("https://fanyi.baidu.com/#en/zh/" + text.toUtf8().toPercentEncoding());
 }
 
+void TranslateHelperPage::getResult()
+{
+    std::map<TranslateService, std::function<void()>> requestMap = {
+        {TST_GOOGLE, std::bind(&TranslateHelperPage::requestGoogle, this)},
+        {TST_BAIDU, std::bind(&TranslateHelperPage::requestBaidu, this)},
+        {TST_SOGOU, std::bind(&TranslateHelperPage::requestSogou, this)},
+        {TST_YOUDAO, std::bind(&TranslateHelperPage::requestYoudao, this)},
+    };
+    auto it = requestMap.find(m_service);
+    if (requestMap.end() != it)
+    {
+        it->second();
+    }
+}
+
 void TranslateHelperPage::onLoadFinished(bool ok)
 {
-    std::map<TranslateService, std::function<void()>> tsLoadFinished      = {{TST_GOOGLE, std::bind(&TranslateHelperPage::requestGoogle, this)},
-                                                                        {TST_BAIDU, std::bind(&TranslateHelperPage::requestBaidu, this)},
-                                                                        {TST_SOGOU, std::bind(&TranslateHelperPage::requestSogou, this)},
-                                                                        {TST_YOUDAO, std::bind(&TranslateHelperPage::requestYoudao, this)}};
-    std::map<TranslateService, std::function<void()>> tsTranslateFinished = {{TST_GOOGLE, std::bind(&TranslateHelperPage::doneGoogle, this)},
-                                                                             {TST_BAIDU, std::bind(&TranslateHelperPage::doneBaidu, this)},
-                                                                             {TST_SOGOU, std::bind(&TranslateHelperPage::doneSogou, this)},
-                                                                             {TST_YOUDAO, std::bind(&TranslateHelperPage::doneYoudao, this)}};
-
     qDebug() << __FUNCTION__ << __LINE__ << m_state << ok;
     switch (m_state)
     {
@@ -42,7 +48,7 @@ void TranslateHelperPage::onLoadFinished(bool ok)
         if (ok)
         {
             qDebug() << __FUNCTION__ << __LINE__ << m_service;
-            tsLoadFinished[m_service]();
+            getResult();
         }
         break;
     case THS_TRANSLATING:
@@ -50,7 +56,6 @@ void TranslateHelperPage::onLoadFinished(bool ok)
         if (ok)
         {
             qDebug() << __FUNCTION__ << __LINE__ << m_service;
-            tsTranslateFinished[m_service]();
         }
         m_state = THS_IDLE;
         break;
@@ -91,11 +96,3 @@ void TranslateHelperPage::requestSogou()
     runJavaScript("let ele = document.getElementsByClassName(\"output\");\n ele[0].innerText;\n",
                   [this](const QVariant &v2) { emit translated(v2.toString()); });
 }
-
-void TranslateHelperPage::doneYoudao() {}
-
-void TranslateHelperPage::doneGoogle() {}
-
-void TranslateHelperPage::doneBaidu() {}
-
-void TranslateHelperPage::doneSogou() {}

@@ -26,9 +26,10 @@ public:
     explicit TranslateHelperPage(TranslateService ts, QObject *parent = nullptr);
 
     void translate(const QString &text);
+    void getResult();
+
 signals:
     void translated(QString);
-    void failed();
 private slots:
 
     void onLoadFinished(bool ok);
@@ -42,11 +43,6 @@ private:
     void requestGoogle();
     void requestBaidu();
     void requestSogou();
-
-    void doneYoudao();
-    void doneGoogle();
-    void doneBaidu();
-    void doneSogou();
 };
 
 #endif // TRANSLATEHELPERPAGE_H

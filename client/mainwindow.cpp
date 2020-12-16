@@ -31,6 +31,7 @@
 #include "previewthemeeditor.h"
 #include "settings.h"
 #include "translatehelperpage.h"
+#include "translateoutputwidget.h"
 #include "ui_mainwindow.h"
 #include "utils.h"
 #include "youdao.h"
@@ -289,26 +290,6 @@ void MainWindow::onCustomPreviewThemeChanged()
 void MainWindow::onYoudaoDictResult(QString res)
 {
     showDictTranslateResult(m_youdaoDictionaryEditor, res);
-}
-
-void MainWindow::onYoudaoTranslated(QString res)
-{
-    showDictTranslateResult(m_youdaoTranslateEditor, res);
-}
-
-void MainWindow::onGoogleTranslated(QString res)
-{
-    showDictTranslateResult(m_googleTranslateEditor, res);
-}
-
-void MainWindow::onBaiduTranslated(QString res)
-{
-    showDictTranslateResult(m_baiduTranslateEditor, res);
-}
-
-void MainWindow::onSogouTranslated(QString res)
-{
-    showDictTranslateResult(m_sogouTranslateEditor, res);
 }
 
 QString MainWindow::strippedName(const QString &fullFileName)
@@ -668,9 +649,11 @@ void MainWindow::setupDockPanels()
 
     tabifyDockWidget(fsDock, cloudDock);
 
+    auto  getSelectionCallback = std::bind(&MarkdownView::selectedText, m_view);
     auto *googleTranslateDock = new QDockWidget(tr("Google Translate"), this);
     googleTranslateDock->setObjectName("googleTranslate");
-    m_googleTranslateEditor = new QPlainTextEdit(googleTranslateDock);
+    m_googleTranslateEditor = new TranslateOutputWidget(TST_GOOGLE, googleTranslateDock);
+    m_googleTranslateEditor->setGetSelectionCallback(getSelectionCallback);
     googleTranslateDock->setWidget(m_googleTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, googleTranslateDock);
     toggleViewAction = googleTranslateDock->toggleViewAction();
@@ -679,7 +662,8 @@ void MainWindow::setupDockPanels()
 
     auto *baiduTranslateDock = new QDockWidget(tr("Baidu Translate"), this);
     baiduTranslateDock->setObjectName("baiduTranslateDock");
-    m_baiduTranslateEditor   = new QPlainTextEdit(baiduTranslateDock);
+    m_baiduTranslateEditor = new TranslateOutputWidget(TST_BAIDU, baiduTranslateDock);
+    m_baiduTranslateEditor->setGetSelectionCallback(getSelectionCallback);
     baiduTranslateDock->setWidget(m_baiduTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, baiduTranslateDock);
     toggleViewAction = baiduTranslateDock->toggleViewAction();
@@ -688,7 +672,8 @@ void MainWindow::setupDockPanels()
 
     auto *youdaoTranslateDock = new QDockWidget(tr("Youdao Translate"), this);
     youdaoTranslateDock->setObjectName("youdaoTranslateDock");
-    m_youdaoTranslateEditor   = new QPlainTextEdit(youdaoTranslateDock);
+    m_youdaoTranslateEditor = new TranslateOutputWidget(TST_YOUDAO, youdaoTranslateDock);
+    m_youdaoTranslateEditor->setGetSelectionCallback(getSelectionCallback);
     youdaoTranslateDock->setWidget(m_youdaoTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, youdaoTranslateDock);
     toggleViewAction = youdaoTranslateDock->toggleViewAction();
@@ -697,7 +682,8 @@ void MainWindow::setupDockPanels()
 
     auto *sogouTranslateDock = new QDockWidget(tr("Sogou Translate"), this);
     sogouTranslateDock->setObjectName("sogouTranslateDock");
-    m_sogouTranslateEditor = new QPlainTextEdit(sogouTranslateDock);
+    m_sogouTranslateEditor = new TranslateOutputWidget(TST_SOGOU, sogouTranslateDock);
+    m_sogouTranslateEditor->setGetSelectionCallback(getSelectionCallback);
     sogouTranslateDock->setWidget(m_sogouTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, sogouTranslateDock);
     toggleViewAction = sogouTranslateDock->toggleViewAction();
@@ -960,50 +946,22 @@ void MainWindow::on_actionTranslate_triggered()
     if (g_settings->enableGoogleTranslate())
     {
         Q_ASSERT(m_googleTranslateEditor);
-        m_googleTranslateEditor->clear();
-        if (!m_googleTranslate)
-        {
-            m_googleTranslate = new TranslateHelperPage(TST_GOOGLE, this);
-            connect(m_googleTranslate, &TranslateHelperPage::translated, this, &MainWindow::onGoogleTranslated);
-        }
-        Q_ASSERT(m_googleTranslate);
-        m_googleTranslate->translate(text);
+        m_googleTranslateEditor->translate(text);
     }
     if (g_settings->enableBaiduTranslate())
     {
         Q_ASSERT(m_baiduTranslateEditor);
-        m_baiduTranslateEditor->clear();
-        if (!m_baiduTranslate)
-        {
-            m_baiduTranslate = new TranslateHelperPage(TST_BAIDU, this);
-            connect(m_baiduTranslate, &TranslateHelperPage::translated, this, &MainWindow::onBaiduTranslated);
-        }
-        Q_ASSERT(m_baiduTranslate);
-        m_baiduTranslate->translate(text);
+        m_baiduTranslateEditor->translate(text);
     }
     if (g_settings->enableSogouTranslate())
     {
         Q_ASSERT(m_sogouTranslateEditor);
-        m_sogouTranslateEditor->clear();
-        if (!m_sogouTranslate)
-        {
-            m_sogouTranslate = new TranslateHelperPage(TST_SOGOU, this);
-            connect(m_sogouTranslate, &TranslateHelperPage::translated, this, &MainWindow::onSogouTranslated);
-        }
-        Q_ASSERT(m_sogouTranslate);
-        m_sogouTranslate->translate(text);
+        m_sogouTranslateEditor->translate(text);
     }
     if (g_settings->enableYoudaoTranslate())
     {
         Q_ASSERT(m_youdaoTranslateEditor);
-        m_youdaoTranslateEditor->clear();
-        if (!m_youdaoTranslate)
-        {
-            m_youdaoTranslate = new TranslateHelperPage(TST_YOUDAO, this);
-            connect(m_youdaoTranslate, &TranslateHelperPage::translated, this, &MainWindow::onYoudaoTranslated);
-        }
-        Q_ASSERT(m_youdaoTranslate);
-        m_youdaoTranslate->translate(text);
+        m_youdaoTranslateEditor->translate(text);
     }
 }
 

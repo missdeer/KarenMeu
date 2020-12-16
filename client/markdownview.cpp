@@ -416,9 +416,13 @@ MarkdownEditor2 *MarkdownView::editor()
 QString MarkdownView::selectedText() const
 {
     Q_ASSERT(m_editor);
-    QTextCursor c = m_editor->textCursor();
-
-    return c.selectedText();
+    if (m_editor->hasFocus())
+    {
+        QTextCursor c = m_editor->textCursor();
+        return c.selectedText();
+    }
+    Q_ASSERT(m_preview);
+    return m_preview->selectedText();
 }
 
 QSplitter *MarkdownView::splitter()

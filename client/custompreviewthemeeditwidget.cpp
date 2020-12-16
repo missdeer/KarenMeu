@@ -15,6 +15,7 @@ CustomPreviewThemeEditWidget::CustomPreviewThemeEditWidget(QWidget *parent)
 {
     auto toolLayout = new QBoxLayout(QBoxLayout::TopToBottom, this);
     toolLayout->setContentsMargins(0, 0, 0, 0);
+    toolLayout->setSpacing(0);
 
     toolLayout->addWidget(m_toolbar);
     toolLayout->addWidget(m_editor);

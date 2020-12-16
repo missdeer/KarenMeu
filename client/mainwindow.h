@@ -14,6 +14,7 @@ class PreviewThemeEditor;
 class CustomPreviewThemeEditWidget;
 class Youdao;
 class TranslateHelperPage;
+class TranslateOutputWidget;
 
 QT_FORWARD_DECLARE_CLASS(QComboBox);
 QT_FORWARD_DECLARE_CLASS(QTreeView);
@@ -59,10 +60,6 @@ private slots:
     void onCurrentPreviewThemeChanged(const QString &text);
     void onCustomPreviewThemeChanged();
     void onYoudaoDictResult(QString res);
-    void onYoudaoTranslated(QString res);
-    void onGoogleTranslated(QString res);
-    void onBaiduTranslated(QString res);
-    void onSogouTranslated(QString res);
 
     void on_actionGoogle_triggered();
 
@@ -89,19 +86,15 @@ private:
     QComboBox *                   m_cbMarkdownEngine;
     QComboBox *                   m_cbCodeBlockStyle;
     QComboBox *                   m_cbPreviewTheme;
-    QPlainTextEdit *              m_googleTranslateEditor;
-    QPlainTextEdit *              m_baiduTranslateEditor;
-    QPlainTextEdit *              m_youdaoTranslateEditor;
-    QPlainTextEdit *              m_sogouTranslateEditor;
+    TranslateOutputWidget *       m_googleTranslateEditor;
+    TranslateOutputWidget *       m_baiduTranslateEditor;
+    TranslateOutputWidget *       m_youdaoTranslateEditor;
+    TranslateOutputWidget *       m_sogouTranslateEditor;
     QPlainTextEdit *              m_youdaoDictionaryEditor;
     PreviewThemeEditor *          m_previewHTMLEditor;
     CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;
     QList<QToolBar *>             m_visibleToolbars;
     Youdao *                      m_youdaoDict;
-    TranslateHelperPage *         m_googleTranslate {nullptr};
-    TranslateHelperPage *         m_baiduTranslate {nullptr};
-    TranslateHelperPage *         m_sogouTranslate {nullptr};
-    TranslateHelperPage *         m_youdaoTranslate {nullptr};
 
     QString m_curFile;
 
