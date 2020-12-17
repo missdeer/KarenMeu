@@ -959,8 +959,8 @@
     </message>
     <message>
         <location filename="../preferencedialog.cpp" line="22"/>
-        <location filename="../preferencedialog.cpp" line="60"/>
-        <location filename="../preferencedialog.cpp" line="77"/>
+        <location filename="../preferencedialog.cpp" line="62"/>
+        <location filename="../preferencedialog.cpp" line="81"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
@@ -1190,22 +1190,27 @@
         <translation>搜狗翻译</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="413"/>
+        <location filename="../preferencedialog.ui" line="399"/>
+        <source>Translate Timeout(s):</source>
+        <translation>翻译超时(秒)：</translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="414"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="419"/>
+        <location filename="../preferencedialog.ui" line="420"/>
         <source>Server:</source>
         <translation>服务器：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="429"/>
+        <location filename="../preferencedialog.ui" line="430"/>
         <source>Username:</source>
         <translation>用户名：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="439"/>
+        <location filename="../preferencedialog.ui" line="440"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>
@@ -1348,22 +1353,22 @@
 <context>
     <name>QSettings</name>
     <message>
-        <location filename="../settings.cpp" line="65"/>
+        <location filename="../settings.cpp" line="66"/>
         <source>默认</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="66"/>
+        <location filename="../settings.cpp" line="67"/>
         <source>xcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="67"/>
+        <location filename="../settings.cpp" line="68"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="70"/>
+        <location filename="../settings.cpp" line="71"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>

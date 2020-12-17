@@ -3,6 +3,8 @@
 
 #include "translatehelperpage.h"
 
+#include "settings.h"
+
 TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) : QWebEnginePage(parent), m_service(ts), m_timer(new QTimer(this))
 {
     connect(this, &QWebEnginePage::loadFinished, this, &TranslateHelperPage::onLoadFinished);
@@ -31,7 +33,7 @@ TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) :
 
     connect(m_timer, &QTimer::timeout, this, &TranslateHelperPage::getResult);
     m_timer->setSingleShot(true);
-    m_timer->setInterval(3000);
+    m_timer->setInterval(g_settings->translateTimeout());
     m_timer->stop();
 }
 

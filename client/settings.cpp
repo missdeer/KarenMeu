@@ -33,6 +33,7 @@ void Settings::save()
     settings.setValue("baiduTranslate", m_enableBaiduTranslate);
     settings.setValue("youdaoTranslate", m_enableYoudaoTranslate);
     settings.setValue("sogouTranslate", m_enableSogouTranslate);
+    settings.setValue("translateTimeout", m_translateTimeout);
     settings.sync();
 }
 
@@ -73,6 +74,7 @@ void Settings::load()
     m_enableBaiduTranslate      = settings.value("baiduTranslate", false).toBool();
     m_enableYoudaoTranslate     = settings.value("youdaoTranslate", true).toBool();
     m_enableSogouTranslate      = settings.value("sogouTranslate", false).toBool();
+    m_translateTimeout          = settings.value("translateTimeout", 3000).toInt();
 }
 
 const QString &Settings::codeEditorFontFamily() const
@@ -313,4 +315,14 @@ QSharedPointer<vte::TextEditorConfig> Settings::textEditorConfig() const
 QSharedPointer<vte::MarkdownEditorConfig> Settings::markdownEditorConfig() const
 {
     return m_markdownEditorConfig;
+}
+
+int Settings::translateTimeout() const
+{
+    return m_translateTimeout;
+}
+
+void Settings::setTranslateTimeout(int translateTimeout)
+{
+    m_translateTimeout = translateTimeout;
 }

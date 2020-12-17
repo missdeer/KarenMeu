@@ -86,6 +86,9 @@ public:
 
     QSharedPointer<vte::MarkdownEditorConfig> markdownEditorConfig() const;
 
+    int  translateTimeout() const;
+    void setTranslateTimeout(int translateTimeout);
+
 private:
     bool m_enableGoogleTranslate {true};
     bool m_enableBaiduTranslate {false};
@@ -97,6 +100,7 @@ private:
     int m_autoRefreshInterval {1000}; // millisecond
     int m_editorZoomFactor {100};     // percent
     int m_codeEditorFontPointSize {14};
+    int m_translateTimeout {3000}; // millisecond
 
     QString m_codeEditorFontFamily;
     QString m_codeEditorTheme;
