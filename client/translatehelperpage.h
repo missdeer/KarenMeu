@@ -2,6 +2,7 @@
 #define TRANSLATEHELPERPAGE_H
 
 #include <QWebEnginePage>
+QT_FORWARD_DECLARE_CLASS(QTimer);
 
 enum TranslateService
 {
@@ -26,13 +27,15 @@ public:
     explicit TranslateHelperPage(TranslateService ts, QObject *parent = nullptr);
 
     void translate(const QString &text);
+
+public slots:
     void getResult();
 
-signals:
-    void translated(QString);
 private slots:
 
     void onLoadFinished(bool ok);
+signals:
+    void translated(QString);
 
 private:
     TranslateService      m_service;
@@ -41,6 +44,7 @@ private:
     QString               m_landingPage;
     std::function<void()> m_request;
     std::function<void()> m_result;
+    QTimer *              m_timer;
 
     void requestYoudao();
     void requestGoogle();

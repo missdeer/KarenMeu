@@ -3,7 +3,7 @@
 
 #include "translatehelperpage.h"
 
-TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) : QWebEnginePage(parent), m_service(ts)
+TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) : QWebEnginePage(parent), m_service(ts), m_timer(new QTimer(this))
 {
     connect(this, &QWebEnginePage::loadFinished, this, &TranslateHelperPage::onLoadFinished);
     std::map<TranslateService, QString> landingPageUrlMap = {
@@ -28,6 +28,11 @@ TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) :
         {TST_YOUDAO, std::bind(&TranslateHelperPage::resultYoudao, this)},
     };
     m_result = resultMap[ts];
+
+    connect(m_timer, &QTimer::timeout, this, &TranslateHelperPage::getResult);
+    m_timer->setSingleShot(true);
+    m_timer->setInterval(3000);
+    m_timer->stop();
 }
 
 void TranslateHelperPage::translate(const QString &text)
@@ -39,31 +44,36 @@ void TranslateHelperPage::translate(const QString &text)
     m_originalText = text;
     m_state = THS_LOADINGPAGE;
     load(QUrl(m_landingPage + text.toUtf8().toPercentEncoding()));
+    m_timer->start();
+    qDebug() << __FUNCTION__ << __LINE__ << m_state << m_service << text;
 }
 
 void TranslateHelperPage::getResult()
 {
+    m_timer->stop();
     m_result();
 }
 
 void TranslateHelperPage::onLoadFinished(bool ok)
 {
-    qDebug() << __FUNCTION__ << __LINE__ << m_state << ok;
+    qDebug() << __FUNCTION__ << __LINE__ << m_state << m_service << ok;
     switch (m_state)
     {
     case THS_LOADINGPAGE:
         m_state = THS_TRANSLATING;
         if (ok)
         {
-            qDebug() << __FUNCTION__ << __LINE__ << m_service;
             m_request();
+        }
+        else
+        {
+            action(QWebEnginePage::Reload);
         }
         break;
     case THS_TRANSLATING:
         m_state = THS_DONE;
         if (ok)
         {
-            qDebug() << __FUNCTION__ << __LINE__ << m_service;
         }
         m_state = THS_IDLE;
         break;
@@ -79,16 +89,22 @@ void TranslateHelperPage::requestYoudao()
                       .arg(m_originalText.replace("\"", "\\\"")),
                   [this](const QVariant &) {
                       QTimer::singleShot(1000, [this]() {
-                          runJavaScript("document.getElementById(\"transTarget\").innerText;\n",
-                                        [this](const QVariant &v2) { emit translated(v2.toString()); });
+                          runJavaScript("document.getElementById(\"transTarget\").innerText;\n", [this](const QVariant &v2) {
+                              m_timer->stop();
+                              emit translated(v2.toString());
+                          });
                       });
                   });
 }
 
 void TranslateHelperPage::requestGoogle()
 {
-    runJavaScript("let ele = document.getElementsByClassName(\"VIiyi\");\n ele[0].innerText;\n",
-                  [this](const QVariant &v2) { emit translated(v2.toString()); });
+    QTimer::singleShot(1000, [this]() {
+        runJavaScript("document.getElementsByClassName(\"VIiyi\")[0].innerText;\n", [this](const QVariant &v2) {
+            m_timer->stop();
+            emit translated(v2.toString());
+        });
+    });
 }
 
 void TranslateHelperPage::requestBaidu()
@@ -98,16 +114,28 @@ void TranslateHelperPage::requestBaidu()
                       .arg(m_originalText.replace("\"", "\\\"")),
                   [this](const QVariant &) {
                       QTimer::singleShot(1000, [this]() {
-                          runJavaScript("let ele = document.getElementsByClassName(\"target-output\");\n ele[0].innerText;\n",
-                                        [this](const QVariant &v2) { emit translated(v2.toString()); });
+                          runJavaScript("document.getElementsByClassName(\"target-output\")[0].innerText;\n", [this](const QVariant &v2) {
+                              m_timer->stop();
+                              emit translated(v2.toString());
+                          });
                       });
                   });
 }
 
 void TranslateHelperPage::requestSogou()
 {
-    runJavaScript("let ele = document.getElementsByClassName(\"output\");\n ele[0].innerText;\n",
-                  [this](const QVariant &v2) { emit translated(v2.toString()); });
+    runJavaScript(QString("document.getElementById(\"trans-input\").value= \"%1\";\n"
+                          "document.getElementById(\"trans-input\").dispatchEvent("
+                          "new KeyboardEvent('keydown', {bubbles: true, cancelable: true, keyCode: 13}));\n")
+                      .arg(m_originalText.replace("\"", "\\\"")),
+                  [this](const QVariant &) {
+                      QTimer::singleShot(1000, [this]() {
+                          runJavaScript("document.getElementsByClassName(\"output\")[0].innerText;\n", [this](const QVariant &v2) {
+                              m_timer->stop();
+                              emit translated(v2.toString());
+                          });
+                      });
+                  });
 }
 
 void TranslateHelperPage::resultYoudao()
@@ -117,18 +145,16 @@ void TranslateHelperPage::resultYoudao()
 
 void TranslateHelperPage::resultGoogle()
 {
-    runJavaScript("let ele = document.getElementsByClassName(\"VIiyi\");\n ele[0].innerText;\n",
-                  [this](const QVariant &v2) { emit translated(v2.toString()); });
+    runJavaScript("document.getElementsByClassName(\"VIiyi\")[0].innerText;\n", [this](const QVariant &v2) { emit translated(v2.toString()); });
 }
 
 void TranslateHelperPage::resultBaidu()
 {
-    runJavaScript("let ele = document.getElementsByClassName(\"target-output\");\n ele[0].innerText;\n",
+    runJavaScript("document.getElementsByClassName(\"target-output\")[0].innerText;\n",
                   [this](const QVariant &v2) { emit translated(v2.toString()); });
 }
 
 void TranslateHelperPage::resultSogou()
 {
-    runJavaScript("let ele = document.getElementsByClassName(\"output\");\n ele[0].innerText;\n",
-                  [this](const QVariant &v2) { emit translated(v2.toString()); });
+    runJavaScript("document.getElementsByClassName(\"output\")[0].innerText;\n", [this](const QVariant &v2) { emit translated(v2.toString()); });
 }
