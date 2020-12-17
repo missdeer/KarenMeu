@@ -1449,12 +1449,12 @@
 <context>
     <name>TranslateOutputWidget</name>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="76"/>
+        <location filename="../translateoutputwidget.cpp" line="82"/>
         <source>Translate</source>
         <translation>翻译</translation>
     </message>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="78"/>
+        <location filename="../translateoutputwidget.cpp" line="84"/>
         <source>Refresh</source>
         <translation>刷新</translation>
     </message>

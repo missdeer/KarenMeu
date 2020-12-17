@@ -59,6 +59,12 @@ void TranslateOutputWidget::onTranslate()
 
 void TranslateOutputWidget::onRefresh()
 {
+    if (!m_helper)
+    {
+        onTranslate();
+        return;
+    }
+    Q_ASSERT(m_helper);
     m_helper->getResult();
 }
 

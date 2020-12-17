@@ -35,14 +35,22 @@ private slots:
     void onLoadFinished(bool ok);
 
 private:
-    TranslateService     m_service;
-    TranslateHelperState m_state {THS_IDLE};
-    QString              m_originalText;
+    TranslateService      m_service;
+    TranslateHelperState  m_state {THS_IDLE};
+    QString               m_originalText;
+    QString               m_landingPage;
+    std::function<void()> m_request;
+    std::function<void()> m_result;
 
     void requestYoudao();
     void requestGoogle();
     void requestBaidu();
     void requestSogou();
+
+    void resultYoudao();
+    void resultGoogle();
+    void resultBaidu();
+    void resultSogou();
 };
 
 #endif // TRANSLATEHELPERPAGE_H

@@ -6,6 +6,28 @@
 TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) : QWebEnginePage(parent), m_service(ts)
 {
     connect(this, &QWebEnginePage::loadFinished, this, &TranslateHelperPage::onLoadFinished);
+    std::map<TranslateService, QString> landingPageUrlMap = {
+        {TST_GOOGLE, "https://translate.google.com/?sl=auto&tl=zh-CN&text="},
+        {TST_BAIDU, "https://fanyi.baidu.com/#en/zh/"},
+        {TST_SOGOU, "https://fanyi.sogou.com/?transfrom=en&transto=zh-CHS&isclient=1&model=general&keyword="},
+        {TST_YOUDAO, "http://fanyi.youdao.com/?keyword="}};
+    m_landingPage = landingPageUrlMap[ts];
+
+    std::map<TranslateService, std::function<void()>> requestMap = {
+        {TST_GOOGLE, std::bind(&TranslateHelperPage::requestGoogle, this)},
+        {TST_BAIDU, std::bind(&TranslateHelperPage::requestBaidu, this)},
+        {TST_SOGOU, std::bind(&TranslateHelperPage::requestSogou, this)},
+        {TST_YOUDAO, std::bind(&TranslateHelperPage::requestYoudao, this)},
+    };
+    m_request = requestMap[ts];
+
+    std::map<TranslateService, std::function<void()>> resultMap = {
+        {TST_GOOGLE, std::bind(&TranslateHelperPage::resultGoogle, this)},
+        {TST_BAIDU, std::bind(&TranslateHelperPage::resultBaidu, this)},
+        {TST_SOGOU, std::bind(&TranslateHelperPage::resultSogou, this)},
+        {TST_YOUDAO, std::bind(&TranslateHelperPage::resultYoudao, this)},
+    };
+    m_result = resultMap[ts];
 }
 
 void TranslateHelperPage::translate(const QString &text)
@@ -14,32 +36,14 @@ void TranslateHelperPage::translate(const QString &text)
     {
         action(QWebEnginePage::Stop);
     }
-    m_originalText                          = text;
-    std::map<TranslateService, QUrl> tsUrls = {
-        {TST_GOOGLE, QUrl::fromUserInput("https://translate.google.com/?sl=auto&tl=zh-CN&text=" + text.toUtf8().toPercentEncoding())},
-        {TST_BAIDU, QUrl::fromUserInput("https://fanyi.baidu.com/#en/zh/" + text.toUtf8().toPercentEncoding())},
-        {TST_SOGOU,
-         QUrl::fromUserInput("https://fanyi.sogou.com/?transfrom=en&transto=zh-CHS&isclient=1&model=general&keyword=" +
-                             text.toUtf8().toPercentEncoding())},
-        {TST_YOUDAO, QUrl("http://fanyi.youdao.com/")}};
+    m_originalText = text;
     m_state = THS_LOADINGPAGE;
-    load(tsUrls[m_service]);
-    qDebug() << QUrl::fromUserInput("https://fanyi.baidu.com/#en/zh/" + text.toUtf8().toPercentEncoding());
+    load(QUrl(m_landingPage + text.toUtf8().toPercentEncoding()));
 }
 
 void TranslateHelperPage::getResult()
 {
-    std::map<TranslateService, std::function<void()>> requestMap = {
-        {TST_GOOGLE, std::bind(&TranslateHelperPage::requestGoogle, this)},
-        {TST_BAIDU, std::bind(&TranslateHelperPage::requestBaidu, this)},
-        {TST_SOGOU, std::bind(&TranslateHelperPage::requestSogou, this)},
-        {TST_YOUDAO, std::bind(&TranslateHelperPage::requestYoudao, this)},
-    };
-    auto it = requestMap.find(m_service);
-    if (requestMap.end() != it)
-    {
-        it->second();
-    }
+    m_result();
 }
 
 void TranslateHelperPage::onLoadFinished(bool ok)
@@ -52,7 +56,7 @@ void TranslateHelperPage::onLoadFinished(bool ok)
         if (ok)
         {
             qDebug() << __FUNCTION__ << __LINE__ << m_service;
-            getResult();
+            m_request();
         }
         break;
     case THS_TRANSLATING:
@@ -101,6 +105,29 @@ void TranslateHelperPage::requestBaidu()
 }
 
 void TranslateHelperPage::requestSogou()
+{
+    runJavaScript("let ele = document.getElementsByClassName(\"output\");\n ele[0].innerText;\n",
+                  [this](const QVariant &v2) { emit translated(v2.toString()); });
+}
+
+void TranslateHelperPage::resultYoudao()
+{
+    runJavaScript("document.getElementById(\"transTarget\").innerText;\n", [this](const QVariant &v2) { emit translated(v2.toString()); });
+}
+
+void TranslateHelperPage::resultGoogle()
+{
+    runJavaScript("let ele = document.getElementsByClassName(\"VIiyi\");\n ele[0].innerText;\n",
+                  [this](const QVariant &v2) { emit translated(v2.toString()); });
+}
+
+void TranslateHelperPage::resultBaidu()
+{
+    runJavaScript("let ele = document.getElementsByClassName(\"target-output\");\n ele[0].innerText;\n",
+                  [this](const QVariant &v2) { emit translated(v2.toString()); });
+}
+
+void TranslateHelperPage::resultSogou()
 {
     runJavaScript("let ele = document.getElementsByClassName(\"output\");\n ele[0].innerText;\n",
                   [this](const QVariant &v2) { emit translated(v2.toString()); });
