@@ -68,9 +68,8 @@ jobs:
           
       - run: |
           cd 3rdparty\vtextedit
-          git pull
           git submodule init
-          git submodule update
+          git submodule update --recursive
        
       - name: generate scintilla headers
         shell: cmd
