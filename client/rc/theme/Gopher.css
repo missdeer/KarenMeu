@@ -142,14 +142,14 @@
 }
 /* 行内代码 */
 #nice p code, li code {
-    font-size: 12px;
+    font-size: 14px;
     color: #007d9c;
 }
 /* 非微信代码块 * 代码块不换行 display: -webkit-box !important;
 * 代码块换行 display: block;
 */
 #nice pre span, pre code {
-    font-size: 12px;
+    font-size: 14px;
 }
 /* * 表格内的单元格 * 字体大小 font-size: 16px;
 * 边框 border: 1px solid #ccc;
