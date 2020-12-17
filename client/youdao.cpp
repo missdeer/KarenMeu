@@ -76,12 +76,12 @@ void Youdao::onFinished()
     if (basic["uk-phonetic"].isString())
         trans.append("UK [" + basic["uk-phonetic"].toString() +"]");
 
-    ts << QString("<h2>%1 %2</h2>").arg(QObject::tr("[Translation]"), query) << QString("<p>%1</p><br>").arg(trans.join("; "));
+    ts << QString("<h4>%1 %2</h4>").arg(QObject::tr("[Translation]"), query) << QString("<p>%1</p><br>").arg(trans.join("; "));
 
     auto explains = basic["explains"].toArray();
     for (auto e : explains)
     {
-        ts << QString("<h2>%1 %2</h2>").arg(QObject::tr("[Explain]"), query) << QString("<p>%1</p><br>").arg(e.toString());
+        ts << QString("<h4>%1 %2</h4>").arg(QObject::tr("[Explain]"), query) << QString("<p>%1</p><br>").arg(e.toString());
     }
 
     auto web = o["web"].toArray();
@@ -95,7 +95,7 @@ void Youdao::onFinished()
         {
             value.append(v.toString());
         }
-        ts << QString("<h2>%1 %2</h2>").arg(QObject::tr("[Web]"), key) << QString("<p>%1</p><br>").arg(value.join("; "));
+        ts << QString("<h4>%1 %2</h4>").arg(QObject::tr("[Web]"), key) << QString("<p>%1</p><br>").arg(value.join("; "));
     }
     emit result(output);
 }
