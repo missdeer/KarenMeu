@@ -501,6 +501,7 @@ void MarkdownView::renderMarkdownToHTML()
     QByteArray temp = ba;
     temp.replace('\r', ' ');
     QList<QByteArray> lines = temp.split('\n');
+    QList<QByteArray> metaDataLines;
 
     QRegularExpression reBegin("\\s*\\-{3,}");
     auto               match = reBegin.match(QString(lines[0]));
@@ -519,6 +520,7 @@ void MarkdownView::renderMarkdownToHTML()
         }
         if (endLine)
         {
+            metaDataLines = lines.mid(1, endLine - 1);
             lines = lines.mid(endLine + 1);
         }
         ba = lines.join('\n');
@@ -545,6 +547,14 @@ void MarkdownView::renderMarkdownToHTML()
     {
         updateMacStyleCodeBlock();
         html = html.replace("<pre", "<pre class=\"macpre\"");
+    }
+    if (!metaDataLines.isEmpty())
+    {
+        std::transform(metaDataLines.begin(), metaDataLines.end(), metaDataLines.begin(), [](const auto &line) {
+            return QString(line).toHtmlEscaped().toUtf8();
+        });
+        QString metaDataHTML = QString("<p id=\"metadata\">%1</p><hr>").arg(QString(metaDataLines.join("<br>")));
+        html                 = metaDataHTML + html;
     }
     setContent(html);
 
