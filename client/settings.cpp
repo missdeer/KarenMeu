@@ -4,8 +4,6 @@
 
 #include "settings.h"
 
-#include "MarkdownEditorThemeFactory.h"
-
 void Settings::initialize()
 {
     load();
@@ -21,7 +19,6 @@ void Settings::save()
     settings.setValue("editorZoomFactor", m_editorZoomFactor);
     settings.setValue("codeEditorFontFamily", m_codeEditorFontFamily);
     settings.setValue("codeEditorFontPointSize", m_codeEditorFontPointSize);
-    settings.setValue("codeEditorTheme", m_codeEditorTheme);
     settings.setValue("previewTheme", m_previewTheme);
     settings.setValue("codeBlockStyle", m_codeBlockStyle);
     settings.setValue("markdownEngine", m_markdownEngine);
@@ -60,10 +57,7 @@ void Settings::load()
                                             )
                                  .toString();
     m_codeEditorFontPointSize = settings.value("codeEditorFontPointSize", 14).toInt();
-    m_codeEditorTheme         = settings.value("codeEditorTheme", MarkdownEditorThemeFactory::PLAINSTRACTION_LIGHT_THEME_NAME).toString();
-    QString err;
-    m_theme = MarkdownEditorThemeFactory::getInstance()->loadTheme(m_codeEditorTheme, err);
-    setPreviewTheme(settings.value("previewTheme", QSettings::tr("默认")).toString());
+    setPreviewTheme(settings.value("previewTheme", QSettings::tr("Default")).toString());
     m_codeBlockStyle          = settings.value("codeBlockStyle", QSettings::tr("xcode")).toString();
     m_markdownEngine          = settings.value("markdownEngine", QSettings::tr("Goldmark")).toString();
     m_enableLineNumbers         = settings.value("enableLineNumbers", true).toBool();
@@ -185,11 +179,6 @@ const QByteArray &Settings::customPreviewThemeStyle() const
 void Settings::setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeStyle)
 {
     m_customPreviewThemeStyle = customPreviewThemeStyle;
-}
-
-MarkdownEditorTheme &Settings::theme()
-{
-    return m_theme;
 }
 
 bool Settings::macTerminalStyleCodeBlock() const

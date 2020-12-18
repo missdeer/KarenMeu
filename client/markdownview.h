@@ -10,7 +10,6 @@ QT_FORWARD_DECLARE_CLASS(QWebEngineView);
 QT_FORWARD_DECLARE_CLASS(QTimer);
 QT_FORWARD_DECLARE_CLASS(QResizeEvent);
 QT_FORWARD_DECLARE_CLASS(QWebEnginePage);
-class MarkdownEditor2;
 class MarkdownEditor3;
 class PreviewThemeEditor;
 
@@ -27,7 +26,7 @@ public:
     void             updateMarkdownEngine();
     void             updateMacStyleCodeBlock();
     void             openFromFile(const QString &fileName);
-    MarkdownEditor2 *editor();
+    MarkdownEditor3 *editor();
     QString          selectedText() const;
     QSplitter *      splitter();
     void             setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor);
@@ -81,10 +80,10 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
 
 private:
-    bool             m_modified {false};
-    QSplitter *      m_splitter;
-    MarkdownEditor2 *m_editor;
-    QWebEngineView * m_preview;
+    bool                m_modified {false};
+    QSplitter *         m_splitter;
+    MarkdownEditor3 *   m_editor;
+    QWebEngineView *    m_preview;
     QTimer *            m_convertTimer;
     PreviewThemeEditor *m_previewHTMLEditor;
     PreviewThemeEditor *m_customPreivewThemeEditor;

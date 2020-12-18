@@ -71,9 +71,7 @@ private slots:
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
-    void moveEvent(QMoveEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
-    void paintEvent(QPaintEvent *event) override;
     void changeEvent(QEvent *event) override;
 
 private:
@@ -118,6 +116,7 @@ private:
     void    setupOptionToolbar();
     void    updateTranslationActions();
     void    showDictTranslateResult(QPlainTextEdit *editor, const QString &res);
+    void    initializeEditor(QPlainTextEdit *editor);
 };
 
 #endif // MAINWINDOW_H

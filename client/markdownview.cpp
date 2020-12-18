@@ -1,5 +1,3 @@
-#include <algorithm>
-
 #include <QApplication>
 #include <QClipboard>
 #include <QFileDialog>
@@ -12,9 +10,11 @@
 #include <QWebEngineScriptCollection>
 #include <QWebEngineView>
 #include <QtCore>
+#include <algorithm>
 
 #include "markdownview.h"
-#include "markdowneditor2.h"
+
+#include "markdowneditor3.h"
 #include "previewpage.h"
 #include "previewthemeeditor.h"
 #include "settings.h"
@@ -24,11 +24,11 @@ using pFMarkdownEngine          = char *(*)(GoString, GoString, GoUint8);
 pFMarkdownEngine markdownEngine = nullptr;
 
 MarkdownView::MarkdownView(QWidget *parent)
-    : QWidget(parent),
-      m_splitter(new QSplitter(this)),
-      m_editor(new MarkdownEditor2(this)),
-      m_preview(new QWebEngineView(this)),
-      m_convertTimer(new QTimer)
+    : QWidget(parent)
+    , m_splitter(new QSplitter(this))
+    , m_editor(new MarkdownEditor3(this))
+    , m_preview(new QWebEngineView(this))
+    , m_convertTimer(new QTimer)
 {
     m_splitter->addWidget(m_editor);
     m_splitter->addWidget(m_preview);
@@ -36,36 +36,38 @@ MarkdownView::MarkdownView(QWidget *parent)
                               "QSplitter { border: 0; margin: 0; padding: 0 }");
     auto *layout = new QVBoxLayout;
     layout->addWidget(m_splitter);
+    layout->setMargin(0);
+    layout->setSpacing(0);
 
     setLayout(layout);
     m_splitter->setSizes(QList<int>() << width() / 2 << width() / 2);
     m_editor->initialize();
-    connect(m_editor, &MarkdownEditor2::contentModified, this, &MarkdownView::documentModified);
-    connect(this, &MarkdownView::formatStrong, m_editor, &MarkdownEditor2::formatStrong);
-    connect(this, &MarkdownView::formatEmphasize, m_editor, &MarkdownEditor2::formatEmphasize);
-    connect(this, &MarkdownView::formatStrikethrough, m_editor, &MarkdownEditor2::formatStrikethrough);
-    connect(this, &MarkdownView::formatInlineCode, m_editor, &MarkdownEditor2::formatInlineCode);
-    connect(this, &MarkdownView::formatCodeBlock, m_editor, &MarkdownEditor2::formatCodeBlock);
-    connect(this, &MarkdownView::formatComment, m_editor, &MarkdownEditor2::formatComment);
-    connect(this, &MarkdownView::formatOrderedList, m_editor, &MarkdownEditor2::formatOrderedList);
-    connect(this, &MarkdownView::formatUnorderedList, m_editor, &MarkdownEditor2::formatUnorderedList);
-    connect(this, &MarkdownView::formatBlockquote, m_editor, &MarkdownEditor2::formatBlockquote);
-    connect(this, &MarkdownView::formatHyperlink, m_editor, &MarkdownEditor2::formatHyperlink);
-    connect(this, &MarkdownView::formatImage, m_editor, &MarkdownEditor2::formatImage);
-    connect(this, &MarkdownView::formatNewParagraph, m_editor, &MarkdownEditor2::formatNewParagraph);
-    connect(this, &MarkdownView::formatHorizontalRule, m_editor, &MarkdownEditor2::formatHorizontalRule);
-    connect(this, &MarkdownView::formatHeader1, m_editor, &MarkdownEditor2::formatHeader1);
-    connect(this, &MarkdownView::formatHeader2, m_editor, &MarkdownEditor2::formatHeader2);
-    connect(this, &MarkdownView::formatHeader3, m_editor, &MarkdownEditor2::formatHeader3);
-    connect(this, &MarkdownView::formatHeader4, m_editor, &MarkdownEditor2::formatHeader4);
-    connect(this, &MarkdownView::formatHeader5, m_editor, &MarkdownEditor2::formatHeader5);
-    connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor2::formatHeader6);
-    connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor2::formatShiftRight);
-    connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor2::formatShiftLeft);
+    connect(m_editor, &MarkdownEditor3::contentModified, this, &MarkdownView::documentModified);
+    connect(this, &MarkdownView::formatStrong, m_editor, &MarkdownEditor3::formatStrong);
+    connect(this, &MarkdownView::formatEmphasize, m_editor, &MarkdownEditor3::formatEmphasize);
+    connect(this, &MarkdownView::formatStrikethrough, m_editor, &MarkdownEditor3::formatStrikethrough);
+    connect(this, &MarkdownView::formatInlineCode, m_editor, &MarkdownEditor3::formatInlineCode);
+    connect(this, &MarkdownView::formatCodeBlock, m_editor, &MarkdownEditor3::formatCodeBlock);
+    connect(this, &MarkdownView::formatComment, m_editor, &MarkdownEditor3::formatComment);
+    connect(this, &MarkdownView::formatOrderedList, m_editor, &MarkdownEditor3::formatOrderedList);
+    connect(this, &MarkdownView::formatUnorderedList, m_editor, &MarkdownEditor3::formatUnorderedList);
+    connect(this, &MarkdownView::formatBlockquote, m_editor, &MarkdownEditor3::formatBlockquote);
+    connect(this, &MarkdownView::formatHyperlink, m_editor, &MarkdownEditor3::formatHyperlink);
+    connect(this, &MarkdownView::formatImage, m_editor, &MarkdownEditor3::formatImage);
+    connect(this, &MarkdownView::formatNewParagraph, m_editor, &MarkdownEditor3::formatNewParagraph);
+    connect(this, &MarkdownView::formatHorizontalRule, m_editor, &MarkdownEditor3::formatHorizontalRule);
+    connect(this, &MarkdownView::formatHeader1, m_editor, &MarkdownEditor3::formatHeader1);
+    connect(this, &MarkdownView::formatHeader2, m_editor, &MarkdownEditor3::formatHeader2);
+    connect(this, &MarkdownView::formatHeader3, m_editor, &MarkdownEditor3::formatHeader3);
+    connect(this, &MarkdownView::formatHeader4, m_editor, &MarkdownEditor3::formatHeader4);
+    connect(this, &MarkdownView::formatHeader5, m_editor, &MarkdownEditor3::formatHeader5);
+    connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor3::formatHeader6);
+    connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor3::formatShiftRight);
+    connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor3::formatShiftLeft);
 
     auto *page = new PreviewPage(this);
     m_preview->setPage(page);
-    connect(m_editor, &MarkdownEditor2::scrollValueChanged, page, &PreviewPage::onEditorScrollMoved);
+    connect(m_editor, &MarkdownEditor3::scrollValueChanged, page, &PreviewPage::onEditorScrollMoved);
 
     auto *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);
@@ -408,7 +410,7 @@ void MarkdownView::openFromFile(const QString &fileName)
     }
 }
 
-MarkdownEditor2 *MarkdownView::editor()
+MarkdownEditor3 *MarkdownView::editor()
 {
     return m_editor;
 }
@@ -494,6 +496,7 @@ void MarkdownView::setContent(const QString &html)
 void MarkdownView::renderMarkdownToHTML()
 {
     QByteArray ba = m_editor->content();
+    qDebug() << __FUNCTION__ << __LINE__ << ba.length();
     if (ba.isEmpty())
         return;
 

@@ -8,8 +8,6 @@
 #include <vtextedit/vmarkdowneditor.h>
 #include <vtextedit/vtexteditor.h>
 
-#include "MarkdownEditorTheme.h"
-
 class Settings
 {
 public:
@@ -49,8 +47,6 @@ public:
 
     const QByteArray &customPreviewThemeStyle() const;
     void              setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeStyle);
-
-    MarkdownEditorTheme &theme();
 
     bool macTerminalStyleCodeBlock() const;
     void setMacTerminalStyleCodeBlock(bool macTerminalStyleCodeBlock);
@@ -110,8 +106,6 @@ private:
     QString m_previewMode;
 
     QByteArray m_customPreviewThemeStyle;
-
-    MarkdownEditorTheme m_theme;
 
     QSharedPointer<vte::TextEditorConfig>     m_textEditorConfig;
     QSharedPointer<vte::MarkdownEditorConfig> m_markdownEditorConfig;
