@@ -42,7 +42,8 @@ SOURCES += \
         $$PWD/translatehelperpage.cpp \
         $$PWD/translateoutputwidget.cpp \
         $$PWD/markdowneditor3/markdowneditor3.cpp \
-        $$PWD/clientutils.cpp
+        $$PWD/clientutils.cpp \
+        markdowneditor4/markdowneditor4.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -58,13 +59,14 @@ HEADERS += \
         $$PWD/translatehelperpage.h \
         $$PWD/translateoutputwidget.h \
         $$PWD/markdowneditor3/markdowneditor3.h \
-        $$PWD/clientutils.h
+        $$PWD/clientutils.h \
+        markdowneditor4/markdowneditor4.h
 
 FORMS += \
         $$PWD/mainwindow.ui \
         $$PWD/preferencedialog.ui
 
-INCLUDEPATH += $$PWD $$PWD/markdowneditor3
+INCLUDEPATH += $$PWD $$PWD/markdowneditor3 $$PWD/markdowneditor4
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

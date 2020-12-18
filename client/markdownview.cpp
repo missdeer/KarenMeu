@@ -16,6 +16,7 @@
 
 #include "clientutils.h"
 #include "markdowneditor3.h"
+#include "markdowneditor4.h"
 #include "previewpage.h"
 #include "previewthemeeditor.h"
 #include "settings.h"
@@ -27,11 +28,13 @@ pFMarkdownEngine markdownEngine = nullptr;
 MarkdownView::MarkdownView(QWidget *parent)
     : QWidget(parent)
     , m_splitter(new QSplitter(this))
-    , m_editor(new MarkdownEditor3(this))
+    , m_editor3(new MarkdownEditor3(this))
+    , m_editor4(new MarkdownEditor4(g_settings->markdownEditorConfig(), this))
     , m_preview(new QWebEngineView(this))
     , m_convertTimer(new QTimer)
 {
-    m_splitter->addWidget(m_editor);
+    m_splitter->addWidget(m_editor3);
+    m_splitter->addWidget(m_editor4);
     m_splitter->addWidget(m_preview);
     m_splitter->setStyleSheet("QSplitter:handle { border: 0 }"
                               "QSplitter { border: 0; margin: 0; padding: 0 }");
@@ -42,33 +45,33 @@ MarkdownView::MarkdownView(QWidget *parent)
 
     setLayout(layout);
     m_splitter->setSizes(QList<int>() << width() / 2 << width() / 2);
-    m_editor->initialize();
-    connect(m_editor, &MarkdownEditor3::contentModified, this, &MarkdownView::documentModified);
-    connect(this, &MarkdownView::formatStrong, m_editor, &MarkdownEditor3::formatStrong);
-    connect(this, &MarkdownView::formatEmphasize, m_editor, &MarkdownEditor3::formatEmphasize);
-    connect(this, &MarkdownView::formatStrikethrough, m_editor, &MarkdownEditor3::formatStrikethrough);
-    connect(this, &MarkdownView::formatInlineCode, m_editor, &MarkdownEditor3::formatInlineCode);
-    connect(this, &MarkdownView::formatCodeBlock, m_editor, &MarkdownEditor3::formatCodeBlock);
-    connect(this, &MarkdownView::formatComment, m_editor, &MarkdownEditor3::formatComment);
-    connect(this, &MarkdownView::formatOrderedList, m_editor, &MarkdownEditor3::formatOrderedList);
-    connect(this, &MarkdownView::formatUnorderedList, m_editor, &MarkdownEditor3::formatUnorderedList);
-    connect(this, &MarkdownView::formatBlockquote, m_editor, &MarkdownEditor3::formatBlockquote);
-    connect(this, &MarkdownView::formatHyperlink, m_editor, &MarkdownEditor3::formatHyperlink);
-    connect(this, &MarkdownView::formatImage, m_editor, &MarkdownEditor3::formatImage);
-    connect(this, &MarkdownView::formatNewParagraph, m_editor, &MarkdownEditor3::formatNewParagraph);
-    connect(this, &MarkdownView::formatHorizontalRule, m_editor, &MarkdownEditor3::formatHorizontalRule);
-    connect(this, &MarkdownView::formatHeader1, m_editor, &MarkdownEditor3::formatHeader1);
-    connect(this, &MarkdownView::formatHeader2, m_editor, &MarkdownEditor3::formatHeader2);
-    connect(this, &MarkdownView::formatHeader3, m_editor, &MarkdownEditor3::formatHeader3);
-    connect(this, &MarkdownView::formatHeader4, m_editor, &MarkdownEditor3::formatHeader4);
-    connect(this, &MarkdownView::formatHeader5, m_editor, &MarkdownEditor3::formatHeader5);
-    connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor3::formatHeader6);
-    connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor3::formatShiftRight);
-    connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor3::formatShiftLeft);
+    m_editor3->initialize();
+    connect(m_editor3, &MarkdownEditor3::contentModified, this, &MarkdownView::documentModified);
+    connect(this, &MarkdownView::formatStrong, m_editor3, &MarkdownEditor3::formatStrong);
+    connect(this, &MarkdownView::formatEmphasize, m_editor3, &MarkdownEditor3::formatEmphasize);
+    connect(this, &MarkdownView::formatStrikethrough, m_editor3, &MarkdownEditor3::formatStrikethrough);
+    connect(this, &MarkdownView::formatInlineCode, m_editor3, &MarkdownEditor3::formatInlineCode);
+    connect(this, &MarkdownView::formatCodeBlock, m_editor3, &MarkdownEditor3::formatCodeBlock);
+    connect(this, &MarkdownView::formatComment, m_editor3, &MarkdownEditor3::formatComment);
+    connect(this, &MarkdownView::formatOrderedList, m_editor3, &MarkdownEditor3::formatOrderedList);
+    connect(this, &MarkdownView::formatUnorderedList, m_editor3, &MarkdownEditor3::formatUnorderedList);
+    connect(this, &MarkdownView::formatBlockquote, m_editor3, &MarkdownEditor3::formatBlockquote);
+    connect(this, &MarkdownView::formatHyperlink, m_editor3, &MarkdownEditor3::formatHyperlink);
+    connect(this, &MarkdownView::formatImage, m_editor3, &MarkdownEditor3::formatImage);
+    connect(this, &MarkdownView::formatNewParagraph, m_editor3, &MarkdownEditor3::formatNewParagraph);
+    connect(this, &MarkdownView::formatHorizontalRule, m_editor3, &MarkdownEditor3::formatHorizontalRule);
+    connect(this, &MarkdownView::formatHeader1, m_editor3, &MarkdownEditor3::formatHeader1);
+    connect(this, &MarkdownView::formatHeader2, m_editor3, &MarkdownEditor3::formatHeader2);
+    connect(this, &MarkdownView::formatHeader3, m_editor3, &MarkdownEditor3::formatHeader3);
+    connect(this, &MarkdownView::formatHeader4, m_editor3, &MarkdownEditor3::formatHeader4);
+    connect(this, &MarkdownView::formatHeader5, m_editor3, &MarkdownEditor3::formatHeader5);
+    connect(this, &MarkdownView::formatHeader6, m_editor3, &MarkdownEditor3::formatHeader6);
+    connect(this, &MarkdownView::formatShiftRight, m_editor3, &MarkdownEditor3::formatShiftRight);
+    connect(this, &MarkdownView::formatShiftLeft, m_editor3, &MarkdownEditor3::formatShiftLeft);
 
     auto *page = new PreviewPage(this);
     m_preview->setPage(page);
-    connect(m_editor, &MarkdownEditor3::scrollValueChanged, page, &PreviewPage::onEditorScrollMoved);
+    connect(m_editor3, &MarkdownEditor3::scrollValueChanged, page, &PreviewPage::onEditorScrollMoved);
 
     auto *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);
@@ -104,7 +107,7 @@ void MarkdownView::forceConvert()
 
 bool MarkdownView::maybeSave()
 {
-    if (m_editor->modify())
+    if (m_editor3->modify())
     {
         int res = QMessageBox::question(this,
                                         tr("Confirm"),
@@ -149,7 +152,7 @@ void MarkdownView::saveAsDocument()
 
 void MarkdownView::newDocument()
 {
-    if (m_editor->modify())
+    if (m_editor3->modify())
     {
         // prompt user to save document first
         int res = QMessageBox::question(this,
@@ -160,15 +163,15 @@ void MarkdownView::newDocument()
         if (res == QMessageBox::Yes)
             saveDocument();
     }
-    m_editor->clear();
-    m_editor->setSavePoint();
-    m_editor->emptyUndoBuffer();
+    m_editor3->clear();
+    m_editor3->setSavePoint();
+    m_editor3->emptyUndoBuffer();
 }
 
 void MarkdownView::copy()
 {
-    if (m_editor->hasFocus())
-        m_editor->copy();
+    if (m_editor3->hasFocus())
+        m_editor3->copy();
     else
     {
         m_preview->triggerPageAction(QWebEnginePage::Copy);
@@ -177,8 +180,8 @@ void MarkdownView::copy()
 
 void MarkdownView::cut()
 {
-    if (m_editor->hasFocus())
-        m_editor->cut();
+    if (m_editor3->hasFocus())
+        m_editor3->cut();
     else
     {
         m_preview->triggerPageAction(QWebEnginePage::Cut);
@@ -187,8 +190,8 @@ void MarkdownView::cut()
 
 void MarkdownView::paste()
 {
-    if (m_editor->hasFocus())
-        m_editor->paste();
+    if (m_editor3->hasFocus())
+        m_editor3->paste();
     else
     {
         m_preview->triggerPageAction(QWebEnginePage::Paste);
@@ -197,8 +200,8 @@ void MarkdownView::paste()
 
 void MarkdownView::selectAll()
 {
-    if (m_editor->hasFocus())
-        m_editor->selectAll();
+    if (m_editor3->hasFocus())
+        m_editor3->selectAll();
     else
     {
         m_preview->triggerPageAction(QWebEnginePage::SelectAll);
@@ -207,8 +210,8 @@ void MarkdownView::selectAll()
 
 void MarkdownView::undo()
 {
-    if (m_editor->hasFocus())
-        m_editor->undo();
+    if (m_editor3->hasFocus())
+        m_editor3->undo();
     else
     {
         m_preview->triggerPageAction(QWebEnginePage::Undo);
@@ -217,8 +220,8 @@ void MarkdownView::undo()
 
 void MarkdownView::redo()
 {
-    if (m_editor->hasFocus())
-        m_editor->redo();
+    if (m_editor3->hasFocus())
+        m_editor3->redo();
     else
     {
         m_preview->triggerPageAction(QWebEnginePage::Redo);
@@ -305,7 +308,7 @@ void MarkdownView::updatePreviewTheme()
         m_customPreivewThemeEditor->clearAll();
     }
     m_themeStyle.setText(QString::fromUtf8(ba));
-    ClientUtils::InitializePlainTextEditFont(m_editor);
+    ClientUtils::InitializePlainTextEditFont(m_editor3);
 }
 
 void MarkdownView::updatePreviewMode()
@@ -399,9 +402,9 @@ void MarkdownView::openFromFile(const QString &fileName)
         if (f.open(QIODevice::ReadOnly))
         {
             QByteArray ba = f.readAll();
-            m_editor->setContent(ba);
-            m_editor->setSavePoint();
-            m_editor->emptyUndoBuffer();
+            m_editor3->setContent(ba);
+            m_editor3->setSavePoint();
+            m_editor3->emptyUndoBuffer();
             f.close();
             m_savePath = fileName;
         }
@@ -413,15 +416,20 @@ void MarkdownView::openFromFile(const QString &fileName)
 
 MarkdownEditor3 *MarkdownView::editor()
 {
-    return m_editor;
+    return m_editor3;
+}
+
+MarkdownEditor4 *MarkdownView::editor4()
+{
+    return m_editor4;
 }
 
 QString MarkdownView::selectedText() const
 {
-    Q_ASSERT(m_editor);
-    if (m_editor->hasFocus())
+    Q_ASSERT(m_editor3);
+    if (m_editor3->hasFocus())
     {
-        QTextCursor c = m_editor->textCursor();
+        QTextCursor c = m_editor3->textCursor();
         return c.selectedText();
     }
     Q_ASSERT(m_preview);
@@ -478,9 +486,9 @@ void MarkdownView::saveToFile(const QString &savePath)
     QApplication::setOverrideCursor(Qt::WaitCursor);
     if (f.open(QIODevice::Truncate | QIODevice::WriteOnly))
     {
-        f.write(m_editor->content());
+        f.write(m_editor3->content());
         f.close();
-        m_editor->setSavePoint();
+        m_editor3->setSavePoint();
     }
     QApplication::restoreOverrideCursor();
 
@@ -496,7 +504,7 @@ void MarkdownView::setContent(const QString &html)
 
 void MarkdownView::renderMarkdownToHTML()
 {
-    QByteArray ba = m_editor->content();
+    QByteArray ba = m_editor3->content();
     qDebug() << __FUNCTION__ << __LINE__ << ba.length();
     if (ba.isEmpty())
         return;
