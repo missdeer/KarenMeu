@@ -14,6 +14,7 @@
 
 #include "markdownview.h"
 
+#include "clientutils.h"
 #include "markdowneditor3.h"
 #include "previewpage.h"
 #include "previewthemeeditor.h"
@@ -304,7 +305,7 @@ void MarkdownView::updatePreviewTheme()
         m_customPreivewThemeEditor->clearAll();
     }
     m_themeStyle.setText(QString::fromUtf8(ba));
-    m_editor->updateCodeEditorFont();
+    ClientUtils::InitializePlainTextEditFont(m_editor);
 }
 
 void MarkdownView::updatePreviewMode()

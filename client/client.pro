@@ -41,7 +41,8 @@ SOURCES += \
         $$PWD/youdao.cpp \
         $$PWD/translatehelperpage.cpp \
         $$PWD/translateoutputwidget.cpp \
-        $$PWD/markdowneditor3/markdowneditor3.cpp
+        $$PWD/markdowneditor3/markdowneditor3.cpp \
+        $$PWD/clientutils.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -56,7 +57,8 @@ HEADERS += \
         $$PWD/youdao.h \
         $$PWD/translatehelperpage.h \
         $$PWD/translateoutputwidget.h \
-        $$PWD/markdowneditor3/markdowneditor3.h
+        $$PWD/markdowneditor3/markdowneditor3.h \
+        $$PWD/clientutils.h
 
 FORMS += \
         $$PWD/mainwindow.ui \

@@ -23,6 +23,7 @@
 
 #include "mainwindow.h"
 
+#include "clientutils.h"
 #include "custompreviewthemeeditwidget.h"
 #include "markdowneditor3.h"
 #include "markdownview.h"
@@ -147,37 +148,6 @@ void MainWindow::updateTranslationActions()
     ui->actionBaidu->setChecked(g_settings->enableBaiduTranslate());
     ui->actionSogou->setChecked(g_settings->enableSogouTranslate());
     ui->actionYoudao->setChecked(g_settings->enableYoudaoTranslate());
-}
-
-void MainWindow::showDictTranslateResult(QPlainTextEdit *editor, const QString &res)
-{
-    Q_ASSERT(editor);
-    editor->clear();
-    editor->appendHtml(res);
-    editor->moveCursor(QTextCursor::Start);
-}
-
-void MainWindow::initializeEditor(QPlainTextEdit *editor)
-{
-    QFont font(editor->font());
-    font.setWeight(QFont::Normal);
-    font.setItalic(false);
-    font.setPointSizeF(g_settings->codeEditorFontPointSize());
-
-    QStringList fonts;
-#if defined(Q_OS_WIN)
-    fonts << "Microsoft YaHei UI";
-#elif defined(Q_OS_MAC)
-    fonts << "PingFang SC"
-          << "PingFang HK"
-          << "PingFang TC";
-#else
-    fonts << "WenQuanYi Micro Hei";
-#endif
-    fonts << editor->font().families();
-    QFont::insertSubstitutions(editor->font().family(), fonts);
-    font.setFamilies(fonts);
-    editor->setFont(font);
 }
 
 void MainWindow::on_actionPreference_triggered()
@@ -311,7 +281,10 @@ void MainWindow::onCustomPreviewThemeChanged()
 
 void MainWindow::onYoudaoDictResult(QString res)
 {
-    showDictTranslateResult(m_youdaoDictionaryEditor, res);
+    Q_ASSERT(m_youdaoDictionaryEditor);
+    m_youdaoDictionaryEditor->clear();
+    m_youdaoDictionaryEditor->appendHtml(res);
+    m_youdaoDictionaryEditor->moveCursor(QTextCursor::Start);
 }
 
 QString MainWindow::strippedName(const QString &fullFileName)
@@ -382,7 +355,7 @@ void MainWindow::setupDockPanels()
     googleTranslateDock->setObjectName("googleTranslate");
     m_googleTranslateEditor = new TranslateOutputWidget(TST_GOOGLE, googleTranslateDock);
     m_googleTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    initializeEditor(m_googleTranslateEditor->editor());
+    ClientUtils::InitializePlainTextEditFont(m_googleTranslateEditor->editor());
     googleTranslateDock->setWidget(m_googleTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, googleTranslateDock);
     toggleViewAction = googleTranslateDock->toggleViewAction();
@@ -393,7 +366,7 @@ void MainWindow::setupDockPanels()
     baiduTranslateDock->setObjectName("baiduTranslateDock");
     m_baiduTranslateEditor = new TranslateOutputWidget(TST_BAIDU, baiduTranslateDock);
     m_baiduTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    initializeEditor(m_baiduTranslateEditor->editor());
+    ClientUtils::InitializePlainTextEditFont(m_baiduTranslateEditor->editor());
     baiduTranslateDock->setWidget(m_baiduTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, baiduTranslateDock);
     toggleViewAction = baiduTranslateDock->toggleViewAction();
@@ -404,7 +377,7 @@ void MainWindow::setupDockPanels()
     youdaoTranslateDock->setObjectName("youdaoTranslateDock");
     m_youdaoTranslateEditor = new TranslateOutputWidget(TST_YOUDAO, youdaoTranslateDock);
     m_youdaoTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    initializeEditor(m_youdaoTranslateEditor->editor());
+    ClientUtils::InitializePlainTextEditFont(m_youdaoTranslateEditor->editor());
     youdaoTranslateDock->setWidget(m_youdaoTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, youdaoTranslateDock);
     toggleViewAction = youdaoTranslateDock->toggleViewAction();
@@ -415,7 +388,7 @@ void MainWindow::setupDockPanels()
     sogouTranslateDock->setObjectName("sogouTranslateDock");
     m_sogouTranslateEditor = new TranslateOutputWidget(TST_SOGOU, sogouTranslateDock);
     m_sogouTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    initializeEditor(m_sogouTranslateEditor->editor());
+    ClientUtils::InitializePlainTextEditFont(m_sogouTranslateEditor->editor());
     sogouTranslateDock->setWidget(m_sogouTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, sogouTranslateDock);
     toggleViewAction = sogouTranslateDock->toggleViewAction();
@@ -425,7 +398,7 @@ void MainWindow::setupDockPanels()
     auto *youdaoDictionaryDock = new QDockWidget(tr("Youdao Dictionary"), this);
     youdaoDictionaryDock->setObjectName("youdaoDictionaryDock");
     m_youdaoDictionaryEditor = new QPlainTextEdit(youdaoDictionaryDock);
-    initializeEditor(m_youdaoDictionaryEditor);
+    ClientUtils::InitializePlainTextEditFont(m_youdaoDictionaryEditor);
     youdaoDictionaryDock->setWidget(m_youdaoDictionaryEditor);
     addDockWidget(Qt::BottomDockWidgetArea, youdaoDictionaryDock);
     toggleViewAction = youdaoDictionaryDock->toggleViewAction();
@@ -558,10 +531,9 @@ void MainWindow::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::WindowStateChange)
     {
-        QList<QToolBar *> toolbars = {ui->fileToolbar, ui->editToolbar, ui->formatToolbar, ui->optionToolbar};
         if (windowState() & Qt::WindowFullScreen)
         {
-            auto actions = ui->menuView->actions();
+            QList<QToolBar *> toolbars = {ui->fileToolbar, ui->editToolbar, ui->formatToolbar, ui->optionToolbar};
             for (auto tb : toolbars)
             {
                 if (tb->isVisible())
@@ -574,7 +546,7 @@ void MainWindow::changeEvent(QEvent *event)
             return;
         }
 
-        QWindowStateChangeEvent *e = static_cast<QWindowStateChangeEvent *>(event);
+        auto *e = static_cast<QWindowStateChangeEvent *>(event);
         if (e->oldState() & Qt::WindowFullScreen)
         {
             for (auto a : m_visibleToolbars)
@@ -611,11 +583,10 @@ void MainWindow::on_actionDictionary_triggered()
     m_youdaoDictionaryEditor->clear();
     Q_ASSERT(m_view);
     QString text = m_view->selectedText();
-    if (!text.isEmpty())
-    {
-        Q_ASSERT(m_youdaoDict);
-        m_youdaoDict->query(text);
-    }
+    if (text.isEmpty())
+        return;
+    Q_ASSERT(m_youdaoDict);
+    m_youdaoDict->query(text);
 }
 
 void MainWindow::on_actionTranslate_triggered()

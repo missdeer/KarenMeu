@@ -6,6 +6,7 @@
 
 #include "markdowneditor3.h"
 
+#include "clientutils.h"
 #include "settings.h"
 
 MarkdownEditor3::MarkdownEditor3(QWidget *parent) : QMarkdownTextEdit(parent)
@@ -23,33 +24,10 @@ MarkdownEditor3::MarkdownEditor3(QWidget *parent) : QMarkdownTextEdit(parent)
     });
 }
 
-void MarkdownEditor3::updateCodeEditorFont()
-{
-    QFont font(this->font());
-    font.setWeight(QFont::Normal);
-    font.setItalic(false);
-    font.setPointSizeF(g_settings->codeEditorFontPointSize());
-
-    QStringList fonts;
-#if defined(Q_OS_WIN)
-    fonts << "Microsoft YaHei UI";
-#elif defined(Q_OS_MAC)
-    fonts << "PingFang SC"
-          << "PingFang HK"
-          << "PingFang TC";
-#else
-    fonts << "WenQuanYi Micro Hei";
-#endif
-    fonts << font.families();
-    QFont::insertSubstitutions(font.family(), fonts);
-    font.setFamilies(fonts);
-    setFont(font);
-}
-
 void MarkdownEditor3::initialize()
 {
     new MarkdownHighlighter(document());
-    updateCodeEditorFont();
+    ClientUtils::InitializePlainTextEditFont(this);
     setLineWrapMode(QPlainTextEdit::WidgetWidth);
 }
 

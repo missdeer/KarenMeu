@@ -115,8 +115,6 @@ private:
     void    setupDockPanels();
     void    setupOptionToolbar();
     void    updateTranslationActions();
-    void    showDictTranslateResult(QPlainTextEdit *editor, const QString &res);
-    void    initializeEditor(QPlainTextEdit *editor);
 };
 
 #endif // MAINWINDOW_H
