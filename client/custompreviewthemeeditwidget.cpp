@@ -46,7 +46,7 @@ void CustomPreviewThemeEditWidget::onSave()
 
 void CustomPreviewThemeEditWidget::onImportFromFile()
 {
-    QString fn = QFileDialog::getOpenFileName(this, tr("Import from css file"), QString(), "Custom theme file (*.css)");
+    QString fn = QFileDialog::getOpenFileName(this, tr("Import from css file"), QString(), tr("Custom theme file (*.css)"));
     QFile   f(fn);
     if (f.open(QIODevice::ReadOnly))
     {
@@ -59,7 +59,7 @@ void CustomPreviewThemeEditWidget::onImportFromFile()
 
 void CustomPreviewThemeEditWidget::onExportToFile()
 {
-    QString fn = QFileDialog::getSaveFileName(this, tr("Export to css file"), QString(), "Custom theme file (*.css)");
+    QString fn = QFileDialog::getSaveFileName(this, tr("Export to css file"), QString(), tr("Custom theme file (*.css)"));
     QFile   f(fn);
     if (f.open(QIODevice::WriteOnly | QIODevice::Truncate))
     {
