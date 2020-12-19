@@ -390,6 +390,17 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="cbDeepLTranslate">
+            <property name="text">
+             <string>DeepL Translate</string>
+            </property>
+            <property name="icon">
+             <iconset resource="karenmeu.qrc">
+              <normaloff>:/rc/images/deepl.png</normaloff>:/rc/images/deepl.png</iconset>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

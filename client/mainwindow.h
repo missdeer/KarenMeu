@@ -69,6 +69,8 @@ private slots:
 
     void on_actionSogou_triggered();
 
+    void on_actionDeepL_triggered();
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
@@ -88,6 +90,7 @@ private:
     TranslateOutputWidget *       m_baiduTranslateEditor;
     TranslateOutputWidget *       m_youdaoTranslateEditor;
     TranslateOutputWidget *       m_sogouTranslateEditor;
+    TranslateOutputWidget *       m_deepLTranslateEditor;
     QPlainTextEdit *              m_youdaoDictionaryEditor;
     PreviewThemeEditor *          m_previewHTMLEditor;
     CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;

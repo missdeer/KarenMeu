@@ -38,6 +38,7 @@ void Settings::save()
     settings.setValue("baiduTranslate", m_enableBaiduTranslate);
     settings.setValue("youdaoTranslate", m_enableYoudaoTranslate);
     settings.setValue("sogouTranslate", m_enableSogouTranslate);
+    settings.setValue("deepLTranslate", m_enableDeepLTranslate);
     settings.setValue("translateTimeout", m_translateTimeout);
     settings.sync();
 }
@@ -76,6 +77,7 @@ void Settings::load()
     m_enableBaiduTranslate      = settings.value("baiduTranslate", false).toBool();
     m_enableYoudaoTranslate     = settings.value("youdaoTranslate", true).toBool();
     m_enableSogouTranslate      = settings.value("sogouTranslate", false).toBool();
+    m_enableDeepLTranslate      = settings.value("deepLTranslate", true).toBool();
     m_translateTimeout          = settings.value("translateTimeout", 3000).toInt();
 }
 
@@ -322,4 +324,14 @@ int Settings::translateTimeout() const
 void Settings::setTranslateTimeout(int translateTimeout)
 {
     m_translateTimeout = translateTimeout;
+}
+
+bool Settings::enableDeepLTranslate() const
+{
+    return m_enableDeepLTranslate;
+}
+
+void Settings::setEnableDeepLTranslate(bool enableDeepLTranslate)
+{
+    m_enableDeepLTranslate = enableDeepLTranslate;
 }

@@ -148,6 +148,7 @@ void MainWindow::updateTranslationActions()
     ui->actionBaidu->setChecked(g_settings->enableBaiduTranslate());
     ui->actionSogou->setChecked(g_settings->enableSogouTranslate());
     ui->actionYoudao->setChecked(g_settings->enableYoudaoTranslate());
+    ui->actionDeepL->setChecked(g_settings->enableDeepLTranslate());
 }
 
 void MainWindow::on_actionPreference_triggered()
@@ -395,6 +396,17 @@ void MainWindow::setupDockPanels()
     toggleViewAction->setShortcut(QKeySequence("Shift+Alt+S"));
     ui->menuView->addAction(toggleViewAction);
 
+    auto *deepLTranslateDock = new QDockWidget(tr("DeepL Translate"), this);
+    deepLTranslateDock->setObjectName("deepLTranslateDock");
+    m_deepLTranslateEditor = new TranslateOutputWidget(TST_DEEPL, deepLTranslateDock);
+    m_deepLTranslateEditor->setGetSelectionCallback(getSelectionCallback);
+    ClientUtils::InitializzWidgetFont(m_deepLTranslateEditor->editor());
+    deepLTranslateDock->setWidget(m_deepLTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, deepLTranslateDock);
+    toggleViewAction = deepLTranslateDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+L"));
+    ui->menuView->addAction(toggleViewAction);
+
     auto *youdaoDictionaryDock = new QDockWidget(tr("Youdao Dictionary"), this);
     youdaoDictionaryDock->setObjectName("youdaoDictionaryDock");
     m_youdaoDictionaryEditor = new QPlainTextEdit(youdaoDictionaryDock);
@@ -612,6 +624,11 @@ void MainWindow::on_actionTranslate_triggered()
         Q_ASSERT(m_youdaoTranslateEditor);
         m_youdaoTranslateEditor->translate(text);
     }
+    if (g_settings->enableDeepLTranslate())
+    {
+        Q_ASSERT(m_deepLTranslateEditor);
+        m_deepLTranslateEditor->translate(text);
+    }
 }
 
 void MainWindow::on_actionGoogle_triggered()
@@ -632,4 +649,9 @@ void MainWindow::on_actionYoudao_triggered()
 void MainWindow::on_actionSogou_triggered()
 {
     g_settings->setEnableSogouTranslate(ui->actionSogou->isChecked());
+}
+
+void MainWindow::on_actionDeepL_triggered()
+{
+    g_settings->setEnableDeepLTranslate(ui->actionDeepL->isChecked());
 }

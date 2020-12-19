@@ -10,6 +10,7 @@ enum TranslateService
     TST_BAIDU,
     TST_YOUDAO,
     TST_SOGOU,
+    TST_DEEPL,
 };
 
 enum TranslateHelperState
@@ -50,11 +51,13 @@ private:
     void requestGoogle();
     void requestBaidu();
     void requestSogou();
+    void requestDeepL();
 
     void resultYoudao();
     void resultGoogle();
     void resultBaidu();
     void resultSogou();
+    void resultDeepL();
 };
 
 #endif // TRANSLATEHELPERPAGE_H

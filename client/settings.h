@@ -83,11 +83,15 @@ public:
     int  translateTimeout() const;
     void setTranslateTimeout(int translateTimeout);
 
+    bool enableDeepLTranslate() const;
+    void setEnableDeepLTranslate(bool enableDeepLTranslate);
+
 private:
     bool m_enableGoogleTranslate {true};
     bool m_enableBaiduTranslate {false};
     bool m_enableYoudaoTranslate {true};
     bool m_enableSogouTranslate {false};
+    bool m_enableDeepLTranslate {true};
     bool m_enableLineNumbers {true};
     bool m_macTerminalStyleCodeBlock {true};
 

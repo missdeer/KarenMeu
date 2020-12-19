@@ -126,6 +126,7 @@
      <addaction name="actionBaidu"/>
      <addaction name="actionYoudao"/>
      <addaction name="actionSogou"/>
+     <addaction name="actionDeepL"/>
     </widget>
     <addaction name="menuTranslate"/>
     <addaction name="actionDictionary"/>
@@ -1103,6 +1104,18 @@
    </property>
    <property name="text">
     <string>Sogou</string>
+   </property>
+  </action>
+  <action name="actionDeepL">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/deepl.png</normaloff>:/rc/images/deepl.png</iconset>
+   </property>
+   <property name="text">
+    <string>DeepL</string>
    </property>
   </action>
  </widget>

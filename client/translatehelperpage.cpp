@@ -12,7 +12,8 @@ TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) :
         {TST_GOOGLE, "https://translate.google.com/?sl=auto&tl=zh-CN&text="},
         {TST_BAIDU, "https://fanyi.baidu.com/#en/zh/"},
         {TST_SOGOU, "https://fanyi.sogou.com/?transfrom=en&transto=zh-CHS&isclient=1&model=general&keyword="},
-        {TST_YOUDAO, "http://fanyi.youdao.com/?keyword="}};
+        {TST_YOUDAO, "http://fanyi.youdao.com/?keyword="},
+        {TST_DEEPL, "https://www.deepl.com/translator#en/zh/"}};
     m_landingPage = landingPageUrlMap[ts];
 
     std::map<TranslateService, std::function<void()>> requestMap = {
@@ -20,6 +21,7 @@ TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) :
         {TST_BAIDU, std::bind(&TranslateHelperPage::requestBaidu, this)},
         {TST_SOGOU, std::bind(&TranslateHelperPage::requestSogou, this)},
         {TST_YOUDAO, std::bind(&TranslateHelperPage::requestYoudao, this)},
+        {TST_DEEPL, std::bind(&TranslateHelperPage::requestDeepL, this)},
     };
     m_request = requestMap[ts];
 
@@ -28,6 +30,7 @@ TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) :
         {TST_BAIDU, std::bind(&TranslateHelperPage::resultBaidu, this)},
         {TST_SOGOU, std::bind(&TranslateHelperPage::resultSogou, this)},
         {TST_YOUDAO, std::bind(&TranslateHelperPage::resultYoudao, this)},
+        {TST_DEEPL, std::bind(&TranslateHelperPage::resultDeepL, this)},
     };
     m_result = resultMap[ts];
 
@@ -140,6 +143,16 @@ void TranslateHelperPage::requestSogou()
                   });
 }
 
+void TranslateHelperPage::requestDeepL()
+{
+    QTimer::singleShot(1000, [this]() {
+        runJavaScript("document.getElementsByTagName(\"textarea\")[1].value;\n", [this](const QVariant &v2) {
+            m_timer->stop();
+            emit translated(v2.toString());
+        });
+    });
+}
+
 void TranslateHelperPage::resultYoudao()
 {
     runJavaScript("document.getElementById(\"transTarget\").innerText;\n", [this](const QVariant &v2) { emit translated(v2.toString()); });
@@ -159,4 +172,9 @@ void TranslateHelperPage::resultBaidu()
 void TranslateHelperPage::resultSogou()
 {
     runJavaScript("document.getElementsByClassName(\"output\")[0].innerText;\n", [this](const QVariant &v2) { emit translated(v2.toString()); });
+}
+
+void TranslateHelperPage::resultDeepL()
+{
+    runJavaScript("document.getElementsByTagName(\"textarea\")[1].value;\n", [this](const QVariant &v2) { emit translated(v2.toString()); });
 }

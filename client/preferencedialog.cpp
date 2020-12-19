@@ -40,6 +40,7 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui
     ui->cbGoogleTranslate->setChecked(g_settings->enableGoogleTranslate());
     ui->cbYoudaoTranslate->setChecked(g_settings->enableYoudaoTranslate());
     ui->cbSogouTranslate->setChecked(g_settings->enableSogouTranslate());
+    ui->cbDeepLTranslate->setChecked(g_settings->enableDeepLTranslate());
 
     ui->sbTranslateTimeout->setValue(g_settings->translateTimeout() / 1000);
 }
@@ -71,6 +72,7 @@ void PreferenceDialog::accept()
     g_settings->setEnableBaiduTranslate(ui->cbBaiduTranslate->isChecked());
     g_settings->setEnableSogouTranslate(ui->cbSogouTranslate->isChecked());
     g_settings->setEnableYoudaoTranslate(ui->cbYoudaoTranslate->isChecked());
+    g_settings->setEnableDeepLTranslate(ui->cbDeepLTranslate->isChecked());
 
     g_settings->setTranslateTimeout(ui->sbTranslateTimeout->value() * 1000);
     QDialog::accept();
