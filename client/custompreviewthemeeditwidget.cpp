@@ -40,8 +40,11 @@ QByteArray CustomPreviewThemeEditWidget::content()
 void CustomPreviewThemeEditWidget::onSave()
 {
     Q_ASSERT(m_editor);
-    g_settings->setCustomPreviewThemeStyle(m_editor->content());
-    emit contentModified();
+    if (g_settings->previewTheme() == tr("Custom"))
+    {
+        g_settings->setCustomPreviewThemeStyle(m_editor->content());
+        emit contentModified();
+    }
 }
 
 void CustomPreviewThemeEditWidget::onImportFromFile()
