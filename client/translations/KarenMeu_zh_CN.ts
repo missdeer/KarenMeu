@@ -6,7 +6,7 @@
     <message>
         <location filename="../custompreviewthemeeditwidget.cpp" line="43"/>
         <source>Custom</source>
-        <translation type="unfinished">自定义</translation>
+        <translation>自定义</translation>
     </message>
     <message>
         <location filename="../custompreviewthemeeditwidget.cpp" line="52"/>
@@ -90,7 +90,6 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="121"/>
-        <location filename="../mainwindow.ui" line="1049"/>
         <source>Translate</source>
         <translation>翻译</translation>
     </message>
@@ -702,6 +701,11 @@
         <translation></translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="1049"/>
+        <source>Translate Selected Text</source>
+        <translation>翻译选中文本</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="1052"/>
         <source>Ctrl+Alt+T</source>
         <translation></translation>
@@ -1279,94 +1283,6 @@
         <location filename="../youdao.cpp" line="98"/>
         <source>[Web]</source>
         <translation>【网络用语】</translation>
-    </message>
-</context>
-<context>
-    <name>QPlainTextEditSearchWidget</name>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="32"/>
-        <source>Find in text</source>
-        <translation>文本中查找</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="39"/>
-        <source>Replace with</source>
-        <translation>替换为</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="53"/>
-        <source>Find:</source>
-        <translation>查找：</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="63"/>
-        <source>Search backward</source>
-        <translation>反向搜索</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="80"/>
-        <source>Replace:</source>
-        <translation>替换：</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="90"/>
-        <source>Close search</source>
-        <translation>关闭搜索</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="107"/>
-        <source>Advanced search / replace text</source>
-        <translation>高级搜索/替换文本</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="127"/>
-        <source>Search forward</source>
-        <translation>正向搜索</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="144"/>
-        <source>Match case sensitive</source>
-        <translation>大小写敏感匹配</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="164"/>
-        <source>Mode:</source>
-        <translation>模式：</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="193"/>
-        <source>Plain text</source>
-        <translation>纯文本</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="198"/>
-        <source>Whole words</source>
-        <translation>全字匹配</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="203"/>
-        <source>Regular expression</source>
-        <translation>正则表达式</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="224"/>
-        <source>Replace one text occurrence</source>
-        <translation>替换一次</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="227"/>
-        <source>Replace</source>
-        <translation>替换</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="237"/>
-        <source>Replace all text occurrences</source>
-        <translation>替换所有文本出现</translation>
-    </message>
-    <message>
-        <location filename="../../3rdparty/qmarkdowntextedit/qplaintexteditsearchwidget.ui" line="240"/>
-        <source>Replace all</source>
-        <translation>全部替换</translation>
     </message>
 </context>
 <context>

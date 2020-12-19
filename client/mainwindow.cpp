@@ -598,7 +598,7 @@ void MainWindow::on_actionDictionary_triggered()
     m_youdaoDict->query(text);
 }
 
-void MainWindow::on_actionTranslate_triggered()
+void MainWindow::on_actionTranslateSelected_triggered()
 {
     Q_ASSERT(m_view);
     QString text = m_view->selectedText();

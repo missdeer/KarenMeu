@@ -25,18 +25,15 @@ TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) :
     };
     m_request = requestMap[ts];
 
-    std::map<TranslateService, std::function<void()>> resultMap = {
-        {TST_GOOGLE, std::bind(&TranslateHelperPage::resultGoogle, this)},
-        {TST_BAIDU, std::bind(&TranslateHelperPage::resultBaidu, this)},
-        {TST_SOGOU, std::bind(&TranslateHelperPage::resultSogou, this)},
-        {TST_YOUDAO, std::bind(&TranslateHelperPage::resultYoudao, this)},
-        {TST_DEEPL, std::bind(&TranslateHelperPage::resultDeepL, this)},
-    };
-    m_result = resultMap[ts];
+    std::map<TranslateService, QString> resultJavascriptMap = {{TST_GOOGLE, "document.getElementsByClassName(\"VIiyi\")[0].innerText;\n"},
+                                                               {TST_BAIDU, "document.getElementsByClassName(\"target-output\")[0].innerText;\n"},
+                                                               {TST_SOGOU, "document.getElementsByClassName(\"output\")[0].innerText;\n"},
+                                                               {TST_YOUDAO, "document.getElementById(\"transTarget\").innerText;\n"},
+                                                               {TST_DEEPL, "document.getElementsByTagName(\"textarea\")[1].value;\n"}};
+    m_resultJavascript                                      = resultJavascriptMap[ts];
 
     connect(m_timer, &QTimer::timeout, this, &TranslateHelperPage::getResult);
     m_timer->setSingleShot(true);
-    m_timer->setInterval(g_settings->translateTimeout());
     m_timer->stop();
 }
 
@@ -49,14 +46,20 @@ void TranslateHelperPage::translate(const QString &text)
     m_originalText = text;
     m_state = THS_LOADINGPAGE;
     load(QUrl(m_landingPage + text.toUtf8().toPercentEncoding()));
-    m_timer->start();
+    m_timer->start(g_settings->translateTimeout());
     qDebug() << __FUNCTION__ << __LINE__ << m_state << m_service << text;
 }
 
 void TranslateHelperPage::getResult()
 {
     m_timer->stop();
-    m_result();
+    runJavaScript(m_resultJavascript, [this](const auto &v) {
+        if (v.toString().isEmpty())
+        {
+            m_timer->start(m_timer->interval() + 1000);
+        }
+        emit translated(v.toString());
+    });
 }
 
 void TranslateHelperPage::onLoadFinished(bool ok)
@@ -92,24 +95,12 @@ void TranslateHelperPage::requestYoudao()
     runJavaScript(QString("document.getElementById(\"inputOriginal\").value= \"%1\";\n"
                           "document.getElementById(\"transMachine\").click();\n")
                       .arg(m_originalText.replace("\"", "\\\"")),
-                  [this](const QVariant &) {
-                      QTimer::singleShot(1000, [this]() {
-                          runJavaScript("document.getElementById(\"transTarget\").innerText;\n", [this](const QVariant &v2) {
-                              m_timer->stop();
-                              emit translated(v2.toString());
-                          });
-                      });
-                  });
+                  [this](const QVariant &) { QTimer::singleShot(1000, [this]() { getResult(); }); });
 }
 
 void TranslateHelperPage::requestGoogle()
 {
-    QTimer::singleShot(1000, [this]() {
-        runJavaScript("document.getElementsByClassName(\"VIiyi\")[0].innerText;\n", [this](const QVariant &v2) {
-            m_timer->stop();
-            emit translated(v2.toString());
-        });
-    });
+    QTimer::singleShot(1000, [this]() { getResult(); });
 }
 
 void TranslateHelperPage::requestBaidu()
@@ -117,14 +108,7 @@ void TranslateHelperPage::requestBaidu()
     runJavaScript(QString("document.getElementById(\"baidu_translate_input\").value= \"%1\";\n"
                           "document.getElementById(\"translate-button\").click();\n")
                       .arg(m_originalText.replace("\"", "\\\"")),
-                  [this](const QVariant &) {
-                      QTimer::singleShot(1000, [this]() {
-                          runJavaScript("document.getElementsByClassName(\"target-output\")[0].innerText;\n", [this](const QVariant &v2) {
-                              m_timer->stop();
-                              emit translated(v2.toString());
-                          });
-                      });
-                  });
+                  [this](const QVariant &) { QTimer::singleShot(1000, [this]() { getResult(); }); });
 }
 
 void TranslateHelperPage::requestSogou()
@@ -133,48 +117,10 @@ void TranslateHelperPage::requestSogou()
                           "document.getElementById(\"trans-input\").dispatchEvent("
                           "new KeyboardEvent('keydown', {bubbles: true, cancelable: true, keyCode: 13}));\n")
                       .arg(m_originalText.replace("\"", "\\\"")),
-                  [this](const QVariant &) {
-                      QTimer::singleShot(1000, [this]() {
-                          runJavaScript("document.getElementsByClassName(\"output\")[0].innerText;\n", [this](const QVariant &v2) {
-                              m_timer->stop();
-                              emit translated(v2.toString());
-                          });
-                      });
-                  });
+                  [this](const QVariant &) { QTimer::singleShot(1000, [this]() { getResult(); }); });
 }
 
 void TranslateHelperPage::requestDeepL()
 {
-    QTimer::singleShot(1000, [this]() {
-        runJavaScript("document.getElementsByTagName(\"textarea\")[1].value;\n", [this](const QVariant &v2) {
-            m_timer->stop();
-            emit translated(v2.toString());
-        });
-    });
-}
-
-void TranslateHelperPage::resultYoudao()
-{
-    runJavaScript("document.getElementById(\"transTarget\").innerText;\n", [this](const QVariant &v2) { emit translated(v2.toString()); });
-}
-
-void TranslateHelperPage::resultGoogle()
-{
-    runJavaScript("document.getElementsByClassName(\"VIiyi\")[0].innerText;\n", [this](const QVariant &v2) { emit translated(v2.toString()); });
-}
-
-void TranslateHelperPage::resultBaidu()
-{
-    runJavaScript("document.getElementsByClassName(\"target-output\")[0].innerText;\n",
-                  [this](const QVariant &v2) { emit translated(v2.toString()); });
-}
-
-void TranslateHelperPage::resultSogou()
-{
-    runJavaScript("document.getElementsByClassName(\"output\")[0].innerText;\n", [this](const QVariant &v2) { emit translated(v2.toString()); });
-}
-
-void TranslateHelperPage::resultDeepL()
-{
-    runJavaScript("document.getElementsByTagName(\"textarea\")[1].value;\n", [this](const QVariant &v2) { emit translated(v2.toString()); });
+    QTimer::singleShot(1000, [this]() { getResult(); });
 }

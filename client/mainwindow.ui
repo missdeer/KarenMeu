@@ -120,7 +120,7 @@
      <property name="title">
       <string>Translate</string>
      </property>
-     <addaction name="actionTranslate"/>
+     <addaction name="actionTranslateSelected"/>
      <addaction name="separator"/>
      <addaction name="actionGoogle"/>
      <addaction name="actionBaidu"/>
@@ -1040,13 +1040,13 @@
     <string>Ctrl+Alt+D</string>
    </property>
   </action>
-  <action name="actionTranslate">
+  <action name="actionTranslateSelected">
    <property name="icon">
     <iconset resource="karenmeu.qrc">
      <normaloff>:/rc/images/translate.png</normaloff>:/rc/images/translate.png</iconset>
    </property>
    <property name="text">
-    <string>Translate</string>
+    <string>Translate Selected Text</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Alt+T</string>

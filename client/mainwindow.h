@@ -48,7 +48,7 @@ private slots:
     void on_actionClearRecentFilesList_triggered();
     void on_actionDictionary_triggered();
 
-    void on_actionTranslate_triggered();
+    void on_actionTranslateSelected_triggered();
 
     void onSetCurrentFile(const QString &fileName);
 

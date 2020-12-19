@@ -43,8 +43,8 @@ private:
     TranslateHelperState  m_state {THS_IDLE};
     QString               m_originalText;
     QString               m_landingPage;
+    QString               m_resultJavascript;
     std::function<void()> m_request;
-    std::function<void()> m_result;
     QTimer *              m_timer;
 
     void requestYoudao();
@@ -52,12 +52,6 @@ private:
     void requestBaidu();
     void requestSogou();
     void requestDeepL();
-
-    void resultYoudao();
-    void resultGoogle();
-    void resultBaidu();
-    void resultSogou();
-    void resultDeepL();
 };
 
 #endif // TRANSLATEHELPERPAGE_H
