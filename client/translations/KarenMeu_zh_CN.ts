@@ -1230,12 +1230,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="75"/>
         <source>Critical error</source>
         <translation>严重错误</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="77"/>
+        <location filename="../main.cpp" line="75"/>
         <source>SSL not supported, some features may not work as expected.</source>
         <translation>不支持SSL，一些功能可能无法正常工作。</translation>
     </message>
@@ -1346,22 +1346,22 @@
 <context>
     <name>QSettings</name>
     <message>
-        <location filename="../settings.cpp" line="60"/>
+        <location filename="../settings.cpp" line="68"/>
         <source>Default</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="61"/>
+        <location filename="../settings.cpp" line="69"/>
         <source>xcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="62"/>
+        <location filename="../settings.cpp" line="70"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="65"/>
+        <location filename="../settings.cpp" line="73"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>
@@ -1382,7 +1382,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="88"/>
+        <location filename="../main.cpp" line="86"/>
         <source>The file to open.</source>
         <translation>打开文章</translation>
     </message>

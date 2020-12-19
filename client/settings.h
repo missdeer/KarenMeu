@@ -5,8 +5,6 @@
 #include <QString>
 
 #include <vtextedit/markdowneditorconfig.h>
-#include <vtextedit/vmarkdowneditor.h>
-#include <vtextedit/vtexteditor.h>
 
 class Settings
 {

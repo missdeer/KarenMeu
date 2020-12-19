@@ -4,12 +4,20 @@
 
 #include "settings.h"
 
+#include <vtextedit/vmarkdowneditor.h>
+#include <vtextedit/vtexteditor.h>
+
 void Settings::initialize()
 {
     load();
 
-    m_textEditorConfig     = QSharedPointer<vte::TextEditorConfig>::create();
-    m_markdownEditorConfig = QSharedPointer<vte::MarkdownEditorConfig>::create(m_textEditorConfig);
+    vte::VTextEditor::addSyntaxCustomSearchPaths(QStringList(QStringLiteral(":/rc/syntax-highlighting/syntax")));
+
+    m_textEditorConfig = QSharedPointer<vte::TextEditorConfig>::create();
+    m_textEditorConfig->m_syntaxTheme                             = ":/rc/syntax-highlighting/themes/breeze-dark.theme";
+    m_textEditorConfig->m_centerCursor                            = vte::CenterCursor::CenterOnBottom;
+    m_markdownEditorConfig                                        = QSharedPointer<vte::MarkdownEditorConfig>::create(m_textEditorConfig);
+    m_markdownEditorConfig->m_constrainInPlacePreviewWidthEnabled = true;
 }
 
 void Settings::save()
