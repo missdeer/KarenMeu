@@ -15,7 +15,7 @@
 #include "markdownview.h"
 
 #include "clientutils.h"
-#include "markdowneditor3.h"
+#include "markdowneditor4.h"
 #include "previewpage.h"
 #include "previewthemeeditor.h"
 #include "settings.h"
@@ -27,7 +27,7 @@ pFMarkdownEngine markdownEngine = nullptr;
 MarkdownView::MarkdownView(QWidget *parent)
     : QWidget(parent)
     , m_splitter(new QSplitter(this))
-    , m_editor(new MarkdownEditor3(this))
+    , m_editor(new MarkdownEditor4(g_settings->markdownEditorConfig(), this))
     , m_preview(new QWebEngineView(this))
     , m_convertTimer(new QTimer)
 {
@@ -43,32 +43,32 @@ MarkdownView::MarkdownView(QWidget *parent)
     setLayout(layout);
     m_splitter->setSizes(QList<int>() << width() / 2 << width() / 2);
     m_editor->initialize();
-    connect(m_editor, &MarkdownEditor3::contentModified, this, &MarkdownView::documentModified);
-    connect(this, &MarkdownView::formatStrong, m_editor, &MarkdownEditor3::formatStrong);
-    connect(this, &MarkdownView::formatEmphasize, m_editor, &MarkdownEditor3::formatEmphasize);
-    connect(this, &MarkdownView::formatStrikethrough, m_editor, &MarkdownEditor3::formatStrikethrough);
-    connect(this, &MarkdownView::formatInlineCode, m_editor, &MarkdownEditor3::formatInlineCode);
-    connect(this, &MarkdownView::formatCodeBlock, m_editor, &MarkdownEditor3::formatCodeBlock);
-    connect(this, &MarkdownView::formatComment, m_editor, &MarkdownEditor3::formatComment);
-    connect(this, &MarkdownView::formatOrderedList, m_editor, &MarkdownEditor3::formatOrderedList);
-    connect(this, &MarkdownView::formatUnorderedList, m_editor, &MarkdownEditor3::formatUnorderedList);
-    connect(this, &MarkdownView::formatBlockquote, m_editor, &MarkdownEditor3::formatBlockquote);
-    connect(this, &MarkdownView::formatHyperlink, m_editor, &MarkdownEditor3::formatHyperlink);
-    connect(this, &MarkdownView::formatImage, m_editor, &MarkdownEditor3::formatImage);
-    connect(this, &MarkdownView::formatNewParagraph, m_editor, &MarkdownEditor3::formatNewParagraph);
-    connect(this, &MarkdownView::formatHorizontalRule, m_editor, &MarkdownEditor3::formatHorizontalRule);
-    connect(this, &MarkdownView::formatHeader1, m_editor, &MarkdownEditor3::formatHeader1);
-    connect(this, &MarkdownView::formatHeader2, m_editor, &MarkdownEditor3::formatHeader2);
-    connect(this, &MarkdownView::formatHeader3, m_editor, &MarkdownEditor3::formatHeader3);
-    connect(this, &MarkdownView::formatHeader4, m_editor, &MarkdownEditor3::formatHeader4);
-    connect(this, &MarkdownView::formatHeader5, m_editor, &MarkdownEditor3::formatHeader5);
-    connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor3::formatHeader6);
-    connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor3::formatShiftRight);
-    connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor3::formatShiftLeft);
+    connect(m_editor, &MarkdownEditor4::contentModified, this, &MarkdownView::documentModified);
+    connect(this, &MarkdownView::formatStrong, m_editor, &MarkdownEditor4::formatStrong);
+    connect(this, &MarkdownView::formatEmphasize, m_editor, &MarkdownEditor4::formatEmphasize);
+    connect(this, &MarkdownView::formatStrikethrough, m_editor, &MarkdownEditor4::formatStrikethrough);
+    connect(this, &MarkdownView::formatInlineCode, m_editor, &MarkdownEditor4::formatInlineCode);
+    connect(this, &MarkdownView::formatCodeBlock, m_editor, &MarkdownEditor4::formatCodeBlock);
+    connect(this, &MarkdownView::formatComment, m_editor, &MarkdownEditor4::formatComment);
+    connect(this, &MarkdownView::formatOrderedList, m_editor, &MarkdownEditor4::formatOrderedList);
+    connect(this, &MarkdownView::formatUnorderedList, m_editor, &MarkdownEditor4::formatUnorderedList);
+    connect(this, &MarkdownView::formatBlockquote, m_editor, &MarkdownEditor4::formatBlockquote);
+    connect(this, &MarkdownView::formatHyperlink, m_editor, &MarkdownEditor4::formatHyperlink);
+    connect(this, &MarkdownView::formatImage, m_editor, &MarkdownEditor4::formatImage);
+    connect(this, &MarkdownView::formatNewParagraph, m_editor, &MarkdownEditor4::formatNewParagraph);
+    connect(this, &MarkdownView::formatHorizontalRule, m_editor, &MarkdownEditor4::formatHorizontalRule);
+    connect(this, &MarkdownView::formatHeader1, m_editor, &MarkdownEditor4::formatHeader1);
+    connect(this, &MarkdownView::formatHeader2, m_editor, &MarkdownEditor4::formatHeader2);
+    connect(this, &MarkdownView::formatHeader3, m_editor, &MarkdownEditor4::formatHeader3);
+    connect(this, &MarkdownView::formatHeader4, m_editor, &MarkdownEditor4::formatHeader4);
+    connect(this, &MarkdownView::formatHeader5, m_editor, &MarkdownEditor4::formatHeader5);
+    connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor4::formatHeader6);
+    connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor4::formatShiftRight);
+    connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor4::formatShiftLeft);
 
     auto *page = new PreviewPage(this);
     m_preview->setPage(page);
-    connect(m_editor, &MarkdownEditor3::scrollValueChanged, page, &PreviewPage::onEditorScrollMoved);
+    connect(m_editor, &MarkdownEditor4::scrollValueChanged, page, &PreviewPage::onEditorScrollMoved);
 
     auto *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);
@@ -305,7 +305,7 @@ void MarkdownView::updatePreviewTheme()
         m_customPreivewThemeEditor->clearAll();
     }
     m_themeStyle.setText(QString::fromUtf8(ba));
-    ClientUtils::InitializePlainTextEditFont(m_editor);
+    ClientUtils::InitializzWidgetFont(m_editor);
 }
 
 void MarkdownView::updatePreviewMode()
@@ -411,7 +411,7 @@ void MarkdownView::openFromFile(const QString &fileName)
     }
 }
 
-MarkdownEditor3 *MarkdownView::editor()
+MarkdownEditor4 *MarkdownView::editor()
 {
     return m_editor;
 }
@@ -497,7 +497,6 @@ void MarkdownView::setContent(const QString &html)
 void MarkdownView::renderMarkdownToHTML()
 {
     QByteArray ba = m_editor->content();
-    qDebug() << __FUNCTION__ << __LINE__ << ba.length();
     if (ba.isEmpty())
         return;
 

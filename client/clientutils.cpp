@@ -6,9 +6,9 @@
 
 namespace ClientUtils
 {
-    void InitializePlainTextEditFont(QPlainTextEdit *editor)
+    void InitializzWidgetFont(QWidget *widget)
     {
-        QFont font(editor->font());
+        QFont font(widget->font());
         font.setWeight(QFont::Normal);
         font.setItalic(false);
         font.setPointSizeF(g_settings->codeEditorFontPointSize());
@@ -23,9 +23,9 @@ namespace ClientUtils
 #else
         fonts << "WenQuanYi Micro Hei";
 #endif
-        fonts << editor->font().families();
-        QFont::insertSubstitutions(editor->font().family(), fonts);
+        fonts << widget->font().families();
+        QFont::insertSubstitutions(widget->font().family(), fonts);
         font.setFamilies(fonts);
-        editor->setFont(font);
+        widget->setFont(font);
     }
 } // namespace ClientUtils

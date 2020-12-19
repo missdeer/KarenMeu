@@ -10,7 +10,7 @@ QT_FORWARD_DECLARE_CLASS(QWebEngineView);
 QT_FORWARD_DECLARE_CLASS(QTimer);
 QT_FORWARD_DECLARE_CLASS(QResizeEvent);
 QT_FORWARD_DECLARE_CLASS(QWebEnginePage);
-class MarkdownEditor3;
+class MarkdownEditor4;
 class PreviewThemeEditor;
 
 class MarkdownView : public QWidget
@@ -26,12 +26,13 @@ public:
     void             updateMarkdownEngine();
     void             updateMacStyleCodeBlock();
     void             openFromFile(const QString &fileName);
-    MarkdownEditor3 *editor();
+    MarkdownEditor4 *editor();
     QString          selectedText() const;
     QSplitter *      splitter();
     void             setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor);
     void             setCustomPreivewThemeEditor(PreviewThemeEditor *customPreivewThemeEditor);
     QWebEnginePage * devToolPage();
+
 signals:
     void formatStrong();
     void formatEmphasize();
@@ -55,6 +56,7 @@ signals:
     void formatShiftRight();
     void formatShiftLeft();
     void setCurrentFile(const QString &);
+
 public slots:
     void openDocument();
     void saveDocument();
@@ -82,7 +84,7 @@ protected:
 private:
     bool                m_modified {false};
     QSplitter *         m_splitter;
-    MarkdownEditor3 *   m_editor;
+    MarkdownEditor4 *   m_editor;
     QWebEngineView *    m_preview;
     QTimer *            m_convertTimer;
     PreviewThemeEditor *m_previewHTMLEditor;

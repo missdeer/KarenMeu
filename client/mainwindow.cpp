@@ -25,7 +25,7 @@
 
 #include "clientutils.h"
 #include "custompreviewthemeeditwidget.h"
-#include "markdowneditor3.h"
+#include "markdowneditor4.h"
 #include "markdownview.h"
 #include "preferencedialog.h"
 #include "previewthemeeditor.h"
@@ -355,7 +355,7 @@ void MainWindow::setupDockPanels()
     googleTranslateDock->setObjectName("googleTranslate");
     m_googleTranslateEditor = new TranslateOutputWidget(TST_GOOGLE, googleTranslateDock);
     m_googleTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    ClientUtils::InitializePlainTextEditFont(m_googleTranslateEditor->editor());
+    ClientUtils::InitializzWidgetFont(m_googleTranslateEditor->editor());
     googleTranslateDock->setWidget(m_googleTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, googleTranslateDock);
     toggleViewAction = googleTranslateDock->toggleViewAction();
@@ -366,7 +366,7 @@ void MainWindow::setupDockPanels()
     baiduTranslateDock->setObjectName("baiduTranslateDock");
     m_baiduTranslateEditor = new TranslateOutputWidget(TST_BAIDU, baiduTranslateDock);
     m_baiduTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    ClientUtils::InitializePlainTextEditFont(m_baiduTranslateEditor->editor());
+    ClientUtils::InitializzWidgetFont(m_baiduTranslateEditor->editor());
     baiduTranslateDock->setWidget(m_baiduTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, baiduTranslateDock);
     toggleViewAction = baiduTranslateDock->toggleViewAction();
@@ -377,7 +377,7 @@ void MainWindow::setupDockPanels()
     youdaoTranslateDock->setObjectName("youdaoTranslateDock");
     m_youdaoTranslateEditor = new TranslateOutputWidget(TST_YOUDAO, youdaoTranslateDock);
     m_youdaoTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    ClientUtils::InitializePlainTextEditFont(m_youdaoTranslateEditor->editor());
+    ClientUtils::InitializzWidgetFont(m_youdaoTranslateEditor->editor());
     youdaoTranslateDock->setWidget(m_youdaoTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, youdaoTranslateDock);
     toggleViewAction = youdaoTranslateDock->toggleViewAction();
@@ -388,7 +388,7 @@ void MainWindow::setupDockPanels()
     sogouTranslateDock->setObjectName("sogouTranslateDock");
     m_sogouTranslateEditor = new TranslateOutputWidget(TST_SOGOU, sogouTranslateDock);
     m_sogouTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    ClientUtils::InitializePlainTextEditFont(m_sogouTranslateEditor->editor());
+    ClientUtils::InitializzWidgetFont(m_sogouTranslateEditor->editor());
     sogouTranslateDock->setWidget(m_sogouTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, sogouTranslateDock);
     toggleViewAction = sogouTranslateDock->toggleViewAction();
@@ -398,7 +398,7 @@ void MainWindow::setupDockPanels()
     auto *youdaoDictionaryDock = new QDockWidget(tr("Youdao Dictionary"), this);
     youdaoDictionaryDock->setObjectName("youdaoDictionaryDock");
     m_youdaoDictionaryEditor = new QPlainTextEdit(youdaoDictionaryDock);
-    ClientUtils::InitializePlainTextEditFont(m_youdaoDictionaryEditor);
+    ClientUtils::InitializzWidgetFont(m_youdaoDictionaryEditor);
     youdaoDictionaryDock->setWidget(m_youdaoDictionaryEditor);
     addDockWidget(Qt::BottomDockWidgetArea, youdaoDictionaryDock);
     toggleViewAction = youdaoDictionaryDock->toggleViewAction();
@@ -572,9 +572,6 @@ void MainWindow::adjustEditorWidth(int width)
     sizes.append(editorWidth);
     Q_ASSERT(m_view);
     m_view->splitter()->setSizes(sizes);
-
-    // Scroll to cursor position.
-    m_view->editor()->centerCursor();
 }
 
 void MainWindow::on_actionDictionary_triggered()

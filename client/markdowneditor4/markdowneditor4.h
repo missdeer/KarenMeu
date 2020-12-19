@@ -1,13 +1,14 @@
-#ifndef MARKDOWNEDITOR3_H
-#define MARKDOWNEDITOR3_H
+#ifndef MARKDOWNEDITOR4_H
+#define MARKDOWNEDITOR4_H
 
-#include "qmarkdowntextedit.h"
+#include <vtextedit/markdowneditorconfig.h>
+#include <vtextedit/vmarkdowneditor.h>
 
-class MarkdownEditor3 : public QMarkdownTextEdit
+class MarkdownEditor4 : public vte::VMarkdownEditor
 {
     Q_OBJECT
 public:
-    explicit MarkdownEditor3(QWidget *parent = nullptr);
+    explicit MarkdownEditor4(const QSharedPointer<vte::MarkdownEditorConfig> &p_config, QWidget *parent = nullptr);
 
     void       initialize();
     void       setContent(const QString &content);
@@ -17,6 +18,16 @@ public:
     void       setSavePoint();
     void       emptyUndoBuffer();
 
+    void clear();
+    void copy();
+    void cut();
+    void paste();
+    void undo();
+    void redo();
+    void selectAll();
+
+    QTextCursor textCursor() const;
+    void        setTextCursor(const QTextCursor &cursor);
 signals:
     void contentModified();
     void scrollValueChanged(int, int);
@@ -66,4 +77,4 @@ private:
     void formatHeading(const QString &heading);
 };
 
-#endif // MARKDOWNEDITOR3_H
+#endif // MARKDOWNEDITOR4_H
