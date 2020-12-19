@@ -425,7 +425,7 @@ void MainWindow::setupDockPanels()
     auto *previewHTMLDock = new QDockWidget(tr("Preview HTML"), this);
     previewHTMLDock->setObjectName("previewHTMLDock");
     m_previewHTMLEditor   = new PreviewThemeEditor(previewHTMLDock);
-    m_previewHTMLEditor->initialize("html");
+    m_previewHTMLEditor->initialize("hypertext");
     previewHTMLDock->setWidget(m_previewHTMLEditor);
     addDockWidget(Qt::RightDockWidgetArea, previewHTMLDock);
     toggleViewAction = previewHTMLDock->toggleViewAction();

@@ -4,33 +4,38 @@
 <context>
     <name>CustomPreviewThemeEditWidget</name>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="49"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="43"/>
+        <source>Custom</source>
+        <translation type="unfinished">自定义</translation>
+    </message>
+    <message>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="52"/>
         <source>Import from css file</source>
         <translation>从CSS文件导入</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="49"/>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="62"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="52"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="65"/>
         <source>Custom theme file (*.css)</source>
         <translation>自定义主题文件(*.css)</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="62"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="65"/>
         <source>Export to css file</source>
         <translation>导出到CSS文件</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="81"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="84"/>
         <source>Save to configuration</source>
         <translation>保存到配置项</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="83"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="86"/>
         <source>Import From File</source>
         <translation>从文件导入</translation>
     </message>
     <message>
-        <location filename="../custompreviewthemeeditwidget.cpp" line="85"/>
+        <location filename="../custompreviewthemeeditwidget.cpp" line="88"/>
         <source>Export To File</source>
         <translation>导出到文件</translation>
     </message>
