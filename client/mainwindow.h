@@ -71,6 +71,8 @@ private slots:
 
     void on_actionDeepL_triggered();
 
+    void on_actionTranslateTextInClipboard_triggered();
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
@@ -118,6 +120,7 @@ private:
     void    setupDockPanels();
     void    setupOptionToolbar();
     void    updateTranslationActions();
+    void    translateText(const QString &text);
 };
 
 #endif // MAINWINDOW_H

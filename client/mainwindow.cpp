@@ -1,4 +1,5 @@
 #include <QAction>
+#include <QClipboard>
 #include <QCloseEvent>
 #include <QComboBox>
 #include <QCoreApplication>
@@ -149,6 +150,37 @@ void MainWindow::updateTranslationActions()
     ui->actionSogou->setChecked(g_settings->enableSogouTranslate());
     ui->actionYoudao->setChecked(g_settings->enableYoudaoTranslate());
     ui->actionDeepL->setChecked(g_settings->enableDeepLTranslate());
+}
+
+void MainWindow::translateText(const QString &text)
+{
+    if (text.isEmpty())
+        return;
+    if (g_settings->enableGoogleTranslate())
+    {
+        Q_ASSERT(m_googleTranslateEditor);
+        m_googleTranslateEditor->translate(text);
+    }
+    if (g_settings->enableBaiduTranslate())
+    {
+        Q_ASSERT(m_baiduTranslateEditor);
+        m_baiduTranslateEditor->translate(text);
+    }
+    if (g_settings->enableSogouTranslate())
+    {
+        Q_ASSERT(m_sogouTranslateEditor);
+        m_sogouTranslateEditor->translate(text);
+    }
+    if (g_settings->enableYoudaoTranslate())
+    {
+        Q_ASSERT(m_youdaoTranslateEditor);
+        m_youdaoTranslateEditor->translate(text);
+    }
+    if (g_settings->enableDeepLTranslate())
+    {
+        Q_ASSERT(m_deepLTranslateEditor);
+        m_deepLTranslateEditor->translate(text);
+    }
 }
 
 void MainWindow::on_actionPreference_triggered()
@@ -602,33 +634,7 @@ void MainWindow::on_actionTranslateSelected_triggered()
 {
     Q_ASSERT(m_view);
     QString text = m_view->selectedText();
-    if (text.isEmpty())
-        return;
-    if (g_settings->enableGoogleTranslate())
-    {
-        Q_ASSERT(m_googleTranslateEditor);
-        m_googleTranslateEditor->translate(text);
-    }
-    if (g_settings->enableBaiduTranslate())
-    {
-        Q_ASSERT(m_baiduTranslateEditor);
-        m_baiduTranslateEditor->translate(text);
-    }
-    if (g_settings->enableSogouTranslate())
-    {
-        Q_ASSERT(m_sogouTranslateEditor);
-        m_sogouTranslateEditor->translate(text);
-    }
-    if (g_settings->enableYoudaoTranslate())
-    {
-        Q_ASSERT(m_youdaoTranslateEditor);
-        m_youdaoTranslateEditor->translate(text);
-    }
-    if (g_settings->enableDeepLTranslate())
-    {
-        Q_ASSERT(m_deepLTranslateEditor);
-        m_deepLTranslateEditor->translate(text);
-    }
+    translateText(text);
 }
 
 void MainWindow::on_actionGoogle_triggered()
@@ -654,4 +660,12 @@ void MainWindow::on_actionSogou_triggered()
 void MainWindow::on_actionDeepL_triggered()
 {
     g_settings->setEnableDeepLTranslate(ui->actionDeepL->isChecked());
+}
+
+void MainWindow::on_actionTranslateTextInClipboard_triggered()
+{
+    auto *clipboard = QGuiApplication::clipboard();
+    Q_ASSERT(clipboard);
+    auto text = clipboard->text();
+    translateText(text);
 }

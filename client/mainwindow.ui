@@ -121,6 +121,7 @@
       <string>Translate</string>
      </property>
      <addaction name="actionTranslateSelected"/>
+     <addaction name="actionTranslateTextInClipboard"/>
      <addaction name="separator"/>
      <addaction name="actionGoogle"/>
      <addaction name="actionBaidu"/>
@@ -1116,6 +1117,14 @@
    </property>
    <property name="text">
     <string>DeepL</string>
+   </property>
+  </action>
+  <action name="actionTranslateTextInClipboard">
+   <property name="text">
+    <string>Translate Text in Clipboard</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+C</string>
    </property>
   </action>
  </widget>
