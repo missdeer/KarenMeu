@@ -119,7 +119,6 @@ private:
     void    predrawBackgroundImage();
     void    setupDockPanels();
     void    setupOptionToolbar();
-    void    setupStatusBar();
     void    updateTranslationActions();
     void    translateText(const QString &text);
 };
