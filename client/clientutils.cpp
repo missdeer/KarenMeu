@@ -6,7 +6,7 @@
 
 namespace ClientUtils
 {
-    void InitializzWidgetFont(QWidget *widget)
+    void InitializeWidgetFont(QWidget *widget)
     {
         QFont font(widget->font());
         font.setWeight(QFont::Normal);

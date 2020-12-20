@@ -7,7 +7,7 @@ QT_FORWARD_DECLARE_CLASS(QWidget);
 
 namespace ClientUtils
 {
-    void InitializzWidgetFont(QWidget *widget);
+    void InitializeWidgetFont(QWidget *widget);
 };
 
 #endif // UTILS_H

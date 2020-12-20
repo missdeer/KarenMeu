@@ -305,7 +305,7 @@ void MarkdownView::updatePreviewTheme()
         m_customPreivewThemeEditor->clearAll();
     }
     m_themeStyle.setText(QString::fromUtf8(ba));
-    ClientUtils::InitializzWidgetFont(m_editor);
+    ClientUtils::InitializeWidgetFont(m_editor);
 }
 
 void MarkdownView::updatePreviewMode()

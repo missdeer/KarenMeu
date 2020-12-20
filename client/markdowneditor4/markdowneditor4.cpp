@@ -25,7 +25,7 @@ MarkdownEditor4::MarkdownEditor4(const QSharedPointer<vte::MarkdownEditorConfig>
 void MarkdownEditor4::initialize()
 {
     vte::VTextEdit *editor = getTextEdit();
-    ClientUtils::InitializzWidgetFont(static_cast<QWidget *>(editor));
+    ClientUtils::InitializeWidgetFont(static_cast<QWidget *>(editor));
 }
 
 void MarkdownEditor4::setContent(const QString &content)
