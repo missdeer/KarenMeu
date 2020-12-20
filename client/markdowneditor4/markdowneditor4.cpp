@@ -26,7 +26,6 @@ void MarkdownEditor4::initialize()
 {
     vte::VTextEdit *editor = getTextEdit();
     ClientUtils::InitializzWidgetFont(static_cast<QWidget *>(editor));
-    setSyntax("breeze-dark.theme");
 }
 
 void MarkdownEditor4::setContent(const QString &content)

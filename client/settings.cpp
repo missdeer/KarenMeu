@@ -11,10 +11,9 @@ void Settings::initialize()
 {
     load();
 
-    vte::VTextEditor::addSyntaxCustomSearchPaths(QStringList(QStringLiteral(":/rc/syntax-highlighting/syntax")));
+    vte::VTextEditor::addSyntaxCustomSearchPaths(QStringList(QStringLiteral(":/rc/syntax-highlighting")));
 
-    m_textEditorConfig = QSharedPointer<vte::TextEditorConfig>::create();
-    m_textEditorConfig->m_syntaxTheme                             = ":/rc/syntax-highlighting/themes/breeze-dark.theme";
+    m_textEditorConfig                                            = QSharedPointer<vte::TextEditorConfig>::create();
     m_textEditorConfig->m_centerCursor                            = vte::CenterCursor::CenterOnBottom;
     m_markdownEditorConfig                                        = QSharedPointer<vte::MarkdownEditorConfig>::create(m_textEditorConfig);
     m_markdownEditorConfig->m_constrainInPlacePreviewWidthEnabled = true;
