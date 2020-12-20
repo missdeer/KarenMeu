@@ -918,22 +918,22 @@
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="448"/>
+        <location filename="../markdownview.cpp" line="449"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="448"/>
+        <location filename="../markdownview.cpp" line="449"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="451"/>
+        <location filename="../markdownview.cpp" line="452"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="451"/>
+        <location filename="../markdownview.cpp" line="452"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>
@@ -1294,22 +1294,22 @@
 <context>
     <name>QSettings</name>
     <message>
-        <location filename="../settings.cpp" line="69"/>
+        <location filename="../settings.cpp" line="68"/>
         <source>Default</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="70"/>
+        <location filename="../settings.cpp" line="69"/>
         <source>xcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="71"/>
+        <location filename="../settings.cpp" line="70"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="74"/>
+        <location filename="../settings.cpp" line="73"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>

@@ -402,6 +402,7 @@ void MarkdownView::openFromFile(const QString &fileName)
             m_editor->setContent(ba);
             m_editor->setSavePoint();
             m_editor->emptyUndoBuffer();
+            m_editor->setBasePath(QFileInfo(fileName).absolutePath());
             f.close();
             m_savePath = fileName;
         }
@@ -481,6 +482,7 @@ void MarkdownView::saveToFile(const QString &savePath)
         f.write(m_editor->content());
         f.close();
         m_editor->setSavePoint();
+        m_editor->setBasePath(QFileInfo(savePath).absolutePath());
     }
     QApplication::restoreOverrideCursor();
 
