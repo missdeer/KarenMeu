@@ -98,6 +98,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     setupOptionToolbar();
 
+    setupStatusBar();
+
     setupDockPanels();
 
     applyMarkdownEditorTheme();
@@ -557,13 +559,23 @@ void MainWindow::setupOptionToolbar()
 
     QDir dir(":/rc/theme");
     auto entries = dir.entryInfoList();
-    for (auto entry : entries)
+    for (const auto &entry : entries)
     {
         m_cbPreviewTheme->addItem(entry.baseName());
     }
     m_cbPreviewTheme->addItem(tr("Custom"));
     m_cbPreviewTheme->setCurrentText(g_settings->previewTheme());
     connect(m_cbPreviewTheme, &QComboBox::currentTextChanged, this, &MainWindow::onCurrentPreviewThemeChanged);
+}
+
+void MainWindow::setupStatusBar()
+{
+    Q_ASSERT(m_view);
+    auto editor = m_view->editor();
+    Q_ASSERT(editor);
+    auto statusWidget = editor->statusWidget();
+    Q_ASSERT(statusWidget);
+    statusBar()->addWidget(statusWidget.get());
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
