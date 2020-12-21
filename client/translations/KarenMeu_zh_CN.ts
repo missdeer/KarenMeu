@@ -1315,6 +1315,19 @@
     </message>
 </context>
 <context>
+    <name>TranslateHelperPage</name>
+    <message>
+        <location filename="../translatehelperpage.cpp" line="69"/>
+        <source>Translated Text:</source>
+        <translation>译文：</translation>
+    </message>
+    <message>
+        <location filename="../translatehelperpage.cpp" line="69"/>
+        <source>Original Text:</source>
+        <translation type="unfinished">原文：</translation>
+    </message>
+</context>
+<context>
     <name>TranslateOutputWidget</name>
     <message>
         <location filename="../translateoutputwidget.cpp" line="82"/>

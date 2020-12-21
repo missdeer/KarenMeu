@@ -48,7 +48,7 @@ void TranslateHelperPage::translate(const QString &text)
     m_originalText = text;
     m_state = THS_LOADINGPAGE;
     load(QUrl(m_landingPage + text.toUtf8().toPercentEncoding()));
-    m_timer->start(intervalStartupStep);
+    m_timer->start(g_settings->translateTimeout());
     qDebug() << __FUNCTION__ << __LINE__ << m_state << m_service << text;
 }
 
@@ -63,7 +63,12 @@ void TranslateHelperPage::getResult()
                 interval = intervalStartupStep;
             m_timer->start(interval);
         }
-        emit translated(v.toString());
+        else
+        {
+            QString result = QString("<h4>%1</h4><p>%2</p><hr><h4>%3</h4><p>%4</p>")
+                                 .arg(tr("Translated Text:"), v.toString(), tr("Original Text:"), m_originalText);
+            emit translated(result);
+        }
     });
 }
 
