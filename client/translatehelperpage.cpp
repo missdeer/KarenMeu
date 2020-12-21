@@ -5,6 +5,8 @@
 
 #include "settings.h"
 
+static const int intervalStartupStep = 1000; // millisecond
+
 TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) : QWebEnginePage(parent), m_service(ts), m_timer(new QTimer(this))
 {
     connect(this, &QWebEnginePage::loadFinished, this, &TranslateHelperPage::onLoadFinished);
@@ -46,7 +48,7 @@ void TranslateHelperPage::translate(const QString &text)
     m_originalText = text;
     m_state = THS_LOADINGPAGE;
     load(QUrl(m_landingPage + text.toUtf8().toPercentEncoding()));
-    m_timer->start(g_settings->translateTimeout());
+    m_timer->start(intervalStartupStep);
     qDebug() << __FUNCTION__ << __LINE__ << m_state << m_service << text;
 }
 
@@ -56,7 +58,10 @@ void TranslateHelperPage::getResult()
     runJavaScript(m_resultJavascript, [this](const auto &v) {
         if (v.toString().isEmpty())
         {
-            m_timer->start(m_timer->interval() + 1000);
+            int interval = m_timer->interval() + intervalStartupStep;
+            if (interval > g_settings->translateTimeout())
+                interval = intervalStartupStep;
+            m_timer->start(interval);
         }
         emit translated(v.toString());
     });
@@ -68,13 +73,14 @@ void TranslateHelperPage::onLoadFinished(bool ok)
     switch (m_state)
     {
     case THS_LOADINGPAGE:
-        m_state = THS_TRANSLATING;
         if (ok)
         {
+            m_state = THS_TRANSLATING;
             m_request();
         }
         else
         {
+            m_state = THS_LOADINGPAGE;
             action(QWebEnginePage::Reload);
         }
         break;
@@ -95,12 +101,12 @@ void TranslateHelperPage::requestYoudao()
     runJavaScript(QString("document.getElementById(\"inputOriginal\").value= \"%1\";\n"
                           "document.getElementById(\"transMachine\").click();\n")
                       .arg(m_originalText.replace("\"", "\\\"")),
-                  [this](const QVariant &) { QTimer::singleShot(1000, [this]() { getResult(); }); });
+                  [this](const QVariant &) { m_timer->start(intervalStartupStep); });
 }
 
 void TranslateHelperPage::requestGoogle()
 {
-    QTimer::singleShot(1000, [this]() { getResult(); });
+    m_timer->start(intervalStartupStep);
 }
 
 void TranslateHelperPage::requestBaidu()
@@ -108,7 +114,7 @@ void TranslateHelperPage::requestBaidu()
     runJavaScript(QString("document.getElementById(\"baidu_translate_input\").value= \"%1\";\n"
                           "document.getElementById(\"translate-button\").click();\n")
                       .arg(m_originalText.replace("\"", "\\\"")),
-                  [this](const QVariant &) { QTimer::singleShot(1000, [this]() { getResult(); }); });
+                  [this](const QVariant &) { m_timer->start(intervalStartupStep); });
 }
 
 void TranslateHelperPage::requestSogou()
@@ -117,10 +123,10 @@ void TranslateHelperPage::requestSogou()
                           "document.getElementById(\"trans-input\").dispatchEvent("
                           "new KeyboardEvent('keydown', {bubbles: true, cancelable: true, keyCode: 13}));\n")
                       .arg(m_originalText.replace("\"", "\\\"")),
-                  [this](const QVariant &) { QTimer::singleShot(1000, [this]() { getResult(); }); });
+                  [this](const QVariant &) { m_timer->start(intervalStartupStep); });
 }
 
 void TranslateHelperPage::requestDeepL()
 {
-    QTimer::singleShot(1000, [this]() { getResult(); });
+    m_timer->start(intervalStartupStep);
 }
