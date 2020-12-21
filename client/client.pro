@@ -42,7 +42,9 @@ SOURCES += \
         $$PWD/translateoutputwidget.cpp \
         $$PWD/clientutils.cpp \
         $$PWD/markdowneditor4/markdowneditor4.cpp \
-        $$PWD/templatemanagerdialog.cpp
+        $$PWD/templatemanagerdialog.cpp \
+        template.cpp \
+        templatemanager.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -59,7 +61,9 @@ HEADERS += \
         $$PWD/translateoutputwidget.h \
         $$PWD/clientutils.h \
         $$PWD/markdowneditor4/markdowneditor4.h \
-        $$PWD/templatemanagerdialog.h
+        $$PWD/templatemanagerdialog.h \
+        template.h \
+        templatemanager.h
 
 FORMS += \
         $$PWD/mainwindow.ui \

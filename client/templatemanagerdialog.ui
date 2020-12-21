@@ -89,7 +89,7 @@
     </widget>
    </item>
    <item>
-    <widget class="MarkdownEditor4" name="widget" native="true"/>
+    <widget class="MarkdownEditor4" name="edtContent" native="true"/>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">

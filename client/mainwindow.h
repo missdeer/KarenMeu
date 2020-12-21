@@ -15,6 +15,7 @@ class CustomPreviewThemeEditWidget;
 class Youdao;
 class TranslateHelperPage;
 class TranslateOutputWidget;
+class TemplateManager;
 
 QT_FORWARD_DECLARE_CLASS(QComboBox);
 QT_FORWARD_DECLARE_CLASS(QTreeView);
@@ -60,6 +61,7 @@ private slots:
     void onCurrentPreviewThemeChanged(const QString &text);
     void onCustomPreviewThemeChanged();
     void onYoudaoDictResult(QString res);
+    void onNewFromTemplateTriggered();
 
     void on_actionGoogle_triggered();
 
@@ -100,6 +102,7 @@ private:
     CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;
     QList<QToolBar *>             m_visibleToolbars;
     Youdao *                      m_youdaoDict;
+    TemplateManager *             m_templateManager {nullptr};
 
     QString m_curFile;
 
@@ -107,7 +110,9 @@ private:
     {
         MaxRecentFiles = 10
     };
-    QAction *recentFileActs[MaxRecentFiles];
+
+    QAction *        recentFileActs[MaxRecentFiles];
+    QList<QAction *> m_templateActs;
 
     QPixmap               originalBackgroundImage;
     QPixmap               adjustedBackgroundImage;

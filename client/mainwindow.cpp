@@ -31,6 +31,7 @@
 #include "preferencedialog.h"
 #include "previewthemeeditor.h"
 #include "settings.h"
+#include "templatemanager.h"
 #include "templatemanagerdialog.h"
 #include "translatehelperpage.h"
 #include "translateoutputwidget.h"
@@ -41,7 +42,12 @@
 using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), m_view(new MarkdownView(this)), m_youdaoDict(new Youdao(m_nam))
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+    , m_view(new MarkdownView(this))
+    , m_youdaoDict(new Youdao(m_nam))
+    , m_templateManager(new TemplateManager)
 {
     ui->setupUi(this);
     setCentralWidget(m_view);
@@ -93,6 +99,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         recentFileActs[i]->setVisible(false);
         connect(recentFileActs[i], &QAction::triggered, this, &MainWindow::openRecentFile);
         ui->menuRecentFiles->addAction(recentFileActs[i]);
+    }
+
+    m_templateManager->load();
+    auto templates = m_templateManager->templates();
+    for (int i = 0; i < templates.length(); i++)
+    {
+        auto act = new QAction(this);
+        m_templateActs.push_back(act);
+        act->setText(QFileInfo(templates[i]->path()).baseName());
+        connect(act, &QAction::triggered, this, &MainWindow::onNewFromTemplateTriggered);
+        ui->menuNewFromTemplate->addAction(act);
     }
 
     updateTranslationActions();
@@ -319,6 +336,12 @@ void MainWindow::onYoudaoDictResult(QString res)
     m_youdaoDictionaryEditor->clear();
     m_youdaoDictionaryEditor->appendHtml(res);
     m_youdaoDictionaryEditor->moveCursor(QTextCursor::Start);
+}
+
+void MainWindow::onNewFromTemplateTriggered()
+{
+    auto act = qobject_cast<QAction *>(sender());
+    Q_UNUSED(act);
 }
 
 QString MainWindow::strippedName(const QString &fullFileName)
@@ -673,6 +696,6 @@ void MainWindow::on_actionTranslateTextInClipboard_triggered()
 
 void MainWindow::on_actionTemplateManager_triggered()
 {
-    TemplateManagerDialog dlg(this);
+    TemplateManagerDialog dlg(*m_templateManager, this);
     dlg.exec();
 }

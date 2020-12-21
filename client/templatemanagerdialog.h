@@ -7,12 +7,14 @@ namespace Ui {
     class TemplateManagerDialog;
 }
 
+class TemplateManager;
+
 class TemplateManagerDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit TemplateManagerDialog(QWidget *parent = nullptr);
+    explicit TemplateManagerDialog(TemplateManager &mgr, QWidget *parent = nullptr);
     ~TemplateManagerDialog();
 
 private slots:
@@ -26,6 +28,7 @@ private slots:
 
 private:
     Ui::TemplateManagerDialog *ui;
+    TemplateManager &          m_mgr;
 };
 
 #endif // TEMPLATEMANAGERDIALOG_H
