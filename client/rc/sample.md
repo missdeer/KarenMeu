@@ -57,7 +57,7 @@
 ```
 
 `js`代码：
-```javascript
+```js
 function sayHelloWorld (name) {
   console.log('Hello world, ' + name);
 }
