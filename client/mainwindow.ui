@@ -45,7 +45,19 @@
      <addaction name="actionClearRecentFilesList"/>
      <addaction name="separator"/>
     </widget>
+    <widget class="QMenu" name="menuNewFromTemplate">
+     <property name="title">
+      <string>New From Template...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="karenmeu.qrc">
+       <normaloff>:/rc/images/newFromTemplate.png</normaloff>:/rc/images/newFromTemplate.png</iconset>
+     </property>
+     <addaction name="actionTemplateManager"/>
+     <addaction name="separator"/>
+    </widget>
     <addaction name="actionNew"/>
+    <addaction name="menuNewFromTemplate"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
@@ -1125,6 +1137,15 @@
    </property>
    <property name="shortcut">
     <string>F7</string>
+   </property>
+  </action>
+  <action name="actionTemplateManager">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/templateManager.png</normaloff>:/rc/images/templateManager.png</iconset>
+   </property>
+   <property name="text">
+    <string>Template Manager...</string>
    </property>
   </action>
  </widget>

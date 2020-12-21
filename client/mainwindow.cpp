@@ -669,3 +669,5 @@ void MainWindow::on_actionTranslateTextInClipboard_triggered()
     auto text = clipboard->text();
     translateText(text);
 }
+
+void MainWindow::on_actionTemplateManager_triggered() {}

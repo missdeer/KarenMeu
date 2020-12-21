@@ -393,5 +393,7 @@
         <file>rc/syntax-highlighting/themes/solarized-dark.theme</file>
         <file>rc/syntax-highlighting/themes/solarized-light.theme</file>
         <file>rc/images/deepl.png</file>
+        <file>rc/images/newFromTemplate.png</file>
+        <file>rc/images/templateManager.png</file>
     </qresource>
 </RCC>

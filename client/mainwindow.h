@@ -73,6 +73,8 @@ private slots:
 
     void on_actionTranslateTextInClipboard_triggered();
 
+    void on_actionTemplateManager_triggered();
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
