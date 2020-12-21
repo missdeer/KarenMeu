@@ -395,5 +395,6 @@
         <file>rc/images/deepl.png</file>
         <file>rc/images/newFromTemplate.png</file>
         <file>rc/images/templateManager.png</file>
+        <file>rc/images/remove.png</file>
     </qresource>
 </RCC>

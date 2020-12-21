@@ -8,6 +8,7 @@ class MarkdownEditor4 : public vte::VMarkdownEditor
 {
     Q_OBJECT
 public:
+    explicit MarkdownEditor4(QWidget *parent = nullptr);
     explicit MarkdownEditor4(const QSharedPointer<vte::MarkdownEditorConfig> &p_config, QWidget *parent = nullptr);
 
     void       initialize();
@@ -75,6 +76,7 @@ private:
     void replaceCurrentLineText(const QString &text);
 
     void formatHeading(const QString &heading);
+    void setupChildWidgets();
 };
 
 #endif // MARKDOWNEDITOR4_H

@@ -31,6 +31,7 @@
 #include "preferencedialog.h"
 #include "previewthemeeditor.h"
 #include "settings.h"
+#include "templatemanagerdialog.h"
 #include "translatehelperpage.h"
 #include "translateoutputwidget.h"
 #include "ui_mainwindow.h"
@@ -670,4 +671,8 @@ void MainWindow::on_actionTranslateTextInClipboard_triggered()
     translateText(text);
 }
 
-void MainWindow::on_actionTemplateManager_triggered() {}
+void MainWindow::on_actionTemplateManager_triggered()
+{
+    TemplateManagerDialog dlg(this);
+    dlg.exec();
+}

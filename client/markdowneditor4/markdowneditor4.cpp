@@ -11,7 +11,17 @@
 #include "clientutils.h"
 #include "settings.h"
 
+MarkdownEditor4::MarkdownEditor4(QWidget *parent) : vte::VMarkdownEditor(g_settings->markdownEditorConfig(), parent)
+{
+    setupChildWidgets();
+}
+
 MarkdownEditor4::MarkdownEditor4(const QSharedPointer<vte::MarkdownEditorConfig> &p_config, QWidget *parent) : vte::VMarkdownEditor(p_config, parent)
+{
+    setupChildWidgets();
+}
+
+void MarkdownEditor4::setupChildWidgets()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);

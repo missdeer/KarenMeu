@@ -41,7 +41,8 @@ SOURCES += \
         $$PWD/translatehelperpage.cpp \
         $$PWD/translateoutputwidget.cpp \
         $$PWD/clientutils.cpp \
-        $$PWD/markdowneditor4/markdowneditor4.cpp
+        $$PWD/markdowneditor4/markdowneditor4.cpp \
+        $$PWD/templatemanagerdialog.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -57,11 +58,13 @@ HEADERS += \
         $$PWD/translatehelperpage.h \
         $$PWD/translateoutputwidget.h \
         $$PWD/clientutils.h \
-        $$PWD/markdowneditor4/markdowneditor4.h
+        $$PWD/markdowneditor4/markdowneditor4.h \
+        $$PWD/templatemanagerdialog.h
 
 FORMS += \
         $$PWD/mainwindow.ui \
-        $$PWD/preferencedialog.ui
+        $$PWD/preferencedialog.ui \
+        $$PWD/templatemanagerdialog.ui
 
 INCLUDEPATH += $$PWD $$PWD/markdowneditor4
 
