@@ -7,22 +7,32 @@
 
 #include "youdao.h"
 
+struct YoudaoDictKey
+{
+    QString keyFrom;
+    QString key;
+};
+
 Youdao::Youdao(QNetworkAccessManager &nam, QObject *parent) : QObject(parent), m_nam(nam) {}
 
 void Youdao::query(const QString &keyword)
 {
+    static int           keyIndex  = 0;
+    static YoudaoDictKey keys[]    = {{"f2ec-org", "1787962561"}, {"go-ydict", "252639882"}, {"Youdao-dict-v21", "1945325576"}};
+    static int           keysCount = sizeof(keys) / sizeof(keys[0]);
     m_content.clear();
     // http://fanyi.youdao.com/openapi.do?keyfrom=f2ec-org&key=1787962561&type=data&doctype=json&version=1.1&q=
     QUrl url("http://fanyi.youdao.com/openapi.do");
     QUrlQuery query;
 
-    query.addQueryItem("keyfrom", "f2ec-org");
-    query.addQueryItem("key", "1787962561");
+    query.addQueryItem("keyfrom", keys[keyIndex].keyFrom);
+    query.addQueryItem("key", keys[keyIndex].key);
     query.addQueryItem("type", "data");
     query.addQueryItem("doctype", "json");
     query.addQueryItem("version", "1.1");
     query.addQueryItem("q", keyword.toUtf8());
-
+    if (++keyIndex >= keysCount)
+        keyIndex = 0;
     url.setQuery(query.query());
     QNetworkRequest req(url);
     req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);

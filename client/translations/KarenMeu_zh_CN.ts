@@ -1276,17 +1276,17 @@
         <translation>不支持SSL，一些功能可能无法正常工作。</translation>
     </message>
     <message>
-        <location filename="../youdao.cpp" line="79"/>
+        <location filename="../youdao.cpp" line="89"/>
         <source>[Translation]</source>
         <translation>【翻译】</translation>
     </message>
     <message>
-        <location filename="../youdao.cpp" line="84"/>
+        <location filename="../youdao.cpp" line="94"/>
         <source>[Explain]</source>
         <translation>【释义】</translation>
     </message>
     <message>
-        <location filename="../youdao.cpp" line="98"/>
+        <location filename="../youdao.cpp" line="108"/>
         <source>[Web]</source>
         <translation>【网络用语】</translation>
     </message>
