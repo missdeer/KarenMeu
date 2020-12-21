@@ -240,7 +240,6 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="394"/>
-        <location filename="../mainwindow.ui" line="1127"/>
         <source>Ctrl+Alt+C</source>
         <translation>Ctrl+Alt+C</translation>
     </message>
@@ -698,18 +697,23 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1041"/>
-        <source>Ctrl+Alt+D</source>
-        <translation></translation>
+        <source>F8</source>
+        <translation>F8</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1053"/>
+        <source>F6</source>
+        <translation>F6</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1127"/>
+        <source>F7</source>
+        <translation>F7</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1050"/>
         <source>Translate Selected Text</source>
         <translation>翻译选中文本</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="1053"/>
-        <source>Ctrl+Alt+T</source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1068"/>
@@ -1324,7 +1328,7 @@
     <message>
         <location filename="../translatehelperpage.cpp" line="69"/>
         <source>Original Text:</source>
-        <translation type="unfinished">原文：</translation>
+        <translation>原文：</translation>
     </message>
 </context>
 <context>

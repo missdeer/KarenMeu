@@ -1038,7 +1038,7 @@
     <string>Dictionary</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Alt+D</string>
+    <string>F8</string>
    </property>
   </action>
   <action name="actionTranslateSelected">
@@ -1050,7 +1050,7 @@
     <string>Translate Selected Text</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Alt+T</string>
+    <string>F6</string>
    </property>
   </action>
   <action name="actionGoogle">
@@ -1124,7 +1124,7 @@
     <string>Translate Text in Clipboard</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Alt+C</string>
+    <string>F7</string>
    </property>
   </action>
  </widget>
