@@ -1370,6 +1370,12 @@
         <source>Content Template</source>
         <translation>内容模板</translation>
     </message>
+    <message>
+        <location filename="../templatemanagerdialog.cpp" line="19"/>
+        <location filename="../templatemanagerdialog.cpp" line="51"/>
+        <source>&lt;New Template&gt;</source>
+        <translation>&lt;新建模板&gt;</translation>
+    </message>
 </context>
 <context>
     <name>TranslateHelperPage</name>

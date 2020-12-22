@@ -15,7 +15,10 @@ TemplateManagerDialog::TemplateManagerDialog(TemplateManager &mgr, QWidget *pare
         ui->cbTemplates->addItem(t->templateName());
     }
     if (!templates.isEmpty())
+    {
+        ui->cbTemplates->addItem(tr("<New Template>"));
         ui->cbTemplates->setCurrentIndex(0);
+    }
 }
 
 TemplateManagerDialog::~TemplateManagerDialog()
@@ -26,16 +29,26 @@ TemplateManagerDialog::~TemplateManagerDialog()
 void TemplateManagerDialog::on_cbTemplates_currentTextChanged(const QString &arg1)
 {
     auto t = m_mgr.find(arg1);
-    ui->edtFileNameRule->setText(t->nameRule());
-    ui->edtTemplateName->setText(QFileInfo(t->path()).baseName());
-    ui->edtContent->setText(t->contentTemplate());
-    ui->edtTemplateName->setReadOnly(true);
+    if (t)
+    {
+        ui->edtFileNameRule->setText(t->nameRule());
+        ui->edtTemplateName->setText(QFileInfo(t->path()).baseName());
+        ui->edtContent->setText(t->contentTemplate());
+        ui->edtTemplateName->setReadOnly(true);
+    }
+    else
+    {
+        ui->edtTemplateName->setText("");
+        ui->edtFileNameRule->setText("");
+        ui->edtContent->setText("");
+        ui->edtTemplateName->setReadOnly(false);
+    }
 }
 
 void TemplateManagerDialog::on_btnAddTemplate_clicked()
 {
     ui->edtTemplateName->setReadOnly(false);
-    ui->cbTemplates->setCurrentText("");
+    ui->cbTemplates->setCurrentText(tr("<New Template>"));
     ui->edtTemplateName->setText("");
     ui->edtFileNameRule->setText("");
     ui->edtContent->setText("");
@@ -43,11 +56,24 @@ void TemplateManagerDialog::on_btnAddTemplate_clicked()
 
 void TemplateManagerDialog::on_btnSaveTemplate_clicked()
 {
-    auto t = m_mgr.add(ui->edtTemplateName->text(), ui->edtFileNameRule->text(), ui->edtContent->getText());
-    t->save();
-    ui->cbTemplates->addItem(ui->edtTemplateName->text());
-    ui->cbTemplates->setCurrentText(ui->edtTemplateName->text());
-    ui->edtTemplateName->setReadOnly(true);
+    if (ui->cbTemplates->currentText().isEmpty())
+    {
+        auto t = m_mgr.add(ui->edtTemplateName->text(), ui->edtFileNameRule->text(), ui->edtContent->getText());
+        t->save();
+        ui->cbTemplates->addItem(ui->edtTemplateName->text());
+        ui->cbTemplates->setCurrentText(ui->edtTemplateName->text());
+        ui->edtTemplateName->setReadOnly(true);
+    }
+    else
+    {
+        auto t = m_mgr.find(ui->cbTemplates->currentText());
+        if (t)
+        {
+            t->setNameRule(ui->edtFileNameRule->text());
+            t->setContentTemplate(ui->edtContent->getText());
+            t->save();
+        }
+    }
 }
 
 void TemplateManagerDialog::on_btnRemoveTemplate_clicked()
