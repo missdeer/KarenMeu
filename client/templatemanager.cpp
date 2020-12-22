@@ -38,7 +38,7 @@ TemplatePtr TemplateManager::add(const QString &name, const QString &fileNameRul
     auto        templateDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/templates";
     TemplatePtr t(new Template);
     t->setPath(QString("%1/%2.xml").arg(templateDir, name));
-    t->setNameRule(fileNameRule);
+    t->setNameTemplate(fileNameRule);
     t->setContentTemplate(content);
     m_templates.append(t);
     return t;

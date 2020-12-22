@@ -13,18 +13,21 @@ public:
     void           setPath(const QString &path);
     QString        templateName();
 
-    const QString &nameRule() const;
-    void           setNameRule(const QString &nameRule);
-    QString        ruleAppliedName();
+    const QString &nameTemplate() const;
+    void           setNameTemplate(const QString &nameRule);
+    QString        templateExecutedName(const QString &title);
 
     const QString &contentTemplate() const;
     void           setContentTemplate(const QString &content);
-    QString        content();
+    QString        templateExecutedContent(const QString &title);
+
+    bool needTitle() const;
 
 private:
     QString m_path;
-    QString m_nameRule;
-    QString m_content;
+    QString m_nameTemplate;
+    QString m_contentTemplate;
+    QString executeTemplate(const QString &t, const QString &title);
 };
 
 using TemplatePtr = QSharedPointer<Template>;

@@ -1,3 +1,4 @@
+#include <QDateTime>
 #include <QDomDocument>
 #include <QDomElement>
 #include <QDomProcessingInstruction>
@@ -30,7 +31,7 @@ bool Template::load()
     auto fnEle = docEle.firstChildElement("fileName");
     if (!fnEle.isNull())
     {
-        m_nameRule = fnEle.text();
+        m_nameTemplate = fnEle.text();
     }
 
     QDomElement contentElem = docEle.firstChildElement("content");
@@ -38,7 +39,7 @@ bool Template::load()
     {
         return false;
     }
-    m_content = contentElem.text();
+    m_contentTemplate = contentElem.text();
 
     return true;
 }
@@ -59,13 +60,13 @@ bool Template::save()
     auto fnEle = doc.createElement("fileName");
     docElem.appendChild(fnEle);
 
-    auto text = doc.createTextNode(m_nameRule);
+    auto text = doc.createTextNode(m_nameTemplate);
     fnEle.appendChild(text);
 
     auto contentEle = doc.createElement("content");
     docElem.appendChild(contentEle);
 
-    auto contentSection = doc.createCDATASection(m_content);
+    auto contentSection = doc.createCDATASection(m_contentTemplate);
     contentEle.appendChild(contentSection);
 
     QTextStream out(&f);
@@ -89,32 +90,69 @@ QString Template::templateName()
     return QFileInfo(m_path).baseName();
 }
 
-const QString &Template::nameRule() const
+const QString &Template::nameTemplate() const
 {
-    return m_nameRule;
+    return m_nameTemplate;
 }
 
-void Template::setNameRule(const QString &nameRule)
+void Template::setNameTemplate(const QString &nameRule)
 {
-    m_nameRule = nameRule;
+    m_nameTemplate = nameRule;
 }
 
-QString Template::ruleAppliedName()
+QString Template::templateExecutedName(const QString &title)
 {
-    return m_nameRule;
+    return executeTemplate(m_nameTemplate, title);
 }
 
 const QString &Template::contentTemplate() const
 {
-    return m_content;
+    return m_contentTemplate;
 }
 
 void Template::setContentTemplate(const QString &content)
 {
-    m_content = content;
+    m_contentTemplate = content;
 }
 
-QString Template::content()
+QString Template::templateExecutedContent(const QString &title)
 {
-    return m_content;
+    return executeTemplate(m_contentTemplate, title);
+}
+
+bool Template::needTitle() const
+{
+    return m_nameTemplate.contains("%title%") || m_contentTemplate.contains("%title%");
+}
+
+QString Template::executeTemplate(const QString &t, const QString &title)
+{
+    auto                       now       = QDateTime::currentDateTime();
+    std::map<QString, QString> templates = {
+        {"%title%", title},
+        {"%h%", QString("%1").arg(now.time().hour())},
+        {"%hh%", QString("%1").arg(now.time().hour())},
+        {"%H%", QString("%1").arg(now.time().hour())},
+        {"%HH%", QString("%1").arg(now.time().hour())},
+        {"%m%", QString("%1").arg(now.time().minute())},
+        {"%mm%", QString("%1").arg(now.time().minute())},
+        {"%AP%", QString("%1").arg(now.time().hour() >= 12 ? "PM" : "AM")},
+        {"%ap%", QString("%1").arg(now.time().hour() >= 12 ? "pm" : "am")},
+        {"%d%", QString("%1").arg(now.date().day())},
+        {"%dd%", QString("%1").arg(now.date().day())},
+        {"%ddd%", QString("%1").arg(now.date().dayOfWeek())},
+        {"%dddd%", QString("%1").arg(now.date().dayOfWeek())},
+        {"%M%", QString("%1").arg(now.date().month())},
+        {"%MM%", QString("%1").arg(now.date().month())},
+        {"%MMM%", QString("%1").arg(now.date().month())},
+        {"%MMMM%", QString("%1").arg(now.date().month())},
+        {"%yy%", QString("%1").arg(now.date().year() % 100)},
+        {"%yyyy%", QString("%1").arg(now.date().year())},
+    };
+    QString res = t;
+    for (const auto &[from, to] : templates)
+    {
+        res = res.replace(from, to);
+    }
+    return res;
 }

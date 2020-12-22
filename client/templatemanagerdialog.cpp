@@ -31,7 +31,7 @@ void TemplateManagerDialog::on_cbTemplates_currentTextChanged(const QString &arg
     auto t = m_mgr.find(arg1);
     if (t)
     {
-        ui->edtFileNameRule->setText(t->nameRule());
+        ui->edtFileNameRule->setText(t->nameTemplate());
         ui->edtTemplateName->setText(QFileInfo(t->path()).baseName());
         ui->edtContent->setText(t->contentTemplate());
         ui->edtTemplateName->setReadOnly(true);
@@ -69,7 +69,7 @@ void TemplateManagerDialog::on_btnSaveTemplate_clicked()
         auto t = m_mgr.find(ui->cbTemplates->currentText());
         if (t)
         {
-            t->setNameRule(ui->edtFileNameRule->text());
+            t->setNameTemplate(ui->edtFileNameRule->text());
             t->setContentTemplate(ui->edtContent->getText());
             t->save();
         }
