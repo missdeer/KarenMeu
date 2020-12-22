@@ -1,6 +1,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QStandardPaths>
+#include <QtCore>
 
 #include "templatemanager.h"
 
@@ -9,12 +10,17 @@ bool TemplateManager::load()
     bool res         = true;
     auto templateDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/templates";
     QDir dir(templateDir);
+    if (!dir.exists())
+        dir.mkpath(templateDir);
     auto entries = dir.entryInfoList(QStringList() << "*.xml", QDir::Files);
     for (const auto &entry : entries)
     {
         TemplatePtr t(new Template);
         t->setPath(entry.absoluteFilePath());
-        res &= t->save();
+        auto loaded = t->load();
+        if (loaded)
+            m_templates.append(t);
+        res &= loaded;
     }
     return res;
 }
@@ -27,14 +33,15 @@ bool TemplateManager::save()
     return res;
 }
 
-void TemplateManager::add(const QString &name, const QString &fileNameRule, const QString &content)
+TemplatePtr TemplateManager::add(const QString &name, const QString &fileNameRule, const QString &content)
 {
     auto        templateDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/templates";
     TemplatePtr t(new Template);
-    t->setPath(QString("%1/templates/%2.xml").arg(templateDir, name));
+    t->setPath(QString("%1/%2.xml").arg(templateDir, name));
     t->setNameRule(fileNameRule);
     t->setContentTemplate(content);
     m_templates.append(t);
+    return t;
 }
 
 void TemplateManager::remove(const QString &name)

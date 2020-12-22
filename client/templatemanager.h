@@ -11,7 +11,7 @@ public:
     bool load();
     bool save();
 
-    void        add(const QString &name, const QString &fileNameRule, const QString &content);
+    TemplatePtr add(const QString &name, const QString &fileNameRule, const QString &content);
     void        remove(const QString &name);
     TemplatePtr find(const QString &name);
 

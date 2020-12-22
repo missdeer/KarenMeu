@@ -43,8 +43,8 @@ SOURCES += \
         $$PWD/clientutils.cpp \
         $$PWD/markdowneditor4/markdowneditor4.cpp \
         $$PWD/templatemanagerdialog.cpp \
-        template.cpp \
-        templatemanager.cpp
+        $$PWD/template.cpp \
+        $$PWD/templatemanager.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -62,8 +62,8 @@ HEADERS += \
         $$PWD/clientutils.h \
         $$PWD/markdowneditor4/markdowneditor4.h \
         $$PWD/templatemanagerdialog.h \
-        template.h \
-        templatemanager.h
+        $$PWD/template.h \
+        $$PWD/templatemanager.h
 
 FORMS += \
         $$PWD/mainwindow.ui \

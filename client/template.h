@@ -11,10 +11,11 @@ public:
 
     const QString &path() const;
     void           setPath(const QString &path);
+    QString        templateName();
 
     const QString &nameRule() const;
     void           setNameRule(const QString &nameRule);
-    QString        name();
+    QString        ruleAppliedName();
 
     const QString &contentTemplate() const;
     void           setContentTemplate(const QString &content);
