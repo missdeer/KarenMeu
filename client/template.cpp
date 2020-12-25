@@ -4,6 +4,8 @@
 #include <QDomProcessingInstruction>
 #include <QFile>
 #include <QFileInfo>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include <QTextStream>
 #include <QtCore>
 
@@ -127,32 +129,15 @@ bool Template::needTitle() const
 
 QString Template::executeTemplate(const QString &t, const QString &title)
 {
-    auto                       now       = QDateTime::currentDateTime();
-    std::map<QString, QString> templates = {
-        {"%title%", title},
-        {"%h%", QString("%1").arg(now.time().hour())},
-        {"%hh%", QString("%1").arg(now.time().hour())},
-        {"%H%", QString("%1").arg(now.time().hour())},
-        {"%HH%", QString("%1").arg(now.time().hour())},
-        {"%m%", QString("%1").arg(now.time().minute())},
-        {"%mm%", QString("%1").arg(now.time().minute())},
-        {"%AP%", QString("%1").arg(now.time().hour() >= 12 ? "PM" : "AM")},
-        {"%ap%", QString("%1").arg(now.time().hour() >= 12 ? "pm" : "am")},
-        {"%d%", QString("%1").arg(now.date().day())},
-        {"%dd%", QString("%1").arg(now.date().day())},
-        {"%ddd%", QString("%1").arg(now.date().dayOfWeek())},
-        {"%dddd%", QString("%1").arg(now.date().dayOfWeek())},
-        {"%M%", QString("%1").arg(now.date().month())},
-        {"%MM%", QString("%1").arg(now.date().month())},
-        {"%MMM%", QString("%1").arg(now.date().month())},
-        {"%MMMM%", QString("%1").arg(now.date().month())},
-        {"%yy%", QString("%1").arg(now.date().year() % 100)},
-        {"%yyyy%", QString("%1").arg(now.date().year())},
-    };
+    auto    now = QDateTime::currentDateTime();
     QString res = t;
-    for (const auto &[from, to] : templates)
+    res         = res.replace("%title%", title);
+    QRegularExpression r("%([a-zA-Z0-9\\s]+)%");
+    for (auto match = r.match(res); match.hasMatch(); match = r.match(res))
     {
-        res = res.replace(from, to);
+        auto fullMatchedText = match.captured(0);
+        auto submatchedText  = match.captured(1);
+        res                  = res.replace(fullMatchedText, now.toString(submatchedText));
     }
     return res;
 }
