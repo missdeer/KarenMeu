@@ -176,7 +176,11 @@ macx: {
 } 
 
 unix: !macx {
+    DESTDIR = $$OUT_PWD
     translate.commands = '$(COPY_DIR) $$shell_path($$PWD/translations) $$shell_path($$DESTDIR)'
+
+    qti18n.depends = translate
+    qti18n.commands = '$(COPY_FILE) $$shell_path($$[QT_INSTALL_BINS]/../translations/qt_zh_CN.qm) $$shell_path($${DESTDIR}/translations/qt_zh_CN.qm)'
 }    
 
 LIBS += -lutils
