@@ -126,11 +126,11 @@
    </widget>
    <widget class="QMenu" name="menuTranslation">
     <property name="title">
-     <string>Translation</string>
+     <string>&amp;Translation</string>
     </property>
     <widget class="QMenu" name="menuTranslate">
      <property name="title">
-      <string>Translate</string>
+      <string>&amp;Translate</string>
      </property>
      <addaction name="actionTranslateSelected"/>
      <addaction name="actionTranslateTextInClipboard"/>
