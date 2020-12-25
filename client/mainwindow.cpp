@@ -5,11 +5,13 @@
 #include <QCoreApplication>
 #include <QDesktopServices>
 #include <QDockWidget>
+#include <QFileDialog>
 #include <QFileInfo>
 #include <QFileSystemModel>
 #include <QGraphicsColorizeEffect>
 #include <QHash>
 #include <QHeaderView>
+#include <QInputDialog>
 #include <QLabel>
 #include <QMap>
 #include <QMessageBox>
@@ -101,16 +103,7 @@ MainWindow::MainWindow(QWidget *parent)
         ui->menuRecentFiles->addAction(recentFileActs[i]);
     }
 
-    m_templateManager->load();
-    auto templates = m_templateManager->templates();
-    for (int i = 0; i < templates.length(); i++)
-    {
-        auto act = new QAction(this);
-        m_templateActs.push_back(act);
-        act->setText(QFileInfo(templates[i]->path()).baseName());
-        connect(act, &QAction::triggered, this, &MainWindow::onNewFromTemplateTriggered);
-        ui->menuNewFromTemplate->addAction(act);
-    }
+    setupTemplateMenus();
 
     updateTranslationActions();
 
@@ -199,6 +192,27 @@ void MainWindow::translateText(const QString &text)
         Q_ASSERT(m_deepLTranslateEditor);
         m_deepLTranslateEditor->translate(text);
     }
+}
+
+void MainWindow::setupTemplateMenus()
+{
+    m_templateManager->load();
+    auto templates = m_templateManager->templates();
+    for (auto t : templates)
+    {
+        auto act = new QAction(this);
+        m_templateActs.push_back(act);
+        act->setText(t->templateName());
+        connect(act, &QAction::triggered, this, &MainWindow::onNewFromTemplateTriggered);
+        ui->menuNewFromTemplate->addAction(act);
+    }
+}
+
+void MainWindow::newDocumentWithContent(const QString &content)
+{
+    Q_ASSERT(m_view);
+    m_view->newDocument();
+    m_view->setInitialDocument(content);
 }
 
 void MainWindow::on_actionPreference_triggered()
@@ -342,6 +356,58 @@ void MainWindow::onNewFromTemplateTriggered()
 {
     auto act = qobject_cast<QAction *>(sender());
     Q_UNUSED(act);
+    QString templateName = act->text();
+    auto    t            = m_templateManager->find(templateName);
+    if (!t)
+        return;
+
+    QString title;
+    if (t->needTitle())
+    {
+        title = QInputDialog::getText(this, tr("Input Title"), tr("Title for document"));
+    }
+    auto fileContent = t->templateExecutedContent(title);
+    auto fileName    = t->templateExecutedName(title);
+    if (!fileName.isEmpty())
+    {
+        // need a directory to save file
+        // save to file
+        auto path = QFileDialog::getExistingDirectory(
+            this, tr("Select a directory to save document"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+        if (path.isEmpty())
+        {
+            return;
+        }
+        QDir dir(path);
+        if (!dir.exists())
+        {
+            if (!dir.mkpath(path))
+            {
+                QMessageBox::warning(this, tr("Error"), tr("Making directory %1 failed.").arg(path), QMessageBox::Ok);
+                return;
+            }
+        }
+        auto  filePath = (QStringList() << path << fileName).join("/");
+        QFile f(filePath);
+        if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate))
+        {
+            QMessageBox::warning(this, tr("Error"), tr("Creating file at %1 failed.").arg(filePath), QMessageBox::Ok);
+            return;
+        }
+        else
+        {
+            f.write(fileContent.toUtf8());
+            f.close();
+            // open file
+            openFile(filePath);
+        }
+    }
+    else
+    {
+        Q_ASSERT(m_view);
+        m_view->newDocument();
+        m_view->setInitialDocument(fileContent);
+    }
 }
 
 QString MainWindow::strippedName(const QString &fullFileName)
@@ -351,9 +417,9 @@ QString MainWindow::strippedName(const QString &fullFileName)
 
 void MainWindow::openRecentFile()
 {
-    QAction *action = qobject_cast<QAction *>(sender());
-    if (action)
-        openFile(action->data().toString());
+    auto *action = qobject_cast<QAction *>(sender());
+    Q_ASSERT(action);
+    openFile(action->data().toString());
 }
 
 void MainWindow::on_actionClearRecentFilesList_triggered()
@@ -699,4 +765,8 @@ void MainWindow::on_actionTemplateManager_triggered()
 {
     TemplateManagerDialog dlg(*m_templateManager, this);
     dlg.exec();
+    if (dlg.isModified())
+    {
+        // update template menu
+    }
 }

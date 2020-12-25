@@ -412,6 +412,13 @@ void MarkdownView::openFromFile(const QString &fileName)
     }
 }
 
+void MarkdownView::setInitialDocument(const QString &content)
+{
+    m_editor->setContent(content.toUtf8());
+    m_editor->setSavePoint();
+    m_editor->emptyUndoBuffer();
+}
+
 MarkdownEditor4 *MarkdownView::editor()
 {
     return m_editor;
@@ -489,7 +496,7 @@ void MarkdownView::saveToFile(const QString &savePath)
     emit setCurrentFile(savePath);
 }
 
-void MarkdownView::setContent(const QString &html)
+void MarkdownView::setRenderedHTML(const QString &html)
 {
     m_renderedContent.setText(html);
     Q_ASSERT(m_previewHTMLEditor);
@@ -561,7 +568,7 @@ void MarkdownView::renderMarkdownToHTML()
         QString metaDataHTML = QString("<p id=\"metadata\">%1</p><hr>").arg(QString(metaDataLines.join("<br>")));
         html                 = metaDataHTML + html;
     }
-    setContent(html);
+    setRenderedHTML(html);
 
     Free(res);
 }

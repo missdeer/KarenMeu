@@ -17,6 +17,7 @@ public:
     explicit TemplateManagerDialog(TemplateManager &mgr, QWidget *parent = nullptr);
     ~TemplateManagerDialog();
 
+    bool isModified() const;
 private slots:
     void on_cbTemplates_currentTextChanged(const QString &arg1);
 
@@ -29,6 +30,7 @@ private slots:
 private:
     Ui::TemplateManagerDialog *ui;
     TemplateManager &          m_mgr;
+    bool                       m_isModified {false};
 };
 
 #endif // TEMPLATEMANAGERDIALOG_H

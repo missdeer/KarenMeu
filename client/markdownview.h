@@ -26,6 +26,7 @@ public:
     void             updateMarkdownEngine();
     void             updateMacStyleCodeBlock();
     void             openFromFile(const QString &fileName);
+    void             setInitialDocument(const QString &content);
     MarkdownEditor4 *editor();
     QString          selectedText() const;
     QSplitter *      splitter();
@@ -97,7 +98,7 @@ private:
 
     void saveToFile(const QString &savePath);
     void renderMarkdownToHTML();
-    void setContent(const QString &html);
+    void setRenderedHTML(const QString &html);
 };
 
 #endif // MARKDOWNVIEW_H

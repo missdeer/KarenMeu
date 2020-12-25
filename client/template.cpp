@@ -124,15 +124,15 @@ QString Template::templateExecutedContent(const QString &title)
 
 bool Template::needTitle() const
 {
-    return m_nameTemplate.contains("%title%") || m_contentTemplate.contains("%title%");
+    return m_nameTemplate.contains("%title%", Qt::CaseInsensitive) || m_contentTemplate.contains("%title%", Qt::CaseInsensitive);
 }
 
 QString Template::executeTemplate(const QString &t, const QString &title)
 {
     auto    now = QDateTime::currentDateTime();
     QString res = t;
-    res         = res.replace("%title%", title);
-    QRegularExpression r("%([a-zA-Z0-9\\s]+)%");
+    res         = res.replace("%title%", title, Qt::CaseInsensitive);
+    QRegularExpression r("%([a-zA-Z]{1,4})%");
     for (auto match = r.match(res); match.hasMatch(); match = r.match(res))
     {
         auto fullMatchedText = match.captured(0);

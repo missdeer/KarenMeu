@@ -26,6 +26,11 @@ TemplateManagerDialog::~TemplateManagerDialog()
     delete ui;
 }
 
+bool TemplateManagerDialog::isModified() const
+{
+    return m_isModified;
+}
+
 void TemplateManagerDialog::on_cbTemplates_currentTextChanged(const QString &arg1)
 {
     auto t = m_mgr.find(arg1);
@@ -60,6 +65,7 @@ void TemplateManagerDialog::on_btnSaveTemplate_clicked()
     {
         auto t = m_mgr.add(ui->edtTemplateName->text(), ui->edtFileNameRule->text(), ui->edtContent->getText());
         t->save();
+        m_isModified = true;
         ui->cbTemplates->addItem(ui->edtTemplateName->text());
         ui->cbTemplates->setCurrentText(ui->edtTemplateName->text());
         ui->edtTemplateName->setReadOnly(true);
@@ -69,7 +75,11 @@ void TemplateManagerDialog::on_btnSaveTemplate_clicked()
         auto t = m_mgr.find(ui->cbTemplates->currentText());
         if (t)
         {
-            t->setNameTemplate(ui->edtFileNameRule->text());
+            if (t->nameTemplate() != ui->edtFileNameRule->text())
+            {
+                m_isModified = true;
+                t->setNameTemplate(ui->edtFileNameRule->text());
+            }
             t->setContentTemplate(ui->edtContent->getText());
             t->save();
         }
@@ -80,4 +90,5 @@ void TemplateManagerDialog::on_btnRemoveTemplate_clicked()
 {
     m_mgr.remove(ui->edtTemplateName->text());
     ui->cbTemplates->removeItem(ui->cbTemplates->currentIndex());
+    m_isModified = true;
 }

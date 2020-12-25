@@ -128,6 +128,8 @@ private:
     void    setupOptionToolbar();
     void    updateTranslationActions();
     void    translateText(const QString &text);
+    void    setupTemplateMenus();
+    void    newDocumentWithContent(const QString &content);
 };
 
 #endif // MAINWINDOW_H
