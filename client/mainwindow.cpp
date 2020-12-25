@@ -476,7 +476,8 @@ void MainWindow::setupDockPanels()
     tabifyDockWidget(googleTranslateDock, baiduTranslateDock);
     tabifyDockWidget(baiduTranslateDock, youdaoTranslateDock);
     tabifyDockWidget(youdaoTranslateDock, sogouTranslateDock);
-    tabifyDockWidget(sogouTranslateDock, youdaoDictionaryDock);
+    tabifyDockWidget(sogouTranslateDock, deepLTranslateDock);
+    tabifyDockWidget(deepLTranslateDock, youdaoDictionaryDock);
 
     auto *previewHTMLDock = new QDockWidget(tr("Preview HTML"), this);
     previewHTMLDock->setObjectName("previewHTMLDock");
