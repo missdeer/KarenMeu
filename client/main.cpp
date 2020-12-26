@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("KarenMeu");
     QCoreApplication::setApplicationVersion("1.0");
 
-    QString     locale = "zh_CN";
+    QString     localeName = QLocale().uiLanguages()[0].replace("-", "_");
     QTranslator translator;
     QTranslator qtTranslator;
 
@@ -42,27 +42,28 @@ int main(int argc, char *argv[])
     }
 #endif
 
-    if (!translator.load("KarenMeu_" + locale, localeDirPath))
+    QString i18nFile = "KarenMeu_" + localeName;
+    if (!translator.load(i18nFile, localeDirPath))
     {
-        qDebug() << "loading " << locale << " from " << localeDirPath << " failed";
+        qDebug() << "loading " << i18nFile << " from " << localeDirPath << " failed";
     }
     else
     {
-        qDebug() << "loading " << locale << " from " << localeDirPath << " success";
+        qDebug() << "loading " << i18nFile << " from " << localeDirPath << " success";
         if (!QApplication::installTranslator(&translator))
         {
             qDebug() << "installing translator failed ";
         }
     }
 
-    // qt locale
-    if (!qtTranslator.load("qt_" + locale, localeDirPath))
+    i18nFile = "qt_" + localeName;
+    if (!qtTranslator.load("qt_" + localeName, localeDirPath))
     {
-        qDebug() << "loading " << locale << " from " << localeDirPath << " failed";
+        qDebug() << "loading " << i18nFile << " from " << localeDirPath << " failed";
     }
     else
     {
-        qDebug() << "loading " << locale << " from " << localeDirPath << " success";
+        qDebug() << "loading " << i18nFile << " from " << localeDirPath << " success";
         if (!QApplication::installTranslator(&qtTranslator))
         {
             qDebug() << "installing qt translator failed ";
