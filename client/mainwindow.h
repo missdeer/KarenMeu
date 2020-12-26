@@ -112,7 +112,7 @@ private:
     };
 
     QAction *        recentFileActs[MaxRecentFiles];
-    QList<QAction *> m_templateActs;
+    QList<QAction *> m_newFromTemplateActions;
 
     QPixmap               originalBackgroundImage;
     QPixmap               adjustedBackgroundImage;
@@ -128,7 +128,7 @@ private:
     void    setupOptionToolbar();
     void    updateTranslationActions();
     void    translateText(const QString &text);
-    void    setupTemplateMenus();
+    void    updateNewFromTemplateMenus();
     void    newDocumentWithContent(const QString &content);
 };
 

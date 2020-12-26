@@ -103,7 +103,7 @@ MainWindow::MainWindow(QWidget *parent)
         ui->menuRecentFiles->addAction(recentFileActs[i]);
     }
 
-    setupTemplateMenus();
+    updateNewFromTemplateMenus();
 
     updateTranslationActions();
 
@@ -194,17 +194,25 @@ void MainWindow::translateText(const QString &text)
     }
 }
 
-void MainWindow::setupTemplateMenus()
+void MainWindow::updateNewFromTemplateMenus()
 {
+    // clear old actions
+    for (auto action : m_newFromTemplateActions)
+    {
+        ui->menuNewFromTemplate->removeAction(action);
+    }
+    m_newFromTemplateActions.clear();
+
+    // add new actions
     m_templateManager->load();
     auto templates = m_templateManager->templates();
     for (auto t : templates)
     {
-        auto act = new QAction(this);
-        m_templateActs.push_back(act);
-        act->setText(t->templateName());
-        connect(act, &QAction::triggered, this, &MainWindow::onNewFromTemplateTriggered);
-        ui->menuNewFromTemplate->addAction(act);
+        auto action = new QAction(this);
+        m_newFromTemplateActions.push_back(action);
+        action->setText(t->templateName());
+        connect(action, &QAction::triggered, this, &MainWindow::onNewFromTemplateTriggered);
+        ui->menuNewFromTemplate->addAction(action);
     }
 }
 
@@ -767,6 +775,6 @@ void MainWindow::on_actionTemplateManager_triggered()
     dlg.exec();
     if (dlg.isModified())
     {
-        // update template menu
+        updateNewFromTemplateMenus();
     }
 }
