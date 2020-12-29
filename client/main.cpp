@@ -32,7 +32,10 @@ int main(int argc, char *argv[])
     // main application and dynamic linked library locale
 #if defined(Q_OS_MAC)
     MacApplication a(argc, argv);
-    QString        localeDirPath = QApplication::applicationDirPath() + "/../Resources/translations";
+    QDir           dir(QApplication::applicationDirPath());
+    dir.cdUp();
+    dir.cd("Resources/translations");
+    QString localeDirPath = dir.absolutePath();
 #else
     QApplication a(argc, argv);
     QString      localeDirPath = QApplication::applicationDirPath() + "/translations";
