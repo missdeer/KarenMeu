@@ -125,7 +125,7 @@ private:
     void    applyMarkdownEditorTheme();
     void    predrawBackgroundImage();
     void    setupDockPanels();
-    void    setupOptionToolbar();
+    void    setupShortcutToolbar();
     void    updateTranslationActions();
     void    translateText(const QString &text);
     void    updateNewFromTemplateMenus();

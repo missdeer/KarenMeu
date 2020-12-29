@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>1283</width>
-     <height>26</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -234,9 +234,9 @@
    <addaction name="actionHeader3"/>
    <addaction name="actionHeader4"/>
   </widget>
-  <widget class="QToolBar" name="optionToolbar">
+  <widget class="QToolBar" name="shortcutToolbar">
    <property name="windowTitle">
-    <string>Options Toolbar</string>
+    <string>Shortcuts Toolbar</string>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>

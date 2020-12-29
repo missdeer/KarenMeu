@@ -93,7 +93,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
     ui->menuView->addAction(ui->editToolbar->toggleViewAction());
     ui->menuView->addAction(ui->formatToolbar->toggleViewAction());
-    ui->menuView->addAction(ui->optionToolbar->toggleViewAction());
+    ui->menuView->addAction(ui->shortcutToolbar->toggleViewAction());
 
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
@@ -107,7 +107,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     updateTranslationActions();
 
-    setupOptionToolbar();
+    setupShortcutToolbar();
 
     setupDockPanels();
 
@@ -589,20 +589,20 @@ void MainWindow::setupDockPanels()
     tabifyDockWidget(previewHTMLDock, customThemeEditorDock);
 }
 
-void MainWindow::setupOptionToolbar()
+void MainWindow::setupShortcutToolbar()
 {
-    ui->optionToolbar->addWidget(new QLabel(tr("Mode:")));
-    m_cbPreviewMode = new QComboBox(ui->optionToolbar);
-    ui->optionToolbar->addWidget(m_cbPreviewMode);
-    ui->optionToolbar->addWidget(new QLabel(tr("Engine:")));
-    m_cbMarkdownEngine = new QComboBox(ui->optionToolbar);
-    ui->optionToolbar->addWidget(m_cbMarkdownEngine);
-    ui->optionToolbar->addWidget(new QLabel(tr("Code Block Style:")));
-    m_cbCodeBlockStyle = new QComboBox(ui->optionToolbar);
-    ui->optionToolbar->addWidget(m_cbCodeBlockStyle);
-    ui->optionToolbar->addWidget(new QLabel(tr("Preview Theme:")));
-    m_cbPreviewTheme = new QComboBox(ui->optionToolbar);
-    ui->optionToolbar->addWidget(m_cbPreviewTheme);
+    ui->shortcutToolbar->addWidget(new QLabel(tr("Mode:")));
+    m_cbPreviewMode = new QComboBox(ui->shortcutToolbar);
+    ui->shortcutToolbar->addWidget(m_cbPreviewMode);
+    ui->shortcutToolbar->addWidget(new QLabel(tr("Engine:")));
+    m_cbMarkdownEngine = new QComboBox(ui->shortcutToolbar);
+    ui->shortcutToolbar->addWidget(m_cbMarkdownEngine);
+    ui->shortcutToolbar->addWidget(new QLabel(tr("Code Block Style:")));
+    m_cbCodeBlockStyle = new QComboBox(ui->shortcutToolbar);
+    ui->shortcutToolbar->addWidget(m_cbCodeBlockStyle);
+    ui->shortcutToolbar->addWidget(new QLabel(tr("Preview Theme:")));
+    m_cbPreviewTheme = new QComboBox(ui->shortcutToolbar);
+    ui->shortcutToolbar->addWidget(m_cbPreviewTheme);
 
     m_cbPreviewMode->addItems(QStringList({tr("Wechat Public Account Article"), tr("Blog Post")}));
     m_cbPreviewMode->setCurrentText(g_settings->previewMode());
@@ -676,7 +676,7 @@ void MainWindow::changeEvent(QEvent *event)
     {
         if (windowState() & Qt::WindowFullScreen)
         {
-            QList<QToolBar *> toolbars = {ui->fileToolbar, ui->editToolbar, ui->formatToolbar, ui->optionToolbar};
+            QList<QToolBar *> toolbars = {ui->fileToolbar, ui->editToolbar, ui->formatToolbar, ui->shortcutToolbar};
             for (auto tb : toolbars)
             {
                 if (tb->isVisible())

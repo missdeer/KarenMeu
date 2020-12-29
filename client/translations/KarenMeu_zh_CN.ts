@@ -104,11 +104,6 @@
         <translation>格式工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="239"/>
-        <source>Options Toolbar</source>
-        <translation>选项工具栏</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="254"/>
         <source>&amp;New</source>
         <translation>新建(&amp;N)</translation>
@@ -726,6 +721,11 @@
         <translation>翻译(&amp;T)</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="239"/>
+        <source>Shortcuts Toolbar</source>
+        <translation>快捷选项工具栏</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="1080"/>
         <source>Google</source>
         <translation>谷歌翻译</translation>
@@ -1311,12 +1311,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="76"/>
+        <location filename="../main.cpp" line="79"/>
         <source>Critical error</source>
         <translation>严重错误</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="76"/>
+        <location filename="../main.cpp" line="79"/>
         <source>SSL not supported, some features may not work as expected.</source>
         <translation>不支持SSL，一些功能可能无法正常工作。</translation>
     </message>
@@ -1437,7 +1437,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="87"/>
+        <location filename="../main.cpp" line="90"/>
         <source>The file to open.</source>
         <translation>打开文章</translation>
     </message>
