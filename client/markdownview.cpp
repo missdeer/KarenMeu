@@ -565,7 +565,7 @@ void MarkdownView::renderMarkdownToHTML()
         std::transform(metaDataLines.begin(), metaDataLines.end(), metaDataLines.begin(), [](const auto &line) {
             return QString(line).toHtmlEscaped().toUtf8();
         });
-        QString metaDataHTML = QString("<p id=\"metadata\">%1</p><hr>").arg(QString(metaDataLines.join("<br>")));
+        QString metaDataHTML = QString("<details><summary>%1</summary>%2<hr></details>").arg(tr("Metadata"), QString(metaDataLines.join("<br>")));
         html                 = metaDataHTML + html;
     }
     setRenderedHTML(html);

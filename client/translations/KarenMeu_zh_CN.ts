@@ -64,11 +64,6 @@
         <translation>最近打开的文件...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="50"/>
-        <source>New From Template...</source>
-        <translation>从模板新建...</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="71"/>
         <source>&amp;Edit</source>
         <translation>编辑(&amp;E)</translation>
@@ -104,19 +99,9 @@
         <translation>格式工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="254"/>
-        <source>&amp;New</source>
-        <translation>新建(&amp;N)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="257"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="266"/>
-        <source>&amp;Open...</source>
-        <translation>打开(&amp;O)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="269"/>
@@ -124,19 +109,9 @@
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="278"/>
-        <source>&amp;Save</source>
-        <translation>保存(&amp;S)</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="281"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="290"/>
-        <source>Save &amp;As...</source>
-        <translation>另存为(&amp;A)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="295"/>
@@ -676,11 +651,6 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1041"/>
-        <source>Clear Recent Files List</source>
-        <translation>清除最近打开的文件列表</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="1050"/>
         <source>Dictionary</source>
         <translation>查词典</translation>
@@ -711,6 +681,11 @@
         <translation>翻译选中文本</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="50"/>
+        <source>New Markdown Document From Template...</source>
+        <translation>从模板新建Markdown文档...</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="129"/>
         <source>&amp;Translation</source>
         <translation>翻译(&amp;T)</translation>
@@ -724,6 +699,31 @@
         <location filename="../mainwindow.ui" line="239"/>
         <source>Shortcuts Toolbar</source>
         <translation>快捷选项工具栏</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="254"/>
+        <source>&amp;New Markdown Document</source>
+        <translation>新建Markdown文档(&amp;N)</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="266"/>
+        <source>&amp;Open Markdown Document...</source>
+        <translation>打开Markdown文档(&amp;O)...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="278"/>
+        <source>&amp;Save Markdown Document</source>
+        <translation>保存Markdown文档(&amp;S)</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="290"/>
+        <source>Save Markdown Document &amp;As...</source>
+        <translation>Markdown文档另存为(&amp;A)...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1041"/>
+        <source>Clear Recent Markdown Files List</source>
+        <translation>清除最近打开的Markdow文档列表</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1080"/>
@@ -981,6 +981,11 @@
         <location filename="../markdownview.cpp" line="459"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
+    </message>
+    <message>
+        <location filename="../markdownview.cpp" line="568"/>
+        <source>Metadata</source>
+        <translation>元数据</translation>
     </message>
 </context>
 <context>
