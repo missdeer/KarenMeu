@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("KarenMeu");
     QCoreApplication::setApplicationVersion("1.0");
 
-    QString     localeName = QLocale().uiLanguages()[0].replace("-", "_");
+    QString     localeName = QLocale::system().name().replace("-", "_");
     QTranslator translator;
     QTranslator qtTranslator;
 
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     }
 #endif
 
-    QString i18nFile = "KarenMeu_" + localeName;
+    QString i18nFile = QString("KarenMeu_%1.qm").arg(localeName);
     if (!translator.load(i18nFile, localeDirPath))
     {
         qDebug() << "loading " << i18nFile << " from " << localeDirPath << " failed";
@@ -59,8 +59,8 @@ int main(int argc, char *argv[])
         }
     }
 
-    i18nFile = "qt_" + localeName;
-    if (!qtTranslator.load("qt_" + localeName, localeDirPath))
+    i18nFile = QString("qt_%1.qm").arg(localeName);
+    if (!qtTranslator.load(i18nFile, localeDirPath))
     {
         qDebug() << "loading " << i18nFile << " from " << localeDirPath << " failed";
     }
