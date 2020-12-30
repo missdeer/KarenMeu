@@ -6,7 +6,9 @@ import (
 	"log"
 
 	"github.com/alecthomas/chroma/formatters/html"
+	mathjax "github.com/litao91/goldmark-mathjax"
 	"github.com/yuin/goldmark"
+	emoji "github.com/yuin/goldmark-emoji"
 	highlighting "github.com/yuin/goldmark-highlighting"
 	meta "github.com/yuin/goldmark-meta"
 	"github.com/yuin/goldmark/extension"
@@ -18,6 +20,7 @@ import (
 func Goldmark(md string, style string, lineNumbers bool) *C.char {
 	options := []html.Option{html.WithLineNumbers(lineNumbers)}
 	markdown := goldmark.New(
+		goldmark.WithExtensions(mathjax.MathJax),
 		goldmark.WithExtensions(
 			highlighting.NewHighlighting(
 				highlighting.WithStyle(style),
@@ -29,6 +32,9 @@ func Goldmark(md string, style string, lineNumbers bool) *C.char {
 			renderer.WithNodeRenderers(
 				util.Prioritized(extension.NewTableHTMLRenderer(), 500),
 			),
+		),
+		goldmark.WithExtensions(
+			emoji.Emoji,
 		),
 	)
 

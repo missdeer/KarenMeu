@@ -10,8 +10,10 @@ require (
 	github.com/aymerick/douceur v0.2.0
 	github.com/gin-gonic/gin v1.6.3
 	github.com/jinzhu/gorm v1.9.16
+	github.com/litao91/goldmark-mathjax v0.0.0-20200921072530-4c5dae64834a
 	github.com/vanng822/go-premailer v1.9.0
 	github.com/yuin/goldmark v1.3.1
+	github.com/yuin/goldmark-emoji v1.0.1
 	github.com/yuin/goldmark-highlighting v0.0.0-20200307114337-60d527fdb691
 	github.com/yuin/goldmark-meta v1.0.0
 	golang.org/x/net v0.0.0-20201224014010-6772e930b67b // indirect
