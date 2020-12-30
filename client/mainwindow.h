@@ -37,6 +37,8 @@ public:
 public slots:
     void openFile(const QString &fileName);
 
+    void openWorkspace(const QString &fileName);
+
 private slots:
     void on_actionExit_triggered();
 
@@ -77,6 +79,14 @@ private slots:
 
     void on_actionTemplateManager_triggered();
 
+    void on_actionOpenWorkspace_triggered();
+
+    void on_actionSaveWorkspace_triggered();
+
+    void on_actionSaveWorkspaceAs_triggered();
+
+    void on_actionClearRecentWorkspaceList_triggered();
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
@@ -112,15 +122,18 @@ private:
     };
 
     QAction *        recentFileActs[MaxRecentFiles];
+    QAction *        recentWorkspaceActs[MaxRecentFiles];
     QList<QAction *> m_newFromTemplateActions;
 
     QPixmap               originalBackgroundImage;
     QPixmap               adjustedBackgroundImage;
     QNetworkAccessManager m_nam;
 
-    void    updateRecentFileActions();
+    void    updateRecentFileActions(const QStringList &files);
+    void    updateRecentWorkspaceActions(const QStringList &files);
     QString strippedName(const QString &fullFileName);
     void    openRecentFile();
+    void    openRecentWorkspace();
     void    adjustEditorWidth(int width);
     void    applyMarkdownEditorTheme();
     void    predrawBackgroundImage();

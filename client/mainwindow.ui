@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>1283</width>
-     <height>24</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -33,14 +33,14 @@
     </property>
     <widget class="QMenu" name="menuExport">
      <property name="title">
-      <string>Export...</string>
+      <string>Export Rendered Document...</string>
      </property>
      <addaction name="actionExportAsHTML"/>
      <addaction name="actionExportAsPDF"/>
     </widget>
     <widget class="QMenu" name="menuRecentFiles">
      <property name="title">
-      <string>Recent Files...</string>
+      <string>Recent Markdown Documents</string>
      </property>
      <addaction name="actionClearRecentFilesList"/>
      <addaction name="separator"/>
@@ -56,12 +56,23 @@
      <addaction name="actionTemplateManager"/>
      <addaction name="separator"/>
     </widget>
+    <widget class="QMenu" name="menuRecentWorkspaces">
+     <property name="title">
+      <string>Recent Workspaces</string>
+     </property>
+     <addaction name="actionClearRecentWorkspaceList"/>
+     <addaction name="separator"/>
+    </widget>
     <addaction name="actionNew"/>
     <addaction name="menuNewFromTemplate"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
+    <addaction name="actionOpenWorkspace"/>
+    <addaction name="actionSaveWorkspace"/>
+    <addaction name="actionSaveWorkspaceAs"/>
     <addaction name="menuRecentFiles"/>
+    <addaction name="menuRecentWorkspaces"/>
     <addaction name="menuExport"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -1038,7 +1049,7 @@
   </action>
   <action name="actionClearRecentFilesList">
    <property name="text">
-    <string>Clear Recent Markdown Files List</string>
+    <string>Clear Recent Markdown Document List</string>
    </property>
   </action>
   <action name="actionDictionary">
@@ -1146,6 +1157,32 @@
    </property>
    <property name="text">
     <string>Template Manager...</string>
+   </property>
+  </action>
+  <action name="actionOpenWorkspace">
+   <property name="text">
+    <string>Open Workspace...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+O</string>
+   </property>
+  </action>
+  <action name="actionSaveWorkspace">
+   <property name="text">
+    <string>Save Workspace</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+S</string>
+   </property>
+  </action>
+  <action name="actionSaveWorkspaceAs">
+   <property name="text">
+    <string>Save Workspace As...</string>
+   </property>
+  </action>
+  <action name="actionClearRecentWorkspaceList">
+   <property name="text">
+    <string>Clear Recent Workspace List</string>
    </property>
   </action>
  </widget>

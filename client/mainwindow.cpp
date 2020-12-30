@@ -101,6 +101,11 @@ MainWindow::MainWindow(QWidget *parent)
         recentFileActs[i]->setVisible(false);
         connect(recentFileActs[i], &QAction::triggered, this, &MainWindow::openRecentFile);
         ui->menuRecentFiles->addAction(recentFileActs[i]);
+
+        recentWorkspaceActs[i] = new QAction(this);
+        recentWorkspaceActs[i]->setVisible(false);
+        connect(recentWorkspaceActs[i], &QAction::triggered, this, &MainWindow::openRecentWorkspace);
+        ui->menuRecentWorkspaces->addAction(recentWorkspaceActs[i]);
     }
 
     updateNewFromTemplateMenus();
@@ -138,6 +143,8 @@ void MainWindow::openFile(const QString &fileName)
     m_view->newDocument();
     m_view->openFromFile(fileName);
 }
+
+void MainWindow::openWorkspace(const QString &fileName) {}
 
 void MainWindow::on_actionExit_triggered()
 {
@@ -255,11 +262,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
 }
 
-void MainWindow::updateRecentFileActions()
+void MainWindow::updateRecentFileActions(const QStringList &files)
 {
-    QSettings   settings;
-    QStringList files = settings.value("recentFileList").toStringList();
-
     int numRecentFiles = qMin(files.size(), (int)MaxRecentFiles);
 
     for (int i = 0; i < numRecentFiles; ++i)
@@ -271,8 +275,21 @@ void MainWindow::updateRecentFileActions()
     }
     for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
         recentFileActs[j]->setVisible(false);
+}
 
-    // separatorAct->setVisible(numRecentFiles > 0);
+void MainWindow::updateRecentWorkspaceActions(const QStringList &files)
+{
+    int numRecentFiles = qMin(files.size(), (int)MaxRecentFiles);
+
+    for (int i = 0; i < numRecentFiles; ++i)
+    {
+        QString text = tr("%1. %2").arg(i + 1).arg(strippedName(files[i]));
+        recentWorkspaceActs[i]->setText(text);
+        recentWorkspaceActs[i]->setData(files[i]);
+        recentWorkspaceActs[i]->setVisible(true);
+    }
+    for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
+        recentWorkspaceActs[j]->setVisible(false);
 }
 
 void MainWindow::onSetCurrentFile(const QString &fileName)
@@ -282,7 +299,8 @@ void MainWindow::onSetCurrentFile(const QString &fileName)
 
     setWindowTitle(QString("%1 - KarenMeu").arg(QFileInfo(m_curFile).fileName()));
 
-    QSettings   settings;
+    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    settings.beginGroup("recentFile");
     QStringList files = settings.value("recentFileList").toStringList();
     files.removeAll(fileName);
     files.prepend(fileName);
@@ -290,8 +308,10 @@ void MainWindow::onSetCurrentFile(const QString &fileName)
         files.removeLast();
 
     settings.setValue("recentFileList", files);
+    settings.endGroup();
+    settings.sync();
 
-    updateRecentFileActions();
+    updateRecentFileActions(files);
 }
 
 void MainWindow::onFileSystemItemActivated(const QModelIndex &index)
@@ -430,13 +450,23 @@ void MainWindow::openRecentFile()
     openFile(action->data().toString());
 }
 
+void MainWindow::openRecentWorkspace()
+{
+    auto *action = qobject_cast<QAction *>(sender());
+    Q_ASSERT(action);
+    openWorkspace(action->data().toString());
+}
+
 void MainWindow::on_actionClearRecentFilesList_triggered()
 {
-    QSettings   settings;
+    QSettings   settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
     QStringList files;
+    settings.beginGroup("recentFile");
     settings.setValue("recentFileList", files);
+    settings.endGroup();
+    settings.sync();
 
-    updateRecentFileActions();
+    updateRecentFileActions(files);
 }
 
 void MainWindow::applyMarkdownEditorTheme()
@@ -777,4 +807,31 @@ void MainWindow::on_actionTemplateManager_triggered()
     {
         updateNewFromTemplateMenus();
     }
+}
+
+void MainWindow::on_actionOpenWorkspace_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Workspace"), "", tr("KarenMeu Workspace (*.krm);;All files (*.*)"));
+    if (fileName.isEmpty())
+        return;
+}
+
+void MainWindow::on_actionSaveWorkspace_triggered() {}
+
+void MainWindow::on_actionSaveWorkspaceAs_triggered()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save Workspace"), "", tr("KarenMeu Workspace (*.krm);;All files (*.*)"));
+
+    if (fileName.isEmpty())
+        return;
+}
+
+void MainWindow::on_actionClearRecentWorkspaceList_triggered()
+{
+    QSettings   settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    QStringList files;
+    settings.beginGroup("workspace");
+    settings.setValue("recentWorkspaceList", files);
+    settings.endGroup();
+    updateRecentWorkspaceActions(files);
 }
