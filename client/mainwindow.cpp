@@ -87,7 +87,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionHeader6, &QAction::triggered, m_view, &MarkdownView::formatHeader6);
     connect(ui->actionShiftRight, &QAction::triggered, m_view, &MarkdownView::formatShiftRight);
     connect(ui->actionShiftLeft, &QAction::triggered, m_view, &MarkdownView::formatShiftLeft);
-    connect(m_view, &MarkdownView::setCurrentFile, this, &MainWindow::onSetCurrentFile);
+    connect(m_view, &MarkdownView::setCurrentFile, this, &MainWindow::onSetCurrentMarkdownDocument);
     connect(m_youdaoDict, &Youdao::result, this, &MainWindow::onYoudaoDictResult);
 
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
@@ -305,12 +305,12 @@ void MainWindow::updateRecentWorkspaceActions(const QStringList &files)
         recentWorkspaceActs[j]->setVisible(false);
 }
 
-void MainWindow::onSetCurrentFile(const QString &fileName)
+void MainWindow::onSetCurrentMarkdownDocument(const QString &fileName)
 {
-    m_curFile = fileName;
-    setWindowFilePath(m_curFile);
+    m_currentMarkdownDocument = fileName;
+    setWindowFilePath(m_currentMarkdownDocument);
 
-    setWindowTitle(QString("%1 - KarenMeu").arg(QFileInfo(m_curFile).fileName()));
+    setWindowTitle(QString("%1 - KarenMeu").arg(QFileInfo(m_currentMarkdownDocument).fileName()));
 
     auto &settings = g_settings->getSettings();
     settings.beginGroup("recentFile");

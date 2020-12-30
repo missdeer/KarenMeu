@@ -49,7 +49,7 @@ private slots:
 
     void on_actionTranslateSelected_triggered();
 
-    void onSetCurrentFile(const QString &fileName);
+    void onSetCurrentMarkdownDocument(const QString &fileName);
 
     void onFileSystemItemActivated(const QModelIndex &index);
 
@@ -89,6 +89,11 @@ protected:
     void changeEvent(QEvent *event) override;
 
 private:
+    enum
+    {
+        MaxRecentFiles = 10
+    };
+
     Ui::MainWindow *              ui;
     MarkdownView *                m_view;
     QFileSystemModel *            m_fsModel;
@@ -109,21 +114,14 @@ private:
     QList<QToolBar *>             m_visibleToolbars;
     Youdao *                      m_youdaoDict;
     TemplateManager *             m_templateManager {nullptr};
-
-    QString m_curFile;
-
-    enum
-    {
-        MaxRecentFiles = 10
-    };
-
-    QAction *        recentFileActs[MaxRecentFiles];
-    QAction *        recentWorkspaceActs[MaxRecentFiles];
-    QList<QAction *> m_newFromTemplateActions;
-
-    QPixmap               originalBackgroundImage;
-    QPixmap               adjustedBackgroundImage;
-    QNetworkAccessManager m_nam;
+    QAction *                     recentFileActs[MaxRecentFiles];
+    QAction *                     recentWorkspaceActs[MaxRecentFiles];
+    QList<QAction *>              m_newFromTemplateActions;
+    QString                       m_currentMarkdownDocument;
+    QString                       m_currentWorkspace;
+    QPixmap                       originalBackgroundImage;
+    QPixmap                       adjustedBackgroundImage;
+    QNetworkAccessManager         m_nam;
 
     void    updateRecentFileActions(const QStringList &files);
     void    updateRecentWorkspaceActions(const QStringList &files);
