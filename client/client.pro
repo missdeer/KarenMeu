@@ -70,7 +70,8 @@ FORMS += \
         $$PWD/preferencedialog.ui \
         $$PWD/templatemanagerdialog.ui
 
-INCLUDEPATH += $$PWD $$PWD/markdowneditor4
+INCLUDEPATH += $$PWD $$PWD/markdowneditor4  $$PWD/../utils
+LIBS += -L$$PWD/../utils
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -120,8 +121,6 @@ win32-*msvc* {
     qti18n.depends = translate
     qti18n.commands = '$(COPY_FILE) $$shell_path($$[QT_INSTALL_BINS]/../translations/qt_zh_CN.qm) $$shell_path($${DESTDIR}/translations/qt_zh_CN.qm)'
 }
-INCLUDEPATH += $$PWD/../utils
-LIBS += -L$$PWD/../utils
 
 macx: {
     ICON = KarenMeu.icns
