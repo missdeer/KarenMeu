@@ -125,6 +125,19 @@ MainWindow::MainWindow(QWidget *parent)
     restoreGeometry(mainWindowGeometry);
 }
 
+void MainWindow::openFile(const QString &fileName)
+{
+    if (fileName.endsWith(".krm", Qt::CaseInsensitive))
+    {
+        openWorkspace(fileName);
+    }
+    if (fileName.endsWith(".md", Qt::CaseInsensitive) || fileName.endsWith(".markdown", Qt::CaseInsensitive) ||
+        fileName.endsWith(".mdown", Qt::CaseInsensitive))
+    {
+        openMarkdownDocument(fileName);
+    }
+}
+
 MainWindow::~MainWindow()
 {
     auto mainWindowState = saveState();
@@ -136,7 +149,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::openFile(const QString &fileName)
+void MainWindow::openMarkdownDocument(const QString &fileName)
 {
     Q_ASSERT(m_view);
 
@@ -299,7 +312,7 @@ void MainWindow::onSetCurrentFile(const QString &fileName)
 
     setWindowTitle(QString("%1 - KarenMeu").arg(QFileInfo(m_curFile).fileName()));
 
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    auto &settings = g_settings->getSettings();
     settings.beginGroup("recentFile");
     QStringList files = settings.value("recentFileList").toStringList();
     files.removeAll(fileName);
@@ -320,7 +333,7 @@ void MainWindow::onFileSystemItemActivated(const QModelIndex &index)
     if (fi.isFile() && (fi.fileName().endsWith(".md", Qt::CaseInsensitive) || fi.fileName().endsWith(".markdown", Qt::CaseInsensitive) ||
                         fi.fileName().endsWith(".mdown", Qt::CaseInsensitive)))
     {
-        openFile(fi.absoluteFilePath());
+        openMarkdownDocument(fi.absoluteFilePath());
     }
 }
 
@@ -427,7 +440,7 @@ void MainWindow::onNewFromTemplateTriggered()
             f.write(fileContent.toUtf8());
             f.close();
             // open file
-            openFile(filePath);
+            openMarkdownDocument(filePath);
         }
     }
     else
@@ -447,7 +460,7 @@ void MainWindow::openRecentFile()
 {
     auto *action = qobject_cast<QAction *>(sender());
     Q_ASSERT(action);
-    openFile(action->data().toString());
+    openMarkdownDocument(action->data().toString());
 }
 
 void MainWindow::openRecentWorkspace()
@@ -459,7 +472,7 @@ void MainWindow::openRecentWorkspace()
 
 void MainWindow::on_actionClearRecentFilesList_triggered()
 {
-    QSettings   settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    auto &      settings = g_settings->getSettings();
     QStringList files;
     settings.beginGroup("recentFile");
     settings.setValue("recentFileList", files);
@@ -828,7 +841,7 @@ void MainWindow::on_actionSaveWorkspaceAs_triggered()
 
 void MainWindow::on_actionClearRecentWorkspaceList_triggered()
 {
-    QSettings   settings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
+    auto &      settings = g_settings->getSettings();
     QStringList files;
     settings.beginGroup("workspace");
     settings.setValue("recentWorkspaceList", files);

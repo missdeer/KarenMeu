@@ -34,11 +34,7 @@ public:
     void operator=(const MainWindow &) = delete;
     void operator=(MainWindow &&) = delete;
 
-public slots:
     void openFile(const QString &fileName);
-
-    void openWorkspace(const QString &fileName);
-
 private slots:
     void on_actionExit_triggered();
 
@@ -143,6 +139,8 @@ private:
     void    translateText(const QString &text);
     void    updateNewFromTemplateMenus();
     void    newDocumentWithContent(const QString &content);
+    void    openMarkdownDocument(const QString &fileName);
+    void    openWorkspace(const QString &fileName);
 };
 
 #endif // MAINWINDOW_H

@@ -6,12 +6,16 @@
 
 #include <vtextedit/markdowneditorconfig.h>
 
+QT_FORWARD_DECLARE_CLASS(QSettings);
+
 class Settings
 {
 public:
+    ~Settings();
     void save();
     void load();
     void initialize();
+    QSettings &getSettings();
 
     const QString &codeEditorFontFamily() const;
     void           setCodeEditorFontFamily(const QString &codeEditorFontFamily);
