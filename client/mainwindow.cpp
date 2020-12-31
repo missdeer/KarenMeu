@@ -493,6 +493,105 @@ void MainWindow::setupDockPanels()
 
     setDockOptions(QMainWindow::AnimatedDocks | QMainWindow::AllowTabbedDocks | QMainWindow::GroupedDragging);
 
+    QList<QAction *> toggleViewActions;
+
+    auto  getSelectionCallback = std::bind(&MarkdownView::selectedText, m_view);
+    auto *googleTranslateDock  = new QDockWidget(tr("Google Translate"), this);
+    googleTranslateDock->setObjectName("googleTranslate");
+    m_googleTranslateEditor = new TranslateOutputWidget(TST_GOOGLE, googleTranslateDock);
+    m_googleTranslateEditor->setGetSelectionCallback(getSelectionCallback);
+    ClientUtils::InitializeWidgetFont(m_googleTranslateEditor->editor());
+    googleTranslateDock->setWidget(m_googleTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, googleTranslateDock);
+    auto toggleViewAction = googleTranslateDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+G"));
+    ui->menuView->addAction(toggleViewAction);
+    toggleViewActions.append(toggleViewAction);
+
+    auto *baiduTranslateDock = new QDockWidget(tr("Baidu Translate"), this);
+    baiduTranslateDock->setObjectName("baiduTranslateDock");
+    m_baiduTranslateEditor = new TranslateOutputWidget(TST_BAIDU, baiduTranslateDock);
+    m_baiduTranslateEditor->setGetSelectionCallback(getSelectionCallback);
+    ClientUtils::InitializeWidgetFont(m_baiduTranslateEditor->editor());
+    baiduTranslateDock->setWidget(m_baiduTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, baiduTranslateDock);
+    toggleViewAction = baiduTranslateDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+B"));
+    ui->menuView->addAction(toggleViewAction);
+    toggleViewActions.append(toggleViewAction);
+
+    auto *youdaoTranslateDock = new QDockWidget(tr("Youdao Translate"), this);
+    youdaoTranslateDock->setObjectName("youdaoTranslateDock");
+    m_youdaoTranslateEditor = new TranslateOutputWidget(TST_YOUDAO, youdaoTranslateDock);
+    m_youdaoTranslateEditor->setGetSelectionCallback(getSelectionCallback);
+    ClientUtils::InitializeWidgetFont(m_youdaoTranslateEditor->editor());
+    youdaoTranslateDock->setWidget(m_youdaoTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, youdaoTranslateDock);
+    toggleViewAction = youdaoTranslateDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+Y"));
+    ui->menuView->addAction(toggleViewAction);
+    toggleViewActions.append(toggleViewAction);
+
+    auto *sogouTranslateDock = new QDockWidget(tr("Sogou Translate"), this);
+    sogouTranslateDock->setObjectName("sogouTranslateDock");
+    m_sogouTranslateEditor = new TranslateOutputWidget(TST_SOGOU, sogouTranslateDock);
+    m_sogouTranslateEditor->setGetSelectionCallback(getSelectionCallback);
+    ClientUtils::InitializeWidgetFont(m_sogouTranslateEditor->editor());
+    sogouTranslateDock->setWidget(m_sogouTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, sogouTranslateDock);
+    toggleViewAction = sogouTranslateDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+S"));
+    ui->menuView->addAction(toggleViewAction);
+    toggleViewActions.append(toggleViewAction);
+
+    auto *deepLTranslateDock = new QDockWidget(tr("DeepL Translate"), this);
+    deepLTranslateDock->setObjectName("deepLTranslateDock");
+    m_deepLTranslateEditor = new TranslateOutputWidget(TST_DEEPL, deepLTranslateDock);
+    m_deepLTranslateEditor->setGetSelectionCallback(getSelectionCallback);
+    ClientUtils::InitializeWidgetFont(m_deepLTranslateEditor->editor());
+    deepLTranslateDock->setWidget(m_deepLTranslateEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, deepLTranslateDock);
+    toggleViewAction = deepLTranslateDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+L"));
+    ui->menuView->addAction(toggleViewAction);
+    toggleViewActions.append(toggleViewAction);
+
+    auto *youdaoDictionaryDock = new QDockWidget(tr("Youdao Dictionary"), this);
+    youdaoDictionaryDock->setObjectName("youdaoDictionaryDock");
+    m_youdaoDictionaryEditor = new QPlainTextEdit(youdaoDictionaryDock);
+    ClientUtils::InitializeWidgetFont(m_youdaoDictionaryEditor);
+    youdaoDictionaryDock->setWidget(m_youdaoDictionaryEditor);
+    addDockWidget(Qt::BottomDockWidgetArea, youdaoDictionaryDock);
+    toggleViewAction = youdaoDictionaryDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+D"));
+    ui->menuView->addAction(toggleViewAction);
+    toggleViewActions.append(toggleViewAction);
+
+    tabifyDockWidget(googleTranslateDock, baiduTranslateDock);
+    tabifyDockWidget(baiduTranslateDock, youdaoTranslateDock);
+    tabifyDockWidget(youdaoTranslateDock, sogouTranslateDock);
+    tabifyDockWidget(sogouTranslateDock, deepLTranslateDock);
+    tabifyDockWidget(deepLTranslateDock, youdaoDictionaryDock);
+
+    auto showAllLanguageDocks = new QAction(tr("Show All Language Docks"), this);
+    ui->menuView->addAction(showAllLanguageDocks);
+    connect(showAllLanguageDocks, &QAction::triggered, [toggleViewActions]() {
+        for (auto toggleViewAction : toggleViewActions)
+        {
+            toggleViewAction->triggered(true);
+        }
+    });
+    auto hideAllLanguageDocks = new QAction(tr("Hide All Language Docks"), this);
+    ui->menuView->addAction(hideAllLanguageDocks);
+    connect(hideAllLanguageDocks, &QAction::triggered, [toggleViewActions]() {
+        for (auto toggleViewAction : toggleViewActions)
+        {
+            toggleViewAction->triggered(false);
+        }
+    });
+
+    ui->menuView->addSeparator();
+
     auto *fsDock = new QDockWidget(tr("File System"), this);
     fsDock->setObjectName("fsDock");
     m_fsView     = new QTreeView(fsDock);
@@ -509,7 +608,7 @@ void MainWindow::setupDockPanels()
     connect(m_fsView, &QTreeView::activated, this, &MainWindow::onFileSystemItemActivated);
     fsDock->setWidget(m_fsView);
     addDockWidget(Qt::LeftDockWidgetArea, fsDock);
-    auto toggleViewAction = fsDock->toggleViewAction();
+    toggleViewAction = fsDock->toggleViewAction();
     toggleViewAction->setShortcut(QKeySequence("Shift+Alt+F"));
     ui->menuView->addAction(toggleViewAction);
 
@@ -523,78 +622,6 @@ void MainWindow::setupDockPanels()
     ui->menuView->addAction(toggleViewAction);
 
     tabifyDockWidget(fsDock, cloudDock);
-
-    auto  getSelectionCallback = std::bind(&MarkdownView::selectedText, m_view);
-    auto *googleTranslateDock = new QDockWidget(tr("Google Translate"), this);
-    googleTranslateDock->setObjectName("googleTranslate");
-    m_googleTranslateEditor = new TranslateOutputWidget(TST_GOOGLE, googleTranslateDock);
-    m_googleTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    ClientUtils::InitializeWidgetFont(m_googleTranslateEditor->editor());
-    googleTranslateDock->setWidget(m_googleTranslateEditor);
-    addDockWidget(Qt::BottomDockWidgetArea, googleTranslateDock);
-    toggleViewAction = googleTranslateDock->toggleViewAction();
-    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+G"));
-    ui->menuView->addAction(toggleViewAction);
-
-    auto *baiduTranslateDock = new QDockWidget(tr("Baidu Translate"), this);
-    baiduTranslateDock->setObjectName("baiduTranslateDock");
-    m_baiduTranslateEditor = new TranslateOutputWidget(TST_BAIDU, baiduTranslateDock);
-    m_baiduTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    ClientUtils::InitializeWidgetFont(m_baiduTranslateEditor->editor());
-    baiduTranslateDock->setWidget(m_baiduTranslateEditor);
-    addDockWidget(Qt::BottomDockWidgetArea, baiduTranslateDock);
-    toggleViewAction = baiduTranslateDock->toggleViewAction();
-    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+B"));
-    ui->menuView->addAction(toggleViewAction);
-
-    auto *youdaoTranslateDock = new QDockWidget(tr("Youdao Translate"), this);
-    youdaoTranslateDock->setObjectName("youdaoTranslateDock");
-    m_youdaoTranslateEditor = new TranslateOutputWidget(TST_YOUDAO, youdaoTranslateDock);
-    m_youdaoTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    ClientUtils::InitializeWidgetFont(m_youdaoTranslateEditor->editor());
-    youdaoTranslateDock->setWidget(m_youdaoTranslateEditor);
-    addDockWidget(Qt::BottomDockWidgetArea, youdaoTranslateDock);
-    toggleViewAction = youdaoTranslateDock->toggleViewAction();
-    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+Y"));
-    ui->menuView->addAction(toggleViewAction);
-
-    auto *sogouTranslateDock = new QDockWidget(tr("Sogou Translate"), this);
-    sogouTranslateDock->setObjectName("sogouTranslateDock");
-    m_sogouTranslateEditor = new TranslateOutputWidget(TST_SOGOU, sogouTranslateDock);
-    m_sogouTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    ClientUtils::InitializeWidgetFont(m_sogouTranslateEditor->editor());
-    sogouTranslateDock->setWidget(m_sogouTranslateEditor);
-    addDockWidget(Qt::BottomDockWidgetArea, sogouTranslateDock);
-    toggleViewAction = sogouTranslateDock->toggleViewAction();
-    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+S"));
-    ui->menuView->addAction(toggleViewAction);
-
-    auto *deepLTranslateDock = new QDockWidget(tr("DeepL Translate"), this);
-    deepLTranslateDock->setObjectName("deepLTranslateDock");
-    m_deepLTranslateEditor = new TranslateOutputWidget(TST_DEEPL, deepLTranslateDock);
-    m_deepLTranslateEditor->setGetSelectionCallback(getSelectionCallback);
-    ClientUtils::InitializeWidgetFont(m_deepLTranslateEditor->editor());
-    deepLTranslateDock->setWidget(m_deepLTranslateEditor);
-    addDockWidget(Qt::BottomDockWidgetArea, deepLTranslateDock);
-    toggleViewAction = deepLTranslateDock->toggleViewAction();
-    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+L"));
-    ui->menuView->addAction(toggleViewAction);
-
-    auto *youdaoDictionaryDock = new QDockWidget(tr("Youdao Dictionary"), this);
-    youdaoDictionaryDock->setObjectName("youdaoDictionaryDock");
-    m_youdaoDictionaryEditor = new QPlainTextEdit(youdaoDictionaryDock);
-    ClientUtils::InitializeWidgetFont(m_youdaoDictionaryEditor);
-    youdaoDictionaryDock->setWidget(m_youdaoDictionaryEditor);
-    addDockWidget(Qt::BottomDockWidgetArea, youdaoDictionaryDock);
-    toggleViewAction = youdaoDictionaryDock->toggleViewAction();
-    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+D"));
-    ui->menuView->addAction(toggleViewAction);
-
-    tabifyDockWidget(googleTranslateDock, baiduTranslateDock);
-    tabifyDockWidget(baiduTranslateDock, youdaoTranslateDock);
-    tabifyDockWidget(youdaoTranslateDock, sogouTranslateDock);
-    tabifyDockWidget(sogouTranslateDock, deepLTranslateDock);
-    tabifyDockWidget(deepLTranslateDock, youdaoDictionaryDock);
 
     auto *previewHTMLDock = new QDockWidget(tr("Preview HTML"), this);
     previewHTMLDock->setObjectName("previewHTMLDock");
