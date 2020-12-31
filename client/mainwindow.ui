@@ -145,6 +145,7 @@
      </property>
      <addaction name="actionTranslateSelected"/>
      <addaction name="actionTranslateTextInClipboard"/>
+     <addaction name="actionTranslateFullText"/>
      <addaction name="separator"/>
      <addaction name="actionGoogle"/>
      <addaction name="actionBaidu"/>
@@ -1061,7 +1062,7 @@
     <string>Dictionary</string>
    </property>
    <property name="shortcut">
-    <string>F8</string>
+    <string>F6</string>
    </property>
   </action>
   <action name="actionTranslateSelected">
@@ -1073,7 +1074,7 @@
     <string>Translate Selected Text</string>
    </property>
    <property name="shortcut">
-    <string>F6</string>
+    <string>F7</string>
    </property>
   </action>
   <action name="actionGoogle">
@@ -1147,7 +1148,7 @@
     <string>Translate Text in Clipboard</string>
    </property>
    <property name="shortcut">
-    <string>F7</string>
+    <string>F8</string>
    </property>
   </action>
   <action name="actionTemplateManager">
@@ -1183,6 +1184,14 @@
   <action name="actionClearRecentWorkspaceList">
    <property name="text">
     <string>Clear Recent Workspace List</string>
+   </property>
+  </action>
+  <action name="actionTranslateFullText">
+   <property name="text">
+    <string>Translate Full Text</string>
+   </property>
+   <property name="shortcut">
+    <string>F9</string>
    </property>
   </action>
  </widget>

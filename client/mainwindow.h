@@ -83,6 +83,8 @@ private slots:
 
     void on_actionClearRecentWorkspaceList_triggered();
 
+    void on_actionTranslateFullText_triggered();
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void closeEvent(QCloseEvent *event) override;

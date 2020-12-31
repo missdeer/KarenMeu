@@ -436,6 +436,12 @@ QString MarkdownView::selectedText() const
     return m_preview->selectedText();
 }
 
+QString MarkdownView::fullText() const
+{
+    Q_ASSERT(m_editor);
+    return m_editor->content();
+}
+
 QSplitter *MarkdownView::splitter()
 {
     return m_splitter;

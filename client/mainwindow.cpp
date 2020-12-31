@@ -875,3 +875,10 @@ void MainWindow::on_actionClearRecentWorkspaceList_triggered()
     settings.endGroup();
     updateRecentWorkspaceActions(files);
 }
+
+void MainWindow::on_actionTranslateFullText_triggered()
+{
+    Q_ASSERT(m_view);
+    QString text = m_view->fullText();
+    translateText(text);
+}

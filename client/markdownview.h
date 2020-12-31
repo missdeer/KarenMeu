@@ -29,6 +29,7 @@ public:
     void             setInitialDocument(const QString &content);
     MarkdownEditor4 *editor();
     QString          selectedText() const;
+    QString          fullText() const;
     QSplitter *      splitter();
     void             setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor);
     void             setCustomPreivewThemeEditor(PreviewThemeEditor *customPreivewThemeEditor);
