@@ -543,7 +543,6 @@ void MarkdownView::renderMarkdownToHTML()
         }
         ba = lines.join('\n');
     }
-    // TODO: add YAML header back to final HTML
 
     GoString content {(const char *)ba.data(), (ptrdiff_t)ba.size()};
 
@@ -566,6 +565,7 @@ void MarkdownView::renderMarkdownToHTML()
         updateMacStyleCodeBlock();
         html = html.replace("<pre", "<pre class=\"macpre\"");
     }
+    // add back leading YAML header as detail/summary
     if (!metaDataLines.isEmpty())
     {
         std::transform(metaDataLines.begin(), metaDataLines.end(), metaDataLines.begin(), [](const auto &line) {
