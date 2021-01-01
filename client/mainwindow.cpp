@@ -290,6 +290,10 @@ void MainWindow::updateRecentFileActions(const QStringList &files)
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
+        if (!QFile::exists(files[i]))
+        {
+            continue;
+        }
         QString text = tr("%1. %2").arg(i + 1).arg(strippedName(files[i]));
         recentFileActs[i]->setText(text);
         recentFileActs[i]->setData(files[i]);
