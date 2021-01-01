@@ -320,7 +320,10 @@ void MainWindow::onSetCurrentMarkdownDocument(const QString &fileName)
     setWindowFilePath(m_currentMarkdownDocument);
 
     updateWindowTitle();
-
+    if (!QFile::exists(fileName))
+    {
+        return;
+    }
     auto &settings = g_settings->getSettings();
     settings.beginGroup("recentFile");
     QStringList files = settings.value("recentFileList").toStringList();
