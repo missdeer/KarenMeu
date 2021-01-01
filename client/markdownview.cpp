@@ -121,10 +121,26 @@ bool MarkdownView::maybeSave()
 
 void MarkdownView::openDocument()
 {
-    newDocument();
-
+    if (m_editor->modify())
+    {
+        // prompt user to save document first
+        int res = QMessageBox::question(this,
+                                        tr("Confirm"),
+                                        tr("Modified document has not been saved, do you want to save it?"),
+                                        QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel,
+                                        QMessageBox::Yes);
+        if (res == QMessageBox::Yes)
+            saveDocument();
+        if (res == QMessageBox::Cancel)
+            return;
+    }
     QString fileName =
         QFileDialog::getOpenFileName(this, tr("Open Markdown file"), "", tr("Markdown files (*.md *.markdown *.mdown);;All files (*.*)"));
+    if (!QFile::exists(fileName))
+    {
+        return;
+    }
+    m_editor->clear();
     openFromFile(fileName);
 }
 
@@ -149,20 +165,26 @@ void MarkdownView::saveAsDocument()
 
 void MarkdownView::newDocument()
 {
+    Q_ASSERT(m_editor);
     if (m_editor->modify())
     {
         // prompt user to save document first
         int res = QMessageBox::question(this,
                                         tr("Confirm"),
                                         tr("Modified document has not been saved, do you want to save it?"),
-                                        QMessageBox::Yes | QMessageBox::No,
+                                        QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel,
                                         QMessageBox::Yes);
         if (res == QMessageBox::Yes)
             saveDocument();
+        if (res == QMessageBox::Cancel)
+            return;
     }
     m_editor->clear();
     m_editor->setSavePoint();
     m_editor->emptyUndoBuffer();
+    static int untitledCount = 0;
+    untitledCount++;
+    emit setCurrentFile(tr("Untitled%1").arg(untitledCount));
 }
 
 void MarkdownView::copy()

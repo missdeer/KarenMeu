@@ -160,6 +160,14 @@ void MainWindow::openMarkdownDocument(const QString &fileName)
 
 void MainWindow::openWorkspace(const QString &fileName) {}
 
+void MainWindow::updateWindowTitle()
+{
+    Q_ASSERT(m_view);
+    auto editor = m_view->editor();
+    Q_ASSERT(editor);
+    setWindowTitle(QString("%1%2 - KarenMeu").arg(QFileInfo(m_currentMarkdownDocument).fileName(), (editor->isModified() ? "*" : "")));
+}
+
 void MainWindow::on_actionExit_triggered()
 {
     QCoreApplication::quit();
@@ -311,7 +319,7 @@ void MainWindow::onSetCurrentMarkdownDocument(const QString &fileName)
     m_currentMarkdownDocument = fileName;
     setWindowFilePath(m_currentMarkdownDocument);
 
-    setWindowTitle(QString("%1 - KarenMeu").arg(QFileInfo(m_currentMarkdownDocument).fileName()));
+    updateWindowTitle();
 
     auto &settings = g_settings->getSettings();
     settings.beginGroup("recentFile");
@@ -454,13 +462,7 @@ void MainWindow::onNewFromTemplateTriggered()
 
 void MainWindow::onDocumentModified()
 {
-    Q_ASSERT(m_view);
-    auto editor = m_view->editor();
-    Q_ASSERT(editor);
-    if (editor->isModified())
-    {
-        setWindowTitle(QString("%1* - KarenMeu").arg(QFileInfo(m_currentMarkdownDocument).fileName()));
-    }
+    updateWindowTitle();
 }
 
 QString MainWindow::strippedName(const QString &fullFileName)
