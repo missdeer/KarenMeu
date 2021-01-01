@@ -88,6 +88,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionShiftRight, &QAction::triggered, m_view, &MarkdownView::formatShiftRight);
     connect(ui->actionShiftLeft, &QAction::triggered, m_view, &MarkdownView::formatShiftLeft);
     connect(m_view, &MarkdownView::setCurrentFile, this, &MainWindow::onSetCurrentMarkdownDocument);
+    connect(m_view, &MarkdownView::contentModified, this, &MainWindow::onDocumentModified);
     connect(m_youdaoDict, &Youdao::result, this, &MainWindow::onYoudaoDictResult);
 
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
@@ -448,6 +449,17 @@ void MainWindow::onNewFromTemplateTriggered()
         Q_ASSERT(m_view);
         m_view->newDocument();
         m_view->setInitialDocument(fileContent);
+    }
+}
+
+void MainWindow::onDocumentModified()
+{
+    Q_ASSERT(m_view);
+    auto editor = m_view->editor();
+    Q_ASSERT(editor);
+    if (editor->isModified())
+    {
+        setWindowTitle(QString("%1* - KarenMeu").arg(QFileInfo(m_currentMarkdownDocument).fileName()));
     }
 }
 

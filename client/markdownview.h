@@ -58,6 +58,7 @@ signals:
     void formatShiftRight();
     void formatShiftLeft();
     void setCurrentFile(const QString &);
+    void contentModified();
 
 public slots:
     void openDocument();

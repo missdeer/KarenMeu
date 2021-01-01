@@ -60,6 +60,7 @@ private slots:
     void onCustomPreviewThemeChanged();
     void onYoudaoDictResult(QString res);
     void onNewFromTemplateTriggered();
+    void onDocumentModified();
 
     void on_actionGoogle_triggered();
 

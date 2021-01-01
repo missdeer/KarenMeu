@@ -274,6 +274,7 @@ void MarkdownView::exportAsPDF()
 void MarkdownView::documentModified()
 {
     m_modified = true;
+    emit contentModified();
 }
 
 void MarkdownView::convertTimeout()
