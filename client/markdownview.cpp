@@ -1,5 +1,6 @@
 #include <QApplication>
 #include <QClipboard>
+#include <QCryptographicHash>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSplitter>
@@ -16,6 +17,7 @@
 
 #include "clientutils.h"
 #include "markdowneditor4.h"
+#include "plantumlurlcodec.h"
 #include "previewpage.h"
 #include "previewthemeeditor.h"
 #include "settings.h"
@@ -543,7 +545,7 @@ void MarkdownView::renderMarkdownToHTML()
     temp.replace('\r', ' ');
     QList<QByteArray> lines = temp.split('\n');
     QList<QByteArray> metaDataLines;
-    QRegularExpression reMetadataSeparator("^\\-{3,}$");
+    QRegularExpression reMetadataSeparator("^\\-{3,}[\\s\\t]*$");
     int                startLineIndex = 0;
     while (lines[startLineIndex].trimmed().isEmpty())
         startLineIndex++;
@@ -552,7 +554,9 @@ void MarkdownView::renderMarkdownToHTML()
     {
         auto beginLine = match.captured(0).toUtf8();
         // find the end separator line
-        auto it = std::find_if(lines.begin() + startLineIndex + 1, lines.end(), [&beginLine](const auto &l) { return l == beginLine; });
+        auto it = std::find_if(lines.begin() + startLineIndex + 1, lines.end(), [&reMetadataSeparator](const auto &l) {
+            return reMetadataSeparator.match(QString(l)).hasMatch();
+        });
         if (lines.end() != it)
         {
             // extract meta data lines
@@ -561,9 +565,72 @@ void MarkdownView::renderMarkdownToHTML()
             // remove meta data lines
             lines.erase(lines.begin(), it + 1);
         }
-        ba = lines.join('\n');
     }
 
+    QRegularExpression rePlantUMLBegin("^```(plantuml|puml|uml|ditaa|dot|mindmap|gantt|math|latex|salt|json)[\\s\\t]*$");
+    QRegularExpression reCodeBlockEnd("^```[\\s\\t]*$");
+    auto               findBeginLine = [&rePlantUMLBegin](const auto &l) { return rePlantUMLBegin.match(QString(l)).hasMatch(); };
+    struct PlantUMLEngine
+    {
+        QString engine;
+        QString outputFormat;
+    };
+    std::map<QString, QString> engineOutputFormatMap = {
+        {"uml", "svg"},
+        {"dot", "svg"},
+        {"ditaa", "png"},
+        {"gantt", "svg"},
+        {"mindmap", "svg"},
+        {"math", "png"},
+        {"latex", "png"},
+        {"json", "png"},
+        {"salt", "png"},
+    };
+
+    for (auto it = std::find_if(lines.begin(), lines.end(), findBeginLine); lines.end() != it;
+         it      = std::find_if(lines.begin(), lines.end(), findBeginLine))
+    {
+        auto itEnd = std::find_if(it + 1, lines.end(), [&reCodeBlockEnd](const auto &l) { return reCodeBlockEnd.match(QString(l)).hasMatch(); });
+        if (lines.end() == itEnd)
+        {
+            break;
+        }
+        if (std::distance(it, itEnd) < 2)
+        {
+            lines.erase(it, itEnd + 1);
+            continue;
+        }
+        QList<QByteArray> plantumlLines;
+        // extract PlantUML source lines
+        std::copy(it + 1, itEnd, std::back_inserter(plantumlLines));
+
+        auto match = rePlantUMLBegin.match(QString(*it));
+        auto mark  = match.captured(1);
+        if (mark.endsWith("uml"))
+        {
+            mark = "uml";
+        }
+        if (!plantumlLines[0].startsWith("@start"))
+            plantumlLines.insert(0, "@start" + mark.toUtf8());
+        if (!plantumlLines[plantumlLines.length() - 1].startsWith("@end"))
+            plantumlLines.append("@end" + mark.toUtf8());
+        qDebug() << mark;
+        QByteArray plantumlContent = plantumlLines.join("\n");
+        auto       md5sum          = QCryptographicHash::hash(plantumlContent, QCryptographicHash::Md5).toHex();
+        // generate final image async
+        if (!m_plantUMLUrlCodec)
+            m_plantUMLUrlCodec = new PlantUMLUrlCodec;
+        auto    encodedStr = m_plantUMLUrlCodec->Encode(plantumlContent.toStdString());
+        QString u          = QString("https://yii.li/plantuml/%1/").arg(engineOutputFormatMap[mark]) + QString::fromStdString(encodedStr);
+        // insert img tag sync
+        QByteArray tag = QString("![%1](%1)").arg(u).toUtf8();
+        *it            = tag;
+        lines.erase(it + 1, itEnd + 1);
+        // \TODO use md5 and local cache
+    }
+
+    // compose new content block
+    ba = lines.join('\n');
     GoString content {(const char *)ba.data(), (ptrdiff_t)ba.size()};
 
     QByteArray style = g_settings->codeBlockStyle().toUtf8();

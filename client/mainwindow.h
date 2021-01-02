@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QNetworkAccessManager>
-#include <QPixmap>
 
 namespace Ui
 {
@@ -122,8 +121,6 @@ private:
     QList<QAction *>              m_newFromTemplateActions;
     QString                       m_currentMarkdownDocument;
     QString                       m_currentWorkspace;
-    QPixmap                       originalBackgroundImage;
-    QPixmap                       adjustedBackgroundImage;
     QNetworkAccessManager         m_nam;
 
     void    updateRecentFileActions(const QStringList &files);

@@ -12,6 +12,7 @@ QT_FORWARD_DECLARE_CLASS(QResizeEvent);
 QT_FORWARD_DECLARE_CLASS(QWebEnginePage);
 class MarkdownEditor4;
 class PreviewThemeEditor;
+class PlantUMLUrlCodec;
 
 class MarkdownView : public QWidget
 {
@@ -92,6 +93,7 @@ private:
     QTimer *            m_convertTimer;
     PreviewThemeEditor *m_previewHTMLEditor;
     PreviewThemeEditor *m_customPreivewThemeEditor;
+    PlantUMLUrlCodec *  m_plantUMLUrlCodec {nullptr};
     QString             m_savePath;
     RenderedDocument    m_renderedContent;
     RenderedDocument    m_themeStyle;

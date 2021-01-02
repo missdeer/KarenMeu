@@ -45,7 +45,10 @@ SOURCES += \
         $$PWD/markdowneditor4/markdowneditor4.cpp \
         $$PWD/templatemanagerdialog.cpp \
         $$PWD/template.cpp \
-        $$PWD/templatemanager.cpp
+        $$PWD/templatemanager.cpp \
+        filecache.cpp \
+        plantumlrunner.cpp \
+        plantumlurlcodec.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -64,7 +67,10 @@ HEADERS += \
         $$PWD/markdowneditor4/markdowneditor4.h \
         $$PWD/templatemanagerdialog.h \
         $$PWD/template.h \
-        $$PWD/templatemanager.h
+        $$PWD/templatemanager.h \
+        filecache.h \
+        plantumlrunner.h \
+        plantumlurlcodec.h
 
 FORMS += \
         $$PWD/mainwindow.ui \
