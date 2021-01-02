@@ -538,31 +538,28 @@ void MarkdownView::renderMarkdownToHTML()
     if (ba.isEmpty())
         return;
 
-    // remove leading YAML header for Jekyll files
+    // extract leading YAML header for some kind of markdown document, suck as Jekyll document
     QByteArray temp = ba;
     temp.replace('\r', ' ');
     QList<QByteArray> lines = temp.split('\n');
     QList<QByteArray> metaDataLines;
-
-    QRegularExpression reBegin("\\s*\\-{3,}");
-    auto               match = reBegin.match(QString(lines[0]));
+    QRegularExpression reMetadataSeparator("^\\-{3,}$");
+    int                startLineIndex = 0;
+    while (lines[startLineIndex].trimmed().isEmpty())
+        startLineIndex++;
+    auto match = reMetadataSeparator.match(QString(lines[startLineIndex]));
     if (match.hasMatch())
     {
-        QRegularExpression reEnd("^\\s*\\-{3,}$");
-        int                endLine = 0;
-        for (int i = 1; i < lines.length(); i++)
+        auto beginLine = match.captured(0).toUtf8();
+        // find the end separator line
+        auto it = std::find_if(lines.begin() + startLineIndex + 1, lines.end(), [&beginLine](const auto &l) { return l == beginLine; });
+        if (lines.end() != it)
         {
-            match = reEnd.match(QString(lines[i]));
-            if (match.hasMatch())
-            {
-                endLine = i;
-                break;
-            }
-        }
-        if (endLine)
-        {
-            metaDataLines = lines.mid(1, endLine - 1);
-            lines = lines.mid(endLine + 1);
+            // extract meta data lines
+            std::copy(lines.begin() + startLineIndex + 1, it, std::back_inserter(metaDataLines));
+
+            // remove meta data lines
+            lines.erase(lines.begin(), it + 1);
         }
         ba = lines.join('\n');
     }
