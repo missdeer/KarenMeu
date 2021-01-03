@@ -125,6 +125,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     auto mainWindowGeometry = g_settings->mainWindowGeometry();
     restoreGeometry(mainWindowGeometry);
+
+    auto cachePath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+    m_fileCache->setPath(cachePath, defaultItemGenerator);
+    m_fileCache->setMaxCost(50 * 1024 * 1024);
 }
 
 void MainWindow::openFile(const QString &fileName)
@@ -148,6 +152,9 @@ MainWindow::~MainWindow()
     g_settings->setMainWindowGeometry(mainWindowGeometry);
 
     g_settings->save();
+
+    delete m_fileCache;
+
     delete ui;
 }
 

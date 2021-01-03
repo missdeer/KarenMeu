@@ -1,15 +1,4 @@
-#include <QDir>
-#include <QFileInfo>
-
 #include "filecache.h"
-
-namespace
-{
-    QString cachePathFromPathAndKey(const QString &path, const QString &key)
-    {
-        return QFileInfo(QDir(path), key).absoluteFilePath();
-    }
-} // namespace
 
 AbstractFileCacheItem::AbstractFileCacheItem(const QString &path, const QString &key, int cost, const QDateTime &date_time, QObject *parent)
     : QObject(parent)
@@ -124,7 +113,8 @@ void FileCache::addItem(const QByteArray &data, const QString &key, FileCache::I
 
 void FileCache::clear()
 {
-    foreach (AbstractFileCacheItem* item, m_items) {
+    foreach (AbstractFileCacheItem *item, m_items)
+    {
         delete item;
     }
     m_items.clear();

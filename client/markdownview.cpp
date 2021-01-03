@@ -16,7 +16,9 @@
 #include "markdownview.h"
 
 #include "clientutils.h"
+#include "filecache.h"
 #include "markdowneditor4.h"
+#include "networkreplyhelper.h"
 #include "plantumlurlcodec.h"
 #include "previewpage.h"
 #include "previewthemeeditor.h"
@@ -492,6 +494,26 @@ void MarkdownView::pdfPrintingFinished(const QString &filePath, bool success)
             this, tr("PDF exporting failed"), tr("PDF file has not been exported to %1.").arg(QDir::toNativeSeparators(filePath)), QMessageBox::Ok);
 }
 
+void MarkdownView::embedRenderingDone()
+{
+    auto *helper = qobject_cast<NetworkReplyHelper *>(sender());
+    Q_ASSERT(helper);
+    helper->deleteLater();
+    auto *reply = helper->reply();
+    Q_ASSERT(reply);
+    auto request  = reply->request();
+    auto cacheKey = request.attribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1)).toString();
+    auto content  = helper->content();
+    qDebug() << "save to" << cacheKey << "with" << content.length() << "bytes";
+    if (content.isEmpty())
+        return;
+    m_fileCache->addItem(content, cacheKey, defaultItemGenerator);
+    Q_ASSERT(m_preview);
+    auto *page = m_preview->page();
+    Q_ASSERT(page);
+    page->triggerAction(QWebEnginePage::Reload);
+}
+
 void MarkdownView::resizeEvent(QResizeEvent *event)
 {
     m_splitter->setSizes(QList<int>() << width() / 2 << width() / 2);
@@ -629,7 +651,7 @@ void MarkdownView::renderMarkdownToHTML()
         qDebug() << mark;
         QByteArray embedGraphCode = embedGraphCodeLines.join("\n");
         auto       md5sum         = QCryptographicHash::hash(embedGraphCode, QCryptographicHash::Md5).toHex();
-        QString    cacheKey       = QString("%1:%2").arg(md5sum, mark);
+        QString    cacheKey       = QString("%1-%2.%3").arg(md5sum, mark, engineOutputFormatMap[mark]);
         // generate final image async
         if (!m_plantUMLUrlCodec)
             m_plantUMLUrlCodec = new PlantUMLUrlCodec;
@@ -638,14 +660,22 @@ void MarkdownView::renderMarkdownToHTML()
         QString header     = graphvizEngines.contains(mark) ? "" : "~1";
         QString u = QString("https://yii.li/%1/%2/%3%4").arg(engine, engineOutputFormatMap[mark], header, QString::fromStdString(encodedStr));
         // insert img tag sync
-        QByteArray tag = QString("![%1](%1)").arg(u).toUtf8();
+        QString    localFilePath = QString("file://%1").arg(QFileInfo(QDir(m_fileCache->path()), cacheKey).absoluteFilePath());
+        QByteArray tag           = QString("![%1](%2)").arg(cacheKey, localFilePath).toUtf8();
         *it            = tag;
         lines.erase(it + 1, itEnd + 1);
 
-        QNetworkRequest req(u);
-        req.setAttribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1), cacheKey);
-        Q_ASSERT(m_nam);
-        m_nam->get(req);
+        if (!m_fileCache->hasItem(cacheKey))
+        {
+            QNetworkRequest req(u);
+            req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
+            req.setAttribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1), cacheKey);
+            Q_ASSERT(m_nam);
+            qDebug() << "request" << u;
+            auto *              reply  = m_nam->get(req);
+            NetworkReplyHelper *helper = new NetworkReplyHelper(reply);
+            connect(helper, &NetworkReplyHelper::done, this, &MarkdownView::embedRenderingDone);
+        }
     }
 
     // compose new content block

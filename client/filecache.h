@@ -2,19 +2,28 @@
 #define FILECACHE_H
 
 #include <QDateTime>
+#include <QDir>
+#include <QFileInfo>
 #include <QMap>
 #include <QObject>
 #include <QSet>
 #include <QString>
 #include <functional>
 
-struct FileCacheError {};
+inline QString cachePathFromPathAndKey(const QString &path, const QString &key)
+{
+    return QFileInfo(QDir(path), key).absoluteFilePath();
+}
+
+struct FileCacheError
+{
+};
 
 class AbstractFileCacheItem : public QObject
 {
     Q_OBJECT
 public:
-    explicit AbstractFileCacheItem(const QString& path, const QString& key, int cost, const QDateTime& date_time, QObject* parent = 0);
+    AbstractFileCacheItem(const QString &path, const QString &key, int cost, const QDateTime &date_time, QObject *parent = 0);
     virtual ~AbstractFileCacheItem() {};
 
     const QString& path() const { return m_path; }
@@ -38,11 +47,11 @@ class FileCacheItem : public AbstractFileCacheItem
 {
     Q_OBJECT
 public:
-    explicit FileCacheItem(const QString& path, const QString& key, int cost, const QDateTime& date_time, QObject* parent = 0);
+    FileCacheItem(const QString &path, const QString &key, int cost, const QDateTime &date_time, QObject *parent = 0);
     virtual ~FileCacheItem();
 
 private:
-    virtual void removeFileFromDisk(const QString& some_path) const;
+    virtual void removeFileFromDisk(const QString &some_path) const override;
 
     mutable bool m_removed;
 };
@@ -58,7 +67,7 @@ public:
                                                                 QObject *          // parent
                                                                 )>;
 
-    FileCache(int maxCost = 0, QObject* parent = 0);
+    explicit FileCache(int maxCost = 0, QObject *parent = 0);
     virtual ~FileCache();
 
     int maxCost() const { return m_maxCost; }
@@ -90,4 +99,8 @@ private:
     QList<QString> m_indexByDate;
 };
 
+inline AbstractFileCacheItem *defaultItemGenerator(const QString &path, const QString &key, int cost, const QDateTime &date_time, QObject *parent)
+{
+    return new FileCacheItem(path, key, cost, date_time, parent);
+}
 #endif // FILECACHE_H
