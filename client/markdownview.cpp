@@ -26,12 +26,14 @@
 using pFMarkdownEngine          = char *(*)(GoString, GoString, GoUint8);
 pFMarkdownEngine markdownEngine = nullptr;
 
-MarkdownView::MarkdownView(QWidget *parent)
-    : QWidget(parent)
-    , m_splitter(new QSplitter(this))
-    , m_editor(new MarkdownEditor4(g_settings->markdownEditorConfig(), this))
-    , m_preview(new QWebEngineView(this))
-    , m_convertTimer(new QTimer)
+MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget *parent)
+    : QWidget(parent),
+      m_splitter(new QSplitter(this)),
+      m_editor(new MarkdownEditor4(g_settings->markdownEditorConfig(), this)),
+      m_preview(new QWebEngineView(this)),
+      m_convertTimer(new QTimer),
+      m_nam(nam),
+      m_fileCache(fileCache)
 {
     m_splitter->addWidget(m_editor);
     m_splitter->addWidget(m_preview);

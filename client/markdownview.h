@@ -10,15 +10,17 @@ QT_FORWARD_DECLARE_CLASS(QWebEngineView);
 QT_FORWARD_DECLARE_CLASS(QTimer);
 QT_FORWARD_DECLARE_CLASS(QResizeEvent);
 QT_FORWARD_DECLARE_CLASS(QWebEnginePage);
+QT_FORWARD_DECLARE_CLASS(QNetworkAccessManager);
 class MarkdownEditor4;
 class PreviewThemeEditor;
 class PlantUMLUrlCodec;
+class FileCache;
 
 class MarkdownView : public QWidget
 {
     Q_OBJECT
 public:
-    explicit MarkdownView(QWidget *parent = nullptr);
+    explicit MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget *parent = nullptr);
     ~MarkdownView();
     void             forceConvert();
     bool             maybeSave();
@@ -86,19 +88,21 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
 
 private:
-    bool                m_modified {false};
-    QSplitter *         m_splitter;
-    MarkdownEditor4 *   m_editor;
-    QWebEngineView *    m_preview;
-    QTimer *            m_convertTimer;
-    PreviewThemeEditor *m_previewHTMLEditor;
-    PreviewThemeEditor *m_customPreivewThemeEditor;
-    PlantUMLUrlCodec *  m_plantUMLUrlCodec {nullptr};
-    QString             m_savePath;
-    RenderedDocument    m_renderedContent;
-    RenderedDocument    m_themeStyle;
-    RenderedDocument    m_wxboxWidth;
-    RenderedDocument    m_macStyleCodeBlock;
+    bool                   m_modified {false};
+    QSplitter *            m_splitter;
+    MarkdownEditor4 *      m_editor;
+    QWebEngineView *       m_preview;
+    QTimer *               m_convertTimer;
+    QNetworkAccessManager *m_nam;
+    PreviewThemeEditor *   m_previewHTMLEditor;
+    PreviewThemeEditor *   m_customPreivewThemeEditor;
+    PlantUMLUrlCodec *     m_plantUMLUrlCodec {nullptr};
+    FileCache *            m_fileCache;
+    QString                m_savePath;
+    RenderedDocument       m_renderedContent;
+    RenderedDocument       m_themeStyle;
+    RenderedDocument       m_wxboxWidth;
+    RenderedDocument       m_macStyleCodeBlock;
 
     void saveToFile(const QString &savePath);
     void renderMarkdownToHTML();

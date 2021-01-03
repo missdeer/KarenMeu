@@ -25,9 +25,9 @@
 #include <QtCore>
 
 #include "mainwindow.h"
-
 #include "clientutils.h"
 #include "custompreviewthemeeditwidget.h"
+#include "filecache.h"
 #include "markdowneditor4.h"
 #include "markdownview.h"
 #include "preferencedialog.h"
@@ -45,11 +45,12 @@ using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-    , m_view(new MarkdownView(this))
-    , m_youdaoDict(new Youdao(m_nam))
-    , m_templateManager(new TemplateManager)
+    : QMainWindow(parent),
+      ui(new Ui::MainWindow),
+      m_fileCache(new FileCache),
+      m_view(new MarkdownView(&m_nam, m_fileCache, this)),
+      m_youdaoDict(new Youdao(m_nam)),
+      m_templateManager(new TemplateManager)
 {
     ui->setupUi(this);
     setCentralWidget(m_view);

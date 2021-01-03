@@ -15,6 +15,7 @@ class Youdao;
 class TranslateHelperPage;
 class TranslateOutputWidget;
 class TemplateManager;
+class FileCache;
 
 QT_FORWARD_DECLARE_CLASS(QComboBox);
 QT_FORWARD_DECLARE_CLASS(QTreeView);
@@ -97,6 +98,7 @@ private:
     };
 
     Ui::MainWindow *              ui;
+    FileCache *                   m_fileCache;
     MarkdownView *                m_view;
     QFileSystemModel *            m_fsModel;
     QTreeView *                   m_fsView;
@@ -115,7 +117,7 @@ private:
     CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;
     QList<QToolBar *>             m_visibleToolbars;
     Youdao *                      m_youdaoDict;
-    TemplateManager *             m_templateManager {nullptr};
+    TemplateManager *             m_templateManager;
     QAction *                     recentFileActs[MaxRecentFiles];
     QAction *                     recentWorkspaceActs[MaxRecentFiles];
     QList<QAction *>              m_newFromTemplateActions;
