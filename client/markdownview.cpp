@@ -628,7 +628,8 @@ void MarkdownView::renderMarkdownToHTML()
         }
         qDebug() << mark;
         QByteArray embedGraphCode = embedGraphCodeLines.join("\n");
-        auto       md5sum         = QCryptographicHash::hash(embedGraphCode + mark.toUtf8(), QCryptographicHash::Md5).toHex();
+        auto       md5sum         = QCryptographicHash::hash(embedGraphCode, QCryptographicHash::Md5).toHex();
+        QString    cacheKey       = QString("%1:%2").arg(md5sum, mark);
         // generate final image async
         if (!m_plantUMLUrlCodec)
             m_plantUMLUrlCodec = new PlantUMLUrlCodec;
@@ -640,7 +641,11 @@ void MarkdownView::renderMarkdownToHTML()
         QByteArray tag = QString("![%1](%1)").arg(u).toUtf8();
         *it            = tag;
         lines.erase(it + 1, itEnd + 1);
-        // \TODO use md5 and local cache
+
+        QNetworkRequest req(u);
+        req.setAttribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1), cacheKey);
+        Q_ASSERT(m_nam);
+        m_nam->get(req);
     }
 
     // compose new content block

@@ -46,9 +46,10 @@ SOURCES += \
         $$PWD/templatemanagerdialog.cpp \
         $$PWD/template.cpp \
         $$PWD/templatemanager.cpp \
-        filecache.cpp \
-        plantumlrunner.cpp \
-        plantumlurlcodec.cpp
+        $$PWD/filecache.cpp \
+        $$PWD/networkreplyhelper.cpp \
+        $$PWD/plantumlrunner.cpp \
+        $$PWD/plantumlurlcodec.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -68,9 +69,10 @@ HEADERS += \
         $$PWD/templatemanagerdialog.h \
         $$PWD/template.h \
         $$PWD/templatemanager.h \
-        filecache.h \
-        plantumlrunner.h \
-        plantumlurlcodec.h
+        $$PWD/filecache.h \
+        $$PWD/networkreplyhelper.h \
+        $$PWD/plantumlrunner.h \
+        $$PWD/plantumlurlcodec.h
 
 FORMS += \
         $$PWD/mainwindow.ui \

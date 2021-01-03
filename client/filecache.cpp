@@ -164,8 +164,8 @@ bool FileCache::updateFromDisk(const QString &path, ItemGenerator item_generator
     if (!dir.mkpath(path)) {
         return false;
     }
-
-    for (const auto &info : dir.entryInfoList(QDir::Files))
+    auto infos = dir.entryInfoList(QDir::Files);
+    for (const auto &info : infos)
     {
         QString key = info.fileName();
         int cost = info.size();

@@ -47,7 +47,7 @@ using ActionLabelMap = QHash<QAction *, QString>;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
-      m_fileCache(new FileCache),
+      m_fileCache(new FileCache(0, this)),
       m_view(new MarkdownView(&m_nam, m_fileCache, this)),
       m_youdaoDict(new Youdao(m_nam)),
       m_templateManager(new TemplateManager)
