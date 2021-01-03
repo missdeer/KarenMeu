@@ -567,17 +567,14 @@ void MarkdownView::renderMarkdownToHTML()
         }
     }
 
-    QRegularExpression rePlantUMLBegin("^```(plantuml|puml|uml|ditaa|dot|mindmap|gantt|math|latex|salt|json)[\\s\\t]*$");
+    QRegularExpression reEmbedGraphRenderBegin(
+        "^```(plantuml|puml|uml|ditaa|dot|mindmap|gantt|math|latex|salt|json|neato|circo|fdp|sfdp|osage|twopi|patchwork)[\\s\\t]*$");
     QRegularExpression reCodeBlockEnd("^```[\\s\\t]*$");
-    auto               findBeginLine = [&rePlantUMLBegin](const auto &l) { return rePlantUMLBegin.match(QString(l)).hasMatch(); };
-    struct PlantUMLEngine
-    {
-        QString engine;
-        QString outputFormat;
-    };
+    auto               findBeginLine = [&reEmbedGraphRenderBegin](const auto &l) { return reEmbedGraphRenderBegin.match(QString(l)).hasMatch(); };
+
     std::map<QString, QString> engineOutputFormatMap = {
+        //-- PlantUML
         {"uml", "svg"},
-        {"dot", "svg"},
         {"ditaa", "png"},
         {"gantt", "svg"},
         {"mindmap", "svg"},
@@ -585,7 +582,17 @@ void MarkdownView::renderMarkdownToHTML()
         {"latex", "png"},
         {"json", "png"},
         {"salt", "png"},
+        //-- Graphviz
+        {"dot", "svg"},
+        {"neato", "svg"},
+        {"circo", "svg"},
+        {"fdp", "svg"},
+        {"sfdp", "svg"},
+        {"osage", "svg"},
+        {"twopi", "svg"},
+        {"patchwork", "svg"},
     };
+    QStringList graphvizEngines = {/*"dot",*/ "neato", "circo", "fdp", "sfdp", "osage", "twopi", "patchwork"};
 
     for (auto it = std::find_if(lines.begin(), lines.end(), findBeginLine); lines.end() != it;
          it      = std::find_if(lines.begin(), lines.end(), findBeginLine))
@@ -600,28 +607,33 @@ void MarkdownView::renderMarkdownToHTML()
             lines.erase(it, itEnd + 1);
             continue;
         }
-        QList<QByteArray> plantumlLines;
+        QList<QByteArray> embedGraphCodeLines;
         // extract PlantUML source lines
-        std::copy(it + 1, itEnd, std::back_inserter(plantumlLines));
+        std::copy(it + 1, itEnd, std::back_inserter(embedGraphCodeLines));
 
-        auto match = rePlantUMLBegin.match(QString(*it));
+        auto match = reEmbedGraphRenderBegin.match(QString(*it));
         auto mark  = match.captured(1);
         if (mark.endsWith("uml"))
         {
             mark = "uml";
         }
-        if (!plantumlLines[0].startsWith("@start"))
-            plantumlLines.insert(0, "@start" + mark.toUtf8());
-        if (!plantumlLines[plantumlLines.length() - 1].startsWith("@end"))
-            plantumlLines.append("@end" + mark.toUtf8());
+        if (!graphvizEngines.contains(mark))
+        {
+            if (!embedGraphCodeLines[0].startsWith("@start"))
+                embedGraphCodeLines.insert(0, "@start" + mark.toUtf8());
+            if (!embedGraphCodeLines[embedGraphCodeLines.length() - 1].startsWith("@end"))
+                embedGraphCodeLines.append("@end" + mark.toUtf8());
+        }
         qDebug() << mark;
-        QByteArray plantumlContent = plantumlLines.join("\n");
-        auto       md5sum          = QCryptographicHash::hash(plantumlContent, QCryptographicHash::Md5).toHex();
+        QByteArray embedGraphCode = embedGraphCodeLines.join("\n");
+        auto       md5sum         = QCryptographicHash::hash(embedGraphCode + mark.toUtf8(), QCryptographicHash::Md5).toHex();
         // generate final image async
         if (!m_plantUMLUrlCodec)
             m_plantUMLUrlCodec = new PlantUMLUrlCodec;
-        auto    encodedStr = m_plantUMLUrlCodec->Encode(plantumlContent.toStdString());
-        QString u          = QString("https://yii.li/plantuml/%1/").arg(engineOutputFormatMap[mark]) + QString::fromStdString(encodedStr);
+        auto    encodedStr = m_plantUMLUrlCodec->Encode(embedGraphCode.toStdString());
+        QString engine     = graphvizEngines.contains(mark) ? mark : "plantuml";
+        QString header     = graphvizEngines.contains(mark) ? "" : "~1";
+        QString u = QString("https://yii.li/%1/%2/%3%4").arg(engine, engineOutputFormatMap[mark], header, QString::fromStdString(encodedStr));
         // insert img tag sync
         QByteArray tag = QString("![%1](%1)").arg(u).toUtf8();
         *it            = tag;

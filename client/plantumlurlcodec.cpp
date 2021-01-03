@@ -14,7 +14,7 @@ PlantUMLUrlCodec::PlantUMLUrlCodec()
 std::string PlantUMLUrlCodec::Encode(const std::string &data)
 {
     std::string zStr = compressDeflate(data);
-    return "~1" + encode64(zStr);
+    return encode64(zStr);
 }
 
 std::string PlantUMLUrlCodec::Decode(const std::string &data)
