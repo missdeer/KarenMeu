@@ -495,7 +495,7 @@ void MarkdownView::onEmbedRenderingDone()
     auto request  = reply->request();
     auto cacheKey = request.attribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1)).toString();
     auto content  = helper->content();
-#if defined(QT_NO_DEBUG)
+#if !defined(QT_NO_DEBUG)
     qDebug() << "save to" << cacheKey << "with" << content.length() << "bytes";
 #endif
     if (content.isEmpty())
