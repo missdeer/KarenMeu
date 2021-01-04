@@ -10,20 +10,20 @@ PreviewPage::PreviewPage(QObject *parent) : QWebEnginePage(parent)
 
 void PreviewPage::refreshImage(const QString &imgAlt, const QString &imgSrc)
 {
-    const QString refreshImagesJavascript("var images = document.getElementsByTagName('img');"
-                                          "for (i=0;i < images.length;i++) {                 "
-                                          "	 var alt = images[i].alt;                        "
-                                          "	 var src = images[i].src;                        "
-                                          "	 queryPos = src.indexOf('?');                    "
-                                          "	 if(queryPos != -1) {                            "
-                                          "	   src = src.substring(0, queryPos);             "
-                                          "	 }                                               "
-                                          "  if(alt==\"%1\"){                                "
-                                          "	   images[i].src = '%2?t=' + Math.random();      "
-                                          "    break;                                        "
-                                          "	 }                                               "
-                                          "}");
-    runJavaScript(refreshImagesJavascript.arg(imgAlt, imgSrc));
+    const QString refreshImageJavascript("var images = document.getElementsByTagName('img');"
+                                         "for (i=0;i < images.length;i++) {                 "
+                                         "	 var alt = images[i].alt;                        "
+                                         "	 var src = images[i].src;                        "
+                                         "	 queryPos = src.indexOf('?');                    "
+                                         "	 if(queryPos != -1) {                            "
+                                         "	   src = src.substring(0, queryPos);             "
+                                         "	 }                                               "
+                                         "  if(alt==\"%1\"){                                "
+                                         "    images[i].src = '%2?t=' + Math.random();      "
+                                         "    break;                                        "
+                                         "	 }                                               "
+                                         "}");
+    runJavaScript(refreshImageJavascript.arg(imgAlt, imgSrc));
 }
 
 void PreviewPage::inlineImages()
