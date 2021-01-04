@@ -8,7 +8,6 @@ class PreviewPage : public QWebEnginePage
     Q_OBJECT
 public:
     explicit PreviewPage(QObject *parent = nullptr);
-    void refreshImages();
     void refreshImage(const QString &imgAlt, const QString &imgSrc);
     void inlineImages();
 

@@ -631,7 +631,7 @@ void MarkdownView::renderMarkdownToHTML()
         {"patchwork", "svg"},
     };
     QStringList graphvizEngines = {/*"dot",*/ "neato", "circo", "fdp", "sfdp", "osage", "twopi", "patchwork"};
-
+    std::map<QString, QString> images;
     for (auto it = std::find_if(lines.begin(), lines.end(), findBeginLine); lines.end() != it;
          it      = std::find_if(lines.begin(), lines.end(), findBeginLine))
     {
@@ -678,6 +678,7 @@ void MarkdownView::renderMarkdownToHTML()
         // insert img tag sync
         QString    localFilePath = QUrl::fromLocalFile(cachePathFromPathAndKey(m_fileCache->path(), cacheKey)).toString();
         QByteArray tag           = QString("![%1](%2)").arg(cacheKey, localFilePath).toUtf8();
+        images.insert(std::make_pair(cacheKey, localFilePath));
         *it            = tag;
         lines.erase(it + 1, itEnd + 1);
 
@@ -730,15 +731,17 @@ void MarkdownView::renderMarkdownToHTML()
         QString metaDataHTML = QString("<details><summary>%1</summary>%2<hr></details>").arg(tr("Metadata"), QString(metaDataLines.join("<br>")));
         renderedHTML         = metaDataHTML + renderedHTML;
     }
-    setRenderedHTML(renderedHTML);
-
-    Free(res);
 
     if (g_settings->markdownEngine() == "Goldmark")
     {
-        Q_ASSERT(m_preview);
-        auto *page = (PreviewPage *)m_preview->page();
-        Q_ASSERT(page);
-        page->refreshImages();
+        // Goldmark's bug?
+        for (const auto &[cacheKey, path] : images)
+        {
+            renderedHTML =
+                renderedHTML.replace(QString("<img src=\"\" alt=\"%1\"").arg(cacheKey), QString("<img src=\"%2\" alt=\"%1\"").arg(cacheKey, path));
+        }
     }
+    setRenderedHTML(renderedHTML);
+
+    Free(res);
 }

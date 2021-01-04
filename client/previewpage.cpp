@@ -8,20 +8,6 @@ PreviewPage::PreviewPage(QObject *parent) : QWebEnginePage(parent)
     connect(this, &PreviewPage::embeded, this, &PreviewPage::onEmbeded);
 }
 
-void PreviewPage::refreshImages()
-{
-    const QString refreshImagesJavascript("var images = document.getElementsByTagName('img');"
-                                          "for (i=0;i < images.length;i++) {                 "
-                                          "	 var src = images[i].src;                        "
-                                          "	 queryPos = src.indexOf('?');                    "
-                                          "	 if(queryPos != -1) {                            "
-                                          "	   src = src.substring(0, queryPos);             "
-                                          "	 }                                               "
-                                          "	 images[i].src = src + '?t=' + Math.random();    "
-                                          "}");
-    runJavaScript(refreshImagesJavascript);
-}
-
 void PreviewPage::refreshImage(const QString &imgAlt, const QString &imgSrc)
 {
     const QString refreshImagesJavascript("var images = document.getElementsByTagName('img');"
