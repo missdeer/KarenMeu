@@ -151,8 +151,9 @@ bool FileCache::setPath(const QString &path, ItemGenerator item_generator)
 bool FileCache::updateFromDisk(const QString &path, ItemGenerator item_generator)
 {
     QDir dir(path);
-    if (!dir.mkpath(path)) {
-        return false;
+    if (!dir.exists(path))
+    {
+        dir.mkpath(path);
     }
     auto infos = dir.entryInfoList(QDir::Files);
     for (const auto &info : infos)
