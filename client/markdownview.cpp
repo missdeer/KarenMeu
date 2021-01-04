@@ -74,6 +74,7 @@ MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWi
 
     auto *page = new PreviewPage(this);
     m_preview->setPage(page);
+    connect(page, &PreviewPage::allImagesEmbeded, this, &MarkdownView::onAllImagesEmbeded);
     connect(m_editor, &MarkdownEditor4::scrollValueChanged, page, &PreviewPage::onEditorScrollMoved);
 
     auto *channel = new QWebChannel(this);
@@ -255,20 +256,10 @@ void MarkdownView::redo()
 
 void MarkdownView::copyAsHTML()
 {
-    // get whole origin html
-    m_preview->page()->toHtml([](const QString &result) mutable {
-        // inline css
-        QByteArray ba = result.toUtf8();
-        GoString   content {(const char *)ba.data(), (ptrdiff_t)ba.size()};
-        auto       res = Inliner(content);
-        // set back to webengine page
-        QString r = QString::fromUtf8(res);
-
-        auto *md = new QMimeData;
-        md->setText(r);
-        md->setHtml(r);
-        QApplication::clipboard()->setMimeData(md, QClipboard::Clipboard);
-    });
+    Q_ASSERT(m_preview);
+    auto *page = (PreviewPage *)m_preview->page();
+    Q_ASSERT(page);
+    page->inlineImages();
 }
 
 void MarkdownView::exportAsHTML()
@@ -504,14 +495,37 @@ void MarkdownView::onEmbedRenderingDone()
     auto request  = reply->request();
     auto cacheKey = request.attribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1)).toString();
     auto content  = helper->content();
+#if defined(QT_NO_DEBUG)
     qDebug() << "save to" << cacheKey << "with" << content.length() << "bytes";
+#endif
     if (content.isEmpty())
         return;
-    m_fileCache->addItem(content, cacheKey, defaultItemGenerator);
+    m_fileCache->addItem(content, cacheKey);
+
     Q_ASSERT(m_preview);
-    auto *page = m_preview->page();
+    auto *page = (PreviewPage *)m_preview->page();
     Q_ASSERT(page);
-    page->triggerAction(QWebEnginePage::Reload);
+    page->refreshImage(cacheKey, QString("file://%1").arg(cachePathFromPathAndKey(m_fileCache->path(), cacheKey)));
+}
+
+void MarkdownView::onAllImagesEmbeded()
+{
+    Q_ASSERT(m_preview);
+    // get whole origin html
+    m_preview->page()->toHtml([this](const QString &result) mutable {
+        // inline css
+        QByteArray ba = result.toUtf8();
+        GoString   content {(const char *)ba.data(), (ptrdiff_t)ba.size()};
+        auto       res = Inliner(content);
+        // set back to webengine page
+        QString r = QString::fromUtf8(res);
+
+        auto *md = new QMimeData;
+        md->setText(r);
+        md->setHtml(r);
+        QApplication::clipboard()->setMimeData(md, QClipboard::Clipboard);
+        QMessageBox::information(this, tr("HTML copied"), tr("HTML content has been copied into clipboard."), QMessageBox::Ok);
+    });
 }
 
 void MarkdownView::resizeEvent(QResizeEvent *event)
@@ -648,7 +662,9 @@ void MarkdownView::renderMarkdownToHTML()
             if (!embedGraphCodeLines[embedGraphCodeLines.length() - 1].startsWith("@end"))
                 embedGraphCodeLines.append("@end" + mark.toUtf8());
         }
+#if !defined(QT_NO_DEBUG)
         qDebug() << mark;
+#endif
         QByteArray embedGraphCode = embedGraphCodeLines.join("\n");
         auto       md5sum         = QCryptographicHash::hash(embedGraphCode, QCryptographicHash::Md5).toHex();
         QString    cacheKey       = QString("%1-%2.%3").arg(md5sum, mark, engineOutputFormatMap[mark]);
@@ -660,7 +676,7 @@ void MarkdownView::renderMarkdownToHTML()
         QString header     = graphvizEngines.contains(mark) ? "" : "~1";
         QString u = QString("https://yii.li/%1/%2/%3%4").arg(engine, engineOutputFormatMap[mark], header, QString::fromStdString(encodedStr));
         // insert img tag sync
-        QString    localFilePath = QString("file://%1").arg(QFileInfo(QDir(m_fileCache->path()), cacheKey).absoluteFilePath());
+        QString    localFilePath = QUrl::fromLocalFile(cachePathFromPathAndKey(m_fileCache->path(), cacheKey)).toString();
         QByteArray tag           = QString("![%1](%2)").arg(cacheKey, localFilePath).toUtf8();
         *it            = tag;
         lines.erase(it + 1, itEnd + 1);
@@ -670,8 +686,11 @@ void MarkdownView::renderMarkdownToHTML()
             QNetworkRequest req(u);
             req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
             req.setAttribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1), cacheKey);
+            req.setRawHeader("Accept-Encoding", "gzip, deflate");
             Q_ASSERT(m_nam);
+#if !defined(QT_NO_DEBUG)
             qDebug() << "request" << u;
+#endif
             auto *reply  = m_nam->get(req);
             auto *helper = new NetworkReplyHelper(reply);
             helper->setTimeout(10000);
@@ -686,21 +705,21 @@ void MarkdownView::renderMarkdownToHTML()
     QByteArray style = g_settings->codeBlockStyle().toUtf8();
     GoString   styleContent {(const char *)style.data(), (ptrdiff_t)style.size()};
 
-    auto    res  = markdownEngine(content, styleContent, g_settings->enableLineNumbers());
-    QString html = QString::fromUtf8(res);
+    auto res          = markdownEngine(content, styleContent, g_settings->enableLineNumbers());
+    auto renderedHTML = QString::fromUtf8(res);
 
     // fix h1/h2/h3 tag for style
-    html = html.replace(QRegularExpression("<h1(\\s+id=\".*\")?>"), "<h1\\1><span>")
-               .replace("</h1>", "</span></h1>")
-               .replace(QRegularExpression("<h2(\\s+id=\".*\")?>"), "<h2\\1><span>")
-               .replace("</h2>", "</span></h2>")
-               .replace(QRegularExpression("<h3(\\s+id=\".*\")?>"), "<h3\\1><span>")
-               .replace("</h3>", "</span></h3>");
+    renderedHTML = renderedHTML.replace(QRegularExpression("<h1(\\s+id=\".*\")?>"), "<h1\\1><span>")
+                       .replace("</h1>", "</span></h1>")
+                       .replace(QRegularExpression("<h2(\\s+id=\".*\")?>"), "<h2\\1><span>")
+                       .replace("</h2>", "</span></h2>")
+                       .replace(QRegularExpression("<h3(\\s+id=\".*\")?>"), "<h3\\1><span>")
+                       .replace("</h3>", "</span></h3>");
 
     if (g_settings->macTerminalStyleCodeBlock())
     {
         updateMacStyleCodeBlock();
-        html = html.replace("<pre", "<pre class=\"macpre\"");
+        renderedHTML = renderedHTML.replace("<pre", "<pre class=\"macpre\"");
     }
     // add back leading YAML header as detail/summary
     if (!metaDataLines.isEmpty())
@@ -709,9 +728,17 @@ void MarkdownView::renderMarkdownToHTML()
             return QString(line).toHtmlEscaped().toUtf8();
         });
         QString metaDataHTML = QString("<details><summary>%1</summary>%2<hr></details>").arg(tr("Metadata"), QString(metaDataLines.join("<br>")));
-        html                 = metaDataHTML + html;
+        renderedHTML         = metaDataHTML + renderedHTML;
     }
-    setRenderedHTML(html);
+    setRenderedHTML(renderedHTML);
 
     Free(res);
+
+    if (g_settings->markdownEngine() == "Goldmark")
+    {
+        Q_ASSERT(m_preview);
+        auto *page = (PreviewPage *)m_preview->page();
+        Q_ASSERT(page);
+        page->refreshImages();
+    }
 }

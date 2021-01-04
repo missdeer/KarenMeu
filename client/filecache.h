@@ -56,6 +56,11 @@ private:
     mutable bool m_removed;
 };
 
+inline AbstractFileCacheItem *defaultItemGenerator(const QString &path, const QString &key, int cost, const QDateTime &date_time, QObject *parent)
+{
+    return new FileCacheItem(path, key, cost, date_time, parent);
+}
+
 class FileCache : public QObject
 {
     Q_OBJECT
@@ -75,7 +80,7 @@ public:
 
     bool hasItem(const QString& key) const;
     void addItem(AbstractFileCacheItem* item);
-    void addItem(const QByteArray& data, const QString& key, ItemGenerator item_generator);
+    void addItem(const QByteArray &data, const QString &key, ItemGenerator item_generator = defaultItemGenerator);
 
     int totalCost() const { return m_totalCost; }
 
@@ -86,11 +91,11 @@ public:
     void clear();
     void clearFromDisk();
 
-    bool setPath(const QString& path, ItemGenerator item_generator);
+    bool           setPath(const QString &path, ItemGenerator item_generator = defaultItemGenerator);
     const QString& path() const { return m_path; }
 
 private:
-    bool updateFromDisk(const QString &path, ItemGenerator item_generator);
+    bool updateFromDisk(const QString &path, ItemGenerator item_generator = defaultItemGenerator);
 
     QString m_path;
     int m_maxCost;
@@ -99,8 +104,4 @@ private:
     QList<QString> m_indexByDate;
 };
 
-inline AbstractFileCacheItem *defaultItemGenerator(const QString &path, const QString &key, int cost, const QDateTime &date_time, QObject *parent)
-{
-    return new FileCacheItem(path, key, cost, date_time, parent);
-}
 #endif // FILECACHE_H

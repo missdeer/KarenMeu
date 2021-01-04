@@ -120,7 +120,7 @@ void NetworkReplyHelper::finished()
     auto *reply           = qobject_cast<QNetworkReply *>(sender());
     auto  contentEncoding = reply->rawHeader("Content-Encoding");
 #if !defined(QT_NO_DEBUG)
-    qDebug() << __FUNCTION__ << __LINE__ << contentEncoding << m_content.length() << "bytes received: " << QString(m_content).left(256) << "\n";
+    qDebug() << __FUNCTION__ << __LINE__ << contentEncoding << m_content.length() << "bytes received";
 #endif
     if (contentEncoding == "gzip" || contentEncoding == "deflate")
     {
@@ -130,7 +130,7 @@ void NetworkReplyHelper::finished()
     }
 
 #if !defined(QT_NO_DEBUG)
-    qDebug() << __FUNCTION__ << __LINE__ << m_content.length() << "bytes received: " << QString(m_content).left(256) << "\n";
+    qDebug() << __FUNCTION__ << __LINE__ << m_content.length() << "bytes uncompressed: " << QString(m_content).left(256) << "\n";
 #endif
     emit done();
 }

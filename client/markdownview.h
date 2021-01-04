@@ -84,6 +84,7 @@ private slots:
     void previewLoadFinished(bool);
     void pdfPrintingFinished(const QString &filePath, bool success);
     void onEmbedRenderingDone();
+    void onAllImagesEmbeded();
 
 protected:
     void resizeEvent(QResizeEvent *event) override;

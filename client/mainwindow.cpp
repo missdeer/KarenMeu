@@ -45,12 +45,12 @@ using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent),
-      ui(new Ui::MainWindow),
-      m_fileCache(new FileCache(0, this)),
-      m_view(new MarkdownView(&m_nam, m_fileCache, this)),
-      m_youdaoDict(new Youdao(m_nam)),
-      m_templateManager(new TemplateManager)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+    , m_fileCache(new FileCache(50 * 1024 * 1024, this))
+    , m_view(new MarkdownView(&m_nam, m_fileCache, this))
+    , m_youdaoDict(new Youdao(m_nam))
+    , m_templateManager(new TemplateManager)
 {
     ui->setupUi(this);
     setCentralWidget(m_view);
@@ -127,8 +127,7 @@ MainWindow::MainWindow(QWidget *parent)
     restoreGeometry(mainWindowGeometry);
 
     auto cachePath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
-    m_fileCache->setPath(cachePath, defaultItemGenerator);
-    m_fileCache->setMaxCost(50 * 1024 * 1024);
+    m_fileCache->setPath(cachePath);
 }
 
 void MainWindow::openFile(const QString &fileName)
