@@ -494,7 +494,7 @@ void MarkdownView::pdfPrintingFinished(const QString &filePath, bool success)
             this, tr("PDF exporting failed"), tr("PDF file has not been exported to %1.").arg(QDir::toNativeSeparators(filePath)), QMessageBox::Ok);
 }
 
-void MarkdownView::embedRenderingDone()
+void MarkdownView::onEmbedRenderingDone()
 {
     auto *helper = qobject_cast<NetworkReplyHelper *>(sender());
     Q_ASSERT(helper);
@@ -672,9 +672,10 @@ void MarkdownView::renderMarkdownToHTML()
             req.setAttribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1), cacheKey);
             Q_ASSERT(m_nam);
             qDebug() << "request" << u;
-            auto *              reply  = m_nam->get(req);
-            NetworkReplyHelper *helper = new NetworkReplyHelper(reply);
-            connect(helper, &NetworkReplyHelper::done, this, &MarkdownView::embedRenderingDone);
+            auto *reply  = m_nam->get(req);
+            auto *helper = new NetworkReplyHelper(reply);
+            helper->setTimeout(10000);
+            connect(helper, &NetworkReplyHelper::done, this, &MarkdownView::onEmbedRenderingDone);
         }
     }
 

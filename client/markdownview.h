@@ -83,7 +83,7 @@ private slots:
     void convertTimeout();
     void previewLoadFinished(bool);
     void pdfPrintingFinished(const QString &filePath, bool success);
-    void embedRenderingDone();
+    void onEmbedRenderingDone();
 
 protected:
     void resizeEvent(QResizeEvent *event) override;

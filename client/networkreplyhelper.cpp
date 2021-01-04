@@ -9,7 +9,7 @@ static QByteArray gUncompress(const QByteArray &data)
     if (data.size() <= 4)
     {
         qWarning("gUncompress: Input data is truncated");
-        return QByteArray();
+        return data;
     }
 
     QByteArray result;
@@ -28,7 +28,7 @@ static QByteArray gUncompress(const QByteArray &data)
 
     ret = inflateInit2(&strm, 15 + 32); // gzip decoding
     if (ret != Z_OK)
-        return QByteArray();
+        return data;
 
     // run inflate()
     do
@@ -46,7 +46,7 @@ static QByteArray gUncompress(const QByteArray &data)
         case Z_DATA_ERROR:
         case Z_MEM_ERROR:
             (void)inflateEnd(&strm);
-            return QByteArray();
+            return data;
         }
 
         result.append(out, CHUNK_SIZE - strm.avail_out);
@@ -60,15 +60,13 @@ static QByteArray gUncompress(const QByteArray &data)
 NetworkReplyHelper::NetworkReplyHelper(QNetworkReply *reply, QIODevice *storage, QObject *parent)
     : QObject(parent), m_reply(reply), m_storage(storage)
 {
-    if (reply)
-    {
-        connect(reply, &QNetworkReply::downloadProgress, this, &NetworkReplyHelper::downloadProgress);
-        connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(error(QNetworkReply::NetworkError)));
-        connect(reply, &QNetworkReply::finished, this, &NetworkReplyHelper::finished);
-        connect(reply, &QNetworkReply::sslErrors, this, &NetworkReplyHelper::sslErrors);
-        connect(reply, &QNetworkReply::uploadProgress, this, &NetworkReplyHelper::uploadProgress);
-        connect(reply, &QNetworkReply::readyRead, this, &NetworkReplyHelper::readyRead);
-    }
+    Q_ASSERT(reply);
+    connect(reply, &QNetworkReply::downloadProgress, this, &NetworkReplyHelper::downloadProgress);
+    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(error(QNetworkReply::NetworkError)));
+    connect(reply, &QNetworkReply::finished, this, &NetworkReplyHelper::finished);
+    connect(reply, &QNetworkReply::sslErrors, this, &NetworkReplyHelper::sslErrors);
+    connect(reply, &QNetworkReply::uploadProgress, this, &NetworkReplyHelper::uploadProgress);
+    connect(reply, &QNetworkReply::readyRead, this, &NetworkReplyHelper::readyRead);
 }
 
 NetworkReplyHelper::~NetworkReplyHelper()
@@ -91,8 +89,12 @@ NetworkReplyHelper::~NetworkReplyHelper()
 
 void NetworkReplyHelper::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 {
+#if !defined(QT_NO_DEBUG)
+    qDebug() << __FUNCTION__ << __LINE__ << bytesReceived << bytesTotal;
+#else
     Q_UNUSED(bytesReceived);
     Q_UNUSED(bytesTotal);
+#endif
     if (m_timeoutTimer && m_timeoutTimer->isActive())
         m_timeoutTimer->start();
 }
@@ -104,7 +106,7 @@ void NetworkReplyHelper::error(QNetworkReply::NetworkError code)
     m_errMsg.append(reply->errorString() + "\n");
 
 #if !defined(QT_NO_DEBUG)
-    qDebug() << m_errMsg;
+    qDebug() << __FUNCTION__ << __LINE__ << m_errMsg;
 #endif
 
     emit errorMessage(code, m_errMsg);
@@ -117,6 +119,9 @@ void NetworkReplyHelper::finished()
 
     auto *reply           = qobject_cast<QNetworkReply *>(sender());
     auto  contentEncoding = reply->rawHeader("Content-Encoding");
+#if !defined(QT_NO_DEBUG)
+    qDebug() << __FUNCTION__ << __LINE__ << contentEncoding << m_content.length() << "bytes received: " << QString(m_content).left(256) << "\n";
+#endif
     if (contentEncoding == "gzip" || contentEncoding == "deflate")
     {
         m_content = gUncompress(m_content);
@@ -125,7 +130,7 @@ void NetworkReplyHelper::finished()
     }
 
 #if !defined(QT_NO_DEBUG)
-    qDebug() << this << m_content.length() << "bytes received: " << QString(m_content).left(256) << "\n";
+    qDebug() << __FUNCTION__ << __LINE__ << m_content.length() << "bytes received: " << QString(m_content).left(256) << "\n";
 #endif
     emit done();
 }
@@ -135,7 +140,7 @@ void NetworkReplyHelper::sslErrors(const QList<QSslError> &errors)
     Q_FOREACH (const QSslError &e, errors)
     {
 #if !defined(QT_NO_DEBUG)
-        qDebug() << "ssl error:" << e.errorString();
+        qDebug() << __FUNCTION__ << __LINE__ << e.errorString();
 #endif
         m_errMsg.append(e.errorString() + "\n");
     }
@@ -153,6 +158,9 @@ void NetworkReplyHelper::readyRead()
 {
     auto *reply      = qobject_cast<QNetworkReply *>(sender());
     int   statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+#if !defined(QT_NO_DEBUG)
+    qDebug() << __FUNCTION__ << __LINE__ << statusCode;
+#endif
     if (statusCode >= 200 && statusCode < 300)
     {
         auto ba              = reply->readAll();
@@ -161,6 +169,9 @@ void NetworkReplyHelper::readyRead()
         {
             m_storage->write(ba);
         }
+#if !defined(QT_NO_DEBUG)
+        qDebug() << __FUNCTION__ << __LINE__ << contentEncoding << ba.length();
+#endif
         m_content.append(ba);
     }
 }
@@ -168,7 +179,7 @@ void NetworkReplyHelper::readyRead()
 void NetworkReplyHelper::timeout()
 {
 #if !defined(QT_NO_DEBUG)
-    qDebug() << "network request timeout";
+    qDebug() << __FUNCTION__ << __LINE__;
 #endif
     if (m_reply && m_reply->isRunning())
         m_reply->abort();
