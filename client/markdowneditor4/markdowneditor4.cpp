@@ -1,3 +1,5 @@
+#include <QApplication>
+#include <QClipboard>
 #include <QRegularExpression>
 #include <QScrollBar>
 #include <QTextBlock>
@@ -249,7 +251,11 @@ void MarkdownEditor4::formatHyperlink()
         QRegularExpressionMatch match        = QRegularExpression(R"(^(\s*)(.+?)(\s*)$)").match(selectedText);
         if (match.hasMatch())
         {
-            c.insertText(match.captured(1) + "[" + match.captured(2) + "]()" + match.captured(3));
+            auto clipText = QApplication::clipboard()->text();
+            if (!clipText.startsWith("http://") && !clipText.startsWith("https://"))
+                clipText.clear();
+            auto text = QString("%1[%2](%4)%3").arg(match.captured(1), match.captured(2), match.captured(3), clipText);
+            c.insertText(text);
             c.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, 1);
         }
     }
@@ -271,7 +277,11 @@ void MarkdownEditor4::formatImage()
         QRegularExpressionMatch match        = QRegularExpression(R"(^(\s*)(.+?)(\s*)$)").match(selectedText);
         if (match.hasMatch())
         {
-            c.insertText(match.captured(1) + "![" + match.captured(2) + "]()" + match.captured(3));
+            auto clipText = QApplication::clipboard()->text();
+            if (!clipText.startsWith("http://") && !clipText.startsWith("https://"))
+                clipText.clear();
+            auto text = QString("%1![%2](%4)%3").arg(match.captured(1), match.captured(2), match.captured(3), clipText);
+            c.insertText(text);
             c.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, 1);
         }
     }
