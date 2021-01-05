@@ -31,7 +31,7 @@ win32: {
 
     INCLUDEPATH += $$PWD/zlib
 
-    DEFINES += _CRT_SECURE_NO_DEPRECATE=1  EXPORT_IMPORT_API=
+    DEFINES += _CRT_SECURE_NO_DEPRECATE=1
 
     CONFIG(release, debug|release) {
         DEFINES += NDEBUG=1
