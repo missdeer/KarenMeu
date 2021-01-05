@@ -1,0 +1,396 @@
+name: MacOS
+on: 
+  push:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.github/workflows/windows.yml'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.github/workflows/windows.yml'
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
+        qt_ver: [5.15.2]
+        qt_arch: [clang_64]
+    env:
+      targetName: KarenMeu
+    steps:
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: ${{ matrix.qt_ver }}
+          modules: qtwebengine
+      
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+          submodules: true
+          
+      - run: |
+          cd 3rdparty/vtextedit
+          git submodule init
+          git submodule update --recursive
+          
+      - name: build macos
+        run: |
+          cd 3rdparty/scintilla/qt/ScintillaEdit
+          python WidgetGen.py
+          cd ../../../..
+          cd utils
+          make
+          cd ..
+          cd server
+          go build -ldflags="-s -w" -o KarenMeuCloud
+          cd ..
+          mkdir build
+          cd build
+          qmake -r CONFIG+=release CONFIG+=qtquickcompiler ../${{ env.targetName }}.pro
+          make -j 2
+          cd ..
+
+      - name: package
+        run: |
+          cd build
+          if [ ! -d client/${{ env.targetName }}.app/Contents/Frameworks ]; then mkdir -p client/${{ env.targetName }}.app/Contents/Frameworks; fi
+          if [ ! -d client/${{ env.targetName }}.app/Contents/Frameworks/ScintillaEdit.framework ]; then cp -R 3rdparty/scintilla/bin/ScintillaEdit.framework client/${{ env.targetName }}.app/Contents/Frameworks/; fi
+          if [ ! -d client/${{ env.targetName }}.app/Contents/Frameworks/VSyntaxHighlighting.framework ]; then cp -R 3rdparty/vtextedit/src/libs/syntax-highlighting/VSyntaxHighlighting.framework client/${{ env.targetName }}.app/Contents/Frameworks/; fi
+          if [ ! -d client/${{ env.targetName }}.app/Contents/Frameworks/VTextEdit.framework ]; then cp -R 3rdparty/vtextedit/src/editor/VTextEdit.framework client/${{ env.targetName }}.app/Contents/Frameworks/; fi
+          install_name_tool -change @executable_path/../Frameworks/ScintillaEdit.framework/Versions/4/ScintillaEdit @rpath/ScintillaEdit.framework/Versions/4/ScintillaEdit client/${{ env.targetName }}.app/Contents/MacOS/${{ env.targetName }}
+          install_name_tool -change VSyntaxHighlighting.framework/Versions/1/VSyntaxHighlighting @rpath/VSyntaxHighlighting.framework/Versions/1/VSyntaxHighlighting client/${{ env.targetName }}.app/Contents/MacOS/${{ env.targetName }} 
+          install_name_tool -change VTextEdit.framework/Versions/1/VTextEdit @rpath/VTextEdit.framework/Versions/1/VTextEdit client/${{ env.targetName }}.app/Contents/MacOS/${{ env.targetName }}
+          macdeployqt "client/${{ env.targetName }}.app" -qmldir=. -verbose=1 -dmg
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: ${{ env.targetName }}-${{ matrix.qt_arch }}
+          path: "build/client/${{ env.targetName }}.dmg"
+          
+  Windows-MSVC: 
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+          - qt_arch: win64_msvc2019_64
+            msvc_arch: x64
+            qt_arch_install: msvc2019_64
+            mingw_arch: MINGW64 
+            mingw_prefix: mingw-w64-x86_64
+            toolchains: gcc
+            GOARCH: amd64
+            BUILDRP: build-x64.bat
+          - qt_arch: win32_msvc2019
+            msvc_arch: x86
+            qt_arch_install: msvc2019_32
+            mingw_arch: MINGW32
+            mingw_prefix: mingw-w64-i686
+            toolchains: gcc
+            GOARCH: 386
+            BUILDRP: build-x86.bat
+    env:
+      targetName: KarenMeu
+      go_version: 1.15.3
+      qt_ver: 5.15.2
+      qt_target: desktop
+    # 步骤
+    steps:
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: ${{ env.qt_ver }}
+          target: ${{ env.qt_target }}
+          arch: ${{ matrix.qt_arch }}
+          modules: qtwebengine
+          
+      - uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          msystem: ${{ matrix.mingw_arch }}
+          install: zip make git ${{ matrix.mingw_prefix }}-${{ matrix.toolchains }} ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-zstd
+
+      - name: Set up Go 1.15
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ env.go_version }}
+        id: go
+
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          ref: ${{ github.head_ref }}
+          submodules: true
+          
+      - run: |
+          cd 3rdparty\vtextedit
+          git submodule init
+          git submodule update --recursive
+       
+      - name: generate scintilla headers
+        shell: cmd
+        run: |
+          cd 3rdparty\scintilla\qt\ScintillaEdit
+          python WidgetGen.py
+          dir
+          cd ..\..\..\..
+
+      - name: Build server
+        shell: cmd
+        env:
+          vc_arch: ${{ matrix.msvc_arch }}
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
+          set PATH=D:\a\_temp\msys\msys64\${{ matrix.mingw_arch }}\bin;%PATH%
+          set GOARCH=${{ matrix.GOARCH }}
+          set GOOS=windows
+          set CGO_ENABLED=1
+          cd server
+          go env
+          go build -v -ldflags="-s -w" -o KarenMeuCloud.exe
+          dir
+          cd ..
+
+      - name: Build utils
+        shell: cmd
+        env:
+          vc_arch: ${{ matrix.msvc_arch }}
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
+          set PATH=D:\a\_temp\msys\msys64\${{ matrix.mingw_arch }}\bin;%PATH%
+          set GOARCH=${{ matrix.GOARCH }}
+          set GOOS=windows
+          set CGO_ENABLED=1
+          cd utils
+          go env
+          go build -v -buildmode=c-archive  -ldflags="-s -w" -o utils.a 
+          dir
+          cd ..
+
+      - name: update cgo headers
+        shell: msys2 {0}
+        run: |
+          cd utils
+          ./update-def.sh
+          ls -l
+          cd ..
+
+      - name: Generate import lib
+        shell: cmd
+        env:
+          vc_arch: ${{ matrix.msvc_arch }}
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
+          cd utils
+          set PATH=D:\a\_temp\msys\msys64\${{ matrix.mingw_arch }}\bin;%PATH%
+          gcc utils.def utils.a -shared -lwinmm -lWs2_32 -o utils.dll -Wl,--out-implib,utils.dll.a
+          lib /def:utils.def /name:utils.dll /out:utils.lib /MACHINE:${{ matrix.msvc_arch }}
+          dir
+          cd ..
+
+      - name: build-msvc
+        shell: cmd
+        env:
+          vc_arch: ${{ matrix.msvc_arch }}
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
+          mkdir build
+          cd build
+          qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
+          nmake
+          cd ..
+
+      - name: package
+        shell: cmd
+        env:
+          target_dir: ${{ env.targetName }}-${{ matrix.qt_arch }}
+        run: |
+          mkdir %target_dir%
+          copy build\3rdparty\vtextedit\src\libs\syntax-highlighting\release\VSyntaxHighlighting.dll %target_dir%\
+          copy build\3rdparty\vtextedit\src\editor\release\VTextEdit.dll %target_dir%\
+          copy build\3rdparty\scintilla\bin\ScintillaEdit4.dll %target_dir%\
+          copy build\client\Release\${{ env.targetName }}.exe %target_dir%\
+          copy build\registerProtocolHandler\Release\registerProtocolHandler.exe %target_dir%\
+          copy utils\utils.dll %target_dir%\
+          copy server\KarenMeuCloud.exe %target_dir%\
+          windeployqt %target_dir%\${{ env.targetName }}.exe
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          path: ${{ env.targetName }}-${{ matrix.qt_arch }}
+          name: ${{ env.targetName }}-${{ matrix.qt_arch }}
+          
+  Windows-MSVC-Clang: 
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+          - qt_arch: win64_msvc2019_64
+            msvc_arch: x64
+            qt_arch_install: msvc2019_64
+            mingw_arch: MINGW64 
+            mingw_prefix: mingw-w64-x86_64
+            toolchains: gcc
+            GOARCH: amd64
+            BUILDRP: build-x64.bat
+            clang_link: https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/LLVM-11.0.0-win64.exe
+          - qt_arch: win32_msvc2019
+            msvc_arch: x86
+            qt_arch_install: msvc2019_32
+            mingw_arch: MINGW32
+            mingw_prefix: mingw-w64-i686
+            toolchains: gcc
+            GOARCH: 386
+            BUILDRP: build-x86.bat
+            clang_link: https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/LLVM-11.0.0-win32.exe
+    env:
+      targetName: KarenMeu
+      go_version: 1.15.3
+      qt_ver: 5.15.2
+      qt_target: desktop
+    # 步骤
+    steps:
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: ${{ env.qt_ver }}
+          target: ${{ env.qt_target }}
+          arch: ${{ matrix.qt_arch }}
+          modules: qtwebengine
+          
+      - uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          msystem: ${{ matrix.mingw_arch }}
+          install: zip make git ${{ matrix.mingw_prefix }}-${{ matrix.toolchains }} ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-zstd
+
+      - name: Set up Go 1.15
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ env.go_version }}
+        id: go
+
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          ref: ${{ github.head_ref }}
+          submodules: true
+          
+      - name: Set up clang for Windows
+        shell: cmd
+        run: |
+          mkdir llvm
+          cd llvm
+          curl.exe -o LLVM.exe -L ${{ matrix.clang_link }}
+          7z.exe x LLVM.exe
+          cd ..
+
+      - run: |
+          cd 3rdparty\vtextedit
+          git submodule init
+          git submodule update --recursive
+       
+      - name: generate scintilla headers
+        shell: cmd
+        run: |
+          cd 3rdparty\scintilla\qt\ScintillaEdit
+          python WidgetGen.py
+          dir
+          cd ..\..\..\..
+
+      - name: Build server
+        shell: cmd
+        env:
+          vc_arch: ${{ matrix.msvc_arch }}
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
+          set PATH=D:\a\_temp\msys\msys64\${{ matrix.mingw_arch }}\bin;%PATH%
+          set GOARCH=${{ matrix.GOARCH }}
+          set GOOS=windows
+          set CGO_ENABLED=1
+          cd server
+          go env
+          go build -v -ldflags="-s -w" -o KarenMeuCloud.exe
+          dir
+          cd ..
+
+      - name: Build utils
+        shell: cmd
+        env:
+          vc_arch: ${{ matrix.msvc_arch }}
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
+          set PATH=D:\a\_temp\msys\msys64\${{ matrix.mingw_arch }}\bin;%PATH%
+          set GOARCH=${{ matrix.GOARCH }}
+          set GOOS=windows
+          set CGO_ENABLED=1
+          cd utils
+          go env
+          go build -v -buildmode=c-archive  -ldflags="-s -w" -o utils.a 
+          dir
+          cd ..
+
+      - name: update cgo headers
+        shell: msys2 {0}
+        run: |
+          cd utils
+          ./update-def.sh
+          ls -l
+          cd ..
+
+      - name: Generate import lib
+        shell: cmd
+        env:
+          vc_arch: ${{ matrix.msvc_arch }}
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
+          cd utils
+          set PATH=D:\a\_temp\msys\msys64\${{ matrix.mingw_arch }}\bin;%PATH%
+          gcc utils.def utils.a -shared -lwinmm -lWs2_32 -o utils.dll -Wl,--out-implib,utils.dll.a
+          lib /def:utils.def /name:utils.dll /out:utils.lib /MACHINE:${{ matrix.msvc_arch }}
+          dir
+          cd ..
+
+      - name: build-msvc
+        shell: cmd
+        env:
+          vc_arch: ${{ matrix.msvc_arch }}
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
+          set PATH=%PATH%;%CD%\llvm\bin
+          path
+          dir
+          dir %CD%\llvm
+          dir %CD%\llvm\bin
+          mkdir build
+          cd build
+          qmake -r -spec win32-clang-msvc CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
+          nmake
+          cd ..
+
+      - name: package
+        shell: cmd
+        env:
+          target_dir: ${{ env.targetName }}-${{ matrix.qt_arch }}
+        run: |
+          mkdir %target_dir%
+          copy build\3rdparty\vtextedit\src\libs\syntax-highlighting\release\VSyntaxHighlighting.dll %target_dir%\
+          copy build\3rdparty\vtextedit\src\editor\release\VTextEdit.dll %target_dir%\
+          copy build\3rdparty\scintilla\bin\ScintillaEdit4.dll %target_dir%\
+          copy build\client\Release\${{ env.targetName }}.exe %target_dir%\
+          copy build\registerProtocolHandler\Release\registerProtocolHandler.exe %target_dir%\
+          copy utils\utils.dll %target_dir%\
+          copy server\KarenMeuCloud.exe %target_dir%\
+          windeployqt %target_dir%\${{ env.targetName }}.exe
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          path: ${{ env.targetName }}-${{ matrix.qt_arch }}
+          name: ${{ env.targetName }}-${{ matrix.qt_arch }}-clang
