@@ -1,4 +1,4 @@
-name: MacOS
+name: Build
 on: 
   push:
     paths-ignore:
@@ -11,9 +11,8 @@ on:
       - 'LICENSE'
       - '.github/workflows/windows.yml'
 jobs:
-  build:
-    name: Build
-    runs-on: ${{ matrix.os }}
+  macOS:
+    runs-on: macos-latest
     strategy:
       matrix:
         os: [macos-latest]
@@ -192,6 +191,15 @@ jobs:
           lib /def:utils.def /name:utils.dll /out:utils.lib /MACHINE:${{ matrix.msvc_arch }}
           dir
           cd ..
+      
+      - name: Set up jom
+        shell: cmd
+        run: |
+          mkdir jom
+          cd jom
+          curl.exe -o jom.zip -L https://download.qt.io/official_releases/jom/jom_1_1_3.zip
+          7z.exe x jom.zip
+          cd ..
 
       - name: build-msvc
         shell: cmd
@@ -199,10 +207,11 @@ jobs:
           vc_arch: ${{ matrix.msvc_arch }}
         run: |
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
+          set PATH=%PATH%;%CD%\jom
           mkdir build
           cd build
           qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
-          nmake
+          jom.exe -j 8
           cd ..
 
       - name: package
@@ -281,15 +290,6 @@ jobs:
           fetch-depth: 1
           ref: ${{ github.head_ref }}
           submodules: true
-          
-      - name: Set up clang for Windows
-        shell: cmd
-        run: |
-          mkdir llvm
-          cd llvm
-          curl.exe -o LLVM.exe -L ${{ matrix.clang_link }}
-          7z.exe x LLVM.exe
-          cd ..
 
       - run: |
           cd 3rdparty\vtextedit
@@ -357,13 +357,31 @@ jobs:
           dir
           cd ..
 
+      - name: Set up clang for Windows
+        shell: cmd
+        run: |
+          mkdir llvm
+          cd llvm
+          curl.exe -o LLVM.exe -L ${{ matrix.clang_link }}
+          7z.exe x LLVM.exe
+          cd ..
+      
+      - name: Set up jom
+        shell: cmd
+        run: |
+          mkdir jom
+          cd jom
+          curl.exe -o jom.zip -L https://download.qt.io/official_releases/jom/jom_1_1_3.zip
+          7z.exe x jom.zip
+          cd ..
+          
       - name: build-msvc
         shell: cmd
         env:
           vc_arch: ${{ matrix.msvc_arch }}
         run: |
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
-          set PATH=%PATH%;%CD%\llvm\bin
+          set PATH=%PATH%;%CD%\llvm\bin;%CD%\jom
           path
           dir
           dir %CD%\llvm
@@ -371,7 +389,7 @@ jobs:
           mkdir build
           cd build
           qmake -r -spec win32-clang-msvc CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
-          nmake
+          jom.exe -j 8
           cd ..
 
       - name: package
