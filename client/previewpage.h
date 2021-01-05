@@ -7,7 +7,7 @@ class PreviewPage : public QWebEnginePage
 {
     Q_OBJECT
 public:
-    explicit PreviewPage(QObject *parent = nullptr);
+    explicit PreviewPage(QNetworkAccessManager *nam, QObject *parent = nullptr);
     void refreshImage(const QString &imgAlt, const QString &imgSrc);
     void inlineImages();
 
@@ -22,10 +22,11 @@ protected:
     bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool isMainFrame);
 
 private:
-    int  m_imageCount;
-    int  m_imageHandledCount;
-    void embedImages(const QStringList &images);
-    void embedImage(const QString &from, const QString &to);
+    int                    m_imageCount;
+    int                    m_imageHandledCount;
+    QNetworkAccessManager *m_nam;
+    void                   embedImages(const QStringList &images);
+    void                   embedImage(const QString &from, const QString &to);
 };
 
 #endif // PREVIEWPAGE_H

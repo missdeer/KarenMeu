@@ -38,6 +38,8 @@ public:
     {
         return m_errMsg;
     }
+
+    void waitForFinished();
 signals:
     void done();
     void cancel();

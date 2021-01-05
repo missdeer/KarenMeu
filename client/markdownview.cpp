@@ -72,7 +72,7 @@ MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWi
     connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor4::formatShiftRight);
     connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor4::formatShiftLeft);
 
-    auto *page = new PreviewPage(this);
+    auto *page = new PreviewPage(nam, this);
     m_preview->setPage(page);
     connect(page, &PreviewPage::allImagesEmbeded, this, &MarkdownView::onAllImagesEmbeded);
     connect(m_editor, &MarkdownEditor4::scrollValueChanged, page, &PreviewPage::onEditorScrollMoved);

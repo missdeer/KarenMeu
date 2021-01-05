@@ -1,3 +1,4 @@
+#include <QEventLoop>
 #include <QIODevice>
 #include <QTimer>
 #include <zlib.h>
@@ -85,6 +86,14 @@ NetworkReplyHelper::~NetworkReplyHelper()
         delete m_timeoutTimer;
         m_timeoutTimer = nullptr;
     }
+}
+
+void NetworkReplyHelper::waitForFinished()
+{
+    QEventLoop loop;
+    QObject::connect(m_reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+    QObject::disconnect(m_reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
 }
 
 void NetworkReplyHelper::downloadProgress(qint64 bytesReceived, qint64 bytesTotal)

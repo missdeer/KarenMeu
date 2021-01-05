@@ -3,7 +3,9 @@
 
 #include "previewpage.h"
 
-PreviewPage::PreviewPage(QObject *parent) : QWebEnginePage(parent)
+#include "networkreplyhelper.h"
+
+PreviewPage::PreviewPage(QNetworkAccessManager *nam, QObject *parent) : QWebEnginePage(parent), m_nam(nam)
 {
     connect(this, &PreviewPage::embeded, this, &PreviewPage::onEmbeded);
 }
@@ -12,16 +14,16 @@ void PreviewPage::refreshImage(const QString &imgAlt, const QString &imgSrc)
 {
     const QString refreshImageJavascript("var images = document.getElementsByTagName('img');"
                                          "for (i=0;i < images.length;i++) {                 "
-                                         "	 var alt = images[i].alt;                        "
-                                         "	 var src = images[i].src;                        "
-                                         "	 queryPos = src.indexOf('?');                    "
-                                         "	 if(queryPos != -1) {                            "
-                                         "	   src = src.substring(0, queryPos);             "
-                                         "	 }                                               "
+                                         "  var alt = images[i].alt;                        "
+                                         "  var src = images[i].src;                        "
+                                         "  queryPos = src.indexOf('?');                    "
+                                         "  if(queryPos != -1) {                            "
+                                         "    src = src.substring(0, queryPos);             "
+                                         "  }                                               "
                                          "  if(alt==\"%1\"){                                "
                                          "    images[i].src = '%2?t=' + Math.random();      "
                                          "    break;                                        "
-                                         "	 }                                               "
+                                         "  }                                               "
                                          "}");
     runJavaScript(refreshImageJavascript.arg(imgAlt, imgSrc));
 }
@@ -29,11 +31,11 @@ void PreviewPage::refreshImage(const QString &imgAlt, const QString &imgSrc)
 void PreviewPage::inlineImages()
 {
     runJavaScript("var images = document.getElementsByTagName('img');"
-                  "var sources = [];"
+                  "var sources = [];                                 "
                   "for (i=0;i < images.length;i++) {                 "
-                  "  sources.push(images[i].src);"
-                  "}"
-                  "sources;",
+                  "  sources.push(images[i].src);                    "
+                  "}                                                 "
+                  "sources;                                          ",
                   [this](const QVariant &v) {
                       auto images         = v.toStringList();
                       m_imageCount        = images.length();
@@ -67,41 +69,68 @@ bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::Navig
 void PreviewPage::embedImages(const QStringList &images)
 {
     std::map<QString, QString> formatMap = {
-        {"svg", "data:image/svg+xml;base64,"},
-        {"png", "data:image/png;base64,"},
-        {"gif", "data:image/gif;base64,"},
-        {"jpeg", "data:image/jpeg;base64,"},
-        {"jpg", "data:image/jpg;base64,"},
+        {".svg", "data:image/svg+xml;base64,"},
+        {".png", "data:image/png;base64,"},
+        {".gif", "data:image/gif;base64,"},
+        {".jpeg", "data:image/jpeg;base64,"},
+        {".jpg", "data:image/jpg;base64,"},
+        {".bmp", "data:image/bmp;base64,"},
+        {".ico", "data:image/x-icon;base64,"},
+        {".webp", "data:image/webp;base64,"},
     };
     for (const auto &src : images)
     {
-        if (!src.startsWith("file://"))
+        if (src.startsWith("file://"))
+        {
+            QString origSrc = QUrl(src).toLocalFile();
+            if (int index = src.indexOf("?t="); index > 0)
+            {
+                origSrc = src.left(index);
+            }
+            QFile f(origSrc);
+            if (!f.open(QIODevice::ReadOnly))
+            {
+                emit embeded();
+                continue;
+            }
+            auto ba = f.readAll();
+            f.close();
+
+            QString newSrc;
+            auto it = std::find_if(formatMap.begin(), formatMap.end(), [&src](const auto &p) { return src.endsWith(p.first, Qt::CaseInsensitive); });
+            if (formatMap.end() == it)
+            {
+                emit embeded();
+                continue;
+            }
+            newSrc = it->second + QString(ba.toBase64());
+            embedImage(src, newSrc);
+        }
+        else if (src.startsWith("http://") || src.startsWith("https://"))
+        {
+            QUrl            u(src);
+            QNetworkRequest req(u);
+            Q_ASSERT(m_nam);
+            auto *reply  = m_nam->get(req);
+            auto *helper = new NetworkReplyHelper(reply);
+            helper->waitForFinished();
+            auto ba = helper->content();
+
+            QString newSrc;
+            auto    it =
+                std::find_if(formatMap.begin(), formatMap.end(), [&src](const auto &p) { return src.lastIndexOf(p.first, Qt::CaseInsensitive) > 0; });
+            if (formatMap.end() == it)
+            {
+                emit embeded();
+                continue;
+            }
+            newSrc = it->second + QString(ba.toBase64());
+            embedImage(src, newSrc);
+        }
+        else
         {
             emit embeded();
-            continue;
         }
-        QString origSrc = QUrl(src).toLocalFile();
-        if (int index = src.indexOf("?t="); index > 0)
-        {
-            origSrc = src.left(index);
-        }
-        QFile f(origSrc);
-        if (!f.open(QIODevice::ReadOnly))
-        {
-            emit embeded();
-            continue;
-        }
-        auto ba = f.readAll();
-        f.close();
-        QString newSrc;
-        auto    it = std::find_if(formatMap.begin(), formatMap.end(), [&src](const auto &p) { return src.endsWith(p.first, Qt::CaseInsensitive); });
-        if (formatMap.end() == it)
-        {
-            emit embeded();
-            continue;
-        }
-        newSrc = it->second + QString(ba.toBase64());
-        embedImage(src, newSrc);
     }
 }
 
