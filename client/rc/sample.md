@@ -300,3 +300,7 @@ digraph foo {
   node1 -> node2 -> node3
 }
 ```
+
+---
+订阅本公众号获得最快最新最前沿的软件开发技术动向
+![软件开发谈微信公众号：softwaredevtalk](https://mmbiz.qpic.cn/mmbiz_png/pheG9VMOvRphXvSDftnd6ItH3lM8nyY0aXP28vv2MkwS3VemMMlFuibwVdPodmdXicYu1icfeTcr7sia7zGgv2g4sg/0?wx_fmt=png)
