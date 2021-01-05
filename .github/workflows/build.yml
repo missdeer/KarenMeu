@@ -4,12 +4,10 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
-      - '.github/workflows/windows.yml'
   pull_request:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
-      - '.github/workflows/windows.yml'
 jobs:
   macOS:
     runs-on: macos-latest
