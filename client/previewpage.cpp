@@ -69,14 +69,14 @@ bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::Navig
 void PreviewPage::embedImages(const QStringList &images)
 {
     std::map<QString, QString> formatMap = {
-        {".svg", "data:image/svg+xml;base64,"},
-        {".png", "data:image/png;base64,"},
-        {".gif", "data:image/gif;base64,"},
-        {".jpeg", "data:image/jpeg;base64,"},
-        {".jpg", "data:image/jpg;base64,"},
-        {".bmp", "data:image/bmp;base64,"},
-        {".ico", "data:image/x-icon;base64,"},
-        {".webp", "data:image/webp;base64,"},
+        {"svg", "data:image/svg+xml;base64,"},
+        {"png", "data:image/png;base64,"},
+        {"gif", "data:image/gif;base64,"},
+        {"jpeg", "data:image/jpeg;base64,"},
+        {"jpg", "data:image/jpg;base64,"},
+        {"bmp", "data:image/bmp;base64,"},
+        {"ico", "data:image/x-icon;base64,"},
+        {"webp", "data:image/webp;base64,"},
     };
     for (const auto &src : images)
     {
