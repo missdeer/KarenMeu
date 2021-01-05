@@ -610,26 +610,26 @@ void MarkdownView::renderMarkdownToHTML()
     QRegularExpression reCodeBlockEnd("^```[\\s\\t]*$");
     auto               findBeginLine = [&reEmbedGraphRenderBegin](const auto &l) { return reEmbedGraphRenderBegin.match(QString(l)).hasMatch(); };
 
-    std::map<QString, QString> engineOutputFormatMap = {
-        //-- PlantUML
-        {"uml", "svg"},
-        {"ditaa", "png"},
-        {"gantt", "svg"},
-        {"mindmap", "svg"},
-        {"math", "png"},
-        {"latex", "png"},
-        {"json", "png"},
-        {"salt", "png"},
-        //-- Graphviz
-        {"dot", "svg"},
-        {"neato", "svg"},
-        {"circo", "svg"},
-        {"fdp", "svg"},
-        {"sfdp", "svg"},
-        {"osage", "svg"},
-        {"twopi", "svg"},
-        {"patchwork", "svg"},
-    };
+    //    std::map<QString, QString> engineOutputFormatMap = {
+    //        //-- PlantUML
+    //        {"uml", "svg"},
+    //        {"ditaa", "png"},
+    //        {"gantt", "svg"},
+    //        {"mindmap", "svg"},
+    //        {"math", "png"},
+    //        {"latex", "png"},
+    //        {"json", "png"},
+    //        {"salt", "png"},
+    //        //-- Graphviz
+    //        {"dot", "svg"},
+    //        {"neato", "svg"},
+    //        {"circo", "svg"},
+    //        {"fdp", "svg"},
+    //        {"sfdp", "svg"},
+    //        {"osage", "svg"},
+    //        {"twopi", "svg"},
+    //        {"patchwork", "svg"},
+    //    };
     QStringList graphvizEngines = {/*"dot",*/ "neato", "circo", "fdp", "sfdp", "osage", "twopi", "patchwork"};
     std::map<QString, QString> images;
     for (auto it = std::find_if(lines.begin(), lines.end(), findBeginLine); lines.end() != it;
@@ -667,14 +667,14 @@ void MarkdownView::renderMarkdownToHTML()
 #endif
         QByteArray embedGraphCode = embedGraphCodeLines.join("\n");
         auto       md5sum         = QCryptographicHash::hash(embedGraphCode, QCryptographicHash::Md5).toHex();
-        QString    cacheKey       = QString("%1-%2.%3").arg(md5sum, mark, engineOutputFormatMap[mark]);
+        QString    cacheKey       = QString("%1-%2.png").arg(md5sum, mark);
         // generate final image async
         if (!m_plantUMLUrlCodec)
             m_plantUMLUrlCodec = new PlantUMLUrlCodec;
         auto    encodedStr = m_plantUMLUrlCodec->Encode(embedGraphCode.toStdString());
         QString engine     = graphvizEngines.contains(mark) ? mark : "plantuml";
         QString header     = graphvizEngines.contains(mark) ? "" : "~1";
-        QString u = QString("https://yii.li/%1/%2/%3%4").arg(engine, engineOutputFormatMap[mark], header, QString::fromStdString(encodedStr));
+        QString u          = QString("https://yii.li/%1/png/%2%3").arg(engine, header, QString::fromStdString(encodedStr));
         // insert img tag sync
         QString    localFilePath = QUrl::fromLocalFile(cachePathFromPathAndKey(m_fileCache->path(), cacheKey)).toString();
         QByteArray tag           = QString("![%1](%2)").arg(cacheKey, localFilePath).toUtf8();
@@ -687,7 +687,6 @@ void MarkdownView::renderMarkdownToHTML()
             QNetworkRequest req(u);
             req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
             req.setAttribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1), cacheKey);
-            req.setRawHeader("Accept-Encoding", "gzip, deflate");
             Q_ASSERT(m_nam);
 #if !defined(QT_NO_DEBUG)
             qDebug() << "request" << u;
