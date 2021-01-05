@@ -82,6 +82,13 @@ void PreviewPage::embedImages(const QStringList &images)
     {
         if (src.startsWith("file://"))
         {
+            auto it = std::find_if(formatMap.begin(), formatMap.end(), [&src](const auto &p) { return src.endsWith(p.first, Qt::CaseInsensitive); });
+            if (formatMap.end() == it)
+            {
+                emit embeded();
+                continue;
+            }
+
             QString origSrc = QUrl(src).toLocalFile();
             if (int index = src.indexOf("?t="); index > 0)
             {
@@ -95,19 +102,19 @@ void PreviewPage::embedImages(const QStringList &images)
             }
             auto ba = f.readAll();
             f.close();
-
-            QString newSrc;
-            auto it = std::find_if(formatMap.begin(), formatMap.end(), [&src](const auto &p) { return src.endsWith(p.first, Qt::CaseInsensitive); });
+            QString newSrc = it->second + QString(ba.toBase64());
+            embedImage(src, newSrc);
+        }
+        else if (src.startsWith("http://") || src.startsWith("https://"))
+        {
+            auto it =
+                std::find_if(formatMap.begin(), formatMap.end(), [&src](const auto &p) { return src.lastIndexOf(p.first, Qt::CaseInsensitive) > 0; });
             if (formatMap.end() == it)
             {
                 emit embeded();
                 continue;
             }
-            newSrc = it->second + QString(ba.toBase64());
-            embedImage(src, newSrc);
-        }
-        else if (src.startsWith("http://") || src.startsWith("https://"))
-        {
+
             QUrl            u(src);
             QNetworkRequest req(u);
             Q_ASSERT(m_nam);
@@ -115,16 +122,8 @@ void PreviewPage::embedImages(const QStringList &images)
             auto *helper = new NetworkReplyHelper(reply);
             helper->waitForFinished();
             auto ba = helper->content();
-
-            QString newSrc;
-            auto    it =
-                std::find_if(formatMap.begin(), formatMap.end(), [&src](const auto &p) { return src.lastIndexOf(p.first, Qt::CaseInsensitive) > 0; });
-            if (formatMap.end() == it)
-            {
-                emit embeded();
-                continue;
-            }
-            newSrc = it->second + QString(ba.toBase64());
+            helper->deleteLater();
+            QString newSrc = it->second + QString(ba.toBase64());
             embedImage(src, newSrc);
         }
         else
