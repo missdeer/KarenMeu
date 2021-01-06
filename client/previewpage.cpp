@@ -1,4 +1,6 @@
+#include <QBuffer>
 #include <QDesktopServices>
+#include <QImageReader>
 #include <QtCore>
 
 #include "previewpage.h"
@@ -22,7 +24,6 @@ void PreviewPage::refreshImage(const QString &imgAlt, const QString &imgSrc)
                                          "  }                                               "
                                          "  if(alt==\"%1\"){                                "
                                          "    images[i].src = '%2?t=' + Math.random();      "
-                                         "    break;                                        "
                                          "  }                                               "
                                          "}");
     runJavaScript(refreshImageJavascript.arg(imgAlt, imgSrc));
@@ -82,17 +83,17 @@ void PreviewPage::embedImages(const QStringList &images)
     {
         if (src.startsWith("file://"))
         {
-            auto it = std::find_if(formatMap.begin(), formatMap.end(), [&src](const auto &p) { return src.endsWith(p.first, Qt::CaseInsensitive); });
-            if (formatMap.end() == it)
-            {
-                emit embeded();
-                continue;
-            }
-
             QString origSrc = QUrl(src).toLocalFile();
             if (int index = src.indexOf("?t="); index > 0)
             {
                 origSrc = src.left(index);
+            }
+            auto format = QImageReader::imageFormat(origSrc);
+            auto it     = formatMap.find(format.toLower());
+            if (formatMap.end() == it)
+            {
+                emit embeded();
+                continue;
             }
             QFile f(origSrc);
             if (!f.open(QIODevice::ReadOnly))
@@ -104,13 +105,13 @@ void PreviewPage::embedImages(const QStringList &images)
             f.close();
             QString newSrc = it->second + QString(ba.toBase64());
             embedImage(src, newSrc);
+            continue;
         }
-        else if (src.startsWith("http://") || src.startsWith("https://"))
+        if (src.startsWith("http://") || src.startsWith("https://"))
         {
-            auto it =
-                std::find_if(formatMap.begin(), formatMap.end(), [&src](const auto &p) { return src.lastIndexOf(p.first, Qt::CaseInsensitive) > 0; });
-            if (formatMap.end() == it)
+            if (src.startsWith("https://mmbiz.qpic.cn/"))
             {
+                // seems that wxmp could fetch this by itself
                 emit embeded();
                 continue;
             }
@@ -123,13 +124,26 @@ void PreviewPage::embedImages(const QStringList &images)
             helper->waitForFinished();
             auto ba = helper->content();
             helper->deleteLater();
+
+            QBuffer buf(&ba);
+            if (!buf.open(QIODevice::ReadOnly))
+            {
+                emit embeded();
+                continue;
+            }
+            auto format = QImageReader::imageFormat(&buf);
+            auto it     = formatMap.find(format.toLower());
+            if (formatMap.end() == it)
+            {
+                emit embeded();
+                continue;
+            }
+
             QString newSrc = it->second + QString(ba.toBase64());
             embedImage(src, newSrc);
+            continue;
         }
-        else
-        {
-            emit embeded();
-        }
+        emit embeded();
     }
 }
 
