@@ -168,19 +168,20 @@ void NetworkReplyHelper::readyRead()
     auto *reply      = qobject_cast<QNetworkReply *>(sender());
     int   statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 #if !defined(QT_NO_DEBUG)
-    qDebug() << __FUNCTION__ << __LINE__ << statusCode;
+    qDebug() << __FUNCTION__ << __LINE__ << statusCode << reply;
 #endif
     if (statusCode >= 200 && statusCode < 300)
     {
         auto ba              = reply->readAll();
         auto contentEncoding = reply->rawHeader("Content-Encoding");
-        if (contentEncoding != "gzip" && contentEncoding != "deflate")
-        {
-            m_storage->write(ba);
-        }
 #if !defined(QT_NO_DEBUG)
         qDebug() << __FUNCTION__ << __LINE__ << contentEncoding << ba.length();
 #endif
+        if (contentEncoding != "gzip" && contentEncoding != "deflate")
+        {
+            if (m_storage)
+                m_storage->write(ba);
+        }
         m_content.append(ba);
     }
 }
