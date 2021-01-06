@@ -103,7 +103,28 @@ void PreviewPage::embedImages(const QStringList &images)
             }
             auto ba = f.readAll();
             f.close();
-            QString newSrc = it->second + QString(ba.toBase64());
+            QString header = it->second;
+            if (format.compare("png", Qt::CaseInsensitive) != 0 && format.compare("jpg", Qt::CaseInsensitive) != 0)
+            {
+                // convert to png
+                auto       image = QImage::fromData(ba);
+                QByteArray baJpeg;
+                QBuffer    buffer(&baJpeg);
+                if (buffer.open(QIODevice::WriteOnly))
+                {
+                    if (image.save(&buffer, "PNG"))
+                    {
+                        ba     = baJpeg;
+                        header = formatMap["png"];
+                        format = "png";
+                    }
+                }
+            }
+            if (format.compare("png", Qt::CaseInsensitive) == 0)
+            {
+                // compress
+            }
+            QString newSrc = header + QString(ba.toBase64());
             embedImage(src, newSrc);
             continue;
         }
@@ -118,6 +139,8 @@ void PreviewPage::embedImages(const QStringList &images)
 
             QUrl            u(src);
             QNetworkRequest req(u);
+            req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
+            req.setRawHeader("Accept-Encoding", "gzip, deflate");
             Q_ASSERT(m_nam);
             auto *reply  = m_nam->get(req);
             auto *helper = new NetworkReplyHelper(reply);
@@ -139,7 +162,28 @@ void PreviewPage::embedImages(const QStringList &images)
                 continue;
             }
 
-            QString newSrc = it->second + QString(ba.toBase64());
+            QString header = it->second;
+            if (format.compare("png", Qt::CaseInsensitive) != 0 && format.compare("jpg", Qt::CaseInsensitive) != 0)
+            {
+                // convert to png
+                auto       image = QImage::fromData(ba);
+                QByteArray baJpeg;
+                QBuffer    buffer(&baJpeg);
+                if (buffer.open(QIODevice::WriteOnly))
+                {
+                    if (image.save(&buffer, "PNG"))
+                    {
+                        ba     = baJpeg;
+                        header = formatMap["png"];
+                        format = "png";
+                    }
+                }
+            }
+            if (format.compare("png", Qt::CaseInsensitive) == 0)
+            {
+                // compress
+            }
+            QString newSrc = header + QString(ba.toBase64());
             embedImage(src, newSrc);
             continue;
         }
