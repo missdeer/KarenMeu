@@ -630,7 +630,7 @@ void MarkdownView::renderMarkdownToHTML()
     //        {"twopi", "svg"},
     //        {"patchwork", "svg"},
     //    };
-    QStringList graphvizEngines = {/*"dot",*/ "neato", "circo", "fdp", "sfdp", "osage", "twopi", "patchwork"};
+    QStringList                graphvizEngines = {"dot", "neato", "circo", "fdp", "sfdp", "osage", "twopi", "patchwork"};
     std::map<QString, QString> images;
     for (auto it = std::find_if(lines.begin(), lines.end(), findBeginLine); lines.end() != it;
          it      = std::find_if(lines.begin(), lines.end(), findBeginLine))
