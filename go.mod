@@ -11,6 +11,7 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/jinzhu/gorm v1.9.16
 	github.com/litao91/goldmark-mathjax v0.0.0-20200921072530-4c5dae64834a
+	github.com/ultimate-guitar/go-imagequant v0.0.0-20201216103743-29e607cca148
 	github.com/vanng822/go-premailer v1.9.0
 	github.com/yuin/goldmark v1.3.1
 	github.com/yuin/goldmark-emoji v1.0.1
