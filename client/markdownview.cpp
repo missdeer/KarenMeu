@@ -676,7 +676,7 @@ void MarkdownView::renderMarkdownToHTML()
         QString header     = graphvizEngines.contains(mark) ? "" : "~1";
         QString u          = QString("https://yii.li/%1/png/%2%3").arg(engine, header, QString::fromStdString(encodedStr));
         // insert img tag sync
-        QString    localFilePath = QUrl::fromLocalFile(cachePathFromPathAndKey(m_fileCache->path(), cacheKey)).toString();
+        QString    localFilePath = QUrl::fromLocalFile("qrc:///rc/images/animatedsprite-loading.gif").toString();
         QByteArray tag           = QString("![%1](%2)").arg(cacheKey, localFilePath).toUtf8();
         images.insert(std::make_pair(cacheKey, localFilePath));
         *it            = tag;
@@ -736,8 +736,9 @@ void MarkdownView::renderMarkdownToHTML()
         // Goldmark's bug?
         for (const auto &[cacheKey, path] : images)
         {
-            renderedHTML =
-                renderedHTML.replace(QString("<img src=\"\" alt=\"%1\"").arg(cacheKey), QString("<img src=\"%2\" alt=\"%1\"").arg(cacheKey, path));
+            renderedHTML = renderedHTML.replace(
+                QString("<img src=\"\" alt=\"%1\"").arg(cacheKey),
+                QString("<img src=\"%2\" alt=\"%1\"").arg(cacheKey, QUrl::fromLocalFile("qrc:///rc/images/animatedsprite-loading.gif").toString()));
         }
     }
     setRenderedHTML(renderedHTML);
