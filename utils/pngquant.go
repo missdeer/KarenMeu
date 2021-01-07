@@ -9,10 +9,10 @@ import (
 )
 
 //export Crush
-func Crush(input []byte, output []byte) bool {
+func Crush(input []byte) []byte {
 	output, err := imagequant.Crush(input, 3, png.BestCompression)
 	if err != nil {
-		return false
+		return nil
 	}
-	return true
+	return output
 }
