@@ -6,6 +6,7 @@
 #include "previewpage.h"
 
 #include "networkreplyhelper.h"
+#include "utils.h"
 
 PreviewPage::PreviewPage(QNetworkAccessManager *nam, QObject *parent) : QWebEnginePage(parent), m_nam(nam)
 {
@@ -81,13 +82,10 @@ void PreviewPage::embedImages(const QStringList &images)
     };
     for (const auto &src : images)
     {
-        if (src.startsWith("file://"))
+        QUrl u(src);
+        if (u.isLocalFile())
         {
-            QString origSrc = QUrl(src).toLocalFile();
-            if (int index = src.indexOf("?t="); index > 0)
-            {
-                origSrc = src.left(index);
-            }
+            QString origSrc = u.toLocalFile();
             auto format = QImageReader::imageFormat(origSrc);
             auto it     = formatMap.find(format.toLower());
             if (formatMap.end() == it)
@@ -122,13 +120,13 @@ void PreviewPage::embedImages(const QStringList &images)
             }
             if (format.compare("png", Qt::CaseInsensitive) == 0)
             {
-                // compress
+                ba = compressPNG(ba);
             }
             QString newSrc = header + QString(ba.toBase64());
             embedImage(src, newSrc);
             continue;
         }
-        if (src.startsWith("http://") || src.startsWith("https://"))
+        if (u.scheme() == "http" || u.scheme() == "https")
         {
             if (src.startsWith("https://mmbiz.qpic.cn/"))
             {
@@ -137,7 +135,6 @@ void PreviewPage::embedImages(const QStringList &images)
                 continue;
             }
 
-            QUrl            u(src);
             QNetworkRequest req(u);
             req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
             req.setRawHeader("Accept-Encoding", "gzip, deflate");
@@ -181,7 +178,7 @@ void PreviewPage::embedImages(const QStringList &images)
             }
             if (format.compare("png", Qt::CaseInsensitive) == 0)
             {
-                // compress
+                ba = compressPNG(ba);
             }
             QString newSrc = header + QString(ba.toBase64());
             embedImage(src, newSrc);
@@ -203,4 +200,17 @@ void PreviewPage::embedImage(const QString &from, const QString &to)
                           "}")
                       .arg(from, to),
                   [this](const QVariant &) { emit embeded(); });
+}
+
+QByteArray PreviewPage::compressPNG(const QByteArray &ba)
+{
+    GoSlice input;
+    input.data = (void *)ba.data();
+    input.len  = ba.length();
+    input.cap  = ba.length();
+    GoSlice output;
+    auto    res = Crush(input, &output);
+    if (!res)
+        return QByteArray();
+    return QByteArray((char *)output.data, output.len);
 }

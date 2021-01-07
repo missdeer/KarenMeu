@@ -27,6 +27,7 @@ private:
     QNetworkAccessManager *m_nam;
     void                   embedImages(const QStringList &images);
     void                   embedImage(const QString &from, const QString &to);
+    QByteArray             compressPNG(const QByteArray &ba);
 };
 
 #endif // PREVIEWPAGE_H
