@@ -128,13 +128,6 @@ void PreviewPage::embedImages(const QStringList &images)
         }
         if (u.scheme() == "http" || u.scheme() == "https")
         {
-            if (src.startsWith("https://mmbiz.qpic.cn/"))
-            {
-                // seems that wxmp could fetch this by itself
-                emit embeded();
-                continue;
-            }
-
             QNetworkRequest req(u);
             req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
             req.setRawHeader("Accept-Encoding", "gzip, deflate");
