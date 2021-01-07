@@ -189,6 +189,7 @@ void MarkdownView::newDocument()
     m_editor->clear();
     m_editor->setSavePoint();
     m_editor->emptyUndoBuffer();
+    m_savePath.clear();
     static int untitledCount = 0;
     untitledCount++;
     emit setCurrentFile(tr("Untitled%1").arg(untitledCount));
