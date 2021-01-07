@@ -493,3 +493,18 @@ void MarkdownEditor4::setTextCursor(const QTextCursor &cursor)
     Q_ASSERT(editor);
     editor->setTextCursor(cursor);
 }
+
+int MarkdownEditor4::currentLineNumber()
+{
+    vte::VTextEdit *editor = getTextEdit();
+    Q_ASSERT(editor);
+    auto cursor = editor->textCursor();
+    return currentLineNumber(&cursor);
+}
+
+int MarkdownEditor4::lineCount()
+{
+    vte::VTextEdit *editor = getTextEdit();
+    Q_ASSERT(editor);
+    return editor->document()->lineCount();
+}

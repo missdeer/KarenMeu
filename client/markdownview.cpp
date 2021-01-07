@@ -82,6 +82,8 @@ MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWi
     m_preview->setPage(page);
     connect(page, &PreviewPage::allImagesEmbeded, this, &MarkdownView::onAllImagesEmbeded);
     connect(m_editor, &MarkdownEditor4::scrollValueChanged, this, &MarkdownView::updatePreviewScrollBar);
+    Q_ASSERT(m_editor->document());
+    connect(m_editor->document(), &QTextDocument::cursorPositionChanged, this, &MarkdownView::updatePreviewScrollBar);
 
     auto *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);
@@ -199,6 +201,8 @@ void MarkdownView::newDocument()
     static int untitledCount = 0;
     untitledCount++;
     emit setCurrentFile(tr("Untitled%1").arg(untitledCount));
+
+    m_preview->load(QUrl("qrc:/rc/html/index.html"));
 }
 
 void MarkdownView::copy()

@@ -29,6 +29,9 @@ public:
 
     QTextCursor textCursor() const;
     void        setTextCursor(const QTextCursor &cursor);
+
+    int currentLineNumber();
+    int lineCount();
 signals:
     void contentModified();
     void scrollValueChanged(int, int);
