@@ -1068,7 +1068,7 @@
         <translation>PDF文档未导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="730"/>
+        <location filename="../markdownview.cpp" line="702"/>
         <source>Metadata</source>
         <translation>元数据</translation>
     </message>

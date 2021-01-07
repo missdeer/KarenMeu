@@ -608,30 +608,10 @@ void MarkdownView::renderMarkdownToHTML()
     QRegularExpression reEmbedGraphRenderBegin(
         "^```(plantuml|puml|uml|ditaa|dot|mindmap|gantt|math|latex|salt|json|neato|circo|fdp|sfdp|osage|twopi|patchwork)[\\s\\t]*$");
     QRegularExpression reCodeBlockEnd("^```[\\s\\t]*$");
-    auto               findBeginLine = [&reEmbedGraphRenderBegin](const auto &l) { return reEmbedGraphRenderBegin.match(QString(l)).hasMatch(); };
-
-    //    std::map<QString, QString> engineOutputFormatMap = {
-    //        //-- PlantUML
-    //        {"uml", "svg"},
-    //        {"ditaa", "png"},
-    //        {"gantt", "svg"},
-    //        {"mindmap", "svg"},
-    //        {"math", "png"},
-    //        {"latex", "png"},
-    //        {"json", "png"},
-    //        {"salt", "png"},
-    //        //-- Graphviz
-    //        {"dot", "svg"},
-    //        {"neato", "svg"},
-    //        {"circo", "svg"},
-    //        {"fdp", "svg"},
-    //        {"sfdp", "svg"},
-    //        {"osage", "svg"},
-    //        {"twopi", "svg"},
-    //        {"patchwork", "svg"},
-    //    };
-    QStringList                graphvizEngines = {"dot", "neato", "circo", "fdp", "sfdp", "osage", "twopi", "patchwork"};
+    auto               findBeginLine   = [&reEmbedGraphRenderBegin](const auto &l) { return reEmbedGraphRenderBegin.match(QString(l)).hasMatch(); };
+    QStringList        graphvizEngines = {"dot", "neato", "circo", "fdp", "sfdp", "osage", "twopi", "patchwork"};
     std::map<QString, QString> images;
+    std::map<QString, QString> imagesToDownload;
     for (auto it = std::find_if(lines.begin(), lines.end(), findBeginLine); lines.end() != it;
          it      = std::find_if(lines.begin(), lines.end(), findBeginLine))
     {
@@ -676,25 +656,17 @@ void MarkdownView::renderMarkdownToHTML()
         QString header     = graphvizEngines.contains(mark) ? "" : "~1";
         QString u          = QString("https://yii.li/%1/png/%2%3").arg(engine, header, QString::fromStdString(encodedStr));
         // insert img tag sync
-        QString    localFilePath = QUrl::fromLocalFile("qrc:///rc/images/animatedsprite-loading.gif").toString();
-        QByteArray tag           = QString("![%1](%2)").arg(cacheKey, localFilePath).toUtf8();
-        images.insert(std::make_pair(cacheKey, localFilePath));
+        bool    hasCached   = m_fileCache->hasItem(cacheKey);
+        QString imgFilePath = hasCached ? QUrl::fromLocalFile(cachePathFromPathAndKey(m_fileCache->path(), cacheKey)).toString()
+                                        : "https://miro.medium.com/max/1000/1*CsJ05WEGfunYMLGfsT2sXA.gif";
+        QByteArray tag         = QString("![%1](%2)").arg(cacheKey, imgFilePath).toUtf8();
+        images.insert(std::make_pair(cacheKey, imgFilePath));
         *it            = tag;
         lines.erase(it + 1, itEnd + 1);
 
-        if (!m_fileCache->hasItem(cacheKey))
+        if (!hasCached)
         {
-            QNetworkRequest req(u);
-            req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
-            req.setAttribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1), cacheKey);
-            Q_ASSERT(m_nam);
-#if !defined(QT_NO_DEBUG)
-            qDebug() << "request" << u;
-#endif
-            auto *reply  = m_nam->get(req);
-            auto *helper = new NetworkReplyHelper(reply);
-            helper->setTimeout(10000);
-            connect(helper, &NetworkReplyHelper::done, this, &MarkdownView::onEmbedRenderingDone);
+            imagesToDownload.insert(std::make_pair(cacheKey, u));
         }
     }
 
@@ -736,12 +708,28 @@ void MarkdownView::renderMarkdownToHTML()
         // Goldmark's bug?
         for (const auto &[cacheKey, path] : images)
         {
-            renderedHTML = renderedHTML.replace(
-                QString("<img src=\"\" alt=\"%1\"").arg(cacheKey),
-                QString("<img src=\"%2\" alt=\"%1\"").arg(cacheKey, QUrl::fromLocalFile("qrc:///rc/images/animatedsprite-loading.gif").toString()));
+            QString imgFilePath = QFile::exists(QUrl(path).toLocalFile()) ? path : "https://miro.medium.com/max/1000/1*CsJ05WEGfunYMLGfsT2sXA.gif";
+
+            renderedHTML = renderedHTML.replace(QString("<img src=\"\" alt=\"%1\"").arg(cacheKey),
+                                                QString("<img src=\"%2\" alt=\"%1\"").arg(cacheKey, imgFilePath));
         }
     }
     setRenderedHTML(renderedHTML);
 
     Free(res);
+
+    for (const auto &[cacheKey, u] : imagesToDownload)
+    {
+        QNetworkRequest req(u);
+        req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
+        req.setAttribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1), cacheKey);
+        Q_ASSERT(m_nam);
+#if !defined(QT_NO_DEBUG)
+        qDebug() << "request" << u;
+#endif
+        auto *reply  = m_nam->get(req);
+        auto *helper = new NetworkReplyHelper(reply);
+        helper->setTimeout(10000);
+        connect(helper, &NetworkReplyHelper::done, this, &MarkdownView::onEmbedRenderingDone);
+    }
 }
