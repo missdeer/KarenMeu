@@ -3,6 +3,7 @@
 #include <QCryptographicHash>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QScrollBar>
 #include <QSplitter>
 #include <QTimer>
 #include <QVBoxLayout>
@@ -15,6 +16,9 @@
 
 #include "markdownview.h"
 
+#include <vtextedit/vtextedit.h>
+#include <vtextedit/vtexteditor.h>
+
 #include "clientutils.h"
 #include "filecache.h"
 #include "markdowneditor4.h"
@@ -24,6 +28,8 @@
 #include "previewthemeeditor.h"
 #include "settings.h"
 #include "utils.h"
+
+using namespace vte;
 
 using pFMarkdownEngine          = char *(*)(GoString, GoString, GoUint8);
 pFMarkdownEngine markdownEngine = nullptr;
@@ -75,7 +81,7 @@ MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWi
     auto *page = new PreviewPage(nam, this);
     m_preview->setPage(page);
     connect(page, &PreviewPage::allImagesEmbeded, this, &MarkdownView::onAllImagesEmbeded);
-    connect(m_editor, &MarkdownEditor4::scrollValueChanged, page, &PreviewPage::onEditorScrollMoved);
+    connect(m_editor, &MarkdownEditor4::scrollValueChanged, this, &MarkdownView::updatePreviewScrollBar);
 
     auto *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);
@@ -507,6 +513,7 @@ void MarkdownView::onEmbedRenderingDone()
     auto *page = (PreviewPage *)m_preview->page();
     Q_ASSERT(page);
     page->refreshImage(cacheKey, QString("file://%1").arg(cachePathFromPathAndKey(m_fileCache->path(), cacheKey)));
+    updatePreviewScrollBar();
 }
 
 void MarkdownView::onAllImagesEmbeded()
@@ -571,6 +578,16 @@ void MarkdownView::setRenderedHTML(const QString &html)
     m_renderedContent.setText(html);
     Q_ASSERT(m_previewHTMLEditor);
     m_previewHTMLEditor->setContent(html.toUtf8());
+}
+
+void MarkdownView::updatePreviewScrollBar()
+{
+    Q_ASSERT(m_editor);
+    auto scrollBar = m_editor->getTextEdit()->verticalScrollBar();
+    Q_ASSERT(m_preview);
+    auto *page = (PreviewPage *)m_preview->page();
+    Q_ASSERT(page);
+    page->onEditorScrollMoved(scrollBar->value(), scrollBar->maximum());
 }
 
 void MarkdownView::renderMarkdownToHTML()
@@ -719,6 +736,7 @@ void MarkdownView::renderMarkdownToHTML()
 
     Free(res);
 
+    updatePreviewScrollBar();
     for (const auto &[cacheKey, u] : imagesToDownload)
     {
         QNetworkRequest req(u);
