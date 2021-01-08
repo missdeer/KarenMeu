@@ -591,7 +591,31 @@ void MarkdownView::updatePreviewScrollBar()
     Q_ASSERT(m_preview);
     auto *page = (PreviewPage *)m_preview->page();
     Q_ASSERT(page);
-    page->onEditorScrollMoved(scrollBar->value(), scrollBar->maximum());
+
+    int currentDocumentLine      = m_editor->currentDocumentLineNumber();
+    int firstVisibleDocumentLine = m_editor->firstVisibleDocumentLineNumber();
+    int lastVisibleDocumentLine  = m_editor->lastVisibleDocumentLineNumber();
+    int documentLineCount        = m_editor->documentLineCount();
+#if !defined(QT_NO_DEBUG)
+    int currentEditorLine      = m_editor->currentEditorLineNumber();
+    int firstVisibleEditorLine = m_editor->firstVisibleEditorLineNumber();
+    int lastVisibleEditorLine  = m_editor->lastVisibleEditorLineNumber();
+    int editorLineCount        = m_editor->editorLineCount();
+    int visibleLineCount       = m_editor->visibleLineCount();
+    qDebug() << "current document line:" << currentDocumentLine << ", first visible document line:" << firstVisibleDocumentLine
+             << ", last visible document line:" << lastVisibleDocumentLine << ", document line count:" << documentLineCount
+             << "current editor line:" << currentEditorLine << ", first visible editor line:" << firstVisibleEditorLine
+             << ", last visible editor line:" << lastVisibleEditorLine << ", editor line count:" << editorLineCount
+             << ", visible line count:" << visibleLineCount;
+#endif
+    if (currentDocumentLine >= firstVisibleDocumentLine && currentDocumentLine <= lastVisibleDocumentLine)
+    {
+        page->onEditorScrollMoved(currentDocumentLine, documentLineCount);
+    }
+    else
+    {
+        page->onEditorScrollMoved(scrollBar->value(), scrollBar->maximum());
+    }
 }
 
 void MarkdownView::renderMarkdownToHTML()

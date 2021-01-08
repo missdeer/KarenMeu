@@ -5,6 +5,7 @@
 #include <QTextBlock>
 #include <QTextDocumentFragment>
 #include <QTextEdit>
+#include <QtCore>
 
 #include "markdowneditor4.h"
 
@@ -65,7 +66,14 @@ void MarkdownEditor4::setSavePoint()
     document()->setModified(false);
 }
 
-void MarkdownEditor4::emptyUndoBuffer() {}
+void MarkdownEditor4::emptyUndoBuffer()
+{
+    vte::VTextEdit *editor = getTextEdit();
+    Q_ASSERT(editor);
+    auto doc = editor->document();
+    Q_ASSERT(doc);
+    doc->clearUndoRedoStacks();
+}
 
 void MarkdownEditor4::clear()
 {
@@ -210,10 +218,10 @@ void MarkdownEditor4::formatOrderedList()
         auto start = c.selectionStart();
         auto end   = c.selectionEnd();
         c.setPosition(end);
-        auto endLine = currentLineNumber(&c);
+        auto endLine = cursorDocumentLineNumber(&c);
         c.setPosition(start);
 
-        for (int index = 1; currentLineNumber(&c) <= endLine; index++)
+        for (int index = 1; cursorDocumentLineNumber(&c) <= endLine; index++)
         {
             c.movePosition(QTextCursor::EndOfLine);
             c.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
@@ -358,10 +366,10 @@ void MarkdownEditor4::formatShiftLeft()
         auto start = c.selectionStart();
         auto end   = c.selectionEnd();
         c.setPosition(end);
-        auto endLine = currentLineNumber(&c);
+        auto endLine = cursorDocumentLineNumber(&c);
         c.setPosition(start);
 
-        for (int index = 1; currentLineNumber(&c) <= endLine; index++)
+        for (int index = 1; cursorDocumentLineNumber(&c) <= endLine; index++)
         {
             c.movePosition(QTextCursor::EndOfLine);
             c.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
@@ -426,7 +434,7 @@ void MarkdownEditor4::applyFormatter(const QString &formatter)
     setTextCursor(c);
 }
 
-int MarkdownEditor4::currentLineNumber(QTextCursor *cursor)
+int MarkdownEditor4::cursorDocumentLineNumber(QTextCursor *cursor)
 {
     QTextDocument *doc  = document();
     QTextBlock     blk  = doc->findBlock(cursor->position());
@@ -440,6 +448,24 @@ int MarkdownEditor4::currentLineNumber(QTextCursor *cursor)
     }
 
     return i;
+}
+
+int MarkdownEditor4::cursorEditorLineNumber(QTextCursor *cursor)
+{
+    const QTextBlock block = cursor->block();
+    if (!block.isValid())
+        return -1;
+
+    const QTextLayout *layout = block.layout();
+    if (!layout)
+        return -1;
+#if !defined(QT_NO_DEBUG)
+    qDebug() << "cursor position:" << cursor->position() << ", block position:" << block.position();
+#endif
+    int  relativePos = cursor->position() - block.position();
+    auto textLine    = layout->lineForTextPosition(relativePos);
+
+    return textLine.lineNumber();
 }
 
 void MarkdownEditor4::replaceCurrentLineText(const QString &text)
@@ -464,10 +490,10 @@ void MarkdownEditor4::formatHeading(const QString &heading)
         auto start = c.selectionStart();
         auto end   = c.selectionEnd();
         c.setPosition(end);
-        auto endLine = currentLineNumber(&c);
+        auto endLine = cursorDocumentLineNumber(&c);
         c.setPosition(start);
 
-        for (int index = 1; currentLineNumber(&c) <= endLine; index++)
+        for (int index = 1; cursorDocumentLineNumber(&c) <= endLine; index++)
         {
             c.movePosition(QTextCursor::EndOfLine);
             c.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
@@ -494,17 +520,87 @@ void MarkdownEditor4::setTextCursor(const QTextCursor &cursor)
     editor->setTextCursor(cursor);
 }
 
-int MarkdownEditor4::currentLineNumber()
+int MarkdownEditor4::currentDocumentLineNumber()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
     auto cursor = editor->textCursor();
-    return currentLineNumber(&cursor);
+    return cursorDocumentLineNumber(&cursor);
 }
 
-int MarkdownEditor4::lineCount()
+int MarkdownEditor4::currentEditorLineNumber()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
-    return editor->document()->lineCount();
+    auto cursor = editor->textCursor();
+    return cursorEditorLineNumber(&cursor);
+}
+
+int MarkdownEditor4::documentLineCount()
+{
+    vte::VTextEdit *editor = getTextEdit();
+    Q_ASSERT(editor);
+    auto doc = editor->document();
+    Q_ASSERT(doc);
+    return doc->blockCount();
+}
+
+int MarkdownEditor4::editorLineCount()
+{
+    vte::VTextEdit *editor = getTextEdit();
+    Q_ASSERT(editor);
+    auto doc = editor->document();
+    Q_ASSERT(doc);
+    int blockCount = doc->blockCount();
+    int lineCount  = 0;
+    for (int i = 0; i < blockCount; i++)
+    {
+        auto block = doc->findBlockByNumber(i);
+        lineCount += block.lineCount();
+    }
+    return lineCount;
+}
+
+int MarkdownEditor4::visibleLineCount()
+{
+    vte::VTextEdit *editor = getTextEdit();
+    Q_ASSERT(editor);
+    auto doc = editor->document();
+    Q_ASSERT(doc);
+    auto margin = doc->documentMargin();
+    return (doc->size().height() - 2 * margin) / editor->fontMetrics().height();
+}
+
+int MarkdownEditor4::firstVisibleDocumentLineNumber()
+{
+    vte::VTextEdit *editor = getTextEdit();
+    Q_ASSERT(editor);
+    auto cursor = editor->cursorForPosition(QPoint(0, 0));
+    return cursorDocumentLineNumber(&cursor);
+}
+
+int MarkdownEditor4::firstVisibleEditorLineNumber()
+{
+    vte::VTextEdit *editor = getTextEdit();
+    Q_ASSERT(editor);
+    auto cursor = editor->cursorForPosition(QPoint(0, 0));
+    return cursorEditorLineNumber(&cursor);
+}
+
+int MarkdownEditor4::lastVisibleDocumentLineNumber()
+{
+    vte::VTextEdit *editor = getTextEdit();
+    Q_ASSERT(editor);
+    QPoint ptBottomRight(editor->viewport()->width() - 1, editor->viewport()->height() - 1);
+    auto   cursor = editor->cursorForPosition(ptBottomRight);
+    return cursorDocumentLineNumber(&cursor);
+}
+
+int MarkdownEditor4::lastVisibleEditorLineNumber()
+{
+    vte::VTextEdit *editor = getTextEdit();
+    Q_ASSERT(editor);
+    QPoint ptBottomRight(editor->viewport()->width() - 1, editor->viewport()->height() - 1);
+    auto   cursor = editor->cursorForPosition(ptBottomRight);
+    return cursorEditorLineNumber(&cursor);
 }

@@ -30,8 +30,15 @@ public:
     QTextCursor textCursor() const;
     void        setTextCursor(const QTextCursor &cursor);
 
-    int currentLineNumber();
-    int lineCount();
+    int currentDocumentLineNumber();
+    int currentEditorLineNumber();
+    int documentLineCount();
+    int editorLineCount();
+    int visibleLineCount();
+    int firstVisibleDocumentLineNumber();
+    int firstVisibleEditorLineNumber();
+    int lastVisibleDocumentLineNumber();
+    int lastVisibleEditorLineNumber();
 signals:
     void contentModified();
     void scrollValueChanged(int, int);
@@ -74,7 +81,8 @@ private:
      */
     void applyFormatter(const QString &formatter);
 
-    int currentLineNumber(QTextCursor *cursor);
+    int cursorDocumentLineNumber(QTextCursor *cursor);
+    int cursorEditorLineNumber(QTextCursor *cursor);
 
     void replaceCurrentLineText(const QString &text);
 
