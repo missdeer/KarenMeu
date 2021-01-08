@@ -236,7 +236,7 @@ void MainWindow::translateText(const QString &text)
 void MainWindow::updateNewFromTemplateMenus()
 {
     // clear old actions
-    for (auto action : m_newFromTemplateActions)
+    for (auto action : qAsConst(m_newFromTemplateActions))
     {
         ui->menuNewFromTemplate->removeAction(action);
     }
@@ -606,18 +606,18 @@ void MainWindow::setupDockPanels()
 
     auto showAllLanguageDocks = new QAction(tr("Show All Language Docks"), this);
     ui->menuView->addAction(showAllLanguageDocks);
-    connect(showAllLanguageDocks, &QAction::triggered, [toggleViewActions]() {
+    connect(showAllLanguageDocks, &QAction::triggered, [toggleViewActions] {
         for (auto toggleViewAction : toggleViewActions)
         {
-            toggleViewAction->triggered(true);
+            emit toggleViewAction->triggered(true);
         }
     });
     auto hideAllLanguageDocks = new QAction(tr("Hide All Language Docks"), this);
     ui->menuView->addAction(hideAllLanguageDocks);
-    connect(hideAllLanguageDocks, &QAction::triggered, [toggleViewActions]() {
+    connect(hideAllLanguageDocks, &QAction::triggered, [toggleViewActions] {
         for (auto toggleViewAction : toggleViewActions)
         {
-            toggleViewAction->triggered(false);
+            emit toggleViewAction->triggered(false);
         }
     });
 
@@ -757,7 +757,7 @@ void MainWindow::setupShortcutToolbar()
 
     QDir dir(":/rc/theme");
     auto entries = dir.entryInfoList();
-    for (auto entry : entries)
+    for (const auto &entry : entries)
     {
         m_cbPreviewTheme->addItem(entry.baseName());
     }
