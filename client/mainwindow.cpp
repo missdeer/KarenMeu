@@ -17,6 +17,7 @@
 #include <QMessageBox>
 #include <QPainter>
 #include <QPlainTextEdit>
+#include <QShortcut>
 #include <QSplitter>
 #include <QTreeView>
 #include <QUrl>
@@ -932,6 +933,7 @@ void MainWindow::on_actionFullScreen_triggered()
             showNormal();
             break;
         }
+        menuBar()->show();
         ui->actionFullScreen->setText(tr("Full Screen"));
     }
     else
@@ -944,5 +946,11 @@ void MainWindow::on_actionFullScreen_triggered()
             m_lastWindowState = Normal;
         showFullScreen();
         ui->actionFullScreen->setText(tr("Exit Full Screen"));
+        menuBar()->hide();
+        auto *shortcut = new QShortcut(QKeySequence("F11"), this);
+        connect(shortcut, &QShortcut::activated, [this, shortcut] {
+            on_actionFullScreen_triggered();
+            shortcut->deleteLater();
+        });
     }
 }
