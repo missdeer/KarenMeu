@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>1283</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -134,6 +134,8 @@
     <property name="title">
      <string>&amp;View</string>
     </property>
+    <addaction name="actionFullScreen"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuTranslation">
     <property name="title">
@@ -1192,6 +1194,14 @@
    </property>
    <property name="shortcut">
     <string>F9</string>
+   </property>
+  </action>
+  <action name="actionFullScreen">
+   <property name="text">
+    <string>Full Screen</string>
+   </property>
+   <property name="shortcut">
+    <string>F11</string>
    </property>
   </action>
  </widget>

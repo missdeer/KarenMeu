@@ -25,6 +25,7 @@
 #include <QtCore>
 
 #include "mainwindow.h"
+
 #include "clientutils.h"
 #include "custompreviewthemeeditwidget.h"
 #include "filecache.h"
@@ -53,6 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
     , m_templateManager(new TemplateManager)
 {
     ui->setupUi(this);
+    statusBar()->hide();
     setCentralWidget(m_view);
     connect(ui->actionNew, &QAction::triggered, m_view, &MarkdownView::newDocument);
     connect(ui->actionOpen, &QAction::triggered, m_view, &MarkdownView::openDocument);
@@ -909,4 +911,38 @@ void MainWindow::on_actionTranslateFullText_triggered()
     Q_ASSERT(m_view);
     QString text = m_view->fullText();
     translateText(text);
+}
+
+void MainWindow::on_actionFullScreen_triggered()
+{
+    if (isFullScreen())
+    {
+        switch (m_lastWindowState)
+        {
+        case Minimized:
+            showMinimized();
+            break;
+        case Maximized:
+            showMaximized();
+            break;
+        case Normal:
+            showNormal();
+            break;
+        default:
+            showNormal();
+            break;
+        }
+        ui->actionFullScreen->setText(tr("Full Screen"));
+    }
+    else
+    {
+        if (isMinimized())
+            m_lastWindowState = Minimized;
+        else if (isMaximized())
+            m_lastWindowState = Maximized;
+        else
+            m_lastWindowState = Normal;
+        showFullScreen();
+        ui->actionFullScreen->setText(tr("Exit Full Screen"));
+    }
 }

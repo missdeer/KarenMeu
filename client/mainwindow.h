@@ -86,6 +86,8 @@ private slots:
 
     void on_actionTranslateFullText_triggered();
 
+    void on_actionFullScreen_triggered();
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
@@ -95,6 +97,14 @@ private:
     enum
     {
         MaxRecentFiles = 10
+    };
+
+    enum
+    {
+        Minimized,
+        Normal,
+        Maximized,
+        FullScreen,
     };
 
     Ui::MainWindow *              ui;
@@ -124,6 +134,7 @@ private:
     QString                       m_currentMarkdownDocument;
     QString                       m_currentWorkspace;
     QNetworkAccessManager         m_nam;
+    int                           m_lastWindowState;
 
     void    updateRecentFileActions(const QStringList &files);
     void    updateRecentWorkspaceActions(const QStringList &files);
