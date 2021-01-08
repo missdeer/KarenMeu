@@ -657,7 +657,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1201"/>
-        <location filename="../mainwindow.cpp" line="937"/>
+        <location filename="../mainwindow.cpp" line="804"/>
         <source>Full Screen</source>
         <translation>全屏</translation>
     </message>
@@ -693,7 +693,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1175"/>
-        <location filename="../mainwindow.cpp" line="894"/>
+        <location filename="../mainwindow.cpp" line="885"/>
         <source>Save Workspace</source>
         <translation>保存工作空间</translation>
     </message>
@@ -929,18 +929,18 @@
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="885"/>
+        <location filename="../mainwindow.cpp" line="876"/>
         <source>Open Workspace</source>
         <translation>打开工作空间</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="876"/>
         <location filename="../mainwindow.cpp" line="885"/>
-        <location filename="../mainwindow.cpp" line="894"/>
         <source>KarenMeu Workspace (*.krm);;All files (*.*)</source>
         <translation>KarenMeu工作空间 (*.krm);;所有文件 (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="948"/>
+        <location filename="../mainwindow.cpp" line="784"/>
         <source>Exit Full Screen</source>
         <translation>退出全屏</translation>
     </message>

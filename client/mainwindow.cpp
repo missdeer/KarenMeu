@@ -766,11 +766,6 @@ void MainWindow::setupShortcutToolbar()
     connect(m_cbPreviewTheme, &QComboBox::currentTextChanged, this, &MainWindow::onCurrentPreviewThemeChanged);
 }
 
-void MainWindow::resizeEvent(QResizeEvent *event)
-{
-    adjustEditorWidth(event->size().width());
-}
-
 void MainWindow::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::WindowStateChange)
@@ -786,6 +781,13 @@ void MainWindow::changeEvent(QEvent *event)
                     tb->setVisible(false);
                 }
             }
+            ui->actionFullScreen->setText(tr("Exit Full Screen"));
+            menuBar()->hide();
+            auto *shortcut = new QShortcut(QKeySequence("F11"), this);
+            connect(shortcut, &QShortcut::activated, [this, shortcut] {
+                on_actionFullScreen_triggered();
+                shortcut->deleteLater();
+            });
             event->accept();
             return;
         }
@@ -793,29 +795,18 @@ void MainWindow::changeEvent(QEvent *event)
         auto *e = static_cast<QWindowStateChangeEvent *>(event);
         if (e->oldState() & Qt::WindowFullScreen)
         {
-            for (auto a : m_visibleToolbars)
+            for (auto a : qAsConst(m_visibleToolbars))
             {
                 a->setVisible(true);
             }
             m_visibleToolbars.clear();
+            menuBar()->show();
+            ui->actionFullScreen->setText(tr("Full Screen"));
             event->accept();
             return;
         }
     }
     event->ignore();
-}
-
-void MainWindow::adjustEditorWidth(int width)
-{
-    int editorWidth = width;
-
-    editorWidth /= 2;
-
-    QList<int> sizes;
-    sizes.append(editorWidth);
-    sizes.append(editorWidth);
-    Q_ASSERT(m_view);
-    m_view->splitter()->setSizes(sizes);
 }
 
 void MainWindow::on_actionDictionary_triggered()
@@ -933,8 +924,6 @@ void MainWindow::on_actionFullScreen_triggered()
             showNormal();
             break;
         }
-        menuBar()->show();
-        ui->actionFullScreen->setText(tr("Full Screen"));
     }
     else
     {
@@ -945,12 +934,5 @@ void MainWindow::on_actionFullScreen_triggered()
         else
             m_lastWindowState = Normal;
         showFullScreen();
-        ui->actionFullScreen->setText(tr("Exit Full Screen"));
-        menuBar()->hide();
-        auto *shortcut = new QShortcut(QKeySequence("F11"), this);
-        connect(shortcut, &QShortcut::activated, [this, shortcut] {
-            on_actionFullScreen_triggered();
-            shortcut->deleteLater();
-        });
     }
 }

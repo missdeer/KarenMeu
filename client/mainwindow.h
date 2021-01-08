@@ -89,7 +89,6 @@ private slots:
     void on_actionFullScreen_triggered();
 
 protected:
-    void resizeEvent(QResizeEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;
 
@@ -141,7 +140,6 @@ private:
     QString strippedName(const QString &fullFileName);
     void    openRecentFile();
     void    openRecentWorkspace();
-    void    adjustEditorWidth(int width);
     void    applyMarkdownEditorTheme();
     void    predrawBackgroundImage();
     void    setupDockPanels();
