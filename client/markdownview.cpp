@@ -540,12 +540,6 @@ void MarkdownView::onAllImagesEmbeded()
     });
 }
 
-void MarkdownView::resizeEvent(QResizeEvent *event)
-{
-    m_splitter->setSizes(QList<int>() << width() / 2 << width() / 2);
-    QWidget::resizeEvent(event);
-}
-
 void MarkdownView::setCustomPreivewThemeEditor(PreviewThemeEditor *customPreivewThemeEditor)
 {
     m_customPreivewThemeEditor = customPreivewThemeEditor;
@@ -636,7 +630,6 @@ void MarkdownView::renderMarkdownToHTML()
     auto match = reMetadataSeparator.match(QString(lines[startLineIndex]));
     if (match.hasMatch())
     {
-        auto beginLine = match.captured(0).toUtf8();
         // find the end separator line
         auto it = std::find_if(lines.begin() + startLineIndex + 1, lines.end(), [&reMetadataSeparator](const auto &l) {
             return reMetadataSeparator.match(QString(l)).hasMatch();

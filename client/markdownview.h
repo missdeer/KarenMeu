@@ -88,8 +88,6 @@ private slots:
     void updatePreviewScrollBar();
 
 protected:
-    void resizeEvent(QResizeEvent *event) override;
-
 private:
     bool                   m_modified {false};
     QSplitter *            m_splitter;
