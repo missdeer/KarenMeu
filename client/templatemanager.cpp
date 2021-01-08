@@ -28,7 +28,7 @@ bool TemplateManager::load()
 bool TemplateManager::save()
 {
     bool res = true;
-    for (auto t : m_templates)
+    for (auto t : qAsConst(m_templates))
         res &= t->save();
     return res;
 }

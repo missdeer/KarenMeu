@@ -44,7 +44,7 @@ void PlantUMLRunner::searchDefaultExecutablePaths()
     paths << QCoreApplication::applicationDirPath() + "/../Resources/";
 #endif
 
-    for (const auto& path : paths)
+    for (const auto &path : qAsConst(paths))
     {
         qDebug() << path;
         if (gSettingsCustomJavaDefaultPath.isEmpty() && QFile::exists(path + "/" + javaExecutable))
