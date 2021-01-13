@@ -45,6 +45,7 @@ void Settings::save()
     settings.setValue("sogouTranslate", m_enableSogouTranslate);
     settings.setValue("deepLTranslate", m_enableDeepLTranslate);
     settings.setValue("translateTimeout", m_translateTimeout);
+    settings.setValue("lastOpenedFilePath", m_lastOpenedFilePath);
     settings.sync();
 }
 
@@ -84,6 +85,7 @@ void Settings::load()
     m_enableSogouTranslate      = settings.value("sogouTranslate", false).toBool();
     m_enableDeepLTranslate      = settings.value("deepLTranslate", true).toBool();
     m_translateTimeout          = settings.value("translateTimeout", 3000).toInt();
+    m_lastOpenedFilePath        = settings.value("lastOpenedFilePath").toString();
 }
 
 const QString &Settings::codeEditorFontFamily() const
@@ -339,6 +341,16 @@ bool Settings::enableDeepLTranslate() const
 void Settings::setEnableDeepLTranslate(bool enableDeepLTranslate)
 {
     m_enableDeepLTranslate = enableDeepLTranslate;
+}
+
+const QString &Settings::getLastOpenedFilePath() const
+{
+    return m_lastOpenedFilePath;
+}
+
+void Settings::setLastOpenedFilePath(const QString &lastOpenedFilePath)
+{
+    m_lastOpenedFilePath = lastOpenedFilePath;
 }
 
 QSettings &Settings::getSettings()

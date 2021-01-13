@@ -92,8 +92,13 @@ int main(int argc, char *argv[])
 
     // get filename from command line arguments
     QString           fileName    = ":/rc/sample.md";
+    auto              lastOpenedFilePath = g_settings->getLastOpenedFilePath();
+    if (QFile::exists(lastOpenedFilePath))
+    {
+        fileName = lastOpenedFilePath;
+    }
     const QStringList cmdLineArgs = parser.positionalArguments();
-    if (!cmdLineArgs.isEmpty())
+    if (!cmdLineArgs.isEmpty() && QFile::exists(cmdLineArgs.at(0)))
     {
         fileName = cmdLineArgs.at(0);
     }

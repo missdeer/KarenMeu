@@ -90,6 +90,9 @@ public:
     bool enableDeepLTranslate() const;
     void setEnableDeepLTranslate(bool enableDeepLTranslate);
 
+    const QString &getLastOpenedFilePath() const;
+    void           setLastOpenedFilePath(const QString &lastOpenedFilePath);
+
 private:
     bool m_enableGoogleTranslate {true};
     bool m_enableBaiduTranslate {false};
@@ -110,6 +113,7 @@ private:
     QString m_codeBlockStyle;
     QString m_markdownEngine;
     QString m_previewMode;
+    QString m_lastOpenedFilePath;
 
     QByteArray m_customPreviewThemeStyle;
 

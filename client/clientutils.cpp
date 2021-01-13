@@ -1,4 +1,6 @@
+#include <QFileInfo>
 #include <QPlainTextEdit>
+#include <QStandardPaths>
 
 #include "clientutils.h"
 
@@ -11,7 +13,7 @@ namespace ClientUtils
         QFont font(widget->font());
         font.setWeight(QFont::Normal);
         font.setItalic(false);
-        font.setPointSizeF(g_settings->codeEditorFontPointSize());
+        font.setPointSize(g_settings->codeEditorFontPointSize());
 
         QStringList fonts;
 #if defined(Q_OS_WIN)
@@ -28,4 +30,17 @@ namespace ClientUtils
         font.setFamilies(fonts);
         widget->setFont(font);
     }
+
+    QString getDefaultFileSaveOpenDirectory()
+    {
+        auto      lastOpenedFilePath = g_settings->getLastOpenedFilePath();
+        QFileInfo fi(lastOpenedFilePath);
+        auto      dir = fi.absolutePath();
+        if (dir.isEmpty())
+        {
+            dir = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+        }
+        return dir;
+    }
+
 } // namespace ClientUtils

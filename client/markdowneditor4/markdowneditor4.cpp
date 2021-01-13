@@ -39,6 +39,9 @@ void MarkdownEditor4::initialize()
 {
     vte::VTextEdit *editor = getTextEdit();
     ClientUtils::InitializeWidgetFont(static_cast<QWidget *>(editor));
+#if defined(Q_OS_MAC)
+    zoom(4);
+#endif
 }
 
 void MarkdownEditor4::setContent(const QString &content)

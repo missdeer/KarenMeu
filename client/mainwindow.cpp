@@ -332,6 +332,7 @@ void MainWindow::updateRecentWorkspaceActions(const QStringList &files)
 void MainWindow::onSetCurrentMarkdownDocument(const QString &fileName)
 {
     m_currentMarkdownDocument = fileName;
+    g_settings->setLastOpenedFilePath(fileName);
     setWindowFilePath(m_currentMarkdownDocument);
 
     updateWindowTitle();
@@ -874,7 +875,8 @@ void MainWindow::on_actionTemplateManager_triggered()
 
 void MainWindow::on_actionOpenWorkspace_triggered()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Workspace"), "", tr("KarenMeu Workspace (*.krm);;All files (*.*)"));
+    QString fileName = QFileDialog::getOpenFileName(
+        this, tr("Open Workspace"), ClientUtils::getDefaultFileSaveOpenDirectory(), tr("KarenMeu Workspace (*.krm);;All files (*.*)"));
     if (fileName.isEmpty())
         return;
 }
@@ -883,7 +885,8 @@ void MainWindow::on_actionSaveWorkspace_triggered() {}
 
 void MainWindow::on_actionSaveWorkspaceAs_triggered()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save Workspace"), "", tr("KarenMeu Workspace (*.krm);;All files (*.*)"));
+    QString fileName = QFileDialog::getSaveFileName(
+        this, tr("Save Workspace"), ClientUtils::getDefaultFileSaveOpenDirectory(), tr("KarenMeu Workspace (*.krm);;All files (*.*)"));
 
     if (fileName.isEmpty())
         return;

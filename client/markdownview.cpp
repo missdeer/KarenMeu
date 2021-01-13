@@ -149,8 +149,10 @@ void MarkdownView::openDocument()
         if (res == QMessageBox::Cancel)
             return;
     }
-    QString fileName =
-        QFileDialog::getOpenFileName(this, tr("Open Markdown file"), "", tr("Markdown files (*.md *.markdown *.mdown);;All files (*.*)"));
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    tr("Open Markdown file"),
+                                                    ClientUtils::getDefaultFileSaveOpenDirectory(),
+                                                    tr("Markdown files (*.md *.markdown *.mdown);;All files (*.*)"));
     if (!QFile::exists(fileName))
     {
         return;
@@ -169,7 +171,8 @@ void MarkdownView::saveDocument()
 
 void MarkdownView::saveAsDocument()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save Markdown file"), "", tr("Markdown file (*.md);;All files (*.*)"));
+    QString fileName = QFileDialog::getSaveFileName(
+        this, tr("Save Markdown file"), ClientUtils::getDefaultFileSaveOpenDirectory(), tr("Markdown file (*.md);;All files (*.*)"));
 
     if (fileName.isEmpty())
         return;
@@ -275,7 +278,8 @@ void MarkdownView::copyAsHTML()
 
 void MarkdownView::exportAsHTML()
 {
-    QString filePath = QFileDialog::getSaveFileName(this, tr("Export As HTML"), "", tr("HTML file (*.html)"));
+    QString filePath =
+        QFileDialog::getSaveFileName(this, tr("Export As HTML"), ClientUtils::getDefaultFileSaveOpenDirectory(), tr("HTML file (*.html)"));
     if (filePath.isEmpty())
         return;
     m_preview->page()->toHtml([filePath, this](const QString &result) mutable {
@@ -295,7 +299,8 @@ void MarkdownView::exportAsHTML()
 
 void MarkdownView::exportAsPDF()
 {
-    QString filePath = QFileDialog::getSaveFileName(this, tr("Export As PDF"), "", tr("Adobe PDF file (*.pdf)"));
+    QString filePath =
+        QFileDialog::getSaveFileName(this, tr("Export As PDF"), ClientUtils::getDefaultFileSaveOpenDirectory(), tr("Adobe PDF file (*.pdf)"));
     if (filePath.isEmpty())
         return;
     m_preview->page()->printToPdf(filePath);
@@ -614,7 +619,6 @@ void MarkdownView::updatePreviewScrollBar()
 
 void MarkdownView::resizeEvent(QResizeEvent *event)
 {
-    qDebug() << m_splitter->sizes() << event->oldSize() << event->size();
     auto sizes = m_splitter->sizes();
     if (!sizes.contains(0))
         m_splitter->setSizes(QList<int>() << width() / 2 << width() / 2);
