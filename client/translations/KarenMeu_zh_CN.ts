@@ -84,6 +84,16 @@
         <source>Replace All</source>
         <translation>全部替换</translation>
     </message>
+    <message>
+        <location filename="../findreplacedialog.cpp" line="40"/>
+        <source>Notice</source>
+        <translation>注意</translation>
+    </message>
+    <message>
+        <location filename="../findreplacedialog.cpp" line="40"/>
+        <source>Reached end of document, search from begin of document now?</source>
+        <translation>到达文档末尾，要从头开始搜索吗？</translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>

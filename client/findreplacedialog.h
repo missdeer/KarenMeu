@@ -9,6 +9,11 @@ namespace Ui {
     class FindReplaceDialog;
 }
 
+namespace vte
+{
+    class VTextEdit;
+} // namespace vte
+
 class FindReplaceDialog : public QDialog
 {
     Q_OBJECT
@@ -28,6 +33,7 @@ private:
     Ui::FindReplaceDialog *ui;
     vte::VTextEditor *     m_editor;
     vte::FindFlags         getFindFlags();
+    void                   promptMoveToBegin(vte::VTextEdit *textedit);
 };
 
 #endif // FINDREPLACEDIALOG_H

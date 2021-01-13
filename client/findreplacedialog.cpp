@@ -1,3 +1,4 @@
+#include <QMessageBox>
 #include <QTextCursor>
 #include <QTextDocument>
 #include <QtCore>
@@ -33,6 +34,19 @@ vte::FindFlags FindReplaceDialog::getFindFlags()
     return flags;
 }
 
+void FindReplaceDialog::promptMoveToBegin(vte::VTextEdit *textedit)
+{
+    int res = QMessageBox::question(
+        this, tr("Notice"), tr("Reached end of document, search from begin of document now?"), QMessageBox::Yes | QMessageBox::No);
+    if (res == QMessageBox::Yes)
+    {
+        Q_ASSERT(textedit);
+        auto textCursor = textedit->textCursor();
+        textCursor.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+        textedit->setTextCursor(textCursor);
+    }
+}
+
 void FindReplaceDialog::on_btnFind_clicked()
 {
     if (ui->edtFindKeyword->text().isEmpty())
@@ -45,6 +59,10 @@ void FindReplaceDialog::on_btnFind_clicked()
     auto textCursor = textedit->textCursor();
     auto fr         = m_editor->findText(ui->edtFindKeyword->text(), flags, textCursor.position());
     qDebug() << flags << textCursor.position() << fr.m_currentMatchIndex << fr.m_totalMatches << fr.m_wrapped;
+    if (fr.m_currentMatchIndex == 0 && fr.m_wrapped)
+    {
+        promptMoveToBegin(textedit);
+    }
 }
 
 void FindReplaceDialog::on_btnReplace_clicked()
@@ -58,6 +76,10 @@ void FindReplaceDialog::on_btnReplace_clicked()
     auto textCursor = textedit->textCursor();
     auto fr         = m_editor->replaceText(ui->edtFindKeyword->text(), flags, ui->edtReplaceText->text(), textCursor.position());
     qDebug() << flags << textCursor.position() << fr.m_currentMatchIndex << fr.m_totalMatches << fr.m_wrapped;
+    if (fr.m_currentMatchIndex == 0 && fr.m_wrapped)
+    {
+        promptMoveToBegin(textedit);
+    }
 }
 
 void FindReplaceDialog::on_btnReplaceAll_clicked()
@@ -71,4 +93,8 @@ void FindReplaceDialog::on_btnReplaceAll_clicked()
     auto textCursor = textedit->textCursor();
     auto fr         = m_editor->replaceAll(ui->edtFindKeyword->text(), flags, ui->edtReplaceText->text(), textCursor.position());
     qDebug() << flags << textCursor.position() << fr.m_currentMatchIndex << fr.m_totalMatches << fr.m_wrapped;
+    if (fr.m_currentMatchIndex == 0 && fr.m_wrapped)
+    {
+        promptMoveToBegin(textedit);
+    }
 }
