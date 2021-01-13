@@ -88,6 +88,8 @@ private slots:
 
     void on_actionFullScreen_triggered();
 
+    void on_actionFindReplace_triggered();
+
 protected:
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;

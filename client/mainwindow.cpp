@@ -30,6 +30,7 @@
 #include "clientutils.h"
 #include "custompreviewthemeeditwidget.h"
 #include "filecache.h"
+#include "findreplacedialog.h"
 #include "markdowneditor4.h"
 #include "markdownview.h"
 #include "preferencedialog.h"
@@ -935,4 +936,12 @@ void MainWindow::on_actionFullScreen_triggered()
             m_lastWindowState = Normal;
         showFullScreen();
     }
+}
+
+void MainWindow::on_actionFindReplace_triggered()
+{
+    Q_ASSERT(m_view);
+    auto                      editor = m_view->editor();
+    static FindReplaceDialog *dlg    = new FindReplaceDialog(editor, this);
+    dlg->show();
 }

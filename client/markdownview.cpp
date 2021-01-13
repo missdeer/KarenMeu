@@ -17,7 +17,6 @@
 #include "markdownview.h"
 
 #include <vtextedit/vtextedit.h>
-#include <vtextedit/vtexteditor.h>
 
 #include "clientutils.h"
 #include "filecache.h"

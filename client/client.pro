@@ -49,7 +49,8 @@ SOURCES += \
         $$PWD/filecache.cpp \
         $$PWD/networkreplyhelper.cpp \
         $$PWD/plantumlrunner.cpp \
-        $$PWD/plantumlurlcodec.cpp
+        $$PWD/plantumlurlcodec.cpp \
+        $$PWD/findreplacedialog.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -72,12 +73,14 @@ HEADERS += \
         $$PWD/filecache.h \
         $$PWD/networkreplyhelper.h \
         $$PWD/plantumlrunner.h \
-        $$PWD/plantumlurlcodec.h
+        $$PWD/plantumlurlcodec.h \
+        $$PWD/findreplacedialog.h
 
 FORMS += \
         $$PWD/mainwindow.ui \
         $$PWD/preferencedialog.ui \
-        $$PWD/templatemanagerdialog.ui
+        $$PWD/templatemanagerdialog.ui \
+        $$PWD/findreplacedialog.ui
 
 INCLUDEPATH += $$PWD $$PWD/markdowneditor4  $$PWD/../utils
 LIBS += -L$$PWD/../utils
