@@ -3,6 +3,7 @@
 #include <QCryptographicHash>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QResizeEvent>
 #include <QScrollBar>
 #include <QSplitter>
 #include <QTimer>
@@ -609,6 +610,16 @@ void MarkdownView::updatePreviewScrollBar()
     {
         page->onEditorScrollMoved(scrollBar->value(), scrollBar->maximum());
     }
+}
+
+void MarkdownView::resizeEvent(QResizeEvent *event)
+{
+    qDebug() << m_splitter->sizes() << event->oldSize() << event->size();
+    auto sizes = m_splitter->sizes();
+    if (!sizes.contains(0))
+        m_splitter->setSizes(QList<int>() << width() / 2 << width() / 2);
+
+    QWidget::resizeEvent(event);
 }
 
 void MarkdownView::renderMarkdownToHTML()

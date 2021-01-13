@@ -48,39 +48,39 @@
         <translation>查找/替换</translation>
     </message>
     <message>
-        <location filename="../findreplacedialog.ui" line="24"/>
-        <location filename="../findreplacedialog.ui" line="87"/>
+        <location filename="../findreplacedialog.ui" line="27"/>
+        <location filename="../findreplacedialog.ui" line="76"/>
         <source>Find</source>
         <translation>查找</translation>
     </message>
     <message>
-        <location filename="../findreplacedialog.ui" line="34"/>
-        <location filename="../findreplacedialog.ui" line="94"/>
+        <location filename="../findreplacedialog.ui" line="37"/>
+        <location filename="../findreplacedialog.ui" line="83"/>
         <source>Replace</source>
         <translation>替换</translation>
     </message>
     <message>
-        <location filename="../findreplacedialog.ui" line="44"/>
+        <location filename="../findreplacedialog.ui" line="112"/>
         <source>Backward</source>
         <translation>向后搜索</translation>
     </message>
     <message>
-        <location filename="../findreplacedialog.ui" line="51"/>
+        <location filename="../findreplacedialog.ui" line="47"/>
         <source>Whole Word Matches</source>
         <translation>全字匹配</translation>
     </message>
     <message>
-        <location filename="../findreplacedialog.ui" line="58"/>
+        <location filename="../findreplacedialog.ui" line="119"/>
         <source>Case Sensitive</source>
         <translation>大小写敏感</translation>
     </message>
     <message>
-        <location filename="../findreplacedialog.ui" line="65"/>
+        <location filename="../findreplacedialog.ui" line="54"/>
         <source>Regular Expression</source>
         <translation>使用正则表达式</translation>
     </message>
     <message>
-        <location filename="../findreplacedialog.ui" line="101"/>
+        <location filename="../findreplacedialog.ui" line="90"/>
         <source>Replace All</source>
         <translation>全部替换</translation>
     </message>
@@ -1040,116 +1040,116 @@
 <context>
     <name>MarkdownView</name>
     <message>
-        <location filename="../markdownview.cpp" line="124"/>
-        <location filename="../markdownview.cpp" line="142"/>
-        <location filename="../markdownview.cpp" line="187"/>
+        <location filename="../markdownview.cpp" line="125"/>
+        <location filename="../markdownview.cpp" line="143"/>
+        <location filename="../markdownview.cpp" line="188"/>
         <source>Confirm</source>
         <translation>确认</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="125"/>
-        <location filename="../markdownview.cpp" line="143"/>
-        <location filename="../markdownview.cpp" line="188"/>
+        <location filename="../markdownview.cpp" line="126"/>
+        <location filename="../markdownview.cpp" line="144"/>
+        <location filename="../markdownview.cpp" line="189"/>
         <source>Modified document has not been saved, do you want to save it?</source>
         <translation>文档被修改且尚未保存，要保存吗？</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="152"/>
+        <location filename="../markdownview.cpp" line="153"/>
         <source>Open Markdown file</source>
         <translation>打开Markdown文档</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="152"/>
+        <location filename="../markdownview.cpp" line="153"/>
         <source>Markdown files (*.md *.markdown *.mdown);;All files (*.*)</source>
         <translation>Markdown文档 (*.md *.markdown *.mdown);;所有类型 (*.*)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="171"/>
+        <location filename="../markdownview.cpp" line="172"/>
         <source>Save Markdown file</source>
         <translation>保存Markdown文档</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="171"/>
+        <location filename="../markdownview.cpp" line="172"/>
         <source>Markdown file (*.md);;All files (*.*)</source>
         <translation>Markdown文档 (*.md);;所有类型 (*.*)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="202"/>
+        <location filename="../markdownview.cpp" line="203"/>
         <source>Untitled%1</source>
         <translation>未命名%1</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="538"/>
+        <location filename="../markdownview.cpp" line="539"/>
         <source>HTML content has been copied into clipboard.</source>
         <translation>HTML内容已复制到剪切板。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="538"/>
+        <location filename="../markdownview.cpp" line="539"/>
         <source>HTML copied</source>
         <translation>HTML已复制</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="277"/>
+        <location filename="../markdownview.cpp" line="278"/>
         <source>Export As HTML</source>
         <translation>导出为HTML</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="277"/>
+        <location filename="../markdownview.cpp" line="278"/>
         <source>HTML file (*.html)</source>
         <translation>HTML文档 (*.html)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="288"/>
+        <location filename="../markdownview.cpp" line="289"/>
         <source>HTML exported</source>
         <translation>HTML已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="289"/>
+        <location filename="../markdownview.cpp" line="290"/>
         <source>HTML file has been exported to %1 successfully.</source>
         <translation>HTML文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="297"/>
+        <location filename="../markdownview.cpp" line="298"/>
         <source>Export As PDF</source>
         <translation>导出为PDF</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="297"/>
+        <location filename="../markdownview.cpp" line="298"/>
         <source>Adobe PDF file (*.pdf)</source>
         <translation>Adobe PDF文档 (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="322"/>
+        <location filename="../markdownview.cpp" line="323"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="343"/>
+        <location filename="../markdownview.cpp" line="344"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="492"/>
+        <location filename="../markdownview.cpp" line="493"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="492"/>
+        <location filename="../markdownview.cpp" line="493"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="495"/>
+        <location filename="../markdownview.cpp" line="496"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="495"/>
+        <location filename="../markdownview.cpp" line="496"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="740"/>
+        <location filename="../markdownview.cpp" line="751"/>
         <source>Metadata</source>
         <translation>元数据</translation>
     </message>
