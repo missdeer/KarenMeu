@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Template Manager</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="karenmeu.qrc">
+    <normaloff>:/rc/images/templateManager.png</normaloff>:/rc/images/templateManager.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0,0,1,0">
    <item>
     <widget class="QLabel" name="label">

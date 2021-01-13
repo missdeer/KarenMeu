@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Preference</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="karenmeu.qrc">
+    <normaloff>:/rc/images/preference.png</normaloff>:/rc/images/preference.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QTabWidget" name="tabWidget">

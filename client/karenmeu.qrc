@@ -397,5 +397,6 @@
         <file>rc/images/templateManager.png</file>
         <file>rc/images/remove.png</file>
         <file>rc/images/animatedsprite-loading.gif</file>
+        <file>rc/images/findreplace.png</file>
     </qresource>
 </RCC>

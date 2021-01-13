@@ -1206,6 +1206,10 @@
    </property>
   </action>
   <action name="actionFindReplace">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/findreplace.png</normaloff>:/rc/images/findreplace.png</iconset>
+   </property>
    <property name="text">
     <string>Find/Replace...</string>
    </property>
