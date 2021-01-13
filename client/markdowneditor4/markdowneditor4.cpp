@@ -147,7 +147,7 @@ void MarkdownEditor4::formatInlineCode()
 void MarkdownEditor4::formatCodeBlock()
 {
     QTextCursor c = textCursor();
-
+    c.beginEditBlock();
     if (!c.hasSelection())
     {
         // insert multi-line code block if cursor is in an empty line
@@ -162,7 +162,6 @@ void MarkdownEditor4::formatCodeBlock()
         }
 
         c.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor);
-        setTextCursor(c);
     }
     else
     {
@@ -187,11 +186,14 @@ void MarkdownEditor4::formatCodeBlock()
             c.insertText("\n");
         }
     }
+    c.endEditBlock();
+    setTextCursor(c);
 }
 
 void MarkdownEditor4::formatComment()
 {
     QTextCursor cursor = textCursor();
+    cursor.beginEditBlock();
     if (!cursor.hasSelection())
     {
         // insert <!--|-->
@@ -203,12 +205,14 @@ void MarkdownEditor4::formatComment()
         cursor.insertText("\n<!--\n" + text + "\n-->\n");
     }
     cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::MoveAnchor, 5);
+    cursor.endEditBlock();
     setTextCursor(cursor);
 }
 
 void MarkdownEditor4::formatOrderedList()
 {
     QTextCursor c = textCursor();
+    c.beginEditBlock();
     if (!c.hasSelection())
     {
         c.insertText("1. ");
@@ -230,7 +234,11 @@ void MarkdownEditor4::formatOrderedList()
             c.movePosition(QTextCursor::StartOfLine);
             c.movePosition(QTextCursor::Down);
         }
+        auto curPos = c.position();
+        c.setPosition(start, QTextCursor::MoveAnchor);
+        c.setPosition(curPos - 1, QTextCursor::KeepAnchor);
     }
+    c.endEditBlock();
     setTextCursor(c);
 }
 
@@ -247,7 +255,7 @@ void MarkdownEditor4::formatBlockquote()
 void MarkdownEditor4::formatHyperlink()
 {
     QTextCursor c = textCursor();
-
+    c.beginEditBlock();
     if (!c.hasSelection())
     {
         c.insertText("[]()");
@@ -267,13 +275,14 @@ void MarkdownEditor4::formatHyperlink()
             c.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, 1);
         }
     }
+    c.endEditBlock();
     setTextCursor(c);
 }
 
 void MarkdownEditor4::formatImage()
 {
     QTextCursor c = textCursor();
-
+    c.beginEditBlock();
     if (!c.hasSelection())
     {
         c.insertText("![]()");
@@ -293,6 +302,7 @@ void MarkdownEditor4::formatImage()
             c.movePosition(QTextCursor::Left, QTextCursor::MoveAnchor, 1);
         }
     }
+    c.endEditBlock();
     setTextCursor(c);
 }
 
@@ -350,6 +360,7 @@ void MarkdownEditor4::formatShiftRight()
 void MarkdownEditor4::formatShiftLeft()
 {
     QTextCursor c = textCursor();
+    c.beginEditBlock();
     if (!c.hasSelection())
     {
         c.movePosition(QTextCursor::StartOfLine);
@@ -382,13 +393,19 @@ void MarkdownEditor4::formatShiftLeft()
             c.movePosition(QTextCursor::StartOfLine);
             c.movePosition(QTextCursor::Down);
         }
+
+        auto curPos = c.position();
+        c.setPosition(start, QTextCursor::MoveAnchor);
+        c.setPosition(curPos - 1, QTextCursor::KeepAnchor);
     }
+    c.endEditBlock();
     setTextCursor(c);
 }
 
 bool MarkdownEditor4::undoFormatting(const QString &formatter)
 {
     QTextCursor c               = textCursor();
+    c.beginEditBlock();
     QString     selectedText    = c.selectedText();
     int         formatterLength = formatter.length();
     int         selectionStart  = c.selectionStart();
@@ -402,16 +419,18 @@ bool MarkdownEditor4::undoFormatting(const QString &formatter)
     if (selectedTextWithFormatter.startsWith(formatter) && selectedTextWithFormatter.endsWith(formatter))
     {
         c.insertText(selectedText);
+        c.endEditBlock();
         return true;
     }
 
+    c.endEditBlock();
     return false;
 }
 
 void MarkdownEditor4::applyFormatter(const QString &formatter)
 {
     QTextCursor c = textCursor();
-
+    c.beginEditBlock();
     if (!c.hasSelection())
     {
         c.insertText(formatter.repeated(2));
@@ -422,6 +441,7 @@ void MarkdownEditor4::applyFormatter(const QString &formatter)
         // first try to undo an existing formatting
         if (undoFormatting(formatter))
         {
+            c.endEditBlock();
             return;
         }
         QString                 selectedText = c.selectedText();
@@ -431,6 +451,7 @@ void MarkdownEditor4::applyFormatter(const QString &formatter)
             c.insertText(match.captured(1) + formatter + match.captured(2) + formatter + match.captured(3));
         }
     }
+    c.endEditBlock();
     setTextCursor(c);
 }
 
@@ -479,6 +500,7 @@ void MarkdownEditor4::replaceCurrentLineText(const QString &text)
 void MarkdownEditor4::formatHeading(const QString &heading)
 {
     QTextCursor c = textCursor();
+    c.beginEditBlock();
     if (!c.hasSelection())
     {
         c.movePosition(QTextCursor::StartOfLine);
@@ -498,11 +520,16 @@ void MarkdownEditor4::formatHeading(const QString &heading)
             c.movePosition(QTextCursor::EndOfLine);
             c.movePosition(QTextCursor::StartOfLine, QTextCursor::KeepAnchor);
             QString text = c.selectedText();
-            c.insertText(heading + text);
+            if (!text.isEmpty())
+                c.insertText(heading + text);
             c.movePosition(QTextCursor::StartOfLine);
             c.movePosition(QTextCursor::Down);
         }
+        auto curPos = c.position();
+        c.setPosition(start, QTextCursor::MoveAnchor);
+        c.setPosition(curPos - 1, QTextCursor::KeepAnchor);
     }
+    c.endEditBlock();
     setTextCursor(c);
 }
 
