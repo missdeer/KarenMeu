@@ -1444,17 +1444,17 @@
         <translation>云服务</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="435"/>
+        <location filename="../preferencedialog.ui" line="438"/>
         <source>Server:</source>
         <translation>服务器：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="445"/>
+        <location filename="../preferencedialog.ui" line="448"/>
         <source>Username:</source>
         <translation>用户名：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="455"/>
+        <location filename="../preferencedialog.ui" line="458"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>
