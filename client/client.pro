@@ -74,7 +74,8 @@ HEADERS += \
         $$PWD/networkreplyhelper.h \
         $$PWD/plantumlrunner.h \
         $$PWD/plantumlurlcodec.h \
-        $$PWD/findreplacedialog.h
+        $$PWD/findreplacedialog.h \
+        $$PWD/xmlSettings.h
 
 FORMS += \
         $$PWD/mainwindow.ui \
