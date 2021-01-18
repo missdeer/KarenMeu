@@ -19,10 +19,12 @@ public:
     void            clear();
     void            translate(const QString &text);
     void            setGetSelectionCallback(std::function<QString()> f);
+    QString         content();
+public slots:
+    void onTranslated(QString res);
 private slots:
     void onTranslate();
     void onRefresh();
-    void onTranslated(QString res);
 signals:
 
 private:

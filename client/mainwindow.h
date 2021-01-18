@@ -152,6 +152,7 @@ private:
     void    newDocumentWithContent(const QString &content);
     void    openMarkdownDocument(const QString &fileName);
     void    openWorkspace(const QString &fileName);
+    void    saveWorkspace(const QString &fileName);
     void    updateWindowTitle();
 };
 

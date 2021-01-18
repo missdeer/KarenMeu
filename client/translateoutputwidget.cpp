@@ -50,6 +50,14 @@ void TranslateOutputWidget::setGetSelectionCallback(std::function<QString()> f)
     m_getSelection = f;
 }
 
+QString TranslateOutputWidget::content()
+{
+    Q_ASSERT(m_editor);
+    if (!m_editor->toPlainText().isEmpty())
+        return m_editor->document()->toHtml();
+    return "";
+}
+
 void TranslateOutputWidget::onTranslate()
 {
     // get selected text from markdownview

@@ -42,6 +42,7 @@
 #include "translateoutputwidget.h"
 #include "ui_mainwindow.h"
 #include "utils.h"
+#include "xmlSettings.h"
 #include "youdao.h"
 
 using LabelActionMap = QMap<QString, QAction *>;
@@ -169,7 +170,119 @@ void MainWindow::openMarkdownDocument(const QString &fileName)
     m_view->openFromFile(fileName);
 }
 
-void MainWindow::openWorkspace(const QString &fileName) {}
+void MainWindow::openWorkspace(const QString &fileName)
+{
+    Q_ASSERT(m_view);
+    auto editor = m_view->editor();
+    Q_ASSERT(editor);
+    QSettings settings(fileName, xmlFormat);
+    auto      content = settings.value("content").toString();
+    newDocumentWithContent(content);
+    auto mainWindowState = settings.value("windowState").toByteArray();
+    if (!mainWindowState.isEmpty())
+        restoreState(mainWindowState);
+    auto mainWindowGeometry = settings.value("windowGeometry").toByteArray();
+    if (!mainWindowGeometry.isEmpty())
+        restoreGeometry(mainWindowGeometry);
+
+    auto html = settings.value("youdaoDictionaryResult").toString();
+    onYoudaoDictResult(html);
+
+    html = settings.value("googleTranslateResult").toString();
+    if (!html.isEmpty())
+    {
+        Q_ASSERT(m_googleTranslateEditor);
+        m_googleTranslateEditor->onTranslated(html);
+    }
+    html = settings.value("baiduTranslateResult").toString();
+    if (!html.isEmpty())
+    {
+        Q_ASSERT(m_baiduTranslateEditor);
+        m_baiduTranslateEditor->onTranslated(html);
+    }
+    html = settings.value("youdaoTranslateResult").toString();
+    if (!html.isEmpty())
+    {
+        Q_ASSERT(m_youdaoTranslateEditor);
+        m_youdaoTranslateEditor->onTranslated(html);
+    }
+    html = settings.value("sogouTranslateResult").toString();
+    if (!html.isEmpty())
+    {
+        Q_ASSERT(m_sogouTranslateEditor);
+        m_sogouTranslateEditor->onTranslated(html);
+    }
+    html = settings.value("deepLTranslateResult").toString();
+    if (!html.isEmpty())
+    {
+        Q_ASSERT(m_deepLTranslateEditor);
+        m_deepLTranslateEditor->onTranslated(html);
+    }
+    m_currentWorkspace = fileName;
+}
+
+void MainWindow::saveWorkspace(const QString &fileName)
+{
+    Q_ASSERT(m_view);
+    auto editor = m_view->editor();
+    Q_ASSERT(editor);
+    QSettings settings(fileName, xmlFormat);
+    settings.setValue("content", m_view->fullText());
+    auto mainWindowState = saveState();
+    settings.setValue("windowState", mainWindowState);
+    auto mainWindowGeometry = saveGeometry();
+    settings.setValue("windowGeometry", mainWindowGeometry);
+
+    Q_ASSERT(m_youdaoDictionaryEditor);
+    if (!m_youdaoDictionaryEditor->toPlainText().isEmpty())
+    {
+        auto html = m_youdaoDictionaryEditor->document()->toHtml();
+        settings.setValue("youdaoDictionaryResult", html);
+    }
+
+    Q_ASSERT(m_googleTranslateEditor);
+    auto html = m_googleTranslateEditor->content();
+    if (!html.isEmpty())
+        settings.setValue("googleTranslateResult", html);
+
+    Q_ASSERT(m_baiduTranslateEditor);
+    html = m_baiduTranslateEditor->content();
+    if (!html.isEmpty())
+        settings.setValue("baiduTranslateResult", html);
+
+    Q_ASSERT(m_youdaoTranslateEditor);
+    html = m_youdaoTranslateEditor->content();
+    if (!html.isEmpty())
+        settings.setValue("youdaoTranslateResult", html);
+
+    Q_ASSERT(m_sogouTranslateEditor);
+    html = m_sogouTranslateEditor->content();
+    if (!html.isEmpty())
+        settings.setValue("sogouTranslateResult", html);
+
+    Q_ASSERT(m_deepLTranslateEditor);
+    html = m_deepLTranslateEditor->content();
+    if (!html.isEmpty())
+        settings.setValue("deepLTranslateResult", html);
+
+    settings.setValue("googleTranslate", g_settings->enableGoogleTranslate());
+    settings.setValue("baiduTranslate", g_settings->enableBaiduTranslate());
+    settings.setValue("youdaoTranslate", g_settings->enableYoudaoTranslate());
+    settings.setValue("sogouTranslate", g_settings->enableSogouTranslate());
+    settings.setValue("deepLTranslate", g_settings->enableDeepLTranslate());
+    settings.setValue("previewTheme", g_settings->previewTheme());
+    settings.setValue("codeBlockStyle", g_settings->codeBlockStyle());
+    settings.setValue("markdownEngine", g_settings->markdownEngine());
+    settings.setValue("enableLineNumbers", g_settings->enableLineNumbers());
+    settings.setValue("macTerminalStyleCodeBlock", g_settings->macTerminalStyleCodeBlock());
+    settings.setValue("previewMode", g_settings->previewMode());
+    settings.setValue("customPreviewThemeStyle", g_settings->customPreviewThemeStyle());
+    settings.setValue("codeEditorFontFamily", g_settings->codeEditorFontFamily());
+    settings.setValue("codeEditorFontPointSize", g_settings->codeEditorFontPointSize());
+
+    settings.sync();
+    m_currentWorkspace = fileName;
+}
 
 void MainWindow::updateWindowTitle()
 {
@@ -879,9 +992,21 @@ void MainWindow::on_actionOpenWorkspace_triggered()
         this, tr("Open Workspace"), ClientUtils::getDefaultFileSaveOpenDirectory(), tr("KarenMeu Workspace (*.krm);;All files (*.*)"));
     if (fileName.isEmpty())
         return;
+
+    QSettings settings(fileName, QSettings::IniFormat);
 }
 
-void MainWindow::on_actionSaveWorkspace_triggered() {}
+void MainWindow::on_actionSaveWorkspace_triggered()
+{
+    if (!QFile::exists(m_currentWorkspace))
+    {
+        on_actionSaveWorkspaceAs_triggered();
+    }
+    else
+    {
+        saveWorkspace(m_currentWorkspace);
+    }
+}
 
 void MainWindow::on_actionSaveWorkspaceAs_triggered()
 {
@@ -890,6 +1015,8 @@ void MainWindow::on_actionSaveWorkspaceAs_triggered()
 
     if (fileName.isEmpty())
         return;
+
+    saveWorkspace(fileName);
 }
 
 void MainWindow::on_actionClearRecentWorkspaceList_triggered()
