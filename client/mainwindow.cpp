@@ -218,7 +218,7 @@ void MainWindow::openWorkspace(const QString &fileName)
         Q_ASSERT(m_deepLTranslateEditor);
         m_deepLTranslateEditor->onTranslated(html);
     }
-    m_currentWorkspace = fileName;
+    onSetCurrentWorkspace(fileName);
 }
 
 void MainWindow::saveWorkspace(const QString &fileName)
@@ -281,7 +281,7 @@ void MainWindow::saveWorkspace(const QString &fileName)
     settings.setValue("codeEditorFontPointSize", g_settings->codeEditorFontPointSize());
 
     settings.sync();
-    m_currentWorkspace = fileName;
+    onSetCurrentWorkspace(fileName);
 }
 
 void MainWindow::updateWindowTitle()
@@ -289,7 +289,9 @@ void MainWindow::updateWindowTitle()
     Q_ASSERT(m_view);
     auto editor = m_view->editor();
     Q_ASSERT(editor);
-    setWindowTitle(QString("%1%2 - KarenMeu").arg(QFileInfo(m_currentMarkdownDocument).fileName(), (editor->isModified() ? "*" : "")));
+    setWindowTitle(QString("%1%2 - KarenMeu")
+                       .arg(QFileInfo(m_currentMarkdownDocument.isEmpty() ? m_currentWorkspace : m_currentMarkdownDocument).fileName(),
+                            (editor->isModified() ? "*" : "")));
 }
 
 void MainWindow::on_actionExit_triggered()
@@ -445,6 +447,7 @@ void MainWindow::updateRecentWorkspaceActions(const QStringList &files)
 void MainWindow::onSetCurrentMarkdownDocument(const QString &fileName)
 {
     m_currentMarkdownDocument = fileName;
+    m_currentMarkdownDocument.clear();
     g_settings->setLastOpenedFilePath(fileName);
     setWindowFilePath(m_currentMarkdownDocument);
 
@@ -466,6 +469,33 @@ void MainWindow::onSetCurrentMarkdownDocument(const QString &fileName)
     settings.sync();
 
     updateRecentFileActions(files);
+}
+
+void MainWindow::onSetCurrentWorkspace(const QString &fileName)
+{
+    m_currentWorkspace = fileName;
+    m_currentMarkdownDocument.clear();
+    g_settings->setLastOpenedFilePath(fileName);
+    setWindowFilePath(m_currentWorkspace);
+
+    updateWindowTitle();
+    if (!QFile::exists(fileName))
+    {
+        return;
+    }
+    auto &settings = g_settings->getSettings();
+    settings.beginGroup("workspace");
+    QStringList files = settings.value("recentWorkspaceList").toStringList();
+    files.removeAll(fileName);
+    files.prepend(fileName);
+    while (files.size() > MaxRecentFiles)
+        files.removeLast();
+
+    settings.setValue("recentWorkspaceList", files);
+    settings.endGroup();
+    settings.sync();
+
+    updateRecentWorkspaceActions(files);
 }
 
 void MainWindow::onFileSystemItemActivated(const QModelIndex &index)
