@@ -447,7 +447,7 @@ void MainWindow::updateRecentWorkspaceActions(const QStringList &files)
 void MainWindow::onSetCurrentMarkdownDocument(const QString &fileName)
 {
     m_currentMarkdownDocument = fileName;
-    m_currentMarkdownDocument.clear();
+    m_currentWorkspace.clear();
     g_settings->setLastOpenedFilePath(fileName);
     setWindowFilePath(m_currentMarkdownDocument);
 
