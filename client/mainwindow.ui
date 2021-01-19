@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>1283</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -63,17 +63,42 @@
      <addaction name="actionClearRecentWorkspaceList"/>
      <addaction name="separator"/>
     </widget>
-    <addaction name="actionNew"/>
+    <widget class="QMenu" name="menuNew">
+     <property name="title">
+      <string>New</string>
+     </property>
+     <addaction name="actionNewMarkdown"/>
+    </widget>
+    <widget class="QMenu" name="menuOpen">
+     <property name="title">
+      <string>Open</string>
+     </property>
+     <addaction name="actionOpenMarkdown"/>
+     <addaction name="actionOpenWorkspace"/>
+    </widget>
+    <widget class="QMenu" name="menuSave">
+     <property name="title">
+      <string>Save</string>
+     </property>
+     <addaction name="actionSaveMarkdown"/>
+     <addaction name="actionSaveWorkspace"/>
+    </widget>
+    <widget class="QMenu" name="menuSave_As">
+     <property name="title">
+      <string>Save As</string>
+     </property>
+     <addaction name="actionSaveMarkdownAs"/>
+     <addaction name="actionSaveWorkspaceAs"/>
+    </widget>
+    <addaction name="menuNew"/>
+    <addaction name="menuOpen"/>
+    <addaction name="menuSave"/>
+    <addaction name="menuSave_As"/>
     <addaction name="menuNewFromTemplate"/>
-    <addaction name="actionOpen"/>
-    <addaction name="actionSave"/>
-    <addaction name="actionSaveAs"/>
-    <addaction name="actionOpenWorkspace"/>
-    <addaction name="actionSaveWorkspace"/>
-    <addaction name="actionSaveWorkspaceAs"/>
+    <addaction name="menuExport"/>
+    <addaction name="separator"/>
     <addaction name="menuRecentFiles"/>
     <addaction name="menuRecentWorkspaces"/>
-    <addaction name="menuExport"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -182,9 +207,9 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionNew"/>
-   <addaction name="actionOpen"/>
-   <addaction name="actionSave"/>
+   <addaction name="actionNewMarkdown"/>
+   <addaction name="actionOpenMarkdown"/>
+   <addaction name="actionSaveMarkdown"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="editToolbar">
@@ -260,7 +285,7 @@
     <bool>false</bool>
    </attribute>
   </widget>
-  <action name="actionNew">
+  <action name="actionNewMarkdown">
    <property name="icon">
     <iconset resource="karenmeu.qrc">
      <normaloff>:/rc/images/new.png</normaloff>:/rc/images/new.png</iconset>
@@ -272,7 +297,7 @@
     <string>Ctrl+N</string>
    </property>
   </action>
-  <action name="actionOpen">
+  <action name="actionOpenMarkdown">
    <property name="icon">
     <iconset resource="karenmeu.qrc">
      <normaloff>:/rc/images/open.png</normaloff>:/rc/images/open.png</iconset>
@@ -284,7 +309,7 @@
     <string>Ctrl+O</string>
    </property>
   </action>
-  <action name="actionSave">
+  <action name="actionSaveMarkdown">
    <property name="icon">
     <iconset resource="karenmeu.qrc">
      <normaloff>:/rc/images/save.png</normaloff>:/rc/images/save.png</iconset>
@@ -296,7 +321,7 @@
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="actionSaveAs">
+  <action name="actionSaveMarkdownAs">
    <property name="icon">
     <iconset resource="karenmeu.qrc">
      <normaloff>:/rc/images/save_as.png</normaloff>:/rc/images/save_as.png</iconset>
@@ -355,6 +380,10 @@
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/KarenMeu.png</normaloff>:/KarenMeu.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;About...</string>
    </property>

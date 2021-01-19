@@ -59,10 +59,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     statusBar()->hide();
     setCentralWidget(m_view);
-    connect(ui->actionNew, &QAction::triggered, m_view, &MarkdownView::newDocument);
-    connect(ui->actionOpen, &QAction::triggered, m_view, &MarkdownView::openDocument);
-    connect(ui->actionSave, &QAction::triggered, m_view, &MarkdownView::saveDocument);
-    connect(ui->actionSaveAs, &QAction::triggered, m_view, &MarkdownView::saveAsDocument);
+    connect(ui->actionNewMarkdown, &QAction::triggered, m_view, &MarkdownView::newDocument);
+    connect(ui->actionOpenMarkdown, &QAction::triggered, m_view, &MarkdownView::openDocument);
+    connect(ui->actionSaveMarkdown, &QAction::triggered, m_view, &MarkdownView::saveDocument);
+    connect(ui->actionSaveMarkdownAs, &QAction::triggered, m_view, &MarkdownView::saveAsDocument);
     connect(ui->actionCut, &QAction::triggered, m_view, &MarkdownView::cut);
     connect(ui->actionCopy, &QAction::triggered, m_view, &MarkdownView::copy);
     connect(ui->actionPaste, &QAction::triggered, m_view, &MarkdownView::paste);
