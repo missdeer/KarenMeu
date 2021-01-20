@@ -132,8 +132,7 @@ private:
     QAction *                     recentFileActs[MaxRecentFiles];
     QAction *                     recentWorkspaceActs[MaxRecentFiles];
     QList<QAction *>              m_newFromTemplateActions;
-    QString                       m_currentMarkdownDocument;
-    QString                       m_currentWorkspace;
+    QString                       m_currentOpenedFile;
     QNetworkAccessManager         m_nam;
     int                           m_lastWindowState;
 

@@ -289,9 +289,10 @@ void MainWindow::updateWindowTitle()
     Q_ASSERT(m_view);
     auto editor = m_view->editor();
     Q_ASSERT(editor);
-    setWindowTitle(QString("%1%2 - KarenMeu")
-                       .arg(QFileInfo(m_currentMarkdownDocument.isEmpty() ? m_currentWorkspace : m_currentMarkdownDocument).fileName(),
-                            (editor->isModified() ? "*" : "")));
+    if (!m_currentOpenedFile.isEmpty())
+        setWindowTitle(QString("%1%2 - KarenMeu").arg(QFileInfo(m_currentOpenedFile).fileName(), (editor->isModified() ? "*" : "")));
+    else
+        setWindowTitle("KarenMeu");
 }
 
 void MainWindow::on_actionExit_triggered()
@@ -446,10 +447,9 @@ void MainWindow::updateRecentWorkspaceActions(const QStringList &files)
 
 void MainWindow::onSetCurrentMarkdownDocument(const QString &fileName)
 {
-    m_currentMarkdownDocument = fileName;
-    m_currentWorkspace.clear();
+    m_currentOpenedFile = fileName;
     g_settings->setLastOpenedFilePath(fileName);
-    setWindowFilePath(m_currentMarkdownDocument);
+    setWindowFilePath(m_currentOpenedFile);
 
     updateWindowTitle();
     if (!QFile::exists(fileName))
@@ -473,10 +473,9 @@ void MainWindow::onSetCurrentMarkdownDocument(const QString &fileName)
 
 void MainWindow::onSetCurrentWorkspace(const QString &fileName)
 {
-    m_currentWorkspace = fileName;
-    m_currentMarkdownDocument.clear();
+    m_currentOpenedFile = fileName;
     g_settings->setLastOpenedFilePath(fileName);
-    setWindowFilePath(m_currentWorkspace);
+    setWindowFilePath(m_currentOpenedFile);
 
     updateWindowTitle();
     if (!QFile::exists(fileName))
@@ -1028,13 +1027,13 @@ void MainWindow::on_actionOpenWorkspace_triggered()
 
 void MainWindow::on_actionSaveWorkspace_triggered()
 {
-    if (!QFile::exists(m_currentWorkspace))
+    if (!QFile::exists(m_currentOpenedFile) || !m_currentOpenedFile.endsWith(".krm", Qt::CaseInsensitive))
     {
         on_actionSaveWorkspaceAs_triggered();
     }
     else
     {
-        saveWorkspace(m_currentWorkspace);
+        saveWorkspace(m_currentOpenedFile);
     }
 }
 

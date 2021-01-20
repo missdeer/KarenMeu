@@ -163,7 +163,8 @@ void MarkdownView::openDocument()
 
 void MarkdownView::saveDocument()
 {
-    if (m_savePath.isEmpty())
+    if (!QFile::exists(m_savePath) || (!m_savePath.endsWith(".md", Qt::CaseInsensitive) && !m_savePath.endsWith(".mdown", Qt::CaseInsensitive) &&
+                                       !m_savePath.endsWith(".markdown", Qt::CaseInsensitive)))
         saveAsDocument();
     else
         saveToFile(m_savePath);
