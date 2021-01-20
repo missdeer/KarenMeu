@@ -24,6 +24,7 @@ jobs:
         with:
           version: ${{ matrix.qt_ver }}
           modules: qtwebengine
+          mirror: http://mirrors.ocf.berkeley.edu/qt/
       
       - uses: actions/checkout@v2
         with:
@@ -105,6 +106,7 @@ jobs:
           target: ${{ env.qt_target }}
           arch: ${{ matrix.qt_arch }}
           modules: qtwebengine
+          mirror: http://mirrors.ocf.berkeley.edu/qt/
           
       - uses: msys2/setup-msys2@v2
         with:
@@ -270,6 +272,7 @@ jobs:
           target: ${{ env.qt_target }}
           arch: ${{ matrix.qt_arch }}
           modules: qtwebengine
+          mirror: http://mirrors.ocf.berkeley.edu/qt/
           
       - uses: msys2/setup-msys2@v2
         with:
