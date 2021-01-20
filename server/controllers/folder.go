@@ -6,13 +6,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ListFolders(c *gin.Context) {
+func GetFolderList(c *gin.Context) {
 	user := c.MustGet(gin.AuthUserKey).(string)
 	log.Println(user)
 
 }
 
-func GetFolderContent(c *gin.Context) {
+func GetFileListInFolder(c *gin.Context) {
 	user := c.MustGet(gin.AuthUserKey).(string)
 	log.Println(user)
 

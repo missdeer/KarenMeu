@@ -7,6 +7,7 @@ require (
 	github.com/PuerkitoBio/goquery v1.6.0 // indirect
 	github.com/alecthomas/chroma v0.8.2
 	github.com/andybalholm/cascadia v1.2.0 // indirect
+	github.com/appleboy/gin-jwt/v2 v2.6.4
 	github.com/aymerick/douceur v0.2.0
 	github.com/gin-gonic/gin v1.6.3
 	github.com/jinzhu/gorm v1.9.16
