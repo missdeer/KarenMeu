@@ -198,7 +198,7 @@ jobs:
           mkdir jom
           cd jom
           curl.exe -o jom.zip -L https://download.qt.io/official_releases/jom/jom_1_1_3.zip
-          7z.exe x jom.zip
+          if exist jom.zip 7z.exe x jom.zip
           cd ..
 
       - name: build-msvc
@@ -211,7 +211,8 @@ jobs:
           mkdir build
           cd build
           qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
-          jom.exe -j 8
+          if exist %CD%\jom\jom.exe jom.exe -j 8
+          if not exist %CD%\jom\jom.exe nmake
           cd ..
 
       - name: package
@@ -373,7 +374,7 @@ jobs:
           mkdir jom
           cd jom
           curl.exe -o jom.zip -L https://download.qt.io/official_releases/jom/jom_1_1_3.zip
-          7z.exe x jom.zip
+          if exist jom.zip 7z.exe x jom.zip
           cd ..
           
       - name: build-msvc
@@ -390,7 +391,8 @@ jobs:
           mkdir build
           cd build
           qmake -r -spec win32-clang-msvc CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
-          jom.exe -j 8
+          if exist %CD%\jom\jom.exe jom.exe -j 8
+          if not exist %CD%\jom\jom.exe nmake
           cd ..
 
       - name: package
