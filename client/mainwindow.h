@@ -16,6 +16,7 @@ class TranslateHelperPage;
 class TranslateOutputWidget;
 class TemplateManager;
 class FileCache;
+class FindReplaceDialog;
 
 QT_FORWARD_DECLARE_CLASS(QComboBox);
 QT_FORWARD_DECLARE_CLASS(QTreeView);
@@ -153,6 +154,7 @@ private:
     void    openWorkspace(const QString &fileName);
     void    saveWorkspace(const QString &fileName);
     void    updateWindowTitle();
+    FindReplaceDialog *getFindReplaceDialog();
 };
 
 #endif // MAINWINDOW_H

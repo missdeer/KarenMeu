@@ -295,6 +295,12 @@ void MainWindow::updateWindowTitle()
         setWindowTitle("KarenMeu");
 }
 
+FindReplaceDialog *MainWindow::getFindReplaceDialog()
+{
+    static FindReplaceDialog *dlg = new FindReplaceDialog(m_view->editor(), this);
+    return dlg;
+}
+
 void MainWindow::on_actionExit_triggered()
 {
     QCoreApplication::quit();
@@ -1095,8 +1101,6 @@ void MainWindow::on_actionFullScreen_triggered()
 
 void MainWindow::on_actionFindReplace_triggered()
 {
-    Q_ASSERT(m_view);
-    auto                      editor = m_view->editor();
-    static FindReplaceDialog *dlg    = new FindReplaceDialog(editor, this);
+    auto *dlg = getFindReplaceDialog();
     dlg->show();
 }
