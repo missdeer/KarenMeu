@@ -43,4 +43,12 @@ namespace ClientUtils
         return dir;
     }
 
+    void setHtmlContent(QPlainTextEdit *editor, const QString &html)
+    {
+        Q_ASSERT(editor);
+        editor->clear();
+        editor->appendHtml(html);
+        editor->moveCursor(QTextCursor::Start);
+    }
+
 } // namespace ClientUtils

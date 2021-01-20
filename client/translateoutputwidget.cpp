@@ -4,6 +4,8 @@
 
 #include "translateoutputwidget.h"
 
+#include "clientutils.h"
+
 TranslateOutputWidget::TranslateOutputWidget(TranslateService ts, QWidget *parent)
     : QWidget(parent)
     , m_editor(new QPlainTextEdit(this))
@@ -79,9 +81,7 @@ void TranslateOutputWidget::onRefresh()
 void TranslateOutputWidget::onTranslated(QString res)
 {
     Q_ASSERT(m_editor);
-    m_editor->clear();
-    m_editor->appendHtml(res);
-    m_editor->moveCursor(QTextCursor::Start);
+    ClientUtils::setHtmlContent(m_editor, res);
 }
 
 void TranslateOutputWidget::initializeToolbar()

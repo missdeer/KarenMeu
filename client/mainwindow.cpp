@@ -500,10 +500,9 @@ void MainWindow::onSetCurrentWorkspace(const QString &fileName)
 void MainWindow::onFileSystemItemActivated(const QModelIndex &index)
 {
     auto fi = m_fsModel->fileInfo(index);
-    if (fi.isFile() && (fi.fileName().endsWith(".md", Qt::CaseInsensitive) || fi.fileName().endsWith(".markdown", Qt::CaseInsensitive) ||
-                        fi.fileName().endsWith(".mdown", Qt::CaseInsensitive)))
+    if (fi.isFile())
     {
-        openMarkdownDocument(fi.absoluteFilePath());
+        openFile(fi.absoluteFilePath());
     }
 }
 
@@ -558,9 +557,7 @@ void MainWindow::onCustomPreviewThemeChanged()
 void MainWindow::onYoudaoDictResult(QString res)
 {
     Q_ASSERT(m_youdaoDictionaryEditor);
-    m_youdaoDictionaryEditor->clear();
-    m_youdaoDictionaryEditor->appendHtml(res);
-    m_youdaoDictionaryEditor->moveCursor(QTextCursor::Start);
+    ClientUtils::setHtmlContent(m_youdaoDictionaryEditor, res);
 }
 
 void MainWindow::onNewFromTemplateTriggered()
@@ -1019,10 +1016,9 @@ void MainWindow::on_actionOpenWorkspace_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(
         this, tr("Open Workspace"), ClientUtils::getDefaultFileSaveOpenDirectory(), tr("KarenMeu Workspace (*.krm);;All files (*.*)"));
-    if (fileName.isEmpty())
+    if (!QFile::exists(fileName))
         return;
-
-    QSettings settings(fileName, QSettings::IniFormat);
+    openWorkspace(fileName);
 }
 
 void MainWindow::on_actionSaveWorkspace_triggered()
