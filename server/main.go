@@ -115,5 +115,5 @@ func main() {
 	if bindAddr == "" {
 		bindAddr = ":4567"
 	}
-	r.Run(bindAddr)
+	log.Fatal(r.Run(bindAddr))
 }
