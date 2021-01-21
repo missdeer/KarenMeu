@@ -11,6 +11,7 @@ import (
 	emoji "github.com/yuin/goldmark-emoji"
 	highlighting "github.com/yuin/goldmark-highlighting"
 	meta "github.com/yuin/goldmark-meta"
+	gast "github.com/yuin/goldmark/ast"
 	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/renderer"
 	"github.com/yuin/goldmark/util"
@@ -35,6 +36,22 @@ func Goldmark(md string, style string, lineNumbers bool) *C.char {
 		),
 		goldmark.WithExtensions(
 			emoji.Emoji,
+		),
+		goldmark.WithExtensions(
+			extension.NewFootnote(
+				extension.WithFootnoteIDPrefixFunction(func(n gast.Node) []byte {
+					v, ok := n.OwnerDocument().Meta()["footnote-prefix"]
+					if ok {
+						return util.StringToReadOnlyBytes(v.(string))
+					}
+					return nil
+				}),
+				extension.WithFootnoteLinkClass([]byte("link-class")),
+				extension.WithFootnoteBacklinkClass([]byte("backlink-class")),
+				extension.WithFootnoteLinkTitle([]byte("link-title-%%-^^")),
+				extension.WithFootnoteBacklinkTitle([]byte("backlink-title")),
+				extension.WithFootnoteBacklinkHTML([]byte("^")),
+			),
 		),
 	)
 
