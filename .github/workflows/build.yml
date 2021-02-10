@@ -50,7 +50,7 @@ jobs:
           mkdir build
           cd build
           qmake -r CONFIG+=release CONFIG+=qtquickcompiler ../${{ env.targetName }}.pro
-          make -j 2
+          make -j `sysctl -n hw.logicalcpu`
           cd ..
 
       - name: package
@@ -211,7 +211,7 @@ jobs:
           mkdir build
           cd build
           qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
-          if exist %CD%\jom\jom.exe jom.exe -j 8
+          if exist %CD%\jom\jom.exe jom.exe -j %NUMBER_OF_PROCESSORS%
           if not exist %CD%\jom\jom.exe nmake
           cd ..
 
@@ -389,7 +389,7 @@ jobs:
           mkdir build
           cd build
           qmake -r -spec win32-clang-msvc CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
-          if exist %CD%\jom\jom.exe jom.exe -j 8
+          if exist %CD%\jom\jom.exe jom.exe -j %NUMBER_OF_PROCESSORS%
           if not exist %CD%\jom\jom.exe nmake
           cd ..
 
