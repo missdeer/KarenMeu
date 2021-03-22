@@ -213,7 +213,19 @@ void ScintillaConfig::applyLanguageStyle(const QString &configPath, const QStrin
     }
 
     auto l = lexer.toUtf8();
-    m_sci->setLexerLanguage(l.data());
+    //m_sci->setLexerLanguage(l.data());
+
+#if _WIN32
+    typedef void *(__stdcall *CreateLexerFn)(const char *name);
+#else
+    typedef void *(*CreateLexerFn)(const char *name);
+#endif
+    QFunctionPointer fn = QLibrary::resolve("lexilla", "CreateLexer");
+    if (fn)
+    {
+        void *lexCpp = ((CreateLexerFn)fn)(l.data());
+        m_sci->setILexer((sptr_t)(void *)lexCpp);
+    }
 }
 
 void ScintillaConfig::applyThemeStyle(const QString &themePath, const QString &lang)

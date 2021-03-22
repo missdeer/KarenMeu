@@ -8,3 +8,6 @@
 [submodule "3rdparty/zlib"]
 	path = 3rdparty/zlib
 	url = https://github.com/madler/zlib.git
+[submodule "3rdparty/lexilla"]
+	path = 3rdparty/lexilla
+	url = https://github.com/ScintillaOrg/lexilla.git
