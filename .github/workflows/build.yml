@@ -413,7 +413,7 @@ jobs:
           copy 3rdparty\lexilla\bin\lexilla.dll %target_dir%\
           copy build\3rdparty\vtextedit\src\libs\syntax-highlighting\release\VSyntaxHighlighting.dll %target_dir%\
           copy build\3rdparty\vtextedit\src\editor\release\VTextEdit.dll %target_dir%\
-          copy build\3rdparty\scintilla\bin\ScintillaEdit4.dll %target_dir%\
+          copy build\3rdparty\scintilla\bin\ScintillaEdit5.dll %target_dir%\
           copy build\client\Release\${{ env.targetName }}.exe %target_dir%\
           copy build\registerProtocolHandler\Release\registerProtocolHandler.exe %target_dir%\
           copy utils\utils.dll %target_dir%\
