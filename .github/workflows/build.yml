@@ -208,6 +208,11 @@ jobs:
         run: |
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
           set PATH=%PATH%;%CD%\jom
+          set OLDPWD=%CD%
+          cd 3rdparty\lexilla\src
+          if exist %CD%\jom\jom.exe jom.exe -j %NUMBER_OF_PROCESSORS% -f lexilla.mak
+          if not exist %CD%\jom\jom.exe nmake -f lexilla.mak
+          cd %OLDPWD%
           mkdir build
           cd build
           qmake -r CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
@@ -221,9 +226,10 @@ jobs:
           target_dir: ${{ env.targetName }}-${{ matrix.qt_arch }}
         run: |
           mkdir %target_dir%
+          copy 3rdparty\lexilla\bin\lexilla.dll %target_dir%\
           copy build\3rdparty\vtextedit\src\libs\syntax-highlighting\release\VSyntaxHighlighting.dll %target_dir%\
           copy build\3rdparty\vtextedit\src\editor\release\VTextEdit.dll %target_dir%\
-          copy build\3rdparty\scintilla\bin\ScintillaEdit4.dll %target_dir%\
+          copy build\3rdparty\scintilla\bin\ScintillaEdit5.dll %target_dir%\
           copy build\client\Release\${{ env.targetName }}.exe %target_dir%\
           copy build\registerProtocolHandler\Release\registerProtocolHandler.exe %target_dir%\
           copy utils\utils.dll %target_dir%\
@@ -386,6 +392,11 @@ jobs:
           path
           dir
           dir %CD%\llvm
+          set OLDPWD=%CD%
+          cd 3rdparty\lexilla\src
+          if exist %CD%\jom\jom.exe jom.exe -j %NUMBER_OF_PROCESSORS% -f lexilla.mak
+          if not exist %CD%\jom\jom.exe nmake -f lexilla.mak
+          cd %OLDPWD%
           mkdir build
           cd build
           qmake -r -spec win32-clang-msvc CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
@@ -399,6 +410,7 @@ jobs:
           target_dir: ${{ env.targetName }}-${{ matrix.qt_arch }}
         run: |
           mkdir %target_dir%
+          copy 3rdparty\lexilla\bin\lexilla.dll %target_dir%\
           copy build\3rdparty\vtextedit\src\libs\syntax-highlighting\release\VSyntaxHighlighting.dll %target_dir%\
           copy build\3rdparty\vtextedit\src\editor\release\VTextEdit.dll %target_dir%\
           copy build\3rdparty\scintilla\bin\ScintillaEdit4.dll %target_dir%\

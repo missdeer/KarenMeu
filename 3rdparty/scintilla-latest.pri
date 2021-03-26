@@ -23,7 +23,7 @@ macx {
 } else {
     INCLUDEPATH *= $$PWD/include
     win32: {
-        LIBS += -L$$OUT_FOLDER -l$${lib_name}4
+        LIBS += -L$$OUT_FOLDER -l$${lib_name}5
     } else: {
         LIBS += -L$$OUT_FOLDER -l$${lib_name}
     }
