@@ -23,6 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++17
 
 include($$PWD/../3rdparty/scintilla-latest.pri)
+include($$PWD/../3rdparty/lexilla-latest.pri)
 include($$PWD/../3rdparty/zlib.pri)
 include($$PWD/../3rdparty/vtextedit/src/editor/editor_export.pri)
 include($$PWD/../3rdparty/vtextedit/src/libs/syntax-highlighting/syntax-highlighting_export.pri)
