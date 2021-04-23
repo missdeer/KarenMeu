@@ -1,13 +1,15 @@
+#include <QCoreApplication>
+#include <QDir>
 #include <QDomDocument>
 #include <QDomElement>
 #include <QFile>
 #include <QFontDatabase>
 #include <QStringBuilder>
-#include <QCoreApplication>
 #include <QtCore>
-#include <QDir>
 
 #include "scintillaconfig.h"
+#include "ILexer.h"
+#include "Lexilla.h"
 #include "ScintillaEdit.h"
 #include "settings.h"
 
@@ -215,28 +217,10 @@ void ScintillaConfig::applyLanguageStyle(const QString &configPath, const QStrin
     }
 
     auto l = lexer.toUtf8();
-    //m_sci->setLexerLanguage(l.data());
+    // m_sci->setLexerLanguage(l.data());
 
-#ifdef _WIN32
-    typedef void *(__stdcall *CreateLexerFn)(const char *name);
-#else
-    typedef void *(*CreateLexerFn)(const char *name);
-#endif
-
-#ifdef Q_OS_MAC
-    QDir dir(QCoreApplication::applicationDirPath());
-    dir.cdUp();
-    dir.cd("Libs");
-    QString path = dir.absolutePath();
-#else
-    QString path = QCoreApplication::applicationDirPath();
-#endif
-    QFunctionPointer fn = QLibrary::resolve(path+ "/lexilla", "CreateLexer");
-    if (fn)
-    {
-        void *lexerId = ((CreateLexerFn)fn)(l.data());
-        m_sci->setILexer((sptr_t)(void *)lexerId);
-    }
+    void *lexerId = CreateLexer(l.data());
+    m_sci->setILexer((sptr_t)(void *)lexerId);
 }
 
 void ScintillaConfig::applyThemeStyle(const QString &themePath, const QString &lang)
