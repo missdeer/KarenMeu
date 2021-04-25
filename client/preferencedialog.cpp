@@ -1,5 +1,6 @@
 #include <QDir>
 #include <QFile>
+#include <QFileDialog>
 
 #include "preferencedialog.h"
 #include "previewthemeeditor.h"
@@ -15,7 +16,7 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui
 
     QDir dir(":/rc/theme");
     auto entries = dir.entryInfoList();
-    for (auto entry : entries)
+    for (const auto &entry : entries)
     {
         ui->cbPreviewTheme->addItem(entry.baseName());
     }
@@ -43,6 +44,17 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui
     ui->cbDeepLTranslate->setChecked(g_settings->enableDeepLTranslate());
 
     ui->sbTranslateTimeout->setValue(g_settings->translateTimeout() / 1000);
+
+    ui->edtPlantUMLRemoteService->setText(g_settings->plantUMLRemoteServiceAddress());
+    ui->edtJavaPath->setText(g_settings->javaPath());
+    ui->edtGraphvizDotPath->setText(g_settings->dotPath());
+    ui->edtPlantUMLJarPath->setText(g_settings->plantUMLJarPath());
+
+    connect(ui->gbPlantUMLLocalJar, &QGroupBox::toggled, [this](bool on) { ui->gbPlantUMLRemoteService->setChecked(!on); });
+    connect(ui->gbPlantUMLRemoteService, &QGroupBox::toggled, [this](bool on) { ui->gbPlantUMLLocalJar->setChecked(!on); });
+
+    ui->gbPlantUMLRemoteService->setChecked(g_settings->plantUMLRemoteServiceEnabled());
+    ui->gbPlantUMLLocalJar->setChecked(g_settings->plantUMLLocalJarEnabled());
 }
 
 PreferenceDialog::~PreferenceDialog()
@@ -75,6 +87,13 @@ void PreferenceDialog::accept()
     g_settings->setEnableDeepLTranslate(ui->cbDeepLTranslate->isChecked());
 
     g_settings->setTranslateTimeout(ui->sbTranslateTimeout->value() * 1000);
+
+    g_settings->setPlantUMLJarPath(ui->edtPlantUMLJarPath->text());
+    g_settings->setPlantUMLRemoteService(ui->edtPlantUMLRemoteService->text());
+    g_settings->setJavaPath(ui->edtJavaPath->text());
+    g_settings->setDotPath(ui->edtGraphvizDotPath->text());
+    g_settings->setPlantUMLLocalJarEnabled(ui->gbPlantUMLLocalJar->isChecked());
+    g_settings->setPlantUMLRemoteServiceEnabled(ui->gbPlantUMLRemoteService->isChecked());
     QDialog::accept();
 }
 
@@ -92,6 +111,33 @@ void PreferenceDialog::on_cbPreviewTheme_currentTextChanged(const QString &text)
         QByteArray ba = f.readAll();
         m_previewThemeEditor->setContent(ba);
         f.close();
+    }
+}
+
+void PreferenceDialog::on_btnBrowseJavaPath_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Select Java executable"), ui->edtJavaPath->text());
+    if (!fileName.isEmpty())
+    {
+        ui->edtJavaPath->setText(QDir::toNativeSeparators(fileName));
+    }
+}
+
+void PreferenceDialog::on_btnBrowseGraphvizDotPath_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Select Dot (from Graphiz) executable"), ui->edtGraphvizDotPath->text());
+    if (!fileName.isEmpty())
+    {
+        ui->edtGraphvizDotPath->setText(QDir::toNativeSeparators(fileName));
+    }
+}
+
+void PreferenceDialog::on_btnBrowsePlantUMLJarPath_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Select PlantUML jar"), ui->edtPlantUMLJarPath->text());
+    if (!fileName.isEmpty())
+    {
+        ui->edtPlantUMLJarPath->setText(QDir::toNativeSeparators(fileName));
     }
 }
 

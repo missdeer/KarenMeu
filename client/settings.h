@@ -93,6 +93,20 @@ public:
     const QString &getLastOpenedFilePath() const;
     void           setLastOpenedFilePath(const QString &lastOpenedFilePath);
 
+    QString plantUMLRemoteServiceAddress();
+    void    setPlantUMLRemoteService(const QString &path);
+    QString javaPath();
+    void    setJavaPath(const QString &path);
+    QString dotPath();
+    void    setDotPath(const QString &path);
+    QString plantUMLJarPath();
+    void    setPlantUMLJarPath(const QString &path);
+
+    bool plantUMLRemoteServiceEnabled();
+    void setPlantUMLRemoteServiceEnabled(bool enabled);
+    bool plantUMLLocalJarEnabled();
+    void setPlantUMLLocalJarEnabled(bool enabled);
+
 private:
     bool m_enableGoogleTranslate {true};
     bool m_enableBaiduTranslate {false};

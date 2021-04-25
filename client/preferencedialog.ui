@@ -339,6 +339,111 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tabPlantUML">
+      <attribute name="title">
+       <string>PlantUML</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QGroupBox" name="gbPlantUMLRemoteService">
+         <property name="title">
+          <string>Remote Service Renderring</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLineEdit" name="edtPlantUMLRemoteService">
+            <property name="text">
+             <string>http://www.plantuml.com/</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbPlantUMLLocalJar">
+         <property name="title">
+          <string>Local PlantUML Jar Renderring</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>Java Path</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="edtJavaPath"/>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="btnBrowseJavaPath">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>PlantUML Jar Path</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="edtPlantUMLJarPath"/>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="btnBrowsePlantUMLJarPath">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>Graphviz Dot Path</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="edtGraphvizDotPath"/>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="btnBrowseGraphvizDotPath">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="tabTranslation">
       <attribute name="title">
        <string>Translation</string>

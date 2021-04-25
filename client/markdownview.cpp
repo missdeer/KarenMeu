@@ -1,3 +1,6 @@
+#include <algorithm>
+#include <vtextedit/vtextedit.h>
+
 #include <QApplication>
 #include <QClipboard>
 #include <QCryptographicHash>
@@ -13,16 +16,13 @@
 #include <QWebEngineScriptCollection>
 #include <QWebEngineView>
 #include <QtCore>
-#include <algorithm>
 
 #include "markdownview.h"
-
-#include <vtextedit/vtextedit.h>
-
 #include "clientutils.h"
 #include "filecache.h"
 #include "markdowneditor4.h"
 #include "networkreplyhelper.h"
+#include "plantumlrunner.h"
 #include "plantumlurlcodec.h"
 #include "previewpage.h"
 #include "previewthemeeditor.h"
@@ -502,7 +502,7 @@ void MarkdownView::pdfPrintingFinished(const QString &filePath, bool success)
             this, tr("PDF exporting failed"), tr("PDF file has not been exported to %1.").arg(QDir::toNativeSeparators(filePath)), QMessageBox::Ok);
 }
 
-void MarkdownView::onEmbedRenderingDone()
+void MarkdownView::onRequestRemoteImageDone()
 {
     auto *helper = qobject_cast<NetworkReplyHelper *>(sender());
     Q_ASSERT(helper);
@@ -517,7 +517,25 @@ void MarkdownView::onEmbedRenderingDone()
 #endif
     if (content.isEmpty())
         return;
+    Q_ASSERT(m_fileCache);
     m_fileCache->addItem(content, cacheKey);
+
+    Q_ASSERT(m_preview);
+    auto *page = (PreviewPage *)m_preview->page();
+    Q_ASSERT(page);
+    page->refreshImage(cacheKey, QString("file://%1").arg(cachePathFromPathAndKey(m_fileCache->path(), cacheKey)));
+    updatePreviewScrollBar();
+}
+
+void MarkdownView::onRequestLocalImageDone()
+{
+    qDebug() << __FUNCTION__;
+    auto *runner = qobject_cast<PlantUMLRunner *>(sender());
+    runner->deleteLater();
+    auto &output   = runner->output();
+    auto &cacheKey = runner->cacheKey();
+    Q_ASSERT(m_fileCache);
+    m_fileCache->addItem(output, cacheKey);
 
     Q_ASSERT(m_preview);
     auto *page = (PreviewPage *)m_preview->page();
@@ -702,13 +720,7 @@ void MarkdownView::renderMarkdownToHTML()
         QByteArray embedGraphCode = embedGraphCodeLines.join("\n");
         auto       md5sum         = QCryptographicHash::hash(embedGraphCode, QCryptographicHash::Md5).toHex();
         QString    cacheKey       = QString("%1-%2.png").arg(md5sum, mark);
-        // generate final image async
-        if (!m_plantUMLUrlCodec)
-            m_plantUMLUrlCodec = new PlantUMLUrlCodec;
-        auto    encodedStr = m_plantUMLUrlCodec->Encode(embedGraphCode.toStdString());
-        QString engine     = graphvizEngines.contains(mark) ? mark : "plantuml";
-        QString header     = graphvizEngines.contains(mark) ? "" : "~1";
-        QString u          = QString("https://yii.li/%1/png/%2%3").arg(engine, header, QString::fromStdString(encodedStr));
+
         // insert img tag sync
         bool    hasCached   = m_fileCache->hasItem(cacheKey);
         QString imgFilePath = hasCached ? QUrl::fromLocalFile(cachePathFromPathAndKey(m_fileCache->path(), cacheKey)).toString()
@@ -720,7 +732,35 @@ void MarkdownView::renderMarkdownToHTML()
 
         if (!hasCached)
         {
-            imagesToDownload.insert(std::make_pair(cacheKey, u));
+            // generate final image async
+            if (g_settings->plantUMLRemoteServiceEnabled())
+            {
+                if (!m_plantUMLUrlCodec)
+                    m_plantUMLUrlCodec = new PlantUMLUrlCodec;
+                auto    encodedStr    = m_plantUMLUrlCodec->Encode(embedGraphCode.toStdString());
+                QString engine        = graphvizEngines.contains(mark) ? mark : "plantuml";
+                QString header        = graphvizEngines.contains(mark) ? "" : "~1";
+                QString embedImageUrl = QString("%1%2/png/%3%4")
+                                            .arg(graphvizEngines.contains(mark) ? "https://yii.li/" : g_settings->plantUMLRemoteServiceAddress(),
+                                                 engine,
+                                                 header,
+                                                 QString::fromStdString(encodedStr));
+                imagesToDownload.insert(std::make_pair(cacheKey, embedImageUrl));
+            }
+            else
+            {
+                auto runner = new PlantUMLRunner;
+                connect(runner, &PlantUMLRunner::result, this, &MarkdownView::onRequestLocalImageDone);
+                runner->searchDefaultExecutablePaths();
+                runner->setGraphvizPath(g_settings->dotPath());
+                runner->setJavaPath(g_settings->javaPath());
+                runner->setPlantUmlPath(g_settings->plantUMLJarPath());
+                runner->setCacheKey(cacheKey);
+                if (graphvizEngines.contains(mark))
+                    runner->runGraphviz(embedGraphCode, "png", mark);
+                else
+                    runner->runPlantUML(embedGraphCode, "png");
+            }
         }
     }
 
@@ -773,7 +813,7 @@ void MarkdownView::renderMarkdownToHTML()
     Free(res);
 
     updatePreviewScrollBar();
-    for (const auto &[cacheKey, u] : imagesToDownload)
+    for (const auto &[cacheKey, u] : qAsConst(imagesToDownload))
     {
         QNetworkRequest req(u);
         req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
@@ -785,6 +825,6 @@ void MarkdownView::renderMarkdownToHTML()
         auto *reply  = m_nam->get(req);
         auto *helper = new NetworkReplyHelper(reply);
         helper->setTimeout(10000);
-        connect(helper, &NetworkReplyHelper::done, this, &MarkdownView::onEmbedRenderingDone);
+        connect(helper, &NetworkReplyHelper::done, this, &MarkdownView::onRequestRemoteImageDone);
     }
 }

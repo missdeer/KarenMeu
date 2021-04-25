@@ -26,15 +26,6 @@ public:
     void runGraphviz(const QByteArray& doc, const QString& outputFormat, const QString& engine);
     bool hasPlantUMLStartEndMark(const QByteArray& doc);
 
-    bool useCustomJava() const;
-    void setUseCustomJava(bool useCustomJava);
-
-    bool useCustomPlantUml() const;
-    void setUseCustomPlantUml(bool useCustomPlantUml);
-
-    bool useCustomGraphiz() const;
-    void setUseCustomGraphiz(bool useCustomGraphiz);
-
     const QString& javaPath() const;
     void setJavaPath(const QString &javaPath);
 
@@ -44,63 +35,35 @@ public:
     const QString& graphvizPath() const;
     void setGraphvizPath(const QString &graphvizPath);
 
-    QString customJavaPath() const;
-    void setCustomJavaPath(const QString &customJavaPath);
-
-    QString customPlantUmlPath() const;
-    void setCustomPlantUmlPath(const QString &customPlantUmlPath);
-
-    QString customGraphizPath() const;
-    void setCustomGraphizPath(const QString &customGraphizPath);
-
-    QString plantUmlVersion() const;
-    void setPlantUmlVersion(const QString &plantUmlVersion);
-
-    QString javaVersion() const;
-    void setJavaVersion(const QString &javaVersion);
-
-    QString graphvizVersion() const;
-    void setGraphvizVersion(const QString &graphvizVersion);
-
-    QString remoteServerAddress() const;
-    void setRemoteServerAddress(const QString &remoteServerAddress);
-
     bool hasValidPaths() const;
     void setHasValidPaths(bool hasValidPaths);
 
-    bool useRemoteServerFirst() const;
-    void setUseRemoteServerFirst(bool useRemoteServerFirst);
+    const QByteArray &input() const;
+
+    const QByteArray &output() const;
+
+    const QString &cacheKey() const;
+    void           setCacheKey(const QString &cacheKey);
 
 signals:
     void exported(const QString& fileName);
-    void result(const QByteArray& res);
+    void result();
 private slots:
     void exportFinished();
     void runFinished();
 private:
     QProcess *m_process {nullptr};
-    bool      m_useCustomJava {false};
-    bool      m_useCustomPlantUml {false};
-    bool      m_useCustomGraphiz {false};
 
     QString m_javaPath;
     QString m_plantUmlPath;
     QString m_graphvizPath;
 
-    QString m_customJavaPath;
-    QString m_customPlantUmlPath;
-    QString m_customGraphizPath;
-
-    QString m_plantUmlVersion;
-    QString m_javaVersion;
-    QString m_graphvizVersion;
-
-    bool    m_useRemoteServerFirst {false};
-    QString m_remoteServerAddress;
-
     bool m_hasValidPaths {false};
 
-    QString m_saveAs;
+    QString    m_saveAs;
+    QByteArray m_input;
+    QByteArray m_output;
+    QString    m_cacheKey;
 };
 
 #endif // PLANTUMLRUNNER_H

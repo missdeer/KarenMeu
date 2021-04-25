@@ -23,6 +23,10 @@ protected:
 private slots:
     void on_cbPreviewTheme_currentTextChanged(const QString &text);
 
+    void on_btnBrowseJavaPath_clicked();
+    void on_btnBrowseGraphvizDotPath_clicked();
+    void on_btnBrowsePlantUMLJarPath_clicked();
+
 private:
     Ui::PreferenceDialog *ui;
     PreviewThemeEditor *  m_previewThemeEditor;

@@ -14,6 +14,7 @@ QT_FORWARD_DECLARE_CLASS(QNetworkAccessManager);
 class MarkdownEditor4;
 class PreviewThemeEditor;
 class PlantUMLUrlCodec;
+class PlantUMLRunner;
 class FileCache;
 
 class MarkdownView : public QWidget
@@ -83,7 +84,8 @@ private slots:
     void convertTimeout();
     void previewLoadFinished(bool);
     void pdfPrintingFinished(const QString &filePath, bool success);
-    void onEmbedRenderingDone();
+    void onRequestRemoteImageDone();
+    void onRequestLocalImageDone();
     void onAllImagesEmbeded();
     void updatePreviewScrollBar();
 

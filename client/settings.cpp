@@ -353,6 +353,84 @@ void Settings::setLastOpenedFilePath(const QString &lastOpenedFilePath)
     m_lastOpenedFilePath = lastOpenedFilePath;
 }
 
+QString Settings::plantUMLRemoteServiceAddress()
+{
+    auto &settings = getSettings();
+    return settings.value("plantUMLRemoteService", "http://www.plantuml.com/").toString();
+}
+
+void Settings::setPlantUMLRemoteService(const QString &path)
+{
+    auto &settings = getSettings();
+    settings.setValue("plantUMLRemoteService", path);
+    settings.sync();
+}
+
+QString Settings::javaPath()
+{
+    auto &settings = getSettings();
+    return settings.value("javaPath").toString();
+}
+
+void Settings::setJavaPath(const QString &path)
+{
+    auto &settings = getSettings();
+    settings.setValue("javaPath", path);
+    settings.sync();
+}
+
+QString Settings::dotPath()
+{
+    auto &settings = getSettings();
+    return settings.value("dotPath").toString();
+}
+
+void Settings::setDotPath(const QString &path)
+{
+    auto &settings = getSettings();
+    settings.setValue("dotPath", path);
+    settings.sync();
+}
+
+QString Settings::plantUMLJarPath()
+{
+    auto &settings = getSettings();
+    return settings.value("plantUMLJarPath").toString();
+}
+
+void Settings::setPlantUMLJarPath(const QString &path)
+{
+    auto &settings = getSettings();
+    settings.setValue("plantUMLJarPath", path);
+    settings.sync();
+}
+
+bool Settings::plantUMLRemoteServiceEnabled()
+{
+    auto &settings = getSettings();
+    return settings.value("plantUMLRemoteServiceEnabled", true).toBool();
+}
+
+void Settings::setPlantUMLRemoteServiceEnabled(bool enabled)
+{
+    auto &settings = getSettings();
+    settings.setValue("plantUMLRemoteServiceEnabled", enabled);
+    settings.sync();
+}
+
+bool Settings::plantUMLLocalJarEnabled()
+{
+    auto &settings = getSettings();
+    return settings.value("plantUMLLocalJarEnabled", false).toBool();
+}
+
+void Settings::setPlantUMLLocalJarEnabled(bool enabled)
+{
+    auto &settings = getSettings();
+    settings.setValue("plantUMLLocalJarEnabled", enabled);
+    settings.sync();
+}
+
 QSettings &Settings::getSettings()
 {
     static QSettings *settings = new QSettings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");

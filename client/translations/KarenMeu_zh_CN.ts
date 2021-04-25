@@ -1099,12 +1099,12 @@
         <translation>未命名%1</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="545"/>
+        <location filename="../markdownview.cpp" line="563"/>
         <source>HTML content has been copied into clipboard.</source>
         <translation>HTML内容已复制到剪切板。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="545"/>
+        <location filename="../markdownview.cpp" line="563"/>
         <source>HTML copied</source>
         <translation>HTML已复制</translation>
     </message>
@@ -1169,19 +1169,9 @@
         <translation>PDF文档未导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="756"/>
+        <location filename="../markdownview.cpp" line="796"/>
         <source>Metadata</source>
         <translation>元数据</translation>
-    </message>
-</context>
-<context>
-    <name>PlantUMLRunner</name>
-    <message>
-        <location filename="../plantumlrunner.cpp" line="66"/>
-        <location filename="../plantumlrunner.cpp" line="114"/>
-        <location filename="../plantumlrunner.cpp" line="161"/>
-        <source>Unknown</source>
-        <translation>未知</translation>
     </message>
 </context>
 <context>
@@ -1217,11 +1207,26 @@
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="22"/>
-        <location filename="../preferencedialog.cpp" line="63"/>
-        <location filename="../preferencedialog.cpp" line="83"/>
+        <location filename="../preferencedialog.cpp" line="23"/>
+        <location filename="../preferencedialog.cpp" line="75"/>
+        <location filename="../preferencedialog.cpp" line="102"/>
         <source>Custom</source>
         <translation>自定义</translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.cpp" line="119"/>
+        <source>Select Java executable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.cpp" line="128"/>
+        <source>Select Dot (from Graphiz) executable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.cpp" line="137"/>
+        <source>Select PlantUML jar</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="128"/>
@@ -1420,61 +1425,103 @@
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="344"/>
+        <source>PlantUML</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="350"/>
+        <source>Remote Service Renderring</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="359"/>
+        <source>http://www.plantuml.com/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="369"/>
+        <source>Local PlantUML Jar Renderring</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="381"/>
+        <source>Java Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="391"/>
+        <location filename="../preferencedialog.ui" line="408"/>
+        <location filename="../preferencedialog.ui" line="425"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="398"/>
+        <source>PlantUML Jar Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="415"/>
+        <source>Graphviz Dot Path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="449"/>
         <source>Translation</source>
         <translation>翻译</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="350"/>
+        <location filename="../preferencedialog.ui" line="455"/>
         <source>Translation Service</source>
         <translation>翻译服务</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="356"/>
+        <location filename="../preferencedialog.ui" line="461"/>
         <source>Google Translate</source>
         <translation>谷歌翻译</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="367"/>
+        <location filename="../preferencedialog.ui" line="472"/>
         <source>Baidu Translate</source>
         <translation>百度翻译</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="378"/>
+        <location filename="../preferencedialog.ui" line="483"/>
         <source>Youdao Translate</source>
         <translation>有道翻译</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="389"/>
+        <location filename="../preferencedialog.ui" line="494"/>
         <source>Sogou Translate</source>
         <translation>搜狗翻译</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="400"/>
+        <location filename="../preferencedialog.ui" line="505"/>
         <source>DeepL Translate</source>
         <translation>DeepL翻译</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="414"/>
+        <location filename="../preferencedialog.ui" line="519"/>
         <source>Translate Timeout(s):</source>
         <translation>翻译超时(秒)：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="429"/>
+        <location filename="../preferencedialog.ui" line="534"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="438"/>
+        <location filename="../preferencedialog.ui" line="543"/>
         <source>Server:</source>
         <translation>服务器：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="448"/>
+        <location filename="../preferencedialog.ui" line="553"/>
         <source>Username:</source>
         <translation>用户名：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="458"/>
+        <location filename="../preferencedialog.ui" line="563"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>
