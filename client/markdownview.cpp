@@ -660,7 +660,7 @@ void MarkdownView::renderMarkdownToHTML()
     }
 
     QRegularExpression reEmbedGraphRenderBegin(
-        "^```(plantuml|puml|uml|ditaa|dot|mindmap|gantt|math|latex|salt|json|neato|circo|fdp|sfdp|osage|twopi|patchwork)[\\s\\t]*$");
+        "^```(plantuml|puml|uml|ditaa|dot|mindmap|wbs|gantt|math|latex|salt|json|yaml|neato|circo|fdp|sfdp|osage|twopi|patchwork)[\\s\\t]*$");
     QRegularExpression reCodeBlockEnd("^```[\\s\\t]*$");
     auto               findBeginLine   = [&reEmbedGraphRenderBegin](const auto &l) { return reEmbedGraphRenderBegin.match(QString(l)).hasMatch(); };
     QStringList        graphvizEngines = {"dot", "neato", "circo", "fdp", "sfdp", "osage", "twopi", "patchwork"};
