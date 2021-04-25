@@ -1216,17 +1216,17 @@
     <message>
         <location filename="../preferencedialog.cpp" line="119"/>
         <source>Select Java executable</source>
-        <translation type="unfinished"></translation>
+        <translation>选择Java解释器</translation>
     </message>
     <message>
         <location filename="../preferencedialog.cpp" line="128"/>
         <source>Select Dot (from Graphiz) executable</source>
-        <translation type="unfinished"></translation>
+        <translation>选择Dot（来自Graphviz）</translation>
     </message>
     <message>
         <location filename="../preferencedialog.cpp" line="137"/>
         <source>Select PlantUML jar</source>
-        <translation type="unfinished"></translation>
+        <translation>选择PlantUML jar包</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="128"/>
@@ -1426,44 +1426,44 @@
     <message>
         <location filename="../preferencedialog.ui" line="344"/>
         <source>PlantUML</source>
-        <translation type="unfinished"></translation>
+        <translation>PlantUML</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="350"/>
         <source>Remote Service Renderring</source>
-        <translation type="unfinished"></translation>
+        <translation>远程服务渲染</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="359"/>
         <source>http://www.plantuml.com/</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="369"/>
         <source>Local PlantUML Jar Renderring</source>
-        <translation type="unfinished"></translation>
+        <translation>本地PlantUML Jar渲染</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="381"/>
         <source>Java Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Java路径</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="391"/>
         <location filename="../preferencedialog.ui" line="408"/>
         <location filename="../preferencedialog.ui" line="425"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="398"/>
         <source>PlantUML Jar Path</source>
-        <translation type="unfinished"></translation>
+        <translation>PlantUML Jar路径</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="415"/>
         <source>Graphviz Dot Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Graphviz Dot路径</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="449"/>
