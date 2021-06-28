@@ -37,7 +37,7 @@ pFMarkdownEngine markdownEngine = nullptr;
 MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget *parent)
     : QWidget(parent),
       m_splitter(new QSplitter(this)),
-      m_editor(new MarkdownEditor4(g_settings->markdownEditorConfig(), this)),
+      m_editor(new MarkdownEditor4(g_settings->markdownEditorConfig(), g_settings->textEditorParameters(), this)),
       m_preview(new QWebEngineView(this)),
       m_convertTimer(new QTimer),
       m_nam(nam),

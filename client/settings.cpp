@@ -17,6 +17,7 @@ void Settings::initialize()
     m_textEditorConfig->m_centerCursor                            = vte::CenterCursor::CenterOnBottom;
     m_markdownEditorConfig                                        = QSharedPointer<vte::MarkdownEditorConfig>::create(m_textEditorConfig);
     m_markdownEditorConfig->m_constrainInPlacePreviewWidthEnabled = true;
+    m_textEditorParameters                                        = QSharedPointer<vte::TextEditorParameters>::create();
 }
 
 Settings::~Settings()
@@ -321,6 +322,11 @@ QSharedPointer<vte::TextEditorConfig> Settings::textEditorConfig() const
 QSharedPointer<vte::MarkdownEditorConfig> Settings::markdownEditorConfig() const
 {
     return m_markdownEditorConfig;
+}
+
+QSharedPointer<vte::TextEditorParameters> Settings::textEditorParameters() const
+{
+    return m_textEditorParameters;
 }
 
 int Settings::translateTimeout() const

@@ -1,8 +1,6 @@
 #include <QVBoxLayout>
 
 #include "previewthemeeditor.h"
-
-#include "ScintillaEdit.h"
 #include "scintillaconfig.h"
 
 PreviewThemeEditor::PreviewThemeEditor(QWidget *parent) : QWidget(parent), m_editor(new ScintillaEdit(this)), m_sc(new ScintillaConfig(m_editor)) {}
@@ -48,9 +46,16 @@ void PreviewThemeEditor::clearAll()
     m_editor->clearAll();
 }
 
-void PreviewThemeEditor::modified(
-    int type, int /*position*/, int /*length*/, int /*linesAdded*/, const QByteArray & /*text*/, int /*line*/, int /*foldNow*/, int /*foldPrev*/)
+void PreviewThemeEditor::modified(Scintilla::ModificationFlags type,
+                                  Scintilla::Position          position,
+                                  Scintilla::Position          length,
+                                  Scintilla::Position          linesAdded,
+                                  const QByteArray &           text,
+                                  Scintilla::Position          line,
+                                  Scintilla::FoldLevel         foldNow,
+                                  Scintilla::FoldLevel         foldPrev)
 {
-    if (type & (SC_MOD_INSERTTEXT | SC_MOD_DELETETEXT))
+    if ((int)type & (int)(Scintilla::ModificationFlags::InsertText | Scintilla::ModificationFlags::DeleteText | Scintilla::ModificationFlags::Undo |
+                          Scintilla::ModificationFlags::Redo | Scintilla::ModificationFlags::MultilineUndoRedo))
         emit contentModified();
 }

@@ -1,3 +1,5 @@
+#include <vtextedit/vtextedit.h>
+
 #include <QApplication>
 #include <QClipboard>
 #include <QRegularExpression>
@@ -8,18 +10,19 @@
 #include <QtCore>
 
 #include "markdowneditor4.h"
-
-#include <vtextedit/vtextedit.h>
-
 #include "clientutils.h"
 #include "settings.h"
 
-MarkdownEditor4::MarkdownEditor4(QWidget *parent) : vte::VMarkdownEditor(g_settings->markdownEditorConfig(), parent)
+MarkdownEditor4::MarkdownEditor4(QWidget *parent)
+    : vte::VMarkdownEditor(g_settings->markdownEditorConfig(), g_settings->textEditorParameters(), parent)
 {
     setupChildWidgets();
 }
 
-MarkdownEditor4::MarkdownEditor4(const QSharedPointer<vte::MarkdownEditorConfig> &p_config, QWidget *parent) : vte::VMarkdownEditor(p_config, parent)
+MarkdownEditor4::MarkdownEditor4(const QSharedPointer<vte::MarkdownEditorConfig> &config,
+                                 const QSharedPointer<vte::TextEditorParameters> &param,
+                                 QWidget *                                        parent)
+    : vte::VMarkdownEditor(config, param, parent)
 {
     setupChildWidgets();
 }

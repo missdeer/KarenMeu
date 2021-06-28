@@ -84,6 +84,8 @@ public:
 
     QSharedPointer<vte::MarkdownEditorConfig> markdownEditorConfig() const;
 
+    QSharedPointer<vte::TextEditorParameters> textEditorParameters() const;
+
     int  translateTimeout() const;
     void setTranslateTimeout(int translateTimeout);
 
@@ -133,6 +135,7 @@ private:
 
     QSharedPointer<vte::TextEditorConfig>     m_textEditorConfig;
     QSharedPointer<vte::MarkdownEditorConfig> m_markdownEditorConfig;
+    QSharedPointer<vte::TextEditorParameters> m_textEditorParameters;
 };
 
 inline QSharedPointer<Settings> g_settings;

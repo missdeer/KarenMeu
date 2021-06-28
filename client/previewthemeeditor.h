@@ -3,8 +3,9 @@
 
 #include <QWidget>
 
+#include "ScintillaEdit.h"
+
 class ScintillaConfig;
-class ScintillaEdit;
 
 class PreviewThemeEditor : public QWidget
 {
@@ -19,7 +20,14 @@ signals:
     void contentModified();
 private slots:
 
-    void modified(int type, int position, int length, int linesAdded, const QByteArray &text, int line, int foldNow, int foldPrev);
+    void modified(Scintilla::ModificationFlags type,
+                  Scintilla::Position          position,
+                  Scintilla::Position          length,
+                  Scintilla::Position          linesAdded,
+                  const QByteArray &           text,
+                  Scintilla::Position          line,
+                  Scintilla::FoldLevel         foldNow,
+                  Scintilla::FoldLevel         foldPrev);
 
 private:
     ScintillaEdit *  m_editor;

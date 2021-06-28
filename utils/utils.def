@@ -1,8 +1,8 @@
 EXPORTS
-    Lute
     Goldmark
-    Crush
-    Free
     PremailerInliner
     DouceurInliner
     Inliner
+    Lute
+    Free
+    Crush
