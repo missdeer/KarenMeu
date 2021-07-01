@@ -1659,18 +1659,28 @@
 <context>
     <name>TranslateHelperPage</name>
     <message>
-        <location filename="../translatehelperpage.cpp" line="69"/>
+        <location filename="../translatehelperpage.cpp" line="79"/>
+        <source>&lt;h4&gt;Translating failed :-(&lt;/h4&gt;</source>
+        <translation>&lt;h4&gt;翻译不出来 :-(&lt;/h4&gt;</translation>
+    </message>
+    <message>
+        <location filename="../translatehelperpage.cpp" line="86"/>
         <source>Translated Text:</source>
         <translation>译文：</translation>
     </message>
     <message>
-        <location filename="../translatehelperpage.cpp" line="69"/>
+        <location filename="../translatehelperpage.cpp" line="86"/>
         <source>Original Text:</source>
         <translation>原文：</translation>
     </message>
 </context>
 <context>
     <name>TranslateOutputWidget</name>
+    <message>
+        <location filename="../translateoutputwidget.cpp" line="40"/>
+        <source>&lt;h4&gt;Translating...&lt;/h4&gt;</source>
+        <translation>&lt;h4&gt;正在翻译…&lt;/h4&gt;</translation>
+    </message>
     <message>
         <location filename="../translateoutputwidget.cpp" line="90"/>
         <source>Translate</source>

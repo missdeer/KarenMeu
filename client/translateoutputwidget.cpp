@@ -37,7 +37,7 @@ void TranslateOutputWidget::clear()
 
 void TranslateOutputWidget::translate(const QString &text)
 {
-    clear();
+    ClientUtils::setHtmlContent(m_editor, tr("<h4>Translating...</h4>"));
     if (!m_helper)
     {
         m_helper = new TranslateHelperPage(m_service, this);

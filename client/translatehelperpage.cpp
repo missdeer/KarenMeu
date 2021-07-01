@@ -14,7 +14,7 @@ TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) :
         {TST_GOOGLE, "https://translate.google.com/?sl=auto&tl=zh-CN&text="},
         {TST_BAIDU, "https://fanyi.baidu.com/#en/zh/"},
         {TST_SOGOU, "https://fanyi.sogou.com/?transfrom=en&transto=zh-CHS&isclient=1&model=general&keyword="},
-        {TST_YOUDAO, "http://fanyi.youdao.com/?keyword="},
+        {TST_YOUDAO, "https://fanyi.youdao.com/?keyword="},
         {TST_DEEPL, "https://www.deepl.com/translator#en/zh/"}};
     m_landingPage = landingPageUrlMap[ts];
 
@@ -27,11 +27,11 @@ TranslateHelperPage::TranslateHelperPage(TranslateService ts, QObject *parent) :
     };
     m_request = requestMap[ts];
 
-    std::map<TranslateService, QString> resultJavascriptMap = {{TST_GOOGLE, "document.getElementsByClassName(\"VIiyi\")[0].innerText;\n"},
-                                                               {TST_BAIDU, "document.getElementsByClassName(\"target-output\")[0].innerText;\n"},
-                                                               {TST_SOGOU, "document.getElementsByClassName(\"output\")[0].innerText;\n"},
-                                                               {TST_YOUDAO, "document.getElementById(\"transTarget\").innerText;\n"},
-                                                               {TST_DEEPL, "document.getElementsByTagName(\"textarea\")[1].value;\n"}};
+    std::map<TranslateService, QString> resultJavascriptMap = {{TST_GOOGLE, "document.getElementsByClassName('VIiyi')[0].innerText;\n"},
+                                                               {TST_BAIDU, "document.getElementsByClassName('target-output')[0].innerText;\n"},
+                                                               {TST_SOGOU, "document.getElementsByClassName('output')[0].innerText;\n"},
+                                                               {TST_YOUDAO, "document.getElementById('transTarget').innerText;\n"},
+                                                               {TST_DEEPL, "document.getElementsByTagName('textarea')[1].value;\n"}};
     m_resultJavascript                                      = resultJavascriptMap[ts];
 
     connect(m_timer, &QTimer::timeout, this, &TranslateHelperPage::getResult);
@@ -49,22 +49,39 @@ void TranslateHelperPage::translate(const QString &text)
     m_state = THS_LOADINGPAGE;
     load(QUrl(m_landingPage + text.toUtf8().toPercentEncoding()));
     m_timer->start(g_settings->translateTimeout());
+#if defined(ENABLE_LOGS)
     qDebug() << __FUNCTION__ << __LINE__ << m_state << m_service << text;
+#endif
 }
 
 void TranslateHelperPage::getResult()
 {
+#if defined(ENABLE_LOGS)
+    qDebug() << __FUNCTION__ << __LINE__ << m_state << m_service << m_resultJavascript;
+#endif
     m_timer->stop();
     runJavaScript(m_resultJavascript, [this](const auto &v) {
+#if defined(ENABLE_LOGS)
+        qDebug() << __FUNCTION__ << __LINE__ << m_state << m_service << v;
+#endif
         if (v.toString().isEmpty())
         {
             int interval = m_timer->interval() + intervalStartupStep;
             if (interval > g_settings->translateTimeout())
                 interval = intervalStartupStep;
-            m_timer->start(interval);
+            m_resultTryCount++;
+            if (m_resultTryCount < 3)
+            {
+                m_timer->start(interval);
+            }
+            else
+            {
+                emit translated(tr("<h4>Translating failed :-(</h4>"));
+            }
         }
         else
         {
+            m_resultTryCount = 0;
             QString result = QString("<h4>%1</h4><p>%2</p><hr><h4>%3</h4><p>%4</p>")
                                  .arg(tr("Translated Text:"), v.toString(), tr("Original Text:"), m_originalText);
             emit translated(result);
@@ -74,7 +91,9 @@ void TranslateHelperPage::getResult()
 
 void TranslateHelperPage::onLoadFinished(bool ok)
 {
+#if defined(ENABLE_LOGS)
     qDebug() << __FUNCTION__ << __LINE__ << m_state << m_service << ok;
+#endif
     switch (m_state)
     {
     case THS_LOADINGPAGE:
@@ -103,10 +122,18 @@ void TranslateHelperPage::onLoadFinished(bool ok)
 
 void TranslateHelperPage::requestYoudao()
 {
-    runJavaScript(QString("document.getElementById(\"inputOriginal\").value= \"%1\";\n"
-                          "document.getElementById(\"transMachine\").click();\n")
-                      .arg(m_originalText.replace("\"", "\\\"")),
-                  [this](const QVariant &) { m_timer->start(intervalStartupStep); });
+    QString js = QString("document.getElementById('inputOriginal').value= '%1';"
+                         "document.getElementById('transMachine').click();\n")
+                     .arg(m_originalText.replace("\"", "\\\""));
+#if defined(ENABLE_LOGS)
+    qDebug() << __FUNCTION__ << __LINE__ << m_state << m_service << js;
+#endif
+    runJavaScript(js, [this](const QVariant &v) {
+#if defined(ENABLE_LOGS)
+        qDebug() << __FUNCTION__ << __LINE__ << v;
+#endif
+        m_timer->start(intervalStartupStep);
+    });
 }
 
 void TranslateHelperPage::requestGoogle()

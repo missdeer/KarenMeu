@@ -37,6 +37,7 @@ private slots:
     void onLoadFinished(bool ok);
 signals:
     void translated(QString);
+    void failed();
 
 private:
     TranslateService      m_service;
@@ -46,6 +47,7 @@ private:
     QString               m_resultJavascript;
     std::function<void()> m_request;
     QTimer *              m_timer;
+    int                   m_resultTryCount {0};
 
     void requestYoudao();
     void requestGoogle();
