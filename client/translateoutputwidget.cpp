@@ -6,11 +6,8 @@
 
 #include "clientutils.h"
 
-TranslateOutputWidget::TranslateOutputWidget(TranslateService ts, QWidget *parent)
-    : QWidget(parent)
-    , m_editor(new QPlainTextEdit(this))
-    , m_toolbar(new QToolBar(this))
-    , m_service(ts)
+TranslateOutputWidget::TranslateOutputWidget(Provider *provider, QWidget *parent)
+    : QWidget(parent), m_editor(new QPlainTextEdit(this)), m_toolbar(new QToolBar(this)), m_provider(provider)
 {
     auto toolLayout = new QBoxLayout(QBoxLayout::TopToBottom, this);
     toolLayout->setContentsMargins(0, 0, 0, 0);
@@ -22,6 +19,12 @@ TranslateOutputWidget::TranslateOutputWidget(TranslateService ts, QWidget *paren
     setLayout(toolLayout);
 
     initializeToolbar();
+}
+
+TranslateOutputWidget::~TranslateOutputWidget()
+{
+    delete m_provider;
+    m_provider = nullptr;
 }
 
 QPlainTextEdit *TranslateOutputWidget::editor() const
@@ -40,7 +43,7 @@ void TranslateOutputWidget::translate(const QString &text)
     ClientUtils::setHtmlContent(m_editor, tr("<h4>Translating...</h4>"));
     if (!m_helper)
     {
-        m_helper = new TranslateHelperPage(m_service, this);
+        m_helper = new TranslateHelperPage(m_provider, this);
         connect(m_helper, &TranslateHelperPage::translated, this, &TranslateOutputWidget::onTranslated);
     }
     Q_ASSERT(m_helper);

@@ -9,11 +9,13 @@
 QT_FORWARD_DECLARE_CLASS(QPlainTextEdit);
 QT_FORWARD_DECLARE_CLASS(QToolBar);
 
+class Provide;
 class TranslateOutputWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit TranslateOutputWidget(TranslateService ts, QWidget *parent = nullptr);
+    explicit TranslateOutputWidget(Provider *provider, QWidget *parent = nullptr);
+    ~TranslateOutputWidget();
 
     QPlainTextEdit *editor() const;
     void            clear();
@@ -31,7 +33,7 @@ private:
     QPlainTextEdit *         m_editor;
     QToolBar *               m_toolbar;
     TranslateHelperPage *    m_helper {nullptr};
-    TranslateService         m_service;
+    Provider *               m_provider {nullptr};
     std::function<QString()> m_getSelection;
     void                     initializeToolbar();
 };
