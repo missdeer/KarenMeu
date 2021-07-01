@@ -33,11 +33,10 @@ public slots:
     void getResult();
 
 private slots:
-
     void onLoadFinished(bool ok);
+
 signals:
     void translated(QString);
-    void failed();
 
 private:
     TranslateService      m_service;
