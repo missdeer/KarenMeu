@@ -13,6 +13,7 @@ $(BINARY): $(CHECKS)
 	GO111MODULE=on CGO_ENABLED=$(CGO_ENABLED) $(SYSTEM) go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY)
 	mv libutils.h utils.h
 	go mod tidy
+	bash -c ./update-def.sh
 
 .PHONY: clean
 clean:
