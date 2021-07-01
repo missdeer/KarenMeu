@@ -204,6 +204,6 @@ QByteArray PreviewPage::compressPNG(const QByteArray &ba)
     GoSlice output;
     auto    res = Crush(input, &output);
     if (!res)
-        return QByteArray();
+        return ba;
     return QByteArray((char *)output.data, output.len);
 }
