@@ -24,7 +24,7 @@ void TranslateHelperPage::translate(const QString &text)
     }
     m_originalText = text;
     m_state = THS_LOADINGPAGE;
-    load(QUrl(m_provider->landingPageUrl() + text.toUtf8().toPercentEncoding()));
+    load(QUrl::fromUserInput(m_provider->landingPageUrl() + text.toUtf8()));
     m_timer->start(g_settings->translateTimeout());
 #if defined(ENABLE_LOGS)
     qDebug() << __FUNCTION__ << __LINE__ << m_state << m_service << text;

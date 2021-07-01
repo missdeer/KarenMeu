@@ -112,12 +112,6 @@ private:
     QString               m_originalText;
     QTimer *              m_timer;
     int                   m_resultTryCount {0};
-
-    void requestYoudao();
-    void requestGoogle();
-    void requestBaidu();
-    void requestSogou();
-    void requestDeepL();
 };
 
 #endif // TRANSLATEHELPERPAGE_H
