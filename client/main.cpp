@@ -19,6 +19,7 @@
 
 int main(int argc, char *argv[])
 {
+    qputenv("QT_ENABLE_GLYPH_CACHE_WORKAROUND", "1");
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setOrganizationName("MiniDump.Info");
