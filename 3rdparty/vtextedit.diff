@@ -1,0 +1,18 @@
+diff --git a/src/editor/editor.pro b/src/editor/editor.pro
+index 0cbc14b..a41118c 100644
+--- a/src/editor/editor.pro
++++ b/src/editor/editor.pro
+@@ -13,6 +13,7 @@ macx: {
+     FRAMEWORK_HEADERS.path = Headers/vtextedit
+     QMAKE_BUNDLE_DATA += FRAMEWORK_HEADERS
+ 
++    QMAKE_LFLAGS_SONAME = -Wl,-install_name,@executable_path/../Frameworks/
+     # Process VSyntaxHighlighting framework
+     sh_lib_name = VSyntaxHighlighting
+     sh_lib_dir = $${OUT_PWD}/../libs/syntax-highlighting
+diff --git a/src/libs/syntax-highlighting b/src/libs/syntax-highlighting
+--- a/src/libs/syntax-highlighting
++++ b/src/libs/syntax-highlighting
+@@ -1 +1 @@
+-Subproject commit 807895fcc897b94e731d91c7e92ee27e61aaeed9
++Subproject commit 807895fcc897b94e731d91c7e92ee27e61aaeed9-dirty
