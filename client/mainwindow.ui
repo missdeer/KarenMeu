@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>1283</width>
-     <height>23</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -284,6 +284,21 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+  </widget>
+  <widget class="QToolBar" name="translateToolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionDictionary"/>
+   <addaction name="actionTranslateSelected"/>
+   <addaction name="actionTranslateTextInClipboard"/>
+   <addaction name="actionTranslateFullText"/>
   </widget>
   <action name="actionNewMarkdown">
    <property name="icon">
@@ -1176,6 +1191,10 @@
    </property>
   </action>
   <action name="actionTranslateTextInClipboard">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/clipboard.png</normaloff>:/rc/images/clipboard.png</iconset>
+   </property>
    <property name="text">
     <string>Translate Text in Clipboard</string>
    </property>
@@ -1219,6 +1238,10 @@
    </property>
   </action>
   <action name="actionTranslateFullText">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/fulltext.png</normaloff>:/rc/images/fulltext.png</iconset>
+   </property>
    <property name="text">
     <string>Translate Full Text</string>
    </property>

@@ -106,6 +106,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->menuView->addAction(ui->editToolbar->toggleViewAction());
     ui->menuView->addAction(ui->formatToolbar->toggleViewAction());
     ui->menuView->addAction(ui->shortcutToolbar->toggleViewAction());
+    ui->menuView->addAction(ui->translateToolBar->toggleViewAction());
 
     for (int i = 0; i < MaxRecentFiles; ++i)
     {

@@ -398,5 +398,7 @@
         <file>rc/images/remove.png</file>
         <file>rc/images/animatedsprite-loading.gif</file>
         <file>rc/images/findreplace.png</file>
+        <file>rc/images/clipboard.png</file>
+        <file>rc/images/fulltext.png</file>
     </qresource>
 </RCC>
