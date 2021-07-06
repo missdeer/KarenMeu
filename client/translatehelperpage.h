@@ -59,7 +59,7 @@ public:
 
     QString resultJavaScript() override
     {
-        return "document.getElementsByClassName('output')[0].innerText;\n";
+        return "document.getElementById('trans-result').innerText;\n";
     }
 };
 class GoogleProvider : public Provider
