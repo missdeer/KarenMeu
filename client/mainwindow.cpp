@@ -26,16 +26,19 @@
 #include <QtCore>
 
 #include "mainwindow.h"
-
+#include "baidutranslator.h"
 #include "clientutils.h"
 #include "custompreviewthemeeditwidget.h"
+#include "deepltranslator.h"
 #include "filecache.h"
 #include "findreplacedialog.h"
+#include "googletranslator.h"
 #include "markdowneditor4.h"
 #include "markdownview.h"
 #include "preferencedialog.h"
 #include "previewthemeeditor.h"
 #include "settings.h"
+#include "sogoutranslator.h"
 #include "templatemanager.h"
 #include "templatemanagerdialog.h"
 #include "translatehelperpage.h"
@@ -44,6 +47,7 @@
 #include "utils.h"
 #include "xmlSettings.h"
 #include "youdao.h"
+#include "youdaotranslator.h"
 
 using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
@@ -676,7 +680,7 @@ void MainWindow::setupDockPanels()
     auto  getSelectionCallback = std::bind(&MarkdownView::selectedText, m_view);
     auto *googleTranslateDock  = new QDockWidget(tr("Google Translate"), this);
     googleTranslateDock->setObjectName("googleTranslate");
-    m_googleTranslateEditor = new TranslateOutputWidget(new GoogleProvider, googleTranslateDock);
+    m_googleTranslateEditor = new TranslateOutputWidget(new GoogleTranslator, googleTranslateDock);
     m_googleTranslateEditor->setGetSelectionCallback(getSelectionCallback);
     ClientUtils::InitializeWidgetFont(m_googleTranslateEditor->editor());
     googleTranslateDock->setWidget(m_googleTranslateEditor);
@@ -688,7 +692,7 @@ void MainWindow::setupDockPanels()
 
     auto *baiduTranslateDock = new QDockWidget(tr("Baidu Translate"), this);
     baiduTranslateDock->setObjectName("baiduTranslateDock");
-    m_baiduTranslateEditor = new TranslateOutputWidget(new BaiduProvider, baiduTranslateDock);
+    m_baiduTranslateEditor = new TranslateOutputWidget(new BaiduTranslator, baiduTranslateDock);
     m_baiduTranslateEditor->setGetSelectionCallback(getSelectionCallback);
     ClientUtils::InitializeWidgetFont(m_baiduTranslateEditor->editor());
     baiduTranslateDock->setWidget(m_baiduTranslateEditor);
@@ -700,7 +704,7 @@ void MainWindow::setupDockPanels()
 
     auto *youdaoTranslateDock = new QDockWidget(tr("Youdao Translate"), this);
     youdaoTranslateDock->setObjectName("youdaoTranslateDock");
-    m_youdaoTranslateEditor = new TranslateOutputWidget(new YoudaoProvider, youdaoTranslateDock);
+    m_youdaoTranslateEditor = new TranslateOutputWidget(new YoudaoTranslator, youdaoTranslateDock);
     m_youdaoTranslateEditor->setGetSelectionCallback(getSelectionCallback);
     ClientUtils::InitializeWidgetFont(m_youdaoTranslateEditor->editor());
     youdaoTranslateDock->setWidget(m_youdaoTranslateEditor);
@@ -712,7 +716,7 @@ void MainWindow::setupDockPanels()
 
     auto *sogouTranslateDock = new QDockWidget(tr("Sogou Translate"), this);
     sogouTranslateDock->setObjectName("sogouTranslateDock");
-    m_sogouTranslateEditor = new TranslateOutputWidget(new SogouProvider, sogouTranslateDock);
+    m_sogouTranslateEditor = new TranslateOutputWidget(new SogouTranslator, sogouTranslateDock);
     m_sogouTranslateEditor->setGetSelectionCallback(getSelectionCallback);
     ClientUtils::InitializeWidgetFont(m_sogouTranslateEditor->editor());
     sogouTranslateDock->setWidget(m_sogouTranslateEditor);
@@ -724,7 +728,7 @@ void MainWindow::setupDockPanels()
 
     auto *deepLTranslateDock = new QDockWidget(tr("DeepL Translate"), this);
     deepLTranslateDock->setObjectName("deepLTranslateDock");
-    m_deepLTranslateEditor = new TranslateOutputWidget(new DeepLProvider, deepLTranslateDock);
+    m_deepLTranslateEditor = new TranslateOutputWidget(new DeepLTranslator, deepLTranslateDock);
     m_deepLTranslateEditor->setGetSelectionCallback(getSelectionCallback);
     ClientUtils::InitializeWidgetFont(m_deepLTranslateEditor->editor());
     deepLTranslateDock->setWidget(m_deepLTranslateEditor);

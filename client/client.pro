@@ -51,7 +51,12 @@ SOURCES += \
         $$PWD/networkreplyhelper.cpp \
         $$PWD/plantumlrunner.cpp \
         $$PWD/plantumlurlcodec.cpp \
-        $$PWD/findreplacedialog.cpp
+        $$PWD/findreplacedialog.cpp \
+        $$PWD/translator/baidutranslator.cpp \
+        $$PWD/translator/deepltranslator.cpp \
+        $$PWD/translator/googletranslator.cpp \
+        $$PWD/translator/sogoutranslator.cpp \
+        $$PWD/translator/youdaotranslator.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -76,7 +81,13 @@ HEADERS += \
         $$PWD/plantumlrunner.h \
         $$PWD/plantumlurlcodec.h \
         $$PWD/findreplacedialog.h \
-        $$PWD/xmlSettings.h
+        $$PWD/xmlSettings.h \
+        $$PWD/translator/baidutranslator.h \
+        $$PWD/translator/deepltranslator.h \
+        $$PWD/translator/googletranslator.h \
+        $$PWD/translator/sogoutranslator.h \
+        $$PWD/translator/translator.hpp \
+        $$PWD/translator/youdaotranslator.h
 
 FORMS += \
         $$PWD/mainwindow.ui \
@@ -84,7 +95,7 @@ FORMS += \
         $$PWD/templatemanagerdialog.ui \
         $$PWD/findreplacedialog.ui
 
-INCLUDEPATH += $$PWD $$PWD/markdowneditor4  $$PWD/../utils
+INCLUDEPATH += $$PWD $$PWD/markdowneditor4  $$PWD/../utils $$PWD/translator
 LIBS += -L$$PWD/../utils
 
 # Default rules for deployment.

@@ -1,13 +1,20 @@
+#include <QComboBox>
+#include <QLabel>
 #include <QPlainTextEdit>
 #include <QToolBar>
 #include <QVBoxLayout>
 
 #include "translateoutputwidget.h"
-
 #include "clientutils.h"
+#include "translator.hpp"
 
-TranslateOutputWidget::TranslateOutputWidget(Provider *provider, QWidget *parent)
-    : QWidget(parent), m_editor(new QPlainTextEdit(this)), m_toolbar(new QToolBar(this)), m_provider(provider)
+TranslateOutputWidget::TranslateOutputWidget(ITranslator *translator, QWidget *parent)
+    : QWidget(parent),
+      m_editor(new QPlainTextEdit(this)),
+      m_toolbar(new QToolBar(this)),
+      m_fromLanguages(new QComboBox(m_toolbar)),
+      m_toLanguages(new QComboBox(m_toolbar)),
+      m_translator(translator)
 {
     auto toolLayout = new QBoxLayout(QBoxLayout::TopToBottom, this);
     toolLayout->setContentsMargins(0, 0, 0, 0);
@@ -19,12 +26,18 @@ TranslateOutputWidget::TranslateOutputWidget(Provider *provider, QWidget *parent
     setLayout(toolLayout);
 
     initializeToolbar();
+    m_fromLanguages->addItems(translator->fromLanguages());
+    m_fromLanguages->setCurrentText(translator->defaultFrom());
+    m_toLanguages->addItems(translator->toLanguages());
+    m_toLanguages->setCurrentText(translator->defaultTo());
+    connect(m_fromLanguages, &QComboBox::currentTextChanged, [translator](const QString &text) { translator->from(text); });
+    connect(m_toLanguages, &QComboBox::currentTextChanged, [translator](const QString &text) { translator->to(text); });
 }
 
 TranslateOutputWidget::~TranslateOutputWidget()
 {
-    delete m_provider;
-    m_provider = nullptr;
+    delete m_translator;
+    m_translator = nullptr;
 }
 
 QPlainTextEdit *TranslateOutputWidget::editor() const
@@ -43,7 +56,7 @@ void TranslateOutputWidget::translate(const QString &text)
     ClientUtils::setHtmlContent(m_editor, tr("<h4>Translating...</h4>"));
     if (!m_helper)
     {
-        m_helper = new TranslateHelperPage(m_provider, this);
+        m_helper = new TranslateHelperPage(m_translator, this);
         connect(m_helper, &TranslateHelperPage::translated, this, &TranslateOutputWidget::onTranslated);
     }
     Q_ASSERT(m_helper);
@@ -94,4 +107,9 @@ void TranslateOutputWidget::initializeToolbar()
     connect(translateAction, &QAction::triggered, this, &TranslateOutputWidget::onTranslate);
     auto refreshAction = m_toolbar->addAction(QIcon(":/rc/images/refresh.png"), tr("Refresh"));
     connect(refreshAction, &QAction::triggered, this, &TranslateOutputWidget::onRefresh);
+    m_toolbar->addSeparator();
+    m_toolbar->addWidget(new QLabel(tr("From")));
+    m_toolbar->addWidget(m_fromLanguages);
+    m_toolbar->addWidget(new QLabel(tr("To")));
+    m_toolbar->addWidget(m_toLanguages);
 }

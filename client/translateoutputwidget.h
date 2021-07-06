@@ -8,13 +8,14 @@
 
 QT_FORWARD_DECLARE_CLASS(QPlainTextEdit);
 QT_FORWARD_DECLARE_CLASS(QToolBar);
+QT_FORWARD_DECLARE_CLASS(QComboBox);
 
-class Provide;
+class ITranslator;
 class TranslateOutputWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit TranslateOutputWidget(Provider *provider, QWidget *parent = nullptr);
+    explicit TranslateOutputWidget(ITranslator *translator, QWidget *parent = nullptr);
     ~TranslateOutputWidget();
 
     QPlainTextEdit *editor() const;
@@ -30,10 +31,12 @@ private slots:
 signals:
 
 private:
-    QPlainTextEdit *         m_editor;
-    QToolBar *               m_toolbar;
+    QPlainTextEdit *         m_editor {nullptr};
+    QToolBar *               m_toolbar {nullptr};
+    QComboBox *              m_fromLanguages {nullptr};
+    QComboBox *              m_toLanguages {nullptr};
     TranslateHelperPage *    m_helper {nullptr};
-    Provider *               m_provider {nullptr};
+    ITranslator *            m_translator {nullptr};
     std::function<QString()> m_getSelection;
     void                     initializeToolbar();
 };
