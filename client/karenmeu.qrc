@@ -400,5 +400,10 @@
         <file>rc/images/findreplace.png</file>
         <file>rc/images/clipboard.png</file>
         <file>rc/images/fulltext.png</file>
+        <file>rc/translators/baidu.json</file>
+        <file>rc/translators/deepl.json</file>
+        <file>rc/translators/google.json</file>
+        <file>rc/translators/sogou.json</file>
+        <file>rc/translators/youdao.json</file>
     </qresource>
 </RCC>
