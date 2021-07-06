@@ -11,7 +11,7 @@ namespace Ui
 class MarkdownView;
 class PreviewThemeEditor;
 class CustomPreviewThemeEditWidget;
-class Youdao;
+class YoudaoDict;
 class TranslateHelperPage;
 class TranslateOutputWidget;
 class TemplateManager;
@@ -128,7 +128,7 @@ private:
     PreviewThemeEditor *          m_previewHTMLEditor;
     CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;
     QList<QToolBar *>             m_visibleToolbars;
-    Youdao *                      m_youdaoDict;
+    YoudaoDict *                  m_youdaoDict;
     TemplateManager *             m_templateManager;
     QAction *                     recentFileActs[MaxRecentFiles];
     QAction *                     recentWorkspaceActs[MaxRecentFiles];

@@ -5,11 +5,11 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 
-class Youdao : public QObject
+class YoudaoDict : public QObject
 {
     Q_OBJECT
 public:
-    explicit Youdao(QNetworkAccessManager &nam, QObject *parent = nullptr);
+    explicit YoudaoDict(QNetworkAccessManager &nam, QObject *parent = nullptr);
     void query(const QString& keyword);
 signals:
     void result(QString);

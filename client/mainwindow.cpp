@@ -26,6 +26,7 @@
 #include <QtCore>
 
 #include "mainwindow.h"
+
 #include "baidutranslator.h"
 #include "clientutils.h"
 #include "custompreviewthemeeditwidget.h"
@@ -46,7 +47,7 @@
 #include "ui_mainwindow.h"
 #include "utils.h"
 #include "xmlSettings.h"
-#include "youdao.h"
+#include "youdaodict.h"
 #include "youdaotranslator.h"
 
 using LabelActionMap = QMap<QString, QAction *>;
@@ -57,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , m_fileCache(new FileCache(50 * 1024 * 1024, this))
     , m_view(new MarkdownView(&m_nam, m_fileCache, this))
-    , m_youdaoDict(new Youdao(m_nam))
+    , m_youdaoDict(new YoudaoDict(m_nam))
     , m_templateManager(new TemplateManager)
 {
     ui->setupUi(this);
@@ -99,7 +100,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionShiftLeft, &QAction::triggered, m_view, &MarkdownView::formatShiftLeft);
     connect(m_view, &MarkdownView::setCurrentFile, this, &MainWindow::onSetCurrentMarkdownDocument);
     connect(m_view, &MarkdownView::contentModified, this, &MainWindow::onDocumentModified);
-    connect(m_youdaoDict, &Youdao::result, this, &MainWindow::onYoudaoDictResult);
+    connect(m_youdaoDict, &YoudaoDict::result, this, &MainWindow::onYoudaoDictResult);
 
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
     ui->menuView->addAction(ui->editToolbar->toggleViewAction());

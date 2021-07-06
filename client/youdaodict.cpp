@@ -5,7 +5,7 @@
 #include <QUrl>
 #include <QUrlQuery>
 
-#include "youdao.h"
+#include "youdaodict.h"
 
 struct YoudaoDictKey
 {
@@ -13,9 +13,9 @@ struct YoudaoDictKey
     QString key;
 };
 
-Youdao::Youdao(QNetworkAccessManager &nam, QObject *parent) : QObject(parent), m_nam(nam) {}
+YoudaoDict::YoudaoDict(QNetworkAccessManager &nam, QObject *parent) : QObject(parent), m_nam(nam) {}
 
-void Youdao::query(const QString &keyword)
+void YoudaoDict::query(const QString &keyword)
 {
     static int           keyIndex  = 0;
     static YoudaoDictKey keys[]    = {{"f2ec-org", "1787962561"}, {"go-ydict", "252639882"}, {"Youdao-dict-v21", "1945325576"}};
@@ -45,7 +45,7 @@ void Youdao::query(const QString &keyword)
             this, SLOT(onError(QNetworkReply::NetworkError)));
 }
 
-void Youdao::onFinished()
+void YoudaoDict::onFinished()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     Q_ASSERT(reply);
@@ -110,14 +110,14 @@ void Youdao::onFinished()
     emit result(output);
 }
 
-void Youdao::onError(QNetworkReply::NetworkError e)
+void YoudaoDict::onError(QNetworkReply::NetworkError e)
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     Q_ASSERT(reply);
     qDebug() << e << reply->errorString();
 }
 
-void Youdao::onReadyRead()
+void YoudaoDict::onReadyRead()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     Q_ASSERT(reply);

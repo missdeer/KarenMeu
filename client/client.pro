@@ -39,7 +39,7 @@ SOURCES += \
         $$PWD/preferencedialog.cpp \
         $$PWD/scintillaconfig.cpp \
         $$PWD/settings.cpp \
-        $$PWD/youdao.cpp \
+        $$PWD/youdaodict.cpp \
         $$PWD/translatehelperpage.cpp \
         $$PWD/translateoutputwidget.cpp \
         $$PWD/clientutils.cpp \
@@ -68,7 +68,7 @@ HEADERS += \
         $$PWD/preferencedialog.h \
         $$PWD/scintillaconfig.h \
         $$PWD/settings.h \
-        $$PWD/youdao.h \
+        $$PWD/youdaodict.h \
         $$PWD/translatehelperpage.h \
         $$PWD/translateoutputwidget.h \
         $$PWD/clientutils.h \
