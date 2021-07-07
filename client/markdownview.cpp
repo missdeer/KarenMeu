@@ -464,7 +464,7 @@ MarkdownEditor4 *MarkdownView::editor()
 QString MarkdownView::selectedText() const
 {
     Q_ASSERT(m_editor);
-    if (m_editor->hasFocus())
+    if (m_editor->hasFocus() || !m_preview || !m_preview->hasFocus() || m_preview->selectedText().isEmpty())
     {
         QTextCursor c = m_editor->textCursor();
         return c.selectedText();

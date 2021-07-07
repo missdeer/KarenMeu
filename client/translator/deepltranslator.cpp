@@ -5,22 +5,22 @@
 
 QStringList DeepLTranslator::fromLanguages()
 {
-    return QStringList();
+    return TranslatorUtil::StringList(":/rc/translators/deepl.json", "fromLanguages");
 }
 
 QStringList DeepLTranslator::toLanguages()
 {
-    return QStringList();
+    return TranslatorUtil::StringList(":/rc/translators/deepl.json", "toLanguages");
 }
 
 QString DeepLTranslator::defaultFrom()
 {
-    return "en";
+    return TranslatorUtil::String(":/rc/translators/deepl.json", "defaultFrom");
 }
 
 QString DeepLTranslator::defaultTo()
 {
-    return "zh";
+    return TranslatorUtil::String(":/rc/translators/deepl.json", "defaultTo");
 }
 
 void DeepLTranslator::from(const QString &from)
@@ -33,6 +33,16 @@ void DeepLTranslator::to(const QString &to)
     m_to = to;
 }
 
+QString DeepLTranslator::from()
+{
+    return TranslatorUtil::String(":/rc/translators/deepl.json", m_from);
+}
+
+QString DeepLTranslator::to()
+{
+    return TranslatorUtil::String(":/rc/translators/deepl.json", m_to);
+}
+
 void DeepLTranslator::request(QWebEnginePage *page, QTimer *timer, const QString &originalText)
 {
     timer->start(intervalStartupStep);
@@ -40,7 +50,7 @@ void DeepLTranslator::request(QWebEnginePage *page, QTimer *timer, const QString
 
 QString DeepLTranslator::landingPageUrl()
 {
-    return "https://www.deepl.com/translator#en/zh/";
+    return QString("https://www.deepl.com/translator#%1/%2/").arg(from(), to());
 }
 
 QString DeepLTranslator::resultJavaScript()

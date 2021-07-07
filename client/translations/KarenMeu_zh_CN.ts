@@ -164,11 +164,6 @@
         <translation>格式工具栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="290"/>
-        <source>toolBar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="312"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
@@ -851,6 +846,11 @@
         <location filename="../mainwindow.ui" line="279"/>
         <source>Shortcuts Toolbar</source>
         <translation>快捷选项工具栏</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="290"/>
+        <source>Translate Toolbar</source>
+        <translation>翻译工具栏</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="309"/>
@@ -1664,47 +1664,37 @@
 <context>
     <name>TranslateHelperPage</name>
     <message>
-        <location filename="../translatehelperpage.cpp" line="55"/>
+        <location filename="../translatehelperpage.cpp" line="59"/>
         <source>&lt;h4&gt;Translating failed :-(&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;翻译不出来 :-(&lt;/h4&gt;</translation>
-    </message>
-    <message>
-        <location filename="../translatehelperpage.cpp" line="62"/>
-        <source>Translated Text:</source>
-        <translation>译文：</translation>
-    </message>
-    <message>
-        <location filename="../translatehelperpage.cpp" line="62"/>
-        <source>Original Text:</source>
-        <translation>原文：</translation>
     </message>
 </context>
 <context>
     <name>TranslateOutputWidget</name>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="56"/>
+        <location filename="../translateoutputwidget.cpp" line="64"/>
         <source>&lt;h4&gt;Translating...&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;正在翻译…&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="106"/>
+        <location filename="../translateoutputwidget.cpp" line="115"/>
         <source>Translate</source>
         <translation>翻译</translation>
     </message>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="108"/>
+        <location filename="../translateoutputwidget.cpp" line="117"/>
         <source>Refresh</source>
         <translation>刷新</translation>
     </message>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="111"/>
+        <location filename="../translateoutputwidget.cpp" line="120"/>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>源语言：</translation>
     </message>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="113"/>
+        <location filename="../translateoutputwidget.cpp" line="122"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>目标语言：</translation>
     </message>
 </context>
 <context>

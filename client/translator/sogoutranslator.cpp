@@ -5,22 +5,22 @@
 
 QStringList SogouTranslator::fromLanguages()
 {
-    return QStringList();
+    return TranslatorUtil::StringList(":/rc/translators/sogou.json", "fromLanguages");
 }
 
 QStringList SogouTranslator::toLanguages()
 {
-    return QStringList();
+    return TranslatorUtil::StringList(":/rc/translators/sogou.json", "toLanguages");
 }
 
 QString SogouTranslator::defaultFrom()
 {
-    return "en";
+    return TranslatorUtil::String(":/rc/translators/sogou.json", "defaultFrom");
 }
 
 QString SogouTranslator::defaultTo()
 {
-    return "zh";
+    return TranslatorUtil::String(":/rc/translators/sogou.json", "defaultTo");
 }
 
 void SogouTranslator::from(const QString &from)
@@ -31,6 +31,16 @@ void SogouTranslator::from(const QString &from)
 void SogouTranslator::to(const QString &to)
 {
     m_to = to;
+}
+
+QString SogouTranslator::from()
+{
+    return TranslatorUtil::String(":/rc/translators/sogou.json", m_from);
+}
+
+QString SogouTranslator::to()
+{
+    return TranslatorUtil::String(":/rc/translators/sogou.json", m_to);
 }
 
 void SogouTranslator::request(QWebEnginePage *page, QTimer *timer, const QString &originalText)
@@ -44,7 +54,7 @@ void SogouTranslator::request(QWebEnginePage *page, QTimer *timer, const QString
 
 QString SogouTranslator::landingPageUrl()
 {
-    return "https://fanyi.sogou.com/?transfrom=en&transto=zh-CHS&isclient=1&model=general&keyword=";
+    return QString("https://fanyi.sogou.com/?transfrom=%1&transto=%2&isclient=1&model=general&keyword=").arg(from(), to());
 }
 
 QString SogouTranslator::resultJavaScript()

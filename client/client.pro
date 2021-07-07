@@ -56,7 +56,8 @@ SOURCES += \
         $$PWD/translator/deepltranslator.cpp \
         $$PWD/translator/googletranslator.cpp \
         $$PWD/translator/sogoutranslator.cpp \
-        $$PWD/translator/youdaotranslator.cpp
+        $$PWD/translator/youdaotranslator.cpp \
+        $$PWD/translator/translator.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \

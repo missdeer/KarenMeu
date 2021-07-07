@@ -7,6 +7,7 @@
 #include "translatehelperpage.h"
 
 QT_FORWARD_DECLARE_CLASS(QPlainTextEdit);
+QT_FORWARD_DECLARE_CLASS(QLineEdit);
 QT_FORWARD_DECLARE_CLASS(QToolBar);
 QT_FORWARD_DECLARE_CLASS(QComboBox);
 
@@ -19,6 +20,7 @@ public:
     ~TranslateOutputWidget();
 
     QPlainTextEdit *editor() const;
+    QLineEdit *     originalTextEditor() const;
     void            clear();
     void            translate(const QString &text);
     void            setGetSelectionCallback(std::function<QString()> f);
@@ -32,6 +34,7 @@ signals:
 
 private:
     QPlainTextEdit *         m_editor {nullptr};
+    QLineEdit *              m_originalTextEditor {nullptr};
     QToolBar *               m_toolbar {nullptr};
     QComboBox *              m_fromLanguages {nullptr};
     QComboBox *              m_toLanguages {nullptr};

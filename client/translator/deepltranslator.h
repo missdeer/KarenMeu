@@ -15,6 +15,8 @@ public:
     QString     defaultTo() override;
     void        from(const QString &from) override;
     void        to(const QString &to) override;
+    QString     from() override;
+    QString     to() override;
     void        request(QWebEnginePage *page, QTimer *timer, const QString &originalText) override;
     QString     landingPageUrl() override;
     QString     resultJavaScript() override;

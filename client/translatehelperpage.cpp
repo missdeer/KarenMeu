@@ -23,7 +23,11 @@ void TranslateHelperPage::translate(const QString &text)
     }
     m_originalText = text;
     m_state = THS_LOADINGPAGE;
-    load(QUrl::fromUserInput(m_translator->landingPageUrl() + text.toUtf8()));
+    QUrl u         = QUrl::fromUserInput(m_translator->landingPageUrl() + text.toUtf8());
+#if defined(ENABLE_LOGS)
+    qDebug() << u;
+#endif
+    load(u);
     m_timer->start(g_settings->translateTimeout());
 #if defined(ENABLE_LOGS)
     qDebug() << __FUNCTION__ << __LINE__ << m_state << m_service << text;
@@ -58,9 +62,7 @@ void TranslateHelperPage::getResult()
         else
         {
             m_resultTryCount = 0;
-            QString result = QString("<h4>%1</h4><p>%2</p><hr><h4>%3</h4><p>%4</p>")
-                                 .arg(tr("Translated Text:"), v.toString(), tr("Original Text:"), m_originalText);
-            emit translated(result);
+            emit translated(v.toString());
         }
     });
 }

@@ -1,5 +1,6 @@
 #include <QComboBox>
 #include <QLabel>
+#include <QLineEdit>
 #include <QPlainTextEdit>
 #include <QToolBar>
 #include <QVBoxLayout>
@@ -11,6 +12,7 @@
 TranslateOutputWidget::TranslateOutputWidget(ITranslator *translator, QWidget *parent)
     : QWidget(parent),
       m_editor(new QPlainTextEdit(this)),
+      m_originalTextEditor(new QLineEdit(this)),
       m_toolbar(new QToolBar(this)),
       m_fromLanguages(new QComboBox(m_toolbar)),
       m_toLanguages(new QComboBox(m_toolbar)),
@@ -18,20 +20,21 @@ TranslateOutputWidget::TranslateOutputWidget(ITranslator *translator, QWidget *p
 {
     auto toolLayout = new QBoxLayout(QBoxLayout::TopToBottom, this);
     toolLayout->setContentsMargins(0, 0, 0, 0);
-    toolLayout->setSpacing(0);
+    toolLayout->setSpacing(2);
 
     toolLayout->addWidget(m_toolbar);
     toolLayout->addWidget(m_editor);
+    toolLayout->addWidget(m_originalTextEditor);
 
     setLayout(toolLayout);
 
     initializeToolbar();
     m_fromLanguages->addItems(translator->fromLanguages());
-    m_fromLanguages->setCurrentText(translator->defaultFrom());
     m_toLanguages->addItems(translator->toLanguages());
-    m_toLanguages->setCurrentText(translator->defaultTo());
     connect(m_fromLanguages, &QComboBox::currentTextChanged, [translator](const QString &text) { translator->from(text); });
     connect(m_toLanguages, &QComboBox::currentTextChanged, [translator](const QString &text) { translator->to(text); });
+    m_fromLanguages->setCurrentText(translator->defaultFrom());
+    m_toLanguages->setCurrentText(translator->defaultTo());
 }
 
 TranslateOutputWidget::~TranslateOutputWidget()
@@ -45,6 +48,11 @@ QPlainTextEdit *TranslateOutputWidget::editor() const
     return m_editor;
 }
 
+QLineEdit *TranslateOutputWidget::originalTextEditor() const
+{
+    return m_originalTextEditor;
+}
+
 void TranslateOutputWidget::clear()
 {
     Q_ASSERT(m_editor);
@@ -54,6 +62,7 @@ void TranslateOutputWidget::clear()
 void TranslateOutputWidget::translate(const QString &text)
 {
     ClientUtils::setHtmlContent(m_editor, tr("<h4>Translating...</h4>"));
+    m_originalTextEditor->setText(text);
     if (!m_helper)
     {
         m_helper = new TranslateHelperPage(m_translator, this);

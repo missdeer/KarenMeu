@@ -15,11 +15,19 @@ public:
     virtual QString     defaultTo()                                                               = 0;
     virtual void        from(const QString &from)                                                 = 0;
     virtual void        to(const QString &to)                                                     = 0;
+    virtual QString     from()                                                                    = 0;
+    virtual QString     to()                                                                      = 0;
     virtual void        request(QWebEnginePage *page, QTimer *timer, const QString &originalText) = 0;
     virtual QString     landingPageUrl()                                                          = 0;
     virtual QString     resultJavaScript()                                                        = 0;
 };
 
 inline int intervalStartupStep = 1000;
+
+namespace TranslatorUtil
+{
+    QStringList StringList(const QString &path, const QString &key);
+    QString     String(const QString &path, const QString &key);
+} // namespace TranslatorUtil
 
 #endif
