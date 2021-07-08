@@ -1,4 +1,5 @@
 #include <QComboBox>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPlainTextEdit>
@@ -18,13 +19,12 @@ TranslateOutputWidget::TranslateOutputWidget(ITranslator *translator, QWidget *p
       m_toLanguages(new QComboBox(m_toolbar)),
       m_translator(translator)
 {
-    auto toolLayout = new QBoxLayout(QBoxLayout::TopToBottom, this);
-    toolLayout->setContentsMargins(0, 0, 0, 0);
-    toolLayout->setSpacing(2);
+    auto toolLayout = new QVBoxLayout(this);
+    toolLayout->setContentsMargins(0, 2, 0, 2);
+    toolLayout->setSpacing(0);
 
     toolLayout->addWidget(m_toolbar);
     toolLayout->addWidget(m_editor);
-    toolLayout->addWidget(m_originalTextEditor);
 
     setLayout(toolLayout);
 
@@ -119,6 +119,10 @@ void TranslateOutputWidget::initializeToolbar()
     m_toolbar->addSeparator();
     m_toolbar->addWidget(new QLabel(tr("From")));
     m_toolbar->addWidget(m_fromLanguages);
+    m_toolbar->addSeparator();
     m_toolbar->addWidget(new QLabel(tr("To")));
     m_toolbar->addWidget(m_toLanguages);
+    m_toolbar->addSeparator();
+    m_toolbar->addWidget(new QLabel(tr("Original Text:"), this));
+    m_toolbar->addWidget(m_originalTextEditor);
 }

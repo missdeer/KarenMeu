@@ -1672,6 +1672,11 @@
 <context>
     <name>TranslateOutputWidget</name>
     <message>
+        <location filename="../translateoutputwidget.cpp" line="126"/>
+        <source>Original Text:</source>
+        <translation>原文：</translation>
+    </message>
+    <message>
         <location filename="../translateoutputwidget.cpp" line="64"/>
         <source>&lt;h4&gt;Translating...&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;正在翻译…&lt;/h4&gt;</translation>
@@ -1692,7 +1697,7 @@
         <translation>源语言：</translation>
     </message>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="122"/>
+        <location filename="../translateoutputwidget.cpp" line="123"/>
         <source>To</source>
         <translation>目标语言：</translation>
     </message>
