@@ -48,11 +48,17 @@ QString YoudaoTranslator::to()
 
 void YoudaoTranslator::request(QWebEnginePage *page, QTimer *timer, const QString &originalText)
 {
-    QString js = QString("document.getElementById('language').value= '%1';"
+    QString js = QString("var list = document.getElementsByTagName('li');"
+                         "for (var i=0; i < list.length; i++) {"
+                         "  if (list[i].getAttribute('data-value') == '%1') {"
+                         "    if (list[i].getAttribute('class') != 'selected') {"
+                         "      list[i].children[0].click();"
+                         "    }"
+                         "  }"
+                         "}"
                          "document.getElementById('inputOriginal').value= '%2';"
                          "document.getElementById('transMachine').click();\n")
                      .arg(from() + "2" + to(), originalText);
-    qDebug() << js;
     page->runJavaScript(js, [timer](const QVariant &v) { timer->start(intervalStartupStep); });
 }
 
