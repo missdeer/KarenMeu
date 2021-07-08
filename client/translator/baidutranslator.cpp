@@ -13,12 +13,12 @@ QStringList BaiduTranslator::toLanguages()
     return TranslatorUtil::StringList(":/rc/translators/baidu.json", "toLanguages");
 }
 
-QString BaiduTranslator::defaultFrom()
+QString BaiduTranslator::defaultFrom() const
 {
     return TranslatorUtil::String(":/rc/translators/baidu.json", "defaultFrom");
 }
 
-QString BaiduTranslator::defaultTo()
+QString BaiduTranslator::defaultTo() const
 {
     return TranslatorUtil::String(":/rc/translators/baidu.json", "defaultTo");
 }
@@ -33,12 +33,12 @@ void BaiduTranslator::to(const QString &to)
     m_to = to;
 }
 
-QString BaiduTranslator::from()
+QString BaiduTranslator::from() const
 {
     return TranslatorUtil::String(":/rc/translators/baidu.json", m_from);
 }
 
-QString BaiduTranslator::to()
+QString BaiduTranslator::to() const
 {
     return TranslatorUtil::String(":/rc/translators/baidu.json", m_to);
 }
@@ -51,12 +51,12 @@ void BaiduTranslator::request(QWebEnginePage *page, QTimer *timer, const QString
                         [timer](const QVariant &) { timer->start(intervalStartupStep); });
 }
 
-QString BaiduTranslator::landingPageUrl()
+QString BaiduTranslator::landingPageUrl() const
 {
     return QString("https://fanyi.baidu.com/#%1/%2/").arg(from(), to());
 }
 
-QString BaiduTranslator::resultJavaScript()
+QString BaiduTranslator::resultJavaScript() const
 {
     return "document.getElementsByClassName('target-output')[0].innerText;\n";
 }

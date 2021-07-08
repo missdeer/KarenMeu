@@ -13,12 +13,12 @@ QStringList DeepLTranslator::toLanguages()
     return TranslatorUtil::StringList(":/rc/translators/deepl.json", "toLanguages");
 }
 
-QString DeepLTranslator::defaultFrom()
+QString DeepLTranslator::defaultFrom() const
 {
     return TranslatorUtil::String(":/rc/translators/deepl.json", "defaultFrom");
 }
 
-QString DeepLTranslator::defaultTo()
+QString DeepLTranslator::defaultTo() const
 {
     return TranslatorUtil::String(":/rc/translators/deepl.json", "defaultTo");
 }
@@ -33,12 +33,12 @@ void DeepLTranslator::to(const QString &to)
     m_to = to;
 }
 
-QString DeepLTranslator::from()
+QString DeepLTranslator::from() const
 {
     return TranslatorUtil::String(":/rc/translators/deepl.json", m_from);
 }
 
-QString DeepLTranslator::to()
+QString DeepLTranslator::to() const
 {
     return TranslatorUtil::String(":/rc/translators/deepl.json", m_to);
 }
@@ -48,12 +48,12 @@ void DeepLTranslator::request(QWebEnginePage *page, QTimer *timer, const QString
     timer->start(intervalStartupStep);
 }
 
-QString DeepLTranslator::landingPageUrl()
+QString DeepLTranslator::landingPageUrl() const
 {
     return QString("https://www.deepl.com/translator#%1/%2/").arg(from(), to());
 }
 
-QString DeepLTranslator::resultJavaScript()
+QString DeepLTranslator::resultJavaScript() const
 {
     return "document.getElementsByTagName('textarea')[1].value;\n";
 }

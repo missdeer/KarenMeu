@@ -16,12 +16,12 @@ QStringList YoudaoTranslator::toLanguages()
     return TranslatorUtil::StringList(":/rc/translators/youdao.json", "toLanguages");
 }
 
-QString YoudaoTranslator::defaultFrom()
+QString YoudaoTranslator::defaultFrom() const
 {
     return TranslatorUtil::String(":/rc/translators/youdao.json", "defaultFrom");
 }
 
-QString YoudaoTranslator::defaultTo()
+QString YoudaoTranslator::defaultTo() const
 {
     return TranslatorUtil::String(":/rc/translators/youdao.json", "defaultTo");
 }
@@ -36,12 +36,12 @@ void YoudaoTranslator::to(const QString &to)
     m_to = to;
 }
 
-QString YoudaoTranslator::from()
+QString YoudaoTranslator::from() const
 {
     return TranslatorUtil::String(":/rc/translators/youdao.json", m_from);
 }
 
-QString YoudaoTranslator::to()
+QString YoudaoTranslator::to() const
 {
     return TranslatorUtil::String(":/rc/translators/youdao.json", m_to);
 }
@@ -62,12 +62,17 @@ void YoudaoTranslator::request(QWebEnginePage *page, QTimer *timer, const QStrin
     page->runJavaScript(js, [timer](const QVariant &v) { timer->start(intervalStartupStep); });
 }
 
-QString YoudaoTranslator::landingPageUrl()
+QString YoudaoTranslator::landingPageUrl() const
 {
     return "https://fanyi.youdao.com/?keyword=";
 }
 
-QString YoudaoTranslator::resultJavaScript()
+QString YoudaoTranslator::resultJavaScript() const
 {
     return "document.getElementById('transTarget').innerText;\n";
+}
+
+bool YoudaoTranslator::mustChinese() const
+{
+    return true;
 }
