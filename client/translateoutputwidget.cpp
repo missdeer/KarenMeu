@@ -125,4 +125,5 @@ void TranslateOutputWidget::initializeToolbar()
     m_toolbar->addSeparator();
     m_toolbar->addWidget(new QLabel(tr("Original Text:"), this));
     m_toolbar->addWidget(m_originalTextEditor);
+    m_originalTextEditor->setReadOnly(true);
 }
