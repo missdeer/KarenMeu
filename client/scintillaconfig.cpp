@@ -13,11 +13,13 @@
 #include "ScintillaEdit.h"
 #include "settings.h"
 
+#if defined(Q_OS_WIN)
 // https://docs.microsoft.com/en-us/cpp/intrinsics/compiler-intrinsics
 // https://software.intel.com/sites/landingpage/IntrinsicsGuide/
 // https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html
 // https://clang.llvm.org/docs/LanguageExtensions.html
 #include <intrin.h>
+#endif
 
 // Clang and GCC use -march=x86-64-v3, https://clang.llvm.org/docs/UsersManual.html#x86
 // or -mavx2 -mpopcnt -mbmi -mbmi2 -mlzcnt -mmovbe
