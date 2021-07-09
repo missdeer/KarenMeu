@@ -13,6 +13,32 @@
 #include "ScintillaEdit.h"
 #include "settings.h"
 
+// https://docs.microsoft.com/en-us/cpp/intrinsics/compiler-intrinsics
+// https://software.intel.com/sites/landingpage/IntrinsicsGuide/
+// https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html
+// https://clang.llvm.org/docs/LanguageExtensions.html
+#include <intrin.h>
+
+// Clang and GCC use -march=x86-64-v3, https://clang.llvm.org/docs/UsersManual.html#x86
+// or -mavx2 -mpopcnt -mbmi -mbmi2 -mlzcnt -mmovbe
+// MSVC use /arch:AVX2
+#if defined(_WIN64) && defined(__AVX2__)
+#    define USE_AVX2 1
+#else
+#    define USE_AVX2 0
+#endif
+
+#if defined(__GNUC__) || defined(__clang__)
+#    define bswap32(x) __builtin_bswap32(x)
+#else
+#    define bswap32(x) _byteswap_ulong(x)
+#endif
+
+static inline uint32_t ColorFromRGBHex(uint32_t hex) noexcept
+{
+    return bswap32(hex) >> 8;
+}
+
 void ScintillaConfig::initScintilla()
 {
     m_sci->styleResetDefault();
@@ -272,15 +298,15 @@ void ScintillaConfig::applyStyle(const QDomElement &styleElem)
         if (!foreColor.isEmpty())
         {
             int color = foreColor.toLong(nullptr, 16);
-            color     = ((color & 0xFF0000) >> 16) | (color & 0xFF00) | ((color & 0xFF) << 16);
-            m_sci->styleSetFore(id, color);
+            // color     = ((color & 0xFF0000) >> 16) | (color & 0xFF00) | ((color & 0xFF) << 16);
+            m_sci->styleSetFore(id, ColorFromRGBHex(color));
         }
         QString backColor = styleElem.attribute("bgColor");
         if (!backColor.isEmpty())
         {
             int color = backColor.toLong(nullptr, 16);
-            color     = ((color & 0xFF0000) >> 16) | (color & 0xFF00) | ((color & 0xFF) << 16);
-            m_sci->styleSetBack(id, color);
+            // color     = ((color & 0xFF0000) >> 16) | (color & 0xFF00) | ((color & 0xFF) << 16);
+            m_sci->styleSetBack(id, ColorFromRGBHex(color));
         }
     }
     else if (styleElem.attribute("name") != "Global override")
