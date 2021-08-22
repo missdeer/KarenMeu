@@ -93,7 +93,7 @@ jobs:
             BUILDRP: build-x86.bat
     env:
       targetName: KarenMeu
-      go_version: 1.16
+      go_version: 1.17
       qt_ver: 5.15.2
       qt_target: desktop
     # 步骤
@@ -112,7 +112,7 @@ jobs:
           msystem: ${{ matrix.mingw_arch }}
           install: zip make git ${{ matrix.mingw_prefix }}-${{ matrix.toolchains }} ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-zstd
 
-      - name: Set up Go 1.16
+      - name: Set up Go 1.17
         uses: actions/setup-go@v2
         with:
           go-version: ${{ env.go_version }}
@@ -260,7 +260,7 @@ jobs:
             clang_link: llvm-win-x86.zip
     env:
       targetName: KarenMeu
-      go_version: 1.16
+      go_version: 1.17
       qt_ver: 5.15.2
       qt_target: desktop
     # 步骤
@@ -279,7 +279,7 @@ jobs:
           msystem: ${{ matrix.mingw_arch }}
           install: zip make git ${{ matrix.mingw_prefix }}-${{ matrix.toolchains }} ${{ matrix.mingw_prefix }}-make ${{ matrix.mingw_prefix }}-zstd
 
-      - name: Set up Go 1.16
+      - name: Set up Go
         uses: actions/setup-go@v2
         with:
           go-version: ${{ env.go_version }}
