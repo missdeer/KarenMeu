@@ -4,13 +4,26 @@ BINARY:=libutils.a
 SYSTEM:=
 CHECKS:=lute.go main.go inliner.go goldmark.go pngquant.go ../go.mod
 BUILDOPTS:=-v -buildmode=c-archive 
-CGO_ENABLED:=1
+UNAME_S:=$(shell uname -s)
+UNAME_M:=$(shell uname -m)
+ifeq ($(UNAME_M),arm64)
+	GOARCH:=arm64
+endif
+ifneq ($(UNAME_S),Darwin)
+	UNAME_O:=$(shell uname -o)
+	ifeq ($(UNAME_O),Msys)
+		HANNAH:=hannah.exe
+		RP=rp.exe
+	endif
+endif
 
 .PHONY: all
 all: $(BINARY)
 
 $(BINARY): $(CHECKS)
-	GO111MODULE=on CGO_ENABLED=$(CGO_ENABLED) $(SYSTEM) go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY)
+	env CGO_ENABLED=1 $(SYSTEM) go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY)
+	if [ "$(UNAME_S)" = "Darwin" -a "$(UNAME_M)" = "arm64" ]; then env CGO_ENABLED=1 GOARCH=amd64 go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY).alter.a; fi
+	if [ "$(UNAME_S)" = "Darwin" -a "$(UNAME_M)" = "arm64" ]; then lipo -create -output $(BINARY) $(BINARY) $(BINARY).alter.a; rm $(BINARY).alter.a $(BINARY).alter.h; fi
 	mv libutils.h utils.h
 	go mod tidy
 	bash -c ./update-def.sh
@@ -18,4 +31,4 @@ $(BINARY): $(CHECKS)
 .PHONY: clean
 clean:
 	GO111MODULE=on go clean
-	rm -f $(BINARY) *.h
+	rm -f $(BINARY) $(BINARY).alter.a *.h
