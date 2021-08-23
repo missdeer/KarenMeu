@@ -16,7 +16,7 @@ void Settings::initialize()
     m_textEditorConfig                                            = QSharedPointer<vte::TextEditorConfig>::create();
     m_textEditorConfig->m_centerCursor                            = vte::CenterCursor::CenterOnBottom;
     m_markdownEditorConfig                                        = QSharedPointer<vte::MarkdownEditorConfig>::create(m_textEditorConfig);
-    m_markdownEditorConfig->m_constrainInPlacePreviewWidthEnabled = true;
+    m_markdownEditorConfig->m_constrainInplacePreviewWidthEnabled = true;
     m_textEditorParameters                                        = QSharedPointer<vte::TextEditorParameters>::create();
 }
 
