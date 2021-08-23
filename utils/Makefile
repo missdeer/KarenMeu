@@ -22,8 +22,7 @@ all: $(BINARY)
 
 $(BINARY): $(CHECKS)
 	env CGO_ENABLED=1 $(SYSTEM) go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY)
-	if [ "$(UNAME_S)" = "Darwin" -a "$(UNAME_M)" = "arm64" ]; then env CGO_ENABLED=1 GOARCH=amd64 go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY).alter.a; fi
-	if [ "$(UNAME_S)" = "Darwin" -a "$(UNAME_M)" = "arm64" ]; then lipo -create -output $(BINARY) $(BINARY) $(BINARY).alter.a; rm $(BINARY).alter.a $(BINARY).alter.h; fi
+	if [ "$(UNAME_S)" = "Darwin" ]; then env CGO_ENABLED=1 GOARCH=amd64 go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY).alter.a; fi
 	mv libutils.h utils.h
 	go mod tidy
 	bash -c ./update-def.sh
