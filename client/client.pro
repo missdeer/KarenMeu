@@ -133,7 +133,7 @@ POST_TARGETDEPS += translate qti18n
 
 contains(QMAKE_HOST.arch, x86_64): {
     win32-msvc: QMAKE_CXXFLAGS += /arch:AVX2
-    else : QMAKE_CXXFLAGS += -mavx2 -mpopcnt -mbmi -mbmi2 -mlzcnt -mmovbe
+    *-gcc : QMAKE_CXXFLAGS += -mavx2 -mpopcnt -mbmi -mbmi2 -mlzcnt -mmovbe
 }
 
 win32-*msvc* {
