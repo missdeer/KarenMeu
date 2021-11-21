@@ -1142,3 +1142,10 @@ void MainWindow::on_actionFindReplace_triggered()
     auto *dlg = getFindReplaceDialog();
     dlg->show();
 }
+
+void MainWindow::on_actionLeftRightOrTopBottomViews_triggered()
+{
+    auto mode = g_settings->markdownViewArrange();
+    g_settings->setMarkdownViewArrange(!mode);
+    QMessageBox::information(this, tr("Notice"), tr("It is required to restart KarenMeu application to take effect."), QMessageBox::Ok);
+}

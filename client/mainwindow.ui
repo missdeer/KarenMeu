@@ -161,6 +161,7 @@
      <string>&amp;View</string>
     </property>
     <addaction name="actionFullScreen"/>
+    <addaction name="actionLeftRightOrTopBottomViews"/>
     <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuTranslation">
@@ -1267,6 +1268,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionLeftRightOrTopBottomViews">
+   <property name="text">
+    <string>Left/Right or Top/Bottom views</string>
    </property>
   </action>
  </widget>

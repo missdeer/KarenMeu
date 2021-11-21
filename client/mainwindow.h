@@ -92,6 +92,8 @@ private slots:
 
     void on_actionFindReplace_triggered();
 
+    void on_actionLeftRightOrTopBottomViews_triggered();
+
 protected:
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent *event) override;

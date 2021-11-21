@@ -5,6 +5,7 @@
 #include <QClipboard>
 #include <QCryptographicHash>
 #include <QFileDialog>
+#include <QHBoxLayout>
 #include <QMessageBox>
 #include <QResizeEvent>
 #include <QScrollBar>
@@ -47,7 +48,11 @@ MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWi
     m_splitter->addWidget(m_preview);
     m_splitter->setStyleSheet("QSplitter:handle { border: 0 }"
                               "QSplitter { border: 0; margin: 0; padding: 0 }");
-    auto *layout = new QVBoxLayout;
+    QLayout *layout = nullptr;
+    if (g_settings->markdownViewArrange() == 0)
+        layout = new QVBoxLayout;
+    else
+        layout = new QHBoxLayout;
     layout->addWidget(m_splitter);
     layout->setMargin(0);
     layout->setSpacing(0);

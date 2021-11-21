@@ -442,3 +442,16 @@ QSettings &Settings::getSettings()
     static QSettings *settings = new QSettings(QSettings::IniFormat, QSettings::UserScope, "minidump.info", "KarenMeu");
     return *settings;
 }
+
+int Settings::markdownViewArrange()
+{
+    auto &settings = getSettings();
+    return settings.value("markdownViewArrange", 0).toInt();
+}
+
+void Settings::setMarkdownViewArrange(int mode)
+{
+    auto &settings = getSettings();
+    settings.setValue("markdownViewArrange", mode);
+    settings.sync();
+}

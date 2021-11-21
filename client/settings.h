@@ -17,6 +17,9 @@ public:
     void initialize();
     QSettings &getSettings();
 
+    int  markdownViewArrange();
+    void setMarkdownViewArrange(int mode);
+
     const QString &codeEditorFontFamily() const;
     void           setCodeEditorFontFamily(const QString &codeEditorFontFamily);
 
