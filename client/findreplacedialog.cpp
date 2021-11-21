@@ -57,7 +57,7 @@ void FindReplaceDialog::on_btnFind_clicked()
     auto textedit = m_editor->getTextEdit();
     Q_ASSERT(textedit);
     auto textCursor = textedit->textCursor();
-    auto fr         = m_editor->findText(ui->edtFindKeyword->text(), flags, textCursor.position());
+    auto fr         = m_editor->findText(QStringList() << ui->edtFindKeyword->text(), flags, textCursor.position());
     qDebug() << flags << textCursor.position() << fr.m_currentMatchIndex << fr.m_totalMatches << fr.m_wrapped;
     if (fr.m_currentMatchIndex == 0 && fr.m_wrapped)
     {
