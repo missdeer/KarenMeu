@@ -405,5 +405,9 @@
         <file>rc/translators/google.json</file>
         <file>rc/translators/sogou.json</file>
         <file>rc/translators/youdao.json</file>
+        <file>rc/images/go-next.png</file>
+        <file>rc/images/go-previous.png</file>
+        <file>rc/images/process-stop.png</file>
+        <file>rc/images/view-refresh.png</file>
     </qresource>
 </RCC>

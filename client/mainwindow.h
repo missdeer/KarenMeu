@@ -22,6 +22,7 @@ QT_FORWARD_DECLARE_CLASS(QComboBox);
 QT_FORWARD_DECLARE_CLASS(QTreeView);
 QT_FORWARD_DECLARE_CLASS(QPlainTextEdit);
 QT_FORWARD_DECLARE_CLASS(QFileSystemModel);
+QT_FORWARD_DECLARE_CLASS(QWebEngineView);
 
 class MainWindow : public QMainWindow
 {
@@ -129,6 +130,7 @@ private:
     CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;
     QList<QToolBar *>             m_visibleToolbars;
     YoudaoDict *                  m_youdaoDict;
+    QWebEngineView *              m_webBrowser {nullptr};
     TemplateManager *             m_templateManager;
     QAction *                     recentFileActs[MaxRecentFiles];
     QAction *                     recentWorkspaceActs[MaxRecentFiles];

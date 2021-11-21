@@ -21,12 +21,12 @@
 #include <QSplitter>
 #include <QTreeView>
 #include <QUrl>
+#include <QVBoxLayout>
 #include <QWebEngineView>
 #include <QWindowStateChangeEvent>
 #include <QtCore>
 
 #include "mainwindow.h"
-
 #include "baidutranslator.h"
 #include "clientutils.h"
 #include "custompreviewthemeeditwidget.h"
@@ -841,6 +841,37 @@ void MainWindow::setupDockPanels()
 
     tabifyDockWidget(previewHTMLDock, devToolDock);
     tabifyDockWidget(previewHTMLDock, customThemeEditorDock);
+
+    auto *browserDock = new QDockWidget(tr("WebBrowser"), this);
+    browserDock->setObjectName("webBrowser");
+    auto *browserContainer  = new QWidget(browserDock);
+    auto *browserLayout     = new QVBoxLayout();
+    auto *browserToolBar    = new QToolBar(browserContainer);
+    auto *browserGoBack     = browserToolBar->addAction(QIcon(":/rc/images/go-previous.png"), tr("Go Back"));
+    auto *browserGoForward  = browserToolBar->addAction(QIcon(":/rc/images/go-next.png"), tr("Go Forward"));
+    auto *browserRefresh    = browserToolBar->addAction(QIcon(":/rc/images/view-refresh.png"), tr("Refresh"));
+    auto *browserStop       = browserToolBar->addAction(QIcon(":/rc/images/process-stop.png"), tr("Stop"));
+    auto *browserAddressBar = new QLineEdit(browserContainer);
+    browserToolBar->addWidget(browserAddressBar);
+    browserLayout->addWidget(browserToolBar);
+    browserLayout->setMargin(0);
+    m_webBrowser = new QWebEngineView(browserContainer);
+    browserLayout->addWidget(m_webBrowser);
+    browserContainer->setLayout(browserLayout);
+    browserDock->setWidget(browserContainer);
+    addDockWidget(Qt::LeftDockWidgetArea, browserDock);
+
+    connect(browserAddressBar, &QLineEdit::returnPressed, [this, browserAddressBar]() {
+        m_webBrowser->load(QUrl::fromUserInput(browserAddressBar->text()));
+    });
+    connect(browserGoBack, &QAction::triggered, [this]() { m_webBrowser->back(); });
+    connect(browserGoForward, &QAction::triggered, [this]() { m_webBrowser->forward(); });
+    connect(browserRefresh, &QAction::triggered, [this]() { m_webBrowser->reload(); });
+    connect(browserStop, &QAction::triggered, [this]() { m_webBrowser->stop(); });
+    connect(m_webBrowser->page(), &QWebEnginePage::selectionChanged, [this]() {
+        auto text = m_webBrowser->page()->selectedText();
+        translateText(text);
+    });
 }
 
 void MainWindow::setupShortcutToolbar()
@@ -977,7 +1008,8 @@ void MainWindow::on_actionDictionary_triggered()
 void MainWindow::on_actionTranslateSelected_triggered()
 {
     Q_ASSERT(m_view);
-    QString text = m_view->selectedText();
+    Q_ASSERT(m_webBrowser);
+    QString text = m_webBrowser->hasFocus() ? m_webBrowser->selectedText() : m_view->selectedText();
     translateText(text);
 }
 
