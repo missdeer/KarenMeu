@@ -857,12 +857,13 @@ void MainWindow::setupDockPanels()
     auto *browserDock = new QDockWidget(tr("WebBrowser"), this);
     browserDock->setObjectName("webBrowser");
     auto *browserContainer  = new QWidget(browserDock);
+    m_webBrowser            = new WebBrowser(browserContainer);
     auto *browserLayout     = new QVBoxLayout();
     auto *browserToolBar    = new QToolBar(browserContainer);
-    auto *browserGoBack     = browserToolBar->addAction(QIcon(":/rc/images/go-previous.png"), tr("Go Back"));
-    auto *browserGoForward  = browserToolBar->addAction(QIcon(":/rc/images/go-next.png"), tr("Go Forward"));
-    auto *browserRefresh    = browserToolBar->addAction(QIcon(":/rc/images/view-refresh.png"), tr("Refresh"));
-    auto *browserStop       = browserToolBar->addAction(QIcon(":/rc/images/process-stop.png"), tr("Stop"));
+    browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Back));
+    browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Forward));
+    browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Reload));
+    browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Stop));
     auto *browserAddressBar = new QLineEdit(browserContainer);
     m_urlCompleter          = new QCompleter(m_urlCompleterModel, browserAddressBar);
     m_urlCompleter->setCaseSensitivity(Qt::CaseInsensitive);
@@ -871,7 +872,6 @@ void MainWindow::setupDockPanels()
     browserToolBar->addWidget(browserAddressBar);
     browserLayout->addWidget(browserToolBar);
     browserLayout->setMargin(0);
-    m_webBrowser = new WebBrowser(browserContainer);
     browserLayout->addWidget(m_webBrowser);
     browserContainer->setLayout(browserLayout);
     browserDock->setWidget(browserContainer);
@@ -881,10 +881,6 @@ void MainWindow::setupDockPanels()
         m_urlCompleterModel.append(browserAddressBar->text());
         m_webBrowser->load(QUrl::fromUserInput(browserAddressBar->text()));
     });
-    connect(browserGoBack, &QAction::triggered, [this]() { m_webBrowser->back(); });
-    connect(browserGoForward, &QAction::triggered, [this]() { m_webBrowser->forward(); });
-    connect(browserRefresh, &QAction::triggered, [this]() { m_webBrowser->reload(); });
-    connect(browserStop, &QAction::triggered, [this]() { m_webBrowser->stop(); });
     connect(m_webBrowser->page(), &QWebEnginePage::selectionChanged, [this]() {
         auto text = m_webBrowser->page()->selectedText();
         translateText(text);
@@ -896,16 +892,6 @@ void MainWindow::setupDockPanels()
     connect(m_webBrowser, &QWebEngineView::titleChanged, [browserDock](const QString &title) {
         Q_ASSERT(browserDock);
         browserDock->setWindowTitle(title);
-    });
-    connect(m_webBrowser, &QWebEngineView::loadFinished, [browserRefresh, browserStop]() {
-        Q_ASSERT(browserRefresh);
-        browserRefresh->setEnabled(true);
-        browserStop->setEnabled(false);
-    });
-    connect(m_webBrowser, &QWebEngineView::loadStarted, [browserRefresh, browserStop]() {
-        Q_ASSERT(browserRefresh);
-        browserRefresh->setEnabled(false);
-        browserStop->setEnabled(true);
     });
 }
 
@@ -1044,7 +1030,21 @@ void MainWindow::on_actionTranslateSelected_triggered()
 {
     Q_ASSERT(m_view);
     Q_ASSERT(m_webBrowser);
-    QString text = m_webBrowser->hasFocus() ? m_webBrowser->selectedText() : m_view->selectedText();
+    QString text;
+    if (m_webBrowser->hasFocus())
+    {
+        if (!m_webBrowser->selectedText().isEmpty())
+            text = m_webBrowser->selectedText();
+        else
+            text = m_view->selectedText();
+    }
+    else
+    {
+        if (!m_view->selectedText().isEmpty())
+            text = m_view->selectedText();
+        else
+            text = m_webBrowser->selectedText();
+    }
     translateText(text);
 }
 
