@@ -48,6 +48,7 @@
 #include "ui_mainwindow.h"
 #include "utils.h"
 #include "webbrowser.h"
+#include "webbrowseraddressbar.h"
 #include "xmlSettings.h"
 #include "youdaodict.h"
 #include "youdaotranslator.h"
@@ -702,8 +703,10 @@ void MainWindow::setupWebBrowserPane()
     browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Forward));
     browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Reload));
     browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Stop));
-    auto *browserAddressBar = new QLineEdit(browserContainer);
-    m_urlCompleter          = new QCompleter(m_urlCompleterModel, browserAddressBar);
+    auto *browserAddressBar = new WebBrowserAddressBar(browserContainer);
+    m_urlCompleterModel << "https://www.meetingcpp.com"
+                        << "https://isocpp.org";
+    m_urlCompleter = new QCompleter(m_urlCompleterModel, browserAddressBar);
     m_urlCompleter->setCaseSensitivity(Qt::CaseInsensitive);
     m_urlCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
     browserAddressBar->setCompleter(m_urlCompleter);
@@ -719,15 +722,13 @@ void MainWindow::setupWebBrowserPane()
         m_urlCompleterModel.append(browserAddressBar->text());
         m_webBrowser->load(QUrl::fromUserInput(browserAddressBar->text()));
     });
-    connect(m_webBrowser->page(), &QWebEnginePage::selectionChanged, [this]() {
-        if (!m_webPageSelectionChangedTimer)
-        {
-            m_webPageSelectionChangedTimer = new QTimer();
-            m_webPageSelectionChangedTimer->setSingleShot(true);
-            connect(m_webPageSelectionChangedTimer, &QTimer::timeout, this, &MainWindow::onWebBrowserSelectionChangedTimeout);
-        }
-        m_webPageSelectionChangedTimer->start(1500);
-    });
+    if (!m_webPageSelectionChangedTimer)
+    {
+        m_webPageSelectionChangedTimer = new QTimer();
+        m_webPageSelectionChangedTimer->setSingleShot(true);
+        connect(m_webPageSelectionChangedTimer, &QTimer::timeout, this, &MainWindow::onWebBrowserSelectionChangedTimeout);
+    }
+    connect(m_webBrowser->page(), &QWebEnginePage::selectionChanged, [this]() { m_webPageSelectionChangedTimer->start(1500); });
     connect(m_webBrowser, &QWebEngineView::urlChanged, [browserAddressBar](const QUrl &url) {
         Q_ASSERT(browserAddressBar);
         browserAddressBar->setText(url.toString());
