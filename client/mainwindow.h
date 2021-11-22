@@ -17,12 +17,13 @@ class TranslateOutputWidget;
 class TemplateManager;
 class FileCache;
 class FindReplaceDialog;
+class WebBrowser;
 
 QT_FORWARD_DECLARE_CLASS(QComboBox);
 QT_FORWARD_DECLARE_CLASS(QTreeView);
 QT_FORWARD_DECLARE_CLASS(QPlainTextEdit);
 QT_FORWARD_DECLARE_CLASS(QFileSystemModel);
-QT_FORWARD_DECLARE_CLASS(QWebEngineView);
+QT_FORWARD_DECLARE_CLASS(QCompleter);
 
 class MainWindow : public QMainWindow
 {
@@ -132,12 +133,14 @@ private:
     CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;
     QList<QToolBar *>             m_visibleToolbars;
     YoudaoDict *                  m_youdaoDict;
-    QWebEngineView *              m_webBrowser {nullptr};
+    WebBrowser *                  m_webBrowser {nullptr};
+    QCompleter *                  m_urlCompleter {nullptr};
     TemplateManager *             m_templateManager;
     QAction *                     recentFileActs[MaxRecentFiles];
     QAction *                     recentWorkspaceActs[MaxRecentFiles];
     QList<QAction *>              m_newFromTemplateActions;
     QString                       m_currentOpenedFile;
+    QStringList                   m_urlCompleterModel;
     QNetworkAccessManager         m_nam;
     int                           m_lastWindowState;
 

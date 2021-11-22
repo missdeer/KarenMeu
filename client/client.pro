@@ -57,7 +57,8 @@ SOURCES += \
         $$PWD/translator/googletranslator.cpp \
         $$PWD/translator/sogoutranslator.cpp \
         $$PWD/translator/youdaotranslator.cpp \
-        $$PWD/translator/translator.cpp
+        $$PWD/translator/translator.cpp \
+        webbrowser.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -88,7 +89,8 @@ HEADERS += \
         $$PWD/translator/googletranslator.h \
         $$PWD/translator/sogoutranslator.h \
         $$PWD/translator/translator.hpp \
-        $$PWD/translator/youdaotranslator.h
+        $$PWD/translator/youdaotranslator.h \
+        webbrowser.h
 
 FORMS += \
         $$PWD/mainwindow.ui \

@@ -2,6 +2,7 @@
 #include <QClipboard>
 #include <QCloseEvent>
 #include <QComboBox>
+#include <QCompleter>
 #include <QCoreApplication>
 #include <QDesktopServices>
 #include <QDockWidget>
@@ -46,6 +47,7 @@
 #include "translateoutputwidget.h"
 #include "ui_mainwindow.h"
 #include "utils.h"
+#include "webbrowser.h"
 #include "xmlSettings.h"
 #include "youdaodict.h"
 #include "youdaotranslator.h"
@@ -862,16 +864,21 @@ void MainWindow::setupDockPanels()
     auto *browserRefresh    = browserToolBar->addAction(QIcon(":/rc/images/view-refresh.png"), tr("Refresh"));
     auto *browserStop       = browserToolBar->addAction(QIcon(":/rc/images/process-stop.png"), tr("Stop"));
     auto *browserAddressBar = new QLineEdit(browserContainer);
+    m_urlCompleter          = new QCompleter(m_urlCompleterModel, browserAddressBar);
+    m_urlCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    m_urlCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+    browserAddressBar->setCompleter(m_urlCompleter);
     browserToolBar->addWidget(browserAddressBar);
     browserLayout->addWidget(browserToolBar);
     browserLayout->setMargin(0);
-    m_webBrowser = new QWebEngineView(browserContainer);
+    m_webBrowser = new WebBrowser(browserContainer);
     browserLayout->addWidget(m_webBrowser);
     browserContainer->setLayout(browserLayout);
     browserDock->setWidget(browserContainer);
     addDockWidget(Qt::LeftDockWidgetArea, browserDock);
 
     connect(browserAddressBar, &QLineEdit::returnPressed, [this, browserAddressBar]() {
+        m_urlCompleterModel.append(browserAddressBar->text());
         m_webBrowser->load(QUrl::fromUserInput(browserAddressBar->text()));
     });
     connect(browserGoBack, &QAction::triggered, [this]() { m_webBrowser->back(); });
@@ -881,6 +888,24 @@ void MainWindow::setupDockPanels()
     connect(m_webBrowser->page(), &QWebEnginePage::selectionChanged, [this]() {
         auto text = m_webBrowser->page()->selectedText();
         translateText(text);
+    });
+    connect(m_webBrowser, &QWebEngineView::urlChanged, [browserAddressBar](const QUrl &url) {
+        Q_ASSERT(browserAddressBar);
+        browserAddressBar->setText(url.toString());
+    });
+    connect(m_webBrowser, &QWebEngineView::titleChanged, [browserDock](const QString &title) {
+        Q_ASSERT(browserDock);
+        browserDock->setWindowTitle(title);
+    });
+    connect(m_webBrowser, &QWebEngineView::loadFinished, [browserRefresh, browserStop]() {
+        Q_ASSERT(browserRefresh);
+        browserRefresh->setEnabled(true);
+        browserStop->setEnabled(false);
+    });
+    connect(m_webBrowser, &QWebEngineView::loadStarted, [browserRefresh, browserStop]() {
+        Q_ASSERT(browserRefresh);
+        browserRefresh->setEnabled(false);
+        browserStop->setEnabled(true);
     });
 }
 
