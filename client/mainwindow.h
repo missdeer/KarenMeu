@@ -24,6 +24,7 @@ QT_FORWARD_DECLARE_CLASS(QTreeView);
 QT_FORWARD_DECLARE_CLASS(QPlainTextEdit);
 QT_FORWARD_DECLARE_CLASS(QFileSystemModel);
 QT_FORWARD_DECLARE_CLASS(QCompleter);
+QT_FORWARD_DECLARE_CLASS(QTimer);
 
 class MainWindow : public QMainWindow
 {
@@ -64,6 +65,7 @@ private slots:
     void onYoudaoDictResult(QString res);
     void onNewFromTemplateTriggered();
     void onDocumentModified();
+    void onWebBrowserSelectionChangedTimeout();
 
     void on_actionGoogle_triggered();
 
@@ -135,6 +137,7 @@ private:
     YoudaoDict *                  m_youdaoDict;
     WebBrowser *                  m_webBrowser {nullptr};
     QCompleter *                  m_urlCompleter {nullptr};
+    QTimer *                      m_webPageSelectionChangedTimer {nullptr};
     TemplateManager *             m_templateManager;
     QAction *                     recentFileActs[MaxRecentFiles];
     QAction *                     recentWorkspaceActs[MaxRecentFiles];
@@ -144,24 +147,25 @@ private:
     QNetworkAccessManager         m_nam;
     int                           m_lastWindowState;
 
-    void    updateRecentFileActions(const QStringList &files);
-    void    updateRecentWorkspaceActions(const QStringList &files);
-    QString strippedName(const QString &fullFileName);
-    void    openRecentFile();
-    void    openRecentWorkspace();
-    void    applyMarkdownEditorTheme();
-    void    predrawBackgroundImage();
-    void    setupDockPanels();
-    void    setupShortcutToolbar();
-    void    updateTranslationActions();
-    void    translateText(const QString &text);
-    void    updateNewFromTemplateMenus();
-    void    newDocumentWithContent(const QString &content);
-    void    openMarkdownDocument(const QString &fileName);
-    void    openWorkspace(const QString &fileName);
-    void    saveWorkspace(const QString &fileName);
-    void    updateWindowTitle();
+    void               updateRecentFileActions(const QStringList &files);
+    void               updateRecentWorkspaceActions(const QStringList &files);
+    QString            strippedName(const QString &fullFileName);
+    void               openRecentFile();
+    void               openRecentWorkspace();
+    void               applyMarkdownEditorTheme();
+    void               predrawBackgroundImage();
+    void               setupDockPanels();
+    void               setupShortcutToolbar();
+    void               updateTranslationActions();
+    void               translateText(const QString &text);
+    void               updateNewFromTemplateMenus();
+    void               newDocumentWithContent(const QString &content);
+    void               openMarkdownDocument(const QString &fileName);
+    void               openWorkspace(const QString &fileName);
+    void               saveWorkspace(const QString &fileName);
+    void               updateWindowTitle();
     FindReplaceDialog *getFindReplaceDialog();
+    void               setupWebBrowserPane();
 };
 
 #endif // MAINWINDOW_H

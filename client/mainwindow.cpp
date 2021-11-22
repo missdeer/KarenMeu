@@ -647,6 +647,13 @@ void MainWindow::onDocumentModified()
     updateWindowTitle();
 }
 
+void MainWindow::onWebBrowserSelectionChangedTimeout()
+{
+    auto text = m_webBrowser->page()->selectedText();
+    if (!text.isEmpty())
+        translateText(text);
+}
+
 QString MainWindow::strippedName(const QString &fullFileName)
 {
     return QFileInfo(fullFileName).fileName();
@@ -681,6 +688,54 @@ void MainWindow::on_actionClearRecentFilesList_triggered()
 void MainWindow::applyMarkdownEditorTheme()
 {
     Q_ASSERT(g_settings);
+}
+
+void MainWindow::setupWebBrowserPane()
+{
+    auto *browserDock = new QDockWidget(tr("WebBrowser"), this);
+    browserDock->setObjectName("webBrowser");
+    auto *browserContainer = new QWidget(browserDock);
+    m_webBrowser           = new WebBrowser(browserContainer);
+    auto *browserLayout    = new QVBoxLayout();
+    auto *browserToolBar   = new QToolBar(browserContainer);
+    browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Back));
+    browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Forward));
+    browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Reload));
+    browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Stop));
+    auto *browserAddressBar = new QLineEdit(browserContainer);
+    m_urlCompleter          = new QCompleter(m_urlCompleterModel, browserAddressBar);
+    m_urlCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    m_urlCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+    browserAddressBar->setCompleter(m_urlCompleter);
+    browserToolBar->addWidget(browserAddressBar);
+    browserLayout->addWidget(browserToolBar);
+    browserLayout->setMargin(0);
+    browserLayout->addWidget(m_webBrowser);
+    browserContainer->setLayout(browserLayout);
+    browserDock->setWidget(browserContainer);
+    addDockWidget(Qt::LeftDockWidgetArea, browserDock);
+
+    connect(browserAddressBar, &QLineEdit::returnPressed, [this, browserAddressBar]() {
+        m_urlCompleterModel.append(browserAddressBar->text());
+        m_webBrowser->load(QUrl::fromUserInput(browserAddressBar->text()));
+    });
+    connect(m_webBrowser->page(), &QWebEnginePage::selectionChanged, [this]() {
+        if (!m_webPageSelectionChangedTimer)
+        {
+            m_webPageSelectionChangedTimer = new QTimer();
+            m_webPageSelectionChangedTimer->setSingleShot(true);
+            connect(m_webPageSelectionChangedTimer, &QTimer::timeout, this, &MainWindow::onWebBrowserSelectionChangedTimeout);
+        }
+        m_webPageSelectionChangedTimer->start(1500);
+    });
+    connect(m_webBrowser, &QWebEngineView::urlChanged, [browserAddressBar](const QUrl &url) {
+        Q_ASSERT(browserAddressBar);
+        browserAddressBar->setText(url.toString());
+    });
+    connect(m_webBrowser, &QWebEngineView::titleChanged, [browserDock](const QString &title) {
+        Q_ASSERT(browserDock);
+        browserDock->setWindowTitle(title);
+    });
 }
 
 void MainWindow::setupDockPanels()
@@ -854,45 +909,7 @@ void MainWindow::setupDockPanels()
     tabifyDockWidget(previewHTMLDock, devToolDock);
     tabifyDockWidget(previewHTMLDock, customThemeEditorDock);
 
-    auto *browserDock = new QDockWidget(tr("WebBrowser"), this);
-    browserDock->setObjectName("webBrowser");
-    auto *browserContainer  = new QWidget(browserDock);
-    m_webBrowser            = new WebBrowser(browserContainer);
-    auto *browserLayout     = new QVBoxLayout();
-    auto *browserToolBar    = new QToolBar(browserContainer);
-    browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Back));
-    browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Forward));
-    browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Reload));
-    browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Stop));
-    auto *browserAddressBar = new QLineEdit(browserContainer);
-    m_urlCompleter          = new QCompleter(m_urlCompleterModel, browserAddressBar);
-    m_urlCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-    m_urlCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-    browserAddressBar->setCompleter(m_urlCompleter);
-    browserToolBar->addWidget(browserAddressBar);
-    browserLayout->addWidget(browserToolBar);
-    browserLayout->setMargin(0);
-    browserLayout->addWidget(m_webBrowser);
-    browserContainer->setLayout(browserLayout);
-    browserDock->setWidget(browserContainer);
-    addDockWidget(Qt::LeftDockWidgetArea, browserDock);
-
-    connect(browserAddressBar, &QLineEdit::returnPressed, [this, browserAddressBar]() {
-        m_urlCompleterModel.append(browserAddressBar->text());
-        m_webBrowser->load(QUrl::fromUserInput(browserAddressBar->text()));
-    });
-    connect(m_webBrowser->page(), &QWebEnginePage::selectionChanged, [this]() {
-        auto text = m_webBrowser->page()->selectedText();
-        translateText(text);
-    });
-    connect(m_webBrowser, &QWebEngineView::urlChanged, [browserAddressBar](const QUrl &url) {
-        Q_ASSERT(browserAddressBar);
-        browserAddressBar->setText(url.toString());
-    });
-    connect(m_webBrowser, &QWebEngineView::titleChanged, [browserDock](const QString &title) {
-        Q_ASSERT(browserDock);
-        browserDock->setWindowTitle(title);
-    });
+    setupWebBrowserPane();
 }
 
 void MainWindow::setupShortcutToolbar()
