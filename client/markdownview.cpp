@@ -50,9 +50,15 @@ MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWi
                               "QSplitter { border: 0; margin: 0; padding: 0 }");
     QLayout *layout = nullptr;
     if (g_settings->markdownViewArrange() == 0)
+    {
         layout = new QVBoxLayout;
+        m_splitter->setOrientation(Qt::Vertical);
+    }
     else
+    {
         layout = new QHBoxLayout;
+        m_splitter->setOrientation(Qt::Horizontal);
+    }
     layout->addWidget(m_splitter);
     layout->setMargin(0);
     layout->setSpacing(0);

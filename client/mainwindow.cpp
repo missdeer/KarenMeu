@@ -64,6 +64,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     statusBar()->hide();
     setCentralWidget(m_view);
+
+    if (g_settings->markdownViewArrange() == 0)
+    {
+        ui->actionLeftRightOrTopBottomViews->setText(tr("Switch to Left/Right View"));
+    }
+    else
+    {
+        ui->actionLeftRightOrTopBottomViews->setText(tr("Switch to Top/Bottom View"));
+    }
+
     connect(ui->actionNewMarkdown, &QAction::triggered, m_view, &MarkdownView::newDocument);
     connect(ui->actionOpenMarkdown, &QAction::triggered, m_view, &MarkdownView::openDocument);
     connect(ui->actionSaveMarkdown, &QAction::triggered, m_view, &MarkdownView::saveDocument);
