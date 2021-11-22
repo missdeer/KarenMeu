@@ -58,8 +58,8 @@ SOURCES += \
         $$PWD/translator/sogoutranslator.cpp \
         $$PWD/translator/youdaotranslator.cpp \
         $$PWD/translator/translator.cpp \
-        webbrowser.cpp \
-        webbrowseraddressbar.cpp
+        $$PWD/webbrowser.cpp \
+        $$PWD/webbrowseraddressbar.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -91,8 +91,8 @@ HEADERS += \
         $$PWD/translator/sogoutranslator.h \
         $$PWD/translator/translator.hpp \
         $$PWD/translator/youdaotranslator.h \
-        webbrowser.h \
-        webbrowseraddressbar.h
+        $$PWD/webbrowser.h \
+        $$PWD/webbrowseraddressbar.h
 
 FORMS += \
         $$PWD/mainwindow.ui \
@@ -136,7 +136,7 @@ QMAKE_EXTRA_TARGETS += lupdate lrelease translate qti18n
 POST_TARGETDEPS += translate qti18n
 
 contains(QMAKE_HOST.arch, x86_64): {
-    win32-msvc: QMAKE_CXXFLAGS += /arch:AVX2
+    win32-*msvc*: QMAKE_CXXFLAGS += /arch:AVX2
     *-gcc : QMAKE_CXXFLAGS += -mavx2 -mpopcnt -mbmi -mbmi2 -mlzcnt -mmovbe
 }
 
