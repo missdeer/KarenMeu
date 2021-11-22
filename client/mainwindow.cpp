@@ -23,6 +23,8 @@
 #include <QTreeView>
 #include <QUrl>
 #include <QVBoxLayout>
+#include <QWebEngineProfile>
+#include <QWebEngineSettings>
 #include <QWebEngineView>
 #include <QWindowStateChangeEvent>
 #include <QtCore>
@@ -693,6 +695,16 @@ void MainWindow::applyMarkdownEditorTheme()
 
 void MainWindow::setupWebBrowserPane()
 {
+    auto *defaultSettings = QWebEngineSettings::globalSettings();
+
+    defaultSettings->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
+    defaultSettings->setAttribute(QWebEngineSettings::ScrollAnimatorEnabled, true);
+    defaultSettings->setAttribute(QWebEngineSettings::PluginsEnabled, true);
+
+    auto *defaultProfile = QWebEngineProfile::defaultProfile();
+
+    defaultProfile->setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
+
     auto *browserDock = new QDockWidget(tr("WebBrowser"), this);
     browserDock->setObjectName("webBrowser");
     auto *browserContainer = new QWidget(browserDock);
