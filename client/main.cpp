@@ -1,5 +1,6 @@
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QCoreApplication>
 #include <QDir>
 #include <QLibraryInfo>
 #include <QMessageBox>
@@ -26,6 +27,18 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("KarenMeu");
     QCoreApplication::setApplicationVersion("1.0");
 
+    QDir dir(QCoreApplication::applicationDirPath());
+#ifdef NDEBUG
+#if defined(Q_OS_MAC)
+    dir.cdUp();
+    dir.cd("/Frameworks/QtWebEngineCore.framework/Helpers/QtWebEngineProcess.app/Contents/MacOS/");
+    auto fn = dir.absoluteFilePath("QtWebEngineProcess");
+    if (QFile::exists(fn)) {
+        qputenv("QTWEBENGINEPROCESS_PATH", fn.toUtf8());
+    }
+#endif
+#endif
+
     QString     localeName = QLocale::system().name().replace("-", "_");
     QTranslator translator;
     QTranslator qtTranslator;
@@ -33,7 +46,7 @@ int main(int argc, char *argv[])
     // main application and dynamic linked library locale
 #if defined(Q_OS_MAC)
     MacApplication a(argc, argv);
-    QDir           dir(QApplication::applicationDirPath());
+    dir.setPath(QApplication::applicationDirPath());
     dir.cdUp();
     dir.cd("Resources/translations");
     QString localeDirPath = dir.absolutePath();
