@@ -707,6 +707,10 @@ void MainWindow::setupWebBrowserPane()
 
     auto *browserDock = new QDockWidget(tr("WebBrowser"), this);
     browserDock->setObjectName("webBrowser");
+    auto toggleViewAction = browserDock->toggleViewAction();
+    toggleViewAction->setShortcut(QKeySequence("Shift+Alt+W"));
+    ui->menuView->addAction(toggleViewAction);
+
     auto *browserContainer = new QWidget(browserDock);
     m_webBrowser           = new WebBrowser(browserContainer);
     auto *browserLayout    = new QVBoxLayout();
@@ -729,7 +733,6 @@ void MainWindow::setupWebBrowserPane()
     browserContainer->setLayout(browserLayout);
     browserDock->setWidget(browserContainer);
     addDockWidget(Qt::LeftDockWidgetArea, browserDock);
-
     connect(browserAddressBar, &QLineEdit::returnPressed, [this, browserAddressBar]() {
         m_urlCompleterModel.append(browserAddressBar->text());
         m_webBrowser->load(QUrl::fromUserInput(browserAddressBar->text()));
