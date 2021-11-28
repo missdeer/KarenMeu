@@ -28,15 +28,15 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationVersion("1.0");
 
     QDir dir(QCoreApplication::applicationDirPath());
-#ifdef NDEBUG
+
 #if defined(Q_OS_MAC)
+    qputenv("QTWEBENGINE_CHROMIUM_FLAGS", "--single-process");
     dir.cdUp();
     dir.cd("/Frameworks/QtWebEngineCore.framework/Helpers/QtWebEngineProcess.app/Contents/MacOS/");
     auto fn = dir.absoluteFilePath("QtWebEngineProcess");
     if (QFile::exists(fn)) {
         qputenv("QTWEBENGINEPROCESS_PATH", fn.toUtf8());
     }
-#endif
 #endif
 
     QString     localeName = QLocale::system().name().replace("-", "_");
