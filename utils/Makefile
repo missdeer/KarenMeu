@@ -2,7 +2,7 @@
 GITCOMMIT:=$(shell git describe --dirty --always)
 BINARY:=libutils.a
 SYSTEM:=
-CHECKS:=lute.go main.go inliner.go goldmark.go pngquant.go ../go.mod
+CHECKS:=lute.go main.go inliner.go goldmark.go pngquant.go pngquant_amd64.go ../go.mod
 BUILDOPTS:=-v -buildmode=c-archive 
 UNAME_S:=$(shell uname -s)
 UNAME_M:=$(shell uname -m)
@@ -21,7 +21,7 @@ endif
 all: $(BINARY)
 
 $(BINARY): $(CHECKS)
-	if [ "$(UNAME_S)" = "Darwin" ]; then env CGO_ENABLED=1 GOARCH=amd64 go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY); else env CGO_ENABLED=1 go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY);  fi
+	if [ "$(UNAME_S)" = "Darwin" ]; then env CGO_ENABLED=1 GOARCH=amd64 go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY).amd64.a; env CGO_ENABLED=1 GOARCH=arm64 go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY).arm64.a; lipo -create -output $(BINARY) $(BINARY).amd64.a $(BINARY).arm64.a; rm -f $(BINARY).arm64.a $(BINARY).amd64.a libutils.a.arm64.h; mv libutils.a.amd64.h libutils.h; else env CGO_ENABLED=1 go build $(BUILDOPTS) -ldflags="-s -w" -o $(BINARY);  fi
 	mv libutils.h utils.h
 	go mod tidy
 	bash -c ./update-def.sh
@@ -29,4 +29,4 @@ $(BINARY): $(CHECKS)
 .PHONY: clean
 clean:
 	GO111MODULE=on go clean
-	rm -f $(BINARY) $(BINARY).alter.a *.h
+	rm -f $(BINARY) *.h

@@ -12,7 +12,7 @@ require (
 	github.com/gin-gonic/gin v1.7.4
 	github.com/go-playground/validator/v10 v10.9.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
-	github.com/gopherjs/gopherjs v0.0.0-20211111143520-d0d5ecc1a356 // indirect
+	github.com/gopherjs/gopherjs v0.0.0-20211228203721-be292294a697 // indirect
 	github.com/jinzhu/gorm v1.9.16
 	github.com/lib/pq v1.10.2 // indirect
 	github.com/litao91/goldmark-mathjax v0.0.0-20210217064022-a43cf739a50f
@@ -26,7 +26,7 @@ require (
 	github.com/yuin/goldmark-highlighting v0.0.0-20210516132338-9216f9c5aa01
 	github.com/yuin/goldmark-meta v1.0.0
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
-	golang.org/x/net v0.0.0-20211123203042-d83791d6bcd9 // indirect
+	golang.org/x/net v0.0.0-20211216030914-fe4d6282115f // indirect
 	golang.org/x/sys v0.0.0-20210820121016-41cdb8703e55 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
