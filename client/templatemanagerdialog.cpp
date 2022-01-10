@@ -10,9 +10,9 @@ TemplateManagerDialog::TemplateManagerDialog(TemplateManager &mgr, QWidget *pare
 {
     ui->setupUi(this);
     auto templates = m_mgr.templates();
-    for (auto t : templates)
+    for (const auto &tmpl : templates)
     {
-        ui->cbTemplates->addItem(t->templateName());
+        ui->cbTemplates->addItem(tmpl->templateName());
     }
     if (!templates.isEmpty())
     {
@@ -33,12 +33,12 @@ bool TemplateManagerDialog::isModified() const
 
 void TemplateManagerDialog::on_cbTemplates_currentTextChanged(const QString &arg1)
 {
-    auto t = m_mgr.find(arg1);
-    if (t)
+    auto tmpl = m_mgr.find(arg1);
+    if (tmpl != nullptr)
     {
-        ui->edtFileNameRule->setText(t->nameTemplate());
-        ui->edtTemplateName->setText(QFileInfo(t->path()).baseName());
-        ui->edtContent->setText(t->contentTemplate());
+        ui->edtFileNameRule->setText(tmpl->nameTemplate());
+        ui->edtTemplateName->setText(QFileInfo(tmpl->path()).baseName());
+        ui->edtContent->setText(tmpl->contentTemplate());
         ui->edtTemplateName->setReadOnly(true);
     }
     else
@@ -63,8 +63,8 @@ void TemplateManagerDialog::on_btnSaveTemplate_clicked()
 {
     if (ui->cbTemplates->currentText().isEmpty())
     {
-        auto t = m_mgr.add(ui->edtTemplateName->text(), ui->edtFileNameRule->text(), ui->edtContent->getText());
-        t->save();
+        auto tmpl = m_mgr.add(ui->edtTemplateName->text(), ui->edtFileNameRule->text(), ui->edtContent->getText());
+        tmpl->save();
         m_isModified = true;
         ui->cbTemplates->addItem(ui->edtTemplateName->text());
         ui->cbTemplates->setCurrentText(ui->edtTemplateName->text());
@@ -72,16 +72,16 @@ void TemplateManagerDialog::on_btnSaveTemplate_clicked()
     }
     else
     {
-        auto t = m_mgr.find(ui->cbTemplates->currentText());
-        if (t)
+        auto tmpl = m_mgr.find(ui->cbTemplates->currentText());
+        if (tmpl != nullptr)
         {
-            if (t->nameTemplate() != ui->edtFileNameRule->text())
+            if (tmpl->nameTemplate() != ui->edtFileNameRule->text())
             {
                 m_isModified = true;
-                t->setNameTemplate(ui->edtFileNameRule->text());
+                tmpl->setNameTemplate(ui->edtFileNameRule->text());
             }
-            t->setContentTemplate(ui->edtContent->getText());
-            t->save();
+            tmpl->setContentTemplate(ui->edtContent->getText());
+            tmpl->save();
         }
     }
 }

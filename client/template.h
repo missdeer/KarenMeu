@@ -15,11 +15,11 @@ public:
 
     const QString &nameTemplate() const;
     void           setNameTemplate(const QString &nameRule);
-    QString        templateExecutedName(const QString &title);
+    QString        templateExecutedName(const QString &title, const QString &filename);
 
     const QString &contentTemplate() const;
     void           setContentTemplate(const QString &content);
-    QString        templateExecutedContent(const QString &title);
+    QString        templateExecutedContent(const QString &title, const QString &filename);
 
     bool needTitle() const;
 
@@ -27,7 +27,7 @@ private:
     QString m_path;
     QString m_nameTemplate;
     QString m_contentTemplate;
-    QString executeTemplate(const QString &t, const QString &title);
+    QString executeTemplate(const QString &t, const QString &title, const QString &filename);
 };
 
 using TemplatePtr = QSharedPointer<Template>;

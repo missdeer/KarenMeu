@@ -11,6 +11,11 @@ QT_FORWARD_DECLARE_CLASS(QSettings);
 class Settings
 {
 public:
+    Settings()                 = default;
+    Settings(const Settings &) = delete;
+    Settings(Settings &&)      = delete;
+    void operator=(const Settings &) = delete;
+    void operator=(Settings &&) = delete;
     ~Settings();
     void save();
     void load();

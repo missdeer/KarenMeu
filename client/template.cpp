@@ -13,17 +13,19 @@
 
 bool Template::load()
 {
-    QFile f(m_path);
-    if (!f.open(QIODevice::ReadOnly))
-        return false;
-
-    QDomDocument doc;
-    if (!doc.setContent(&f))
+    QFile file(m_path);
+    if (!file.open(QIODevice::ReadOnly))
     {
-        f.close();
         return false;
     }
-    f.close();
+
+    QDomDocument doc;
+    if (!doc.setContent(&file))
+    {
+        file.close();
+        return false;
+    }
+    file.close();
 
     auto docEle = doc.documentElement();
     if (docEle.isNull())
@@ -49,9 +51,11 @@ bool Template::load()
 bool Template::save()
 {
     QDomDocument doc;
-    QFile        f(m_path);
-    if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    QFile        file(m_path);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    {
         return false;
+    }
 
     auto intruction = doc.createProcessingInstruction("xml", "version='1.0' encoding='UTF-8'");
     doc.appendChild(intruction);
@@ -71,9 +75,9 @@ bool Template::save()
     auto contentSection = doc.createCDATASection(m_contentTemplate);
     contentEle.appendChild(contentSection);
 
-    QTextStream out(&f);
+    QTextStream out(&file);
     doc.save(out, 4);
-    f.close();
+    file.close();
     return true;
 }
 
@@ -102,9 +106,9 @@ void Template::setNameTemplate(const QString &nameRule)
     m_nameTemplate = nameRule;
 }
 
-QString Template::templateExecutedName(const QString &title)
+QString Template::templateExecutedName(const QString &title, const QString &filename)
 {
-    return executeTemplate(m_nameTemplate, title);
+    return executeTemplate(m_nameTemplate, title, filename);
 }
 
 const QString &Template::contentTemplate() const
@@ -117,9 +121,9 @@ void Template::setContentTemplate(const QString &content)
     m_contentTemplate = content;
 }
 
-QString Template::templateExecutedContent(const QString &title)
+QString Template::templateExecutedContent(const QString &title, const QString &filename)
 {
-    return executeTemplate(m_contentTemplate, title);
+    return executeTemplate(m_contentTemplate, title, filename);
 }
 
 bool Template::needTitle() const
@@ -127,13 +131,13 @@ bool Template::needTitle() const
     return m_nameTemplate.contains("%title%", Qt::CaseInsensitive) || m_contentTemplate.contains("%title%", Qt::CaseInsensitive);
 }
 
-QString Template::executeTemplate(const QString &t, const QString &title)
+QString Template::executeTemplate(const QString &t, const QString &title, const QString &filename)
 {
     auto    now = QDateTime::currentDateTime();
     QString res = t;
-    res         = res.replace("%title%", title, Qt::CaseInsensitive);
-    QRegularExpression r("%([a-zA-Z]{1,4})%");
-    for (auto match = r.match(res); match.hasMatch(); match = r.match(res))
+    res         = res.replace("%title%", title, Qt::CaseInsensitive).replace("%filename%", filename, Qt::CaseInsensitive);
+    QRegularExpression reg("%([a-zA-Z]{1,4})%");
+    for (auto match = reg.match(res); match.hasMatch(); match = reg.match(res))
     {
         auto fullMatchedText = match.captured(0);
         auto submatchedText  = match.captured(1);

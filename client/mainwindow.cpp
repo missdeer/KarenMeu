@@ -589,53 +589,58 @@ void MainWindow::onYoudaoDictResult(QString res)
 
 void MainWindow::onNewFromTemplateTriggered()
 {
-    auto act = qobject_cast<QAction *>(sender());
+    auto *act = qobject_cast<QAction *>(sender());
     Q_UNUSED(act);
     QString templateName = act->text();
-    auto    t            = m_templateManager->find(templateName);
-    if (!t)
+    auto    tmpl         = m_templateManager->find(templateName);
+    if (!tmpl)
+    {
         return;
+    }
 
     QString title;
-    if (t->needTitle())
+    if (tmpl->needTitle())
     {
         title = QInputDialog::getText(this, tr("Input Title"), tr("Title for document"));
-    }
-    auto fileContent = t->templateExecutedContent(title);
-    auto fileName    = t->templateExecutedName(title);
-    if (!fileName.isEmpty())
-    {
-        // need a directory to save file
-        // save to file
-        auto path = QFileDialog::getExistingDirectory(
-            this, tr("Select a directory to save document"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
-        if (path.isEmpty())
+        if (title.isEmpty())
         {
             return;
         }
-        QDir dir(path);
+    }
+    auto filePath = QFileDialog::getSaveFileName(this, tr("Save file to"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+    if (filePath.isEmpty())
+    {
+        return;
+    }
+    QFileInfo finfo(filePath);
+    auto      baseName    = finfo.baseName();
+    auto      fileName    = tmpl->templateExecutedName(title, baseName);
+    auto      fileContent = tmpl->templateExecutedContent(title, baseName);
+    if (!fileName.isEmpty())
+    {
+        QDir dir(finfo.absoluteDir());
         if (!dir.exists())
         {
-            if (!dir.mkpath(path))
+            if (!dir.mkpath(dir.absolutePath()))
             {
-                QMessageBox::warning(this, tr("Error"), tr("Making directory %1 failed.").arg(path), QMessageBox::Ok);
+                QMessageBox::warning(
+                    this, tr("Error"), tr("Making directory %1 failed.").arg(QDir::toNativeSeparators(dir.absolutePath())), QMessageBox::Ok);
                 return;
             }
         }
-        auto  filePath = (QStringList() << path << fileName).join("/");
-        QFile f(filePath);
-        if (!f.open(QIODevice::WriteOnly | QIODevice::Truncate))
+
+        filePath = dir.absolutePath() + "/" + fileName;
+        QFile file(filePath);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
         {
-            QMessageBox::warning(this, tr("Error"), tr("Creating file at %1 failed.").arg(filePath), QMessageBox::Ok);
+            QMessageBox::warning(this, tr("Error"), tr("Creating file at %1 failed.").arg(QDir::toNativeSeparators(filePath)), QMessageBox::Ok);
             return;
         }
-        else
-        {
-            f.write(fileContent.toUtf8());
-            f.close();
-            // open file
-            openMarkdownDocument(filePath);
-        }
+
+        file.write(fileContent.toUtf8());
+        file.close();
+        // open file
+        openMarkdownDocument(filePath);
     }
     else
     {
