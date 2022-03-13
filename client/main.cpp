@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QSslSocket>
 #include <QTranslator>
+#include <QWebEngineProfile>
 #include <QWebEngineSettings>
 #include <QtCore>
 
@@ -95,7 +96,10 @@ int main(int argc, char *argv[])
     g_settings.reset(new Settings);
     g_settings->initialize();
 
-    QWebEngineSettings::globalSettings()->setAttribute(QWebEngineSettings::JavascriptCanAccessClipboard, true);
+    auto *defaultProfile = QWebEngineProfile::defaultProfile();
+    defaultProfile->setHttpCacheType(QWebEngineProfile::MemoryHttpCache);
+    defaultProfile->setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
+    defaultProfile->setHttpUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0");
 
     // setup command line parser
     QCommandLineParser parser;

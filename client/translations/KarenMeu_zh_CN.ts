@@ -1594,12 +1594,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="93"/>
+        <location filename="../main.cpp" line="94"/>
         <source>Critical error</source>
         <translation>严重错误</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="93"/>
+        <location filename="../main.cpp" line="94"/>
         <source>SSL not supported, some features may not work as expected.</source>
         <translation>不支持SSL，一些功能可能无法正常工作。</translation>
     </message>
@@ -1702,32 +1702,32 @@
 <context>
     <name>TranslateOutputWidget</name>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="126"/>
+        <location filename="../translateoutputwidget.cpp" line="128"/>
         <source>Original Text:</source>
         <translation>原文：</translation>
     </message>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="64"/>
+        <location filename="../translateoutputwidget.cpp" line="65"/>
         <source>&lt;h4&gt;Translating...&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;正在翻译…&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="115"/>
+        <location filename="../translateoutputwidget.cpp" line="117"/>
         <source>Translate</source>
         <translation>翻译</translation>
     </message>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="117"/>
+        <location filename="../translateoutputwidget.cpp" line="119"/>
         <source>Refresh</source>
         <translation>刷新</translation>
     </message>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="120"/>
+        <location filename="../translateoutputwidget.cpp" line="122"/>
         <source>From</source>
         <translation>源语言：</translation>
     </message>
     <message>
-        <location filename="../translateoutputwidget.cpp" line="123"/>
+        <location filename="../translateoutputwidget.cpp" line="125"/>
         <source>To</source>
         <translation>目标语言：</translation>
     </message>
@@ -1735,7 +1735,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="104"/>
+        <location filename="../main.cpp" line="108"/>
         <source>The file to open.</source>
         <translation>打开文章</translation>
     </message>

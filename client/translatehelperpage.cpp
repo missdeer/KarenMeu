@@ -23,7 +23,7 @@ void TranslateHelperPage::translate(const QString &text)
     }
     m_originalText = text;
     m_state = THS_LOADINGPAGE;
-    QUrl u         = QUrl::fromUserInput(m_translator->landingPageUrl() + text.toUtf8());
+    QUrl u         = QUrl::fromUserInput(m_translator->landingPageUrl() + text.toUtf8().toPercentEncoding());
 #if defined(ENABLE_LOGS)
     qDebug() << u;
 #endif
@@ -52,7 +52,7 @@ void TranslateHelperPage::getResult()
             m_resultTryCount++;
             if (m_resultTryCount < 3)
             {
-                m_timer->start(interval);
+                emit failed();
             }
             else
             {

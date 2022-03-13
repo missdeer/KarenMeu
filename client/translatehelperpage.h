@@ -30,6 +30,7 @@ private slots:
 
 signals:
     void translated(QString);
+    void failed();
 
 private:
     ITranslator *         m_translator;

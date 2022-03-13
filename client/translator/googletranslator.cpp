@@ -50,7 +50,7 @@ void GoogleTranslator::request(QWebEnginePage *page, QTimer *timer, const QStrin
 
 QString GoogleTranslator::landingPageUrl() const
 {
-    return QString("https://translate.google.com/?sl=%1&tl=%2&text=").arg(from(), to());
+    return QString("https://translate.google.cn/?sl=%1&tl=%2&text=").arg(from(), to());
 }
 
 QString GoogleTranslator::resultJavaScript() const

@@ -3,6 +3,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPlainTextEdit>
+#include <QTimer>
 #include <QToolBar>
 #include <QVBoxLayout>
 
@@ -67,6 +68,7 @@ void TranslateOutputWidget::translate(const QString &text)
     {
         m_helper = new TranslateHelperPage(m_translator, this);
         connect(m_helper, &TranslateHelperPage::translated, this, &TranslateOutputWidget::onTranslated);
+        connect(m_helper, &TranslateHelperPage::failed, [this] { QTimer::singleShot(3000, [this] { onRefresh(); }); });
     }
     Q_ASSERT(m_helper);
     m_helper->translate(text);
