@@ -725,7 +725,15 @@ void MainWindow::setupWebBrowserPane()
     browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Reload));
     browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Stop));
     auto *browserAddressBar = new WebBrowserAddressBar(browserContainer);
-    m_urlCompleterModel << "https://www.meetingcpp.com"
+    m_urlCompleterModel << "https://medium.com/@ralph.kootker"
+                        << "https://medium.com/@happy.cerberus"
+                        << "https://ggulgulia.medium.com/"
+                        << "https://brevzin.github.io/posts/"
+                        << "https://shafik.github.io/"
+                        << "https://www.foonathan.net/"
+                        << "https://www.cppstories.com/p/archive/"
+                        << "http://www.modernescpp.com/index.php"
+                        << "https://www.fluentcpp.com/"
                         << "https://isocpp.org";
     m_urlCompleter = new QCompleter(m_urlCompleterModel, browserAddressBar);
     m_urlCompleter->setCaseSensitivity(Qt::CaseInsensitive);
