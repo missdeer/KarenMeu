@@ -98,6 +98,12 @@ jobs:
       qt_target: desktop
     # 步骤
     steps:
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-version: '16.11'
+          msbuild-architecture: ${{ matrix.msvc_arch }}
+          
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
