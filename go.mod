@@ -21,11 +21,11 @@ require (
 	github.com/ugorji/go v1.2.6 // indirect
 	github.com/ultimate-guitar/go-imagequant v0.0.0-20201216103743-29e607cca148
 	github.com/vanng822/go-premailer v1.20.1
-	github.com/yuin/goldmark v1.4.8
+	github.com/yuin/goldmark v1.4.11
 	github.com/yuin/goldmark-emoji v1.0.1
 	github.com/yuin/goldmark-highlighting v0.0.0-20220208100518-594be1970594
 	github.com/yuin/goldmark-meta v1.1.0
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
-	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
+	golang.org/x/net v0.0.0-20220403103023-749bd193bc2b // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 )
