@@ -34,6 +34,7 @@ using namespace vte;
 
 using pFMarkdownEngine          = char *(*)(GoString, GoString, GoUint8);
 pFMarkdownEngine markdownEngine = nullptr;
+static auto      g_loadingGif   = QStringLiteral("https://miro.medium.com/max/1000/1*CsJ05WEGfunYMLGfsT2sXA.gif");
 
 MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget *parent)
     : QWidget(parent),
@@ -666,7 +667,7 @@ void MarkdownView::renderMarkdownToHTML()
     QByteArray temp = ba;
     temp.replace('\r', ' ');
     QList<QByteArray> lines = temp.split('\n');
-    QList<QByteArray> metaDataLines;
+    QList<QByteArray>  metaDataLines;
     QRegularExpression reMetadataSeparator("^\\-{3,}[\\s\\t]*$");
     int                startLineIndex = 0;
     while (lines[startLineIndex].trimmed().isEmpty())
@@ -690,7 +691,7 @@ void MarkdownView::renderMarkdownToHTML()
 
     QRegularExpression reEmbedGraphRenderBegin(
         "^```(plantuml|puml|uml|ditaa|dot|mindmap|wbs|gantt|math|latex|salt|json|yaml|neato|circo|fdp|sfdp|osage|twopi|patchwork)[\\s\\t]*$");
-    QRegularExpression reCodeBlockEnd("^```[\\s\\t]*$");
+    QRegularExpression         reCodeBlockEnd("^```[\\s\\t]*$");
     auto               findBeginLine   = [&reEmbedGraphRenderBegin](const auto &l) { return reEmbedGraphRenderBegin.match(QString(l)).hasMatch(); };
     QStringList        graphvizEngines = {"dot", "neato", "circo", "fdp", "sfdp", "osage", "twopi", "patchwork"};
     std::map<QString, QString> images;
@@ -734,8 +735,7 @@ void MarkdownView::renderMarkdownToHTML()
 
         // insert img tag sync
         bool    hasCached   = m_fileCache->hasItem(cacheKey);
-        QString imgFilePath = hasCached ? QUrl::fromLocalFile(cachePathFromPathAndKey(m_fileCache->path(), cacheKey)).toString()
-                                        : "https://miro.medium.com/max/1000/1*CsJ05WEGfunYMLGfsT2sXA.gif";
+        QString    imgFilePath = hasCached ? QUrl::fromLocalFile(cachePathFromPathAndKey(m_fileCache->path(), cacheKey)).toString() : g_loadingGif;
         QByteArray tag         = QString("![%1](%2)").arg(cacheKey, imgFilePath).toUtf8();
         images.insert(std::make_pair(cacheKey, imgFilePath));
         *it            = tag;
@@ -751,11 +751,12 @@ void MarkdownView::renderMarkdownToHTML()
                 auto    encodedStr    = m_plantUMLUrlCodec->Encode(embedGraphCode.toStdString());
                 QString engine        = graphvizEngines.contains(mark) ? mark : "plantuml";
                 QString header        = graphvizEngines.contains(mark) ? "" : "~1";
-                QString embedImageUrl = QString("%1%2/png/%3%4")
-                                            .arg(graphvizEngines.contains(mark) ? "https://yii.li/" : g_settings->plantUMLRemoteServiceAddress(),
-                                                 engine,
-                                                 header,
-                                                 QString::fromStdString(encodedStr));
+                QString embedImageUrl =
+                    QString("%1%2/png/%3%4")
+                        .arg(graphvizEngines.contains(mark) ? "https://plantuml.ismisv.com/" : g_settings->plantUMLRemoteServiceAddress(),
+                             engine,
+                             header,
+                             QString::fromStdString(encodedStr));
                 imagesToDownload.insert(std::make_pair(cacheKey, embedImageUrl));
             }
             else
@@ -786,11 +787,15 @@ void MarkdownView::renderMarkdownToHTML()
     auto renderedHTML = QString::fromUtf8(res);
 
     // fix h1/h2/h3 tag for style
-    renderedHTML = renderedHTML.replace(QRegularExpression("<h1(\\s+id=\".*\")?>"), "<h1\\1><span>")
+    static auto regexpH1 = QRegularExpression("<h1(\\s+id=\".*\")?>");
+    static auto regexpH2 = QRegularExpression("<h2(\\s+id=\".*\")?>");
+    static auto regexpH3 = QRegularExpression("<h3(\\s+id=\".*\")?>");
+
+    renderedHTML = renderedHTML.replace(regexpH1, "<h1\\1><span>")
                        .replace("</h1>", "</span></h1>")
-                       .replace(QRegularExpression("<h2(\\s+id=\".*\")?>"), "<h2\\1><span>")
+                       .replace(regexpH2, "<h2\\1><span>")
                        .replace("</h2>", "</span></h2>")
-                       .replace(QRegularExpression("<h3(\\s+id=\".*\")?>"), "<h3\\1><span>")
+                       .replace(regexpH3, "<h3\\1><span>")
                        .replace("</h3>", "</span></h3>");
 
     if (g_settings->macTerminalStyleCodeBlock())
@@ -813,7 +818,7 @@ void MarkdownView::renderMarkdownToHTML()
         // Goldmark's bug?
         for (const auto &[cacheKey, path] : images)
         {
-            QString imgFilePath = QFile::exists(QUrl(path).toLocalFile()) ? path : "https://miro.medium.com/max/1000/1*CsJ05WEGfunYMLGfsT2sXA.gif";
+            QString imgFilePath = QFile::exists(QUrl(path).toLocalFile()) ? path : g_loadingGif;
 
             renderedHTML = renderedHTML.replace(QString("<img src=\"\" alt=\"%1\"").arg(cacheKey),
                                                 QString("<img src=\"%2\" alt=\"%1\"").arg(cacheKey, imgFilePath));
