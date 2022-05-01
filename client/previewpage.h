@@ -10,10 +10,12 @@ public:
     explicit PreviewPage(QNetworkAccessManager *nam, QObject *parent = nullptr);
     void refreshImage(const QString &imgAlt, const QString &imgSrc);
     void inlineImages();
-
+    void copy1stImage();
+    void getImages();
 signals:
     void embeded();
     void allImagesEmbeded();
+    void gotAllImages(QStringList);
 public slots:
     void onEditorScrollMoved(int pos, int max);
     void onEmbeded();
@@ -28,6 +30,10 @@ private:
     void                   embedImages(const QStringList &images);
     void                   embedImage(const QString &from, const QString &to);
     QByteArray             compressPNG(const QByteArray &ba);
+    void                   copyImage(const QString &image);
+    void                   copyRemoteImage(const QUrl &url);
+    void                   copyLocalImage(const QString &filePath);
+    void                   copyFromImageData(const QString &data);
 };
 
 #endif // PREVIEWPAGE_H

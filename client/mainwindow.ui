@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>1283</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -106,6 +106,13 @@
     <property name="title">
      <string>&amp;Edit</string>
     </property>
+    <widget class="QMenu" name="menuCopyImageInPreview">
+     <property name="title">
+      <string>Copy Image In Preview</string>
+     </property>
+     <addaction name="actionCopyTheFirstImage"/>
+     <addaction name="actionListImages"/>
+    </widget>
     <addaction name="actionUndo"/>
     <addaction name="actionRedo"/>
     <addaction name="separator"/>
@@ -115,6 +122,7 @@
     <addaction name="actionSelectAll"/>
     <addaction name="separator"/>
     <addaction name="actionFindReplace"/>
+    <addaction name="menuCopyImageInPreview"/>
     <addaction name="actionCopyAsHTML"/>
     <addaction name="separator"/>
     <addaction name="actionPreference"/>
@@ -236,6 +244,7 @@
    <addaction name="actionCut"/>
    <addaction name="actionPaste"/>
    <addaction name="separator"/>
+   <addaction name="actionCopyTheFirstImage"/>
    <addaction name="actionCopyAsHTML"/>
   </widget>
   <widget class="QToolBar" name="formatToolbar">
@@ -1273,6 +1282,26 @@
   <action name="actionLeftRightOrTopBottomViews">
    <property name="text">
     <string>Left/Right or Top/Bottom views</string>
+   </property>
+  </action>
+  <action name="actionCopyTheFirstImage">
+   <property name="icon">
+    <iconset resource="karenmeu.qrc">
+     <normaloff>:/rc/images/copy1stimage.png</normaloff>:/rc/images/copy1stimage.png</iconset>
+   </property>
+   <property name="text">
+    <string>Copy The First Image</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+Shift+C</string>
+   </property>
+  </action>
+  <action name="actionListImages">
+   <property name="text">
+    <string>List Images</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
    </property>
   </action>
  </widget>

@@ -409,5 +409,7 @@
         <file>rc/images/go-previous.png</file>
         <file>rc/images/process-stop.png</file>
         <file>rc/images/view-refresh.png</file>
+        <file>rc/images/animated-loading.gif</file>
+        <file>rc/images/copy1stimage.png</file>
     </qresource>
 </RCC>

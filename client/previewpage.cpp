@@ -1,10 +1,11 @@
 #include <QBuffer>
+#include <QClipboard>
 #include <QDesktopServices>
+#include <QGuiApplication>
 #include <QImageReader>
 #include <QtCore>
 
 #include "previewpage.h"
-
 #include "networkreplyhelper.h"
 #include "utils.h"
 
@@ -43,6 +44,30 @@ void PreviewPage::inlineImages()
                       m_imageCount        = images.length();
                       m_imageHandledCount = 0;
                       embedImages(images);
+                  });
+}
+
+void PreviewPage::copy1stImage()
+{
+    runJavaScript("var images = document.getElementsByTagName('img');"
+                  "images[0].src;                                    ",
+                  [this](const QVariant &v) {
+                      auto image = v.toString();
+                      copyImage(image);
+                  });
+}
+
+void PreviewPage::getImages()
+{
+    runJavaScript("var images = document.getElementsByTagName('img');"
+                  "var sources = [];                                 "
+                  "for (i=0;i < images.length;i++) {                 "
+                  "  sources.push(images[i].src);                    "
+                  "}                                                 "
+                  "sources;                                          ",
+                  [this](const QVariant &v) {
+                      auto res = v.toStringList();
+                      emit gotAllImages(res);
                   });
 }
 
@@ -204,6 +229,80 @@ QByteArray PreviewPage::compressPNG(const QByteArray &ba)
     GoSlice output;
     auto    res = Crush(input, &output);
     if (!res)
+    {
         return ba;
+    }
     return QByteArray((char *)output.data, output.len);
+}
+
+void PreviewPage::copyImage(const QString &image)
+{
+    if (image.startsWith("file://"))
+    {
+        copyLocalImage(image);
+    }
+    else if (image.startsWith("http://") || image.startsWith("https://"))
+    {
+        copyRemoteImage(QUrl(image));
+    }
+    else
+    {
+        copyFromImageData(image);
+    }
+}
+
+void PreviewPage::copyRemoteImage(const QUrl &url)
+{
+    auto *clipboard = QGuiApplication::clipboard();
+    if (clipboard)
+    {
+        QNetworkRequest req(url);
+        req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
+        req.setRawHeader("Accept-Encoding", "gzip, deflate");
+        Q_ASSERT(m_nam);
+        auto *reply  = m_nam->get(req);
+        auto *helper = new NetworkReplyHelper(reply);
+        helper->waitForFinished();
+        auto imgData = helper->content();
+        helper->deleteLater();
+        QImage img;
+        if (!img.loadFromData(imgData))
+        {
+            qDebug() << "loading from data failed:" << url;
+            return;
+        }
+        clipboard->setImage(img);
+    }
+}
+
+void PreviewPage::copyLocalImage(const QString &filePath)
+{
+    auto *clipboard = QGuiApplication::clipboard();
+    if (clipboard)
+    {
+        QImage img(filePath.startsWith("file:///") ? filePath.mid(8) : filePath);
+        clipboard->setImage(img);
+    }
+}
+
+void PreviewPage::copyFromImageData(const QString &data)
+{
+    auto *clipboard = QGuiApplication::clipboard();
+    if (clipboard)
+    {
+        static auto pattern = QRegularExpression("^data:image/([a-zA-Z0-9]+);base64,");
+        auto        match   = pattern.match(data);
+        if (match.hasMatch())
+        {
+            auto   matched   = match.captured(0);
+            auto   imageData = data.mid(matched.length());
+            auto   imgData   = QByteArray::fromBase64(imageData.toUtf8());
+            QImage img;
+            if (!img.loadFromData(imgData))
+            {
+                qDebug() << "loading from data failed:" << data;
+            }
+            clipboard->setImage(img);
+        }
+    }
 }
