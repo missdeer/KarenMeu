@@ -27,10 +27,15 @@ private slots:
 
     void on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *);
 
+protected:
+    void resizeEvent(QResizeEvent *);
+
 private:
     Ui::ListImagesDialog  *ui;
     QNetworkAccessManager *m_nam;
+    QPixmap                m_currentPixmap;
     QPixmap                pixmapFromString(const QString &image);
+    void                   previewCurrentImage();
 };
 
 #endif // LISTIMAGESDIALOG_H

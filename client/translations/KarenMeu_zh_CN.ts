@@ -118,12 +118,12 @@
         <translation>关闭(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../listimagesdialog.cpp" line="44"/>
+        <location filename="../listimagesdialog.cpp" line="49"/>
         <source>All supported formats (%1)</source>
         <translation>所有支持的格式 (%1)</translation>
     </message>
     <message>
-        <location filename="../listimagesdialog.cpp" line="46"/>
+        <location filename="../listimagesdialog.cpp" line="51"/>
         <source>Save image to file</source>
         <translation>保存图像到文件</translation>
     </message>

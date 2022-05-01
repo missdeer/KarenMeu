@@ -3,6 +3,7 @@
 #include <QGuiApplication>
 #include <QImageWriter>
 #include <QMimeDatabase>
+#include <QResizeEvent>
 
 #include "listimagesdialog.h"
 #include "networkreplyhelper.h"
@@ -13,6 +14,10 @@ ListImagesDialog::ListImagesDialog(const QStringList &images, QNetworkAccessMana
 {
     ui->setupUi(this);
     ui->listWidget->addItems(images);
+    if (!images.isEmpty())
+    {
+        ui->listWidget->setCurrentRow(0);
+    }
 }
 
 ListImagesDialog::~ListImagesDialog()
@@ -47,22 +52,16 @@ void ListImagesDialog::on_btnSaveAs_clicked()
 
     if (!filePath.isEmpty())
     {
-        auto   *current = ui->listWidget->currentItem();
-        QString image   = current->text();
-        auto    pixmap  = pixmapFromString(image);
-        pixmap.save(filePath);
+        m_currentPixmap.save(filePath);
     }
 }
 
 void ListImagesDialog::on_btnCopyImage_clicked()
 {
-    auto   *current   = ui->listWidget->currentItem();
-    QString image     = current->text();
-    auto    pixmap    = pixmapFromString(image);
-    auto   *clipboard = QGuiApplication::clipboard();
+    auto *clipboard = QGuiApplication::clipboard();
     if (clipboard)
     {
-        clipboard->setPixmap(pixmap);
+        clipboard->setPixmap(m_currentPixmap);
     }
 }
 
@@ -71,16 +70,30 @@ void ListImagesDialog::on_btnClose_clicked()
     reject();
 }
 
+void ListImagesDialog::previewCurrentImage()
+{
+    auto previewSize = ui->imagePreview->size();
+    if (m_currentPixmap.width() > previewSize.width() || m_currentPixmap.height() > previewSize.height())
+    {
+        auto pixmap = m_currentPixmap.scaled(previewSize, Qt::KeepAspectRatio);
+        ui->imagePreview->setPixmap(pixmap);
+    }
+    else
+    {
+        ui->imagePreview->setPixmap(m_currentPixmap);
+    }
+}
+
 void ListImagesDialog::on_listWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem * /*previous*/)
 {
-    QString image       = current->text();
-    auto    previewSize = ui->imagePreview->size();
-    auto    pixmap      = pixmapFromString(image);
-    if (pixmap.width() > previewSize.width() || pixmap.height() > previewSize.height())
-    {
-        pixmap = pixmap.scaled(previewSize, Qt::KeepAspectRatio);
-    }
-    ui->imagePreview->setPixmap(pixmap);
+    QString image   = current->text();
+    m_currentPixmap = pixmapFromString(image);
+    previewCurrentImage();
+}
+
+void ListImagesDialog::resizeEvent(QResizeEvent *)
+{
+    previewCurrentImage();
 }
 
 QPixmap ListImagesDialog::pixmapFromString(const QString &image)
