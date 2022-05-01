@@ -21,6 +21,7 @@
 #include "markdownview.h"
 #include "clientutils.h"
 #include "filecache.h"
+#include "listimagesdialog.h"
 #include "markdowneditor4.h"
 #include "networkreplyhelper.h"
 #include "plantumlrunner.h"
@@ -93,6 +94,7 @@ MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWi
     auto *page = new PreviewPage(nam, this);
     m_preview->setPage(page);
     connect(page, &PreviewPage::allImagesEmbeded, this, &MarkdownView::onAllImagesEmbeded);
+    connect(page, &PreviewPage::gotAllImages, this, &MarkdownView::onGotAllImages);
     connect(m_editor, &MarkdownEditor4::scrollValueChanged, this, &MarkdownView::updatePreviewScrollBar);
     Q_ASSERT(m_editor->document());
     connect(m_editor->document(), &QTextDocument::cursorPositionChanged, this, &MarkdownView::updatePreviewScrollBar);
@@ -287,6 +289,22 @@ void MarkdownView::copyAsHTML()
     auto *page = (PreviewPage *)m_preview->page();
     Q_ASSERT(page);
     page->inlineImages();
+}
+
+void MarkdownView::copyTheFirstImage()
+{
+    Q_ASSERT(m_preview);
+    auto *page = (PreviewPage *)m_preview->page();
+    Q_ASSERT(page);
+    page->copy1stImage();
+}
+
+void MarkdownView::listImages()
+{
+    Q_ASSERT(m_preview);
+    auto *page = (PreviewPage *)m_preview->page();
+    Q_ASSERT(page);
+    page->getImages();
 }
 
 void MarkdownView::exportAsHTML()
@@ -574,6 +592,12 @@ void MarkdownView::onAllImagesEmbeded()
         QApplication::clipboard()->setMimeData(md, QClipboard::Clipboard);
         QMessageBox::information(this, tr("HTML copied"), tr("HTML content has been copied into clipboard."), QMessageBox::Ok);
     });
+}
+
+void MarkdownView::onGotAllImages(QStringList images)
+{
+    ListImagesDialog dlg(images, m_nam, this);
+    dlg.exec();
 }
 
 void MarkdownView::setCustomPreivewThemeEditor(PreviewThemeEditor *customPreivewThemeEditor)

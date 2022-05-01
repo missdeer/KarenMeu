@@ -90,6 +90,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionRedo, &QAction::triggered, m_view, &MarkdownView::redo);
     connect(ui->actionSelectAll, &QAction::triggered, m_view, &MarkdownView::selectAll);
     connect(ui->actionCopyAsHTML, &QAction::triggered, m_view, &MarkdownView::copyAsHTML);
+    connect(ui->actionCopyTheFirstImage, &QAction::triggered, m_view, &MarkdownView::copyTheFirstImage);
+    connect(ui->actionListImages, &QAction::triggered, m_view, &MarkdownView::listImages);
     connect(ui->actionExportAsPDF, &QAction::triggered, m_view, &MarkdownView::exportAsPDF);
     connect(ui->actionExportAsHTML, &QAction::triggered, m_view, &MarkdownView::exportAsHTML);
     connect(ui->actionStrong, &QAction::triggered, m_view, &MarkdownView::formatStrong);

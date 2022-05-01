@@ -75,6 +75,8 @@ public slots:
     void selectAll();
     void undo();
     void redo();
+    void copyTheFirstImage();
+    void listImages();
     void copyAsHTML();
     void exportAsHTML();
     void exportAsPDF();
@@ -87,6 +89,7 @@ private slots:
     void onRequestRemoteImageDone();
     void onRequestLocalImageDone();
     void onAllImagesEmbeded();
+    void onGotAllImages(QStringList images);
     void updatePreviewScrollBar();
 
 protected:

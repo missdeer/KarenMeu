@@ -61,7 +61,8 @@ SOURCES += \
         $$PWD/translator/youdaotranslator.cpp \
         $$PWD/translator/translator.cpp \
         $$PWD/webbrowser.cpp \
-        $$PWD/webbrowseraddressbar.cpp
+        $$PWD/webbrowseraddressbar.cpp \
+        listimagesdialog.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -94,13 +95,15 @@ HEADERS += \
         $$PWD/translator/translator.hpp \
         $$PWD/translator/youdaotranslator.h \
         $$PWD/webbrowser.h \
-        $$PWD/webbrowseraddressbar.h
+        $$PWD/webbrowseraddressbar.h \
+        listimagesdialog.h
 
 FORMS += \
         $$PWD/mainwindow.ui \
         $$PWD/preferencedialog.ui \
         $$PWD/templatemanagerdialog.ui \
-        $$PWD/findreplacedialog.ui
+        $$PWD/findreplacedialog.ui \
+        listimagesdialog.ui
 
 INCLUDEPATH += $$PWD $$PWD/markdowneditor4  $$PWD/../utils $$PWD/translator
 LIBS += -L$$PWD/../utils
@@ -145,7 +148,7 @@ contains(QMAKE_HOST.arch, x86_64): {
 win32-*msvc* {
     #QMAKE_LFLAGS += "/LTCG"
     QMAKE_CXXFLAGS_RELEASE += /Zi
-    #QMAKE_LFLAGS_RELEASE += /DEBUG
+    QMAKE_LFLAGS_RELEASE += /DEBUG
 
     CONFIG(release, debug|release) : {
         WINDEPLOYQT = $$[QT_INSTALL_BINS]/windeployqt.exe
