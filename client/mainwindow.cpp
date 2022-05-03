@@ -21,6 +21,7 @@
 #include <QPlainTextEdit>
 #include <QShortcut>
 #include <QSignalMapper>
+#include <QSplashScreen>
 #include <QSplitter>
 #include <QSvgRenderer>
 #include <QToolBox>
@@ -1460,9 +1461,8 @@ void MainWindow::reloadSamples(SampleResult *sr)
     }
 }
 
-void MainWindow::insertSampleSource(const QString &code)
-{
-    // TODO: insert sample source code to markdown source editor current position
+void MainWindow::insertSampleSource(const QString &code) {
+  emit m_view->insertText(code);
 }
 
 QListWidget *MainWindow::newSampleListWidget(const QSize &icon_size, QWidget *parent)

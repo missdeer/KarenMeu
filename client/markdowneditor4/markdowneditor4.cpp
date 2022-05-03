@@ -408,6 +408,12 @@ void MarkdownEditor4::formatShiftLeft()
     setTextCursor(c);
 }
 
+void MarkdownEditor4::insertText(const QString &text) {
+  vte::VTextEdit *editor = getTextEdit();
+  Q_ASSERT(editor);
+  editor->insertPlainText(text);
+}
+
 bool MarkdownEditor4::undoFormatting(const QString &formatter)
 {
     QTextCursor c               = textCursor();

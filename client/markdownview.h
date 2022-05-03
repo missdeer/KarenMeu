@@ -22,7 +22,7 @@ class MarkdownView : public QWidget
     Q_OBJECT
 public:
     explicit MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget *parent = nullptr);
-    ~MarkdownView();
+    ~MarkdownView() override;
     void             forceConvert();
     bool             maybeSave();
     void             updatePreviewTheme();
@@ -32,8 +32,8 @@ public:
     void             openFromFile(const QString &fileName);
     void             setInitialDocument(const QString &content);
     MarkdownEditor4 *editor();
-    QString          selectedText() const;
-    QString          fullText() const;
+    [[nodiscard]] QString selectedText() const;
+    [[nodiscard]] QString fullText() const;
     QSplitter *      splitter();
     void             setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor);
     void             setCustomPreivewThemeEditor(PreviewThemeEditor *customPreivewThemeEditor);
@@ -62,6 +62,7 @@ signals:
     void formatShiftRight();
     void formatShiftLeft();
     void setCurrentFile(const QString &);
+    void insertText(const QString &);
     void contentModified();
 
 public slots:

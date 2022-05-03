@@ -90,6 +90,8 @@ MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWi
     connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor4::formatHeader6);
     connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor4::formatShiftRight);
     connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor4::formatShiftLeft);
+    connect(this, &MarkdownView::insertText, m_editor,
+            &MarkdownEditor4::insertText);
 
     auto *page = new PreviewPage(nam, this);
     m_preview->setPage(page);

@@ -29,7 +29,7 @@ public:
     void redo();
     void selectAll();
 
-    QTextCursor textCursor() const;
+    [[nodiscard]] QTextCursor textCursor() const;
     void        setTextCursor(const QTextCursor &cursor);
 
     int currentDocumentLineNumber();
@@ -66,8 +66,9 @@ public slots:
     void formatHeader6();
     void formatShiftRight();
     void formatShiftLeft();
+    void insertText(const QString &text);
 
-private:
+  private:
     /**
      * Attempts to undo the formatting on a selected string
      *
