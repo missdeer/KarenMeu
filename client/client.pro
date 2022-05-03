@@ -27,6 +27,7 @@ CONFIG += c++17 sdk_no_version_check
 include($$PWD/../3rdparty/scintilla-latest.pri)
 include($$PWD/../3rdparty/lexilla-latest.pri)
 include($$PWD/../3rdparty/zlib.pri)
+include($$PWD/../3rdparty/QtWebDAV/QtWebDAV.pri)
 include($$PWD/../3rdparty/vtextedit/src/editor/editor_export.pri)
 include($$PWD/../3rdparty/vtextedit/src/libs/syntax-highlighting/syntax-highlighting_export.pri)
 

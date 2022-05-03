@@ -1635,21 +1635,36 @@
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="534"/>
-        <source>Cloud</source>
-        <translation>云服务</translation>
+        <source>WebDAV</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="543"/>
+        <location filename="../preferencedialog.ui" line="583"/>
+        <source>&amp;Test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="590"/>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="597"/>
+        <source>&amp;Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.ui" line="545"/>
         <source>Server:</source>
         <translation>服务器：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="553"/>
+        <location filename="../preferencedialog.ui" line="555"/>
         <source>Username:</source>
         <translation>用户名：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="563"/>
+        <location filename="../preferencedialog.ui" line="565"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>

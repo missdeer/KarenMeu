@@ -235,42 +235,42 @@ void Settings::setMainWindowGeometry(const QByteArray &geometry)
     settings.sync();
 }
 
-QString Settings::cloudServerAddress()
+QString Settings::webDAVServerAddress()
 {
     auto &settings = getSettings();
-    return settings.value("cloudServerAddress").toString();
+    return settings.value("webDAVServerAddress").toString();
 }
 
-void Settings::setCloudServerAddress(const QString &server)
+void Settings::setWebDAVServerAddress(const QString &server)
 {
     auto &settings = getSettings();
-    settings.setValue("cloudServerAddress", server);
+    settings.setValue("webDAVServerAddress", server);
     settings.sync();
 }
 
-QString Settings::cloudUsername()
+QString Settings::webDAVUsername()
 {
     auto &settings = getSettings();
-    return settings.value("cloudUsername").toString();
+    return settings.value("webDAVUsername").toString();
 }
 
-void Settings::setCloudUsername(const QString &username)
+void Settings::setWebDAVUsername(const QString &username)
 {
     auto &settings = getSettings();
-    settings.setValue("cloudUsername", username);
+    settings.setValue("webDAVUsername", username);
     settings.sync();
 }
 
-QString Settings::cloudPassword()
+QString Settings::webDAVPassword()
 {
     auto &settings = getSettings();
-    return settings.value("cloudPassword").toString();
+    return settings.value("webDAVPassword").toString();
 }
 
-void Settings::setCloudPassword(const QString &password)
+void Settings::setWebDAVPassword(const QString &password)
 {
     auto &settings = getSettings();
-    settings.setValue("cloudPassword", password);
+    settings.setValue("webDAVPassword", password);
     settings.sync();
 }
 

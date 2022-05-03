@@ -67,14 +67,14 @@ public:
     QByteArray mainWindowGeometry();
     void       setMainWindowGeometry(const QByteArray &geometry);
 
-    QString cloudServerAddress();
-    void    setCloudServerAddress(const QString &server);
+    QString webDAVServerAddress();
+    void    setWebDAVServerAddress(const QString &server);
 
-    QString cloudUsername();
-    void    setCloudUsername(const QString &username);
+    QString webDAVUsername();
+    void    setWebDAVUsername(const QString &username);
 
-    QString cloudPassword();
-    void    setCloudPassword(const QString &password);
+    QString webDAVPassword();
+    void    setWebDAVPassword(const QString &password);
 
     bool enableGoogleTranslate() const;
     void setEnableGoogleTranslate(bool enableGoogleTranslate);

@@ -10,3 +10,6 @@
 [submodule "3rdparty/lexilla"]
 	path = 3rdparty/lexilla
 	url = https://github.com/ScintillaOrg/lexilla.git
+[submodule "3rdparty/QtWebDAV"]
+	path = 3rdparty/QtWebDAV
+	url = git@github.com:missdeer/QtWebDAV.git

@@ -33,9 +33,9 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui
     ui->sbFontPointSize->setValue(g_settings->codeEditorFontPointSize());
     ui->cbPreviewMode->setCurrentText(g_settings->previewMode());
 
-    ui->edtCloudServerAddress->setText(g_settings->cloudServerAddress());
-    ui->edtCloudUsername->setText(g_settings->cloudUsername());
-    ui->edtCloudPassword->setText(g_settings->cloudPassword());
+    ui->edtWebDAVServerAddress->setText(g_settings->webDAVServerAddress());
+    ui->edtWebDAVUsername->setText(g_settings->webDAVUsername());
+    ui->edtWebDAVPassword->setText(g_settings->webDAVPassword());
 
     ui->cbBaiduTranslate->setChecked(g_settings->enableBaiduTranslate());
     ui->cbGoogleTranslate->setChecked(g_settings->enableGoogleTranslate());
@@ -76,9 +76,9 @@ void PreferenceDialog::accept()
     {
         g_settings->setCustomPreviewThemeStyle(m_previewThemeEditor->content());
     }
-    g_settings->setCloudServerAddress(ui->edtCloudServerAddress->text());
-    g_settings->setCloudUsername(ui->edtCloudUsername->text());
-    g_settings->setCloudPassword(ui->edtCloudPassword->text());
+    g_settings->setWebDAVServerAddress(ui->edtWebDAVServerAddress->text());
+    g_settings->setWebDAVUsername(ui->edtWebDAVUsername->text());
+    g_settings->setWebDAVPassword(ui->edtWebDAVPassword->text());
 
     g_settings->setEnableGoogleTranslate(ui->cbGoogleTranslate->isChecked());
     g_settings->setEnableBaiduTranslate(ui->cbBaiduTranslate->isChecked());
