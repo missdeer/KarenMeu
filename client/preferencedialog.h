@@ -9,6 +9,7 @@ namespace Ui
 }
 
 class PreviewThemeEditor;
+class QWebdav;
 
 class PreferenceDialog : public QDialog
 {
@@ -27,9 +28,16 @@ private slots:
     void on_btnBrowseGraphvizDotPath_clicked();
     void on_btnBrowsePlantUMLJarPath_clicked();
 
+    void on_btnTestWebDAV_clicked();
+
+    void on_btnAddWebDAV_clicked();
+
+    void on_btnRemoveWebDAV_clicked();
+
 private:
     Ui::PreferenceDialog *ui;
-    PreviewThemeEditor *  m_previewThemeEditor;
+    PreviewThemeEditor   *m_previewThemeEditor;
+    QWebdav              *m_webDav;
     void                  setupPreviewThemeEditor();
 };
 

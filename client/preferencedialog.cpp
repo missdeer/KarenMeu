@@ -1,28 +1,21 @@
 #include <QDir>
 #include <QFile>
 #include <QFileDialog>
+#include <QUrl>
 
 #include "preferencedialog.h"
 #include "previewthemeeditor.h"
+#include "qwebdav.h"
 #include "settings.h"
 #include "ui_preferencedialog.h"
 
-PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui::PreferenceDialog)
+PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui::PreferenceDialog), m_webDav(new QWebdav)
 {
     ui->setupUi(this);
+    ui->tabWidget->setCurrentIndex(0);
+
     setupPreviewThemeEditor();
 
-    ui->cbPreviewTheme->clear();
-
-    QDir dir(":/rc/theme");
-    auto entries = dir.entryInfoList();
-    for (const auto &entry : entries)
-    {
-        ui->cbPreviewTheme->addItem(entry.baseName());
-    }
-    ui->cbPreviewTheme->addItem(tr("Custom"));
-
-    ui->cbPreviewTheme->setCurrentText(g_settings->previewTheme());
     ui->cbCodeBlockStyle->setCurrentText(g_settings->codeBlockStyle());
     ui->cbMarkdownEngine->setCurrentText(g_settings->markdownEngine());
     ui->cbEnableLineNumbers->setChecked(g_settings->enableLineNumbers());
@@ -59,6 +52,7 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui
 
 PreferenceDialog::~PreferenceDialog()
 {
+    delete m_webDav;
     delete ui;
 }
 
@@ -150,4 +144,33 @@ void PreferenceDialog::setupPreviewThemeEditor()
     ui->previewThemeEditorContainer->setLayout(layout);
 
     m_previewThemeEditor->initialize("css");
+
+    ui->cbPreviewTheme->clear();
+
+    QDir dir(":/rc/theme");
+    auto entries = dir.entryInfoList();
+    for (const auto &entry : entries)
+    {
+        ui->cbPreviewTheme->addItem(entry.baseName());
+    }
+    ui->cbPreviewTheme->addItem(tr("Custom"));
+
+    ui->cbPreviewTheme->setCurrentText(g_settings->previewTheme());
 }
+
+void PreferenceDialog::on_btnTestWebDAV_clicked()
+{
+    auto url = ui->edtWebDAVServerAddress->text();
+    QUrl u(url);
+
+    auto user   = ui->edtWebDAVUsername->text();
+    auto passwd = ui->edtWebDAVPassword->text();
+
+    m_webDav->setConnectionSettings(u.scheme() == "https" ? QWebdav::HTTPS : QWebdav::HTTP, u.host(), u.path(), user, passwd, u.port());
+}
+
+void PreferenceDialog::on_btnAddWebDAV_clicked() {}
+
+void PreferenceDialog::on_btnRemoveWebDAV_clicked() {}
+
+void PreferenceDialog::on_listWebDAV_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous) {}

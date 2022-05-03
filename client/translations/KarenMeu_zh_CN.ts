@@ -1335,24 +1335,24 @@
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="23"/>
-        <location filename="../preferencedialog.cpp" line="75"/>
-        <location filename="../preferencedialog.cpp" line="102"/>
+        <location filename="../preferencedialog.cpp" line="69"/>
+        <location filename="../preferencedialog.cpp" line="96"/>
+        <location filename="../preferencedialog.cpp" line="156"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="119"/>
+        <location filename="../preferencedialog.cpp" line="113"/>
         <source>Select Java executable</source>
         <translation>选择Java解释器</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="128"/>
+        <location filename="../preferencedialog.cpp" line="122"/>
         <source>Select Dot (from Graphiz) executable</source>
         <translation>选择Dot（来自Graphviz）</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="137"/>
+        <location filename="../preferencedialog.cpp" line="131"/>
         <source>Select PlantUML jar</source>
         <translation>选择PlantUML jar包</translation>
     </message>
