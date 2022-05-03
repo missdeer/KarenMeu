@@ -48,6 +48,12 @@ void PlantUMLSourceEditor::clearAll()
     m_editor->clearAll();
 }
 
+void PlantUMLSourceEditor::setReadOnly(bool readOnly)
+{
+    Q_ASSERT(m_editor);
+    m_editor->setReadOnly(readOnly);
+}
+
 void PlantUMLSourceEditor::modified(Scintilla::ModificationFlags type,
                                     Scintilla::Position          position,
                                     Scintilla::Position          length,

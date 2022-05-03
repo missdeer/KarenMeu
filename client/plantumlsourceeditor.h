@@ -17,6 +17,7 @@ public:
     void       setContent(const QByteArray &content);
     QByteArray content();
     void       clearAll();
+    void       setReadOnly(bool readOnly);
 signals:
     void contentModified();
 private slots:

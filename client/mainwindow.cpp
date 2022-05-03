@@ -1070,7 +1070,7 @@ void MainWindow::setupDockPanels()
     auto *dockSampleSource = new QDockWidget(tr("Sample Source Code"), this);
     m_sampleSourcePreview  = new PlantUMLSourceEditor(dockSampleSource);
     m_sampleSourcePreview->initialize();
-    // m_sampleSourcePreview->setReadOnly(true);
+    m_sampleSourcePreview->setReadOnly(true);
     dockSampleSource->setWidget(m_sampleSourcePreview);
     dockSampleSource->setObjectName("sampleSource");
     addDockWidget(Qt::RightDockWidgetArea, dockSampleSource);
@@ -1401,9 +1401,9 @@ void MainWindow::onSampleItemSelectionChanged()
         {
             auto notes = item->data(SAMPLE_ITEM_NOTES_ROLE).toString();
             m_sampleSourcePreview->setToolTip(notes);
-            // m_sampleSourcePreview->setReadOnly(false);
+            m_sampleSourcePreview->setReadOnly(false);
             m_sampleSourcePreview->setContent(item->data(SAMPLE_ITEM_DATA_ROLE).toByteArray());
-            // m_sampleSourcePreview->setReadOnly(true);
+            m_sampleSourcePreview->setReadOnly(true);
         }
     }
 }
