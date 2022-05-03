@@ -132,7 +132,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
-        <location filename="../mainwindow.cpp" line="418"/>
+        <location filename="../mainwindow.cpp" line="419"/>
         <source>KarenMeu</source>
         <translation></translation>
     </message>
@@ -518,13 +518,13 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="740"/>
-        <location filename="../mainwindow.cpp" line="1107"/>
+        <location filename="../mainwindow.cpp" line="1108"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="748"/>
-        <location filename="../mainwindow.cpp" line="1107"/>
+        <location filename="../mainwindow.cpp" line="1108"/>
         <source>Lute</source>
         <translation></translation>
     </message>
@@ -770,7 +770,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1264"/>
-        <location filename="../mainwindow.cpp" line="1199"/>
+        <location filename="../mainwindow.cpp" line="1200"/>
         <source>Full Screen</source>
         <translation>全屏</translation>
     </message>
@@ -841,7 +841,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1234"/>
-        <location filename="../mainwindow.cpp" line="1308"/>
+        <location filename="../mainwindow.cpp" line="1309"/>
         <source>Save Workspace</source>
         <translation>保存工作空间</translation>
     </message>
@@ -966,221 +966,221 @@
         <translation>翻译剪切板中的文本</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="860"/>
+        <location filename="../mainwindow.cpp" line="861"/>
         <source>Google Translate</source>
         <translation>谷歌翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="872"/>
+        <location filename="../mainwindow.cpp" line="873"/>
         <source>Baidu Translate</source>
         <translation>百度翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="884"/>
+        <location filename="../mainwindow.cpp" line="885"/>
         <source>Youdao Translate</source>
         <translation>有道翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="920"/>
+        <location filename="../mainwindow.cpp" line="921"/>
         <source>Youdao Dictionary</source>
         <translation>有道词典</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1009"/>
+        <location filename="../mainwindow.cpp" line="1010"/>
         <source>DevTool</source>
         <translation>开发者工具</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="987"/>
+        <location filename="../mainwindow.cpp" line="988"/>
         <source>Preview HTML</source>
         <translation>预览HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="150"/>
+        <location filename="../mainwindow.cpp" line="151"/>
         <source>Switch to Top/Bottom View</source>
         <translation>切换为上下分栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="146"/>
+        <location filename="../mainwindow.cpp" line="147"/>
         <source>Switch to Left/Right View</source>
         <translation>切换为左右分栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="685"/>
+        <location filename="../mainwindow.cpp" line="686"/>
         <source>Input Title</source>
         <translation>输入标题</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="685"/>
+        <location filename="../mainwindow.cpp" line="686"/>
         <source>Title for document</source>
         <translation>文档标题</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="708"/>
-        <location filename="../mainwindow.cpp" line="717"/>
+        <location filename="../mainwindow.cpp" line="709"/>
+        <location filename="../mainwindow.cpp" line="718"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="708"/>
+        <location filename="../mainwindow.cpp" line="709"/>
         <source>Making directory %1 failed.</source>
         <translation>创建目录 %1 失败。 </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="717"/>
+        <location filename="../mainwindow.cpp" line="718"/>
         <source>Creating file at %1 failed.</source>
         <translation>创建文件 %1 失败。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="896"/>
+        <location filename="../mainwindow.cpp" line="897"/>
         <source>Sogou Translate</source>
         <translation>搜狗翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="908"/>
+        <location filename="../mainwindow.cpp" line="909"/>
         <source>DeepL Translate</source>
         <translation>DeepL翻译</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="937"/>
+        <location filename="../mainwindow.cpp" line="938"/>
         <source>Show All Language Docks</source>
         <translation>显示所有语言停靠栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="945"/>
+        <location filename="../mainwindow.cpp" line="946"/>
         <source>Hide All Language Docks</source>
         <translation>隐藏所有语言停靠栏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="998"/>
+        <location filename="../mainwindow.cpp" line="999"/>
         <source>Custom Theme Editor</source>
         <translation>自定义主题编辑器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="794"/>
+        <location filename="../mainwindow.cpp" line="795"/>
         <source>WebBrowser</source>
         <translation>网页浏览器</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="691"/>
+        <location filename="../mainwindow.cpp" line="692"/>
         <source>Save file to</source>
         <translation>保存文件到</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1026"/>
+        <location filename="../mainwindow.cpp" line="1027"/>
         <source>Sample Result</source>
-        <translation type="unfinished"></translation>
+        <translation>示例结果</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1043"/>
+        <location filename="../mainwindow.cpp" line="1044"/>
         <source>UML</source>
-        <translation type="unfinished"></translation>
+        <translation>UML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1050"/>
+        <location filename="../mainwindow.cpp" line="1051"/>
         <source>non-UML</source>
-        <translation type="unfinished"></translation>
+        <translation>非UML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1057"/>
+        <location filename="../mainwindow.cpp" line="1058"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>高级</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1063"/>
+        <location filename="../mainwindow.cpp" line="1064"/>
         <source>Show or hide the Sample Result dock</source>
-        <translation type="unfinished"></translation>
+        <translation>显示或隐藏示例结果停靠面板</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1070"/>
+        <location filename="../mainwindow.cpp" line="1071"/>
         <source>Sample Source Code</source>
-        <translation type="unfinished"></translation>
+        <translation>示例源代码</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1080"/>
+        <location filename="../mainwindow.cpp" line="1081"/>
         <source>Show or hide the Sample Source dock</source>
-        <translation type="unfinished"></translation>
+        <translation>显示或隐藏示例源代码停靠面板</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1090"/>
+        <location filename="../mainwindow.cpp" line="1091"/>
         <source>Mode:</source>
         <translation>预览模式：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1093"/>
+        <location filename="../mainwindow.cpp" line="1094"/>
         <source>Engine:</source>
         <translation>渲染引擎：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1096"/>
+        <location filename="../mainwindow.cpp" line="1097"/>
         <source>Code Block Style:</source>
         <translation>代码块风格：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1099"/>
+        <location filename="../mainwindow.cpp" line="1100"/>
         <source>Preview Theme:</source>
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1103"/>
+        <location filename="../mainwindow.cpp" line="1104"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1103"/>
+        <location filename="../mainwindow.cpp" line="1104"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1287"/>
+        <location filename="../mainwindow.cpp" line="1288"/>
         <source>Open Workspace</source>
         <translation>打开工作空间</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1287"/>
-        <location filename="../mainwindow.cpp" line="1308"/>
+        <location filename="../mainwindow.cpp" line="1288"/>
+        <location filename="../mainwindow.cpp" line="1309"/>
         <source>KarenMeu Workspace (*.krm);;All files (*.*)</source>
         <translation>KarenMeu工作空间 (*.krm);;所有文件 (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1375"/>
+        <location filename="../mainwindow.cpp" line="1376"/>
         <source>Notice</source>
         <translation>注意</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1375"/>
+        <location filename="../mainwindow.cpp" line="1376"/>
         <source>It is required to restart KarenMeu application to take effect.</source>
         <translation>需要重启KarenMeu才能生效。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1179"/>
+        <location filename="../mainwindow.cpp" line="1180"/>
         <source>Exit Full Screen</source>
         <translation>退出全屏</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="658"/>
-        <location filename="../mainwindow.cpp" line="1159"/>
+        <location filename="../mainwindow.cpp" line="659"/>
+        <location filename="../mainwindow.cpp" line="1160"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="418"/>
+        <location filename="../mainwindow.cpp" line="419"/>
         <source>KarenMeu is a Markdown based Wechat public account article editor for programmers.</source>
         <translation>KarenMeu是一款专为程序员设计的基于Markdown语法的微信公众号文章编辑器。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="532"/>
-        <location filename="../mainwindow.cpp" line="547"/>
+        <location filename="../mainwindow.cpp" line="533"/>
+        <location filename="../mainwindow.cpp" line="548"/>
         <source>%1. %2</source>
         <translation>%1. %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="956"/>
+        <location filename="../mainwindow.cpp" line="957"/>
         <source>File System</source>
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="976"/>
+        <location filename="../mainwindow.cpp" line="977"/>
         <source>Cloud</source>
         <translation>云服务</translation>
     </message>
@@ -1188,116 +1188,116 @@
 <context>
     <name>MarkdownView</name>
     <message>
-        <location filename="../markdownview.cpp" line="139"/>
-        <location filename="../markdownview.cpp" line="157"/>
-        <location filename="../markdownview.cpp" line="206"/>
+        <location filename="../markdownview.cpp" line="141"/>
+        <location filename="../markdownview.cpp" line="159"/>
+        <location filename="../markdownview.cpp" line="208"/>
         <source>Confirm</source>
         <translation>确认</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="140"/>
-        <location filename="../markdownview.cpp" line="158"/>
-        <location filename="../markdownview.cpp" line="207"/>
+        <location filename="../markdownview.cpp" line="142"/>
+        <location filename="../markdownview.cpp" line="160"/>
+        <location filename="../markdownview.cpp" line="209"/>
         <source>Modified document has not been saved, do you want to save it?</source>
         <translation>文档被修改且尚未保存，要保存吗？</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="167"/>
+        <location filename="../markdownview.cpp" line="169"/>
         <source>Open Markdown file</source>
         <translation>打开Markdown文档</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="169"/>
+        <location filename="../markdownview.cpp" line="171"/>
         <source>Markdown files (*.md *.markdown *.mdown);;All files (*.*)</source>
         <translation>Markdown文档 (*.md *.markdown *.mdown);;所有类型 (*.*)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="190"/>
+        <location filename="../markdownview.cpp" line="192"/>
         <source>Save Markdown file</source>
         <translation>保存Markdown文档</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="190"/>
+        <location filename="../markdownview.cpp" line="192"/>
         <source>Markdown file (*.md);;All files (*.*)</source>
         <translation>Markdown文档 (*.md);;所有类型 (*.*)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="221"/>
+        <location filename="../markdownview.cpp" line="223"/>
         <source>Untitled%1</source>
         <translation>未命名%1</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="593"/>
+        <location filename="../markdownview.cpp" line="595"/>
         <source>HTML content has been copied into clipboard.</source>
         <translation>HTML内容已复制到剪切板。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="593"/>
+        <location filename="../markdownview.cpp" line="595"/>
         <source>HTML copied</source>
         <translation>HTML已复制</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="313"/>
+        <location filename="../markdownview.cpp" line="315"/>
         <source>Export As HTML</source>
         <translation>导出为HTML</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="313"/>
+        <location filename="../markdownview.cpp" line="315"/>
         <source>HTML file (*.html)</source>
         <translation>HTML文档 (*.html)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="324"/>
+        <location filename="../markdownview.cpp" line="326"/>
         <source>HTML exported</source>
         <translation>HTML已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="325"/>
+        <location filename="../markdownview.cpp" line="327"/>
         <source>HTML file has been exported to %1 successfully.</source>
         <translation>HTML文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="334"/>
+        <location filename="../markdownview.cpp" line="336"/>
         <source>Export As PDF</source>
         <translation>导出为PDF</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="334"/>
+        <location filename="../markdownview.cpp" line="336"/>
         <source>Adobe PDF file (*.pdf)</source>
         <translation>Adobe PDF文档 (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="359"/>
+        <location filename="../markdownview.cpp" line="361"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="380"/>
+        <location filename="../markdownview.cpp" line="382"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="529"/>
+        <location filename="../markdownview.cpp" line="531"/>
         <source>PDF exported</source>
         <translation>PDF已导出</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="529"/>
+        <location filename="../markdownview.cpp" line="531"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation>PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="532"/>
+        <location filename="../markdownview.cpp" line="534"/>
         <source>PDF exporting failed</source>
         <translation>导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="532"/>
+        <location filename="../markdownview.cpp" line="534"/>
         <source>PDF file has not been exported to %1.</source>
         <translation>PDF文档未导出到%1。</translation>
     </message>
     <message>
-        <location filename="../markdownview.cpp" line="836"/>
+        <location filename="../markdownview.cpp" line="838"/>
         <source>Metadata</source>
         <translation>元数据</translation>
     </message>
@@ -1687,12 +1687,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../main.cpp" line="102"/>
+        <location filename="../main.cpp" line="108"/>
         <source>Critical error</source>
         <translation>严重错误</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="102"/>
+        <location filename="../main.cpp" line="108"/>
         <source>SSL not supported, some features may not work as expected.</source>
         <translation>不支持SSL，一些功能可能无法正常工作。</translation>
     </message>
@@ -1828,7 +1828,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.cpp" line="116"/>
+        <location filename="../main.cpp" line="122"/>
         <source>The file to open.</source>
         <translation>打开文章</translation>
     </message>
