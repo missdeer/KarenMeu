@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="90.0038px" preserveAspectRatio="none" style="width:73px;height:90px;background:#FFFFFF;" version="1.1" viewBox="0 0 73 90" width="73.1281px" zoomAndPan="magnify"><defs/><g><line style="stroke:#181818;stroke-width:0.3515772527686327;stroke-dasharray:5.0,5.0;" x1="16.8757" x2="16.8757" y1="27.5075" y2="63.8988"/><line style="stroke:#181818;stroke-width:0.3515772527686327;stroke-dasharray:5.0,5.0;" x1="53.4397" x2="53.4397" y1="27.5075" y2="63.8988"/><rect fill="#E2E2F0" height="23.2886" rx="1.7579" ry="1.7579" style="stroke:#181818;stroke-width:0.3515772527686327;" width="27.423" x="3.5158" y="3.5158"/><text fill="#000000" font-family="sans-serif" font-size="9.8442" lengthAdjust="spacing" textLength="17.5789" x="8.4379" y="19.7192">Bob</text><rect fill="#E2E2F0" height="23.2886" rx="1.7579" ry="1.7579" style="stroke:#181818;stroke-width:0.3515772527686327;" width="27.423" x="3.5158" y="63.1957"/><text fill="#000000" font-family="sans-serif" font-size="9.8442" lengthAdjust="spacing" textLength="17.5789" x="8.4379" y="79.3991">Bob</text><rect fill="#E2E2F0" height="23.2886" rx="1.7579" ry="1.7579" style="stroke:#181818;stroke-width:0.3515772527686327;" width="30.9388" x="37.9703" y="3.5158"/><text fill="#000000" font-family="sans-serif" font-size="9.8442" lengthAdjust="spacing" textLength="21.0946" x="42.8924" y="19.7192">Alice</text><rect fill="#E2E2F0" height="23.2886" rx="1.7579" ry="1.7579" style="stroke:#181818;stroke-width:0.3515772527686327;" width="30.9388" x="37.9703" y="63.1957"/><text fill="#000000" font-family="sans-serif" font-size="9.8442" lengthAdjust="spacing" textLength="21.0946" x="42.8924" y="79.3991">Alice</text><polygon fill="#181818" points="45.0019,48.4294,52.0334,51.242,45.0019,54.0547,47.8145,51.242" style="stroke:#181818;stroke-width:0.7031545055372654;"/><line style="stroke:#181818;stroke-width:0.7031545055372654;" x1="17.2273" x2="49.2208" y1="51.242" y2="51.242"/><text fill="#000000" font-family="sans-serif" font-size="9.141" lengthAdjust="spacing" textLength="18.9852" x="22.1494" y="47.8272">hello</text><!--MD5=[febd520b7a09847ebcc563ab115ee45d]
+@startuml
+scale 180*90
+Bob->Alice : hello
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

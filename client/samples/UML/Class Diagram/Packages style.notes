@@ -1,0 +1,3 @@
+There are different styles available for packages.
+
+You can specify them either by setting a default style with the command : skinparam packageStyle, or by using a stereotype on the package: 

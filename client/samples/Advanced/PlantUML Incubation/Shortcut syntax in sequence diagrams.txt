@@ -1,0 +1,10 @@
+@startuml
+alice -> bob ++ : hello
+bob -> bob ++ : self call
+bob -> bib ++  #005500 : hello
+bob -> geoge ** : create
+return done
+return rc
+bob -> geoge !! : delete
+return success
+@enduml

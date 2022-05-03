@@ -1,0 +1,12 @@
+ Some HTML tags are also working:
+
+* <b> for bold text
+* <u> or <u:#AAAAAA> or <u:colorName> for underline
+* <i> for italic
+* <s> or <s:#AAAAAA> or <s:colorName> for strike text
+* <w> or <w:#AAAAAA> or <w:colorName> for wave underline text
+* <color:#AAAAAA> or <color:colorName>
+* <back:#AAAAAA> or <back:colorName> for background color
+* <size:nn> to change font size
+* <img:file> : the file must be accessible by the filesystem
+* <img:http://plantuml.com/logo3.png> : the URL must be available from the Internet

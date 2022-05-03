@@ -1,0 +1,872 @@
+<RCC>
+    <qresource prefix="/">
+        <file>samples/non-UML/Archimate Diagram/Archimate keyword.notes</file>
+        <file>samples/non-UML/Archimate Diagram/Archimate keyword.svg</file>
+        <file>samples/non-UML/Archimate Diagram/Archimate keyword.txt</file>
+        <file>samples/non-UML/Archimate Diagram/Defining Junctions.notes</file>
+        <file>samples/non-UML/Archimate Diagram/Defining Junctions.svg</file>
+        <file>samples/non-UML/Archimate Diagram/Defining Junctions.txt</file>
+        <file>samples/non-UML/Archimate Diagram/Example 1.notes</file>
+        <file>samples/non-UML/Archimate Diagram/Example 1.svg</file>
+        <file>samples/non-UML/Archimate Diagram/Example 1.txt</file>
+        <file>samples/non-UML/Archimate Diagram/Example 2.notes</file>
+        <file>samples/non-UML/Archimate Diagram/Example 2.svg</file>
+        <file>samples/non-UML/Archimate Diagram/Example 2.txt</file>
+        <file>samples/non-UML/Archimate Diagram/List possible sprites.notes</file>
+        <file>samples/non-UML/Archimate Diagram/List possible sprites.svg</file>
+        <file>samples/non-UML/Archimate Diagram/List possible sprites.txt</file>
+        <file>samples/non-UML/AsciiMath/Introduction.notes</file>
+        <file>samples/non-UML/AsciiMath/Introduction.txt</file>
+        <file>samples/non-UML/AsciiMath/Introduction.png</file>
+        <file>samples/non-UML/AsciiMath/Introduction2.txt</file>
+        <file>samples/non-UML/AsciiMath/Introduction2.png</file>
+        <file>samples/non-UML/AsciiMath/startlatex-endlatex.notes</file>
+        <file>samples/non-UML/AsciiMath/startlatex-endlatex.svg</file>
+        <file>samples/non-UML/AsciiMath/startlatex-endlatex.txt</file>
+        <file>samples/non-UML/AsciiMath/startmath-endmath.notes</file>
+        <file>samples/non-UML/AsciiMath/startmath-endmath.svg</file>
+        <file>samples/non-UML/AsciiMath/startmath-endmath.txt</file>
+        <file>samples/non-UML/Colors/list.notes</file>
+        <file>samples/non-UML/Colors/list.png</file>
+        <file>samples/non-UML/Colors/list.svg</file>
+        <file>samples/non-UML/Colors/list.txt</file>
+        <file>samples/non-UML/Colors/notes.png</file>
+        <file>samples/non-UML/Colors/notes.svg</file>
+        <file>samples/non-UML/Colors/notes.txt</file>
+        <file>samples/non-UML/Colors/palette.notes</file>
+        <file>samples/non-UML/Colors/palette.png</file>
+        <file>samples/non-UML/Colors/palette.svg</file>
+        <file>samples/non-UML/Colors/palette.txt</file>
+        <file>samples/non-UML/Colors/table.png</file>
+        <file>samples/non-UML/Colors/table.svg</file>
+        <file>samples/non-UML/Colors/table.txt</file>
+        <file>samples/non-UML/Common commands/Caption.notes</file>
+        <file>samples/non-UML/Common commands/Caption.svg</file>
+        <file>samples/non-UML/Common commands/Caption.txt</file>
+        <file>samples/non-UML/Common commands/Footer and header.notes</file>
+        <file>samples/non-UML/Common commands/Footer and header.svg</file>
+        <file>samples/non-UML/Common commands/Footer and header.txt</file>
+        <file>samples/non-UML/Common commands/Legend the diagram.notes</file>
+        <file>samples/non-UML/Common commands/Legend the diagram.svg</file>
+        <file>samples/non-UML/Common commands/Legend the diagram.txt</file>
+        <file>samples/non-UML/Common commands/Title.notes</file>
+        <file>samples/non-UML/Common commands/Title.svg</file>
+        <file>samples/non-UML/Common commands/Title.txt</file>
+        <file>samples/non-UML/Common commands/Title2.notes</file>
+        <file>samples/non-UML/Common commands/Title2.svg</file>
+        <file>samples/non-UML/Common commands/Title2.txt</file>
+        <file>samples/non-UML/Common commands/Zoom.notes</file>
+        <file>samples/non-UML/Common commands/Zoom.svg</file>
+        <file>samples/non-UML/Common commands/Zoom.txt</file>
+        <file>samples/non-UML/Creole/Emphasized text.notes</file>
+        <file>samples/non-UML/Creole/Emphasized text.svg</file>
+        <file>samples/non-UML/Creole/Emphasized text.txt</file>
+        <file>samples/non-UML/Creole/Escape character.notes</file>
+        <file>samples/non-UML/Creole/Escape character.svg</file>
+        <file>samples/non-UML/Creole/Escape character.txt</file>
+        <file>samples/non-UML/Creole/Headings.notes</file>
+        <file>samples/non-UML/Creole/Headings.svg</file>
+        <file>samples/non-UML/Creole/Headings.txt</file>
+        <file>samples/non-UML/Creole/Horizontal lines.notes</file>
+        <file>samples/non-UML/Creole/Horizontal lines.svg</file>
+        <file>samples/non-UML/Creole/Horizontal lines.txt</file>
+        <file>samples/non-UML/Creole/Legacy HTML.notes</file>
+        <file>samples/non-UML/Creole/Legacy HTML.svg</file>
+        <file>samples/non-UML/Creole/Legacy HTML.txt</file>
+        <file>samples/non-UML/Creole/List.notes</file>
+        <file>samples/non-UML/Creole/List.svg</file>
+        <file>samples/non-UML/Creole/List.txt</file>
+        <file>samples/non-UML/Creole/OpenIconic.notes</file>
+        <file>samples/non-UML/Creole/OpenIconic.svg</file>
+        <file>samples/non-UML/Creole/OpenIconic.txt</file>
+        <file>samples/non-UML/Creole/OpenIconicList.notes</file>
+        <file>samples/non-UML/Creole/OpenIconicList.svg</file>
+        <file>samples/non-UML/Creole/OpenIconicList.txt</file>
+        <file>samples/non-UML/Creole/Special characters.notes</file>
+        <file>samples/non-UML/Creole/Special characters.svg</file>
+        <file>samples/non-UML/Creole/Special characters.txt</file>
+        <file>samples/non-UML/Creole/Table.notes</file>
+        <file>samples/non-UML/Creole/Table.svg</file>
+        <file>samples/non-UML/Creole/Table.txt</file>
+        <file>samples/non-UML/Creole/Table2.notes</file>
+        <file>samples/non-UML/Creole/Table2.svg</file>
+        <file>samples/non-UML/Creole/Table2.txt</file>
+        <file>samples/non-UML/Creole/Tree.notes</file>
+        <file>samples/non-UML/Creole/Tree.svg</file>
+        <file>samples/non-UML/Creole/Tree.txt</file>
+        <file>samples/non-UML/Gantt Diagram/Adding constraints.notes</file>
+        <file>samples/non-UML/Gantt Diagram/Adding constraints.svg</file>
+        <file>samples/non-UML/Gantt Diagram/Adding constraints.txt</file>
+        <file>samples/non-UML/Gantt Diagram/Adding constraints2.svg</file>
+        <file>samples/non-UML/Gantt Diagram/Adding constraints2.txt</file>
+        <file>samples/non-UML/Gantt Diagram/Calendar.notes</file>
+        <file>samples/non-UML/Gantt Diagram/Calendar.svg</file>
+        <file>samples/non-UML/Gantt Diagram/Calendar.txt</file>
+        <file>samples/non-UML/Gantt Diagram/Complex example.notes</file>
+        <file>samples/non-UML/Gantt Diagram/Complex example.svg</file>
+        <file>samples/non-UML/Gantt Diagram/Complex example.txt</file>
+        <file>samples/non-UML/Gantt Diagram/Customize colors.notes</file>
+        <file>samples/non-UML/Gantt Diagram/Customize colors.svg</file>
+        <file>samples/non-UML/Gantt Diagram/Customize colors.txt</file>
+        <file>samples/non-UML/Gantt Diagram/Declaring tasks.notes</file>
+        <file>samples/non-UML/Gantt Diagram/Declaring tasks.svg</file>
+        <file>samples/non-UML/Gantt Diagram/Declaring tasks.txt</file>
+        <file>samples/non-UML/Gantt Diagram/Milestone.notes</file>
+        <file>samples/non-UML/Gantt Diagram/Milestone.svg</file>
+        <file>samples/non-UML/Gantt Diagram/Milestone.txt</file>
+        <file>samples/non-UML/Gantt Diagram/Short names.notes</file>
+        <file>samples/non-UML/Gantt Diagram/Short names.svg</file>
+        <file>samples/non-UML/Gantt Diagram/Short names.txt</file>
+        <file>samples/Advanced/Graphviz Dot/classic example.svg</file>
+        <file>samples/Advanced/Graphviz Dot/classic example.txt</file>
+        <file>samples/Advanced/Graphviz Dot/finite state machine.svg</file>
+        <file>samples/Advanced/Graphviz Dot/finite state machine.txt</file>
+        <file>samples/Advanced/Graphviz Dot/full digraph.svg</file>
+        <file>samples/Advanced/Graphviz Dot/full digraph.txt</file>
+        <file>samples/Advanced/Graphviz Dot/k6.svg</file>
+        <file>samples/Advanced/Graphviz Dot/k6.txt</file>
+        <file>samples/Advanced/Graphviz Dot/large graphs.svg</file>
+        <file>samples/Advanced/Graphviz Dot/large graphs.txt</file>
+        <file>samples/Advanced/Graphviz Dot/large graphs2.svg</file>
+        <file>samples/Advanced/Graphviz Dot/large graphs2.txt</file>
+        <file>samples/Advanced/Graphviz Dot/left to right.svg</file>
+        <file>samples/Advanced/Graphviz Dot/left to right.txt</file>
+        <file>samples/Advanced/Graphviz Dot/prof.svg</file>
+        <file>samples/Advanced/Graphviz Dot/prof.txt</file>
+        <file>samples/Advanced/Graphviz Dot/showing a path.svg</file>
+        <file>samples/Advanced/Graphviz Dot/showing a path.txt</file>
+        <file>samples/Advanced/Graphviz Dot/simple digraph.svg</file>
+        <file>samples/Advanced/Graphviz Dot/simple digraph.txt</file>
+        <file>samples/Advanced/Graphviz Dot/simple graph.svg</file>
+        <file>samples/Advanced/Graphviz Dot/simple graph.txt</file>
+        <file>samples/Advanced/Graphviz Dot/subgraphs.svg</file>
+        <file>samples/Advanced/Graphviz Dot/subgraphs.txt</file>
+        <file>samples/Advanced/Graphviz Dot/subgraphs2.svg</file>
+        <file>samples/Advanced/Graphviz Dot/subgraphs2.txt</file>
+        <file>samples/Advanced/Graphviz Dot/unix.svg</file>
+        <file>samples/Advanced/Graphviz Dot/unix.txt</file>
+        <file>samples/non-UML/Preprocessing/Adding date and time.notes</file>
+        <file>samples/non-UML/Preprocessing/Adding date and time.svg</file>
+        <file>samples/non-UML/Preprocessing/Adding date and time.txt</file>
+        <file>samples/non-UML/Preprocessing/Advanced features.notes</file>
+        <file>samples/non-UML/Preprocessing/Advanced features.svg</file>
+        <file>samples/non-UML/Preprocessing/Advanced features.txt</file>
+        <file>samples/non-UML/Preprocessing/Advanced features2.notes</file>
+        <file>samples/non-UML/Preprocessing/Advanced features2.svg</file>
+        <file>samples/non-UML/Preprocessing/Advanced features2.txt</file>
+        <file>samples/non-UML/Preprocessing/Advanced features3.notes</file>
+        <file>samples/non-UML/Preprocessing/Advanced features3.svg</file>
+        <file>samples/non-UML/Preprocessing/Advanced features3.txt</file>
+        <file>samples/non-UML/Preprocessing/ArrayList.iuml</file>
+        <file>samples/non-UML/Preprocessing/Conditions.notes</file>
+        <file>samples/non-UML/Preprocessing/Conditions.svg</file>
+        <file>samples/non-UML/Preprocessing/Conditions.txt</file>
+        <file>samples/non-UML/Preprocessing/Conditions2.notes</file>
+        <file>samples/non-UML/Preprocessing/Conditions2.svg</file>
+        <file>samples/non-UML/Preprocessing/Conditions2.txt</file>
+        <file>samples/non-UML/Preprocessing/Conditions3.notes</file>
+        <file>samples/non-UML/Preprocessing/Conditions3.svg</file>
+        <file>samples/non-UML/Preprocessing/Conditions3.txt</file>
+        <file>samples/non-UML/Preprocessing/Constant definition.notes</file>
+        <file>samples/non-UML/Preprocessing/Constant definition.svg</file>
+        <file>samples/non-UML/Preprocessing/Constant definition.txt</file>
+        <file>samples/non-UML/Preprocessing/Default values for macro parameters.notes</file>
+        <file>samples/non-UML/Preprocessing/Default values for macro parameters.svg</file>
+        <file>samples/non-UML/Preprocessing/Default values for macro parameters.txt</file>
+        <file>samples/non-UML/Preprocessing/Including files.notes</file>
+        <file>samples/non-UML/Preprocessing/Including files.svg</file>
+        <file>samples/non-UML/Preprocessing/Including files.txt</file>
+        <file>samples/non-UML/Preprocessing/List.iuml</file>
+        <file>samples/non-UML/Preprocessing/Macro definition.notes</file>
+        <file>samples/non-UML/Preprocessing/Macro definition.svg</file>
+        <file>samples/non-UML/Preprocessing/Macro definition.txt</file>
+        <file>samples/non-UML/Preprocessing/Macro definition2.notes</file>
+        <file>samples/non-UML/Preprocessing/Macro definition2.svg</file>
+        <file>samples/non-UML/Preprocessing/Macro definition2.txt</file>
+        <file>samples/non-UML/Preprocessing/Macro on several lines.notes</file>
+        <file>samples/non-UML/Preprocessing/Macro on several lines.svg</file>
+        <file>samples/non-UML/Preprocessing/Macro on several lines.txt</file>
+        <file>samples/non-UML/Salt/Adding tabs.notes</file>
+        <file>samples/non-UML/Salt/Adding tabs.svg</file>
+        <file>samples/non-UML/Salt/Adding tabs.txt</file>
+        <file>samples/non-UML/Salt/Adding tabs2.notes</file>
+        <file>samples/non-UML/Salt/Adding tabs2.svg</file>
+        <file>samples/non-UML/Salt/Adding tabs2.txt</file>
+        <file>samples/non-UML/Salt/Advanced table.notes</file>
+        <file>samples/non-UML/Salt/Advanced table.svg</file>
+        <file>samples/non-UML/Salt/Advanced table.txt</file>
+        <file>samples/non-UML/Salt/Basic widgets.notes</file>
+        <file>samples/non-UML/Salt/Basic widgets.svg</file>
+        <file>samples/non-UML/Salt/Basic widgets.txt</file>
+        <file>samples/non-UML/Salt/Enclosing brackets.notes</file>
+        <file>samples/non-UML/Salt/Enclosing brackets.svg</file>
+        <file>samples/non-UML/Salt/Enclosing brackets.txt</file>
+        <file>samples/non-UML/Salt/OpenIconic.notes</file>
+        <file>samples/non-UML/Salt/OpenIconic.svg</file>
+        <file>samples/non-UML/Salt/OpenIconic.txt</file>
+        <file>samples/non-UML/Salt/Tree widget.notes</file>
+        <file>samples/non-UML/Salt/Tree widget.svg</file>
+        <file>samples/non-UML/Salt/Tree widget.txt</file>
+        <file>samples/non-UML/Salt/Using grid.notes</file>
+        <file>samples/non-UML/Salt/Using grid.svg</file>
+        <file>samples/non-UML/Salt/Using grid.txt</file>
+        <file>samples/non-UML/Salt/Using grid2.notes</file>
+        <file>samples/non-UML/Salt/Using grid2.svg</file>
+        <file>samples/non-UML/Salt/Using grid2.txt</file>
+        <file>samples/non-UML/Salt/Using menu.notes</file>
+        <file>samples/non-UML/Salt/Using menu.svg</file>
+        <file>samples/non-UML/Salt/Using menu.txt</file>
+        <file>samples/non-UML/Salt/Using menu2.notes</file>
+        <file>samples/non-UML/Salt/Using menu2.svg</file>
+        <file>samples/non-UML/Salt/Using menu2.txt</file>
+        <file>samples/non-UML/Salt/Using separator.notes</file>
+        <file>samples/non-UML/Salt/Using separator.svg</file>
+        <file>samples/non-UML/Salt/Using separator.txt</file>
+        <file>samples/non-UML/Skinparam command/Black and White.notes</file>
+        <file>samples/non-UML/Skinparam command/Black and White.svg</file>
+        <file>samples/non-UML/Skinparam command/Black and White.txt</file>
+        <file>samples/non-UML/Skinparam command/Examples.notes</file>
+        <file>samples/non-UML/Skinparam command/Examples.svg</file>
+        <file>samples/non-UML/Skinparam command/Examples.txt</file>
+        <file>samples/non-UML/Skinparam command/Examples2.svg</file>
+        <file>samples/non-UML/Skinparam command/Examples2.txt</file>
+        <file>samples/non-UML/Skinparam command/Examples3.svg</file>
+        <file>samples/non-UML/Skinparam command/Examples3.txt</file>
+        <file>samples/non-UML/Skinparam command/Examples4.svg</file>
+        <file>samples/non-UML/Skinparam command/Examples4.txt</file>
+        <file>samples/non-UML/Skinparam command/Examples5.svg</file>
+        <file>samples/non-UML/Skinparam command/Examples5.txt</file>
+        <file>samples/non-UML/Skinparam command/Reverse colors.notes</file>
+        <file>samples/non-UML/Skinparam command/Reverse colors.svg</file>
+        <file>samples/non-UML/Skinparam command/Reverse colors.txt</file>
+        <file>samples/non-UML/Skinparam command/Text Alignement.notes</file>
+        <file>samples/non-UML/Skinparam command/Text Alignement.svg</file>
+        <file>samples/non-UML/Skinparam command/Text Alignement.txt</file>
+        <file>samples/UML/Activity Diagram/Branches.notes</file>
+        <file>samples/UML/Activity Diagram/Branches.svg</file>
+        <file>samples/UML/Activity Diagram/Branches.txt</file>
+        <file>samples/UML/Activity Diagram/Branches2.notes</file>
+        <file>samples/UML/Activity Diagram/Branches2.svg</file>
+        <file>samples/UML/Activity Diagram/Branches2.txt</file>
+        <file>samples/UML/Activity Diagram/Changing arrow direction.notes</file>
+        <file>samples/UML/Activity Diagram/Changing arrow direction.svg</file>
+        <file>samples/UML/Activity Diagram/Changing arrow direction.txt</file>
+        <file>samples/UML/Activity Diagram/Complete example.notes</file>
+        <file>samples/UML/Activity Diagram/Complete example.svg</file>
+        <file>samples/UML/Activity Diagram/Complete example.txt</file>
+        <file>samples/UML/Activity Diagram/Label on arrows.notes</file>
+        <file>samples/UML/Activity Diagram/Label on arrows.svg</file>
+        <file>samples/UML/Activity Diagram/Label on arrows.txt</file>
+        <file>samples/UML/Activity Diagram/Long activity description.notes</file>
+        <file>samples/UML/Activity Diagram/Long activity description.svg</file>
+        <file>samples/UML/Activity Diagram/Long activity description.txt</file>
+        <file>samples/UML/Activity Diagram/More on Branches.notes</file>
+        <file>samples/UML/Activity Diagram/More on Branches.svg</file>
+        <file>samples/UML/Activity Diagram/More on Branches.txt</file>
+        <file>samples/UML/Activity Diagram/Notes.notes</file>
+        <file>samples/UML/Activity Diagram/Notes.svg</file>
+        <file>samples/UML/Activity Diagram/Notes.txt</file>
+        <file>samples/UML/Activity Diagram/Octagon.notes</file>
+        <file>samples/UML/Activity Diagram/Octagon.svg</file>
+        <file>samples/UML/Activity Diagram/Octagon.txt</file>
+        <file>samples/UML/Activity Diagram/Partition.notes</file>
+        <file>samples/UML/Activity Diagram/Partition.svg</file>
+        <file>samples/UML/Activity Diagram/Partition.txt</file>
+        <file>samples/UML/Activity Diagram/Simple Activity.notes</file>
+        <file>samples/UML/Activity Diagram/Simple Activity.svg</file>
+        <file>samples/UML/Activity Diagram/Simple Activity.txt</file>
+        <file>samples/UML/Activity Diagram/Skinparam.notes</file>
+        <file>samples/UML/Activity Diagram/Skinparam.svg</file>
+        <file>samples/UML/Activity Diagram/Skinparam.txt</file>
+        <file>samples/UML/Activity Diagram/Synchronization.notes</file>
+        <file>samples/UML/Activity Diagram/Synchronization.svg</file>
+        <file>samples/UML/Activity Diagram/Synchronization.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Arrows.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Arrows.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Arrows.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Colors.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Colors.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Colors.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Complete example.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Complete example.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Conditional.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Conditional.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Conditional.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Conditional2.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Conditional2.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Conditional2.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Connector.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Connector.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Connector.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Detach.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Detach.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Detach.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Grouping.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Grouping.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Grouping.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Notes.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Notes.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Notes.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Parallel processing.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Parallel processing.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Parallel processing.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Repeat loop.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Repeat loop.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Repeat loop.txt</file>
+        <file>samples/UML/Activity Diagram(New)/SDL.notes</file>
+        <file>samples/UML/Activity Diagram(New)/SDL.svg</file>
+        <file>samples/UML/Activity Diagram(New)/SDL.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Simple Activity.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Simple Activity.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Simple Activity.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Start-End.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Start-End.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Start-End.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Start-Stop.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Start-Stop.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Start-Stop.txt</file>
+        <file>samples/UML/Activity Diagram(New)/Swimlanes.notes</file>
+        <file>samples/UML/Activity Diagram(New)/Swimlanes.svg</file>
+        <file>samples/UML/Activity Diagram(New)/Swimlanes.txt</file>
+        <file>samples/UML/Activity Diagram(New)/While loop.notes</file>
+        <file>samples/UML/Activity Diagram(New)/While loop.svg</file>
+        <file>samples/UML/Activity Diagram(New)/While loop.txt</file>
+        <file>samples/UML/Activity Diagram(New)/While loop2.notes</file>
+        <file>samples/UML/Activity Diagram(New)/While loop2.svg</file>
+        <file>samples/UML/Activity Diagram(New)/While loop2.txt</file>
+        <file>samples/UML/Class Diagram/Abstract and Static.notes</file>
+        <file>samples/UML/Class Diagram/Abstract and Static.svg</file>
+        <file>samples/UML/Class Diagram/Abstract and Static.txt</file>
+        <file>samples/UML/Class Diagram/Abstract class and interface.notes</file>
+        <file>samples/UML/Class Diagram/Abstract class and interface.svg</file>
+        <file>samples/UML/Class Diagram/Abstract class and interface.txt</file>
+        <file>samples/UML/Class Diagram/Adding methods.notes</file>
+        <file>samples/UML/Class Diagram/Adding methods.svg</file>
+        <file>samples/UML/Class Diagram/Adding methods.txt</file>
+        <file>samples/UML/Class Diagram/Adding methods2.notes</file>
+        <file>samples/UML/Class Diagram/Adding methods2.svg</file>
+        <file>samples/UML/Class Diagram/Adding methods2.txt</file>
+        <file>samples/UML/Class Diagram/Adding methods3.notes</file>
+        <file>samples/UML/Class Diagram/Adding methods3.svg</file>
+        <file>samples/UML/Class Diagram/Adding methods3.txt</file>
+        <file>samples/UML/Class Diagram/Advanced class body.notes</file>
+        <file>samples/UML/Class Diagram/Advanced class body.svg</file>
+        <file>samples/UML/Class Diagram/Advanced class body.txt</file>
+        <file>samples/UML/Class Diagram/Association classes.notes</file>
+        <file>samples/UML/Class Diagram/Association classes.svg</file>
+        <file>samples/UML/Class Diagram/Association classes.txt</file>
+        <file>samples/UML/Class Diagram/Association classes2.notes</file>
+        <file>samples/UML/Class Diagram/Association classes2.svg</file>
+        <file>samples/UML/Class Diagram/Association classes2.txt</file>
+        <file>samples/UML/Class Diagram/Automatic namespace creation.notes</file>
+        <file>samples/UML/Class Diagram/Automatic namespace creation.svg</file>
+        <file>samples/UML/Class Diagram/Automatic namespace creation.txt</file>
+        <file>samples/UML/Class Diagram/Automatic namespace creation2.notes</file>
+        <file>samples/UML/Class Diagram/Automatic namespace creation2.svg</file>
+        <file>samples/UML/Class Diagram/Automatic namespace creation2.txt</file>
+        <file>samples/UML/Class Diagram/Changing arrows direction.notes</file>
+        <file>samples/UML/Class Diagram/Changing arrows direction.svg</file>
+        <file>samples/UML/Class Diagram/Changing arrows direction.txt</file>
+        <file>samples/UML/Class Diagram/Changing arrows direction2.notes</file>
+        <file>samples/UML/Class Diagram/Changing arrows direction2.svg</file>
+        <file>samples/UML/Class Diagram/Changing arrows direction2.txt</file>
+        <file>samples/UML/Class Diagram/Changing arrows direction3.notes</file>
+        <file>samples/UML/Class Diagram/Changing arrows direction3.svg</file>
+        <file>samples/UML/Class Diagram/Changing arrows direction3.txt</file>
+        <file>samples/UML/Class Diagram/Color gradient.notes</file>
+        <file>samples/UML/Class Diagram/Color gradient.svg</file>
+        <file>samples/UML/Class Diagram/Color gradient.txt</file>
+        <file>samples/UML/Class Diagram/Defining visibility.notes</file>
+        <file>samples/UML/Class Diagram/Defining visibility.svg</file>
+        <file>samples/UML/Class Diagram/Defining visibility.txt</file>
+        <file>samples/UML/Class Diagram/Defining visibility2.notes</file>
+        <file>samples/UML/Class Diagram/Defining visibility2.svg</file>
+        <file>samples/UML/Class Diagram/Defining visibility2.txt</file>
+        <file>samples/UML/Class Diagram/Help on layout.notes</file>
+        <file>samples/UML/Class Diagram/Help on layout.svg</file>
+        <file>samples/UML/Class Diagram/Help on layout.txt</file>
+        <file>samples/UML/Class Diagram/Hide attributes methods.notes</file>
+        <file>samples/UML/Class Diagram/Hide attributes methods.svg</file>
+        <file>samples/UML/Class Diagram/Hide attributes methods.txt</file>
+        <file>samples/UML/Class Diagram/Hide classes.notes</file>
+        <file>samples/UML/Class Diagram/Hide classes.svg</file>
+        <file>samples/UML/Class Diagram/Hide classes.txt</file>
+        <file>samples/UML/Class Diagram/Label on relations.notes</file>
+        <file>samples/UML/Class Diagram/Label on relations.svg</file>
+        <file>samples/UML/Class Diagram/Label on relations.txt</file>
+        <file>samples/UML/Class Diagram/Label on relations2.notes</file>
+        <file>samples/UML/Class Diagram/Label on relations2.svg</file>
+        <file>samples/UML/Class Diagram/Label on relations2.txt</file>
+        <file>samples/UML/Class Diagram/Lollipop interface.notes</file>
+        <file>samples/UML/Class Diagram/Lollipop interface.svg</file>
+        <file>samples/UML/Class Diagram/Lollipop interface.txt</file>
+        <file>samples/UML/Class Diagram/More on notes.notes</file>
+        <file>samples/UML/Class Diagram/More on notes.svg</file>
+        <file>samples/UML/Class Diagram/More on notes.txt</file>
+        <file>samples/UML/Class Diagram/Namespaces.notes</file>
+        <file>samples/UML/Class Diagram/Namespaces.svg</file>
+        <file>samples/UML/Class Diagram/Namespaces.txt</file>
+        <file>samples/UML/Class Diagram/Note on links.notes</file>
+        <file>samples/UML/Class Diagram/Note on links.svg</file>
+        <file>samples/UML/Class Diagram/Note on links.txt</file>
+        <file>samples/UML/Class Diagram/Notes and stereotypes.notes</file>
+        <file>samples/UML/Class Diagram/Notes and stereotypes.svg</file>
+        <file>samples/UML/Class Diagram/Notes and stereotypes.txt</file>
+        <file>samples/UML/Class Diagram/Packages style.notes</file>
+        <file>samples/UML/Class Diagram/Packages style.svg</file>
+        <file>samples/UML/Class Diagram/Packages style.txt</file>
+        <file>samples/UML/Class Diagram/Packages style2.notes</file>
+        <file>samples/UML/Class Diagram/Packages style2.svg</file>
+        <file>samples/UML/Class Diagram/Packages style2.txt</file>
+        <file>samples/UML/Class Diagram/Packages.notes</file>
+        <file>samples/UML/Class Diagram/Packages.svg</file>
+        <file>samples/UML/Class Diagram/Packages.txt</file>
+        <file>samples/UML/Class Diagram/Relations between classes1.notes</file>
+        <file>samples/UML/Class Diagram/Relations between classes1.svg</file>
+        <file>samples/UML/Class Diagram/Relations between classes1.txt</file>
+        <file>samples/UML/Class Diagram/Relations between classes2.svg</file>
+        <file>samples/UML/Class Diagram/Relations between classes2.txt</file>
+        <file>samples/UML/Class Diagram/Relations between classes3.svg</file>
+        <file>samples/UML/Class Diagram/Relations between classes3.txt</file>
+        <file>samples/UML/Class Diagram/Skinned Stereotypes.notes</file>
+        <file>samples/UML/Class Diagram/Skinned Stereotypes.svg</file>
+        <file>samples/UML/Class Diagram/Skinned Stereotypes.txt</file>
+        <file>samples/UML/Class Diagram/Skinparam.notes</file>
+        <file>samples/UML/Class Diagram/Skinparam.svg</file>
+        <file>samples/UML/Class Diagram/Skinparam.txt</file>
+        <file>samples/UML/Class Diagram/Specific Spot.notes</file>
+        <file>samples/UML/Class Diagram/Specific Spot.svg</file>
+        <file>samples/UML/Class Diagram/Specific Spot.txt</file>
+        <file>samples/UML/Class Diagram/Splitting large files.notes</file>
+        <file>samples/UML/Class Diagram/Splitting large files.svg</file>
+        <file>samples/UML/Class Diagram/Splitting large files.txt</file>
+        <file>samples/UML/Class Diagram/Use generics.notes</file>
+        <file>samples/UML/Class Diagram/Use generics.svg</file>
+        <file>samples/UML/Class Diagram/Use generics.txt</file>
+        <file>samples/UML/Class Diagram/Using non-letters.notes</file>
+        <file>samples/UML/Class Diagram/Using non-letters.svg</file>
+        <file>samples/UML/Class Diagram/Using non-letters.txt</file>
+        <file>samples/UML/Component Diagram/Basic example.notes</file>
+        <file>samples/UML/Component Diagram/Basic example.svg</file>
+        <file>samples/UML/Component Diagram/Basic example.txt</file>
+        <file>samples/UML/Component Diagram/Changing arrows direction.notes</file>
+        <file>samples/UML/Component Diagram/Changing arrows direction.svg</file>
+        <file>samples/UML/Component Diagram/Changing arrows direction.txt</file>
+        <file>samples/UML/Component Diagram/Changing arrows direction2.notes</file>
+        <file>samples/UML/Component Diagram/Changing arrows direction2.svg</file>
+        <file>samples/UML/Component Diagram/Changing arrows direction2.txt</file>
+        <file>samples/UML/Component Diagram/Changing arrows direction3.notes</file>
+        <file>samples/UML/Component Diagram/Changing arrows direction3.svg</file>
+        <file>samples/UML/Component Diagram/Changing arrows direction3.txt</file>
+        <file>samples/UML/Component Diagram/Components.notes</file>
+        <file>samples/UML/Component Diagram/Components.svg</file>
+        <file>samples/UML/Component Diagram/Components.txt</file>
+        <file>samples/UML/Component Diagram/Grouping Components.notes</file>
+        <file>samples/UML/Component Diagram/Grouping Components.svg</file>
+        <file>samples/UML/Component Diagram/Grouping Components.txt</file>
+        <file>samples/UML/Component Diagram/Individual colors.notes</file>
+        <file>samples/UML/Component Diagram/Individual colors.svg</file>
+        <file>samples/UML/Component Diagram/Individual colors.txt</file>
+        <file>samples/UML/Component Diagram/Interfaces.notes</file>
+        <file>samples/UML/Component Diagram/Interfaces.svg</file>
+        <file>samples/UML/Component Diagram/Interfaces.txt</file>
+        <file>samples/UML/Component Diagram/Long description.notes</file>
+        <file>samples/UML/Component Diagram/Long description.svg</file>
+        <file>samples/UML/Component Diagram/Long description.txt</file>
+        <file>samples/UML/Component Diagram/Skinparam.notes</file>
+        <file>samples/UML/Component Diagram/Skinparam.svg</file>
+        <file>samples/UML/Component Diagram/Skinparam.txt</file>
+        <file>samples/UML/Component Diagram/Skinparam2.svg</file>
+        <file>samples/UML/Component Diagram/Skinparam2.txt</file>
+        <file>samples/UML/Component Diagram/Use UML2 notation.notes</file>
+        <file>samples/UML/Component Diagram/Use UML2 notation.svg</file>
+        <file>samples/UML/Component Diagram/Use UML2 notation.txt</file>
+        <file>samples/UML/Component Diagram/Using notes.notes</file>
+        <file>samples/UML/Component Diagram/Using notes.svg</file>
+        <file>samples/UML/Component Diagram/Using notes.txt</file>
+        <file>samples/UML/Component Diagram/Using Sprite in Stereotype.notes</file>
+        <file>samples/UML/Component Diagram/Using Sprite in Stereotype.svg</file>
+        <file>samples/UML/Component Diagram/Using Sprite in Stereotype.txt</file>
+        <file>samples/UML/Deployment Diagram/Declaring element.svg</file>
+        <file>samples/UML/Deployment Diagram/Declaring element.txt</file>
+        <file>samples/UML/Deployment Diagram/Declaring element2.notes</file>
+        <file>samples/UML/Deployment Diagram/Declaring element2.svg</file>
+        <file>samples/UML/Deployment Diagram/Declaring element2.txt</file>
+        <file>samples/UML/Deployment Diagram/Linking.notes</file>
+        <file>samples/UML/Deployment Diagram/Linking.svg</file>
+        <file>samples/UML/Deployment Diagram/Linking.txt</file>
+        <file>samples/UML/Deployment Diagram/Linking2.notes</file>
+        <file>samples/UML/Deployment Diagram/Linking2.svg</file>
+        <file>samples/UML/Deployment Diagram/Linking2.txt</file>
+        <file>samples/UML/Deployment Diagram/Linking3.notes</file>
+        <file>samples/UML/Deployment Diagram/Linking3.svg</file>
+        <file>samples/UML/Deployment Diagram/Linking3.txt</file>
+        <file>samples/UML/Deployment Diagram/Packages.svg</file>
+        <file>samples/UML/Deployment Diagram/Packages.txt</file>
+        <file>samples/UML/Deployment Diagram/Packages2.svg</file>
+        <file>samples/UML/Deployment Diagram/Packages2.txt</file>
+        <file>samples/UML/Deployment Diagram/Round corner.notes</file>
+        <file>samples/UML/Deployment Diagram/Round corner.svg</file>
+        <file>samples/UML/Deployment Diagram/Round corner.txt</file>
+        <file>samples/UML/Object Diagram/Adding fields.notes</file>
+        <file>samples/UML/Object Diagram/Adding fields.svg</file>
+        <file>samples/UML/Object Diagram/Adding fields.txt</file>
+        <file>samples/UML/Object Diagram/Adding fields2.notes</file>
+        <file>samples/UML/Object Diagram/Adding fields2.svg</file>
+        <file>samples/UML/Object Diagram/Adding fields2.txt</file>
+        <file>samples/UML/Object Diagram/Definition of objects.notes</file>
+        <file>samples/UML/Object Diagram/Definition of objects.svg</file>
+        <file>samples/UML/Object Diagram/Definition of objects.txt</file>
+        <file>samples/UML/Object Diagram/Relations between objects.notes</file>
+        <file>samples/UML/Object Diagram/Relations between objects.svg</file>
+        <file>samples/UML/Object Diagram/Relations between objects.txt</file>
+        <file>samples/UML/Sequence Diagram/Basic examples.notes</file>
+        <file>samples/UML/Sequence Diagram/Basic examples.svg</file>
+        <file>samples/UML/Sequence Diagram/Basic examples.txt</file>
+        <file>samples/UML/Sequence Diagram/Change arrow color.notes</file>
+        <file>samples/UML/Sequence Diagram/Change arrow color.svg</file>
+        <file>samples/UML/Sequence Diagram/Change arrow color.txt</file>
+        <file>samples/UML/Sequence Diagram/Change arrow style.notes</file>
+        <file>samples/UML/Sequence Diagram/Change arrow style.svg</file>
+        <file>samples/UML/Sequence Diagram/Change arrow style.txt</file>
+        <file>samples/UML/Sequence Diagram/Changing notes shape.notes</file>
+        <file>samples/UML/Sequence Diagram/Changing notes shape.svg</file>
+        <file>samples/UML/Sequence Diagram/Changing notes shape.txt</file>
+        <file>samples/UML/Sequence Diagram/Changing padding.notes</file>
+        <file>samples/UML/Sequence Diagram/Changing padding.svg</file>
+        <file>samples/UML/Sequence Diagram/Changing padding.txt</file>
+        <file>samples/UML/Sequence Diagram/Creole and HTML.notes</file>
+        <file>samples/UML/Sequence Diagram/Creole and HTML.svg</file>
+        <file>samples/UML/Sequence Diagram/Creole and HTML.txt</file>
+        <file>samples/UML/Sequence Diagram/Declaring participant.notes</file>
+        <file>samples/UML/Sequence Diagram/Declaring participant.svg</file>
+        <file>samples/UML/Sequence Diagram/Declaring participant.txt</file>
+        <file>samples/UML/Sequence Diagram/Declaring participant2.notes</file>
+        <file>samples/UML/Sequence Diagram/Declaring participant2.svg</file>
+        <file>samples/UML/Sequence Diagram/Declaring participant2.txt</file>
+        <file>samples/UML/Sequence Diagram/Declaring participant3.notes</file>
+        <file>samples/UML/Sequence Diagram/Declaring participant3.svg</file>
+        <file>samples/UML/Sequence Diagram/Declaring participant3.txt</file>
+        <file>samples/UML/Sequence Diagram/Delay.notes</file>
+        <file>samples/UML/Sequence Diagram/Delay.svg</file>
+        <file>samples/UML/Sequence Diagram/Delay.txt</file>
+        <file>samples/UML/Sequence Diagram/Divider.notes</file>
+        <file>samples/UML/Sequence Diagram/Divider.svg</file>
+        <file>samples/UML/Sequence Diagram/Divider.txt</file>
+        <file>samples/UML/Sequence Diagram/Grouping message.notes</file>
+        <file>samples/UML/Sequence Diagram/Grouping message.svg</file>
+        <file>samples/UML/Sequence Diagram/Grouping message.txt</file>
+        <file>samples/UML/Sequence Diagram/Incoming and outgoing messages.notes</file>
+        <file>samples/UML/Sequence Diagram/Incoming and outgoing messages.svg</file>
+        <file>samples/UML/Sequence Diagram/Incoming and outgoing messages.txt</file>
+        <file>samples/UML/Sequence Diagram/Incoming and outgoing messages2.notes</file>
+        <file>samples/UML/Sequence Diagram/Incoming and outgoing messages2.svg</file>
+        <file>samples/UML/Sequence Diagram/Incoming and outgoing messages2.txt</file>
+        <file>samples/UML/Sequence Diagram/Lifeline Activation and Destruction.notes</file>
+        <file>samples/UML/Sequence Diagram/Lifeline Activation and Destruction.svg</file>
+        <file>samples/UML/Sequence Diagram/Lifeline Activation and Destruction.txt</file>
+        <file>samples/UML/Sequence Diagram/Lifeline Activation and Destruction2.notes</file>
+        <file>samples/UML/Sequence Diagram/Lifeline Activation and Destruction2.svg</file>
+        <file>samples/UML/Sequence Diagram/Lifeline Activation and Destruction2.txt</file>
+        <file>samples/UML/Sequence Diagram/Message sequence numbering.notes</file>
+        <file>samples/UML/Sequence Diagram/Message sequence numbering.svg</file>
+        <file>samples/UML/Sequence Diagram/Message sequence numbering.txt</file>
+        <file>samples/UML/Sequence Diagram/Message sequence numbering2.notes</file>
+        <file>samples/UML/Sequence Diagram/Message sequence numbering2.svg</file>
+        <file>samples/UML/Sequence Diagram/Message sequence numbering2.txt</file>
+        <file>samples/UML/Sequence Diagram/Message sequence numbering3.notes</file>
+        <file>samples/UML/Sequence Diagram/Message sequence numbering3.svg</file>
+        <file>samples/UML/Sequence Diagram/Message sequence numbering3.txt</file>
+        <file>samples/UML/Sequence Diagram/Message sequence numbering4.notes</file>
+        <file>samples/UML/Sequence Diagram/Message sequence numbering4.svg</file>
+        <file>samples/UML/Sequence Diagram/Message sequence numbering4.txt</file>
+        <file>samples/UML/Sequence Diagram/Message to Self.notes</file>
+        <file>samples/UML/Sequence Diagram/Message to Self.svg</file>
+        <file>samples/UML/Sequence Diagram/Message to Self.txt</file>
+        <file>samples/UML/Sequence Diagram/More information on titles.notes</file>
+        <file>samples/UML/Sequence Diagram/More information on titles.svg</file>
+        <file>samples/UML/Sequence Diagram/More information on titles.txt</file>
+        <file>samples/UML/Sequence Diagram/More information on titles2.notes</file>
+        <file>samples/UML/Sequence Diagram/More information on titles2.svg</file>
+        <file>samples/UML/Sequence Diagram/More information on titles2.txt</file>
+        <file>samples/UML/Sequence Diagram/More information on titles3.notes</file>
+        <file>samples/UML/Sequence Diagram/More information on titles3.svg</file>
+        <file>samples/UML/Sequence Diagram/More information on titles3.txt</file>
+        <file>samples/UML/Sequence Diagram/Notes on messages.notes</file>
+        <file>samples/UML/Sequence Diagram/Notes on messages.svg</file>
+        <file>samples/UML/Sequence Diagram/Notes on messages.txt</file>
+        <file>samples/UML/Sequence Diagram/Participant creation.notes</file>
+        <file>samples/UML/Sequence Diagram/Participant creation.svg</file>
+        <file>samples/UML/Sequence Diagram/Participant creation.txt</file>
+        <file>samples/UML/Sequence Diagram/Participants encompass.notes</file>
+        <file>samples/UML/Sequence Diagram/Participants encompass.svg</file>
+        <file>samples/UML/Sequence Diagram/Participants encompass.txt</file>
+        <file>samples/UML/Sequence Diagram/Reference.notes</file>
+        <file>samples/UML/Sequence Diagram/Reference.svg</file>
+        <file>samples/UML/Sequence Diagram/Reference.txt</file>
+        <file>samples/UML/Sequence Diagram/Removing Footer.notes</file>
+        <file>samples/UML/Sequence Diagram/Removing Footer.svg</file>
+        <file>samples/UML/Sequence Diagram/Removing Footer.txt</file>
+        <file>samples/UML/Sequence Diagram/Skinparam.notes</file>
+        <file>samples/UML/Sequence Diagram/Skinparam.svg</file>
+        <file>samples/UML/Sequence Diagram/Skinparam.txt</file>
+        <file>samples/UML/Sequence Diagram/Skinparam2.svg</file>
+        <file>samples/UML/Sequence Diagram/Skinparam2.txt</file>
+        <file>samples/UML/Sequence Diagram/Some other notes.notes</file>
+        <file>samples/UML/Sequence Diagram/Some other notes.svg</file>
+        <file>samples/UML/Sequence Diagram/Some other notes.txt</file>
+        <file>samples/UML/Sequence Diagram/Space.notes</file>
+        <file>samples/UML/Sequence Diagram/Space.svg</file>
+        <file>samples/UML/Sequence Diagram/Space.txt</file>
+        <file>samples/UML/Sequence Diagram/Splitting diagrams.notes</file>
+        <file>samples/UML/Sequence Diagram/Splitting diagrams.svg</file>
+        <file>samples/UML/Sequence Diagram/Splitting diagrams.txt</file>
+        <file>samples/UML/Sequence Diagram/Splitting diagrams_001.svg</file>
+        <file>samples/UML/Sequence Diagram/Splitting diagrams_002.svg</file>
+        <file>samples/UML/Sequence Diagram/Stereotypes and Spots.notes</file>
+        <file>samples/UML/Sequence Diagram/Stereotypes and Spots.svg</file>
+        <file>samples/UML/Sequence Diagram/Stereotypes and Spots.txt</file>
+        <file>samples/UML/Sequence Diagram/Stereotypes and Spots2.notes</file>
+        <file>samples/UML/Sequence Diagram/Stereotypes and Spots2.svg</file>
+        <file>samples/UML/Sequence Diagram/Stereotypes and Spots2.txt</file>
+        <file>samples/UML/Sequence Diagram/Stereotypes and Spots3.notes</file>
+        <file>samples/UML/Sequence Diagram/Stereotypes and Spots3.svg</file>
+        <file>samples/UML/Sequence Diagram/Stereotypes and Spots3.txt</file>
+        <file>samples/UML/Sequence Diagram/Use non-letters in participants.notes</file>
+        <file>samples/UML/Sequence Diagram/Use non-letters in participants.svg</file>
+        <file>samples/UML/Sequence Diagram/Use non-letters in participants.txt</file>
+        <file>samples/UML/State Diagram/Arrow direction.notes</file>
+        <file>samples/UML/State Diagram/Arrow direction.svg</file>
+        <file>samples/UML/State Diagram/Arrow direction.txt</file>
+        <file>samples/UML/State Diagram/Composite state.notes</file>
+        <file>samples/UML/State Diagram/Composite state.svg</file>
+        <file>samples/UML/State Diagram/Composite state.txt</file>
+        <file>samples/UML/State Diagram/Concurrent state.notes</file>
+        <file>samples/UML/State Diagram/Concurrent state.svg</file>
+        <file>samples/UML/State Diagram/Concurrent state.txt</file>
+        <file>samples/UML/State Diagram/Long name.notes</file>
+        <file>samples/UML/State Diagram/Long name.svg</file>
+        <file>samples/UML/State Diagram/Long name.txt</file>
+        <file>samples/UML/State Diagram/More in notes.notes</file>
+        <file>samples/UML/State Diagram/More in notes.svg</file>
+        <file>samples/UML/State Diagram/More in notes.txt</file>
+        <file>samples/UML/State Diagram/Note.notes</file>
+        <file>samples/UML/State Diagram/Note.svg</file>
+        <file>samples/UML/State Diagram/Note.txt</file>
+        <file>samples/UML/State Diagram/Note2.notes</file>
+        <file>samples/UML/State Diagram/Note2.svg</file>
+        <file>samples/UML/State Diagram/Note2.txt</file>
+        <file>samples/UML/State Diagram/Simple State.notes</file>
+        <file>samples/UML/State Diagram/Simple State.svg</file>
+        <file>samples/UML/State Diagram/Simple State.txt</file>
+        <file>samples/UML/State Diagram/Skinparam.notes</file>
+        <file>samples/UML/State Diagram/Skinparam.svg</file>
+        <file>samples/UML/State Diagram/Skinparam.txt</file>
+        <file>samples/UML/Timing Diagram/Adding constraint.notes</file>
+        <file>samples/UML/Timing Diagram/Adding constraint.svg</file>
+        <file>samples/UML/Timing Diagram/Adding constraint.txt</file>
+        <file>samples/UML/Timing Diagram/Adding message.notes</file>
+        <file>samples/UML/Timing Diagram/Adding message.svg</file>
+        <file>samples/UML/Timing Diagram/Adding message.txt</file>
+        <file>samples/UML/Timing Diagram/Adding texts.notes</file>
+        <file>samples/UML/Timing Diagram/Adding texts.svg</file>
+        <file>samples/UML/Timing Diagram/Adding texts.txt</file>
+        <file>samples/UML/Timing Diagram/Declaring participant.notes</file>
+        <file>samples/UML/Timing Diagram/Declaring participant.svg</file>
+        <file>samples/UML/Timing Diagram/Declaring participant.txt</file>
+        <file>samples/UML/Timing Diagram/Initial state.notes</file>
+        <file>samples/UML/Timing Diagram/Initial state.svg</file>
+        <file>samples/UML/Timing Diagram/Initial state.txt</file>
+        <file>samples/UML/Timing Diagram/Participant oriented.notes</file>
+        <file>samples/UML/Timing Diagram/Participant oriented.svg</file>
+        <file>samples/UML/Timing Diagram/Participant oriented.txt</file>
+        <file>samples/UML/Timing Diagram/Relative time.notes</file>
+        <file>samples/UML/Timing Diagram/Relative time.svg</file>
+        <file>samples/UML/Timing Diagram/Relative time.txt</file>
+        <file>samples/UML/Timing Diagram/Setting scale.notes</file>
+        <file>samples/UML/Timing Diagram/Setting scale.svg</file>
+        <file>samples/UML/Timing Diagram/Setting scale.txt</file>
+        <file>samples/UML/Use Case Diagram/Actors.notes</file>
+        <file>samples/UML/Use Case Diagram/Actors.svg</file>
+        <file>samples/UML/Use Case Diagram/Actors.txt</file>
+        <file>samples/UML/Use Case Diagram/Basic example.notes</file>
+        <file>samples/UML/Use Case Diagram/Basic example.svg</file>
+        <file>samples/UML/Use Case Diagram/Basic example.txt</file>
+        <file>samples/UML/Use Case Diagram/Changing arrows direction.notes</file>
+        <file>samples/UML/Use Case Diagram/Changing arrows direction.svg</file>
+        <file>samples/UML/Use Case Diagram/Changing arrows direction.txt</file>
+        <file>samples/UML/Use Case Diagram/Changing arrows direction2.notes</file>
+        <file>samples/UML/Use Case Diagram/Changing arrows direction2.svg</file>
+        <file>samples/UML/Use Case Diagram/Changing arrows direction2.txt</file>
+        <file>samples/UML/Use Case Diagram/Changing arrows direction3.notes</file>
+        <file>samples/UML/Use Case Diagram/Changing arrows direction3.svg</file>
+        <file>samples/UML/Use Case Diagram/Changing arrows direction3.txt</file>
+        <file>samples/UML/Use Case Diagram/Complete example.notes</file>
+        <file>samples/UML/Use Case Diagram/Complete example.svg</file>
+        <file>samples/UML/Use Case Diagram/Complete example.txt</file>
+        <file>samples/UML/Use Case Diagram/Extension.notes</file>
+        <file>samples/UML/Use Case Diagram/Extension.svg</file>
+        <file>samples/UML/Use Case Diagram/Extension.txt</file>
+        <file>samples/UML/Use Case Diagram/Left to right direction.notes</file>
+        <file>samples/UML/Use Case Diagram/Left to right direction.svg</file>
+        <file>samples/UML/Use Case Diagram/Left to right direction.txt</file>
+        <file>samples/UML/Use Case Diagram/Left to right direction2.notes</file>
+        <file>samples/UML/Use Case Diagram/Left to right direction2.svg</file>
+        <file>samples/UML/Use Case Diagram/Left to right direction2.txt</file>
+        <file>samples/UML/Use Case Diagram/Skinparam.notes</file>
+        <file>samples/UML/Use Case Diagram/Skinparam.svg</file>
+        <file>samples/UML/Use Case Diagram/Skinparam.txt</file>
+        <file>samples/UML/Use Case Diagram/Splitting diagrams.notes</file>
+        <file>samples/UML/Use Case Diagram/Splitting diagrams.svg</file>
+        <file>samples/UML/Use Case Diagram/Splitting diagrams.txt</file>
+        <file>samples/UML/Use Case Diagram/Splitting diagrams_001.svg</file>
+        <file>samples/UML/Use Case Diagram/Stereotypes.notes</file>
+        <file>samples/UML/Use Case Diagram/Stereotypes.svg</file>
+        <file>samples/UML/Use Case Diagram/Stereotypes.txt</file>
+        <file>samples/UML/Use Case Diagram/Usecases description.notes</file>
+        <file>samples/UML/Use Case Diagram/Usecases description.svg</file>
+        <file>samples/UML/Use Case Diagram/Usecases description.txt</file>
+        <file>samples/UML/Use Case Diagram/Usecases.notes</file>
+        <file>samples/UML/Use Case Diagram/Usecases.svg</file>
+        <file>samples/UML/Use Case Diagram/Usecases.txt</file>
+        <file>samples/UML/Use Case Diagram/Using notes.notes</file>
+        <file>samples/UML/Use Case Diagram/Using notes.svg</file>
+        <file>samples/UML/Use Case Diagram/Using notes.txt</file>
+        <file>samples/Advanced/JCCKit/Example 1.png</file>
+        <file>samples/Advanced/JCCKit/Example 1.txt</file>
+        <file>samples/Advanced/JCCKit/Example 2.png</file>
+        <file>samples/Advanced/JCCKit/Example 2.txt</file>
+        <file>samples/Advanced/JCCKit/Example 3.png</file>
+        <file>samples/Advanced/JCCKit/Example 3.txt</file>
+        <file>samples/Advanced/JCCKit/Example 4.png</file>
+        <file>samples/Advanced/JCCKit/Example 4.txt</file>
+        <file>samples/Advanced/JCCKit/Example 5.png</file>
+        <file>samples/Advanced/JCCKit/Example 5.txt</file>
+        <file>samples/Advanced/PlantUML/Authors.svg</file>
+        <file>samples/Advanced/PlantUML/Authors.txt</file>
+        <file>samples/Advanced/PlantUML/Icons.svg</file>
+        <file>samples/Advanced/PlantUML/Icons.txt</file>
+        <file>samples/Advanced/PlantUML/License.svg</file>
+        <file>samples/Advanced/PlantUML/License.txt</file>
+        <file>samples/Advanced/PlantUML/Test Graphviz dot.svg</file>
+        <file>samples/Advanced/PlantUML/Test Graphviz dot.txt</file>
+        <file>samples/Advanced/PlantUML/Version.txt</file>
+        <file>samples/Advanced/PlantUML/Version.svg</file>
+        <file>samples/Advanced/Ditaa/Castle.png</file>
+        <file>samples/Advanced/Ditaa/Castle.txt</file>
+        <file>samples/Advanced/Ditaa/Color codes.png</file>
+        <file>samples/Advanced/Ditaa/Color codes.txt</file>
+        <file>samples/Advanced/Ditaa/Color.txt</file>
+        <file>samples/Advanced/Ditaa/Color.png</file>
+        <file>samples/Advanced/Ditaa/Complex Example 1.notes</file>
+        <file>samples/Advanced/Ditaa/Complex Example 1.png</file>
+        <file>samples/Advanced/Ditaa/Complex Example 1.txt</file>
+        <file>samples/Advanced/Ditaa/Complex Example 2.notes</file>
+        <file>samples/Advanced/Ditaa/Complex Example 2.png</file>
+        <file>samples/Advanced/Ditaa/Complex Example 2.txt</file>
+        <file>samples/Advanced/Ditaa/Dashed lines.png</file>
+        <file>samples/Advanced/Ditaa/Dashed lines.txt</file>
+        <file>samples/Advanced/Ditaa/Example 1.png</file>
+        <file>samples/Advanced/Ditaa/Example 1.txt</file>
+        <file>samples/Advanced/Ditaa/Example 2.png</file>
+        <file>samples/Advanced/Ditaa/Example 2.txt</file>
+        <file>samples/Advanced/Ditaa/Example with options.txt</file>
+        <file>samples/Advanced/Ditaa/Example with options.png</file>
+        <file>samples/Advanced/Ditaa/Point markers.png</file>
+        <file>samples/Advanced/Ditaa/Point markers.txt</file>
+        <file>samples/Advanced/Ditaa/Process.png</file>
+        <file>samples/Advanced/Ditaa/Process.txt</file>
+        <file>samples/Advanced/Ditaa/Round corners.png</file>
+        <file>samples/Advanced/Ditaa/Round corners.txt</file>
+        <file>samples/Advanced/Ditaa/Tags.png</file>
+        <file>samples/Advanced/Ditaa/Tags.txt</file>
+        <file>samples/Advanced/Ditaa/Text handling.png</file>
+        <file>samples/Advanced/Ditaa/Text handling.txt</file>
+        <file>samples/Advanced/HandWritten/Example 1.svg</file>
+        <file>samples/Advanced/HandWritten/Example 1.txt</file>
+        <file>samples/Advanced/HandWritten/Example 2.svg</file>
+        <file>samples/Advanced/HandWritten/Example 2.txt</file>
+        <file>samples/Advanced/HandWritten/Example 3.svg</file>
+        <file>samples/Advanced/HandWritten/Example 3.txt</file>
+        <file>samples/Advanced/Link/Links in activity diagram.svg</file>
+        <file>samples/Advanced/Link/Links in activity diagram.txt</file>
+        <file>samples/Advanced/Link/Links in class diagram.svg</file>
+        <file>samples/Advanced/Link/Links in class diagram.txt</file>
+        <file>samples/Advanced/Link/Links in class diagram2.notes</file>
+        <file>samples/Advanced/Link/Links in class diagram2.svg</file>
+        <file>samples/Advanced/Link/Links in class diagram2.txt</file>
+        <file>samples/Advanced/Link/Links in sequence diagram.svg</file>
+        <file>samples/Advanced/Link/Links in sequence diagram.txt</file>
+        <file>samples/Advanced/Sudoku/Basic.notes</file>
+        <file>samples/Advanced/Sudoku/Basic.png</file>
+        <file>samples/Advanced/Sudoku/Basic.txt</file>
+        <file>samples/Advanced/Sudoku/Seed.notes</file>
+        <file>samples/Advanced/Sudoku/Seed.png</file>
+        <file>samples/Advanced/Sudoku/Seed.txt</file>
+        <file>samples/Advanced/Unicode/Example 1.notes</file>
+        <file>samples/Advanced/Unicode/Example 1.svg</file>
+        <file>samples/Advanced/Unicode/Example 1.txt</file>
+        <file>samples/Advanced/Unicode/Example 2.svg</file>
+        <file>samples/Advanced/Unicode/Example 2.txt</file>
+        <file>samples/Advanced/Unicode/Example 3.svg</file>
+        <file>samples/Advanced/Unicode/Example 3.txt</file>
+        <file>samples/Advanced/Unicode/Example 4.svg</file>
+        <file>samples/Advanced/Unicode/Example 4.txt</file>
+        <file>samples/Advanced/Xearth/Add more stars.png</file>
+        <file>samples/Advanced/Xearth/Add more stars.txt</file>
+        <file>samples/Advanced/Xearth/Adding cities.png</file>
+        <file>samples/Advanced/Xearth/Adding cities.txt</file>
+        <file>samples/Advanced/Xearth/Basic.notes</file>
+        <file>samples/Advanced/Xearth/Basic.png</file>
+        <file>samples/Advanced/Xearth/Basic.txt</file>
+        <file>samples/Advanced/Xearth/Change grid configuration.notes</file>
+        <file>samples/Advanced/Xearth/Change grid configuration.png</file>
+        <file>samples/Advanced/Xearth/Change grid configuration.txt</file>
+        <file>samples/Advanced/Xearth/Fixed position without shading.png</file>
+        <file>samples/Advanced/Xearth/Fixed position without shading.txt</file>
+        <file>samples/Advanced/Xearth/Relative view from Sun.png</file>
+        <file>samples/Advanced/Xearth/Relative view from Sun.txt</file>
+        <file>samples/Advanced/Xearth/View from Moon and changing luminosity.png</file>
+        <file>samples/Advanced/Xearth/View from Moon and changing luminosity.txt</file>
+        <file>samples/Advanced/Xearth/View set by orbit and changing luminosity.png</file>
+        <file>samples/Advanced/Xearth/View set by orbit and changing luminosity.txt</file>
+        <file>samples/Advanced/Xearth/Zooming.png</file>
+        <file>samples/Advanced/Xearth/Zooming.txt</file>
+        <file>samples/Advanced/PlantUML Incubation/Autoactivation in sequence diagrams.svg</file>
+        <file>samples/Advanced/PlantUML Incubation/Autoactivation in sequence diagrams.txt</file>
+        <file>samples/Advanced/PlantUML Incubation/Change line color in state diagrams.svg</file>
+        <file>samples/Advanced/PlantUML Incubation/Change line color in state diagrams.txt</file>
+        <file>samples/Advanced/PlantUML Incubation/Reference in dequence diagrams.svg</file>
+        <file>samples/Advanced/PlantUML Incubation/Reference in dequence diagrams.txt</file>
+        <file>samples/Advanced/PlantUML Incubation/Return in Sequence Diagram.svg</file>
+        <file>samples/Advanced/PlantUML Incubation/Return in Sequence Diagram.txt</file>
+        <file>samples/Advanced/PlantUML Incubation/Shortcut syntax in sequence diagrams.svg</file>
+        <file>samples/Advanced/PlantUML Incubation/Shortcut syntax in sequence diagrams.txt</file>
+        <file>samples/Advanced/PlantUML Incubation/URL in diagrams.svg</file>
+        <file>samples/Advanced/PlantUML Incubation/URL in diagrams.txt</file>
+        <file>samples/Advanced/PlantUML Incubation/URLs on classes.svg</file>
+        <file>samples/Advanced/PlantUML Incubation/URLs on classes.txt</file>
+        <file>samples/non-UML/Other/Conditions 1.svg</file>
+        <file>samples/non-UML/Other/Conditions 1.txt</file>
+        <file>samples/non-UML/Other/Constants.svg</file>
+        <file>samples/non-UML/Other/Constants.txt</file>
+        <file>samples/non-UML/Other/Header and Footer.svg</file>
+        <file>samples/non-UML/Other/Header and Footer.txt</file>
+        <file>samples/non-UML/Other/Macros 1.svg</file>
+        <file>samples/non-UML/Other/Macros 1.txt</file>
+        <file>samples/non-UML/Other/Macros 2.svg</file>
+        <file>samples/non-UML/Other/Macros 2.txt</file>
+        <file>samples/non-UML/Other/Macros 3.svg</file>
+        <file>samples/non-UML/Other/Macros 3.txt</file>
+        <file>samples/non-UML/Other/Monochrome.svg</file>
+        <file>samples/non-UML/Other/Monochrome.txt</file>
+        <file>samples/non-UML/Other/Runtime variables.svg</file>
+        <file>samples/non-UML/Other/Runtime variables.txt</file>
+        <file>samples/non-UML/Other/Sprite 1.svg</file>
+        <file>samples/non-UML/Other/Sprite 1.txt</file>
+        <file>samples/non-UML/Other/Sprite 2.svg</file>
+        <file>samples/non-UML/Other/Sprite 2.txt</file>
+        <file>samples/non-UML/Other/Sprite 3.svg</file>
+        <file>samples/non-UML/Other/Sprite 3.txt</file>
+    </qresource>
+</RCC>

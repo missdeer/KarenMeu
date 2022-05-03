@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="136px" preserveAspectRatio="none" style="width:483px;height:136px;background:#FFFFFF;" version="1.1" viewBox="0 0 483 136" width="483px" zoomAndPan="magnify"><defs/><g><!--MD5=[d62e9fc5ee28a3e087993a152cbb833a]
+cluster Foo1--><g id="cluster_Foo1"><polygon points="16,21,26,11,127,11,127,109,117,119,16,119,16,21" style="stroke:#181818;stroke-width:1.0;fill:none;"/><line style="stroke:#181818;stroke-width:1.0;fill:none;" x1="117" x2="127" y1="21" y2="11"/><line style="stroke:#181818;stroke-width:1.0;fill:none;" x1="16" x2="117" y1="21" y2="21"/><line style="stroke:#181818;stroke-width:1.0;fill:none;" x1="117" x2="117" y1="21" y2="119"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="35" x="50" y="40.0439">Foo1</text></g><!--MD5=[4c01bded7976bd4e197567f392720707]
+cluster Foo3--><g id="cluster_Foo3"><path d="M167.9167,25.693 C171.4199,19.4618 175.7123,19.4016 180.4215,24.3432 C183.4511,17.6793 187.8089,18.5818 192.1963,22.8855 C195.2844,15.809 200.8633,15.6219 205.5146,21.2463 C209.5508,15.5715 214.8889,15.2426 218.8215,21.3633 C223.8447,17.4903 227.4924,17.224 229.7346,24.1688 C239.337,16.8657 246.2816,18.8887 249,31 C249.9681,30.4833 250.7311,30.6795 250.8047,31.9191 C257.5765,34.7253 258.5768,39.2176 253.2422,44.3899 C260.225,46.8328 260.7509,50.9902 257.126,56.7627 C262.8487,59.0171 263.0626,63.903 258.9173,67.7641 C264.3624,72.9634 262.7674,77.9594 256.3081,80.7708 C260.157,85.5507 258.9991,91.1297 252.3613,92.3285 C257.682,101.5893 254.8308,111.8119 242,111 C242.4287,110.8742 242.6861,111.0474 242.6539,111.5112 C240.2821,117.9778 236.3451,117.8795 231.4472,114.3406 C226.9833,120.8513 221.566,121.7082 217.007,114.4403 C213.4478,120.8727 208.6698,120.0904 204.4895,115.1222 C200.0834,121.0651 195.7781,120.462 191.5118,114.9637 C186.5708,119.1338 182.8454,119.165 180.2691,112.5082 C168.738,120.3977 161.6975,118.1931 159,104 C159.5204,103.4977 160.0981,103.6287 160.2432,104.374 C153.8011,102.6522 151.3894,98.1317 156.6351,92.7744 C149.3231,90.5536 148.7633,85.1916 153.6832,80.1179 C148.1141,78.6251 146.4784,73.8861 150.0455,69.3164 C145.3945,64.9549 146.0537,59.1346 152.839,57.4698 C147.4319,51.1168 149.1243,44.7294 157.9514,43.6373 C151.8118,34.6313 153.0208,25.1699 166,24 C167.2336,23.686 168.2396,24.2449 167.9167,25.693 " style="stroke:#181818;stroke-width:1.0;fill:none;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="35" x="186.5" y="45.0439">Foo3</text></g><!--MD5=[a271349c8b0755b677764f257412a177]
+cluster Foo5--><g id="cluster_Foo5"><path d="M281,16 C281,6 324,6 324,6 C324,6 367,6 367,16 L367,104 C367,114 324,114 324,114 C324,114 281,114 281,104 L281,16 " style="stroke:#181818;stroke-width:1.0;fill:none;"/><path d="M281,16 C281,26 324,26 324,26 C324,26 367,26 367,16 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="35" x="306.5" y="44.0439">Foo5</text></g><!--MD5=[b234c1eb5be979a8c3ecf73381ed17e9]
+cluster Foo7--><g id="cluster_Foo7"><rect height="93" rx="35" ry="35" style="stroke:#181818;stroke-width:1.0;fill:none;" width="86" x="391" y="21"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="35" x="416.5" y="44.0439">Foo7</text></g><!--MD5=[32511b0d30498c8a52e183535ebe0e5d]
+entity Foo2--><g id="elem_Foo2"><path d="M47.7482,62.3606 C51.8879,56.5376 56.6705,56.3783 60.4783,62.7083 C63.554,56.575 68.974,55.6563 73.0261,61.7024 C75.8291,57.1919 80.8999,56.0067 83.8709,61.5207 C87.8847,56.1104 93.0588,56.5693 96.0786,62.5829 C106.9613,64.7129 106.5081,74.1325 100.4505,80.4157 C106.9164,87.1462 104.4774,93.2484 95.9466,95.5016 C94.1187,101.058 88.8416,102.6045 84.5315,98.4064 C81.5233,104.7034 76.944,105.5192 72.3583,100.0364 C68.3247,105.5652 62.0084,105.5989 59.2635,98.6807 C54.5167,102.5852 49.8584,101.0687 47.715,95.5052 C37.3835,95.0784 34.61,86.304 39.6957,78.5747 C33.9002,70.6146 37.0007,62.105 47.7482,62.3606 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="54.5" y="85.0439">Foo2</text></g><!--MD5=[e432657e7c51da6cb048ccc2ca55c8b3]
+entity Foo4--><g id="elem_Foo4"><rect fill="#F1F1F1" height="49.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="73" x="167.5" y="54"/><path d="M191.8333,54 L191.8333,59 L184.8333,66 L167.5,66 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="182.5" y="90.0439">Foo4</text></g><!--MD5=[8f22d7578d7140a0794192e18fb7b245]
+entity Foo6--><g id="elem_Foo6"><rect fill="#F1F1F1" height="39.1201" rx="35" ry="35" style="stroke:#181818;stroke-width:0.5;" width="53" x="297.5" y="59"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="307.5" y="85.0439">Foo6</text></g><!--MD5=[532194de22e15fd0b4eb32ee14a84b49]
+entity Foo8--><g id="elem_Foo8"><rect fill="#F1F1F1" height="39.1201" rx="35" ry="35" style="stroke:#181818;stroke-width:0.5;" width="53" x="407.5" y="59"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="417.5" y="85.0439">Foo8</text></g><!--MD5=[28b115166d391ec1b6e1db9e19a805cd]
+@startuml
+node Foo1 {
+ cloud Foo2 
+}
+
+cloud Foo3 {
+  frame Foo4
+}
+
+database Foo5  {
+  storage Foo6
+}
+
+storage Foo7 {
+  storage Foo8
+}
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

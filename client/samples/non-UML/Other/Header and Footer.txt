@@ -1,0 +1,16 @@
+@startuml
+scale 1.5
+'scale 2/3
+'scale 200 width
+'scale 200 height
+'scale 200*100
+
+Alice -> Bob: Authentication Request
+
+header
+    <font color=red>Warning:</font>
+    Do not use in production.
+endheader
+
+center footer Generated for demonstration
+@enduml

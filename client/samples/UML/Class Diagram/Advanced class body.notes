@@ -1,0 +1,3 @@
+By default, methods and fields are automatically regrouped by PlantUML. You can use separators to define your own way of ordering fields and methods. The following separators are possible : --..==__.
+
+You can also use titles within the separators: 

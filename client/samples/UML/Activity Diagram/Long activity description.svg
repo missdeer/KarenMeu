@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="282px" preserveAspectRatio="none" style="width:238px;height:282px;background:#FFFFFF;" version="1.1" viewBox="0 0 238 282" width="238px" zoomAndPan="magnify"><defs/><g><ellipse cx="222.5" cy="148" fill="#222222" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><rect fill="#F1F1F1" height="96.4805" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="175" x="17" y="100"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="20" x="27" y="134.6777">this</text><text fill="#000000" font-family="sans-serif" font-size="20" lengthAdjust="spacing" textLength="60" x="50" y="132.9199">activity</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="10" x="27" y="151.0664">is</text><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="24" x="40" y="151.0664">very</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="3" x="64" y="151.0664"> </text><text fill="#FF0000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="31" x="67" y="151.0664">long2</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="155" x="27" y="167.4551">and defined on several lines</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="103" x="27" y="183.8438">that contains many</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="19" x="133" y="183.8438">text</text><rect fill="#F1F1F1" height="52.7773" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="110" x="49.5" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="59.5" y="30.752">Another activity</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="87" x="62.5" y="47.1406">on several lines</text><rect fill="#F1F1F1" height="40.248" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="195" x="7" y="236"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="67" x="17" y="263.6113">Short activity</text><text fill="#000000" font-family="monospace" font-size="14" lengthAdjust="spacing" textLength="105" x="87" y="262.0439">(Cannot decode)</text><!--MD5=[ea757e8cb0e5c9c6641c068fe5aa4539]
+reverse link A1 to start--><g id="link_A1_start"><path d="M197.381,148 C202.268,148 207.155,148 212.042,148 " fill="none" id="A1-backto-start" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="192.078,148,201.078,152,197.078,148,201.078,144,192.078,148" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[b5aac31dacf873e7f14e273d7d7856bf]
+reverse link Another activity\n on several lines to A1--><g id="link_Another activity\n on several lines_A1"><path d="M104.5,65.151 C104.5,75.862 104.5,88.148 104.5,99.888 " fill="none" id="Another activity\n on several lines-backto-A1" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="104.5,60.028,100.5,69.028,104.5,65.028,108.5,69.028,104.5,60.028" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[84b78a78dab5fbfbbfb5367c5134559c]
+link A1 to Short activity <img:sourceforge.jpg>--><g id="link_A1_Short activity &lt;img:sourceforge.jpg&gt;"><path d="M104.5,196.1104 C104.5,208.0701 104.5,220.4349 104.5,230.728 " fill="none" id="A1-to-Short activity &lt;img:sourceforge.jpg&gt;" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="104.5,235.9087,108.5,226.9087,104.5,230.9087,100.5,226.9087,104.5,235.9087" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[1df729d2f256afe444f92b279210d34f]
+@startuml
+(*) -left-> "this <size:20>activity</size>
+	is <b>very</b> <color:red>long2</color>
+	and defined on several lines
+	that contains many <i>text</i>" as A1
+
+-up-> "Another activity\n on several lines"
+
+A1 - -> "Short activity <img:sourceforge.jpg>"
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets network xml webenginewidgets webchannel
+QT       += core gui widgets network xml svg webenginewidgets webchannel
 lessThan(QT_MAJOR_VERSION, 6): QT += webengine
 equals(QT_MAJOR_VERSION, 6): QT += core5compat
 
@@ -62,7 +62,9 @@ SOURCES += \
         $$PWD/translator/translator.cpp \
         $$PWD/webbrowser.cpp \
         $$PWD/webbrowseraddressbar.cpp \
-        listimagesdialog.cpp
+        $$PWD/listimagesdialog.cpp \
+        $$PWD/samplexmlreader.cpp \
+        plantumlsourceeditor.cpp
 
 HEADERS += \
         $$PWD/custompreviewthemeeditwidget.h \
@@ -96,14 +98,16 @@ HEADERS += \
         $$PWD/translator/youdaotranslator.h \
         $$PWD/webbrowser.h \
         $$PWD/webbrowseraddressbar.h \
-        listimagesdialog.h
+        $$PWD/listimagesdialog.h \
+        $$PWD/samplexmlreader.h \
+        plantumlsourceeditor.h
 
 FORMS += \
         $$PWD/mainwindow.ui \
         $$PWD/preferencedialog.ui \
         $$PWD/templatemanagerdialog.ui \
         $$PWD/findreplacedialog.ui \
-        listimagesdialog.ui
+        $$PWD/listimagesdialog.ui
 
 INCLUDEPATH += $$PWD $$PWD/markdowneditor4  $$PWD/../utils $$PWD/translator
 LIBS += -L$$PWD/../utils
@@ -114,9 +118,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    karenmeu.qrc
+    $$PWD/karenmeu.qrc \
+    $$PWD/plantumlsamples.qrc
 
-RC_FILE = KarenMeu.rc
+RC_FILE = $$PWD/KarenMeu.rc
 
 CODECFORTR      = UTF-8
 CODECFORSRC     = UTF-8

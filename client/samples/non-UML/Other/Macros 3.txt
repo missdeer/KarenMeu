@@ -1,0 +1,9 @@
+@startuml
+!define DOUBLE(x) x x
+!definelong AUTHEN(x,y)
+    x -> y : DOUBLE(hello)
+    y -> x : ok
+!enddefinelong
+
+AUTHEN(Bob ,Alice)
+@enduml

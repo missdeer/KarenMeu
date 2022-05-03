@@ -1,0 +1,6 @@
+@startuml
+start
+[[http://plantuml.com]]:Some activity;
+:Some [[http://plantuml.com link]];
+end
+@enduml

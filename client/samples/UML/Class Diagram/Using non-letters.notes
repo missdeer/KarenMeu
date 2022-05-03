@@ -1,0 +1,4 @@
+If you want to use non-letters in the class (or enum...) display, you can either :
+
+* Use the as keyword in the class definition
+* Put quotes "" around the class name

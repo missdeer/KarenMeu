@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="124px" preserveAspectRatio="none" style="width:345px;height:124px;background:#FFFFFF;" version="1.1" viewBox="0 0 345 124" width="345px" zoomAndPan="magnify"><defs/><g><!--MD5=[d62e9fc5ee28a3e087993a152cbb833a]
+cluster Foo1--><g id="cluster_Foo1"><rect height="111" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;fill:none;" width="102" x="7" y="7"/><polygon points="92,12,92,26,104,26,104,18,98,12,92,12" style="stroke:#181818;stroke-width:1.0;fill:none;"/><line style="stroke:#181818;stroke-width:1.0;fill:none;" x1="98" x2="98" y1="12" y2="18"/><line style="stroke:#181818;stroke-width:1.0;fill:none;" x1="104" x2="98" y1="18" y2="18"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="35" x="40.5" y="25.0439">Foo1</text></g><!--MD5=[4c01bded7976bd4e197567f392720707]
+cluster Foo3--><g id="cluster_Foo3"><path d="M135.5,14.5 L171.5,14.5 A3.75,3.75 0 0 1 174,17 L181,39.6201 L226.5,39.6201 A2.5,2.5 0 0 1 229,42.1201 L229,108 A2.5,2.5 0 0 1 226.5,110.5 L135.5,110.5 A2.5,2.5 0 0 1 133,108 L133,17 A2.5,2.5 0 0 1 135.5,14.5 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="133" x2="181" y1="39.6201" y2="39.6201"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="35" x="137" y="32.5439">Foo3</text></g><!--MD5=[a271349c8b0755b677764f257412a177]
+cluster Foo5--><g id="cluster_Foo5"><rect height="102" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;fill:none;" width="86" x="253" y="11.5"/><path d="M298,11.5 L298,23.6201 L288,33.6201 L253,33.6201 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="35" x="256" y="28.5439">Foo5</text></g><!--MD5=[32511b0d30498c8a52e183535ebe0e5d]
+entity Foo2--><g id="elem_Foo2"><path d="M25.5,45 L66.5,45 A3.75,3.75 0 0 1 69,47.5 L76,66 L90.5,66 A2.5,2.5 0 0 1 93,68.5 L93,99.6201 A2.5,2.5 0 0 1 90.5,102.1201 L25.5,102.1201 A2.5,2.5 0 0 1 23,99.6201 L23,47.5 A2.5,2.5 0 0 1 25.5,45 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><line style="stroke:#181818;stroke-width:0.5;" x1="23" x2="76" y1="66" y2="66"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="33" y="89.0439">Foo2</text></g><!--MD5=[e432657e7c51da6cb048ccc2ca55c8b3]
+entity Foo4--><g id="elem_Foo4"><rect fill="#F1F1F1" height="42.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="63" x="149.5" y="52.5"/><polygon fill="#F1F1F1" points="195.5,57.5,195.5,71.5,207.5,71.5,207.5,63.5,201.5,57.5,195.5,57.5" style="stroke:#181818;stroke-width:0.5;"/><line style="stroke:#181818;stroke-width:0.5;" x1="201.5" x2="201.5" y1="57.5" y2="63.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="207.5" x2="201.5" y1="63.5" y2="63.5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="159.5" y="81.5439">Foo4</text></g><!--MD5=[8f22d7578d7140a0794192e18fb7b245]
+entity Foo6--><g id="elem_Foo6"><path d="M269.5,59.5 C269.5,49.5 296,49.5 296,49.5 C296,49.5 322.5,49.5 322.5,59.5 L322.5,87.6201 C322.5,97.6201 296,97.6201 296,97.6201 C296,97.6201 269.5,97.6201 269.5,87.6201 L269.5,59.5 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><path d="M269.5,59.5 C269.5,69.5 296,69.5 296,69.5 C296,69.5 322.5,69.5 322.5,59.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="279.5" y="89.5439">Foo6</text></g><!--MD5=[96b1c903957d057a208b5814b01eb366]
+@startuml
+artifact Foo1 {
+  folder Foo2
+}
+
+folder Foo3 {
+  artifact Foo4
+}
+
+frame Foo5 {
+  database Foo6
+}
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

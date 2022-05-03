@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="229px" preserveAspectRatio="none" style="width:289px;height:229px;background:#FFFFFF;" version="1.1" viewBox="0 0 289 229" width="289px" zoomAndPan="magnify"><defs/><g><!--MD5=[97ab183161fd5d1db7fba7485cf76add]
+entity Admin--><g id="elem_Admin"><ellipse cx="42.5" cy="153" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M42.5,161 L42.5,188 M29.5,169 L55.5,169 M42.5,188 L29.5,203 M42.5,188 L55.5,203 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="6" y="220.5439">Main Admin</text></g><g id="elem_Use"><ellipse cx="198.5469" cy="183.8094" fill="#F1F1F1" rx="84.5469" ry="19.3094" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="136.784" y="188.7801">Use the application</text></g><!--MD5=[fee662a292a0353a69bd162820bae93b]
+entity User--><g id="elem_User"><ellipse cx="42.5" cy="14" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M42.5,22 L42.5,49 M29.5,30 L55.5,30 M42.5,49 L29.5,64 M42.5,49 L55.5,64 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="29" x="28" y="81.5439">User</text></g><g id="elem_Start"><ellipse cx="198.6985" cy="45.02" fill="#F1F1F1" rx="32.6985" ry="16.52" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="183.6985" y="49.5039">Start</text></g><!--MD5=[933987b91d2b08b1b4941f3221fa6cec]
+reverse link User to Admin--><g id="link_User_Admin"><path d="M42.5,104.801 C42.5,118.157 42.5,132.0145 42.5,144.2878 " fill="none" id="User-backto-Admin" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="35.5001,104.527,42.5,84.527,49.5001,104.527,35.5001,104.527" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[2cb1453f0b23e2ba7216b1bf4a67bc96]
+reverse link Start to Use--><g id="link_Start_Use"><path d="M198.5,81.852 C198.5,108.33 198.5,143.302 198.5,164.4211 " fill="none" id="Start-backto-Use" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="191.5,81.716,198.5,61.716,205.5,81.716,191.5,81.716" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[634e2c93b7202b9cb947be75c4b18090]
+@startuml
+:Main Admin: as Admin
+(Use the application) as (Use)
+
+User <|- - Admin
+(Start) <|- - (Use)
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

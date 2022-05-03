@@ -1,0 +1,6 @@
+// you may need to change render engine to Graphviz dot/neato/fdp ...
+digraph G {
+  "Welcome" -> "To"
+  "To" -> "Web"
+  "To" -> "GraphViz!"
+}

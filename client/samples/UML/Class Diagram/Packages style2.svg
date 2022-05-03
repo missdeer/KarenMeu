@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="213px" preserveAspectRatio="none" style="width:186px;height:213px;background:#FFFFFF;" version="1.1" viewBox="0 0 186 213" width="186px" zoomAndPan="magnify"><defs/><g><!--MD5=[81c5b77bbb331c24d34a89c9e6a454d6]
+cluster foo1.foo2.foo3--><g id="cluster_foo1.foo2.foo3"><rect height="118" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.5;fill:none;" width="141" x="39" y="89"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="101" x="59" y="107.0439">foo1.foo2.foo3</text></g><rect fill="#F1F1F1" height="58.2402" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="80" x="7" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="17" y="25.0439">foo1.foo2</text><!--MD5=[aa7f586532e18719e6cefa70fc650583]
+class Object--><g id="elem_Object"><rect codeLine="8" fill="#F1F1F1" height="48" id="Object" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="73" x="82.5" y="135"/><ellipse cx="97.5" cy="151" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M96.0781,156.3594 Q94.2188,156.3594 93.125,154.9688 Q92.0313,153.5781 92.0313,150.5938 Q92.0313,148.0625 93.1953,146.4063 Q94.3594,144.75 96.3438,144.75 Q97.8125,144.75 98.2813,144.875 Q98.75,145.0781 98.75,145.0781 Q98.75,145.0781 98.75,145.0078 Q98.75,144.9375 99.3594,144.0156 L100.4063,147.6719 L99.0781,148.0781 Q98.6094,146.5313 97.9453,145.8672 Q97.2813,145.2031 96.2188,145.2031 Q95.8281,145.2031 95.0625,146.7344 Q94.2969,148.2656 94.2969,150.5156 Q94.2969,152.9844 94.9609,154.375 Q95.625,155.7656 96.1563,155.7656 Q97.2188,155.7656 97.9766,155 Q98.7344,154.2344 99.0781,152.5781 L100.4063,153.1719 Q100.0781,154.5781 99.1797,155.4688 Q98.2813,156.3594 96.0781,156.3594 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="111.5" y="157.4839">Object</text><line style="stroke:#181818;stroke-width:0.5;" x1="83.5" x2="154.5" y1="167" y2="167"/><line style="stroke:#181818;stroke-width:0.5;" x1="83.5" x2="154.5" y1="175" y2="175"/></g><!--MD5=[df24c5d1cc2fb3033768186d0212b6ce]
+reverse link foo1.foo2 to foo1.foo2.foo3--><g id="link_foo1.foo2_foo1.foo2.foo3"><path d="M47,80.213 C47,82.3061 47,84.4294 47,86.5716 C47,87.1071 47,87.6438 47,88.1816 C47,88.4504 47,88.7196 47,88.9889 " fill="none" id="foo1.foo2-backto-foo1.foo2.foo3" style="stroke:#181818;stroke-width:1.0;"/><ellipse cx="47" cy="73.064" fill="#FFFFFF" rx="8" ry="8" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="47" x2="47" y1="81.064" y2="65.064"/><line style="stroke:#181818;stroke-width:1.0;" x1="39" x2="55" y1="73.064" y2="73.064"/></g><!--MD5=[2c44c8654aa126e19bea7cf99ae317fb]
+@startuml
+
+skinparam packageStyle rectangle
+
+package foo1.foo2 {
+}
+
+package foo1.foo2.foo3 {
+  class Object
+}
+
+foo1.foo2 +- - foo1.foo2.foo3
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

@@ -1,0 +1,7 @@
+@startuml
+!define module(x) component x <<module >>
+!define module(x,y) component x as y <<module >>
+
+module(foo)
+module(bar , barcode)
+@enduml

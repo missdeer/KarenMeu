@@ -1,0 +1,5 @@
+@startuml
+!define ANOTHER_DATE %date[yyyy.MM.dd 'at' HH:mm]%
+Title Generated %date% or ANOTHER_DATE
+alice -> bob
+@enduml

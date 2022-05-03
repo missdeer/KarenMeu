@@ -1,0 +1,8 @@
+By changing the final ; separator, you can set different rendering for the activity:
+
+*  |
+*  <
+*  >
+*  /
+*  ]
+*  }

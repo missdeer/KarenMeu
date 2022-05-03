@@ -1,0 +1,11 @@
+@startuml
+ditaa(--no-separation, --no-shadows)
++----------------------------+
+| You can add the following  |
+| Options to the first line: |
++----------------------------+
+| --no-separation or -E      |
++----------------------------+
+| --no-shadows    or -S      |
++----------------------------+
+@enduml

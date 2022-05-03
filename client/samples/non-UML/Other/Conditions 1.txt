@@ -1,0 +1,11 @@
+@startuml
+!define SHOW_METHODS
+
+class ArrayList
+!ifdef SHOW_METHODS
+    ArrayList : int size ()
+    ArrayList : void clear ()
+!else
+    ArrayList : void foo_bar ()
+!endif
+@enduml

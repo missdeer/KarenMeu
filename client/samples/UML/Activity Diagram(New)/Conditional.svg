@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="219px" preserveAspectRatio="none" style="width:316px;height:219px;background:#FFFFFF;" version="1.1" viewBox="0 0 316 219" width="316px" zoomAndPan="magnify"><defs/><g><ellipse cx="130" cy="20" fill="#222222" rx="10" ry="10" style="stroke:#222222;stroke-width:1.0;"/><polygon fill="#F1F1F1" points="84,50,176,50,188,62,176,74,84,74,72,62,84,50" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="92" x="84" y="67.0945">Graphviz installed?</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="18" x="54" y="59.583">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="12" x="188" y="59.583">no</text><rect fill="#F1F1F1" height="52.7773" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="81" x="11" y="84"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="61" x="21" y="107.752">process all</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="21" y="124.1406">diagrams</text><rect fill="#F1F1F1" height="52.7773" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="193" x="112" y="84"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="70" x="122" y="107.752">process only</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" text-decoration="underline" textLength="55" x="122" y="124.1406">sequence</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="21" x="180" y="124.1406">and</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" text-decoration="underline" textLength="35" x="204" y="124.1406">activity</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="242" y="124.1406">diagrams</text><polygon fill="#F1F1F1" points="130,142.7773,142,154.7773,130,166.7773,118,154.7773,130,142.7773" style="stroke:#181818;stroke-width:0.5;"/><ellipse cx="130" cy="197.7773" rx="11" ry="11" style="stroke:#222222;stroke-width:1.0;fill:none;"/><ellipse cx="130" cy="197.7773" fill="#222222" rx="6" ry="6" style="stroke:#111111;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="72" x2="51.5" y1="62" y2="62"/><line style="stroke:#181818;stroke-width:1.0;" x1="51.5" x2="51.5" y1="62" y2="84"/><polygon fill="#181818" points="47.5,74,51.5,84,55.5,74,51.5,78" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="188" x2="208.5" y1="62" y2="62"/><line style="stroke:#181818;stroke-width:1.0;" x1="208.5" x2="208.5" y1="62" y2="84"/><polygon fill="#181818" points="204.5,74,208.5,84,212.5,74,208.5,78" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="51.5" x2="51.5" y1="136.7773" y2="154.7773"/><line style="stroke:#181818;stroke-width:1.0;" x1="51.5" x2="118" y1="154.7773" y2="154.7773"/><polygon fill="#181818" points="108,150.7773,118,154.7773,108,158.7773,112,154.7773" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="208.5" x2="208.5" y1="136.7773" y2="154.7773"/><line style="stroke:#181818;stroke-width:1.0;" x1="208.5" x2="142" y1="154.7773" y2="154.7773"/><polygon fill="#181818" points="152,150.7773,142,154.7773,152,158.7773,148,154.7773" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="130" x2="130" y1="30" y2="50"/><polygon fill="#181818" points="126,40,130,50,134,40,130,44" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="130" x2="130" y1="166.7773" y2="186.7773"/><polygon fill="#181818" points="126,176.7773,130,186.7773,134,176.7773,130,180.7773" style="stroke:#181818;stroke-width:1.0;"/><!--MD5=[2b930c8eaaee6fba6239eb9dcd9b2184]
+@startuml
+
+start
+
+if (Graphviz installed?) then (yes)
+  :process all\ndiagrams;
+else (no)
+  :process only
+  __sequence__ and __activity__ diagrams;
+endif
+
+stop
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

@@ -1,0 +1,9 @@
+You can use specify a color either:
+
+* with its standard name
+* using HEX value #AABBCC
+* using short HEX value #ABC
+
+A user has recently created an image to display all names colors used by PlantUML. (We thank him by the way!)
+
+So a new feature has been added to print all those colors using a special diagram description: 

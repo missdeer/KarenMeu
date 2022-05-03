@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="183px" preserveAspectRatio="none" style="width:245px;height:183px;background:#FFFFFF;" version="1.1" viewBox="0 0 245 183" width="245px" zoomAndPan="magnify"><defs/><g><!--MD5=[8fc3522a43f8c7199df5e09e5bb0188e]
+entity user--><g id="elem_user"><ellipse cx="67.5" cy="14" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M67.5,22 L67.5,49 M54.5,30 L80.5,30 M67.5,49 L54.5,64 M67.5,49 L80.5,64 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="28" x="53.5" y="81.5439">user</text></g><g id="elem_Use case 1"><ellipse cx="67.4258" cy="161.1233" fill="#F1F1F1" rx="61.4258" ry="16.6233" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="29.4258" y="166.3952">Use case 1</text></g><g id="elem_Use case 2"><ellipse cx="178.4258" cy="45.1233" fill="#F1F1F1" rx="61.4258" ry="16.6233" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="140.4258" y="50.3952">Use case 2</text></g><!--MD5=[bb3d9c07db52296fd972b0c57c034637]
+link user to Use case 1--><g id="link_user_Use case 1"><path d="M67.5,84.5952 C67.5,102.7745 67.5,123.7517 67.5,138.9581 " fill="none" id="user-to-Use case 1" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="67.5,144.2834,71.5,135.2834,67.5,139.2834,63.5,135.2834,67.5,144.2834" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[59bd31fa4effd1c6e08bca357b312fcd]
+link user to Use case 2--><g id="link_user_Use case 2"><path d="M81.8086,45 C91.7793,45 101.75,45 111.721,45 " fill="none" id="user-to-Use case 2" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="116.935,45,107.935,41,111.935,45,107.935,49,116.935,45" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[06c175d14b53d39f5e16fdc22ca0825c]
+@startuml
+:user: - -> (Use case 1)
+:user: -> (Use case 2)
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

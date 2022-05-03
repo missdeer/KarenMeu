@@ -1,0 +1,5 @@
+// you may need to change render engine to Graphviz dot/neato/fdp ...
+digraph g{
+  rankdir=LR;
+  "webgraphviz" -> "@" -> "gmail" -> "." -> "com"
+}

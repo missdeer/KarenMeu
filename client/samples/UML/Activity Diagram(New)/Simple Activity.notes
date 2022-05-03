@@ -1,0 +1,5 @@
+Activities label starts with : and ends with ;.
+
+Text formatting can be done using creole wiki syntax.
+
+They are implicitly linked in their definition order. 

@@ -1,0 +1,5 @@
+You can declare a class as abstract using "abstract" or "abstract class" keywords.
+
+The class will be printed in italic.
+
+You can use the interface, annotation and enum keywords too.

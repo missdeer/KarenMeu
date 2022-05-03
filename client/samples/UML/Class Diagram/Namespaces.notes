@@ -1,0 +1,7 @@
+In packages, the name of a class is the unique identifier of this class. It means that you cannot have two classes with the very same name in different packages.
+
+In that case, you should use namespaces instead of packages.
+
+You can refer to classes from other namespaces by fully qualify them. Classes from the default namespace are qualified with a starting dot.
+
+Note that you don't have to explicitly create namespace : a fully qualified class is automatically put in the right namespace. 

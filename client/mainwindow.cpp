@@ -14,12 +14,16 @@
 #include <QHeaderView>
 #include <QInputDialog>
 #include <QLabel>
+#include <QListWidget>
 #include <QMap>
 #include <QMessageBox>
 #include <QPainter>
 #include <QPlainTextEdit>
 #include <QShortcut>
+#include <QSignalMapper>
 #include <QSplitter>
+#include <QSvgRenderer>
+#include <QToolBox>
 #include <QTreeView>
 #include <QUrl>
 #include <QVBoxLayout>
@@ -39,8 +43,10 @@
 #include "googletranslator.h"
 #include "markdowneditor4.h"
 #include "markdownview.h"
+#include "plantumlsourceeditor.h"
 #include "preferencedialog.h"
 #include "previewthemeeditor.h"
+#include "samplexmlreader.h"
 #include "settings.h"
 #include "sogoutranslator.h"
 #include "templatemanager.h"
@@ -55,16 +61,81 @@
 #include "youdaodict.h"
 #include "youdaotranslator.h"
 
+namespace
+{
+    static const int   SAMPLE_ITEM_DATA_ROLE  = Qt::UserRole;
+    static const int   SAMPLE_ITEM_NOTES_ROLE = Qt::UserRole + 1;
+    static const int   SAMPLE_ITEM_PATH_ROLE  = Qt::UserRole + 2;
+    static const QSize SAMPLE_ICON_SIZE(128, 128);
+} // namespace
+
 using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
 
+QIcon iconFromSvg(QSize size, const QString &path)
+{
+    QPixmap     pixmap(size);
+    QPainter    painter(&pixmap);
+    const QRect bounding_rect(QPoint(0, 0), size);
+
+    if (!path.isEmpty())
+    {
+        painter.setRenderHint(QPainter::Antialiasing, true);
+
+        painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
+        painter.setPen(Qt::NoPen);
+        painter.drawRect(bounding_rect);
+
+        if (path.endsWith(".svg"))
+        {
+            QSvgRenderer svg(path);
+            QSize        target_size = svg.defaultSize();
+            target_size.scale(size, Qt::KeepAspectRatio);
+            QRect target_rect = QRect(QPoint(0, 0), target_size);
+            target_rect.translate(bounding_rect.center() - target_rect.center());
+            svg.render(&painter, target_rect);
+        }
+        else
+        {
+            QImage image(path);
+
+            if (image.width() > image.height())
+            {
+                image = image.scaledToWidth(size.width());
+            }
+            else
+            {
+                image = image.scaledToHeight(size.height());
+            }
+            painter.drawImage(0, 0, image);
+        }
+    }
+    else
+    {
+        painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
+        painter.setPen(Qt::NoPen);
+        painter.drawRect(bounding_rect);
+
+        const int margin      = 5;
+        QRect     target_rect = bounding_rect.adjusted(margin, margin, -margin, -margin);
+        painter.setPen(Qt::SolidLine);
+        painter.drawRect(target_rect);
+        painter.drawLine(target_rect.topLeft(), target_rect.bottomRight() + QPoint(1, 1));
+        painter.drawLine(target_rect.bottomLeft() + QPoint(0, 1), target_rect.topRight() + QPoint(1, 0));
+    }
+
+    QIcon icon;
+    icon.addPixmap(pixmap);
+    return icon;
+}
+
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-    , m_fileCache(new FileCache(50 * 1024 * 1024, this))
-    , m_view(new MarkdownView(&m_nam, m_fileCache, this))
-    , m_youdaoDict(new YoudaoDict(m_nam))
-    , m_templateManager(new TemplateManager)
+    : QMainWindow(parent),
+      ui(new Ui::MainWindow),
+      m_fileCache(new FileCache(50 * 1024 * 1024, this)),
+      m_view(new MarkdownView(&m_nam, m_fileCache, this)),
+      m_youdaoDict(new YoudaoDict(m_nam)),
+      m_templateManager(new TemplateManager)
 {
     ui->setupUi(this);
     statusBar()->hide();
@@ -147,6 +218,14 @@ MainWindow::MainWindow(QWidget *parent)
     setupDockPanels();
 
     applyMarkdownEditorTheme();
+
+    m_sampleInsertSignalMapper = new QSignalMapper(this);
+    connect(m_sampleInsertSignalMapper, QOverload<QWidget *>::of(&QSignalMapper::mapped), this, &MainWindow::onSampleItemInsert);
+
+    for (auto *s : m_sampleResults)
+    {
+        reloadSamples(s);
+    }
 
     auto mainWindowState = g_settings->mainWindowState();
     restoreState(mainWindowState);
@@ -941,6 +1020,69 @@ void MainWindow::setupDockPanels()
     tabifyDockWidget(previewHTMLDock, customThemeEditorDock);
 
     setupWebBrowserPane();
+
+    // setup samples panels
+
+    auto *dockSampleResult = new QDockWidget(tr("Sample Result"), this);
+    connect(dockSampleResult, SIGNAL(dockLocationChanged(Qt::DockWidgetArea)), this, SLOT(onSampleResultDockLocationChanged(Qt::DockWidgetArea)));
+
+    m_tabWidgetSampleResult = new QTabWidget(dockSampleResult);
+    connect(m_tabWidgetSampleResult, &QTabWidget::currentChanged, [this]() {
+        focusSampleResult();
+        onSampleItemSelectionChanged();
+    });
+
+    dockSampleResult->setWidget(m_tabWidgetSampleResult);
+    dockSampleResult->setObjectName("sampleResult");
+    addDockWidget(Qt::LeftDockWidgetArea, dockSampleResult);
+    onSampleResultDockLocationChanged(Qt::LeftDockWidgetArea);
+
+    auto *sr          = new SampleResult;
+    sr->samplePath    = ":/samples/UML";
+    sr->sampleToolBox = new QToolBox(m_tabWidgetSampleResult);
+    m_tabWidgetSampleResult->addTab(sr->sampleToolBox, tr("UML"));
+    connect(sr->sampleToolBox, SIGNAL(currentChanged(int)), this, SLOT(onCurrentSampleResultChanged(int)));
+    m_sampleResults << sr;
+
+    sr                = new SampleResult;
+    sr->samplePath    = ":/samples/non-UML";
+    sr->sampleToolBox = new QToolBox(m_tabWidgetSampleResult);
+    m_tabWidgetSampleResult->addTab(sr->sampleToolBox, tr("non-UML"));
+    connect(sr->sampleToolBox, SIGNAL(currentChanged(int)), this, SLOT(onCurrentSampleResultChanged(int)));
+    m_sampleResults << sr;
+
+    sr                = new SampleResult;
+    sr->samplePath    = ":/samples/Advanced";
+    sr->sampleToolBox = new QToolBox(m_tabWidgetSampleResult);
+    m_tabWidgetSampleResult->addTab(sr->sampleToolBox, tr("Advanced"));
+    connect(sr->sampleToolBox, SIGNAL(currentChanged(int)), this, SLOT(onCurrentSampleResultChanged(int)));
+    m_sampleResults << sr;
+
+    auto *m_showSampleResultDockAction = dockSampleResult->toggleViewAction();
+    m_showSampleResultDockAction->setIconVisibleInMenu(false);
+    m_showSampleResultDockAction->setStatusTip(tr("Show or hide the Sample Result dock"));
+#if !defined(Q_WS_WIN) // BUG: icons are not displayed when cross-linking
+    m_showSampleResultDockAction->setIcon(QIcon(":/rc/icons/sample-result.png"));
+#endif
+    m_showSampleResultDockAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_1));
+    ui->menuView->addAction(m_showSampleResultDockAction);
+
+    auto *dockSampleSource = new QDockWidget(tr("Sample Source Code"), this);
+    m_sampleSourcePreview  = new PlantUMLSourceEditor(dockSampleSource);
+    m_sampleSourcePreview->initialize();
+    // m_sampleSourcePreview->setReadOnly(true);
+    dockSampleSource->setWidget(m_sampleSourcePreview);
+    dockSampleSource->setObjectName("sampleSource");
+    addDockWidget(Qt::RightDockWidgetArea, dockSampleSource);
+
+    auto *m_showSampleSourceDockAction = dockSampleSource->toggleViewAction();
+    m_showSampleSourceDockAction->setIconVisibleInMenu(false);
+    m_showSampleSourceDockAction->setStatusTip(tr("Show or hide the Sample Source dock"));
+#if !defined(Q_WS_WIN) // BUG: icons are not displayed when cross-linking
+    m_showSampleSourceDockAction->setIcon(QIcon(":/rc/icons/sample-source.png"));
+#endif
+    m_showSampleSourceDockAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_2));
+    ui->menuView->addAction(m_showSampleSourceDockAction);
 }
 
 void MainWindow::setupShortcutToolbar()
@@ -1231,4 +1373,130 @@ void MainWindow::on_actionLeftRightOrTopBottomViews_triggered()
     auto mode = g_settings->markdownViewArrange();
     g_settings->setMarkdownViewArrange(!mode);
     QMessageBox::information(this, tr("Notice"), tr("It is required to restart KarenMeu application to take effect."), QMessageBox::Ok);
+}
+
+void MainWindow::onSampleResultFocus()
+{
+    focusSampleResult();
+}
+
+void MainWindow::onSampleItemInsert(QWidget *widget)
+{
+    auto *list_widget = qobject_cast<QListWidget *>(widget);
+    if (list_widget)
+    {
+        onSampleItemDoubleClicked(list_widget->currentItem());
+    }
+}
+
+void MainWindow::onSampleItemSelectionChanged()
+{
+    auto *sampleResultToolBox = qobject_cast<QToolBox *>(m_tabWidgetSampleResult->currentWidget());
+    Q_ASSERT(sampleResultToolBox);
+    auto *widget = qobject_cast<QListWidget *>(sampleResultToolBox->currentWidget());
+    if (widget)
+    {
+        auto *item = widget->currentItem();
+        if (item)
+        {
+            auto notes = item->data(SAMPLE_ITEM_NOTES_ROLE).toString();
+            m_sampleSourcePreview->setToolTip(notes);
+            // m_sampleSourcePreview->setReadOnly(false);
+            m_sampleSourcePreview->setContent(item->data(SAMPLE_ITEM_DATA_ROLE).toByteArray());
+            // m_sampleSourcePreview->setReadOnly(true);
+        }
+    }
+}
+
+void MainWindow::onCurrentSampleResultChanged(int /*index*/)
+{
+    focusSampleResult();
+    onSampleItemSelectionChanged(); // make sure we don't show stale info
+}
+
+void MainWindow::onSampleItemDoubleClicked(QListWidgetItem *item)
+{
+    insertSampleSource(item->data(SAMPLE_ITEM_DATA_ROLE).toString());
+}
+
+void MainWindow::reloadSamples(SampleResult *sr)
+{
+    for (auto *widget : sr->sampleWidgets)
+    {
+        widget->deleteLater();
+    }
+    sr->sampleWidgets.clear();
+
+    if (sr->samplePath.isEmpty())
+    {
+        qDebug() << "No sample defined.";
+        return;
+    }
+    SampleReader reader;
+    reader.scan(sr->samplePath);
+
+    for (auto *sample : reader)
+    {
+        auto *view = newSampleListWidget(SAMPLE_ICON_SIZE, this);
+        for (const auto *sampleItem : *sample)
+        {
+            auto *listWidgetItem = new QListWidgetItem(iconFromSvg(SAMPLE_ICON_SIZE, sampleItem->icon()), sampleItem->name(), view);
+            listWidgetItem->setData(SAMPLE_ITEM_DATA_ROLE, sampleItem->data());
+            listWidgetItem->setData(SAMPLE_ITEM_NOTES_ROLE, sampleItem->notes());
+            listWidgetItem->setData(SAMPLE_ITEM_PATH_ROLE, sampleItem->icon());
+            listWidgetItem->setToolTip(sampleItem->notes());
+        }
+        sr->sampleToolBox->addItem(view, sample->name());
+        connect(view, &QListWidget::itemDoubleClicked, this, &MainWindow::onSampleItemDoubleClicked);
+        connect(view, &QListWidget::itemSelectionChanged, this, &MainWindow::onSampleItemSelectionChanged);
+
+        auto *action = new QAction(this);
+        action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Return));
+        m_sampleInsertSignalMapper->setMapping(action, view);
+        connect(action, &QAction::triggered, m_sampleInsertSignalMapper, QOverload<>::of(&QSignalMapper::map));
+        view->addAction(action);
+
+        sr->sampleWidgets << view;
+    }
+}
+
+void MainWindow::insertSampleSource(const QString &code)
+{
+    // TODO: insert sample source code to markdown source editor current position
+}
+
+QListWidget *MainWindow::newSampleListWidget(const QSize &icon_size, QWidget *parent)
+{
+    auto *view = new QListWidget(parent);
+    view->setUniformItemSizes(true);
+    view->setMovement(QListView::Static);
+    view->setResizeMode(QListView::Adjust);
+    view->setIconSize(icon_size);
+    view->setViewMode(QListView::IconMode);
+    return view;
+}
+
+void MainWindow::focusSampleResult()
+{
+    auto *currentToolBox = qobject_cast<QToolBox *>(m_tabWidgetSampleResult->currentWidget());
+    auto *widget         = qobject_cast<QListWidget *>(currentToolBox->currentWidget());
+    if (widget)
+    {
+        widget->setFocus();
+        if (widget->selectedItems().count() == 0)
+        {
+            widget->setCurrentItem(widget->itemAt(0, 0));
+        }
+    }
+}
+
+void MainWindow::onSampleResultDockLocationChanged(Qt::DockWidgetArea area)
+{
+    QMap<Qt::DockWidgetArea, QTabWidget::TabPosition> m = {
+        {Qt::LeftDockWidgetArea, QTabWidget::West},
+        {Qt::RightDockWidgetArea, QTabWidget::East},
+        {Qt::TopDockWidgetArea, QTabWidget::North},
+        {Qt::BottomDockWidgetArea, QTabWidget::South},
+    };
+    m_tabWidgetSampleResult->setTabPosition(m[area]);
 }

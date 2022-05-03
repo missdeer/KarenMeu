@@ -1,0 +1,7 @@
+Stereotypes are defined with the class keyword, " << " and " >> ".
+
+You can also define notes using note left of , note right of , note top of , note bottom of keywords.
+
+You can also define a note on the last defined class using note left, note right, note top, note bottom.
+
+A note can be also define alone with the note keywords, then linked to other objects using the .. symbol. 

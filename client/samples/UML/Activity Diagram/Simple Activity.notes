@@ -1,0 +1,5 @@
+You can use (*) for the starting point and ending point of the activity diagram.
+
+In some occasion, you may want to use (*top) to force the starting point to be at the top of the diagram.
+
+Use --> for arrows. 

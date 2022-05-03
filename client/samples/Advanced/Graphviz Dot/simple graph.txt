@@ -1,0 +1,9 @@
+// you may need to change render engine to Graphviz dot/neato/fdp ...
+graph {
+    a -- b;
+    b -- c;
+    a -- c;
+    d -- c;
+    e -- c;
+    e -- a;
+}

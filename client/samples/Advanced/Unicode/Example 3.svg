@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="230px" preserveAspectRatio="none" style="width:271px;height:230px;background:#FFFFFF;" version="1.1" viewBox="0 0 271 230" width="271px" zoomAndPan="magnify"><defs/><g><!--MD5=[26c61e5215b5dc7e578c051f32202c15]
+entity 使用者--><g id="elem_使用者"><ellipse cx="28" cy="35.1963" fill="#F1F1F1" rx="8" ry="8" style="stroke:#000000;stroke-width:0.5;"/><path d="M28,43.1963 L28,70.1963 M15,51.1963 L41,51.1963 M28,70.1963 L15,85.1963 M28,70.1963 L41,85.1963 " fill="none" style="stroke:#000000;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="7" y="102.7402">使用者</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="44" x="6" y="23.6201">«人類»</text></g><!--MD5=[23cbfdfd6b10ca6cbafe89ceb20d9f77]
+entity 數據庫--><g id="elem_數據庫"><ellipse cx="228" cy="35.1963" fill="#F1F1F1" rx="8" ry="8" style="stroke:#000000;stroke-width:0.5;"/><path d="M228,43.1963 L228,70.1963 M215,51.1963 L241,51.1963 M228,70.1963 L215,85.1963 M228,70.1963 L241,85.1963 " fill="none" style="stroke:#000000;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="200" y="102.7402">主數據庫</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="72" x="192" y="23.6201">«應用程式»</text></g><g id="elem_草創"><ellipse cx="121.0882" cy="56.6467" fill="#8FBC8F" rx="35.5882" ry="29.0705" style="stroke:#2F4F4F;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="44" x="99.0882" y="53.0337">«一桿»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="28" x="107.0882" y="72.1538">草創</text></g><g id="elem_贏余"><ellipse cx="127.8868" cy="195.2244" fill="#8FBC8F" rx="50.3868" ry="29.6483" style="stroke:#2F4F4F;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="58" x="96.3868" y="190.9364">«基本的»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="97.3868" y="210.0565">主数据燕</text></g><!--MD5=[e8a967317773f364d53799cd9b4787ea]
+link 使用者 to 草創--><g id="link_使用者_草創"><path d="M50.1602,56.5762 C60.1357,56.5762 70.1112,56.5762 80.0868,56.5762 " fill="none" id="使用者-to-草創" style="stroke:#808000;stroke-width:1.0;"/><polygon fill="#808000" points="85.3034,56.5762,76.3034,52.5762,80.3034,56.5762,76.3034,60.5762,85.3034,56.5762" style="stroke:#808000;stroke-width:1.0;"/></g><!--MD5=[cf5da07076190dc885d6ccfcd374de45]
+link 使用者 to 贏余--><g id="link_使用者_贏余"><path d="M50.1932,87.8702 C66.6607,110.3482 89.0285,140.8801 105.5555,163.4394 " fill="none" id="使用者-to-贏余" style="stroke:#808000;stroke-width:1.0;"/><polygon fill="#808000" points="108.571,167.5553,106.4798,157.931,105.6165,163.5216,100.0259,162.6582,108.571,167.5553" style="stroke:#808000;stroke-width:1.0;"/></g><!--MD5=[20a51f01d12168ae7a620c2932d64c5f]
+link 數據庫 to 贏余--><g id="link_數據庫_贏余"><path d="M192.744,105.7012 C178.644,124.9476 162.826,146.5392 150.354,163.5626 " fill="none" id="數據庫-to-贏余" style="stroke:#808000;stroke-width:1.0;"/><polygon fill="#808000" points="147.259,167.7879,155.8049,162.8921,150.2141,163.7546,149.3517,158.1639,147.259,167.7879" style="stroke:#808000;stroke-width:1.0;"/></g><!--MD5=[d68b401218e3d55654695691bc8f323c]
+@startuml
+skinparam usecaseBackgroundColor DarkSeaGreen
+skinparam usecaseArrowColor Olive
+skinparam actorBorderColor black
+skinparam usecaseBorderColor DarkSlateGray
+
+使用者 << 人類 >>
+"主數據庫" as 數據庫 << 應用程式 >>
+(草創) << 一桿 >>
+"主数据燕" as (贏余) << 基本的 >>
+
+使用者 -> (草創)
+使用者 - -> (贏余)
+
+數據庫  - -> (贏余)
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

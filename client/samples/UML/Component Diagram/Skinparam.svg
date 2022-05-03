@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="197px" preserveAspectRatio="none" style="width:315px;height:197px;background:#FFFFFF;" version="1.1" viewBox="0 0 315 197" width="315px" zoomAndPan="magnify"><defs/><g><!--MD5=[bdbee0fc59a29b9ec21c283a244fef13]
+entity DA--><g id="elem_DA"><ellipse cx="45.5" cy="31" fill="#BC8F8F" rx="8" ry="8" style="stroke:#FFA500;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="6" y="64.0439">Data Access</text></g><!--MD5=[cbd7cda55f2530e2efe43ec72c097853]
+entity First Component--><g id="elem_First Component"><rect fill="#FFD700" height="47.7544" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.5;" width="136" x="89.5" y="7"/><rect fill="#FFD700" height="10" style="stroke:#000000;stroke-width:0.5;" width="15" x="205.5" y="12"/><rect fill="#FFD700" height="2" style="stroke:#000000;stroke-width:0.5;" width="4" x="203.5" y="14"/><rect fill="#FFD700" height="2" style="stroke:#000000;stroke-width:0.5;" width="4" x="203.5" y="18"/><text fill="#000000" font-family="Courier" font-size="13" lengthAdjust="spacing" textLength="96" x="104.5" y="41.8979">First Component</text></g><!--MD5=[96f7e1299d4a43069e6ed32352fcac20]
+entity HTTP--><g id="elem_HTTP"><ellipse cx="157.5" cy="156" fill="#BC8F8F" rx="8" ry="8" style="stroke:#FFA500;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="36" x="139.5" y="189.0439">HTTP</text></g><!--MD5=[cfe1c00cd2ddda50f37fc5622644ebdd]
+entity Web Server--><g id="elem_Web Server"><rect fill="#FFD700" height="47.7544" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.5;" width="107" x="202" y="132"/><rect fill="#FFD700" height="10" style="stroke:#000000;stroke-width:0.5;" width="15" x="289" y="137"/><rect fill="#FFD700" height="2" style="stroke:#000000;stroke-width:0.5;" width="4" x="287" y="139"/><rect fill="#FFD700" height="2" style="stroke:#000000;stroke-width:0.5;" width="4" x="287" y="143"/><text fill="#000000" font-family="Courier" font-size="13" lengthAdjust="spacing" textLength="67" x="217" y="166.8979">Web Server</text></g><!--MD5=[363fa5e0e34baebc00cf77642f1dd18b]
+link DA to First Component--><g id="link_DA_First Component"><path d="M54.6875,31 C66.2004,31 77.7132,31 89.2261,31 " fill="none" id="DA-First Component" style="stroke:#FF6655;stroke-width:1.0;"/></g><!--MD5=[b31ac7abd68f04ca600009a3528fb133]
+link First Component to HTTP--><g id="link_First Component_HTTP"><path d="M157.5,55.135 C157.5,80.688 157.5,120.9525 157.5,141.6849 " fill="none" id="First Component-to-HTTP" style="stroke:#FF6655;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#FF6655" points="157.5,146.7506,161.5,137.7506,157.5,141.7506,153.5,137.7506,157.5,146.7506" style="stroke:#FF6655;stroke-width:1.0;"/><text fill="#777777" font-family="Impact" font-size="13" lengthAdjust="spacing" textLength="20" x="158.5" y="99.1143">use</text></g><!--MD5=[3904698d0307f1ddb5506dbe8c7f52ee]
+link HTTP to Web Server--><g id="link_HTTP_Web Server"><path d="M166.688,156 C178.367,156 190.047,156 201.727,156 " fill="none" id="HTTP-Web Server" style="stroke:#FF6655;stroke-width:1.0;"/></g><!--MD5=[88b17266126298a56dfd7275fcb9fc68]
+@startuml
+
+skinparam interface {
+  backgroundColor RosyBrown
+  borderColor orange
+}
+
+skinparam component {
+  FontSize 13
+  BackgroundColor<<Apache>> Red
+  BorderColor<<Apache>> #FF6655
+  FontName Courier
+  BorderColor black
+  BackgroundColor gold
+  ArrowFontName Impact
+  ArrowColor #FF6655
+  ArrowFontColor #777777
+}
+
+() "Data Access" as DA
+
+DA - [First Component] 
+[First Component] ..> () HTTP : use
+HTTP - [Web Server] << Apache >>
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

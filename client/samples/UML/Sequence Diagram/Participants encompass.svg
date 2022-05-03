@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="188px" preserveAspectRatio="none" style="width:170px;height:188px;background:#FFFFFF;" version="1.1" viewBox="0 0 170 188" width="170px" zoomAndPan="magnify"><defs/><g><rect fill="#ADD8E6" height="176.5034" style="stroke:#181818;stroke-width:0.5;" width="107" x="1" y="6"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="101" x="4" y="20.8979">Internal Service</text><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="27" x2="27" y1="61.8745" y2="145.3833"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="79" x2="79" y1="61.8745" y2="145.3833"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="139" x2="139" y1="61.8745" y2="145.3833"/><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="39" x="8" y="27.7544"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="25" x="15" y="50.7983">Bob</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="39" x="8" y="144.3833"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="25" x="15" y="167.4272">Bob</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="44" x="57" y="27.7544"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="64" y="50.7983">Alice</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="44" x="57" y="144.3833"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="64" y="167.4272">Alice</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="50" x="114" y="27.7544"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="36" x="121" y="50.7983">Other</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="50" x="114" y="144.3833"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="36" x="121" y="167.4272">Other</text><polygon fill="#181818" points="67,91.6289,77,95.6289,67,99.6289,71,95.6289" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="27.5" x2="73" y1="95.6289" y2="95.6289"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="27" x="34.5" y="90.7725">hello</text><polygon fill="#181818" points="127,123.3833,137,127.3833,127,131.3833,131,127.3833" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="79" x2="133" y1="127.3833" y2="127.3833"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="27" x="86" y="122.5269">hello</text><!--MD5=[50002094b47290a7f623245c9d084471]
+@startuml
+
+box "Internal Service" #LightBlue
+	participant Bob
+	participant Alice
+end box
+participant Other
+
+Bob -> Alice : hello
+Alice -> Other : hello
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

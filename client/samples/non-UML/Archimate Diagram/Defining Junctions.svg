@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="298px" preserveAspectRatio="none" style="width:246px;height:298px;background:#FFFFFF;" version="1.1" viewBox="0 0 246 298" width="246px" zoomAndPan="magnify"><defs/><g><!--MD5=[c6b63f8d0b828200562d0fe5e7c7bb14]
+entity JunctionAnd--><g id="elem_JunctionAnd"><ellipse cx="158" cy="257" fill="#F5F5F5" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="119.5" y="290.0439">JunctionAnd</text></g><!--MD5=[f6e52e8f778d26d418058e147f2cbe60]
+entity JunctionOr--><g id="elem_JunctionOr"><ellipse cx="70" cy="34" fill="#000000" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="36" y="67.0439">JunctionOr</text></g><!--MD5=[a525d5208e24671653b5780717f580ab]
+entity vpnServerA--><g id="elem_vpnServerA"><rect fill="#C9FFC9" height="54.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="93" x="147.5" y="7"/><image height="16" width="16" x="186.5" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVR42mNgGGzgH5EYu+aTz7f/JwbjMmTUgMFgAMXpgChX0CwhEa0ZlyH/yMSUAwC1WIl8FvWCFwAAAABJRU5ErkJggg==" y="17"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="157.5" y="48.0439">VPN Server</text></g><!--MD5=[aba3a422084821251358def362bf37bd]
+entity GO--><g id="elem_GO"><rect fill="#90EE90" height="39.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="42" x="7" y="126"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="22" x="17" y="152.0439">GO</text></g><!--MD5=[6018eaad65737e15cd910899bc5da8be]
+entity STOP--><g id="elem_STOP"><rect fill="#FF0000" height="39.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="58" x="84" y="126"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="38" x="94" y="152.0439">STOP</text></g><!--MD5=[dad6df58737413e746dce8552b7b1e5b]
+entity WAIT--><g id="elem_WAIT"><rect fill="#FFA500" height="39.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="54" x="177" y="126"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="187" y="152.0439">WAIT</text></g><!--MD5=[2fc36391183bb19e130eee54e0780e81]
+reverse link JunctionOr to GO--><g id="link_JunctionOr_GO"><path d="M64.9317,48.214 C57.5152,67.55 43.6701,103.646 35.1999,125.729 " fill="none" id="JunctionOr-backto-GO" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="66.8432,43.23,59.8862,50.2013,65.0531,47.8986,67.3559,53.0655,66.8432,43.23" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[75771c242973a4b730787a5ce6ef8afa]
+reverse link JunctionOr to STOP--><g id="link_JunctionOr_STOP"><path d="M75.189,48.214 C82.782,67.55 96.9568,103.646 105.6287,125.729 " fill="none" id="JunctionOr-backto-STOP" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="73.232,43.23,72.7975,53.0693,75.0592,47.8842,80.2442,50.1458,73.232,43.23" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d3c26ba8eab388a3f18581abe3a8be4e]
+link STOP to JunctionAnd--><g id="link_STOP_JunctionAnd"><path d="M120.634,165.075 C129.71,187.162 144.629,223.4639 152.593,242.8428 " fill="none" id="STOP-to-JunctionAnd" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="154.644,247.834,154.9222,237.9891,152.7432,243.2094,147.5228,241.0304,154.644,247.834" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0b69e434637757b8f378cccdf5fdc925]
+link WAIT to JunctionAnd--><g id="link_WAIT_JunctionAnd"><path d="M196.197,165.075 C186.918,187.162 171.668,223.4639 163.527,242.8428 " fill="none" id="WAIT-to-JunctionAnd" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="161.43,247.834,168.6042,241.0864,163.367,243.2244,161.2289,237.9872,161.43,247.834" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[bfb2fc9c8a74edeee19acf5da3a0b0d7]
+@startuml
+!define Junction_Or circle #black
+!define Junction_And circle #whitesmoke
+
+Junction_And JunctionAnd
+Junction_Or JunctionOr
+
+archimate #Technology "VPN Server" as vpnServerA <<technology-device>>
+
+rectangle GO #lightgreen
+rectangle STOP #red
+rectangle WAIT #orange
+GO -up-> JunctionOr
+STOP -up-> JunctionOr
+STOP -down-> JunctionAnd
+WAIT -down-> JunctionAnd
+@enduml
+
+@startuml
+
+circle #whitesmoke JunctionAnd
+circle #black JunctionOr
+
+archimate #Technology "VPN Server" as vpnServerA <<technology-device>>
+
+rectangle GO #lightgreen
+rectangle STOP #red
+rectangle WAIT #orange
+GO -up-> JunctionOr
+STOP -up-> JunctionOr
+STOP -down-> JunctionAnd
+WAIT -down-> JunctionAnd
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

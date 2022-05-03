@@ -1,0 +1,7 @@
+When you define methods or fields, you can use characters to define the visibility of the corresponding item:
+
+Character	Visibility
+-			private
+#			protected
+~			package private
++			public

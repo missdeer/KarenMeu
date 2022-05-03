@@ -1,0 +1,7 @@
+Sometimes, you will get some very large image files.
+
+You can use the "page (hpages)x(vpages)" command to split the generated image into several files :
+
+hpages is a number that indicated the number of horizontal pages, and vpages is a number that indicated the number of vertical pages.
+
+You can also use some specific skinparam settings to put borders on splitted pages (see example). 

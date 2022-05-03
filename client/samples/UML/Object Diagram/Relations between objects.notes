@@ -1,0 +1,13 @@
+Relations between objects are defined using the following symbols :
+
+Extension	<|--	
+Composition	*--	
+Aggregation	o--	
+
+It is possible to replace -- by .. to have a dotted line.
+
+Knowing those rules, it is possible to draw the following drawings.
+
+It is possible a add a label on the relation, using " : ", followed by the text of the label.
+
+For cardinality, you can use double-quotes "" on each side of the relation. 

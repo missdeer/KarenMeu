@@ -1,0 +1,5 @@
+Interface can be defined using the () symbol (because this looks like a circle).
+
+You can also use the interface keyword to defines an interface. And you can define an alias, using the as keyword. This alias will be used latter, when defining relations.
+
+We will see latter that interface definition is optional. 

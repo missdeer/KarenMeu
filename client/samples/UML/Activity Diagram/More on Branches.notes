@@ -1,0 +1,3 @@
+By default, a branch is connected to the last defined activity, but it is possible to override this and to define a link with the if keywords.
+
+It is also possible to nest branches. 

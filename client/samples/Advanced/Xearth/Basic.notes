@@ -1,0 +1,1 @@
+XEarth is a unix utility written in 1993 by Kirk Lauritz Johnson. It has been ported to Java by Christian Treber. So it was easy to integrate it into PlantUML, even if it won't probably help for documentation. 

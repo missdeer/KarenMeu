@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="220px" preserveAspectRatio="none" style="width:416px;height:220px;background:#FFFFFF;" version="1.1" viewBox="0 0 416 220" width="416px" zoomAndPan="magnify"><defs/><g><!--MD5=[455beceef6f1269795dd52bc15d5237a]
+entity AA--><g id="elem_AA"><rect fill="#F1F1F1" height="68.2402" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="107" x="7" y="7"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="94" y="12"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="92" y="14"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="92" y="18"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="67" x="22" y="43.0439">«static lib»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="18" x="46.5" y="62.1641">AA</text></g><!--MD5=[c88bc3321355bf5bf45d2a7b231643f2]
+entity BB--><g id="elem_BB"><rect fill="#F1F1F1" height="68.2402" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="149.5" y="7"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="247.5" y="12"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="245.5" y="14"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="245.5" y="18"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="78" x="164.5" y="43.0439">«shared lib»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="18" x="194.5" y="62.1641">BB</text></g><!--MD5=[36dc586d67e0f1d076b0ce70c9875d3e]
+entity CC--><g id="elem_CC"><rect fill="#F1F1F1" height="68.2402" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="107" x="303" y="7"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="390" y="12"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="388" y="14"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="388" y="18"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="67" x="318" y="43.0439">«static lib»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="20" x="341.5" y="62.1641">CC</text></g><!--MD5=[08697289393bf1a7348b8f8a03e04260]
+entity node1--><g id="elem_node1"><polygon fill="#FFFF00" points="20.5,154.5,30.5,144.5,100.5,144.5,100.5,183.6201,90.5,193.6201,20.5,193.6201,20.5,154.5" style="stroke:#008000;stroke-width:0.5;"/><line style="stroke:#008000;stroke-width:0.5;" x1="90.5" x2="100.5" y1="154.5" y2="144.5"/><line style="stroke:#008000;stroke-width:0.5;" x1="20.5" x2="90.5" y1="154.5" y2="154.5"/><line style="stroke:#008000;stroke-width:0.5;" x1="90.5" x2="90.5" y1="154.5" y2="193.6201"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="40" x="35.5" y="180.5439">node1</text></g><!--MD5=[d4bb979d073464a818782f912af531d1]
+entity node2--><g id="elem_node2"><polygon fill="#FFFF00" points="135.5,145,145.5,135,271.5,135,271.5,193.2402,261.5,203.2402,135.5,203.2402,135.5,145" style="stroke:#008000;stroke-width:0.5;"/><line style="stroke:#008000;stroke-width:0.5;" x1="261.5" x2="271.5" y1="145" y2="135"/><line style="stroke:#008000;stroke-width:0.5;" x1="135.5" x2="261.5" y1="145" y2="145"/><line style="stroke:#008000;stroke-width:0.5;" x1="261.5" x2="261.5" y1="145" y2="203.2402"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="96" x="150.5" y="171.0439">«shared node»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="40" x="178.5" y="190.1641">node2</text></g><!--MD5=[6f9d8e1d6f8fed1334eabf4f71d6adb2]
+entity Production--><g id="elem_Production"><path d="M306.5,155 C306.5,145 350.5,145 350.5,145 C350.5,145 394.5,145 394.5,155 L394.5,183.1201 C394.5,193.1201 350.5,193.1201 350.5,193.1201 C350.5,193.1201 306.5,193.1201 306.5,183.1201 L306.5,155 " fill="#00FFFF" style="stroke:#181818;stroke-width:0.5;"/><path d="M306.5,155 C306.5,165 350.5,165 350.5,165 C350.5,165 394.5,165 394.5,155 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="316.5" y="185.0439">Production</text></g><!--MD5=[0a7e2be345e95036288fdeb8d91e500f]
+@startuml
+[AA] <<static lib>>
+[BB] <<shared lib>>
+[CC] <<static lib>>
+
+node node1
+node node2 <<shared node>>
+database Production
+
+skinparam component {
+    backgroundColor<<static lib>> DarkKhaki
+    backgroundColor<<shared lib>> Green
+}
+
+skinparam node {
+	borderColor Green
+	backgroundColor Yellow
+	backgroundColor<<shared node>> Magenta
+}
+skinparam databaseBackgroundColor Aqua
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

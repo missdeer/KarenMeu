@@ -1,0 +1,5 @@
+Just after the opening bracket, you can use a character to define if you want to draw lines or columns of the grid :
+#	To display all vertical and horizontal lines
+!	To display all vertical lines
+-	To display all horizontal lines
++	To display external lines

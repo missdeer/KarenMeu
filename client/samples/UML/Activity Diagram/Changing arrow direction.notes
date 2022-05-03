@@ -1,0 +1,6 @@
+You can use -> for horizontal arrows. It is possible to force arrow's direction using the following syntax:
+
+* -down-> (default arrow)
+* -right-> or ->
+* -left->
+* -up->

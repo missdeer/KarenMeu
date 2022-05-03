@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="227px" preserveAspectRatio="none" style="width:159px;height:227px;background:#FFFFFF;" version="1.1" viewBox="0 0 159 227" width="159px" zoomAndPan="magnify"><defs/><g><!--MD5=[aa7f586532e18719e6cefa70fc650583]
+class Object--><g id="elem_Object"><rect fill="#F1F1F1" height="67.1201" id="Object" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="73" x="43" y="7"/><ellipse cx="58" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M56.5781,28.3594 Q54.7188,28.3594 53.625,26.9688 Q52.5313,25.5781 52.5313,22.5938 Q52.5313,20.0625 53.6953,18.4063 Q54.8594,16.75 56.8438,16.75 Q58.3125,16.75 58.7813,16.875 Q59.25,17.0781 59.25,17.0781 Q59.25,17.0781 59.25,17.0078 Q59.25,16.9375 59.8594,16.0156 L60.9063,19.6719 L59.5781,20.0781 Q59.1094,18.5313 58.4453,17.8672 Q57.7813,17.2031 56.7188,17.2031 Q56.3281,17.2031 55.5625,18.7344 Q54.7969,20.2656 54.7969,22.5156 Q54.7969,24.9844 55.4609,26.375 Q56.125,27.7656 56.6563,27.7656 Q57.7188,27.7656 58.4766,27 Q59.2344,26.2344 59.5781,24.5781 L60.9063,25.1719 Q60.5781,26.5781 59.6797,27.4688 Q58.7813,28.3594 56.5781,28.3594 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="72" y="29.4839">Object</text><line style="stroke:#181818;stroke-width:0.5;" x1="44" x2="115" y1="39" y2="39"/><line style="stroke:#181818;stroke-width:0.5;" x1="44" x2="115" y1="47" y2="47"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52" x="49" y="67.0439">equals()</text></g><!--MD5=[ab8871ed637f40707b866ba6597734bc]
+class ArrayList--><g id="elem_ArrayList"><rect fill="#F1F1F1" height="86.2402" id="ArrayList" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="145" x="7" y="134"/><ellipse cx="47.65" cy="150" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M46.2281,155.3594 Q44.3688,155.3594 43.275,153.9688 Q42.1813,152.5781 42.1813,149.5938 Q42.1813,147.0625 43.3453,145.4063 Q44.5094,143.75 46.4938,143.75 Q47.9625,143.75 48.4313,143.875 Q48.9,144.0781 48.9,144.0781 Q48.9,144.0781 48.9,144.0078 Q48.9,143.9375 49.5094,143.0156 L50.5563,146.6719 L49.2281,147.0781 Q48.7594,145.5313 48.0953,144.8672 Q47.4313,144.2031 46.3688,144.2031 Q45.9781,144.2031 45.2125,145.7344 Q44.4469,147.2656 44.4469,149.5156 Q44.4469,151.9844 45.1109,153.375 Q45.775,154.7656 46.3063,154.7656 Q47.3688,154.7656 48.1266,154 Q48.8844,153.2344 49.2281,151.5781 L50.5563,152.1719 Q50.2281,153.5781 49.3297,154.4688 Q48.4313,155.3594 46.2281,155.3594 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="67.35" y="156.4839">ArrayList</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="151" y1="166" y2="166"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="13" y="186.0439">Object[] elementData</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="151" y1="193.1201" y2="193.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="13" y="213.1641">size()</text></g><!--MD5=[78ed3d54c6ad96fb6434a4e45aa4b5f0]
+reverse link Object to ArrayList--><g id="link_Object_ArrayList"><path codeLine="1" d="M79.5,94.348 C79.5,107.444 79.5,121.3051 79.5,133.8153 " fill="none" id="Object-backto-ArrayList" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="72.5001,94.059,79.5,74.059,86.5001,94.059,72.5001,94.059" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[8202aca8cd3239039eb6f8c63fdcb711]
+@startuml
+Object <|- - ArrayList
+
+Object : equals()
+ArrayList : Object[] elementData
+ArrayList : size()
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

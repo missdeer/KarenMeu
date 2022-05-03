@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="405px" preserveAspectRatio="none" style="width:174px;height:405px;background:#FFFFFF;" version="1.1" viewBox="0 0 174 405" width="174px" zoomAndPan="magnify"><defs/><g><ellipse cx="125.5" cy="16" fill="#222222" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="82" x="84.5" y="67"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62" x="94.5" y="90.752">check input</text><g id="elem_#5"><polygon fill="#F1F1F1" points="125.5,144,137.5,156,125.5,168,113.5,156,125.5,144" style="stroke:#181818;stroke-width:0.5;"/></g><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="109" x="7" y="225"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="89" x="17" y="248.752">turn on verbosity</text><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="97" x="71" y="302"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="77" x="81" y="325.752">run command</text><ellipse cx="119.5" cy="389" fill="none" rx="10" ry="10" style="stroke:#222222;stroke-width:1.0;"/><ellipse cx="120" cy="389.5" fill="#222222" rx="6" ry="6" style="stroke:none;stroke-width:1.0;"/><!--MD5=[eb90ff9c43641cc7c29d99fb64d57cdc]
+link start to check input--><g id="link_start_check input"><path d="M125.5,26.036 C125.5,35.162 125.5,49.614 125.5,61.804 " fill="none" id="start-to-check input" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="125.5,66.868,129.5,57.868,125.5,61.868,121.5,57.868,125.5,66.868" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[44bd2d6afbe53fad73d33a3d9d2bfe90]
+link check input to #5--><g id="link_check input_#5"><path d="M125.5,103.056 C125.5,113.931 125.5,127.944 125.5,138.674 " fill="none" id="check input-to-#5" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="125.5,143.952,129.5,134.952,125.5,138.952,121.5,134.952,125.5,143.952" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="77" x="32.6188" y="133.4991">input is verbose</text></g><!--MD5=[aac7cfdf42e91711d93d5f06f07200f6]
+link #5 to turn on verbosity--><g id="link_#5_turn on verbosity"><path d="M120.69,163.389 C111.663,175.377 91.8144,201.739 77.5906,220.63 " fill="none" id="#5-to-turn on verbosity" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="74.467,224.778,83.0757,219.9936,77.4742,220.7834,76.6844,215.182,74.467,224.778" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="20" x="102.5" y="201.606">Yes</text></g><!--MD5=[1fe1b39f49f3288bc6a244459c8a9914]
+link turn on verbosity to run command--><g id="link_turn on verbosity_run command"><path d="M74.6611,261.019 C83.0554,271.873 94.0038,286.031 102.9806,297.639 " fill="none" id="turn on verbosity-to-run command" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="106.1902,301.7891,103.849,292.2226,103.1316,297.8337,97.5204,297.1164,106.1902,301.7891" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[8626d9f93c521440c892df639d01dd1a]
+link #5 to run command--><g id="link_#5_run command"><path d="M126.719,167.034 C127.393,173.095 128.161,180.979 128.5,188 C130.345,226.211 125.904,270.617 122.625,296.677 " fill="none" id="#5-to-run command" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="121.987,301.6372,127.1011,293.2202,122.624,296.6779,119.1663,292.2009,121.987,301.6372" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f9695b454b34c3c5f1c507ef7945a2d8]
+link run command to end--><g id="link_run command_end"><path d="M119.5,338.2542 C119.5,349.2159 119.5,363.2398 119.5,373.6017 " fill="none" id="run command-to-end" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="119.5,378.6509,123.5,369.6509,119.5,373.6509,115.5,369.6509,119.5,378.6509" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[8bf5b09ef69048048c533c3715fda057]
+@startuml
+(*)  - -> "check input"
+If "input is verbose" then
+- -> [Yes] "turn on verbosity"
+- -> "run command"
+else
+- -> "run command"
+Endif
+- ->(*)
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

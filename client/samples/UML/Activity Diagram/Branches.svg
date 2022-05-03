@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="363px" preserveAspectRatio="none" style="width:223px;height:363px;background:#FFFFFF;" version="1.1" viewBox="0 0 223 363" width="223px" zoomAndPan="magnify"><defs/><g><ellipse cx="96" cy="16" fill="#222222" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="84" x="54" y="67"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="64" x="64" y="90.752">Initialization</text><g id="elem_#5"><polygon fill="#F1F1F1" points="96,144,108,156,96,168,84,156,96,144" style="stroke:#181818;stroke-width:0.5;"/></g><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="91" x="9.5" y="244"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="71" x="19.5" y="267.752">Some Activity</text><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="100" x="7" y="321"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="80" x="17" y="344.752">Another activity</text><ellipse cx="138" cy="339" fill="none" rx="10" ry="10" style="stroke:#222222;stroke-width:1.0;"/><ellipse cx="138.5" cy="339.5" fill="#222222" rx="6" ry="6" style="stroke:none;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="107" x="85.5" y="188"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="87" x="95.5" y="211.752">Something else</text><!--MD5=[0f23ef6eb4b1b6c14a21cac5fe254886]
+link start to Initialization--><g id="link_start_Initialization"><path d="M96,26.036 C96,35.162 96,49.614 96,61.804 " fill="none" id="start-to-Initialization" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="96,66.868,100,57.868,96,61.868,92,57.868,96,66.868" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f970159557ceffc4559f9ee4f3f46fdb]
+link Initialization to #5--><g id="link_Initialization_#5"><path d="M96,103.056 C96,113.931 96,127.944 96,138.674 " fill="none" id="Initialization-to-#5" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="96,143.952,100,134.952,96,138.952,92,134.952,96,143.952" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="51" x="34.4813" y="133.4991">Some Test</text></g><!--MD5=[4ed0b6951f0c4ed119b5825e34e72fa8]
+link #5 to Some Activity--><g id="link_#5_Some Activity"><path d="M88.0203,160.171 C77.9554,164.661 61.1062,173.923 54,188 C46.0973,203.655 47.029,223.712 49.5541,238.839 " fill="none" id="#5-to-Some Activity" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="50.4611,243.767,52.7674,234.192,49.5568,238.8495,44.8993,235.6389,50.4611,243.767" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="19" x="55" y="211.106">true</text></g><!--MD5=[97e0d588043c3fbfd2b2e59d052c508a]
+link Some Activity to Another activity--><g id="link_Some Activity_Another activity"><path d="M55.4538,280.0187 C55.7357,290.5877 56.101,304.2879 56.4058,315.7171 " fill="none" id="Some Activity-to-Another activity" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="56.541,320.7891,60.2997,311.6857,56.4077,315.7909,52.3025,311.8989,56.541,320.7891" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[14518ea1a79a02d11bb86953a1b562de]
+link Another activity to end--><g id="link_Another activity_end"><path d="M107.309,339 C112.464,339 117.619,339 122.774,339 " fill="none" id="Another activity-to-end" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="127.929,339,118.929,335,122.929,339,118.929,343,127.929,339" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d73beba7fcb51f91ef1c24c353dc0a65]
+link #5 to Something else--><g id="link_#5_Something else"><path d="M101.2726,162.886 C106.0522,168.221 113.39,176.412 120.328,184.156 " fill="none" id="#5-to-Something else" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="123.688,187.908,120.661,178.5359,120.3513,184.1842,114.7029,183.8746,123.688,187.908" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="24" x="113.191" y="171.679">false</text></g><!--MD5=[6008a548d6e19d71c4fdb729e150d919]
+link Something else to end--><g id="link_Something else_end"><path d="M138.869,224.126 C138.669,250.304 138.292,299.7729 138.107,323.9649 " fill="none" id="Something else-to-end" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="138.069,328.9991,142.1378,320.03,138.1073,323.9992,134.138,319.9687,138.069,328.9991" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="75" x="140" y="267.106">Ending process</text></g><!--MD5=[529bba3698516359bf6c31156b1664d5]
+@startuml
+(*) - -> "Initialization"
+
+if "Some Test" then
+  - ->[true] "Some Activity"
+  - -> "Another activity"
+  -right-> (*)
+else
+  ->[false] "Something else"
+  - ->[Ending process] (*)
+endif
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

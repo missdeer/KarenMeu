@@ -1,0 +1,3 @@
+Usually, a spotted character (C, I, E or A) is used for classes, interface, enum and abstract classes.
+
+But you can define your own spot for a class when you define the stereotype, adding a single character and a color, like in this example: 

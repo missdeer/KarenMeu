@@ -1,0 +1,4 @@
+@startuml
+usecase foo as "this is ∞ long"
+usecase bar as "this is also <U+221E> long"
+@enduml

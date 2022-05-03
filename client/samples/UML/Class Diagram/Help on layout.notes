@@ -1,0 +1,5 @@
+Sometimes, the default layout is not perfect...
+
+You can use together keyword to group some classes together : the layout engine will try to group them (as if they were in the same package).
+
+You can also use hidden links to force the layout. 

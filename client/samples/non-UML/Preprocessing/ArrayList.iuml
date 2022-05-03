@@ -1,0 +1,7 @@
+class ArrayList
+!ifdef SHOW_METHODS
+class ArrayList {
+  int size()
+  void clear()
+}
+!endif

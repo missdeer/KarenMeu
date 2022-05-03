@@ -1,0 +1,1 @@
+You can define concurrent state into a composite state using either -- or || symbol as separator. 

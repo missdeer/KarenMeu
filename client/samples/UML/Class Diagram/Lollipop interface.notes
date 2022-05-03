@@ -1,0 +1,5 @@
+You can also define lollipops interface on classes, using the following syntax:
+
+* bar ()- foo
+* bar ()-- foo
+* foo -() bar

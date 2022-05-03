@@ -1,0 +1,8 @@
+A window must start and end with brackets. You can then define:
+
+* Button using [ and ].
+* Radio button using ( and ).
+* Checkbox using [ and ].
+* User text area using ". 
+
+The goal of this tool is to discuss about simple and sample windows. 

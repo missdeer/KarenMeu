@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="241px" preserveAspectRatio="none" style="width:450px;height:241px;background:#FFFFFF;" version="1.1" viewBox="0 0 450 241" width="450px" zoomAndPan="magnify"><defs/><g><ellipse cx="141" cy="20" fill="#222222" rx="10" ry="10" style="stroke:#222222;stroke-width:1.0;"/><path d="M10,54.3171 L10,82.0715 L109,82.0715 L109,64.3171 L99,54.3171 L10,54.3171 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M99,54.3171 L99,64.3171 L109,64.3171 L99,54.3171 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="78" x="16" y="74.2151">This is a note</text><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="44" x="119" y="50"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="24" x="129" y="73.752">foo1</text><path d="M183,96.3887 L183,138.4211 L163,142.4211 L183,146.4211 L183,188.4536 A0,0 0 0 0 183,188.4536 L438,188.4536 A0,0 0 0 0 438,188.4536 L438,106.3887 L428,96.3887 L183,96.3887 A0,0 0 0 0 183,96.3887 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M428,96.3887 L428,106.3887 L438,106.3887 L428,96.3887 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="129" x="189" y="116.2866">This note is on several</text><text fill="#000000" font-family="sans-serif" font-size="13" font-style="italic" lengthAdjust="spacing" textLength="27" x="189" y="134.041">lines</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="46" x="220" y="134.041">and can</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="42" x="189" y="151.7954">contain</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="36" x="235" y="151.7954">HTML</text><line style="stroke:#181818;stroke-width:1.0;" x1="183" x2="438" y1="159.6519" y2="159.6519"/><line style="stroke:#181818;stroke-width:1.0;" x1="183" x2="438" y1="161.6519" y2="161.6519"/><ellipse cx="194.5" cy="175.9536" fill="#000000" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:0.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="108" x="202" y="180.5972">Calling the method</text><text fill="#000000" font-family="monospace" font-size="13" lengthAdjust="spacing" textLength="35" x="314" y="179.5498">foo()</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="70" x="353" y="180.5972">is prohibited</text><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="44" x="119" y="124.2268"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="24" x="129" y="147.9788">foo2</text><ellipse cx="141" cy="219.4536" rx="11" ry="11" style="stroke:#222222;stroke-width:1.0;fill:none;"/><ellipse cx="141" cy="219.4536" fill="#222222" rx="6" ry="6" style="stroke:#111111;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="141" x2="141" y1="30" y2="50"/><polygon fill="#181818" points="137,40,141,50,145,40,141,44" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="141" x2="141" y1="86.3887" y2="124.2268"/><polygon fill="#181818" points="137,114.2268,141,124.2268,145,114.2268,141,118.2268" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="141" x2="141" y1="160.6155" y2="208.4536"/><polygon fill="#181818" points="137,198.4536,141,208.4536,145,198.4536,141,202.4536" style="stroke:#181818;stroke-width:1.0;"/><!--MD5=[1c19120de8ab1463d4b61da89f25dd25]
+@startuml
+
+start
+:foo1;
+floating note left: This is a note
+:foo2;
+note right
+  This note is on several
+  //lines// and can
+  contain <b>HTML</b>
+  ====
+  * Calling the method ""foo()"" is prohibited
+end note
+stop
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

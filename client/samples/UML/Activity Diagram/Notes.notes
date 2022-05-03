@@ -1,0 +1,5 @@
+You can add notes on a activity using the commands note left, note right, note top or note bottom, just after the description of the activity you want to note.
+
+If you want to put a note on the starting point, define the note at the very beginning of the diagram description.
+
+You can also have a note on several lines, using the endnote keywords. 

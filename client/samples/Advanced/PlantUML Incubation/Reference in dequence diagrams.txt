@@ -1,0 +1,13 @@
+@startuml
+Dummy -> Alice : foo1
+ref over Alice, Dummy : [[http://www.google.com]] Foo2
+
+Alice -> Bob : hello
+
+ref over Alice, Bob
+  [[http://www.google.com]]
+  this is a
+  reference over
+  Alice and Bob
+end
+@enduml

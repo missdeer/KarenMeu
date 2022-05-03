@@ -1,0 +1,7 @@
+Relations between classes are defined using the following symbols :
+
+Extension	<|-- extension symbol
+Composition	*--	composition symbol
+Aggregation	o--	aggregation symbol
+
+It is possible to replace -- by .. to have a dotted line. 

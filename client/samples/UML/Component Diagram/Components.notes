@@ -1,0 +1,3 @@
+Components must be bracketed.
+
+You can also use the component keyword to defines a component. And you can define an alias, using the as keyword. This alias will be used latter, when defining relations. 

@@ -1,0 +1,3 @@
+You can define static or abstract methods or fields using the {static} or {abstract} modifier.
+
+These modifiers can be used at the start or at the end of the line. You can also use {classifier} instead of {static}. 

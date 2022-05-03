@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="170px" preserveAspectRatio="none" style="width:439px;height:170px;background:#FFFFFF;" version="1.1" viewBox="0 0 439 170" width="439px" zoomAndPan="magnify"><defs/><g><g id="elem_Object01"><rect fill="#F1F1F1" height="39.1201" style="stroke:#181818;stroke-width:0.5;" width="71" x="7" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="14" y="25.0439">Object01</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="77" y1="30.1201" y2="30.1201"/></g><g id="elem_Object02"><rect fill="#F1F1F1" height="39.1201" style="stroke:#181818;stroke-width:0.5;" width="71" x="7" y="125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="14" y="143.0439">Object02</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="77" y1="148.1201" y2="148.1201"/></g><g id="elem_Object03"><rect fill="#F1F1F1" height="39.1201" style="stroke:#181818;stroke-width:0.5;" width="71" x="113" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="120" y="25.0439">Object03</text><line style="stroke:#181818;stroke-width:0.5;" x1="114" x2="183" y1="30.1201" y2="30.1201"/></g><g id="elem_Object04"><rect fill="#F1F1F1" height="39.1201" style="stroke:#181818;stroke-width:0.5;" width="71" x="113" y="125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="120" y="143.0439">Object04</text><line style="stroke:#181818;stroke-width:0.5;" x1="114" x2="183" y1="148.1201" y2="148.1201"/></g><g id="elem_Object05"><rect fill="#F1F1F1" height="39.1201" style="stroke:#181818;stroke-width:0.5;" width="71" x="219" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="226" y="25.0439">Object05</text><line style="stroke:#181818;stroke-width:0.5;" x1="220" x2="289" y1="30.1201" y2="30.1201"/></g><g id="elem_Object06"><rect fill="#F1F1F1" height="39.1201" style="stroke:#181818;stroke-width:0.5;" width="71" x="219" y="125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="226" y="143.0439">Object06</text><line style="stroke:#181818;stroke-width:0.5;" x1="220" x2="289" y1="148.1201" y2="148.1201"/></g><g id="elem_Object07"><rect fill="#F1F1F1" height="39.1201" style="stroke:#181818;stroke-width:0.5;" width="71" x="325" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="332" y="25.0439">Object07</text><line style="stroke:#181818;stroke-width:0.5;" x1="326" x2="395" y1="30.1201" y2="30.1201"/></g><g id="elem_Object08"><rect fill="#F1F1F1" height="39.1201" style="stroke:#181818;stroke-width:0.5;" width="71" x="325" y="125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="332" y="143.0439">Object08</text><line style="stroke:#181818;stroke-width:0.5;" x1="326" x2="395" y1="148.1201" y2="148.1201"/></g><!--MD5=[507381b32e0a49e7abc7210229a8ee60]
+reverse link Object01 to Object02--><g id="link_Object01_Object02"><path codeLine="10" d="M42.5,66.4346 C42.5,86.1599 42.5,109.1954 42.5,124.9088 " fill="none" id="Object01-backto-Object02" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="35.5001,66.1374,42.5,46.137,49.5001,66.1374,35.5001,66.1374" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d21c20b16b3ff22abbc2c8af84931b60]
+reverse link Object03 to Object04--><g id="link_Object03_Object04"><path codeLine="11" d="M148.5,59.289 C148.5,80.351 148.5,107.2523 148.5,124.9088 " fill="none" id="Object03-backto-Object04" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="148.5,46.137,144.5,52.137,148.5,58.137,152.5,52.137,148.5,46.137" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[ade907096602ef8d7fe19339b46bff0e]
+reverse link Object05 to Object06--><g id="link_Object05_Object06"><path codeLine="12" d="M254.5,59.289 C254.5,80.351 254.5,107.2523 254.5,124.9088 " fill="none" id="Object05-backto-Object06" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="254.5,46.137,250.5,52.137,254.5,58.137,258.5,52.137,254.5,46.137" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="246.4281" y="114.3009">4</text></g><!--MD5=[17488501a7bed181c851ca0c615fb4f2]
+link Object07 to Object08--><g id="link_Object07_Object08"><path codeLine="13" d="M360.5,46.137 C360.5,67.7843 360.5,103.2817 360.5,124.9088 " fill="none" id="Object07-Object08" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="70" x="361.5" y="91.8979">some labels</text></g><!--MD5=[c7043948dbceca06e588cc77988db43c]
+@startuml
+object Object01
+object Object02
+object Object03
+object Object04
+object Object05
+object Object06
+object Object07
+object Object08
+
+Object01 <|- - Object02
+Object03 *- - Object04
+Object05 o- - "4" Object06
+Object07 .. Object08 : some labels
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

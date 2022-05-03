@@ -1,0 +1,6 @@
+@startuml
+xearth(300,300)
+starsP = true
+starFrequency = 0.025
+bigStars = 20
+@enduml

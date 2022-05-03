@@ -1,0 +1,11 @@
+You can define constant using the !define directive. As in C language, a constant name can only use alphanumeric and underscore characters, and cannot start with a digit. 
+
+ Of course, you can use the !include directive to define all your constants in a single file that you include in your diagram.
+
+Constant can be undefined with the !undef XXX directive.
+
+You can also specify constants within the command line, with the -D flags.
+
+java -jar plantuml.jar -DTITLE="My title" atest1.txt
+
+Note that the -D flag must be put after the "-jar plantuml.jar" section. 

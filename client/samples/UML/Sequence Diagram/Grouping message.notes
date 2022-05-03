@@ -1,0 +1,15 @@
+ It is possible to group messages together using the following keywords:
+
+* alt/else
+* opt
+* loop
+* par
+* break
+* critical
+* group, followed by a text to be displayed
+
+It is possible a add a text that will be displayed into the header (except for group).
+
+The end keyword is used to close the group.
+
+Note that it is possible to nest groups. 

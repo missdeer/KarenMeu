@@ -1,0 +1,3 @@
+It is possible a add a label on the relation, using ":", followed by the text of the label.
+
+For cardinality, you can use double-quotes "" on each side of the relation. 

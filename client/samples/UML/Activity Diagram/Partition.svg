@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="615px" preserveAspectRatio="none" style="width:319px;height:615px;background:#FFFFFF;" version="1.1" viewBox="0 0 319 615" width="319px" zoomAndPan="magnify"><defs/><g><!--MD5=[4a813ad39bc04da289496f99803e834d]
+cluster Conductor--><g id="cluster_Conductor"><polygon points="16,6,96,6,103,31.1201,174,31.1201,174,418,16,418,16,6" style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="16" x2="103" y1="31.1201" y2="31.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="74" x="20" y="24.0439">Conductor</text></g><!--MD5=[c02177e7a6990d66e4cd25d23a209821]
+cluster Audience--><g id="cluster_Audience"><polygon fill="#87CEFA" points="198,204,270,204,277,229.1201,302,229.1201,302,294,198,294,198,204" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="198" x2="277" y1="229.1201" y2="229.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="66" x="202" y="222.0439">Audience</text></g><!--MD5=[e57b8dbe184645b3d1e1bfc026aae8e5]
+cluster Orchestra--><g id="cluster_Orchestra"><polygon fill="#CCCCEE" points="53,442,129,442,136,467.1201,169,467.1201,169,608,53,608,53,442" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="53" x2="136" y1="467.1201" y2="467.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="70" x="57" y="460.0439">Orchestra</text></g><ellipse cx="95" cy="54" fill="#222222" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="126" x="32" y="104"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="106" x="42" y="127.752">Climbs on Platform</text><rect fill="#555555" height="8" style="stroke:none;stroke-width:1.0;" width="80" x="74" y="180"/><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="51" x="88.5" y="242"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="31" x="98.5" y="265.752">Bows</text><rect fill="#555555" height="8" style="stroke:none;stroke-width:1.0;" width="80" x="74" y="318"/><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="93" x="64.5" y="366"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="74.5" y="389.752">WavesArmes</text><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="72" x="214" y="242"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="52" x="224" y="265.752">Applauds</text><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="84" x="69" y="480"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="64" x="79" y="503.752">Introduction</text><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="80" x="71" y="556"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="60" x="81" y="579.752">Play music</text><!--MD5=[849c6e42b1bf196375e3c04d769d73f7]
+link start to Climbs on Platform--><g id="link_start_Climbs on Platform"><path d="M95,64.177 C95,73.023 95,86.76 95,98.511 " fill="none" id="start-to-Climbs on Platform" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="95,103.745,99,94.745,95,98.745,91,94.745,95,103.745" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0e9b11d2740e56c189749770539cdd9d]
+link Climbs on Platform to S1--><g id="link_Climbs on Platform_S1"><path d="M100.394,140.033 C103.959,151.293 108.481,165.571 111.308,174.498 " fill="none" id="Climbs on Platform-to-S1" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="112.962,179.721,114.0594,169.9335,111.4531,174.9541,106.4324,172.3478,112.962,179.721" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[cf319800d22d6c2360adc378c2eae2e2]
+link S1 to Bows--><g id="link_S1_Bows"><path d="M114,188.18 C114,196.453 114,219.224 114,236.733 " fill="none" id="S1-to-Bows" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="114,241.976,118,232.976,114,236.976,110,232.976,114,241.976" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9936e995706d00f3567e06ee876ba492]
+link S1 to Applauds--><g id="link_S1_Applauds"><path d="M144.133,188.034 C153.061,189.661 162.671,192.161 171,196 C193.324,206.29 214.878,224.191 229.817,238.287 " fill="none" id="S1-to-Applauds" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="233.469,241.782,229.7337,232.669,229.8572,238.3245,224.2016,238.4479,233.469,241.782" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d3499ec33ef7151056f290236fd8ffee]
+link Bows to S2--><g id="link_Bows_S2"><path d="M114,278.033 C114,289.293 114,303.571 114,312.498 " fill="none" id="Bows-to-S2" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="114,317.721,118,308.721,114,312.721,110,308.721,114,317.721" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9c9180c4e72fb687a9f792a9783ea13b]
+link S2 to WavesArmes--><g id="link_S2_WavesArmes"><path d="M113.839,326.226 C113.514,332.715 112.758,347.841 112.108,360.849 " fill="none" id="S2-to-WavesArmes" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="111.855,365.892,116.2974,357.102,112.1035,360.8982,108.3073,356.7043,111.855,365.892" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a351a989f5a5cd5531d9156c797a9f24]
+link Applauds to S2--><g id="link_Applauds_S2"><path d="M219.773,278.108 C205.276,285.943 187.508,295.016 171,302 C157.337,307.78 141.263,313.002 129.674,316.502 " fill="none" id="Applauds-to-S2" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="124.689,317.985,134.456,319.2521,129.4813,316.559,132.1744,311.5843,124.689,317.985" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[eeb5e01b7a70c72fb8f6ee9c7a2b8daf]
+link WavesArmes to Introduction--><g id="link_WavesArmes_Introduction"><path d="M111,402.01 C111,421.417 111,453.225 111,474.626 " fill="none" id="WavesArmes-to-Introduction" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="111,479.83,115,470.83,111,474.83,107,470.83,111,479.83" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[048564e51c263f6942559181109202a1]
+link Introduction to Play music--><g id="link_Introduction_Play music"><path d="M111,516.163 C111,526.4368 111,539.6075 111,550.6831 " fill="none" id="Introduction-to-Play music" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="111,555.93,115,546.93,111,550.93,107,546.93,111,555.93" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[5d730ba76ecae8c6fe7791ff817a6e8e]
+@startuml
+
+partition Conductor {
+  (*) - -> "Climbs on Platform"
+  - -> === S1 ===
+  - -> Bows
+}
+
+partition Audience #LightSkyBlue {
+  === S1 === - -> Applauds
+}
+
+partition Conductor {
+  Bows - -> === S2 ===
+  - -> WavesArmes
+  Applauds - -> === S2 ===
+}
+
+partition Orchestra #CCCCEE {
+  WavesArmes - -> Introduction
+  - -> "Play music"
+}
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

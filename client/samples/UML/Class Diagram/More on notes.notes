@@ -1,0 +1,14 @@
+It is also possible to use few html tags like :
+
+* <b>
+* <u>
+* <i>
+* <s>, <del>, <strike>
+* <font color="#AAAAAA"> or <font color="colorName">
+* <color:#AAAAAA> or <color:colorName>
+* <size:nn> to change font size
+* <img src="file"> or <img:file> : the file must be accessible by the filesystem
+
+You can also have a note on several lines.
+
+You can also define a note on the last defined class using note left, note right, note top, note bottom. 

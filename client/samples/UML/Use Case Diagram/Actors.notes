@@ -1,0 +1,5 @@
+Actor are enclosed using between two points.
+
+You can also use the actor keyword to define an actor. And you can define an alias, using the as keyword. This alias will be used latter, when defining relations.
+
+We will see later that the actor definitions are optional. 

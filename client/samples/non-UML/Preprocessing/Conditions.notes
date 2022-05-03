@@ -1,0 +1,5 @@
+You can use !ifdef XXX and !endif directives to have conditionnal drawings.
+
+The lines between those two directives will be included only if the constant after the !ifdef directive has been defined before.
+
+You can also provide a !else part which will be included if the constant has not been defined. 

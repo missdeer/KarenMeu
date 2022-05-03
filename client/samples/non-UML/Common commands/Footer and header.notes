@@ -1,0 +1,7 @@
+You can use the commands header or footer to add a footer or a header on any generated diagram.
+
+You can optionally specify if you want a center, left or right footer/header, by adding a keyword.
+
+As for title, it is possible to define a header or a footer on several lines.
+
+It is also possible to put some HTML into the header or footer. 

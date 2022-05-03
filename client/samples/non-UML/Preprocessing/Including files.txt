@@ -1,0 +1,4 @@
+@startuml
+!include List.iuml
+List <|.. ArrayList
+@enduml

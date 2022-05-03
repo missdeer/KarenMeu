@@ -21,6 +21,14 @@
 
 int main(int argc, char *argv[])
 {
+#if !defined(Q_OS_WIN)
+    // increase the number of file that can be opened.
+    struct rlimit rl;
+    getrlimit(RLIMIT_NOFILE, &rl);
+
+    rl.rlim_cur = qMin((rlim_t)OPEN_MAX, rl.rlim_max);
+    setrlimit(RLIMIT_NOFILE, &rl);
+#endif
     qputenv("QT_ENABLE_GLYPH_CACHE_WORKAROUND", "1");
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

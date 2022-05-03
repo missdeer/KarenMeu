@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="84px" preserveAspectRatio="none" style="width:295px;height:84px;background:#FFFFFF;" version="1.1" viewBox="0 0 295 84" width="295px" zoomAndPan="magnify"><defs/><g><!--MD5=[d10371c429a20e8e62c953c705282488]
+class Foo--><g id="elem_Foo"><rect codeLine="2" fill="#F1F1F1" height="67.1201" id="Foo" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="163" x="7" y="10"/><ellipse cx="22" cy="26" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M20.5781,31.3594 Q18.7188,31.3594 17.625,29.9688 Q16.5313,28.5781 16.5313,25.5938 Q16.5313,23.0625 17.6953,21.4063 Q18.8594,19.75 20.8438,19.75 Q22.3125,19.75 22.7813,19.875 Q23.25,20.0781 23.25,20.0781 Q23.25,20.0781 23.25,20.0078 Q23.25,19.9375 23.8594,19.0156 L24.9063,22.6719 L23.5781,23.0781 Q23.1094,21.5313 22.4453,20.8672 Q21.7813,20.2031 20.7188,20.2031 Q20.3281,20.2031 19.5625,21.7344 Q18.7969,23.2656 18.7969,25.5156 Q18.7969,27.9844 19.4609,29.375 Q20.125,30.7656 20.6563,30.7656 Q21.7188,30.7656 22.4766,30 Q23.2344,29.2344 23.5781,27.5781 L24.9063,28.1719 Q24.5781,29.5781 23.6797,30.4688 Q22.7813,31.3594 20.5781,31.3594 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="25" x="36" y="32.4839">Foo</text><rect fill="#FFFFFF" height="18.3887" style="stroke:#000000;stroke-width:1.0;stroke-dasharray:2.0,2.0;" width="104" x="69" y="7"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="102" x="70" y="21.752">? extends Element</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="169" y1="42" y2="42"/><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="169" y1="50" y2="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="53" x="13" y="70.0439">int size()</text></g><!--MD5=[95174e42ee347a14b6cb78d6855f19b5]
+class Element--><g id="elem_Element"><rect fill="#F1F1F1" height="48" id="Element" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="83" x="205" y="19.5"/><ellipse cx="220" cy="35.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M218.5781,40.8594 Q216.7188,40.8594 215.625,39.4688 Q214.5313,38.0781 214.5313,35.0938 Q214.5313,32.5625 215.6953,30.9063 Q216.8594,29.25 218.8438,29.25 Q220.3125,29.25 220.7813,29.375 Q221.25,29.5781 221.25,29.5781 Q221.25,29.5781 221.25,29.5078 Q221.25,29.4375 221.8594,28.5156 L222.9063,32.1719 L221.5781,32.5781 Q221.1094,31.0313 220.4453,30.3672 Q219.7813,29.7031 218.7188,29.7031 Q218.3281,29.7031 217.5625,31.2344 Q216.7969,32.7656 216.7969,35.0156 Q216.7969,37.4844 217.4609,38.875 Q218.125,40.2656 218.6563,40.2656 Q219.7188,40.2656 220.4766,39.5 Q221.2344,38.7344 221.5781,37.0781 L222.9063,37.6719 Q222.5781,39.0781 221.6797,39.9688 Q220.7813,40.8594 218.5781,40.8594 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="51" x="234" y="41.9839">Element</text><line style="stroke:#181818;stroke-width:0.5;" x1="206" x2="287" y1="51.5" y2="51.5"/><line style="stroke:#181818;stroke-width:0.5;" x1="206" x2="287" y1="59.5" y2="59.5"/></g><!--MD5=[1d3323b51c92ad2499afdb564f3833d0]
+reverse link Foo to Element--><g id="link_Foo_Element"><path codeLine="5" d="M183.499,43.5 C190.605,43.5 197.71,43.5 204.816,43.5 " fill="none" id="Foo-backto-Element" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="170.277,43.5,176.277,47.5,182.277,43.5,176.277,39.5,170.277,43.5" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0bbfdb4056f472b1692b789ba3c8244b]
+@startuml
+
+class Foo<? extends Element> {
+  int size()
+}
+Foo *- Element
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

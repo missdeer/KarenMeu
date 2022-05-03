@@ -1,0 +1,7 @@
+The activate and deactivate are used to denote participant activation.
+
+Once a participant is activated, its lifeline appears.
+
+The activate and deactivate apply on the previous message.
+
+The destroy denote the end of the lifeline of a participant. 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="243px" preserveAspectRatio="none" style="width:194px;height:243px;background:#FFFFFF;" version="1.1" viewBox="0 0 194 243" width="194px" zoomAndPan="magnify"><defs/><g><rect height="90.4805" style="stroke:#00000000;stroke-width:1.0;fill:none;" width="176" x="5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="166" x="10" y="26.0439">Example of simple table</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="4" x="34" y="47.1641"> </text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="35" x="55" y="47.1641">table</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="50" x="98" y="47.1641">header</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="8" x="38" y="66.2842">a</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="35" x="55" y="66.2842">table</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="26" x="98" y="66.2842">row</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="9" x="38" y="85.4043">b</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="35" x="55" y="85.4043">table</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="26" x="98" y="85.4043">row</text><line style="stroke:#000000;stroke-width:1.0;" x1="34" x2="152" y1="31.1201" y2="31.1201"/><line style="stroke:#000000;stroke-width:1.0;" x1="34" x2="152" y1="50.2402" y2="50.2402"/><line style="stroke:#000000;stroke-width:1.0;" x1="34" x2="152" y1="69.3604" y2="69.3604"/><line style="stroke:#000000;stroke-width:1.0;" x1="34" x2="152" y1="88.4805" y2="88.4805"/><line style="stroke:#000000;stroke-width:1.0;" x1="34" x2="34" y1="31.1201" y2="88.4805"/><line style="stroke:#000000;stroke-width:1.0;" x1="51" x2="51" y1="31.1201" y2="88.4805"/><line style="stroke:#000000;stroke-width:1.0;" x1="94" x2="94" y1="31.1201" y2="88.4805"/><line style="stroke:#000000;stroke-width:1.0;" x1="152" x2="152" y1="31.1201" y2="88.4805"/><ellipse cx="100" cy="117.4805" fill="#222222" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><g id="State1"><rect fill="#F1F1F1" height="50" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="61" x="69.5" y="187.4805"/><line style="stroke:#181818;stroke-width:0.5;" x1="69.5" x2="130.5" y1="216.6006" y2="216.6006"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="79.5" y="208.5244">State1</text></g><!--MD5=[60533a5dc91355c93bf187ba4549d745]
+link *start to State1--><g id="link_*start_State1"><path d="M100,127.7375 C100,140.3364 100,163.4614 100,182.2233 " fill="none" id="*start-to-State1" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="100,187.387,104,178.387,100,182.387,96,178.387,100,187.387" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[1e739bd084ba0661ea5753f5839ca4a8]
+@startuml
+skinparam titleFontSize 14
+title
+  Example of simple table
+  |= |= table |= header |
+  | a | table | row |
+  | b | table | row |
+end title
+[*] - -> State1
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

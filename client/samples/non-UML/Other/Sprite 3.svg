@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="140px" preserveAspectRatio="none" style="width:382px;height:140px;background:#FFFFFF;" version="1.1" viewBox="0 0 382 140" width="382px" zoomAndPan="magnify"><defs/><g><rect height="29.1201" style="stroke:#00000000;stroke-width:1.0;fill:none;" width="172" x="98" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="107" x="103" y="26.0439">Use of sprites (</text><image height="15" width="15" x="210" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAAbklEQVR42pWQ0Q3AIAgFWY9lHMZlGMZh7LPEhEIr9D7U8E6i0NyMwAyQtW0gIvEO2dgGqspNbr/WvY21b1pr3taYmQ+9kcLBgbAVe6Pi7cO7vf3Fwx41/tv4StGGuew6a97YegacNW+dRtpVJ3MBtOYRjfjPPZwAAAAASUVORK5CYII=" y="14.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="4" x="225" y="26.0439">,</text><image height="15" width="15" x="233" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAApElEQVR42o2S0Q2AIAxE2YkVWMFZWIFZWIEVWIEVWEEvPcWmInofRtp35ZLidqUQwr6Ue6OnzpvOOXvv8V3R4RLQTWRsk9nogeu9t9a2S6h70SQJ2kTp4X8W8fI7iR5Pga610mBnj9yAgIKoolIKI9kkg6ZSSkWEIlpnEk0zzJgaY2SFYWBweh3sQZw6jpPc+hIcyZkduecKGGm1HUP/elWfz/AArCcL3hMnR0gAAAAASUVORK5CYII=" y="14.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="17" x="248" y="26.0439">...)</text><!--MD5=[57528f4c716a2f9f06b37d90a80dda88]
+class Example--><g id="elem_Example"><rect codeLine="20" fill="#F1F1F1" height="86.2402" id="Example" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="166" x="209" y="47.1201"/><ellipse cx="261.25" cy="63.1201" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M259.8281,68.4795 Q257.9688,68.4795 256.875,67.0889 Q255.7813,65.6982 255.7813,62.7139 Q255.7813,60.1826 256.9453,58.5264 Q258.1094,56.8701 260.0938,56.8701 Q261.5625,56.8701 262.0313,56.9951 Q262.5,57.1982 262.5,57.1982 Q262.5,57.1982 262.5,57.1279 Q262.5,57.0576 263.1094,56.1357 L264.1563,59.792 L262.8281,60.1982 Q262.3594,58.6514 261.6953,57.9873 Q261.0313,57.3232 259.9688,57.3232 Q259.5781,57.3232 258.8125,58.8545 Q258.0469,60.3857 258.0469,62.6357 Q258.0469,65.1045 258.7109,66.4951 Q259.375,67.8857 259.9063,67.8857 Q260.9688,67.8857 261.7266,67.1201 Q262.4844,66.3545 262.8281,64.6982 L264.1563,65.292 Q263.8281,66.6982 262.9297,67.5889 Q262.0313,68.4795 259.8281,68.4795 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="53" x="281.75" y="69.604">Example</text><line style="stroke:#181818;stroke-width:0.5;" x1="210" x2="374" y1="79.1201" y2="79.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="215" y="99.1641">Can have some bug :</text><image height="15" width="15" x="354" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAApUlEQVR42o2SUQ3AIAxEsYQEJEwKEpCCBCQgAQlImINdehtrOsZ2H8to35VLituVQgj7Uu6NnjpvOufsvcd3RYdLQDeRsU1moweu995a2y6h7kWTJGgTpYf/WcTL7yR6PAW61kqDnT1yAwIKoopKKYxkkwyaSikVEYponUk0zTBjaoyRFYaBwel1sAdx6jhOcutLcCRnduSeK2Ck1XYM/etVfT7DAyEI76NVd0Z2AAAAAElFTkSuQmCC" y="87.2402"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="215" y="118.2842">Click on</text><image height="14" width="15" x="269" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAIAAAB/6NG4AAAAsklEQVR42o2RbRXDIAwAsYIEJEQCEiZhEiZhEiqhEpCABCTMwY5kzVtG97b70QfkIB9Ne2RT7gc35aqMMRJGa43A4wuXg7/sWmsphe+0yYtNulMVA4/ob5tw711EKDrY7E9VQsGm4tV2FSiaFoNNr957VUQxFVhPm4p90uuM/X6wTa2Rj1TT5gF/ldOUEtm7Ys15VcG2oaLaTwYW8sbLNpV9ztl6sGlIZNqcenGOLJAT+wk203AjEFn5TQAAAABJRU5ErkJggg==" y="107.3604"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46" x="288" y="118.2842">to save</text><line style="stroke:#181818;stroke-width:0.5;" x1="210" x2="374" y1="125.3604" y2="125.3604"/></g><g id="elem_GMN3"><path d="M6,76.1201 L6,103.8745 A0,0 0 0 0 6,103.8745 L174,103.8745 A0,0 0 0 0 174,103.8745 L174,94.1201 L208.595,90.1201 L174,86.1201 L174,86.1201 L164,76.1201 L6,76.1201 A0,0 0 0 0 6,76.1201 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M164,76.1201 L164,86.1201 L174,86.1201 L164,76.1201 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="61" x="12" y="96.0181">The printer</text><image height="15" width="15" x="77" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAAgUlEQVR42mP49/8uBN26vQ8NwaXgiAFZNbLEtu3zMPUwIEsjS0CUAgWRxXGqxiqOrhpITppUD0G5efHoqiHSnp4OeMwGygLVABkMQIpIs4Ei6KrxuBtdNS6EohozXrAi0lUDvUKkaqBKkGriESi8gRQ81HAhoBpQeENCg6CpkJABABz2+TD3TdFUAAAAAElFTkSuQmCC" y="83.8745"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="63" x="96" y="96.0181">is available</text></g><!--MD5=[07742d33b196ecc6e120ce1831894945]
+@startuml
+sprite $bug [15x15/16z] PKzR2i0m2BFMi15p__FEjQEqB1z27aeqCqixa8S4OT7C53cKpsHpaYPDJY_12MHM-BLRyywPhrrlw3qumqNThmXgd1TOterAZmOW8sgiJafogofWRwtV3nCF
+sprite $printer [15x15/8z] NOtH3W0W208HxFz_kMAhj7lHWpa1XC716sz0Pq4MVPEWfBHIuxP3L6kbTcizR8tAhzaqFvXwvFfPEqm0
+sprite $disk {
+  444445566677881
+  436000000009991
+  43600000000ACA1
+  53700000001A7A1
+  53700000012B8A1
+  53800000123B8A1
+  63800001233C9A1
+  634999AABBC99B1
+  744566778899AB1
+  7456AAAAA99AAB1
+  8566AFC228AABB1
+  8567AC8118BBBB1
+  867BD4433BBBBB1
+  39AAAAABBBBBBC1
+}
+title Use of sprites (<$printer>, <$bug>...)
+class Example {
+    Can have some bug : <$bug>
+    Click on <$disk> to save
+}
+note left : The printer <$printer> is available
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

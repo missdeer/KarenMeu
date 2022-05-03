@@ -1,0 +1,7 @@
+// you may need to change render engine to Graphviz dot/neato/fdp ...
+digraph {
+    a -> b;
+    b -> c;
+    c -> d;
+    d -> a;
+}

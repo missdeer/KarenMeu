@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="194px" preserveAspectRatio="none" style="width:407px;height:194px;background:#FFFFFF;" version="1.1" viewBox="0 0 407 194" width="407px" zoomAndPan="magnify"><defs/><g><ellipse cx="142" cy="16" fill="#222222" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><rect fill="#F1F1F1" height="36.3887" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="91" x="96.5" y="66"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="71" x="106.5" y="89.752">Some Activity</text><g id="elem_GN5"><path d="M208,70 L208,80 L187.563,84 L208,88 L208,97.7544 A0,0 0 0 0 208,97.7544 L400,97.7544 A0,0 0 0 0 400,97.7544 L400,80 L390,70 L208,70 A0,0 0 0 0 208,70 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M390,70 L390,80 L400,80 L390,70 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="171" x="214" y="89.8979">This activity has to be defined</text></g><ellipse cx="142" cy="165" fill="none" rx="10" ry="10" style="stroke:#222222;stroke-width:1.0;"/><ellipse cx="142.5" cy="165.5" fill="#222222" rx="6" ry="6" style="stroke:none;stroke-width:1.0;"/><g id="elem_GMN10"><path d="M6,142 L6,187.5088 A0,0 0 0 0 6,187.5088 L112,187.5088 A0,0 0 0 0 112,187.5088 L112,169 L131.747,165 L112,161 L112,152 L102,142 L6,142 A0,0 0 0 0 6,142 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M102,142 L102,152 L112,152 L102,142 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="85" x="12" y="161.8979">This note is on</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="71" x="12" y="179.6523">several lines</text></g><!--MD5=[c001d0e714f70fdc2d37e2dac9c0844b]
+link start to Some Activity--><g id="link_start_Some Activity"><path d="M142,26.177 C142,35.023 142,48.76 142,60.511 " fill="none" id="start-to-Some Activity" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="142,65.745,146,56.745,142,60.745,138,56.745,142,65.745" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9af8d2d3116ae902ec25b82b159335d9]
+link Some Activity to end--><g id="link_Some Activity_end"><path d="M142,102.1418 C142,116.2777 142,136.1098 142,149.4746 " fill="none" id="Some Activity-to-end" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="142,154.771,146,145.771,142,149.771,138,145.771,142,154.771" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[af771ee98e09eb15331e00c35777fb8b]
+@startuml
+
+(*) - -> "Some Activity"
+note right: This activity has to be defined
+"Some Activity" - -> (*)
+note left
+ This note is on
+ several lines
+end note
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

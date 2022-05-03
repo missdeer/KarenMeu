@@ -1,0 +1,5 @@
+You can define a partition using the partition keyword, and optionally declare a background color for your partition (Using a html color code or name)
+
+When you declare activities, they are automatically put in the last used partition.
+
+You can close the partition definition using a closing bracket }. 

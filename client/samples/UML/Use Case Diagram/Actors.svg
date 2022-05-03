@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="248px" preserveAspectRatio="none" style="width:163px;height:248px;background:#FFFFFF;" version="1.1" viewBox="0 0 163 248" width="163px" zoomAndPan="magnify"><defs/><g><!--MD5=[0154ce9715a30d7d18fef37a629d6312]
+entity First Actor--><g id="elem_First Actor"><ellipse cx="38.5" cy="23.5" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M38.5,31.5 L38.5,58.5 M25.5,39.5 L51.5,39.5 M38.5,58.5 L25.5,73.5 M38.5,58.5 L51.5,73.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="6" y="91.0439">First Actor</text></g><!--MD5=[5ec2bc3286d2ec187d74869b8a89494d]
+entity Men2--><g id="elem_Men2"><ellipse cx="131.5" cy="14" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M131.5,22 L131.5,49 M118.5,30 L144.5,30 M131.5,49 L118.5,64 M131.5,49 L144.5,64 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="106.5" y="81.5439">Another</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="106.5" y="100.6641">actor</text></g><!--MD5=[79172a5b8cf4708b70f8421824327b2e]
+entity Men3--><g id="elem_Men3"><ellipse cx="38.5" cy="172" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M38.5,180 L38.5,207 M25.5,188 L51.5,188 M38.5,207 L25.5,222 M38.5,207 L51.5,222 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="35" x="21" y="239.5439">Men3</text></g><!--MD5=[200996eba66f061e110bcd98da79c008]
+entity Men4--><g id="elem_Men4"><ellipse cx="122.5" cy="172" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M122.5,180 L122.5,207 M109.5,188 L135.5,188 M122.5,207 L109.5,222 M122.5,207 L135.5,222 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="63" x="91" y="239.5439">Last actor</text></g><!--MD5=[cd71be7bbdca086cd4f21949cb035a13]
+@startuml
+
+:First Actor:
+:Another\nactor: as Men2  
+actor Men3
+actor :Last actor: as Men4
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

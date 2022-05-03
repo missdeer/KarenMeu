@@ -1,0 +1,5 @@
+The newpage keyword is used to split a diagram into several images.
+
+You can put a title for the new page just after the newpage keyword.
+
+This is very handy with Word to print long diagram on several pages. 

@@ -1,0 +1,8 @@
+You can change arrow style by several ways:
+
+* add a final x to denote a lost message
+* use \ or / instead of < or > to have only the bottom or top part of the arrow
+* repeat the arrow head (for example, >> or //) head to have a thin drawing
+* use -- instead of - to have a dotted arrow
+* add a final "o" at arrow head
+* use bidirectional arrow 

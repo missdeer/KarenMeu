@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="357px" preserveAspectRatio="none" style="width:342px;height:357px;background:#FFFFFF;" version="1.1" viewBox="0 0 342 357" width="342px" zoomAndPan="magnify"><defs/><g><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="132" x2="132" y1="39.1201" y2="318.9097"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="183" x2="183" y1="39.1201" y2="318.9097"/><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="44" x="110" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="117" y="28.0439">Alice</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="44" x="110" y="317.9097"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="117" y="340.9536">Alice</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="39" x="164" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="25" x="171" y="28.0439">Bob</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="39" x="164" y="317.9097"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="25" x="171" y="340.9536">Bob</text><path d="M5,54.1201 L5,99.1201 L127,99.1201 L127,64.1201 L117,54.1201 L5,54.1201 " fill="#00FFFF" style="stroke:#181818;stroke-width:0.5;"/><path d="M117,54.1201 L117,64.1201 L127,64.1201 L117,54.1201 " fill="#00FFFF" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="97" x="11" y="74.0181">This is displayed</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="68" x="11" y="91.7725">left of Alice.</text><path d="M137,109.6289 L137,136.6289 L335,136.6289 L335,119.6289 L325,109.6289 L137,109.6289 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M325,109.6289 L325,119.6289 L335,119.6289 L325,109.6289 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="177" x="143" y="129.5269">This is displayed right of Alice.</text><path d="M41,147.3833 L41,174.3833 L223,174.3833 L223,157.3833 L213,147.3833 L41,147.3833 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M213,147.3833 L213,157.3833 L223,157.3833 L213,147.3833 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="161" x="47" y="167.2813">This is displayed over Alice.</text><path d="M89,185.1377 L89,230.1377 L226,230.1377 L226,195.1377 L216,185.1377 L89,185.1377 " fill="#FFAAAA" style="stroke:#181818;stroke-width:0.5;"/><path d="M216,185.1377 L216,195.1377 L226,195.1377 L216,185.1377 " fill="#FFAAAA" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="97" x="95" y="205.0356">This is displayed</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="112" x="99" y="222.79">over Bob and Alice.</text><path d="M93,240.6465 L93,303.6465 L221,303.6465 L221,250.6465 L211,240.6465 L93,240.6465 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M211,240.6465 L211,250.6465 L221,250.6465 L211,240.6465 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="107" x="99" y="260.5444">This is yet another</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="63" x="99" y="278.2988">example of</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="68" x="99" y="296.0532">a long note.</text><!--MD5=[53e8fa717a77a0730057213d4cfadb31]
+@startuml
+participant Alice
+participant Bob
+note left of Alice #aqua
+	This is displayed 
+	left of Alice. 
+end note
+ 
+note right of Alice: This is displayed right of Alice.
+
+note over Alice: This is displayed over Alice.
+
+note over Alice, Bob #FFAAAA: This is displayed\n over Bob and Alice.
+
+note over Bob, Alice
+	This is yet another
+	example of
+	a long note.
+end note
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

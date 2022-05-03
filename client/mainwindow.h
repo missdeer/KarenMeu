@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QList>
 #include <QMainWindow>
 #include <QNetworkAccessManager>
 
@@ -10,6 +11,7 @@ namespace Ui
 }
 class MarkdownView;
 class PreviewThemeEditor;
+class PlantUMLSourceEditor;
 class CustomPreviewThemeEditWidget;
 class YoudaoDict;
 class TranslateHelperPage;
@@ -25,6 +27,18 @@ QT_FORWARD_DECLARE_CLASS(QPlainTextEdit);
 QT_FORWARD_DECLARE_CLASS(QFileSystemModel);
 QT_FORWARD_DECLARE_CLASS(QCompleter);
 QT_FORWARD_DECLARE_CLASS(QTimer);
+QT_FORWARD_DECLARE_CLASS(QSignalMapper);
+QT_FORWARD_DECLARE_CLASS(QListWidget);
+QT_FORWARD_DECLARE_CLASS(QToolBox);
+QT_FORWARD_DECLARE_CLASS(QListWidgetItem);
+QT_FORWARD_DECLARE_CLASS(QTabWidget);
+
+struct SampleResult
+{
+    QString              samplePath;
+    QToolBox            *sampleToolBox;
+    QList<QListWidget *> sampleWidgets;
+};
 
 class MainWindow : public QMainWindow
 {
@@ -66,6 +80,12 @@ private slots:
     void onNewFromTemplateTriggered();
     void onDocumentModified();
     void onWebBrowserSelectionChangedTimeout();
+    void onSampleItemDoubleClicked(QListWidgetItem *item);
+    void onSampleResultFocus();
+    void onSampleItemInsert(QWidget *widget);
+    void onSampleItemSelectionChanged();
+    void onCurrentSampleResultChanged(int index);
+    void onSampleResultDockLocationChanged(Qt::DockWidgetArea area);
 
     void on_actionGoogle_triggered();
 
@@ -132,6 +152,9 @@ private:
     TranslateOutputWidget *       m_deepLTranslateEditor;
     QPlainTextEdit *              m_youdaoDictionaryEditor;
     PreviewThemeEditor *          m_previewHTMLEditor;
+    PlantUMLSourceEditor         *m_sampleSourcePreview;
+    QTabWidget                   *m_tabWidgetSampleResult;
+    QList<SampleResult *>         m_sampleResults;
     CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;
     QList<QToolBar *>             m_visibleToolbars;
     YoudaoDict *                  m_youdaoDict;
@@ -139,6 +162,7 @@ private:
     QCompleter *                  m_urlCompleter {nullptr};
     QTimer *                      m_webPageSelectionChangedTimer {nullptr};
     TemplateManager *             m_templateManager;
+    QSignalMapper                *m_sampleInsertSignalMapper;
     QAction *                     recentFileActs[MaxRecentFiles];
     QAction *                     recentWorkspaceActs[MaxRecentFiles];
     QList<QAction *>              m_newFromTemplateActions;
@@ -166,6 +190,10 @@ private:
     void               updateWindowTitle();
     FindReplaceDialog *getFindReplaceDialog();
     void               setupWebBrowserPane();
+    void               reloadSamples(SampleResult *sr);
+    void               insertSampleSource(const QString &code);
+    void               focusSampleResult();
+    QListWidget       *newSampleListWidget(const QSize &icon_size, QWidget *parent);
 };
 
 #endif // MAINWINDOW_H

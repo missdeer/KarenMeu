@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="233px" preserveAspectRatio="none" style="width:353px;height:233px;background:#FFFFFF;" version="1.1" viewBox="0 0 353 233" width="353px" zoomAndPan="magnify"><defs/><g><g id="elem_UC1"><ellipse cx="173.3947" cy="113.4435" fill="#F1F1F1" rx="166.3947" ry="106.4435" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="146.1447" y="50.567">You can use</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="231" x="70.1447" y="69.6871">several lines to define your usecase.</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="185" x="93.1447" y="88.8073">You can also use separators.</text><line style="stroke:#181818;stroke-width:1.0;" x1="11.449" x2="335.3403" y1="91.8834" y2="91.8834"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="205" x="83.1447" y="111.9274">Several separators are possible.</text><line style="stroke:#181818;stroke-width:1.0;" x1="8.2272" x2="338.5621" y1="119.0035" y2="119.0035"/><line style="stroke:#181818;stroke-width:1.0;" x1="8.4202" x2="338.3691" y1="121.0035" y2="121.0035"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144" x="113.6447" y="139.0475">And you can add titles:</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="182" x="94.6447" y="181.2877">This allows large description.</text><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="21.6625" x2="138.3947" y1="155.6837" y2="155.6837"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="138.3947" y="161.6676">Conclusion</text><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:1.0,2.0;" x1="208.3947" x2="325.1268" y1="155.6837" y2="155.6837"/></g><!--MD5=[f69a41fccf1ccc568016a62fc590a21d]
+@startuml
+
+usecase UC1 as "You can use
+several lines to define your usecase.
+You can also use separators.
+- -
+Several separators are possible.
+==
+And you can add titles:
+..Conclusion..
+This allows large description."
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

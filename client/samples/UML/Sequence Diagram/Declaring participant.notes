@@ -1,0 +1,9 @@
+It is possible to change participant order using the participant keyword.
+
+It is also possible to use other keywords to declare a participant:
+
+* actor
+* boundary
+* control
+* entity
+* database

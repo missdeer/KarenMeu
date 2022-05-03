@@ -1,0 +1,63 @@
+@startuml
+sprite $bProcess jar:archimate/business-process
+sprite $aService jar:archimate/application-service
+sprite $aComponent jar:archimate/application-component
+
+rectangle "Handle claim"  as HC <<$bProcess>> #yellow 
+rectangle "Capture Information"  as CI <<$bProcess>> #yellow
+rectangle "Notify\nAdditional Stakeholders" as NAS <<$bProcess>> #yellow
+rectangle "Validate" as V <<$bProcess>> #yellow
+rectangle "Investigate" as I <<$bProcess>> #yellow
+rectangle "Pay" as P <<$bProcess>> #yellow
+
+HC *-down- CI
+HC *-down- NAS
+HC *-down- V
+HC *-down- I
+HC *-down- P
+
+
+CI -right->> NAS
+NAS -right->> V
+V -right->> I
+I -right->> P
+
+
+
+rectangle "Scanning" as scanning <<$aService>> #A9DCDF
+rectangle "Customer admnistration" as customerAdministration <<$aService>> #A9DCDF
+rectangle "Claims admnistration" as claimsAdministration <<$aService>> #A9DCDF
+rectangle Printing  <<$aService>> #A9DCDF
+rectangle Payment  <<$aService>> #A9DCDF
+
+scanning -up-> CI
+customerAdministration  -up-> CI
+claimsAdministration -up-> NAS
+claimsAdministration -up-> V
+claimsAdministration -up-> I
+Printing -up-> V
+Printing -up-> P
+Payment -up-> P
+
+rectangle "Document\nManagement\nSystem" as DMS <<$aComponent>> #A9DCDF
+rectangle "General\nCRM\nSystem" as CRM <<$aComponent>> #A9DCDF
+rectangle "Home & Away\nPolicy\nAdministration" as HAPA <<$aComponent>> #A9DCDF
+rectangle "Home & Away\nFinancial\nAdministration" as HFPA <<$aComponent>> #A9DCDF
+
+DMS .up.|> scanning
+DMS .up.|> Printing
+CRM .up.|> customerAdministration
+HAPA .up.|> claimsAdministration
+HFPA .up.|> Payment
+
+legend left
+Example from the "Archisurance case study" (OpenGroup).
+See 
+==
+<$bProcess> :business process
+==
+<$aService> : application service
+==
+<$aComponent> : appplication component
+endlegend
+@enduml

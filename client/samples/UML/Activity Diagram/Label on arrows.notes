@@ -1,0 +1,3 @@
+By default, an arrow starts at the last used activity.
+
+You can put a label on an arrow using brackets [ and ] just after the arrow definition. 

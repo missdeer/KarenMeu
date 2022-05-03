@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="250px" preserveAspectRatio="none" style="width:154px;height:250px;background:#FFFFFF;" version="1.1" viewBox="0 0 154 250" width="154px" zoomAndPan="magnify"><defs/><g><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="29" x2="29" y1="39.1201" y2="211.8921"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="100" x2="100" y1="39.1201" y2="211.8921"/><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="48" x="5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="12" y="28.0439">caller</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="48" x="5" y="210.8921"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="12" y="233.936">caller</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="54" x="73" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="40" x="80" y="28.0439">server</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="54" x="73" y="210.8921"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="40" x="80" y="233.936">server</text><polygon fill="#181818" points="88,68.8745,98,72.8745,88,76.8745,92,72.8745" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="29" x2="94" y1="72.8745" y2="72.8745"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="44" x="36" y="68.0181">conReq</text><polygon fill="#FEFFDD" points="17,85.8745,41,85.8745,51,97.8745,41,110.8745,17,110.8745,7,97.8745,17,85.8745" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="19" y="104.7725">idle</text><polygon fill="#181818" points="40,136.3833,30,140.3833,40,144.3833,36,140.3833" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="34" x2="99" y1="140.3833" y2="140.3833"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="47" x="46" y="135.5269">conConf</text><rect fill="#FEFFDD" height="43" style="stroke:#181818;stroke-width:0.5;" width="97" x="51" y="153.3833"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="89" x="55" y="172.2813">"r" as rectangle</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="88" x="55" y="190.0356">"h" as hexagon</text><!--MD5=[3b31fb3eb573c4c65e7568ab2ba27bd7]
+@startuml
+caller -> server : conReq
+hnote over caller : idle
+caller <- server : conConf
+rnote over server
+ "r" as rectangle
+ "h" as hexagon
+endrnote
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

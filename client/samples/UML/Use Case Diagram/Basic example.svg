@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="348px" preserveAspectRatio="none" style="width:280px;height:348px;background:#FFFFFF;" version="1.1" viewBox="0 0 280 348" width="280px" zoomAndPan="magnify"><defs/><g><!--MD5=[fee662a292a0353a69bd162820bae93b]
+entity User--><g id="elem_User"><ellipse cx="20.5" cy="154" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M20.5,162 L20.5,189 M7.5,170 L33.5,170 M20.5,189 L7.5,204 M20.5,189 L33.5,204 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="29" x="6" y="221.5439">User</text></g><g id="elem_Start"><ellipse cx="102.6985" cy="185.02" fill="#F1F1F1" rx="32.6985" ry="16.52" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="87.6985" y="189.5039">Start</text></g><g id="elem_Use the application"><ellipse cx="134.5469" cy="322.8094" fill="#F1F1F1" rx="84.5469" ry="19.3094" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="72.784" y="327.7801">Use the application</text></g><!--MD5=[9d80a031e6d406631f1782a5e0bf8feb]
+entity Main Admin--><g id="elem_Main Admin"><ellipse cx="205.5" cy="14" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M205.5,22 L205.5,49 M192.5,30 L218.5,30 M205.5,49 L192.5,64 M205.5,49 L218.5,64 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="169" y="81.5439">Main Admin</text></g><!--MD5=[f4b2be5085d6f52f3a0e36c62efcf3ad]
+link User to Start--><g id="link_User_Start"><path d="M35.2344,185 C45.0795,185 54.9247,185 64.7698,185 " fill="none" id="User-to-Start" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="69.9182,185,60.9182,181,64.9182,185,60.9182,189,69.9182,185" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d0b0c59f33bd08b0398cb18ab70d3659]
+link User to Use the application--><g id="link_User_Use the application"><path d="M35.1346,203.651 C40.5784,210.205 46.8136,217.699 52.5,224.5 C73.9988,250.2136 98.7783,279.6493 115.421,299.3904 " fill="none" id="User-to-Use the application" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="119.053,303.6973,116.3096,294.2382,115.83,299.8747,110.1935,299.3951,119.053,303.6973" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="75" x="94.5" y="270.3979">A small label</text></g><!--MD5=[84f62c86aeb01e7b0e45c962b4c6c2da]
+link Main Admin to Use the application--><g id="link_Main Admin_Use the application"><path d="M207.884,84.528 C209.255,131.364 206.613,211.788 178.5,273.5 C174.045,283.2801 166.88,292.4506 159.615,300.1281 " fill="none" id="Main Admin-to-Use the application" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="156.051,303.7732,165.2025,300.1332,159.546,300.1976,159.4816,294.5411,156.051,303.7732" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="38" x="221" y="173.3979">This is</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="65" x="207.5" y="191.1523">yet another</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="27" x="226.5" y="208.9067">label</text></g><!--MD5=[52f6d1fa1cd9a1729419e8d41a1c8964]
+@startuml
+
+User -> (Start)
+User - -> (Use the application) : A small label
+
+:Main Admin: - - -> (Use the application) : This is\nyet another\nlabel
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

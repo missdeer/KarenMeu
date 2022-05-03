@@ -1,0 +1,3 @@
+It is possible to draw a box around some participants, using box and end box commands.
+
+You can add an optional title or a optional background color, after the box keyword. 

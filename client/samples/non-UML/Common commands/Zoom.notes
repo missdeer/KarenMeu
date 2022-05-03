@@ -1,0 +1,12 @@
+ You can use the scale command to zoom the generated image.
+
+You can use either a number or a fraction to define the scale factor. You can also specify either width or height (in pixel). And you can also give both width and height : the image is scaled to fit inside the specified dimension. 
+
+* scale 1.5
+* scale 2/3
+* scale 200 width
+* scale 200 height
+* scale 200*100
+* scale max 300*200
+* scale max 1024 width
+* scale max 800 height

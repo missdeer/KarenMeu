@@ -1,0 +1,11 @@
+@startuml
+!define SEQUENCE (S,#aaaaaa) Database Sequence
+!define TABLE (T,#ffaaaa) Database Table
+
+class USER << TABLE >>
+class ACCOUNT << TABLE >>
+class UID << SEQUENCE >>
+
+USER "1" -- "*" ACCOUNT
+USER -> UID
+@enduml

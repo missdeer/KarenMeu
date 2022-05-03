@@ -1,0 +1,3 @@
+When you declare activities, you can span on several lines the description text. You can also add \n in the description.
+
+You can also give a short code to the activity with the as keyword. This code can be used latter in the diagram description. 

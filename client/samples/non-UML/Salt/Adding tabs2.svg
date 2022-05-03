@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="139px" preserveAspectRatio="none" style="width:264px;height:139px;background:#FFFFFF;" version="1.1" viewBox="0 0 264 139" width="264px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="44" x="6" y="21.752">General</text><line style="stroke:#000000;stroke-width:1.0;" x1="6" x2="64" y1="6" y2="6"/><line style="stroke:#000000;stroke-width:1.0;" x1="6" x2="6" y1="6" y2="27.3887"/><line style="stroke:#000000;stroke-width:1.0;" x1="6" x2="64" y1="27.3887" y2="27.3887"/><line style="stroke:#000000;stroke-width:1.0;" x1="64" x2="64" y1="27.3887" y2="37.3887"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="58" x="6" y="53.1406">Fullscreen</text><line style="stroke:#000000;stroke-width:1.0;" x1="6" x2="64" y1="37.3887" y2="37.3887"/><line style="stroke:#000000;stroke-width:1.0;" x1="6" x2="6" y1="37.3887" y2="58.7773"/><line style="stroke:#000000;stroke-width:1.0;" x1="6" x2="64" y1="58.7773" y2="58.7773"/><line style="stroke:#000000;stroke-width:1.0;" x1="64" x2="64" y1="58.7773" y2="68.7773"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="48" x="6" y="84.5293">Behavior</text><line style="stroke:#000000;stroke-width:1.0;" x1="6" x2="64" y1="68.7773" y2="68.7773"/><line style="stroke:#000000;stroke-width:1.0;" x1="6" x2="6" y1="68.7773" y2="90.166"/><line style="stroke:#000000;stroke-width:1.0;" x1="6" x2="64" y1="90.166" y2="90.166"/><line style="stroke:#000000;stroke-width:1.0;" x1="64" x2="64" y1="90.166" y2="100.166"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="37" x="6" y="115.918">Saving</text><line style="stroke:#000000;stroke-width:1.0;" x1="6" x2="64" y1="100.166" y2="100.166"/><line style="stroke:#000000;stroke-width:1.0;" x1="6" x2="6" y1="100.166" y2="121.5547"/><line style="stroke:#000000;stroke-width:1.0;" x1="6" x2="64" y1="121.5547" y2="121.5547"/><line style="stroke:#000000;stroke-width:1.0;" x1="64" x2="64" y1="121.5547" y2="131.5547"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="84" x="68" y="21.752">Open image in:</text><rect fill="#EEEEEE" height="19.3887" style="stroke:#000000;stroke-width:1.0;" width="95" x="154" y="8"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="66" x="156" y="23.752">Smart Mode</text><line style="stroke:#000000;stroke-width:1.0;" x1="238" x2="238" y1="8" y2="27.3887"/><polygon fill="#000000" points="241,14,247,14,244,22.3887" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="168" x="87" y="45.1406">Smooth images when zoomed</text><rect fill="none" height="10" style="stroke:#000000;stroke-width:1.5;" width="10" x="69" y="34.583"/><polygon fill="#000000" points="70,37.3887,73,40.3887,80,31.3887,73,38.3887" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="129" x="87" y="63.5293">Confirm image deletion</text><rect fill="none" height="10" style="stroke:#000000;stroke-width:1.5;" width="10" x="69" y="52.9717"/><polygon fill="#000000" points="70,55.7773,73,58.7773,80,49.7773,73,56.7773" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="117" x="87" y="81.918">Show hidden images</text><rect fill="none" height="10" style="stroke:#000000;stroke-width:1.5;" width="10" x="69" y="71.3604"/><rect fill="#EEEEEE" height="20.3887" rx="5" ry="5" style="stroke:#000000;stroke-width:2.5;" width="44" x="69.5" y="89.0547"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="33" x="75" y="104.8066">Close</text><line style="stroke:#000000;stroke-width:1.0;" x1="5" x2="65" y1="5" y2="5"/><line style="stroke:#000000;stroke-width:1.0;" x1="65" x2="257" y1="132.5547" y2="132.5547"/><line style="stroke:#000000;stroke-width:1.0;" x1="65" x2="257" y1="5" y2="5"/><line style="stroke:#000000;stroke-width:1.0;" x1="5" x2="65" y1="132.5547" y2="132.5547"/><line style="stroke:#000000;stroke-width:1.0;" x1="5" x2="5" y1="5" y2="132.5547"/><line style="stroke:#000000;stroke-width:1.0;" x1="257" x2="257" y1="5" y2="132.5547"/><!--MD5=[e026919a6207343bf30c6cd3e771c454]
+@startsalt
+{+
+{/ <b>General
+Fullscreen
+Behavior
+Saving } |
+{
+	{ Open image in: | ^Smart Mode^ }
+	[X] Smooth images when zoomed
+	[X] Confirm image deletion
+	[ ] Show hidden images 
+	[Close]
+}
+}
+@endsalt
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

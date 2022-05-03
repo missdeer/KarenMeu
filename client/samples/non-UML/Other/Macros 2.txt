@@ -1,0 +1,6 @@
+@startuml
+!define send(a,b,c) a->b : c
+
+send(Alice , Bob , Hello)
+send(Bob , Alice , ok)
+@enduml

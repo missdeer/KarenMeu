@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="283px" preserveAspectRatio="none" style="width:329px;height:283px;background:#FFFFFF;" version="1.1" viewBox="0 0 329 283" width="329px" zoomAndPan="magnify"><defs/><g><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="20" x2="20" y1="84.1201" y2="199.3833"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="189.5" x2="189.5" y1="84.1201" y2="199.3833"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="272.5" x2="272.5" y1="84.1201" y2="199.3833"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="25" x="5" y="81.0439">Bob</text><ellipse cx="20.5" cy="13.5" fill="#FF0000" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M20.5,21.5 L20.5,48.5 M7.5,29.5 L33.5,29.5 M20.5,48.5 L7.5,63.5 M20.5,48.5 L33.5,63.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="25" x="5" y="214.4272">Bob</text><ellipse cx="20.5" cy="226.0034" fill="#FF0000" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M20.5,234.0034 L20.5,261.0034 M7.5,242.0034 L33.5,242.0034 M20.5,261.0034 L7.5,276.0034 M20.5,261.0034 L33.5,276.0034 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="44" x="167.5" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="174.5" y="73.0439">Alice</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="44" x="167.5" y="198.3833"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="174.5" y="221.4272">Alice</text><rect fill="#99FF99" height="52.2402" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="102" x="221.5" y="30.8799"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="228.5" y="53.9238">I have a really</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="239.5" y="73.0439">long name</text><rect fill="#99FF99" height="52.2402" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="102" x="221.5" y="198.3833"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="228.5" y="221.4272">I have a really</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="239.5" y="240.5474">long name</text><polygon fill="#181818" points="31.5,113.8745,21.5,117.8745,31.5,121.8745,27.5,117.8745" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="25.5" x2="188.5" y1="117.8745" y2="117.8745"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="135" x="37.5" y="113.0181">Authentication Request</text><polygon fill="#181818" points="177.5,145.6289,187.5,149.6289,177.5,153.6289,181.5,149.6289" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="20.5" x2="183.5" y1="149.6289" y2="149.6289"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="145" x="27.5" y="144.7725">Authentication Response</text><polygon fill="#181818" points="260.5,177.3833,270.5,181.3833,260.5,185.3833,264.5,181.3833" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="20.5" x2="266.5" y1="181.3833" y2="181.3833"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="89" x="27.5" y="176.5269">Log transaction</text><!--MD5=[79d7f781250da9ff03a34d03df4e1a53]
+@startuml
+actor Bob #red
+' The only difference between actor
+'and participant is the drawing
+participant Alice
+participant "I have a really\nlong name" as L #99FF99
+/' You can also declare:
+   participant L as "I have a really\nlong name"  #99FF99
+  '/
+
+Alice->Bob: Authentication Request
+Bob->Alice: Authentication Response
+Bob->L: Log transaction
+@enduml
+
+@startuml
+actor Bob #red
+participant Alice
+participant "I have a really\nlong name" as L #99FF99
+
+Alice->Bob: Authentication Request
+Bob->Alice: Authentication Response
+Bob->L: Log transaction
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

@@ -1,0 +1,10 @@
+You can use -> for horizontal arrows. It is possible to force arrow's direction using the following syntax:
+
+* -down-> (default arrow)
+* -right-> or ->
+* -left->
+* -up->
+
+You can shorten the arrow by using only the first character of the direction (for example, -d- instead of -down-) or the two first characters (-do-).
+
+Please note that you should not abuse this functionality : Graphviz gives usually good results without tweaking. 

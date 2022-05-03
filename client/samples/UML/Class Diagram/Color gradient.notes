@@ -1,0 +1,11 @@
+It's possible to declare individual color for classes or note using the # notation.
+You can use either standard color name or RGB code.
+
+You can also use color gradient in background, with the following syntax: two colors names separated either by:
+
+* |,
+* /,
+* \,
+* or -
+
+depending the direction of the gradient. For example, you could have: 

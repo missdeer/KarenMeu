@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="145px" preserveAspectRatio="none" style="width:106px;height:145px;background:#FFFFFF;" version="1.1" viewBox="0 0 106 145" width="106px" zoomAndPan="magnify"><defs/><g><!--MD5=[c54ba4f61d01a424743e5a1fa0f9e38e]
+class Dummy--><g id="elem_Dummy"><rect codeLine="2" fill="#F1F1F1" height="124.4805" id="Dummy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="85" x="7" y="7"/><ellipse cx="24.7" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M23.2781,28.3594 Q21.4188,28.3594 20.325,26.9688 Q19.2313,25.5781 19.2313,22.5938 Q19.2313,20.0625 20.3953,18.4063 Q21.5594,16.75 23.5438,16.75 Q25.0125,16.75 25.4813,16.875 Q25.95,17.0781 25.95,17.0781 Q25.95,17.0781 25.95,17.0078 Q25.95,16.9375 26.5594,16.0156 L27.6063,19.6719 L26.2781,20.0781 Q25.8094,18.5313 25.1453,17.8672 Q24.4813,17.2031 23.4188,17.2031 Q23.0281,17.2031 22.2625,18.7344 Q21.4969,20.2656 21.4969,22.5156 Q21.4969,24.9844 22.1609,26.375 Q22.825,27.7656 23.3563,27.7656 Q24.4188,27.7656 25.1766,27 Q25.9344,26.2344 26.2781,24.5781 L27.6063,25.1719 Q27.2781,26.5781 26.3797,27.4688 Q25.4813,28.3594 23.2781,28.3594 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47" x="39.3" y="29.4839">Dummy</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="91" y1="39" y2="39"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="13" y="59.0439">-field1</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="13" y="78.1641">#field2</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="91" y1="85.2402" y2="85.2402"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="13" y="105.2842">~method1()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="13" y="124.4043">+method2()</text></g><!--MD5=[57d5dc728a0381c37a45e02aae1ca326]
+@startuml
+skinparam classAttributeIconSize 0
+class Dummy {
+ -field1
+ #field2
+ ~method1()
+ +method2()
+}
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

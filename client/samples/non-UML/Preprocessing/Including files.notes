@@ -1,0 +1,13 @@
+ Use the !include directive to include file in your diagram.
+
+Imagine you have the very same class that appears in many diagrams. Instead of duplicating the description of this class, you can define a file that contains the description. 
+
+ The file List.iuml can be included in many diagrams, and any modification in this file will change all diagrams that include it.
+
+A file can be only be included once. If you want to include several times the very same file, you have to use the directive !include_many instead of !include.
+
+You can also put several @startuml/@enduml text block in an included file and then specify which block you want to include adding !0 where 0 is the block number.
+
+For example, if you use !include foo.txt!1, the second @startuml/@enduml block within foo.txt will be included.
+
+You can also put an id to some @startuml/@enduml text block in an included file using @startuml(id=MY_OWN_ID) syntax and then include the block adding !MY_OWN_ID when including the file, so using something like !include foo.txt!MY_OWN_ID. 

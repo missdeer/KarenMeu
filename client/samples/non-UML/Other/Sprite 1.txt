@@ -1,0 +1,24 @@
+@startuml
+sprite $foo1 {
+FFFFFFFFFFFFFFF
+F0123456789ABCF
+F0123456789ABCF
+F0123456789ABCF
+F0123456789ABCF
+F0123456789ABCF
+F0123456789ABCF
+F0123456789ABCF
+F0123456789ABCF
+FFFFFFFFFFFFFFF
+}
+Alice -> Bob : Testing <$foo1>
+note right
+To encode sprite, you can use the command line like:
+<i><b>java -jar plantuml.jar -encodesprite 16z foo.png</b></i>
+where foo.png if the image file you want to use (it will
+be converted to gray automatically). After -encodesprite,
+you have to specify a format: 4, 8, 16, 4z, 8z or 16z.
+The number indicates the gray level and the optionnal z
+is used to enable compression in sprite definition.
+end note
+@enduml

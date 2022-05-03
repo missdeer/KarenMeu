@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="169px" preserveAspectRatio="none" style="width:221px;height:169px;background:#FFFFFF;" version="1.1" viewBox="0 0 221 169" width="221px" zoomAndPan="magnify"><defs/><g><rect height="29.1201" style="stroke:#00000000;stroke-width:1.0;fill:none;" width="124" x="47.75" y="10"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="114" x="52.75" y="31.0439">Footer removed</text><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="27" x2="27" y1="79.2402" y2="162.749"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="195.5" x2="195.5" y1="79.2402" y2="162.749"/><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="44" x="5" y="45.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="12" y="68.1641">Alice</text><rect fill="#E2E2F0" height="33.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="39" x="176.5" y="45.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="25" x="183.5" y="68.1641">Bob</text><polygon fill="#181818" points="184,108.9946,194,112.9946,184,116.9946,188,112.9946" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="27" x2="190" y1="112.9946" y2="112.9946"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="135" x="34" y="108.1382">Authentication Request</text><polygon fill="#181818" points="38,140.749,28,144.749,38,148.749,34,144.749" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="32" x2="195" y1="144.749" y2="144.749"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="145" x="44" y="139.8926">Authentication Response</text><!--MD5=[643b93517dd38c33152b87f63b38b238]
+@startuml
+
+hide footbox
+title Footer removed
+
+Alice -> Bob: Authentication Request
+Bob - -> Alice: Authentication Response
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

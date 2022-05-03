@@ -1,0 +1,3 @@
+To declare fields and methods, you can use the symbol ":" followed by the field's or method's name.
+
+The system checks for parenthesis to choose between methods and fields. 

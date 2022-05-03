@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="52px" preserveAspectRatio="none" style="width:255px;height:52px;background:#FFFFFF;" version="1.1" viewBox="0 0 255 52" width="255px" zoomAndPan="magnify"><defs/><g><g id="elem_firstObject"><rect fill="#F1F1F1" height="39.1201" style="stroke:#181818;stroke-width:0.5;" width="78" x="7" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64" x="14" y="25.0439">firstObject</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="84" y1="30.1201" y2="30.1201"/></g><g id="elem_o2"><rect fill="#F1F1F1" height="39.1201" style="stroke:#181818;stroke-width:0.5;" width="129" x="120.5" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="127.5" y="25.0439">My Second Object</text><line style="stroke:#181818;stroke-width:0.5;" x1="121.5" x2="248.5" y1="30.1201" y2="30.1201"/></g><!--MD5=[991d503788d9d8b9dd33adee2c679f09]
+@startuml
+object firstObject
+object "My Second Object" as o2
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

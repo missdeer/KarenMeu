@@ -1,0 +1,3 @@
+ You can also use the !ifndef directive that includes lines if the provided constant has NOT been defined.
+
+You can use boolean expression with parenthesis, operators && and || in the test. 

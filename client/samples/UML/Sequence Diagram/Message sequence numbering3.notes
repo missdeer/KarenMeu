@@ -1,0 +1,5 @@
+You can specify a format for your number by using between double-quote.
+
+The formatting is done with the Java class DecimalFormat ('0' means digit, '#' means digit and zero if absent).
+
+You can use some html tag in the format. 

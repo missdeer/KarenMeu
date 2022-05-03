@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="144px" preserveAspectRatio="none" style="width:303px;height:144px;background:#FFFFFF;" version="1.1" viewBox="0 0 303 144" width="303px" zoomAndPan="magnify"><defs/><g><!--MD5=[c35006cdfbf04b40adbf2801679027ad]
+cluster Concept Model--><g id="cluster_Concept Model"><rect height="131" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.0;fill:none;" width="290" x="7" y="7"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="69" x="117.5" y="25.0439">«Concept»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="107" x="98.5" y="44.1641">Concept Model</text></g><!--MD5=[abb6b06a5de2aa9c7069e8f2fc43f3cf]
+entity ex1--><g id="elem_ex1"><rect fill="#F1F1F1" height="58.2402" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="89" x="191.5" y="64"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="69" x="201.5" y="90.0439">«Concept»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="203.5" y="109.1641">Example 1</text></g><!--MD5=[1b79a7c3989e080319f527e57790e5c9]
+entity Another rectangle--><g id="elem_Another rectangle"><rect fill="#F1F1F1" height="39.1201" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="133" x="23.5" y="73.5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113" x="33.5" y="99.5439">Another rectangle</text></g><!--MD5=[47b0ed512be8478d3abc9e72113e806c]
+@startuml
+skinparam rectangle {
+    roundCorner<<Concept>> 25
+}
+
+rectangle "Concept Model" <<Concept>> {
+	rectangle "Example 1" <<Concept>> as ex1
+	rectangle "Another rectangle"
+}
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>

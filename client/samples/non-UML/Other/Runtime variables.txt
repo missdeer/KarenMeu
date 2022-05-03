@@ -1,0 +1,30 @@
+@startuml
+object Foo
+object Bar
+
+Foo -> Bar
+
+header
+    Runtime variables
+endheader
+
+legend
+    Runtime variables will be substituted by Yiili before image generation.
+    ""Username ............. : "" ${USER}
+    ""Path ................. : "" ${PATH}
+    ""Filename ............. : "" ${FILE}
+    ""Directory ............ : "" ${DIR}
+    ""Date ................. : "" ${DATE}
+    ""Time ................. : "" ${TIME}
+    ""Timestamp ............ : "" ${NOW}
+    ""Timestamp short....... : "" ${NOW:L}
+    ""Timestamp long ....... : "" ${NOW:S}
+    ""Formatted timestamp .. : "" ${NOW:MMMM ''yy  hh:mm ap}
+    See [[http://doc.qt.io/qt-5/qdatetime.html#toString]] for format informaton.
+    You can use Unix like ${...} or Windows like %...% variable format!
+endlegend
+
+footer
+    %PATH%, %USER%, %NOW:S%
+endfooter
+@enduml

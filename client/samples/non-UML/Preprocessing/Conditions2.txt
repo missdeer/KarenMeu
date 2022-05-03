@@ -1,0 +1,4 @@
+@startuml
+!define SHOW_METHODS
+!include ArrayList.iuml
+@enduml

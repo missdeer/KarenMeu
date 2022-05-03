@@ -1,0 +1,242 @@
+basic
+  Activity Diagram
+    Simple Activity
+    Label on arrows
+    Changing arrow direction
+    Branches
+    Branches2
+    More on Branches
+    Synchronization
+    Long activity description
+    Notes
+    Partition
+    Skinparam
+    Octagon
+    Complete example
+  Activity Diagram(New)
+    Simple Activity
+    Start-Stop
+    Start-End
+    Conditional
+    Conditional2
+    Repeat loop
+    While loop
+    While loop2
+    Parallel processing
+    Notes
+    Colors
+    Arrows
+    Connector
+    Grouping
+    Swimlanes
+    Detach
+    SDL
+    Complete example
+  Archimate Diagram
+    Archimate keyword
+    Defining Junctions
+    Example 1
+    Example 2
+    List possible sprites
+  AsciiMath
+    Introduction
+    Introduction2
+    startmath-endmath
+    startlatex-endlatex
+  Class Diagram
+    Relations between classes1
+    Relations between classes2
+    Relations between classes3
+    Label on relations
+    Label on relations2
+    Adding methods
+    Adding methods2
+    Adding methods3
+    Defining visibility
+    Defining visibility2
+    Abstract and Static
+    Advanced class body
+    Notes and stereotypes
+    More on notes
+    Note on links
+    Abstract class and interface
+    Using non-letters
+    Hide attributes
+    Hide classes
+    Use generics
+    Specific Spot
+    Packages
+    Packages style
+    Packages style2
+    Namespaces
+    Automatic namespace creation
+    Automatic namespace creation2
+    Lollipop interface
+    Changing arrows direction
+    Changing arrows direction2
+    Changing arrows direction3
+    Association classes
+    Association classes2
+    Skinparam
+    Skinned Stereotypes
+    Color gradient
+    Help on layout
+    Splitting large files
+  Common commands
+    Comments
+    Footer and header
+    Zoom
+    Title
+    Title2
+    Caption
+    Legend the diagram
+  Component Diagram
+    Components
+    Interfaces
+    Basic example
+    Using notes
+    Grouping Components
+    Changing arrows direction
+    Changing arrows direction2
+    Changing arrows direction3
+    Use UML2 notation
+    Long description
+    Individual colors
+    Using Sprite in Stereotype
+    Skinparam
+    Skinparam2
+  Creole
+    Emphasized text
+    List
+    Escape character
+    Horizontal lines
+    Headings
+    Legacy HTML
+    Table
+    Table2
+    Tree
+    Special characters
+    OpenIconic
+    OpenIconicList
+  Deployment Diagram
+    Declaring element
+    Declaring element2
+    Linking
+    Linking2
+    Linking3
+    Packages
+    Packages2
+    Round corner
+  Gantt Diagram
+    Declaring tasks
+    Adding constraints
+    Adding constraints2
+    Short names
+    Customize colors
+    Milestone
+    Calendar
+    Complex example
+  Object Diagram
+    Definition of objects
+    Relations between objects
+    Adding fields
+    Adding fields2
+    Common features with class diagrams
+  Preprocessing                             
+    Including files
+    Including URL
+    Constant definition
+    Macro definition
+    Macro definition2
+    Adding date and time
+    Other special variables
+    Macro on several lines
+    Default values for macro parameters
+    Conditions
+    Conditions2
+    Conditions3
+    Search path
+    Advanced features
+    Advanced features2
+    Advanced features3
+  Salt                                       
+    Basic widgets                       
+    Using grid                          
+    Using grid2                         
+    Using separator                     
+    Tree widget                         
+    Enclosing brackets                  
+    Adding tabs                  
+    Adding tabs2                
+    Using menu               
+    Using menu2        
+    Advanced table      
+    OpenIconic               
+  Sequence Diagram                          
+    Basic examples                      
+    Declaring participant               
+    Use non-letters in participants     
+    Message to Self                     
+    Change arrow style                  
+    Change arrow color                  
+    Message sequence numbering          
+    Splitting diagrams                  
+    Grouping message                    
+    Notes on messages                   
+    Some other notes                    
+    Changing notes shape                
+    Creole and HTML                     
+    Divider                             
+    Reference                           
+    Delay                               
+    Space                               
+    Lifeline Activation and Destruction 
+    Participant creation                
+    Incoming and outgoing messages      
+    Stereotypes and Spots               
+    More information on titles          
+    Participants encompass              
+    Removing Footer                     
+    Skinparam                           
+    Changing padding                                       
+  Skinparam command                             
+    Usage                               
+    Nested                              
+    List                                
+    Black and White                     
+    Reverse colors                      
+    Colors                              
+    Font color, name and size           
+    Text Alignement                     
+    Examples                                            
+  State Diagram                             
+    Simple State                        
+    Composite state                     
+    Long name                           
+    Concurrent state                    
+    Arrow direction                     
+    Note                                
+    More in notes                       
+    Skinparam                                
+  Timing Diagram                             
+    Declaring participant               
+    Adding message                      
+    Relative time                       
+    Participant oriented                
+    Setting scale                       
+    Initial state                       
+    Adding constraint                   
+    Adding texts                                  
+  Use Case Diagram                          
+    Usecases                            
+    Actors                              
+    Usecases description                
+    Basic example                       
+    Extension                           
+    Using notes                         
+    Stereotypes                         
+    Changing arrows direction           
+    Splitting diagrams                  
+    Left to right direction             
+    Skinparam                           
+    Complete example                    

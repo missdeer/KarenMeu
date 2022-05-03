@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="100px" preserveAspectRatio="none" style="width:302px;height:100px;background:#FFFFFF;" version="1.1" viewBox="0 0 302 100" width="302px" zoomAndPan="magnify"><defs/><g><!--MD5=[c54ba4f61d01a424743e5a1fa0f9e38e]
+class Dummy--><g id="elem_Dummy"><rect codeLine="1" fill="#F1F1F1" height="86.2402" id="Dummy" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="7" y="7"/><ellipse cx="34.15" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M32.7281,28.3594 Q30.8688,28.3594 29.775,26.9688 Q28.6813,25.5781 28.6813,22.5938 Q28.6813,20.0625 29.8453,18.4063 Q31.0094,16.75 32.9938,16.75 Q34.4625,16.75 34.9313,16.875 Q35.4,17.0781 35.4,17.0781 Q35.4,17.0781 35.4,17.0078 Q35.4,16.9375 36.0094,16.0156 L37.0563,19.6719 L35.7281,20.0781 Q35.2594,18.5313 34.5953,17.8672 Q33.9313,17.2031 32.8688,17.2031 Q32.4781,17.2031 31.7125,18.7344 Q30.9469,20.2656 30.9469,22.5156 Q30.9469,24.9844 31.6109,26.375 Q32.275,27.7656 32.8063,27.7656 Q33.8688,27.7656 34.6266,27 Q35.3844,26.2344 35.7281,24.5781 L37.0563,25.1719 Q36.7281,26.5781 35.8297,27.4688 Q34.9313,28.3594 32.7281,28.3594 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47" x="50.85" y="29.4839">Dummy</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="112" y1="39" y2="39"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69" x="13" y="59.0439">String data</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="112" y1="66.1201" y2="66.1201"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94" x="13" y="86.1641">void methods()</text></g><!--MD5=[bd6e5d4dd3d7814cbdc3148d3ed1ec4b]
+class Flight--><g id="elem_Flight"><rect codeLine="6" fill="#F1F1F1" height="86.2402" id="Flight" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="147" x="148.5" y="7"/><ellipse cx="200.25" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M198.8281,28.3594 Q196.9688,28.3594 195.875,26.9688 Q194.7813,25.5781 194.7813,22.5938 Q194.7813,20.0625 195.9453,18.4063 Q197.1094,16.75 199.0938,16.75 Q200.5625,16.75 201.0313,16.875 Q201.5,17.0781 201.5,17.0781 Q201.5,17.0781 201.5,17.0078 Q201.5,16.9375 202.1094,16.0156 L203.1563,19.6719 L201.8281,20.0781 Q201.3594,18.5313 200.6953,17.8672 Q200.0313,17.2031 198.9688,17.2031 Q198.5781,17.2031 197.8125,18.7344 Q197.0469,20.2656 197.0469,22.5156 Q197.0469,24.9844 197.7109,26.375 Q198.375,27.7656 198.9063,27.7656 Q199.9688,27.7656 200.7266,27 Q201.4844,26.2344 201.8281,24.5781 L203.1563,25.1719 Q202.8281,26.5781 201.9297,27.4688 Q201.0313,28.3594 198.8281,28.3594 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="35" x="220.75" y="29.4839">Flight</text><line style="stroke:#181818;stroke-width:0.5;" x1="149.5" x2="294.5" y1="39" y2="39"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="154.5" y="59.0439">flightNumber : Integer</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="154.5" y="78.1641">departureTime : Date</text><line style="stroke:#181818;stroke-width:0.5;" x1="149.5" x2="294.5" y1="85.2402" y2="85.2402"/></g><!--MD5=[ee032f266100a9e3867c491b9683d87f]
+@startuml
+class Dummy {
+  String data
+  void methods()
+}
+
+class Flight {
+   flightNumber : Integer
+   departureTime : Date
+}
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 21:29:17 CST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: GBK
+Language: zh
+Country: CN
+--></g></svg>
