@@ -1024,7 +1024,8 @@ void MainWindow::setupDockPanels()
 
     // setup samples panels
 
-    auto *dockSampleResult = new QDockWidget(tr("Sample Result"), this);
+    auto *dockSampleResult =
+        new QDockWidget(tr("PlantUML Sample Result"), this);
     connect(dockSampleResult, SIGNAL(dockLocationChanged(Qt::DockWidgetArea)), this, SLOT(onSampleResultDockLocationChanged(Qt::DockWidgetArea)));
 
     m_tabWidgetSampleResult = new QTabWidget(dockSampleResult);
@@ -1068,7 +1069,8 @@ void MainWindow::setupDockPanels()
     m_showSampleResultDockAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_1));
     ui->menuView->addAction(m_showSampleResultDockAction);
 
-    auto *dockSampleSource = new QDockWidget(tr("Sample Source Code"), this);
+    auto *dockSampleSource =
+        new QDockWidget(tr("PlantUML Sample Source Code"), this);
     m_sampleSourcePreview  = new PlantUMLSourceEditor(dockSampleSource);
     m_sampleSourcePreview->initialize();
     m_sampleSourcePreview->setReadOnly(true);

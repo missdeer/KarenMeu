@@ -518,13 +518,13 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="740"/>
-        <location filename="../mainwindow.cpp" line="1108"/>
+        <location filename="../mainwindow.cpp" line="1110"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="748"/>
-        <location filename="../mainwindow.cpp" line="1108"/>
+        <location filename="../mainwindow.cpp" line="1110"/>
         <source>Lute</source>
         <translation></translation>
     </message>
@@ -770,7 +770,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1264"/>
-        <location filename="../mainwindow.cpp" line="1200"/>
+        <location filename="../mainwindow.cpp" line="1202"/>
         <source>Full Screen</source>
         <translation>全屏</translation>
     </message>
@@ -841,7 +841,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1234"/>
-        <location filename="../mainwindow.cpp" line="1309"/>
+        <location filename="../mainwindow.cpp" line="1311"/>
         <source>Save Workspace</source>
         <translation>保存工作空间</translation>
     </message>
@@ -1057,6 +1057,16 @@
         <translation>自定义主题编辑器</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="1028"/>
+        <source>PlantUML Sample Result</source>
+        <translation>PlantUML示例</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="1073"/>
+        <source>PlantUML Sample Source Code</source>
+        <translation>PlantUML示例源代码</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.cpp" line="795"/>
         <source>WebBrowser</source>
         <translation>网页浏览器</translation>
@@ -1067,99 +1077,89 @@
         <translation>保存文件到</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1027"/>
-        <source>Sample Result</source>
-        <translation>示例结果</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="1044"/>
+        <location filename="../mainwindow.cpp" line="1045"/>
         <source>UML</source>
         <translation>UML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1051"/>
+        <location filename="../mainwindow.cpp" line="1052"/>
         <source>non-UML</source>
         <translation>非UML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1058"/>
+        <location filename="../mainwindow.cpp" line="1059"/>
         <source>Advanced</source>
         <translation>高级</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1064"/>
+        <location filename="../mainwindow.cpp" line="1065"/>
         <source>Show or hide the Sample Result dock</source>
         <translation>显示或隐藏示例结果停靠面板</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1071"/>
-        <source>Sample Source Code</source>
-        <translation>示例源代码</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="1081"/>
+        <location filename="../mainwindow.cpp" line="1083"/>
         <source>Show or hide the Sample Source dock</source>
         <translation>显示或隐藏示例源代码停靠面板</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1091"/>
+        <location filename="../mainwindow.cpp" line="1093"/>
         <source>Mode:</source>
         <translation>预览模式：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1094"/>
+        <location filename="../mainwindow.cpp" line="1096"/>
         <source>Engine:</source>
         <translation>渲染引擎：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1097"/>
+        <location filename="../mainwindow.cpp" line="1099"/>
         <source>Code Block Style:</source>
         <translation>代码块风格：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1100"/>
+        <location filename="../mainwindow.cpp" line="1102"/>
         <source>Preview Theme:</source>
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1104"/>
+        <location filename="../mainwindow.cpp" line="1106"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1104"/>
+        <location filename="../mainwindow.cpp" line="1106"/>
         <source>Blog Post</source>
         <translation>博客文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1288"/>
+        <location filename="../mainwindow.cpp" line="1290"/>
         <source>Open Workspace</source>
         <translation>打开工作空间</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1288"/>
-        <location filename="../mainwindow.cpp" line="1309"/>
+        <location filename="../mainwindow.cpp" line="1290"/>
+        <location filename="../mainwindow.cpp" line="1311"/>
         <source>KarenMeu Workspace (*.krm);;All files (*.*)</source>
         <translation>KarenMeu工作空间 (*.krm);;所有文件 (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1376"/>
+        <location filename="../mainwindow.cpp" line="1378"/>
         <source>Notice</source>
         <translation>注意</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1376"/>
+        <location filename="../mainwindow.cpp" line="1378"/>
         <source>It is required to restart KarenMeu application to take effect.</source>
         <translation>需要重启KarenMeu才能生效。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1180"/>
+        <location filename="../mainwindow.cpp" line="1182"/>
         <source>Exit Full Screen</source>
         <translation>退出全屏</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="659"/>
-        <location filename="../mainwindow.cpp" line="1160"/>
+        <location filename="../mainwindow.cpp" line="1162"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
