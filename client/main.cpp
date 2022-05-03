@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QLibraryInfo>
 #include <QMessageBox>
+#include <QSplashScreen>
 #include <QSslSocket>
 #include <QTranslator>
 #include <QWebEngineProfile>
@@ -67,6 +68,11 @@ int main(int argc, char *argv[])
         localeDirPath = QApplication::applicationDirPath() + "/../translations";
     }
 #endif
+
+    QPixmap pixmap(":/KarenMeu.png");
+    QSplashScreen splash(pixmap);
+    splash.show();
+    QApplication::processEvents();
 
     QString i18nFile = QString("KarenMeu_%1.qm").arg(localeName);
     if (!translator.load(i18nFile, localeDirPath))
@@ -137,5 +143,6 @@ int main(int argc, char *argv[])
     a.connect(&a, &MacApplication::openFile, &w, &MainWindow::openFile);
 #endif
 
+    splash.finish(&w);
     return QApplication::exec();
 }
