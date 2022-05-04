@@ -140,7 +140,7 @@ private:
     MarkdownView *                m_view;
     QFileSystemModel *            m_fsModel;
     QTreeView *                   m_fsView;
-    QTreeView *                   m_cloudView;
+    QTreeView *                   m_webDAVView;
     QComboBox *                   m_cbPreviewMode;
     QComboBox *                   m_cbMarkdownEngine;
     QComboBox *                   m_cbCodeBlockStyle;

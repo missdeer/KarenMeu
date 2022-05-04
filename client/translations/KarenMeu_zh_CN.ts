@@ -1077,6 +1077,11 @@
         <translation>保存文件到</translation>
     </message>
     <message>
+        <location filename="../mainwindow.cpp" line="977"/>
+        <source>WebDAV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mainwindow.cpp" line="1045"/>
         <source>UML</source>
         <translation>UML</translation>
@@ -1178,11 +1183,6 @@
         <location filename="../mainwindow.cpp" line="957"/>
         <source>File System</source>
         <translation>文件系统</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="977"/>
-        <source>Cloud</source>
-        <translation>云服务</translation>
     </message>
 </context>
 <context>

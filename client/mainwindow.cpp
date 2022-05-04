@@ -974,16 +974,16 @@ void MainWindow::setupDockPanels()
     toggleViewAction->setShortcut(QKeySequence("Shift+Alt+F"));
     ui->menuView->addAction(toggleViewAction);
 
-    auto *cloudDock = new QDockWidget(tr("Cloud"), this);
-    cloudDock->setObjectName("cloudDock");
-    m_cloudView     = new QTreeView(cloudDock);
-    cloudDock->setWidget(m_cloudView);
-    addDockWidget(Qt::LeftDockWidgetArea, cloudDock);
-    toggleViewAction = cloudDock->toggleViewAction();
+    auto *webDAVDock = new QDockWidget(tr("WebDAV"), this);
+    webDAVDock->setObjectName("webDAVDock");
+    m_webDAVView = new QTreeView(webDAVDock);
+    webDAVDock->setWidget(m_webDAVView);
+    addDockWidget(Qt::LeftDockWidgetArea, webDAVDock);
+    toggleViewAction = webDAVDock->toggleViewAction();
     toggleViewAction->setShortcut(QKeySequence("Shift+Alt+C"));
     ui->menuView->addAction(toggleViewAction);
 
-    tabifyDockWidget(fsDock, cloudDock);
+    tabifyDockWidget(fsDock, webDAVDock);
 
     auto *previewHTMLDock = new QDockWidget(tr("Preview HTML"), this);
     previewHTMLDock->setObjectName("previewHTMLDock");
