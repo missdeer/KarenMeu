@@ -47,6 +47,17 @@ void Settings::save()
     settings.setValue("deepLTranslate", m_enableDeepLTranslate);
     settings.setValue("translateTimeout", m_translateTimeout);
     settings.setValue("lastOpenedFilePath", m_lastOpenedFilePath);
+
+    settings.beginWriteArray("webDAVInfos", m_webDAVInfos.size());
+    for (int i = 0; i < m_webDAVInfos.size(); ++i)
+    {
+        settings.setArrayIndex(i);
+        settings.setValue("server", m_webDAVInfos.at(i).server);
+        settings.setValue("user", m_webDAVInfos.at(i).user);
+        settings.setValue("password", m_webDAVInfos.at(i).password);
+    }
+    settings.endArray();
+
     settings.sync();
 }
 
@@ -87,6 +98,14 @@ void Settings::load()
     m_enableDeepLTranslate      = settings.value("deepLTranslate", true).toBool();
     m_translateTimeout          = settings.value("translateTimeout", 3000).toInt();
     m_lastOpenedFilePath        = settings.value("lastOpenedFilePath").toString();
+
+    int size = settings.beginReadArray("webDAVInfos");
+    for (int i = 0; i < size; ++i)
+    {
+        settings.setArrayIndex(i);
+        m_webDAVInfos.append({settings.value("server").toString(), settings.value("user").toString(), settings.value("password").toString()});
+    }
+    settings.endArray();
 }
 
 const QString &Settings::codeEditorFontFamily() const
@@ -232,45 +251,6 @@ void Settings::setMainWindowGeometry(const QByteArray &geometry)
 {
     auto &settings = getSettings();
     settings.setValue("mainWindowGeometry", geometry);
-    settings.sync();
-}
-
-QString Settings::webDAVServerAddress()
-{
-    auto &settings = getSettings();
-    return settings.value("webDAVServerAddress").toString();
-}
-
-void Settings::setWebDAVServerAddress(const QString &server)
-{
-    auto &settings = getSettings();
-    settings.setValue("webDAVServerAddress", server);
-    settings.sync();
-}
-
-QString Settings::webDAVUsername()
-{
-    auto &settings = getSettings();
-    return settings.value("webDAVUsername").toString();
-}
-
-void Settings::setWebDAVUsername(const QString &username)
-{
-    auto &settings = getSettings();
-    settings.setValue("webDAVUsername", username);
-    settings.sync();
-}
-
-QString Settings::webDAVPassword()
-{
-    auto &settings = getSettings();
-    return settings.value("webDAVPassword").toString();
-}
-
-void Settings::setWebDAVPassword(const QString &password)
-{
-    auto &settings = getSettings();
-    settings.setValue("webDAVPassword", password);
     settings.sync();
 }
 
@@ -435,6 +415,16 @@ void Settings::setPlantUMLLocalJarEnabled(bool enabled)
     auto &settings = getSettings();
     settings.setValue("plantUMLLocalJarEnabled", enabled);
     settings.sync();
+}
+
+const QVector<WebDAVInfo> &Settings::webDAVInfos() const
+{
+    return m_webDAVInfos;
+}
+
+void Settings::setWebDAVInfos(const QVector<WebDAVInfo> &newWebDAVInfos)
+{
+    m_webDAVInfos = newWebDAVInfos;
 }
 
 QSettings &Settings::getSettings()

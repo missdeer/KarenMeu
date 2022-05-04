@@ -1335,41 +1335,51 @@
         <translation>预览主题：</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="77"/>
-        <location filename="../preferencedialog.cpp" line="116"/>
-        <location filename="../preferencedialog.cpp" line="176"/>
+        <location filename="../preferencedialog.cpp" line="83"/>
+        <location filename="../preferencedialog.cpp" line="130"/>
+        <location filename="../preferencedialog.cpp" line="190"/>
         <source>Custom</source>
         <translation>自定义</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="105"/>
+        <location filename="../preferencedialog.cpp" line="119"/>
         <source>Notice</source>
         <translation type="unfinished">注意</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="105"/>
+        <location filename="../preferencedialog.cpp" line="119"/>
         <source>This server seems ok.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="111"/>
+        <location filename="../preferencedialog.cpp" line="125"/>
         <source>Error</source>
         <translation type="unfinished">错误</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="133"/>
+        <location filename="../preferencedialog.cpp" line="147"/>
         <source>Select Java executable</source>
         <translation>选择Java解释器</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="142"/>
+        <location filename="../preferencedialog.cpp" line="156"/>
         <source>Select Dot (from Graphiz) executable</source>
         <translation>选择Dot（来自Graphviz）</translation>
     </message>
     <message>
-        <location filename="../preferencedialog.cpp" line="151"/>
+        <location filename="../preferencedialog.cpp" line="165"/>
         <source>Select PlantUML jar</source>
         <translation>选择PlantUML jar包</translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.cpp" line="218"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferencedialog.cpp" line="218"/>
+        <source>This WebDAV server exists.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="128"/>
@@ -1659,12 +1669,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="590"/>
+        <location filename="../preferencedialog.ui" line="593"/>
         <source>&amp;Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferencedialog.ui" line="597"/>
+        <location filename="../preferencedialog.ui" line="600"/>
         <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1745,22 +1755,22 @@
 <context>
     <name>QSettings</name>
     <message>
-        <location filename="../settings.cpp" line="76"/>
+        <location filename="../settings.cpp" line="87"/>
         <source>Default</source>
         <translation>默认</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="77"/>
+        <location filename="../settings.cpp" line="88"/>
         <source>xcode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="78"/>
+        <location filename="../settings.cpp" line="89"/>
         <source>Goldmark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="81"/>
+        <location filename="../settings.cpp" line="92"/>
         <source>Wechat Public Account Article</source>
         <translation>微信公众号文章</translation>
     </message>

@@ -2,6 +2,7 @@
 #define PREFERENCEDIALOG_H
 
 #include <QDialog>
+#include <QVector>
 
 namespace Ui
 {
@@ -12,6 +13,8 @@ QT_FORWARD_DECLARE_CLASS(QListWidgetItem);
 
 class PreviewThemeEditor;
 class QWebdav;
+class QWebdavDirParser;
+struct WebDAVInfo;
 
 class PreferenceDialog : public QDialog
 {
@@ -24,6 +27,9 @@ public:
 protected:
     void accept() override;
 private slots:
+    void onWebDAVFinished();
+    void onWebDAVError(QString errorMsg);
+
     void on_cbPreviewTheme_currentTextChanged(const QString &text);
 
     void on_btnBrowseJavaPath_clicked();
@@ -36,12 +42,14 @@ private slots:
 
     void on_btnRemoveWebDAV_clicked();
 
-    void on_listWebDAV_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+    void on_listWebDAV_currentRowChanged(int currentRow);
 
 private:
     Ui::PreferenceDialog *ui;
     PreviewThemeEditor   *m_previewThemeEditor;
-    QWebdav              *m_webDav;
+    QWebdav              *m_webDAV;
+    QWebdavDirParser     *m_webDAVDirParser;
+    QVector<WebDAVInfo>   m_webDAVInfos;
     void                  setupPreviewThemeEditor();
 };
 

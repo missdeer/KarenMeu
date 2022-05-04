@@ -27,7 +27,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tabStyle">
       <attribute name="title">
@@ -586,6 +586,9 @@
          </item>
          <item>
           <widget class="QPushButton" name="btnAddWebDAV">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="text">
             <string>&amp;Add</string>
            </property>

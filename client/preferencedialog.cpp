@@ -1,15 +1,18 @@
 #include <QDir>
 #include <QFile>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QUrl>
 
 #include "preferencedialog.h"
 #include "previewthemeeditor.h"
 #include "qwebdav.h"
+#include "qwebdavdirparser.h"
 #include "settings.h"
 #include "ui_preferencedialog.h"
 
-PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui::PreferenceDialog), m_webDav(new QWebdav)
+PreferenceDialog::PreferenceDialog(QWidget *parent)
+    : QDialog(parent), ui(new Ui::PreferenceDialog), m_webDAV(new QWebdav), m_webDAVDirParser(new QWebdavDirParser)
 {
     ui->setupUi(this);
     ui->tabWidget->setCurrentIndex(0);
@@ -25,10 +28,6 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui
     ui->cbCodeEditorFont->setCurrentFont(f);
     ui->sbFontPointSize->setValue(g_settings->codeEditorFontPointSize());
     ui->cbPreviewMode->setCurrentText(g_settings->previewMode());
-
-    ui->edtWebDAVServerAddress->setText(g_settings->webDAVServerAddress());
-    ui->edtWebDAVUsername->setText(g_settings->webDAVUsername());
-    ui->edtWebDAVPassword->setText(g_settings->webDAVPassword());
 
     ui->cbBaiduTranslate->setChecked(g_settings->enableBaiduTranslate());
     ui->cbGoogleTranslate->setChecked(g_settings->enableGoogleTranslate());
@@ -48,11 +47,26 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) : QDialog(parent), ui(new Ui
 
     ui->gbPlantUMLRemoteService->setChecked(g_settings->plantUMLRemoteServiceEnabled());
     ui->gbPlantUMLLocalJar->setChecked(g_settings->plantUMLLocalJarEnabled());
+
+    const auto &webDAVInfos = g_settings->webDAVInfos();
+    for (const auto &info : webDAVInfos)
+    {
+        ui->listWebDAV->addItem(QString("%1 - %2").arg(info.server, info.user));
+    }
+    if (!webDAVInfos.empty())
+    {
+        ui->listWebDAV->setCurrentRow(0);
+    }
+
+    connect(m_webDAV, &QWebdav::errorChanged, this, &PreferenceDialog::onWebDAVError);
+    connect(m_webDAVDirParser, &QWebdavDirParser::finished, this, &PreferenceDialog::onWebDAVFinished);
+    connect(m_webDAVDirParser, &QWebdavDirParser::errorChanged, this, &PreferenceDialog::onWebDAVError);
 }
 
 PreferenceDialog::~PreferenceDialog()
 {
-    delete m_webDav;
+    delete m_webDAVDirParser;
+    delete m_webDAV;
     delete ui;
 }
 
@@ -70,9 +84,6 @@ void PreferenceDialog::accept()
     {
         g_settings->setCustomPreviewThemeStyle(m_previewThemeEditor->content());
     }
-    g_settings->setWebDAVServerAddress(ui->edtWebDAVServerAddress->text());
-    g_settings->setWebDAVUsername(ui->edtWebDAVUsername->text());
-    g_settings->setWebDAVPassword(ui->edtWebDAVPassword->text());
 
     g_settings->setEnableGoogleTranslate(ui->cbGoogleTranslate->isChecked());
     g_settings->setEnableBaiduTranslate(ui->cbBaiduTranslate->isChecked());
@@ -88,7 +99,30 @@ void PreferenceDialog::accept()
     g_settings->setDotPath(ui->edtGraphvizDotPath->text());
     g_settings->setPlantUMLLocalJarEnabled(ui->gbPlantUMLLocalJar->isChecked());
     g_settings->setPlantUMLRemoteServiceEnabled(ui->gbPlantUMLRemoteService->isChecked());
+    if (!m_webDAVInfos.empty())
+    {
+        g_settings->setWebDAVInfos(m_webDAVInfos);
+    }
     QDialog::accept();
+}
+
+void PreferenceDialog::onWebDAVFinished()
+{
+    auto list = m_webDAVDirParser->getList();
+    qDebug() << "returns" << list.size() << "items";
+    for (auto &item : list)
+    {
+        qDebug() << item.name();
+    }
+
+    ui->btnAddWebDAV->setEnabled(true);
+    QMessageBox::information(this, tr("Notice"), tr("This server seems ok."), QMessageBox::Ok);
+}
+
+void PreferenceDialog::onWebDAVError(QString errorMsg)
+{
+    ui->btnAddWebDAV->setEnabled(false);
+    QMessageBox::warning(this, tr("Error"), errorMsg, QMessageBox::Ok);
 }
 
 void PreferenceDialog::on_cbPreviewTheme_currentTextChanged(const QString &text)
@@ -99,12 +133,12 @@ void PreferenceDialog::on_cbPreviewTheme_currentTextChanged(const QString &text)
         return;
     }
 
-    QFile f(":/rc/theme/" + text + ".css");
-    if (f.open(QIODevice::ReadOnly))
+    QFile file(":/rc/theme/" + text + ".css");
+    if (file.open(QIODevice::ReadOnly))
     {
-        QByteArray ba = f.readAll();
+        QByteArray ba = file.readAll();
         m_previewThemeEditor->setContent(ba);
-        f.close();
+        file.close();
     }
 }
 
@@ -160,17 +194,65 @@ void PreferenceDialog::setupPreviewThemeEditor()
 
 void PreferenceDialog::on_btnTestWebDAV_clicked()
 {
-    auto url = ui->edtWebDAVServerAddress->text();
-    QUrl u(url);
+    QUrl url(ui->edtWebDAVServerAddress->text());
 
     auto user   = ui->edtWebDAVUsername->text();
     auto passwd = ui->edtWebDAVPassword->text();
 
-    m_webDav->setConnectionSettings(u.scheme() == "https" ? QWebdav::HTTPS : QWebdav::HTTP, u.host(), u.path(), user, passwd, u.port());
+    m_webDAV->setConnectionSettings(url.scheme() == "https" ? QWebdav::HTTPS : QWebdav::HTTP, url.host(), url.path(), user, passwd, url.port());
+    m_webDAVDirParser->listDirectory(m_webDAV, "/");
+
+    qDebug() << url.host() << url.path() << url.port() << url.scheme() << user << passwd;
 }
 
-void PreferenceDialog::on_btnAddWebDAV_clicked() {}
+void PreferenceDialog::on_btnAddWebDAV_clicked()
+{
+    // check exists
+    const auto &webDAVInfos = m_webDAVInfos.empty() ? g_settings->webDAVInfos() : m_webDAVInfos;
+    auto        iter        = std::find_if(webDAVInfos.begin(), webDAVInfos.end(), [this](const WebDAVInfo &info) {
+        return info.server == ui->edtWebDAVServerAddress->text() && info.user == ui->edtWebDAVUsername->text() &&
+               info.password == ui->edtWebDAVPassword->text();
+    });
+    if (webDAVInfos.end() != iter)
+    {
+        QMessageBox::warning(this, tr("Warning"), tr("This WebDAV server exists."), QMessageBox::Ok);
+        return;
+    }
+    // not exist
+    if (!m_webDAVInfos.empty())
+    {
+        m_webDAVInfos = g_settings->webDAVInfos();
+    }
+    m_webDAVInfos.append({ui->edtWebDAVServerAddress->text(), ui->edtWebDAVUsername->text(), ui->edtWebDAVPassword->text()});
+    ui->listWebDAV->addItem(QString("%1 - %2").arg(ui->edtWebDAVServerAddress->text(), ui->edtWebDAVUsername->text()));
+    ui->listWebDAV->setCurrentRow(ui->listWebDAV->count() - 1);
+}
 
-void PreferenceDialog::on_btnRemoveWebDAV_clicked() {}
+void PreferenceDialog::on_btnRemoveWebDAV_clicked()
+{
+    if (!m_webDAVInfos.empty())
+    {
+        m_webDAVInfos = g_settings->webDAVInfos();
+    }
+    int row = ui->listWebDAV->currentIndex().row();
+    if (row < 0 || row >= m_webDAVInfos.size())
+    {
+        return;
+    }
+    m_webDAVInfos.remove(row);
+    ui->listWebDAV->removeItemWidget(ui->listWebDAV->item(row));
+    ui->listWebDAV->setCurrentRow(row >= ui->listWebDAV->count() ? ui->listWebDAV->count() - 1 : row);
+}
 
-void PreferenceDialog::on_listWebDAV_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous) {}
+void PreferenceDialog::on_listWebDAV_currentRowChanged(int currentRow)
+{
+    const auto &webDAVInfos = m_webDAVInfos.empty() ? g_settings->webDAVInfos() : m_webDAVInfos;
+    if (currentRow < 0 || currentRow >= webDAVInfos.size())
+    {
+        return;
+    }
+    const auto &info = webDAVInfos.at(currentRow);
+    ui->edtWebDAVServerAddress->setText(info.server);
+    ui->edtWebDAVUsername->setText(info.user);
+    ui->edtWebDAVPassword->setText(info.password);
+}

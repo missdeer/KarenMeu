@@ -8,6 +8,13 @@
 
 QT_FORWARD_DECLARE_CLASS(QSettings);
 
+struct WebDAVInfo
+{
+    QString server;
+    QString user;
+    QString password;
+};
+
 class Settings
 {
 public:
@@ -19,103 +26,97 @@ public:
     ~Settings();
     void save();
     void load();
-    void initialize();
-    QSettings &getSettings();
+    void                     initialize();
+    [[nodiscard]] QSettings &getSettings();
 
-    int  markdownViewArrange();
-    void setMarkdownViewArrange(int mode);
+    [[nodiscard]] int markdownViewArrange();
+    void              setMarkdownViewArrange(int mode);
 
-    const QString &codeEditorFontFamily() const;
-    void           setCodeEditorFontFamily(const QString &codeEditorFontFamily);
+    [[nodiscard]] const QString &codeEditorFontFamily() const;
+    void                         setCodeEditorFontFamily(const QString &codeEditorFontFamily);
 
-    const QString &codeEditorTheme() const;
-    void           setCodeEditorTheme(const QString &codeEditorTheme);
+    [[nodiscard]] const QString &codeEditorTheme() const;
+    void                         setCodeEditorTheme(const QString &codeEditorTheme);
 
-    int  autoRefreshInterval() const;
-    void setAutoRefreshInterval(int autoRefreshInterval);
+    [[nodiscard]] int autoRefreshInterval() const;
+    void              setAutoRefreshInterval(int autoRefreshInterval);
 
-    int  editorZoomFactor() const;
-    void setEditorZoomFactor(int editorZoomFactor);
+    [[nodiscard]] int editorZoomFactor() const;
+    void              setEditorZoomFactor(int editorZoomFactor);
 
-    const QString &previewTheme() const;
-    void           setPreviewTheme(const QString &previewTheme);
+    [[nodiscard]] const QString &previewTheme() const;
+    void                         setPreviewTheme(const QString &previewTheme);
 
-    const QString &codeBlockStyle() const;
-    void           setCodeBlockStyle(const QString &codeBlockStyle);
+    [[nodiscard]] const QString &codeBlockStyle() const;
+    void                         setCodeBlockStyle(const QString &codeBlockStyle);
 
-    const QString &markdownEngine() const;
-    void           setMarkdownEngine(const QString &markdownEngine);
+    [[nodiscard]] const QString &markdownEngine() const;
+    void                         setMarkdownEngine(const QString &markdownEngine);
 
-    bool enableLineNumbers() const;
-    void setEnableLineNumbers(bool enableLineNumbers);
+    [[nodiscard]] bool enableLineNumbers() const;
+    void               setEnableLineNumbers(bool enableLineNumbers);
 
-    int  codeEditorFontPointSize() const;
-    void setCodeEditorFontPointSize(int codeEditorFontPointSize);
+    [[nodiscard]] int codeEditorFontPointSize() const;
+    void              setCodeEditorFontPointSize(int codeEditorFontPointSize);
 
-    const QString &previewMode() const;
-    void           setPreviewMode(const QString &previewMode);
+    [[nodiscard]] const QString &previewMode() const;
+    void                         setPreviewMode(const QString &previewMode);
 
-    const QByteArray &customPreviewThemeStyle() const;
-    void              setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeStyle);
+    [[nodiscard]] const QByteArray &customPreviewThemeStyle() const;
+    void                            setCustomPreviewThemeStyle(const QByteArray &customPreviewThemeStyle);
 
-    bool macTerminalStyleCodeBlock() const;
-    void setMacTerminalStyleCodeBlock(bool macTerminalStyleCodeBlock);
+    [[nodiscard]] bool macTerminalStyleCodeBlock() const;
+    void               setMacTerminalStyleCodeBlock(bool macTerminalStyleCodeBlock);
 
-    QByteArray mainWindowState();
-    void       setMainWindowState(const QByteArray &state);
+    [[nodiscard]] QByteArray mainWindowState();
+    void                     setMainWindowState(const QByteArray &state);
 
-    QByteArray mainWindowGeometry();
-    void       setMainWindowGeometry(const QByteArray &geometry);
+    [[nodiscard]] QByteArray mainWindowGeometry();
+    void                     setMainWindowGeometry(const QByteArray &geometry);
 
-    QString webDAVServerAddress();
-    void    setWebDAVServerAddress(const QString &server);
+    [[nodiscard]] bool enableGoogleTranslate() const;
+    void               setEnableGoogleTranslate(bool enableGoogleTranslate);
 
-    QString webDAVUsername();
-    void    setWebDAVUsername(const QString &username);
-
-    QString webDAVPassword();
-    void    setWebDAVPassword(const QString &password);
-
-    bool enableGoogleTranslate() const;
-    void setEnableGoogleTranslate(bool enableGoogleTranslate);
-
-    bool enableBaiduTranslate() const;
+    [[nodiscard]] bool enableBaiduTranslate() const;
     void setEnableBaiduTranslate(bool enableBaiduTranslate);
 
-    bool enableYoudaoTranslate() const;
-    void setEnableYoudaoTranslate(bool enableYoudaoTranslate);
+    [[nodiscard]] bool enableYoudaoTranslate() const;
+    void               setEnableYoudaoTranslate(bool enableYoudaoTranslate);
 
-    bool enableSogouTranslate() const;
-    void setEnableSogouTranslate(bool enableSogouTranslate);
+    [[nodiscard]] bool enableSogouTranslate() const;
+    void               setEnableSogouTranslate(bool enableSogouTranslate);
 
-    QSharedPointer<vte::TextEditorConfig> textEditorConfig() const;
+    [[nodiscard]] QSharedPointer<vte::TextEditorConfig> textEditorConfig() const;
 
-    QSharedPointer<vte::MarkdownEditorConfig> markdownEditorConfig() const;
+    [[nodiscard]] QSharedPointer<vte::MarkdownEditorConfig> markdownEditorConfig() const;
 
-    QSharedPointer<vte::TextEditorParameters> textEditorParameters() const;
+    [[nodiscard]] QSharedPointer<vte::TextEditorParameters> textEditorParameters() const;
 
-    int  translateTimeout() const;
-    void setTranslateTimeout(int translateTimeout);
+    [[nodiscard]] int translateTimeout() const;
+    void              setTranslateTimeout(int translateTimeout);
 
-    bool enableDeepLTranslate() const;
-    void setEnableDeepLTranslate(bool enableDeepLTranslate);
+    [[nodiscard]] bool enableDeepLTranslate() const;
+    void               setEnableDeepLTranslate(bool enableDeepLTranslate);
 
-    const QString &getLastOpenedFilePath() const;
-    void           setLastOpenedFilePath(const QString &lastOpenedFilePath);
+    [[nodiscard]] const QString &getLastOpenedFilePath() const;
+    void                         setLastOpenedFilePath(const QString &lastOpenedFilePath);
 
-    QString plantUMLRemoteServiceAddress();
-    void    setPlantUMLRemoteService(const QString &path);
-    QString javaPath();
-    void    setJavaPath(const QString &path);
-    QString dotPath();
-    void    setDotPath(const QString &path);
-    QString plantUMLJarPath();
-    void    setPlantUMLJarPath(const QString &path);
+    [[nodiscard]] QString plantUMLRemoteServiceAddress();
+    void                  setPlantUMLRemoteService(const QString &path);
+    [[nodiscard]] QString javaPath();
+    void                  setJavaPath(const QString &path);
+    [[nodiscard]] QString dotPath();
+    void                  setDotPath(const QString &path);
+    [[nodiscard]] QString plantUMLJarPath();
+    void                  setPlantUMLJarPath(const QString &path);
 
-    bool plantUMLRemoteServiceEnabled();
-    void setPlantUMLRemoteServiceEnabled(bool enabled);
-    bool plantUMLLocalJarEnabled();
-    void setPlantUMLLocalJarEnabled(bool enabled);
+    [[nodiscard]] bool plantUMLRemoteServiceEnabled();
+    void               setPlantUMLRemoteServiceEnabled(bool enabled);
+    [[nodiscard]] bool plantUMLLocalJarEnabled();
+    void               setPlantUMLLocalJarEnabled(bool enabled);
+
+    [[nodiscard]] const QVector<WebDAVInfo> &webDAVInfos() const;
+    void                                     setWebDAVInfos(const QVector<WebDAVInfo> &newWebDAVInfos);
 
 private:
     bool m_enableGoogleTranslate {true};
@@ -141,6 +142,7 @@ private:
 
     QByteArray m_customPreviewThemeStyle;
 
+    QVector<WebDAVInfo>                       m_webDAVInfos;
     QSharedPointer<vte::TextEditorConfig>     m_textEditorConfig;
     QSharedPointer<vte::MarkdownEditorConfig> m_markdownEditorConfig;
     QSharedPointer<vte::TextEditorParameters> m_textEditorParameters;
