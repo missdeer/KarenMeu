@@ -155,6 +155,7 @@ void PreviewPage::embedImages(const QStringList &images)
         {
             QNetworkRequest req(u);
             req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
+            req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
             req.setRawHeader("Accept-Encoding", "gzip, deflate");
             Q_ASSERT(m_nam);
             auto *reply  = m_nam->get(req);
@@ -258,6 +259,7 @@ void PreviewPage::copyRemoteImage(const QUrl &url)
     {
         QNetworkRequest req(url);
         req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
+        req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
         req.setRawHeader("Accept-Encoding", "gzip, deflate");
         Q_ASSERT(m_nam);
         auto *reply  = m_nam->get(req);

@@ -36,6 +36,7 @@ void YoudaoDict::query(const QString &keyword)
     url.setQuery(query.query());
     QNetworkRequest req(url);
     req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
+    req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 
     QNetworkReply* reply = m_nam.get(req);
 

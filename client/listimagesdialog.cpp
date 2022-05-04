@@ -128,6 +128,7 @@ QPixmap ListImagesDialog::pixmapFromString(const QString &image)
     {
         QNetworkRequest req(image);
         req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
+        req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
         Q_ASSERT(m_nam);
         auto *reply  = m_nam->get(req);
         auto *helper = new NetworkReplyHelper(reply);

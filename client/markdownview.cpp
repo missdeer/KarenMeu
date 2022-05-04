@@ -859,6 +859,7 @@ void MarkdownView::renderMarkdownToHTML()
     {
         QNetworkRequest req(u);
         req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
+        req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
         req.setAttribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1), cacheKey);
         Q_ASSERT(m_nam);
 #if !defined(QT_NO_DEBUG)

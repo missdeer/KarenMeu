@@ -17,6 +17,7 @@
 #include <QListWidget>
 #include <QMap>
 #include <QMessageBox>
+#include <QNetworkDiskCache>
 #include <QPainter>
 #include <QPlainTextEdit>
 #include <QShortcut>
@@ -138,6 +139,10 @@ MainWindow::MainWindow(QWidget *parent)
       m_youdaoDict(new YoudaoDict(m_nam)),
       m_templateManager(new TemplateManager)
 {
+    auto *diskCache = new QNetworkDiskCache(this);
+    diskCache->setCacheDirectory(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
+    m_nam.setCache(diskCache);
+
     ui->setupUi(this);
     statusBar()->hide();
     setCentralWidget(m_view);
