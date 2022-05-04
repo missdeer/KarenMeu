@@ -96,6 +96,27 @@ void ListImagesDialog::resizeEvent(QResizeEvent *)
     previewCurrentImage();
 }
 
+void ListImagesDialog::onRequestRemoteImageDone()
+{
+    auto *helper = qobject_cast<NetworkReplyHelper *>(sender());
+    Q_ASSERT(helper);
+    helper->deleteLater();
+    auto *reply = helper->reply();
+    Q_ASSERT(reply);
+    auto imgData = helper->content();
+#if !defined(QT_NO_DEBUG)
+    qDebug() << "received" << content.length() << "bytes image data";
+#endif
+    if (imgData.isEmpty())
+        return;
+
+    m_currentPixmap.loadFromData(imgData);
+    if (!m_currentPixmap.isNull())
+    {
+        previewCurrentImage();
+    }
+}
+
 QPixmap ListImagesDialog::pixmapFromString(const QString &image)
 {
     if (image.startsWith("file://"))
@@ -107,16 +128,11 @@ QPixmap ListImagesDialog::pixmapFromString(const QString &image)
     {
         QNetworkRequest req(image);
         req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
-        req.setRawHeader("Accept-Encoding", "gzip, deflate");
         Q_ASSERT(m_nam);
         auto *reply  = m_nam->get(req);
         auto *helper = new NetworkReplyHelper(reply);
-        helper->waitForFinished();
-        auto imgData = helper->content();
-        helper->deleteLater();
-        QPixmap pixmap;
-        pixmap.loadFromData(imgData);
-        return pixmap;
+        helper->setTimeout(10000);
+        connect(helper, &NetworkReplyHelper::done, this, &ListImagesDialog::onRequestRemoteImageDone);
     }
     else
     {

@@ -19,6 +19,8 @@ public:
     ~ListImagesDialog();
 
 private slots:
+    void onRequestRemoteImageDone();
+
     void on_btnSaveAs_clicked();
 
     void on_btnCopyImage_clicked();
