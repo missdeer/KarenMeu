@@ -8,6 +8,8 @@ namespace Ui
     class PreferenceDialog;
 }
 
+QT_FORWARD_DECLARE_CLASS(QListWidgetItem);
+
 class PreviewThemeEditor;
 class QWebdav;
 
@@ -33,6 +35,8 @@ private slots:
     void on_btnAddWebDAV_clicked();
 
     void on_btnRemoveWebDAV_clicked();
+
+    void on_listWebDAV_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
 private:
     Ui::PreferenceDialog *ui;
