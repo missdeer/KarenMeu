@@ -39,8 +39,8 @@ void PreviewPage::inlineImages()
                   "  sources.push(images[i].src);                    "
                   "}                                                 "
                   "sources;                                          ",
-                  [this](const QVariant &v) {
-                      auto images         = v.toStringList();
+                  [this](const QVariant &var) {
+                      auto images         = var.toStringList();
                       m_imageCount        = images.length();
                       m_imageHandledCount = 0;
                       embedImages(images);
@@ -51,8 +51,8 @@ void PreviewPage::copy1stImage()
 {
     runJavaScript("var images = document.getElementsByTagName('img');"
                   "images[0].src;                                    ",
-                  [this](const QVariant &v) {
-                      auto image = v.toString();
+                  [this](const QVariant &var) {
+                      auto image = var.toString();
                       copyImage(image);
                   });
 }
@@ -65,8 +65,8 @@ void PreviewPage::getImages()
                   "  sources.push(images[i].src);                    "
                   "}                                                 "
                   "sources;                                          ",
-                  [this](const QVariant &v) {
-                      auto res = v.toStringList();
+                  [this](const QVariant &var) {
+                      auto res = var.toStringList();
                       emit gotAllImages(res);
                   });
 }
@@ -81,7 +81,28 @@ void PreviewPage::onEmbeded()
 {
     m_imageHandledCount++;
     if (m_imageCount == m_imageHandledCount)
+    {
         emit allImagesEmbeded();
+    }
+}
+
+void PreviewPage::onRequestRemoteImageDoneThenCopy()
+{
+    auto *helper = qobject_cast<NetworkReplyHelper *>(sender());
+    Q_ASSERT(helper);
+    helper->deleteLater();
+    auto   imgData = helper->content();
+    QImage img;
+    if (!img.loadFromData(imgData))
+    {
+        qDebug() << "loading from data failed:" << helper->reply()->request().url();
+        return;
+    }
+    auto *clipboard = QGuiApplication::clipboard();
+    if (clipboard)
+    {
+        clipboard->setImage(img);
+    }
 }
 
 bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::NavigationType /*type*/, bool /*isMainFrame*/)
@@ -107,10 +128,10 @@ void PreviewPage::embedImages(const QStringList &images)
     };
     for (const auto &src : images)
     {
-        QUrl u(src);
-        if (u.isLocalFile())
+        QUrl url(src);
+        if (url.isLocalFile())
         {
-            QString origSrc = u.toLocalFile();
+            QString origSrc = url.toLocalFile();
             auto format = QImageReader::imageFormat(origSrc);
             auto it     = formatMap.find(format.toLower());
             if (formatMap.end() == it)
@@ -151,12 +172,13 @@ void PreviewPage::embedImages(const QStringList &images)
             embedImage(src, newSrc);
             continue;
         }
-        if (u.scheme() == "http" || u.scheme() == "https")
+        if (url.scheme() == "http" || url.scheme() == "https")
         {
-            QNetworkRequest req(u);
+            QNetworkRequest req(url);
             req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
             req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
             req.setRawHeader("Accept-Encoding", "gzip, deflate");
+            req.setRawHeader("Referer", QString("%1://%2").arg(url.scheme(), url.host()).toUtf8());
             Q_ASSERT(m_nam);
             auto *reply  = m_nam->get(req);
             auto *helper = new NetworkReplyHelper(reply);
@@ -254,27 +276,16 @@ void PreviewPage::copyImage(const QString &image)
 
 void PreviewPage::copyRemoteImage(const QUrl &url)
 {
-    auto *clipboard = QGuiApplication::clipboard();
-    if (clipboard)
-    {
-        QNetworkRequest req(url);
-        req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
-        req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
-        req.setRawHeader("Accept-Encoding", "gzip, deflate");
-        Q_ASSERT(m_nam);
-        auto *reply  = m_nam->get(req);
-        auto *helper = new NetworkReplyHelper(reply);
-        helper->waitForFinished();
-        auto imgData = helper->content();
-        helper->deleteLater();
-        QImage img;
-        if (!img.loadFromData(imgData))
-        {
-            qDebug() << "loading from data failed:" << url;
-            return;
-        }
-        clipboard->setImage(img);
-    }
+    QNetworkRequest req(url);
+    req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
+    req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+    req.setRawHeader("Accept-Encoding", "gzip, deflate");
+    req.setRawHeader("Referer", QString("%1://%2").arg(url.scheme(), url.host()).toUtf8());
+    Q_ASSERT(m_nam);
+    auto *reply  = m_nam->get(req);
+    auto *helper = new NetworkReplyHelper(reply);
+    helper->setTimeout(10000);
+    connect(helper, &NetworkReplyHelper::done, this, &PreviewPage::onRequestRemoteImageDoneThenCopy);
 }
 
 void PreviewPage::copyLocalImage(const QString &filePath)

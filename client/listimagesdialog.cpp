@@ -121,14 +121,17 @@ QPixmap ListImagesDialog::pixmapFromString(const QString &image)
 {
     if (image.startsWith("file://"))
     {
-        QPixmap pixmap(image.mid(8));
+        QUrl    url(image);
+        QPixmap pixmap(url.toLocalFile());
         return pixmap;
     }
     else if (image.startsWith("http://") || image.startsWith("https://"))
     {
-        QNetworkRequest req(image);
+        QUrl            url(image);
+        QNetworkRequest req(url);
         req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
         req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+        req.setRawHeader("Referer", QString("%1://%2").arg(url.scheme(), url.host()).toUtf8());
         Q_ASSERT(m_nam);
         auto *reply  = m_nam->get(req);
         auto *helper = new NetworkReplyHelper(reply);

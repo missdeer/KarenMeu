@@ -20,6 +20,9 @@ public slots:
     void onEditorScrollMoved(int pos, int max);
     void onEmbeded();
 
+private slots:
+    void onRequestRemoteImageDoneThenCopy();
+
 protected:
     bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool isMainFrame);
 

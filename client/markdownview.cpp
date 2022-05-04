@@ -857,10 +857,12 @@ void MarkdownView::renderMarkdownToHTML()
     updatePreviewScrollBar();
     for (const auto &[cacheKey, u] : qAsConst(imagesToDownload))
     {
-        QNetworkRequest req(u);
+        QUrl            url(u);
+        QNetworkRequest req(url);
         req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
         req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
         req.setAttribute(QNetworkRequest::Attribute(QNetworkRequest::User + 1), cacheKey);
+        req.setRawHeader("Referer", QString("%1://%2").arg(url.scheme(), url.host()).toUtf8());
         Q_ASSERT(m_nam);
 #if !defined(QT_NO_DEBUG)
         qDebug() << "request" << u;
