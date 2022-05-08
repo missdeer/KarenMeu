@@ -566,15 +566,6 @@ jobs:
           lib /def:utils.def /name:utils.dll /out:utils.lib /MACHINE:${{ matrix.msvc_arch }}
           dir
           cd ..
-
-      - name: Set up clang for Windows
-        shell: cmd
-        run: |
-          mkdir llvm
-          cd llvm
-          curl.exe -o LLVM.7z -L ${{ secrets.CLANG_SERVER }}/${{ matrix.clang_link }}
-          7z.exe x LLVM.7z
-          cd ..
       
       - name: Set up jom
         shell: cmd
