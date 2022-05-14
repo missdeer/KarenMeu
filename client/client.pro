@@ -46,7 +46,7 @@ SOURCES += \
         $$PWD/translatehelperpage.cpp \
         $$PWD/translateoutputwidget.cpp \
         $$PWD/clientutils.cpp \
-        $$PWD/markdowneditor4/markdowneditor4.cpp \
+        $$PWD/markdowneditor/markdowneditor.cpp \
         $$PWD/templatemanagerdialog.cpp \
         $$PWD/template.cpp \
         $$PWD/templatemanager.cpp \
@@ -81,7 +81,7 @@ HEADERS += \
         $$PWD/translatehelperpage.h \
         $$PWD/translateoutputwidget.h \
         $$PWD/clientutils.h \
-        $$PWD/markdowneditor4/markdowneditor4.h \
+        $$PWD/markdowneditor/markdowneditor.h \
         $$PWD/templatemanagerdialog.h \
         $$PWD/template.h \
         $$PWD/templatemanager.h \
@@ -110,7 +110,7 @@ FORMS += \
         $$PWD/findreplacedialog.ui \
         $$PWD/listimagesdialog.ui
 
-INCLUDEPATH += $$PWD $$PWD/markdowneditor4  $$PWD/../utils $$PWD/translator
+INCLUDEPATH += $$PWD $$PWD/markdowneditor  $$PWD/../utils $$PWD/translator
 LIBS += -L$$PWD/../utils
 
 # Default rules for deployment.

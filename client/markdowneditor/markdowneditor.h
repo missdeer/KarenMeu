@@ -4,14 +4,14 @@
 #include <vtextedit/markdowneditorconfig.h>
 #include <vtextedit/vmarkdowneditor.h>
 
-class MarkdownEditor4 : public vte::VMarkdownEditor
+class MarkdownEditor : public vte::VMarkdownEditor
 {
     Q_OBJECT
 public:
-    explicit MarkdownEditor4(QWidget *parent = nullptr);
-    explicit MarkdownEditor4(const QSharedPointer<vte::MarkdownEditorConfig> &config,
-                             const QSharedPointer<vte::TextEditorParameters> &param,
-                             QWidget *                                        parent = nullptr);
+    explicit MarkdownEditor(QWidget *parent = nullptr);
+    explicit MarkdownEditor(const QSharedPointer<vte::MarkdownEditorConfig> &config,
+                            const QSharedPointer<vte::TextEditorParameters> &param,
+                            QWidget                                         *parent = nullptr);
 
     void       initialize();
     void       setContent(const QString &content);

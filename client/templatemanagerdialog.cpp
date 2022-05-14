@@ -2,7 +2,7 @@
 
 #include "templatemanagerdialog.h"
 
-#include "markdowneditor4.h"
+#include "markdowneditor.h"
 #include "templatemanager.h"
 #include "ui_templatemanagerdialog.h"
 

@@ -9,36 +9,35 @@
 #include <QTextEdit>
 #include <QtCore>
 
-#include "markdowneditor4.h"
 #include "clientutils.h"
+#include "markdowneditor.h"
 #include "settings.h"
 
-MarkdownEditor4::MarkdownEditor4(QWidget *parent)
-    : vte::VMarkdownEditor(g_settings->markdownEditorConfig(), g_settings->textEditorParameters(), parent)
+MarkdownEditor::MarkdownEditor(QWidget *parent) : vte::VMarkdownEditor(g_settings->markdownEditorConfig(), g_settings->textEditorParameters(), parent)
 {
     setupChildWidgets();
 }
 
-MarkdownEditor4::MarkdownEditor4(const QSharedPointer<vte::MarkdownEditorConfig> &config,
-                                 const QSharedPointer<vte::TextEditorParameters> &param,
-                                 QWidget *                                        parent)
+MarkdownEditor::MarkdownEditor(const QSharedPointer<vte::MarkdownEditorConfig> &config,
+                               const QSharedPointer<vte::TextEditorParameters> &param,
+                               QWidget                                         *parent)
     : vte::VMarkdownEditor(config, param, parent)
 {
     setupChildWidgets();
 }
 
-void MarkdownEditor4::setupChildWidgets()
+void MarkdownEditor::setupChildWidgets()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
-    connect(editor, &QTextEdit::textChanged, this, &MarkdownEditor4::contentModified);
+    connect(editor, &QTextEdit::textChanged, this, &MarkdownEditor::contentModified);
     auto scrollBar = editor->verticalScrollBar();
     Q_ASSERT(scrollBar);
     connect(scrollBar, &QScrollBar::valueChanged, [this, scrollBar](int) { emit scrollValueChanged(scrollBar->value(), scrollBar->maximum()); });
     connect(scrollBar, &QScrollBar::rangeChanged, [this, scrollBar](int, int) { emit scrollValueChanged(scrollBar->value(), scrollBar->maximum()); });
 }
 
-void MarkdownEditor4::initialize()
+void MarkdownEditor::initialize()
 {
     vte::VTextEdit *editor = getTextEdit();
     ClientUtils::InitializeWidgetFont(static_cast<QWidget *>(editor));
@@ -47,32 +46,32 @@ void MarkdownEditor4::initialize()
 #endif
 }
 
-void MarkdownEditor4::setContent(const QString &content)
+void MarkdownEditor::setContent(const QString &content)
 {
     setText(content);
 }
 
-void MarkdownEditor4::setContent(const QByteArray &content)
+void MarkdownEditor::setContent(const QByteArray &content)
 {
     setText(content);
 }
 
-QByteArray MarkdownEditor4::content()
+QByteArray MarkdownEditor::content()
 {
     return getText().toUtf8();
 }
 
-bool MarkdownEditor4::modify()
+bool MarkdownEditor::modify()
 {
     return isModified();
 }
 
-void MarkdownEditor4::setSavePoint()
+void MarkdownEditor::setSavePoint()
 {
     document()->setModified(false);
 }
 
-void MarkdownEditor4::emptyUndoBuffer()
+void MarkdownEditor::emptyUndoBuffer()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
@@ -81,76 +80,76 @@ void MarkdownEditor4::emptyUndoBuffer()
     doc->clearUndoRedoStacks();
 }
 
-void MarkdownEditor4::clear()
+void MarkdownEditor::clear()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
     editor->clear();
 }
 
-void MarkdownEditor4::copy()
+void MarkdownEditor::copy()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
     editor->copy();
 }
 
-void MarkdownEditor4::cut()
+void MarkdownEditor::cut()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
     editor->cut();
 }
 
-void MarkdownEditor4::paste()
+void MarkdownEditor::paste()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
     editor->paste();
 }
 
-void MarkdownEditor4::undo()
+void MarkdownEditor::undo()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
     editor->undo();
 }
 
-void MarkdownEditor4::redo()
+void MarkdownEditor::redo()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
     editor->redo();
 }
 
-void MarkdownEditor4::selectAll()
+void MarkdownEditor::selectAll()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
     editor->selectAll();
 }
 
-void MarkdownEditor4::formatStrong()
+void MarkdownEditor::formatStrong()
 {
     applyFormatter("**");
 }
 
-void MarkdownEditor4::formatEmphasize()
+void MarkdownEditor::formatEmphasize()
 {
     applyFormatter("*");
 }
 
-void MarkdownEditor4::formatStrikethrough()
+void MarkdownEditor::formatStrikethrough()
 {
     applyFormatter("~~");
 }
 
-void MarkdownEditor4::formatInlineCode()
+void MarkdownEditor::formatInlineCode()
 {
     applyFormatter("`");
 }
 
-void MarkdownEditor4::formatCodeBlock()
+void MarkdownEditor::formatCodeBlock()
 {
     QTextCursor c = textCursor();
     c.beginEditBlock();
@@ -196,7 +195,7 @@ void MarkdownEditor4::formatCodeBlock()
     setTextCursor(c);
 }
 
-void MarkdownEditor4::formatComment()
+void MarkdownEditor::formatComment()
 {
     QTextCursor cursor = textCursor();
     cursor.beginEditBlock();
@@ -215,7 +214,7 @@ void MarkdownEditor4::formatComment()
     setTextCursor(cursor);
 }
 
-void MarkdownEditor4::formatOrderedList()
+void MarkdownEditor::formatOrderedList()
 {
     QTextCursor c = textCursor();
     c.beginEditBlock();
@@ -248,17 +247,17 @@ void MarkdownEditor4::formatOrderedList()
     setTextCursor(c);
 }
 
-void MarkdownEditor4::formatUnorderedList()
+void MarkdownEditor::formatUnorderedList()
 {
     formatHeading("* ");
 }
 
-void MarkdownEditor4::formatBlockquote()
+void MarkdownEditor::formatBlockquote()
 {
     formatHeading("> ");
 }
 
-void MarkdownEditor4::formatHyperlink()
+void MarkdownEditor::formatHyperlink()
 {
     QTextCursor c = textCursor();
     c.beginEditBlock();
@@ -285,7 +284,7 @@ void MarkdownEditor4::formatHyperlink()
     setTextCursor(c);
 }
 
-void MarkdownEditor4::formatImage()
+void MarkdownEditor::formatImage()
 {
     QTextCursor c = textCursor();
     c.beginEditBlock();
@@ -312,7 +311,7 @@ void MarkdownEditor4::formatImage()
     setTextCursor(c);
 }
 
-void MarkdownEditor4::formatNewParagraph()
+void MarkdownEditor::formatNewParagraph()
 {
     QTextCursor c = textCursor();
     c.insertText("\n");
@@ -320,7 +319,7 @@ void MarkdownEditor4::formatNewParagraph()
     setTextCursor(c);
 }
 
-void MarkdownEditor4::formatHorizontalRule()
+void MarkdownEditor::formatHorizontalRule()
 {
     QTextCursor c = textCursor();
     c.insertText("---\n");
@@ -328,42 +327,42 @@ void MarkdownEditor4::formatHorizontalRule()
     setTextCursor(c);
 }
 
-void MarkdownEditor4::formatHeader1()
+void MarkdownEditor::formatHeader1()
 {
     formatHeading("# ");
 }
 
-void MarkdownEditor4::formatHeader2()
+void MarkdownEditor::formatHeader2()
 {
     formatHeading("## ");
 }
 
-void MarkdownEditor4::formatHeader3()
+void MarkdownEditor::formatHeader3()
 {
     formatHeading("### ");
 }
 
-void MarkdownEditor4::formatHeader4()
+void MarkdownEditor::formatHeader4()
 {
     formatHeading("#### ");
 }
 
-void MarkdownEditor4::formatHeader5()
+void MarkdownEditor::formatHeader5()
 {
     formatHeading("##### ");
 }
 
-void MarkdownEditor4::formatHeader6()
+void MarkdownEditor::formatHeader6()
 {
     formatHeading("###### ");
 }
 
-void MarkdownEditor4::formatShiftRight()
+void MarkdownEditor::formatShiftRight()
 {
     formatHeading("  ");
 }
 
-void MarkdownEditor4::formatShiftLeft()
+void MarkdownEditor::formatShiftLeft()
 {
     QTextCursor c = textCursor();
     c.beginEditBlock();
@@ -408,13 +407,14 @@ void MarkdownEditor4::formatShiftLeft()
     setTextCursor(c);
 }
 
-void MarkdownEditor4::insertText(const QString &text) {
-  vte::VTextEdit *editor = getTextEdit();
-  Q_ASSERT(editor);
-  editor->insertPlainText(text);
+void MarkdownEditor::insertText(const QString &text)
+{
+    vte::VTextEdit *editor = getTextEdit();
+    Q_ASSERT(editor);
+    editor->insertPlainText(text);
 }
 
-bool MarkdownEditor4::undoFormatting(const QString &formatter)
+bool MarkdownEditor::undoFormatting(const QString &formatter)
 {
     QTextCursor c               = textCursor();
     c.beginEditBlock();
@@ -439,7 +439,7 @@ bool MarkdownEditor4::undoFormatting(const QString &formatter)
     return false;
 }
 
-void MarkdownEditor4::applyFormatter(const QString &formatter)
+void MarkdownEditor::applyFormatter(const QString &formatter)
 {
     QTextCursor c = textCursor();
     c.beginEditBlock();
@@ -467,7 +467,7 @@ void MarkdownEditor4::applyFormatter(const QString &formatter)
     setTextCursor(c);
 }
 
-int MarkdownEditor4::cursorDocumentLineNumber(QTextCursor *cursor)
+int MarkdownEditor::cursorDocumentLineNumber(QTextCursor *cursor)
 {
     QTextDocument *doc  = document();
     QTextBlock     blk  = doc->findBlock(cursor->position());
@@ -483,7 +483,7 @@ int MarkdownEditor4::cursorDocumentLineNumber(QTextCursor *cursor)
     return i;
 }
 
-int MarkdownEditor4::cursorEditorLineNumber(QTextCursor *cursor)
+int MarkdownEditor::cursorEditorLineNumber(QTextCursor *cursor)
 {
     const QTextBlock block = cursor->block();
     if (!block.isValid())
@@ -501,7 +501,7 @@ int MarkdownEditor4::cursorEditorLineNumber(QTextCursor *cursor)
     return textLine.lineNumber();
 }
 
-void MarkdownEditor4::replaceCurrentLineText(const QString &text)
+void MarkdownEditor::replaceCurrentLineText(const QString &text)
 {
     QTextCursor cursor = textCursor();
     cursor.movePosition(QTextCursor::StartOfLine);
@@ -509,7 +509,7 @@ void MarkdownEditor4::replaceCurrentLineText(const QString &text)
     cursor.insertText(text);
 }
 
-void MarkdownEditor4::formatHeading(const QString &heading)
+void MarkdownEditor::formatHeading(const QString &heading)
 {
     QTextCursor c = textCursor();
     c.beginEditBlock();
@@ -545,21 +545,21 @@ void MarkdownEditor4::formatHeading(const QString &heading)
     setTextCursor(c);
 }
 
-QTextCursor MarkdownEditor4::textCursor() const
+QTextCursor MarkdownEditor::textCursor() const
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
     return editor->textCursor();
 }
 
-void MarkdownEditor4::setTextCursor(const QTextCursor &cursor)
+void MarkdownEditor::setTextCursor(const QTextCursor &cursor)
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
     editor->setTextCursor(cursor);
 }
 
-int MarkdownEditor4::currentDocumentLineNumber()
+int MarkdownEditor::currentDocumentLineNumber()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
@@ -567,7 +567,7 @@ int MarkdownEditor4::currentDocumentLineNumber()
     return cursorDocumentLineNumber(&cursor);
 }
 
-int MarkdownEditor4::currentEditorLineNumber()
+int MarkdownEditor::currentEditorLineNumber()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
@@ -575,7 +575,7 @@ int MarkdownEditor4::currentEditorLineNumber()
     return cursorEditorLineNumber(&cursor);
 }
 
-int MarkdownEditor4::documentLineCount()
+int MarkdownEditor::documentLineCount()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
@@ -584,7 +584,7 @@ int MarkdownEditor4::documentLineCount()
     return doc->blockCount();
 }
 
-int MarkdownEditor4::editorLineCount()
+int MarkdownEditor::editorLineCount()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
@@ -600,7 +600,7 @@ int MarkdownEditor4::editorLineCount()
     return lineCount;
 }
 
-int MarkdownEditor4::visibleLineCount()
+int MarkdownEditor::visibleLineCount()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
@@ -610,7 +610,7 @@ int MarkdownEditor4::visibleLineCount()
     return (doc->size().height() - 2 * margin) / editor->fontMetrics().height();
 }
 
-int MarkdownEditor4::firstVisibleDocumentLineNumber()
+int MarkdownEditor::firstVisibleDocumentLineNumber()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
@@ -618,7 +618,7 @@ int MarkdownEditor4::firstVisibleDocumentLineNumber()
     return cursorDocumentLineNumber(&cursor);
 }
 
-int MarkdownEditor4::firstVisibleEditorLineNumber()
+int MarkdownEditor::firstVisibleEditorLineNumber()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
@@ -626,7 +626,7 @@ int MarkdownEditor4::firstVisibleEditorLineNumber()
     return cursorEditorLineNumber(&cursor);
 }
 
-int MarkdownEditor4::lastVisibleDocumentLineNumber()
+int MarkdownEditor::lastVisibleDocumentLineNumber()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);
@@ -635,7 +635,7 @@ int MarkdownEditor4::lastVisibleDocumentLineNumber()
     return cursorDocumentLineNumber(&cursor);
 }
 
-int MarkdownEditor4::lastVisibleEditorLineNumber()
+int MarkdownEditor::lastVisibleEditorLineNumber()
 {
     vte::VTextEdit *editor = getTextEdit();
     Q_ASSERT(editor);

@@ -43,7 +43,7 @@
 #include "filecache.h"
 #include "findreplacedialog.h"
 #include "googletranslator.h"
-#include "markdowneditor4.h"
+#include "markdowneditor.h"
 #include "markdownview.h"
 #include "plantumlsourceeditor.h"
 #include "preferencedialog.h"

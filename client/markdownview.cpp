@@ -22,7 +22,7 @@
 #include "clientutils.h"
 #include "filecache.h"
 #include "listimagesdialog.h"
-#include "markdowneditor4.h"
+#include "markdowneditor.h"
 #include "networkreplyhelper.h"
 #include "plantumlrunner.h"
 #include "plantumlurlcodec.h"
@@ -40,7 +40,7 @@ static auto      g_loadingGif   = QStringLiteral("https://miro.medium.com/max/10
 MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget *parent)
     : QWidget(parent),
       m_splitter(new QSplitter(this)),
-      m_editor(new MarkdownEditor4(g_settings->markdownEditorConfig(), g_settings->textEditorParameters(), this)),
+      m_editor(new MarkdownEditor(g_settings->markdownEditorConfig(), g_settings->textEditorParameters(), this)),
       m_preview(new QWebEngineView(this)),
       m_convertTimer(new QTimer),
       m_nam(nam),
@@ -68,36 +68,36 @@ MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWi
     setLayout(layout);
     m_splitter->setSizes(QList<int>() << width() / 2 << width() / 2);
     m_editor->initialize();
-    connect(m_editor, &MarkdownEditor4::contentModified, this, &MarkdownView::documentModified);
-    connect(this, &MarkdownView::formatStrong, m_editor, &MarkdownEditor4::formatStrong);
-    connect(this, &MarkdownView::formatEmphasize, m_editor, &MarkdownEditor4::formatEmphasize);
-    connect(this, &MarkdownView::formatStrikethrough, m_editor, &MarkdownEditor4::formatStrikethrough);
-    connect(this, &MarkdownView::formatInlineCode, m_editor, &MarkdownEditor4::formatInlineCode);
-    connect(this, &MarkdownView::formatCodeBlock, m_editor, &MarkdownEditor4::formatCodeBlock);
-    connect(this, &MarkdownView::formatComment, m_editor, &MarkdownEditor4::formatComment);
-    connect(this, &MarkdownView::formatOrderedList, m_editor, &MarkdownEditor4::formatOrderedList);
-    connect(this, &MarkdownView::formatUnorderedList, m_editor, &MarkdownEditor4::formatUnorderedList);
-    connect(this, &MarkdownView::formatBlockquote, m_editor, &MarkdownEditor4::formatBlockquote);
-    connect(this, &MarkdownView::formatHyperlink, m_editor, &MarkdownEditor4::formatHyperlink);
-    connect(this, &MarkdownView::formatImage, m_editor, &MarkdownEditor4::formatImage);
-    connect(this, &MarkdownView::formatNewParagraph, m_editor, &MarkdownEditor4::formatNewParagraph);
-    connect(this, &MarkdownView::formatHorizontalRule, m_editor, &MarkdownEditor4::formatHorizontalRule);
-    connect(this, &MarkdownView::formatHeader1, m_editor, &MarkdownEditor4::formatHeader1);
-    connect(this, &MarkdownView::formatHeader2, m_editor, &MarkdownEditor4::formatHeader2);
-    connect(this, &MarkdownView::formatHeader3, m_editor, &MarkdownEditor4::formatHeader3);
-    connect(this, &MarkdownView::formatHeader4, m_editor, &MarkdownEditor4::formatHeader4);
-    connect(this, &MarkdownView::formatHeader5, m_editor, &MarkdownEditor4::formatHeader5);
-    connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor4::formatHeader6);
-    connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor4::formatShiftRight);
-    connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor4::formatShiftLeft);
+    connect(m_editor, &MarkdownEditor::contentModified, this, &MarkdownView::documentModified);
+    connect(this, &MarkdownView::formatStrong, m_editor, &MarkdownEditor::formatStrong);
+    connect(this, &MarkdownView::formatEmphasize, m_editor, &MarkdownEditor::formatEmphasize);
+    connect(this, &MarkdownView::formatStrikethrough, m_editor, &MarkdownEditor::formatStrikethrough);
+    connect(this, &MarkdownView::formatInlineCode, m_editor, &MarkdownEditor::formatInlineCode);
+    connect(this, &MarkdownView::formatCodeBlock, m_editor, &MarkdownEditor::formatCodeBlock);
+    connect(this, &MarkdownView::formatComment, m_editor, &MarkdownEditor::formatComment);
+    connect(this, &MarkdownView::formatOrderedList, m_editor, &MarkdownEditor::formatOrderedList);
+    connect(this, &MarkdownView::formatUnorderedList, m_editor, &MarkdownEditor::formatUnorderedList);
+    connect(this, &MarkdownView::formatBlockquote, m_editor, &MarkdownEditor::formatBlockquote);
+    connect(this, &MarkdownView::formatHyperlink, m_editor, &MarkdownEditor::formatHyperlink);
+    connect(this, &MarkdownView::formatImage, m_editor, &MarkdownEditor::formatImage);
+    connect(this, &MarkdownView::formatNewParagraph, m_editor, &MarkdownEditor::formatNewParagraph);
+    connect(this, &MarkdownView::formatHorizontalRule, m_editor, &MarkdownEditor::formatHorizontalRule);
+    connect(this, &MarkdownView::formatHeader1, m_editor, &MarkdownEditor::formatHeader1);
+    connect(this, &MarkdownView::formatHeader2, m_editor, &MarkdownEditor::formatHeader2);
+    connect(this, &MarkdownView::formatHeader3, m_editor, &MarkdownEditor::formatHeader3);
+    connect(this, &MarkdownView::formatHeader4, m_editor, &MarkdownEditor::formatHeader4);
+    connect(this, &MarkdownView::formatHeader5, m_editor, &MarkdownEditor::formatHeader5);
+    connect(this, &MarkdownView::formatHeader6, m_editor, &MarkdownEditor::formatHeader6);
+    connect(this, &MarkdownView::formatShiftRight, m_editor, &MarkdownEditor::formatShiftRight);
+    connect(this, &MarkdownView::formatShiftLeft, m_editor, &MarkdownEditor::formatShiftLeft);
     connect(this, &MarkdownView::insertText, m_editor,
-            &MarkdownEditor4::insertText);
+            &MarkdownEditor::insertText);
 
     auto *page = new PreviewPage(nam, this);
     m_preview->setPage(page);
     connect(page, &PreviewPage::allImagesEmbeded, this, &MarkdownView::onAllImagesEmbeded);
     connect(page, &PreviewPage::gotAllImages, this, &MarkdownView::onGotAllImages);
-    connect(m_editor, &MarkdownEditor4::scrollValueChanged, this, &MarkdownView::updatePreviewScrollBar);
+    connect(m_editor, &MarkdownEditor::scrollValueChanged, this, &MarkdownView::updatePreviewScrollBar);
     Q_ASSERT(m_editor->document());
     connect(m_editor->document(), &QTextDocument::cursorPositionChanged, this, &MarkdownView::updatePreviewScrollBar);
 
@@ -488,7 +488,7 @@ void MarkdownView::setInitialDocument(const QString &content)
     m_editor->emptyUndoBuffer();
 }
 
-MarkdownEditor4 *MarkdownView::editor()
+MarkdownEditor *MarkdownView::editor()
 {
     return m_editor;
 }

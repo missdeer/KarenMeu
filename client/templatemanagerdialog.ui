@@ -93,7 +93,7 @@
     </widget>
    </item>
    <item>
-    <widget class="MarkdownEditor4" name="edtContent" native="true"/>
+    <widget class="MarkdownEditor" name="edtContent" native="true"/>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -109,9 +109,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>MarkdownEditor4</class>
+   <class>MarkdownEditor</class>
    <extends>QWidget</extends>
-   <header>markdowneditor4.h</header>
+   <header>markdowneditor.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

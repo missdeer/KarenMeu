@@ -11,7 +11,7 @@ QT_FORWARD_DECLARE_CLASS(QTimer);
 QT_FORWARD_DECLARE_CLASS(QResizeEvent);
 QT_FORWARD_DECLARE_CLASS(QWebEnginePage);
 QT_FORWARD_DECLARE_CLASS(QNetworkAccessManager);
-class MarkdownEditor4;
+class MarkdownEditor;
 class PreviewThemeEditor;
 class PlantUMLUrlCodec;
 class PlantUMLRunner;
@@ -31,7 +31,7 @@ public:
     void             updateMacStyleCodeBlock();
     void             openFromFile(const QString &fileName);
     void             setInitialDocument(const QString &content);
-    MarkdownEditor4 *editor();
+    MarkdownEditor *editor();
     [[nodiscard]] QString selectedText() const;
     [[nodiscard]] QString fullText() const;
     QSplitter *      splitter();
@@ -99,7 +99,7 @@ protected:
 private:
     bool                   m_modified {false};
     QSplitter *            m_splitter;
-    MarkdownEditor4 *      m_editor;
+    MarkdownEditor *      m_editor;
     QWebEngineView *       m_preview;
     QTimer *               m_convertTimer;
     QNetworkAccessManager *m_nam;
