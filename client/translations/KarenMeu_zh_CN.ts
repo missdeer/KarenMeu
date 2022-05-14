@@ -1079,7 +1079,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="982"/>
         <source>WebDAV</source>
-        <translation type="unfinished"></translation>
+        <translation>WebDAV</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1050"/>
@@ -1344,17 +1344,17 @@
     <message>
         <location filename="../preferencedialog.cpp" line="119"/>
         <source>Notice</source>
-        <translation type="unfinished">注意</translation>
+        <translation>注意</translation>
     </message>
     <message>
         <location filename="../preferencedialog.cpp" line="119"/>
         <source>This server seems ok.</source>
-        <translation type="unfinished"></translation>
+        <translation>服务器正常。</translation>
     </message>
     <message>
         <location filename="../preferencedialog.cpp" line="125"/>
         <source>Error</source>
-        <translation type="unfinished">错误</translation>
+        <translation>错误</translation>
     </message>
     <message>
         <location filename="../preferencedialog.cpp" line="147"/>
@@ -1374,12 +1374,12 @@
     <message>
         <location filename="../preferencedialog.cpp" line="218"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../preferencedialog.cpp" line="218"/>
         <source>This WebDAV server exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>此WebDAV服务器已存在。</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="128"/>
@@ -1661,22 +1661,22 @@
     <message>
         <location filename="../preferencedialog.ui" line="534"/>
         <source>WebDAV</source>
-        <translation type="unfinished"></translation>
+        <translation>WebDAV</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="583"/>
         <source>&amp;Test</source>
-        <translation type="unfinished"></translation>
+        <translation>测试(&amp;T)</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="593"/>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>新增(&amp;A)</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="600"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>删除(&amp;R)</translation>
     </message>
     <message>
         <location filename="../preferencedialog.ui" line="545"/>
