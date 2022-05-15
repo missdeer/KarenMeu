@@ -43,7 +43,7 @@
 static inline uint32_t ColorFromRGBHex(uint32_t hex) noexcept
 {
 #if defined(_M_AMD64) || defined(__amd64__) || defined(__x86_64)
-    return bswap32(hex) >> sizeof(uint8_t);
+    return bswap32(hex) >> 8;
 #else
     return ((hex & 0xFF0000) >> 16) | (hex & 0xFF00) | ((hex & 0xFF) << 16);
 #endif
