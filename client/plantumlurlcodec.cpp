@@ -1,5 +1,6 @@
 #include <array>
 #include <cassert>
+#include <cstring>
 #include <sstream>
 #include <stdexcept>
 
@@ -26,7 +27,7 @@ std::string PlantUMLUrlCodec::Decode(const std::string &data)
 std::string PlantUMLUrlCodec::uncompressInflate(const std::string &str)
 {
     z_stream zs; // z_stream is zlib's control structure
-    memset(&zs, 0, sizeof(zs));
+    std::memset(&zs, 0, sizeof(zs));
 
     if (inflateInit(&zs) != Z_OK)
     {
@@ -140,7 +141,7 @@ std::string PlantUMLUrlCodec::decode64(const std::string &s)
 void PlantUMLUrlCodec::initialize()
 {
     unsigned char encode6bitTable[64] = {0};
-    memset(m_decode6bit, 0, sizeof(m_decode6bit));
+    std::memset(m_decode6bit, 0, sizeof(m_decode6bit));
     for (unsigned char b = 0; b < 64; b++)
     {
         encode6bitTable[b]               = encode6bit(b);
@@ -151,7 +152,7 @@ void PlantUMLUrlCodec::initialize()
 std::string PlantUMLUrlCodec::compressDeflate(const std::string &str, int compressionlevel)
 {
     z_stream zs; // z_stream is zlib's control structure
-    memset(&zs, 0, sizeof(zs));
+    std::memset(&zs, 0, sizeof(zs));
 
     if (deflateInit(&zs, compressionlevel) != Z_OK)
     {
