@@ -10,7 +10,7 @@ public:
     explicit WebBrowserAddressBar(QWidget *parent = nullptr);
 
 protected:
-    virtual void focusInEvent(QFocusEvent *e) override;
+    void focusInEvent(QFocusEvent *e) override;
 };
 
 #endif // WEBBROWSERADDRESSBAR_H

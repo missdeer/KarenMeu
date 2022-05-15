@@ -14,7 +14,7 @@ void PreviewThemeEditor::initialize(const QString &lexer)
     m_sc->initLexerStyle(lexer);
 
     Q_ASSERT(m_editor);
-    auto layout = new QVBoxLayout();
+    auto *layout = new QVBoxLayout();
     layout->setSpacing(0);
     layout->setMargin(0);
     layout->addWidget(m_editor);

@@ -1,9 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QList>
+#include <array>
+
 #include <QMainWindow>
 #include <QNetworkAccessManager>
+#include <QVector>
 
 namespace Ui
 {
@@ -37,7 +39,7 @@ struct SampleResult
 {
     QString              samplePath;
     QToolBox            *sampleToolBox;
-    QList<QListWidget *> sampleWidgets;
+    QVector<QListWidget *> sampleWidgets;
 };
 
 class MainWindow : public QMainWindow
@@ -47,10 +49,10 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
-    MainWindow(const MainWindow &) = delete;
-    MainWindow(MainWindow &&)      = delete;
+    MainWindow(const MainWindow &)     = delete;
+    MainWindow(MainWindow &&)          = delete;
     void operator=(const MainWindow &) = delete;
-    void operator=(MainWindow &&) = delete;
+    void operator=(MainWindow &&)      = delete;
 
     void openFile(const QString &fileName);
 private slots:
@@ -76,7 +78,7 @@ private slots:
     void onCurrentCodeBlockStyleChanged(const QString &text);
     void onCurrentPreviewThemeChanged(const QString &text);
     void onCustomPreviewThemeChanged();
-    void onYoudaoDictResult(QString res);
+    void onYoudaoDictResult(const QString &res);
     void onNewFromTemplateTriggered();
     void onDocumentModified();
     void onWebBrowserSelectionChangedTimeout();
@@ -135,41 +137,50 @@ private:
         FullScreen,
     };
 
-    Ui::MainWindow *              ui;
-    FileCache *                   m_fileCache;
-    MarkdownView *                m_view;
-    QFileSystemModel *            m_fsModel;
-    QTreeView *                   m_fsView;
-    QTreeView *                   m_webDAVView;
-    QComboBox *                   m_cbPreviewMode;
-    QComboBox *                   m_cbMarkdownEngine;
-    QComboBox *                   m_cbCodeBlockStyle;
-    QComboBox *                   m_cbPreviewTheme;
-    TranslateOutputWidget *       m_googleTranslateEditor;
-    TranslateOutputWidget *       m_baiduTranslateEditor;
-    TranslateOutputWidget *       m_youdaoTranslateEditor;
-    TranslateOutputWidget *       m_sogouTranslateEditor;
-    TranslateOutputWidget *       m_deepLTranslateEditor;
-    QPlainTextEdit *              m_youdaoDictionaryEditor;
-    PreviewThemeEditor *          m_previewHTMLEditor;
-    PlantUMLSourceEditor         *m_sampleSourcePreview;
-    QTabWidget                   *m_tabWidgetSampleResult;
-    QList<SampleResult *>         m_sampleResults;
-    CustomPreviewThemeEditWidget *m_customPreivewThemeEditor;
-    QList<QToolBar *>             m_visibleToolbars;
-    YoudaoDict *                  m_youdaoDict;
-    WebBrowser *                  m_webBrowser {nullptr};
-    QCompleter *                  m_urlCompleter {nullptr};
-    QTimer *                      m_webPageSelectionChangedTimer {nullptr};
-    TemplateManager *             m_templateManager;
-    QSignalMapper                *m_sampleInsertSignalMapper;
-    QAction *                     recentFileActs[MaxRecentFiles];
-    QAction *                     recentWorkspaceActs[MaxRecentFiles];
-    QList<QAction *>              m_newFromTemplateActions;
-    QString                       m_currentOpenedFile;
-    QStringList                   m_urlCompleterModel;
-    QNetworkAccessManager         m_nam;
-    int                           m_lastWindowState;
+    Ui::MainWindow                       *ui;
+    FileCache                            *m_fileCache;
+    MarkdownView                         *m_view;
+    QFileSystemModel                     *m_fsModel {nullptr};
+    QTreeView                            *m_fsView {nullptr};
+    QTreeView                            *m_webDAVView {nullptr};
+    QComboBox                            *m_cbPreviewMode {nullptr};
+    QComboBox                            *m_cbMarkdownEngine {nullptr};
+    QComboBox                            *m_cbCodeBlockStyle {nullptr};
+    QComboBox                            *m_cbPreviewTheme {nullptr};
+    TranslateOutputWidget                *m_googleTranslateEditor {nullptr};
+    TranslateOutputWidget                *m_baiduTranslateEditor {nullptr};
+    TranslateOutputWidget                *m_youdaoTranslateEditor {nullptr};
+    TranslateOutputWidget                *m_sogouTranslateEditor {nullptr};
+    TranslateOutputWidget                *m_deepLTranslateEditor {nullptr};
+    QPlainTextEdit                       *m_youdaoDictionaryEditor {nullptr};
+    PreviewThemeEditor                   *m_previewHTMLEditor {nullptr};
+    PlantUMLSourceEditor                 *m_sampleSourcePreview {nullptr};
+    QTabWidget                           *m_tabWidgetSampleResult {nullptr};
+    QVector<SampleResult *>               m_sampleResults;
+    CustomPreviewThemeEditWidget         *m_customPreivewThemeEditor {nullptr};
+    QVector<QToolBar *>                   m_visibleToolbars;
+    YoudaoDict                           *m_youdaoDict;
+    WebBrowser                           *m_webBrowser {nullptr};
+    QCompleter                           *m_urlCompleter {nullptr};
+    QTimer                               *m_webPageSelectionChangedTimer {nullptr};
+    TemplateManager                      *m_templateManager;
+    QSignalMapper                        *m_sampleInsertSignalMapper;
+    std::array<QAction *, MaxRecentFiles> recentFileActs;
+    std::array<QAction *, MaxRecentFiles> recentWorkspaceActs;
+    QVector<QAction *>                    m_newFromTemplateActions;
+    QString                               m_currentOpenedFile;
+    QStringList                           m_urlCompleterModel {"https://medium.com/@ralph.kootker",
+                                     "https://medium.com/@happy.cerberus",
+                                     "https://ggulgulia.medium.com/",
+                                     "https://brevzin.github.io/posts/",
+                                     "https://shafik.github.io/",
+                                     "https://www.foonathan.net/",
+                                     "https://www.cppstories.com/p/archive/",
+                                     "http://www.modernescpp.com/index.php",
+                                     "https://www.fluentcpp.com/",
+                                     "https://isocpp.org"};
+    QNetworkAccessManager                 m_nam;
+    int                                   m_lastWindowState;
 
     void               updateRecentFileActions(const QStringList &files);
     void               updateRecentWorkspaceActions(const QStringList &files);

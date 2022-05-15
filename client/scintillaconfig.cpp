@@ -43,7 +43,7 @@
 static inline uint32_t ColorFromRGBHex(uint32_t hex) noexcept
 {
 #if defined(_M_AMD64) || defined(__amd64__) || defined(__x86_64)
-    return bswap32(hex) >> 8;
+    return bswap32(hex) >> sizeof(uint8_t);
 #else
     return ((hex & 0xFF0000) >> 16) | (hex & 0xFF00) | ((hex & 0xFF) << 16);
 #endif
@@ -216,9 +216,11 @@ void ScintillaConfig::applyLanguageStyle(const QString &configPath, const QStrin
     QDomDocument doc;
     QFile        file(configPath);
     if (!file.open(QIODevice::ReadOnly))
+    {
         return;
+    }
     QString errMsg;
-    int     errLine;
+    int     errLine = 0;
     if (!doc.setContent(&file, &errMsg, &errLine))
     {
         file.close();
@@ -226,28 +228,34 @@ void ScintillaConfig::applyLanguageStyle(const QString &configPath, const QStrin
     }
     file.close();
 
-    QDomElement docElem       = doc.documentElement();
-    QDomElement languagesElem = docElem.firstChildElement("Languages");
+    auto docElem       = doc.documentElement();
+    auto languagesElem = docElem.firstChildElement("Languages");
 
-    QDomElement langElem = languagesElem.firstChildElement("Language");
+    auto langElem = languagesElem.firstChildElement("Language");
     while (!langElem.isNull() && langElem.attribute("name").toLower() != lang.toLower())
+    {
         langElem = langElem.nextSiblingElement("Language");
+    }
 
     if (langElem.isNull())
+    {
         return;
+    }
 
-    QString commentLine  = langElem.attribute("commentLine");
-    QString commentStart = langElem.attribute("commentStart");
-    QString commentEnd   = langElem.attribute("commentEnd");
-    QString lexer        = langElem.attribute("lexer");
+    auto commentLine  = langElem.attribute("commentLine");
+    auto commentStart = langElem.attribute("commentStart");
+    auto commentEnd   = langElem.attribute("commentEnd");
+    auto lexer        = langElem.attribute("lexer");
     if (lexer.isEmpty())
+    {
         lexer = lang;
+    }
 
-    QDomElement keywordElem = langElem.firstChildElement("Keywords");
+    auto        keywordElem = langElem.firstChildElement("Keywords");
     int         keywordSet  = 0;
     while (!keywordElem.isNull())
     {
-        QString keyword = keywordElem.text();
+        auto keyword = keywordElem.text();
         m_sci->setKeyWords(keywordSet++, keyword.toStdString().c_str());
         keywordElem = keywordElem.nextSiblingElement("Keywords");
     }
@@ -264,9 +272,11 @@ void ScintillaConfig::applyThemeStyle(const QString &themePath, const QString &l
     QDomDocument doc;
     QFile        file(themePath);
     if (!file.open(QIODevice::ReadOnly))
+    {
         return;
+    }
     QString errMsg;
-    int     errLine;
+    int     errLine = 0;
     if (!doc.setContent(&file, &errMsg, &errLine))
     {
         file.close();
@@ -274,26 +284,29 @@ void ScintillaConfig::applyThemeStyle(const QString &themePath, const QString &l
     }
     file.close();
 
-    QDomElement docElem = doc.documentElement();
+    auto docElem = doc.documentElement();
 
-    QDomElement globalStylesElem = docElem.firstChildElement("GlobalStyles");
+    auto globalStylesElem = docElem.firstChildElement("GlobalStyles");
 
-    for (QDomElement styleElem = globalStylesElem.firstChildElement("WidgetStyle"); !styleElem.isNull();
-         styleElem             = styleElem.nextSiblingElement("WidgetStyle"))
+    for (auto styleElem = globalStylesElem.firstChildElement("WidgetStyle"); !styleElem.isNull();
+         styleElem      = styleElem.nextSiblingElement("WidgetStyle"))
     {
         applyStyle(styleElem);
     }
 
-    QDomElement lexerStylesElem = docElem.firstChildElement("LexerStyles");
-    QDomElement lexerTypeElem   = lexerStylesElem.firstChildElement("LexerType");
+    auto lexerStylesElem = docElem.firstChildElement("LexerStyles");
+    auto lexerTypeElem   = lexerStylesElem.firstChildElement("LexerType");
     while (!lexerTypeElem.isNull() && lexerTypeElem.attribute("name").toLower() != lang.toLower())
+    {
         lexerTypeElem = lexerTypeElem.nextSiblingElement("LexerType");
+    }
 
     if (lexerTypeElem.isNull())
+    {
         return;
+    }
 
-    for (QDomElement styleElem = lexerTypeElem.firstChildElement("WordsStyle"); !styleElem.isNull();
-         styleElem             = styleElem.nextSiblingElement("WordsStyle"))
+    for (auto styleElem = lexerTypeElem.firstChildElement("WordsStyle"); !styleElem.isNull(); styleElem = styleElem.nextSiblingElement("WordsStyle"))
     {
         applyStyle(styleElem);
     }
@@ -304,16 +317,17 @@ void ScintillaConfig::applyStyle(const QDomElement &styleElem)
     int id = styleElem.attribute("styleID").toInt();
     if (id != 0)
     {
-        QString foreColor = styleElem.attribute("fgColor");
+        const int colorDigitBase = 16;
+        auto      foreColor      = styleElem.attribute("fgColor");
         if (!foreColor.isEmpty())
         {
-            int color = foreColor.toLong(nullptr, 16);
+            int color = foreColor.toLong(nullptr, colorDigitBase);
             m_sci->styleSetFore(id, ColorFromRGBHex(color));
         }
-        QString backColor = styleElem.attribute("bgColor");
+        auto backColor = styleElem.attribute("bgColor");
         if (!backColor.isEmpty())
         {
-            int color = backColor.toLong(nullptr, 16);
+            int color = backColor.toLong(nullptr, colorDigitBase);
             m_sci->styleSetBack(id, ColorFromRGBHex(color));
         }
     }
@@ -322,16 +336,21 @@ void ScintillaConfig::applyStyle(const QDomElement &styleElem)
         return;
     }
 
-    QString       fontName = styleElem.attribute("fontName");
+    auto          fontName = styleElem.attribute("fontName");
     QFontDatabase database;
-    QStringList   families = database.families();
+    auto          families = database.families();
     if (!fontName.isEmpty() && families.contains(fontName))
+    {
         m_sci->styleSetFont(id, fontName.toStdString().c_str());
+    }
     else
     {
         if (families.contains(g_settings->codeEditorFontFamily()))
+        {
             m_sci->styleSetFont(id, g_settings->codeEditorFontFamily().toStdString().c_str());
+        }
         else
+        {
 #if defined(Q_OS_MAC) || defined(Q_OS_IOS)
             m_sci->styleSetFont(id, "Menlo");
 #elif defined(Q_OS_WIN)
@@ -341,28 +360,58 @@ void ScintillaConfig::applyStyle(const QDomElement &styleElem)
 #else
             m_sci->styleSetFont(id, "Monospace");
 #endif
+        }
     }
 
+    const uint styleBold       = 0x01;
+    const uint styleItalic     = 0x02;
+    const uint styleUnderLine  = 0x04;
+    const uint styleVisible    = 0x08;
+    const uint styleCase       = 0x10;
+    const uint styleEOLFilled  = 0x20;
+    const uint styleHotSpot    = 0x40;
+    const uint styleChangeable = 0x80;
     uint fontStyle = styleElem.attribute("fontStyle").toUInt();
-    if (fontStyle & 0x01)
+    if (fontStyle & styleBold)
+    {
         m_sci->styleSetBold(id, true);
-    if (fontStyle & 0x02)
+    }
+    if (fontStyle & styleItalic)
+    {
         m_sci->styleSetItalic(id, true);
-    if (fontStyle & 0x04)
+    }
+    if (fontStyle & styleUnderLine)
+    {
         m_sci->styleSetUnderline(id, true);
-    if (fontStyle & 0x08)
+    }
+    if (fontStyle & styleVisible)
+    {
         m_sci->styleSetVisible(id, true);
-    if (fontStyle & 0x10)
+    }
+    if (fontStyle & styleCase)
+    {
         m_sci->styleSetCase(id, true);
-    if (fontStyle & 0x20)
+    }
+    if (fontStyle & styleEOLFilled)
+    {
         m_sci->styleSetEOLFilled(id, true);
-    if (fontStyle & 0x40)
+    }
+    if (fontStyle & styleHotSpot)
+    {
         m_sci->styleSetHotSpot(id, true);
-    if (fontStyle & 0x80)
+    }
+    if (fontStyle & styleChangeable)
+    {
         m_sci->styleSetChangeable(id, true);
+    }
+    const int defaultFontSize = 12;
     QString fontSize = styleElem.attribute("fontSize");
     if (!fontSize.isEmpty())
-        m_sci->styleSetSize(id, std::max(12, fontSize.toInt()));
+    {
+        m_sci->styleSetSize(id, std::max(defaultFontSize, fontSize.toInt()));
+    }
     else
-        m_sci->styleSetSize(id, 12);
+    {
+        m_sci->styleSetSize(id, defaultFontSize);
+    }
 }

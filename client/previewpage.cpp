@@ -109,7 +109,9 @@ bool PreviewPage::acceptNavigationRequest(const QUrl &url, QWebEnginePage::Navig
 {
     // Only allow qrc:/index.html.
     if (url.scheme() == QString("qrc"))
+    {
         return true;
+    }
     QDesktopServices::openUrl(url);
     return false;
 }
@@ -255,7 +257,7 @@ QByteArray PreviewPage::compressPNG(const QByteArray &ba)
     {
         return ba;
     }
-    return QByteArray((char *)output.data, output.len);
+    return {static_cast<char *>(output.data), static_cast<int>(output.len)};
 }
 
 void PreviewPage::copyImage(const QString &image)

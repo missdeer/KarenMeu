@@ -82,7 +82,9 @@ NetworkReplyHelper::~NetworkReplyHelper()
     if (m_timeoutTimer)
     {
         if (m_timeoutTimer->isActive())
+        {
             m_timeoutTimer->stop();
+        }
         delete m_timeoutTimer;
         m_timeoutTimer = nullptr;
     }
@@ -105,7 +107,9 @@ void NetworkReplyHelper::downloadProgress(qint64 bytesReceived, qint64 bytesTota
     Q_UNUSED(bytesTotal);
 #endif
     if (m_timeoutTimer && m_timeoutTimer->isActive())
+    {
         m_timeoutTimer->start();
+    }
 }
 
 void NetworkReplyHelper::error(QNetworkReply::NetworkError code)
@@ -124,7 +128,9 @@ void NetworkReplyHelper::error(QNetworkReply::NetworkError code)
 void NetworkReplyHelper::finished()
 {
     if (m_timeoutTimer)
+    {
         m_timeoutTimer->stop();
+    }
 
     auto *reply           = qobject_cast<QNetworkReply *>(sender());
     auto  contentEncoding = reply->rawHeader("Content-Encoding");
@@ -135,7 +141,9 @@ void NetworkReplyHelper::finished()
     {
         m_content = gUncompress(m_content);
         if (m_storage)
+        {
             m_storage->write(m_content);
+        }
     }
 
 #if !defined(QT_NO_DEBUG)
@@ -146,12 +154,12 @@ void NetworkReplyHelper::finished()
 
 void NetworkReplyHelper::sslErrors(const QList<QSslError> &errors)
 {
-    Q_FOREACH (const QSslError &e, errors)
+    Q_FOREACH (const QSslError &err, errors)
     {
 #if !defined(QT_NO_DEBUG)
-        qDebug() << __FUNCTION__ << __LINE__ << e.errorString();
+        qDebug() << __FUNCTION__ << __LINE__ << err.errorString();
 #endif
-        m_errMsg.append(e.errorString() + "\n");
+        m_errMsg.append(err.errorString() + "\n");
     }
 }
 
@@ -160,7 +168,9 @@ void NetworkReplyHelper::uploadProgress(qint64 bytesSent, qint64 bytesTotal)
     Q_UNUSED(bytesSent);
     Q_UNUSED(bytesTotal);
     if (m_timeoutTimer && m_timeoutTimer->isActive())
+    {
         m_timeoutTimer->start();
+    }
 }
 
 void NetworkReplyHelper::readyRead()
@@ -180,7 +190,9 @@ void NetworkReplyHelper::readyRead()
         if (contentEncoding != "gzip" && contentEncoding != "deflate")
         {
             if (m_storage)
+            {
                 m_storage->write(ba);
+            }
         }
         m_content.append(ba);
     }
@@ -192,7 +204,9 @@ void NetworkReplyHelper::timeout()
     qDebug() << __FUNCTION__ << __LINE__;
 #endif
     if (m_reply && m_reply->isRunning())
+    {
         m_reply->abort();
+    }
 }
 
 QVariant NetworkReplyHelper::data() const
@@ -208,7 +222,9 @@ void NetworkReplyHelper::setData(const QVariant &data)
 void NetworkReplyHelper::setTimeout(int milliseconds)
 {
     if (!m_reply->isRunning())
+    {
         return;
+    }
     if (!m_timeoutTimer)
     {
         m_timeoutTimer = new QTimer;

@@ -5,12 +5,6 @@
 
 #include "samplexmlreader.h"
 
-namespace
-{
-    static const QString ROOT_TAG   = "samples";
-    static const QString SAMPLE_TAG = "sample";
-} // namespace
-
 SampleReader::SampleReader(QObject *parent)
     : QObject(parent)
 {
@@ -18,7 +12,8 @@ SampleReader::SampleReader(QObject *parent)
 
 void SampleReader::scan(const QString &path)
 {
-    foreach(Sample* sample, m_items) {
+    for (auto *sample : qAsConst(m_items))
+    {
         delete sample;
     }
     m_items.clear();
@@ -27,9 +22,9 @@ void SampleReader::scan(const QString &path)
     auto samples = basicDir.entryList();
     for (const auto & sampleName : samples)
     {
-        Sample* s = new Sample(sampleName);
-        s->scan(path);
-        m_items.append(s);
+        auto *sample = new Sample(sampleName);
+        sample->scan(path);
+        m_items.append(sample);
     }
 }
 
@@ -52,7 +47,8 @@ Sample::Sample(const QString &name, QObject *parent)
 
 Sample::~Sample()
 {
-    foreach(SampleItem* item, m_items) {
+    for (auto *item : qAsConst(m_items))
+    {
         delete item;
     }
     m_items.clear();
@@ -60,29 +56,31 @@ Sample::~Sample()
 
 void Sample::scan(const QString& path)
 {
-    QDir d(path + "/" + m_name);
-    QFileInfoList sources = d.entryInfoList(QStringList() << "*.txt", QDir::Files, QDir::Name);
-    for (QFileInfo& si : sources)
+    QDir          dir(path + "/" + m_name);
+    QFileInfoList sources = dir.entryInfoList(QStringList() << "*.txt", QDir::Files, QDir::Name);
+    for (QFileInfo &sourceInfo : sources)
     {
-        QString name = si.baseName();
+        QString name = sourceInfo.baseName();
         QString data;
-        QFile fs(si.absoluteFilePath());
-        if (fs.open(QIODevice::ReadOnly))
+        QFile   file(sourceInfo.absoluteFilePath());
+        if (file.open(QIODevice::ReadOnly))
         {
-             data = QString(fs.readAll());
-             fs.close();
+            data = QString(file.readAll());
+            file.close();
         }
         QString notes;
-        QFile fn(si.absolutePath() + "/" + si.baseName() + ".notes");
-        if (fn.open(QIODevice::ReadOnly))
+        QFile   fileNotes(sourceInfo.absolutePath() + "/" + sourceInfo.baseName() + ".notes");
+        if (fileNotes.open(QIODevice::ReadOnly))
         {
-             notes = QString(fn.readAll());
-             fn.close();
+            notes = QString(fileNotes.readAll());
+            fileNotes.close();
         }
-        QString icon = si.absolutePath() + "/" + si.baseName() + ".svg";
+        QString icon = sourceInfo.absolutePath() + "/" + sourceInfo.baseName() + ".svg";
         if (!QFile::exists(icon))
-            icon = si.absolutePath() + "/" + si.baseName() + ".png";
-        SampleItem* item = new SampleItem(name, data, notes, icon);
+        {
+            icon = sourceInfo.absolutePath() + "/" + sourceInfo.baseName() + ".png";
+        }
+        auto *item = new SampleItem(name, data, notes, icon);
 
         m_items.append(item);
     }

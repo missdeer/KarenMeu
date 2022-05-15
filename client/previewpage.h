@@ -27,8 +27,8 @@ protected:
     bool acceptNavigationRequest(const QUrl &url, NavigationType type, bool isMainFrame);
 
 private:
-    int                    m_imageCount;
-    int                    m_imageHandledCount;
+    int                    m_imageCount {0};
+    int                    m_imageHandledCount {0};
     QNetworkAccessManager *m_nam;
     void                   embedImages(const QStringList &images);
     void                   embedImage(const QString &from, const QString &to);

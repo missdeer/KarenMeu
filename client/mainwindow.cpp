@@ -65,76 +65,20 @@
 
 namespace
 {
-    static const int   SAMPLE_ITEM_DATA_ROLE  = Qt::UserRole;
-    static const int   SAMPLE_ITEM_NOTES_ROLE = Qt::UserRole + 1;
-    static const int   SAMPLE_ITEM_PATH_ROLE  = Qt::UserRole + 2;
-    static const QSize SAMPLE_ICON_SIZE(128, 128);
+    const int   FILE_CACHE_SIZE        = 50 * 1024 * 1024;
+    const int   SAMPLE_ITEM_DATA_ROLE  = Qt::UserRole;
+    const int   SAMPLE_ITEM_NOTES_ROLE = Qt::UserRole + 1;
+    const int   SAMPLE_ITEM_PATH_ROLE  = Qt::UserRole + 2;
+    const QSize SAMPLE_ICON_SIZE(128, 128);
 } // namespace
 
 using LabelActionMap = QMap<QString, QAction *>;
 using ActionLabelMap = QHash<QAction *, QString>;
 
-QIcon iconFromSvg(QSize size, const QString &path)
-{
-    QPixmap     pixmap(size);
-    QPainter    painter(&pixmap);
-    const QRect bounding_rect(QPoint(0, 0), size);
-
-    if (!path.isEmpty())
-    {
-        painter.setRenderHint(QPainter::Antialiasing, true);
-
-        painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
-        painter.setPen(Qt::NoPen);
-        painter.drawRect(bounding_rect);
-
-        if (path.endsWith(".svg"))
-        {
-            QSvgRenderer svg(path);
-            QSize        target_size = svg.defaultSize();
-            target_size.scale(size, Qt::KeepAspectRatio);
-            QRect target_rect = QRect(QPoint(0, 0), target_size);
-            target_rect.translate(bounding_rect.center() - target_rect.center());
-            svg.render(&painter, target_rect);
-        }
-        else
-        {
-            QImage image(path);
-
-            if (image.width() > image.height())
-            {
-                image = image.scaledToWidth(size.width());
-            }
-            else
-            {
-                image = image.scaledToHeight(size.height());
-            }
-            painter.drawImage(0, 0, image);
-        }
-    }
-    else
-    {
-        painter.setBrush(QBrush(Qt::white, Qt::SolidPattern));
-        painter.setPen(Qt::NoPen);
-        painter.drawRect(bounding_rect);
-
-        const int margin      = 5;
-        QRect     target_rect = bounding_rect.adjusted(margin, margin, -margin, -margin);
-        painter.setPen(Qt::SolidLine);
-        painter.drawRect(target_rect);
-        painter.drawLine(target_rect.topLeft(), target_rect.bottomRight() + QPoint(1, 1));
-        painter.drawLine(target_rect.bottomLeft() + QPoint(0, 1), target_rect.topRight() + QPoint(1, 0));
-    }
-
-    QIcon icon;
-    icon.addPixmap(pixmap);
-    return icon;
-}
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
-      m_fileCache(new FileCache(50 * 1024 * 1024, this)),
+      m_fileCache(new FileCache(FILE_CACHE_SIZE, this)),
       m_view(new MarkdownView(&m_nam, m_fileCache, this)),
       m_youdaoDict(new YoudaoDict(m_nam)),
       m_templateManager(new TemplateManager)
@@ -204,15 +148,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
-        recentFileActs[i] = new QAction(this);
-        recentFileActs[i]->setVisible(false);
-        connect(recentFileActs[i], &QAction::triggered, this, &MainWindow::openRecentFile);
-        ui->menuRecentFiles->addAction(recentFileActs[i]);
+        recentFileActs.at(i) = new QAction(this);
+        recentFileActs.at(i)->setVisible(false);
+        connect(recentFileActs.at(i), &QAction::triggered, this, &MainWindow::openRecentFile);
+        ui->menuRecentFiles->addAction(recentFileActs.at(i));
 
-        recentWorkspaceActs[i] = new QAction(this);
-        recentWorkspaceActs[i]->setVisible(false);
-        connect(recentWorkspaceActs[i], &QAction::triggered, this, &MainWindow::openRecentWorkspace);
-        ui->menuRecentWorkspaces->addAction(recentWorkspaceActs[i]);
+        recentWorkspaceActs.at(i) = new QAction(this);
+        recentWorkspaceActs.at(i)->setVisible(false);
+        connect(recentWorkspaceActs.at(i), &QAction::triggered, this, &MainWindow::openRecentWorkspace);
+        ui->menuRecentWorkspaces->addAction(recentWorkspaceActs.at(i));
     }
 
     updateNewFromTemplateMenus();
@@ -228,9 +172,9 @@ MainWindow::MainWindow(QWidget *parent)
     m_sampleInsertSignalMapper = new QSignalMapper(this);
     connect(m_sampleInsertSignalMapper, QOverload<QWidget *>::of(&QSignalMapper::mapped), this, &MainWindow::onSampleItemInsert);
 
-    for (auto *s : m_sampleResults)
+    for (auto *sampleResult : qAsConst(m_sampleResults))
     {
-        reloadSamples(s);
+        reloadSamples(sampleResult);
     }
 
     auto mainWindowState = g_settings->mainWindowState();
@@ -250,7 +194,8 @@ void MainWindow::openFile(const QString &fileName)
         openWorkspace(fileName);
     }
     if (fileName.endsWith(".md", Qt::CaseInsensitive) || fileName.endsWith(".markdown", Qt::CaseInsensitive) ||
-        fileName.endsWith(".mdown", Qt::CaseInsensitive))
+        fileName.endsWith(".mdown", Qt::CaseInsensitive) || fileName.endsWith(".htm", Qt::CaseInsensitive) ||
+        fileName.endsWith(".html", Qt::CaseInsensitive))
     {
         openMarkdownDocument(fileName);
     }
@@ -281,17 +226,19 @@ void MainWindow::openMarkdownDocument(const QString &fileName)
 void MainWindow::openWorkspace(const QString &fileName)
 {
     Q_ASSERT(m_view);
-    auto editor = m_view->editor();
-    Q_ASSERT(editor);
     QSettings settings(fileName, xmlFormat);
     auto      content = settings.value("content").toString();
     newDocumentWithContent(content);
     auto mainWindowState = settings.value("windowState").toByteArray();
     if (!mainWindowState.isEmpty())
+    {
         restoreState(mainWindowState);
+    }
     auto mainWindowGeometry = settings.value("windowGeometry").toByteArray();
     if (!mainWindowGeometry.isEmpty())
+    {
         restoreGeometry(mainWindowGeometry);
+    }
 
     auto html = settings.value("youdaoDictionaryResult").toString();
     onYoudaoDictResult(html);
@@ -332,8 +279,6 @@ void MainWindow::openWorkspace(const QString &fileName)
 void MainWindow::saveWorkspace(const QString &fileName)
 {
     Q_ASSERT(m_view);
-    auto editor = m_view->editor();
-    Q_ASSERT(editor);
     QSettings settings(fileName, xmlFormat);
     settings.setValue("content", m_view->fullText());
     auto mainWindowState = saveState();
@@ -351,27 +296,37 @@ void MainWindow::saveWorkspace(const QString &fileName)
     Q_ASSERT(m_googleTranslateEditor);
     auto html = m_googleTranslateEditor->content();
     if (!html.isEmpty())
+    {
         settings.setValue("googleTranslateResult", html);
+    }
 
     Q_ASSERT(m_baiduTranslateEditor);
     html = m_baiduTranslateEditor->content();
     if (!html.isEmpty())
+    {
         settings.setValue("baiduTranslateResult", html);
+    }
 
     Q_ASSERT(m_youdaoTranslateEditor);
     html = m_youdaoTranslateEditor->content();
     if (!html.isEmpty())
+    {
         settings.setValue("youdaoTranslateResult", html);
+    }
 
     Q_ASSERT(m_sogouTranslateEditor);
     html = m_sogouTranslateEditor->content();
     if (!html.isEmpty())
+    {
         settings.setValue("sogouTranslateResult", html);
+    }
 
     Q_ASSERT(m_deepLTranslateEditor);
     html = m_deepLTranslateEditor->content();
     if (!html.isEmpty())
+    {
         settings.setValue("deepLTranslateResult", html);
+    }
 
     settings.setValue("googleTranslate", g_settings->enableGoogleTranslate());
     settings.setValue("baiduTranslate", g_settings->enableBaiduTranslate());
@@ -395,17 +350,21 @@ void MainWindow::saveWorkspace(const QString &fileName)
 void MainWindow::updateWindowTitle()
 {
     Q_ASSERT(m_view);
-    auto editor = m_view->editor();
+    auto *editor = m_view->editor();
     Q_ASSERT(editor);
     if (!m_currentOpenedFile.isEmpty())
+    {
         setWindowTitle(QString("%1%2 - KarenMeu").arg(QFileInfo(m_currentOpenedFile).fileName(), (editor->isModified() ? "*" : "")));
+    }
     else
+    {
         setWindowTitle("KarenMeu");
+    }
 }
 
 FindReplaceDialog *MainWindow::getFindReplaceDialog()
 {
-    static FindReplaceDialog *dlg = new FindReplaceDialog(m_view->editor(), this);
+    static auto *dlg = new FindReplaceDialog(m_view->editor(), this);
     return dlg;
 }
 
@@ -436,7 +395,9 @@ void MainWindow::updateTranslationActions()
 void MainWindow::translateText(const QString &text)
 {
     if (text.isEmpty())
+    {
         return;
+    }
     if (g_settings->enableGoogleTranslate())
     {
         Q_ASSERT(m_googleTranslateEditor);
@@ -531,17 +492,19 @@ void MainWindow::updateRecentFileActions(const QStringList &files)
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
-        if (!QFile::exists(files[i]))
+        if (!QFile::exists(files.at(i)))
         {
             continue;
         }
-        QString text = tr("%1. %2").arg(i + 1).arg(strippedName(files[i]));
-        recentFileActs[i]->setText(text);
-        recentFileActs[i]->setData(files[i]);
-        recentFileActs[i]->setVisible(true);
+        QString text = tr("%1. %2").arg(i + 1).arg(strippedName(files.at(i)));
+        recentFileActs.at(i)->setText(text);
+        recentFileActs.at(i)->setData(files.at(i));
+        recentFileActs.at(i)->setVisible(true);
     }
     for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
+    {
         recentFileActs[j]->setVisible(false);
+    }
 }
 
 void MainWindow::updateRecentWorkspaceActions(const QStringList &files)
@@ -550,13 +513,15 @@ void MainWindow::updateRecentWorkspaceActions(const QStringList &files)
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
-        QString text = tr("%1. %2").arg(i + 1).arg(strippedName(files[i]));
-        recentWorkspaceActs[i]->setText(text);
-        recentWorkspaceActs[i]->setData(files[i]);
-        recentWorkspaceActs[i]->setVisible(true);
+        QString text = tr("%1. %2").arg(i + 1).arg(strippedName(files.at(i)));
+        recentWorkspaceActs.at(i)->setText(text);
+        recentWorkspaceActs.at(i)->setData(files.at(i));
+        recentWorkspaceActs.at(i)->setVisible(true);
     }
     for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
+    {
         recentWorkspaceActs[j]->setVisible(false);
+    }
 }
 
 void MainWindow::onSetCurrentMarkdownDocument(const QString &fileName)
@@ -576,7 +541,9 @@ void MainWindow::onSetCurrentMarkdownDocument(const QString &fileName)
     files.removeAll(fileName);
     files.prepend(fileName);
     while (files.size() > MaxRecentFiles)
+    {
         files.removeLast();
+    }
 
     settings.setValue("recentFileList", files);
     settings.endGroup();
@@ -602,7 +569,9 @@ void MainWindow::onSetCurrentWorkspace(const QString &fileName)
     files.removeAll(fileName);
     files.prepend(fileName);
     while (files.size() > MaxRecentFiles)
+    {
         files.removeLast();
+    }
 
     settings.setValue("recentWorkspaceList", files);
     settings.endGroup();
@@ -668,7 +637,7 @@ void MainWindow::onCustomPreviewThemeChanged()
     }
 }
 
-void MainWindow::onYoudaoDictResult(QString res)
+void MainWindow::onYoudaoDictResult(const QString &res)
 {
     Q_ASSERT(m_youdaoDictionaryEditor);
     ClientUtils::setHtmlContent(m_youdaoDictionaryEditor, res);
@@ -746,7 +715,9 @@ void MainWindow::onWebBrowserSelectionChangedTimeout()
 {
     auto text = m_webBrowser->page()->selectedText();
     if (!text.isEmpty())
+    {
         translateText(text);
+    }
 }
 
 QString MainWindow::strippedName(const QString &fullFileName)
@@ -799,7 +770,7 @@ void MainWindow::setupWebBrowserPane()
 
     auto *browserDock = new QDockWidget(tr("WebBrowser"), this);
     browserDock->setObjectName("webBrowser");
-    auto toggleViewAction = browserDock->toggleViewAction();
+    auto *toggleViewAction = browserDock->toggleViewAction();
     toggleViewAction->setShortcut(QKeySequence("Shift+Alt+W"));
     ui->menuView->addAction(toggleViewAction);
 
@@ -812,16 +783,6 @@ void MainWindow::setupWebBrowserPane()
     browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Reload));
     browserToolBar->addAction(m_webBrowser->pageAction(QWebEnginePage::Stop));
     auto *browserAddressBar = new WebBrowserAddressBar(browserContainer);
-    m_urlCompleterModel << "https://medium.com/@ralph.kootker"
-                        << "https://medium.com/@happy.cerberus"
-                        << "https://ggulgulia.medium.com/"
-                        << "https://brevzin.github.io/posts/"
-                        << "https://shafik.github.io/"
-                        << "https://www.foonathan.net/"
-                        << "https://www.cppstories.com/p/archive/"
-                        << "http://www.modernescpp.com/index.php"
-                        << "https://www.fluentcpp.com/"
-                        << "https://isocpp.org";
     m_urlCompleter = new QCompleter(m_urlCompleterModel, browserAddressBar);
     m_urlCompleter->setCaseSensitivity(Qt::CaseInsensitive);
     m_urlCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
@@ -860,9 +821,9 @@ void MainWindow::setupDockPanels()
 
     setDockOptions(QMainWindow::AnimatedDocks | QMainWindow::AllowTabbedDocks | QMainWindow::GroupedDragging);
 
-    QList<QAction *> toggleViewActions;
+    QVector<QAction *> toggleViewActions;
 
-    auto  getSelectionCallback = std::bind(&MarkdownView::selectedText, m_view);
+    auto  getSelectionCallback = [this] { return m_view->selectedText(); };
     auto *googleTranslateDock  = new QDockWidget(tr("Google Translate"), this);
     googleTranslateDock->setObjectName("googleTranslate");
     m_googleTranslateEditor = new TranslateOutputWidget(new GoogleTranslator, googleTranslateDock);
@@ -870,7 +831,7 @@ void MainWindow::setupDockPanels()
     ClientUtils::InitializeWidgetFont(m_googleTranslateEditor->editor());
     googleTranslateDock->setWidget(m_googleTranslateEditor);
     addDockWidget(Qt::BottomDockWidgetArea, googleTranslateDock);
-    auto toggleViewAction = googleTranslateDock->toggleViewAction();
+    auto *toggleViewAction = googleTranslateDock->toggleViewAction();
     toggleViewAction->setShortcut(QKeySequence("Shift+Alt+G"));
     ui->menuView->addAction(toggleViewAction);
     toggleViewActions.append(toggleViewAction);
@@ -940,18 +901,18 @@ void MainWindow::setupDockPanels()
     tabifyDockWidget(sogouTranslateDock, deepLTranslateDock);
     tabifyDockWidget(deepLTranslateDock, youdaoDictionaryDock);
 
-    auto showAllLanguageDocks = new QAction(tr("Show All Language Docks"), this);
+    auto *showAllLanguageDocks = new QAction(tr("Show All Language Docks"), this);
     ui->menuView->addAction(showAllLanguageDocks);
     connect(showAllLanguageDocks, &QAction::triggered, [toggleViewActions] {
-        for (auto toggleViewAction : toggleViewActions)
+        for (auto *toggleViewAction : toggleViewActions)
         {
             emit toggleViewAction->triggered(true);
         }
     });
-    auto hideAllLanguageDocks = new QAction(tr("Hide All Language Docks"), this);
+    auto *hideAllLanguageDocks = new QAction(tr("Hide All Language Docks"), this);
     ui->menuView->addAction(hideAllLanguageDocks);
     connect(hideAllLanguageDocks, &QAction::triggered, [toggleViewActions] {
-        for (auto toggleViewAction : toggleViewActions)
+        for (auto *toggleViewAction : toggleViewActions)
         {
             emit toggleViewAction->triggered(false);
         }
@@ -966,11 +927,15 @@ void MainWindow::setupDockPanels()
     m_fsModel->setRootPath(QDir::currentPath());
     m_fsModel->setNameFilters(QStringList() << "*.md"
                                             << "*.markdown"
-                                            << "*.mdown");
+                                            << "*.mdown"
+                                            << "*.htm"
+                                            << "*.html");
     m_fsModel->sort(0);
     m_fsView->setModel(m_fsModel);
-    for (int i = 1; i < m_fsModel->columnCount(); ++i)
+    for (int i = 1, total = m_fsModel->columnCount(); i < total; ++i)
+    {
         m_fsView->hideColumn(i);
+    }
     m_fsView->header()->hide();
     connect(m_fsView, &QTreeView::activated, this, &MainWindow::onFileSystemItemActivated);
     fsDock->setWidget(m_fsView);
@@ -1044,26 +1009,26 @@ void MainWindow::setupDockPanels()
     addDockWidget(Qt::LeftDockWidgetArea, dockSampleResult);
     onSampleResultDockLocationChanged(Qt::LeftDockWidgetArea);
 
-    auto *sr          = new SampleResult;
-    sr->samplePath    = ":/samples/UML";
-    sr->sampleToolBox = new QToolBox(m_tabWidgetSampleResult);
-    m_tabWidgetSampleResult->addTab(sr->sampleToolBox, tr("UML"));
-    connect(sr->sampleToolBox, SIGNAL(currentChanged(int)), this, SLOT(onCurrentSampleResultChanged(int)));
-    m_sampleResults << sr;
+    auto *sampleResult          = new SampleResult;
+    sampleResult->samplePath    = ":/samples/UML";
+    sampleResult->sampleToolBox = new QToolBox(m_tabWidgetSampleResult);
+    m_tabWidgetSampleResult->addTab(sampleResult->sampleToolBox, tr("UML"));
+    connect(sampleResult->sampleToolBox, SIGNAL(currentChanged(int)), this, SLOT(onCurrentSampleResultChanged(int)));
+    m_sampleResults << sampleResult;
 
-    sr                = new SampleResult;
-    sr->samplePath    = ":/samples/non-UML";
-    sr->sampleToolBox = new QToolBox(m_tabWidgetSampleResult);
-    m_tabWidgetSampleResult->addTab(sr->sampleToolBox, tr("non-UML"));
-    connect(sr->sampleToolBox, SIGNAL(currentChanged(int)), this, SLOT(onCurrentSampleResultChanged(int)));
-    m_sampleResults << sr;
+    sampleResult                = new SampleResult;
+    sampleResult->samplePath    = ":/samples/non-UML";
+    sampleResult->sampleToolBox = new QToolBox(m_tabWidgetSampleResult);
+    m_tabWidgetSampleResult->addTab(sampleResult->sampleToolBox, tr("non-UML"));
+    connect(sampleResult->sampleToolBox, SIGNAL(currentChanged(int)), this, SLOT(onCurrentSampleResultChanged(int)));
+    m_sampleResults << sampleResult;
 
-    sr                = new SampleResult;
-    sr->samplePath    = ":/samples/Advanced";
-    sr->sampleToolBox = new QToolBox(m_tabWidgetSampleResult);
-    m_tabWidgetSampleResult->addTab(sr->sampleToolBox, tr("Advanced"));
-    connect(sr->sampleToolBox, SIGNAL(currentChanged(int)), this, SLOT(onCurrentSampleResultChanged(int)));
-    m_sampleResults << sr;
+    sampleResult                = new SampleResult;
+    sampleResult->samplePath    = ":/samples/Advanced";
+    sampleResult->sampleToolBox = new QToolBox(m_tabWidgetSampleResult);
+    m_tabWidgetSampleResult->addTab(sampleResult->sampleToolBox, tr("Advanced"));
+    connect(sampleResult->sampleToolBox, SIGNAL(currentChanged(int)), this, SLOT(onCurrentSampleResultChanged(int)));
+    m_sampleResults << sampleResult;
 
     auto *m_showSampleResultDockAction = dockSampleResult->toggleViewAction();
     m_showSampleResultDockAction->setIconVisibleInMenu(false);
@@ -1175,13 +1140,13 @@ void MainWindow::changeEvent(QEvent *event)
     {
         if (windowState() & Qt::WindowFullScreen)
         {
-            QList<QToolBar *> toolbars = {ui->fileToolbar, ui->editToolbar, ui->formatToolbar, ui->shortcutToolbar};
-            for (auto tb : toolbars)
+            QVector<QToolBar *> toolbars = {ui->fileToolbar, ui->editToolbar, ui->formatToolbar, ui->shortcutToolbar};
+            for (auto *toolbar : toolbars)
             {
-                if (tb->isVisible())
+                if (toolbar->isVisible())
                 {
-                    m_visibleToolbars.append(tb);
-                    tb->setVisible(false);
+                    m_visibleToolbars.append(toolbar);
+                    toolbar->setVisible(false);
                 }
             }
             ui->actionFullScreen->setText(tr("Exit Full Screen"));
@@ -1195,12 +1160,12 @@ void MainWindow::changeEvent(QEvent *event)
             return;
         }
 
-        auto *e = static_cast<QWindowStateChangeEvent *>(event);
-        if (e->oldState() & Qt::WindowFullScreen)
+        auto *stateChangeEvent = static_cast<QWindowStateChangeEvent *>(event);
+        if (stateChangeEvent->oldState() & Qt::WindowFullScreen)
         {
-            for (auto a : qAsConst(m_visibleToolbars))
+            for (auto *toolbar : qAsConst(m_visibleToolbars))
             {
-                a->setVisible(true);
+                toolbar->setVisible(true);
             }
             m_visibleToolbars.clear();
             menuBar()->show();
@@ -1219,7 +1184,9 @@ void MainWindow::on_actionDictionary_triggered()
     Q_ASSERT(m_view);
     QString text = m_view->selectedText();
     if (text.isEmpty())
+    {
         return;
+    }
     Q_ASSERT(m_youdaoDict);
     m_youdaoDict->query(text);
 }
@@ -1232,16 +1199,24 @@ void MainWindow::on_actionTranslateSelected_triggered()
     if (m_webBrowser->hasFocus())
     {
         if (!m_webBrowser->selectedText().isEmpty())
+        {
             text = m_webBrowser->selectedText();
+        }
         else
+        {
             text = m_view->selectedText();
+        }
     }
     else
     {
         if (!m_view->selectedText().isEmpty())
+        {
             text = m_view->selectedText();
+        }
         else
+        {
             text = m_webBrowser->selectedText();
+        }
     }
     translateText(text);
 }
@@ -1294,7 +1269,9 @@ void MainWindow::on_actionOpenWorkspace_triggered()
     QString fileName = QFileDialog::getOpenFileName(
         this, tr("Open Workspace"), ClientUtils::getDefaultFileSaveOpenDirectory(), tr("KarenMeu Workspace (*.krm);;All files (*.*)"));
     if (!QFile::exists(fileName))
+    {
         return;
+    }
     openWorkspace(fileName);
 }
 
@@ -1316,7 +1293,9 @@ void MainWindow::on_actionSaveWorkspaceAs_triggered()
         this, tr("Save Workspace"), ClientUtils::getDefaultFileSaveOpenDirectory(), tr("KarenMeu Workspace (*.krm);;All files (*.*)"));
 
     if (fileName.isEmpty())
+    {
         return;
+    }
 
     saveWorkspace(fileName);
 }
@@ -1361,11 +1340,17 @@ void MainWindow::on_actionFullScreen_triggered()
     else
     {
         if (isMinimized())
+        {
             m_lastWindowState = Minimized;
+        }
         else if (isMaximized())
+        {
             m_lastWindowState = Maximized;
+        }
         else
+        {
             m_lastWindowState = Normal;
+        }
         showFullScreen();
     }
 }
@@ -1390,10 +1375,10 @@ void MainWindow::onSampleResultFocus()
 
 void MainWindow::onSampleItemInsert(QWidget *widget)
 {
-    auto *list_widget = qobject_cast<QListWidget *>(widget);
-    if (list_widget)
+    auto *listWidget = qobject_cast<QListWidget *>(widget);
+    if (listWidget)
     {
-        onSampleItemDoubleClicked(list_widget->currentItem());
+        onSampleItemDoubleClicked(listWidget->currentItem());
     }
 }
 
@@ -1427,34 +1412,34 @@ void MainWindow::onSampleItemDoubleClicked(QListWidgetItem *item)
     insertSampleSource(item->data(SAMPLE_ITEM_DATA_ROLE).toString());
 }
 
-void MainWindow::reloadSamples(SampleResult *sr)
+void MainWindow::reloadSamples(SampleResult *sampleResult)
 {
-    for (auto *widget : sr->sampleWidgets)
+    for (auto *widget : qAsConst(sampleResult->sampleWidgets))
     {
         widget->deleteLater();
     }
-    sr->sampleWidgets.clear();
+    sampleResult->sampleWidgets.clear();
 
-    if (sr->samplePath.isEmpty())
+    if (sampleResult->samplePath.isEmpty())
     {
         qDebug() << "No sample defined.";
         return;
     }
     SampleReader reader;
-    reader.scan(sr->samplePath);
+    reader.scan(sampleResult->samplePath);
 
     for (auto *sample : reader)
     {
         auto *view = newSampleListWidget(SAMPLE_ICON_SIZE, this);
         for (const auto *sampleItem : *sample)
         {
-            auto *listWidgetItem = new QListWidgetItem(iconFromSvg(SAMPLE_ICON_SIZE, sampleItem->icon()), sampleItem->name(), view);
+            auto *listWidgetItem = new QListWidgetItem(ClientUtils::iconFromSvg(SAMPLE_ICON_SIZE, sampleItem->icon()), sampleItem->name(), view);
             listWidgetItem->setData(SAMPLE_ITEM_DATA_ROLE, sampleItem->data());
             listWidgetItem->setData(SAMPLE_ITEM_NOTES_ROLE, sampleItem->notes());
             listWidgetItem->setData(SAMPLE_ITEM_PATH_ROLE, sampleItem->icon());
             listWidgetItem->setToolTip(sampleItem->notes());
         }
-        sr->sampleToolBox->addItem(view, sample->name());
+        sampleResult->sampleToolBox->addItem(view, sample->name());
         connect(view, &QListWidget::itemDoubleClicked, this, &MainWindow::onSampleItemDoubleClicked);
         connect(view, &QListWidget::itemSelectionChanged, this, &MainWindow::onSampleItemSelectionChanged);
 
@@ -1464,7 +1449,7 @@ void MainWindow::reloadSamples(SampleResult *sr)
         connect(action, &QAction::triggered, m_sampleInsertSignalMapper, QOverload<>::of(&QSignalMapper::map));
         view->addAction(action);
 
-        sr->sampleWidgets << view;
+        sampleResult->sampleWidgets << view;
     }
 }
 
@@ -1472,13 +1457,13 @@ void MainWindow::insertSampleSource(const QString &code) {
   emit m_view->insertText(code);
 }
 
-QListWidget *MainWindow::newSampleListWidget(const QSize &icon_size, QWidget *parent)
+QListWidget *MainWindow::newSampleListWidget(const QSize &iconSize, QWidget *parent)
 {
     auto *view = new QListWidget(parent);
     view->setUniformItemSizes(true);
     view->setMovement(QListView::Static);
     view->setResizeMode(QListView::Adjust);
-    view->setIconSize(icon_size);
+    view->setIconSize(iconSize);
     view->setViewMode(QListView::IconMode);
     return view;
 }
@@ -1499,11 +1484,11 @@ void MainWindow::focusSampleResult()
 
 void MainWindow::onSampleResultDockLocationChanged(Qt::DockWidgetArea area)
 {
-    QMap<Qt::DockWidgetArea, QTabWidget::TabPosition> m = {
+    QMap<Qt::DockWidgetArea, QTabWidget::TabPosition> dockPositionMap = {
         {Qt::LeftDockWidgetArea, QTabWidget::West},
         {Qt::RightDockWidgetArea, QTabWidget::East},
         {Qt::TopDockWidgetArea, QTabWidget::North},
         {Qt::BottomDockWidgetArea, QTabWidget::South},
     };
-    m_tabWidgetSampleResult->setTabPosition(m[area]);
+    m_tabWidgetSampleResult->setTabPosition(dockPositionMap[area]);
 }

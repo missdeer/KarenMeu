@@ -5,8 +5,8 @@
 
 WebBrowserAddressBar::WebBrowserAddressBar(QWidget *parent) : QLineEdit(parent) {}
 
-void WebBrowserAddressBar::focusInEvent(QFocusEvent *e)
+void WebBrowserAddressBar::focusInEvent(QFocusEvent *event)
 {
-    QLineEdit::focusInEvent(e);
+    QLineEdit::focusInEvent(event);
     QTimer::singleShot(0, this, &QLineEdit::selectAll);
 }

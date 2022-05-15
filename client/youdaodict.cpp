@@ -17,41 +17,42 @@ YoudaoDict::YoudaoDict(QNetworkAccessManager &nam, QObject *parent) : QObject(pa
 
 void YoudaoDict::query(const QString &keyword)
 {
-    static int           keyIndex  = 0;
-    static YoudaoDictKey keys[]    = {{"f2ec-org", "1787962561"}, {"go-ydict", "252639882"}, {"Youdao-dict-v21", "1945325576"}};
-    static int           keysCount = sizeof(keys) / sizeof(keys[0]);
+    static int                    keyIndex = 0;
+    static QVector<YoudaoDictKey> keys     = {{"f2ec-org", "1787962561"}, {"go-ydict", "252639882"}, {"Youdao-dict-v21", "1945325576"}};
+
     m_content.clear();
     // http://fanyi.youdao.com/openapi.do?keyfrom=f2ec-org&key=1787962561&type=data&doctype=json&version=1.1&q=
-    QUrl url("http://fanyi.youdao.com/openapi.do");
+    QUrl      url("http://fanyi.youdao.com/openapi.do");
     QUrlQuery query;
 
-    query.addQueryItem("keyfrom", keys[keyIndex].keyFrom);
-    query.addQueryItem("key", keys[keyIndex].key);
+    query.addQueryItem("keyfrom", keys.at(keyIndex).keyFrom);
+    query.addQueryItem("key", keys.at(keyIndex).key);
     query.addQueryItem("type", "data");
     query.addQueryItem("doctype", "json");
     query.addQueryItem("version", "1.1");
     query.addQueryItem("q", keyword.toUtf8());
-    if (++keyIndex >= keysCount)
+    if (++keyIndex >= keys.size())
+    {
         keyIndex = 0;
+    }
     url.setQuery(query.query());
     QNetworkRequest req(url);
     req.setAttribute(QNetworkRequest::Http2AllowedAttribute, true);
     req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 
-    QNetworkReply* reply = m_nam.get(req);
+    QNetworkReply *reply = m_nam.get(req);
 
     connect(reply, SIGNAL(finished()), this, SLOT(onFinished()));
     connect(reply, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
-            this, SLOT(onError(QNetworkReply::NetworkError)));
+    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(onError(QNetworkReply::NetworkError)));
 }
 
 void YoudaoDict::onFinished()
 {
-    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+    auto *reply = qobject_cast<QNetworkReply *>(sender());
     Q_ASSERT(reply);
     reply->deleteLater();
-    m_content.append( reply->readAll());
+    m_content.append(reply->readAll());
 
     QJsonDocument doc = QJsonDocument::fromJson(m_content);
     if (!doc.isObject())
@@ -60,8 +61,8 @@ void YoudaoDict::onFinished()
         return;
     }
 
-    auto o = doc.object();
-    auto errorCode = o["errorCode"].toInt();
+    auto obj       = doc.object();
+    auto errorCode = obj["errorCode"].toInt();
     if (errorCode != 0)
     {
         emit result("");
@@ -69,58 +70,64 @@ void YoudaoDict::onFinished()
     }
 
     QString     output;
-    QTextStream ts(&output);
-    ts.setCodec("UTF-8");
+    QTextStream textStream(&output);
+    textStream.setCodec("UTF-8");
 
-    auto query = o["query"].toString();
-    auto translation = o["translation"].toArray();
+    auto        query        = obj["query"].toString();
+    auto        translations = obj["translation"].toArray();
     QStringList trans;
-    for (auto t : translation)
+    for (auto translation : translations)
     {
-        trans.append(t.toString());
+        trans.append(translation.toString());
     }
-    auto basic = o["basic"].toObject();
+    auto basic = obj["basic"].toObject();
     if (basic["phonetic"].isString())
-        trans.append("[" + basic["phonetic"].toString() +"]");
+    {
+        trans.append("[" + basic["phonetic"].toString() + "]");
+    }
     if (basic["us-phonetic"].isString())
-        trans.append("US [" + basic["us-phonetic"].toString() +"]");
+    {
+        trans.append("US [" + basic["us-phonetic"].toString() + "]");
+    }
     if (basic["uk-phonetic"].isString())
-        trans.append("UK [" + basic["uk-phonetic"].toString() +"]");
+    {
+        trans.append("UK [" + basic["uk-phonetic"].toString() + "]");
+    }
 
-    ts << QString("<h4>%1 %2</h4>").arg(QObject::tr("[Translation]"), query) << QString("<p>%1</p><br>").arg(trans.join("; "));
+    textStream << QString("<h4>%1 %2</h4>").arg(QObject::tr("[Translation]"), query) << QString("<p>%1</p><br>").arg(trans.join("; "));
 
     auto explains = basic["explains"].toArray();
-    for (auto e : explains)
+    for (auto explain : explains)
     {
-        ts << QString("<h4>%1 %2</h4>").arg(QObject::tr("[Explain]"), query) << QString("<p>%1</p><br>").arg(e.toString());
+        textStream << QString("<h4>%1 %2</h4>").arg(QObject::tr("[Explain]"), query) << QString("<p>%1</p><br>").arg(explain.toString());
     }
 
-    auto web = o["web"].toArray();
-    for (auto w : web)
+    auto webs = obj["web"].toArray();
+    for (auto web : webs)
     {
-        auto i = w.toObject();
-        QString key = i["key"].toString();
-        auto values = i["value"].toArray();
+        auto        webObj = web.toObject();
+        QString     key    = webObj["key"].toString();
+        auto        values = webObj["value"].toArray();
         QStringList value;
-        for (auto v : values)
+        for (auto val : values)
         {
-            value.append(v.toString());
+            value.append(val.toString());
         }
-        ts << QString("<h4>%1 %2</h4>").arg(QObject::tr("[Web]"), key) << QString("<p>%1</p><br>").arg(value.join("; "));
+        textStream << QString("<h4>%1 %2</h4>").arg(QObject::tr("[Web]"), key) << QString("<p>%1</p><br>").arg(value.join("; "));
     }
     emit result(output);
 }
 
-void YoudaoDict::onError(QNetworkReply::NetworkError e)
+void YoudaoDict::onError(QNetworkReply::NetworkError err)
 {
-    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+    auto *reply = qobject_cast<QNetworkReply *>(sender());
     Q_ASSERT(reply);
-    qDebug() << e << reply->errorString();
+    qDebug() << err << reply->errorString();
 }
 
 void YoudaoDict::onReadyRead()
 {
-    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+    auto *reply = qobject_cast<QNetworkReply *>(sender());
     Q_ASSERT(reply);
-    m_content.append( reply->readAll());
+    m_content.append(reply->readAll());
 }
