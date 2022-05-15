@@ -14,15 +14,10 @@
 #include "mainwindow.h"
 #include "settings.h"
 
-#if !defined(Q_OS_WIN)
-#    if defined(Q_OS_MAC)
-#        include <QFileOpenEvent>
+#if defined(Q_OS_MAC)
+#    include <QFileOpenEvent>
 
-#        include "macapplication.h"
-#    else
-#        include <sys/resource.h>
-#        include <sys/time.h>
-#    endif
+#    include "macapplication.h"
 #endif
 
 int main(int argc, char *argv[])
