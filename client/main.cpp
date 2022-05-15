@@ -14,54 +14,46 @@
 #include "mainwindow.h"
 #include "settings.h"
 
-#if defined(Q_OS_MAC)
-#    include <QFileOpenEvent>
+#if !defined(Q_OS_WIN)
+#    if defined(Q_OS_MAC)
+#        include <QFileOpenEvent>
 
-#    include "macapplication.h"
+#        include "macapplication.h"
+#    else
+#        include <sys/resource.h>
+#        include <sys/time.h>
+#    endif
 #endif
 
 int main(int argc, char *argv[])
 {
-#if !defined(Q_OS_WIN)
-    // increase the number of file that can be opened.
-    struct rlimit rl;
-    getrlimit(RLIMIT_NOFILE, &rl);
-
-    rl.rlim_cur = qMin((rlim_t)OPEN_MAX, rl.rlim_max);
-    setrlimit(RLIMIT_NOFILE, &rl);
-#endif
     qputenv("QT_ENABLE_GLYPH_CACHE_WORKAROUND", "1");
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
     QCoreApplication::setOrganizationName("MiniDump.Info");
     QCoreApplication::setApplicationName("KarenMeu");
     QCoreApplication::setApplicationVersion("1.0");
 
-    QDir dir(QCoreApplication::applicationDirPath());
-
+    // main application and dynamic linked library locale
 #if defined(Q_OS_MAC)
+    MacApplication app(argc, argv);
+    QDir           dir(QCoreApplication::applicationDirPath());
     qputenv("QTWEBENGINE_CHROMIUM_FLAGS", "--single-process");
     dir.cdUp();
     dir.cd("/Frameworks/QtWebEngineCore.framework/Helpers/QtWebEngineProcess.app/Contents/MacOS/");
     auto fn = dir.absoluteFilePath("QtWebEngineProcess");
-    if (QFile::exists(fn)) {
+    if (QFile::exists(fn))
+    {
         qputenv("QTWEBENGINEPROCESS_PATH", fn.toUtf8());
     }
-#endif
-
-    QString     localeName = QLocale::system().name().replace("-", "_");
-    QTranslator translator;
-    QTranslator qtTranslator;
-
-    // main application and dynamic linked library locale
-#if defined(Q_OS_MAC)
-    MacApplication a(argc, argv);
     dir.setPath(QApplication::applicationDirPath());
     dir.cdUp();
     dir.cd("Resources/translations");
     QString localeDirPath = dir.absolutePath();
 #else
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
     QString      localeDirPath = QApplication::applicationDirPath() + "/translations";
     if (!QDir(localeDirPath).exists())
     {
@@ -69,10 +61,14 @@ int main(int argc, char *argv[])
     }
 #endif
 
-    QPixmap pixmap(":/KarenMeu.png");
+    QPixmap       pixmap(":/KarenMeu.png");
     QSplashScreen splash(pixmap);
     splash.show();
     QApplication::processEvents();
+
+    QString     localeName = QLocale::system().name().replace("-", "_");
+    QTranslator translator;
+    QTranslator qtTranslator;
 
     QString i18nFile = QString("KarenMeu_%1.qm").arg(localeName);
     if (!translator.load(i18nFile, localeDirPath))
@@ -119,12 +115,12 @@ int main(int argc, char *argv[])
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.addPositionalArgument("file", QApplication::translate("main", "The file to open."));
-    parser.process(a);
+    parser.addPositionalArgument("file", QCoreApplication::translate("main", "The file to open."));
+    parser.process(app);
 
     // get filename from command line arguments
-    QString           fileName    = ":/rc/sample.md";
-    auto              lastOpenedFilePath = g_settings->getLastOpenedFilePath();
+    QString fileName(":/rc/sample.md");
+    auto    lastOpenedFilePath = g_settings->getLastOpenedFilePath();
     if (QFile::exists(lastOpenedFilePath))
     {
         fileName = lastOpenedFilePath;
@@ -135,14 +131,14 @@ int main(int argc, char *argv[])
         fileName = cmdLineArgs.at(0);
     }
 
-    MainWindow w;
-    w.showMaximized();
-    w.openFile(fileName);
+    MainWindow win;
+    win.showMaximized();
+    win.openFile(fileName);
 
 #if defined(Q_OS_MAC)
-    a.connect(&a, &MacApplication::openFile, &w, &MainWindow::openFile);
+    app.connect(&app, &MacApplication::openFile, &win, &MainWindow::openFile);
 #endif
 
-    splash.finish(&w);
-    return QApplication::exec();
+    splash.finish(&win);
+    return QCoreApplication::exec();
 }
