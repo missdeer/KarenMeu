@@ -3,12 +3,13 @@ module github.com/missdeer/KarenMeu
 go 1.15
 
 require (
-	github.com/88250/lute v1.7.3
+	github.com/88250/lute v1.7.4
 	github.com/PuerkitoBio/goquery v1.8.0 // indirect
 	github.com/alecthomas/chroma v0.10.0
 	github.com/appleboy/gin-jwt/v2 v2.6.4
 	github.com/aymerick/douceur v0.2.0
 	github.com/denisenkom/go-mssqldb v0.10.0 // indirect
+	github.com/dlclark/regexp2 v1.7.0 // indirect
 	github.com/gin-gonic/gin v1.7.4
 	github.com/go-playground/validator/v10 v10.9.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
@@ -21,11 +22,11 @@ require (
 	github.com/ugorji/go v1.2.6 // indirect
 	github.com/ultimate-guitar/go-imagequant v0.0.0-20201216103743-29e607cca148
 	github.com/vanng822/go-premailer v1.20.1
-	github.com/yuin/goldmark v1.4.12
+	github.com/yuin/goldmark v1.4.13
 	github.com/yuin/goldmark-emoji v1.0.1
 	github.com/yuin/goldmark-highlighting v0.0.0-20220208100518-594be1970594
 	github.com/yuin/goldmark-meta v1.1.0
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
-	golang.org/x/net v0.0.0-20220513224357-95641704303c // indirect
+	golang.org/x/net v0.0.0-20220812174116-3211cb980234 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 )
