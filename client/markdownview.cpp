@@ -206,6 +206,7 @@ void MarkdownView::saveAsDocument()
     QString fileName =
         QFileDialog::getSaveFileName(this,
                                      tr("Save file"),
+                                     QStandardPaths::writableLocation(QStandardPaths::DataLocation),
                                      tr("Markdown files (*.md *.markdown *.mdown);; PlantUML files (*.puml *.plantuml);; Graphviz files (*.dot);; "
                                         "All supproted files (*.md *.markdown *.mdown *.puml *.plantuml *.dot);; All files (*.*)"));
 
