@@ -113,9 +113,25 @@ private:
     RenderedDocument       m_wxboxWidth;
     RenderedDocument       m_macStyleCodeBlock;
 
+    enum DocumentType
+    {
+        MARKDOWN,
+        PLANTUML,
+        GRAPHVIZ,
+    };
+
     void saveToFile(const QString &savePath);
     void renderMarkdownToHTML();
+    void         doRendering(const QByteArray &ba, QList<QByteArray> &metaDataLines, std::map<QString, QString> &images);
     void setRenderedHTML(const QString &html);
+    void         downloadImages(const std::map<QString, QString> &images);
+    void         preprocessMarkdown(QList<QByteArray>          &lines,
+                                    QList<QByteArray>          &metaDataLines,
+                                    std::map<QString, QString> &images,
+                                    std::map<QString, QString> &imagesToDownload);
+    void         preprocessPlantUML(QList<QByteArray> &lines, std::map<QString, QString> &images, std::map<QString, QString> &imagesToDownload);
+    void         preprocessGraphviz(QList<QByteArray> &lines, std::map<QString, QString> &images, std::map<QString, QString> &imagesToDownload);
+    DocumentType guessDocumentType(QList<QByteArray> &lines);
 };
 
 #endif // MARKDOWNVIEW_H

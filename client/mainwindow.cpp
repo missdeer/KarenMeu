@@ -53,7 +53,6 @@
 #include "sogoutranslator.h"
 #include "templatemanager.h"
 #include "templatemanagerdialog.h"
-#include "translatehelperpage.h"
 #include "translateoutputwidget.h"
 #include "ui_mainwindow.h"
 #include "utils.h"
@@ -428,7 +427,7 @@ void MainWindow::translateText(const QString &text)
 void MainWindow::updateNewFromTemplateMenus()
 {
     // clear old actions
-    for (auto action : qAsConst(m_newFromTemplateActions))
+    for (auto *action : qAsConst(m_newFromTemplateActions))
     {
         ui->menuNewFromTemplate->removeAction(action);
     }
@@ -437,9 +436,9 @@ void MainWindow::updateNewFromTemplateMenus()
     // add new actions
     m_templateManager->load();
     auto templates = m_templateManager->templates();
-    for (auto t : templates)
+    for (const auto &t : templates)
     {
-        auto action = new QAction(this);
+        auto *action = new QAction(this);
         m_newFromTemplateActions.push_back(action);
         action->setText(t->templateName());
         connect(action, &QAction::triggered, this, &MainWindow::onNewFromTemplateTriggered);
@@ -488,7 +487,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::updateRecentFileActions(const QStringList &files)
 {
-    int numRecentFiles = qMin(files.size(), (int)MaxRecentFiles);
+    int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
 
     for (int i = 0; i < numRecentFiles; ++i)
     {
@@ -1140,7 +1139,7 @@ void MainWindow::changeEvent(QEvent *event)
     {
         if (windowState() & Qt::WindowFullScreen)
         {
-            QVector<QToolBar *> toolbars = {ui->fileToolbar, ui->editToolbar, ui->formatToolbar, ui->shortcutToolbar};
+            QVector<QToolBar *> toolbars = {ui->fileToolbar, ui->editToolbar, ui->formatToolbar, ui->shortcutToolbar, ui->translateToolBar};
             for (auto *toolbar : toolbars)
             {
                 if (toolbar->isVisible())
@@ -1160,7 +1159,7 @@ void MainWindow::changeEvent(QEvent *event)
             return;
         }
 
-        auto *stateChangeEvent = static_cast<QWindowStateChangeEvent *>(event);
+        auto *stateChangeEvent = dynamic_cast<QWindowStateChangeEvent *>(event);
         if (stateChangeEvent->oldState() & Qt::WindowFullScreen)
         {
             for (auto *toolbar : qAsConst(m_visibleToolbars))

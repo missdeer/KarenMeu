@@ -11,46 +11,47 @@ class PlantUMLRunner : public QObject
 public:
     explicit PlantUMLRunner(QObject *parent = nullptr);
 
-    void searchDefaultExecutablePaths();
-    void updateJavaPath();
-    void updateJavaVersion();
-    void updatePlantUMLPath();
-    void updatePlantUMLVersion();
-    void updateGraphvizPath();
-    void updateGraphvizVersion();
-    bool isRunning();
-    void checkPaths();
-    void exportByPlantUML(const QString& saveAs, const QByteArray& doc);
-    void exportByGraphviz(const QString& saveAs, const QByteArray& doc, const QString& engine);
-    void runPlantUML(const QByteArray& doc, const QString &outputFormat);
-    void runGraphviz(const QByteArray& doc, const QString& outputFormat, const QString& engine);
-    bool hasPlantUMLStartEndMark(const QByteArray& doc);
+    void                      searchDefaultExecutablePaths();
+    void                      updateJavaPath();
+    void                      updateJavaVersion();
+    void                      updatePlantUMLPath();
+    void                      updatePlantUMLVersion();
+    void                      updateGraphvizPath();
+    void                      updateGraphvizVersion();
+    [[nodiscard]] bool        isRunning();
+    void                      checkPaths();
+    void                      exportByPlantUML(const QString &saveAs, const QByteArray &doc);
+    void                      exportByGraphviz(const QString &saveAs, const QByteArray &doc, const QString &engine);
+    void                      runPlantUML(const QByteArray &doc, const QString &outputFormat);
+    void                      runGraphviz(const QByteArray &doc, const QString &outputFormat, const QString &engine);
+    [[nodiscard]] static bool hasPlantUMLStartEndMark(const QByteArray &doc);
 
-    const QString& javaPath() const;
-    void setJavaPath(const QString &javaPath);
+    [[nodiscard]] const QString &javaPath() const;
+    void                         setJavaPath(const QString &javaPath);
 
-    const QString& plantUmlPath() const;
-    void setPlantUmlPath(const QString &plantUmlPath);
+    [[nodiscard]] const QString &plantUmlPath() const;
+    void                         setPlantUmlPath(const QString &plantUmlPath);
 
-    const QString& graphvizPath() const;
-    void setGraphvizPath(const QString &graphvizPath);
+    [[nodiscard]] const QString &graphvizPath() const;
+    void                         setGraphvizPath(const QString &graphvizPath);
 
-    bool hasValidPaths() const;
-    void setHasValidPaths(bool hasValidPaths);
+    [[nodiscard]] bool hasValidPaths() const;
+    void               setHasValidPaths(bool hasValidPaths);
 
-    const QByteArray &input() const;
+    [[nodiscard]] const QByteArray &input() const;
 
-    const QByteArray &output() const;
+    [[nodiscard]] const QByteArray &output() const;
 
-    const QString &cacheKey() const;
-    void           setCacheKey(const QString &cacheKey);
+    [[nodiscard]] const QString &cacheKey() const;
+    void                         setCacheKey(const QString &cacheKey);
 
 signals:
-    void exported(const QString& fileName);
+    void exported(const QString &fileName);
     void result();
 private slots:
     void exportFinished();
     void runFinished();
+
 private:
     QProcess *m_process {nullptr};
 

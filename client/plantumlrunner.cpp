@@ -42,11 +42,17 @@ void PlantUMLRunner::searchDefaultExecutablePaths()
     {
         qDebug() << path;
         if (m_javaPath.isEmpty() && QFile::exists(path + "/" + javaExecutable))
+        {
             m_javaPath = path + "/" + javaExecutable;
+        }
         if (m_graphvizPath.isEmpty() && QFile::exists(path + "/" + dotExecutable))
+        {
             m_graphvizPath = path + "/" + dotExecutable;
+        }
         if (m_plantUmlPath.isEmpty() && QFile::exists(path + "/plantuml.jar"))
+        {
             m_plantUmlPath = path + "/plantuml.jar";
+        }
     }
 }
 
@@ -154,12 +160,14 @@ void PlantUMLRunner::runPlantUML(const QByteArray &doc, const QString& outputFor
     env.insert("JAVA_TOOL_OPTIONS", "-Dapple.awt.UIElement=true");
 #endif
 
-    env.insert("GRAPHVIZ_DOT", QDir::toNativeSeparators(m_graphvizPath));
-    arguments << "-graphvizdot" << QDir::toNativeSeparators(m_graphvizPath);
+    if (QFile::exists(m_graphvizPath))
+    {
+        env.insert("GRAPHVIZ_DOT", QDir::toNativeSeparators(m_graphvizPath));
+        arguments << "-graphvizdot" << QDir::toNativeSeparators(m_graphvizPath);
+    }
 
     m_process->setProcessEnvironment(env);
     m_process->start(m_javaPath, arguments);
-
 
     if (!m_process->waitForStarted())
     {
@@ -216,15 +224,17 @@ void PlantUMLRunner::exportFinished()
     m_process->deleteLater();
     m_process = nullptr;
 
-    QFileInfo fi(m_saveAs);
-    if (!fi.absoluteDir().exists())
-        fi.absoluteDir().mkpath(fi.absolutePath());
-
-    QFile f(m_saveAs);
-    if (f.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    QFileInfo fileInfo(m_saveAs);
+    if (!fileInfo.absoluteDir().exists())
     {
-        f.write(m_output);
-        f.close();
+        fileInfo.absoluteDir().mkpath(fileInfo.absolutePath());
+    }
+
+    QFile file(m_saveAs);
+    if (file.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    {
+        file.write(m_output);
+        file.close();
         emit exported(m_saveAs);
     }
 }
@@ -275,7 +285,9 @@ const QString &PlantUMLRunner::graphvizPath() const
 void PlantUMLRunner::setGraphvizPath(const QString &graphvizPath)
 {
     if (QFile::exists(graphvizPath))
+    {
         m_graphvizPath = graphvizPath;
+    }
 }
 
 const QString &PlantUMLRunner::plantUmlPath() const
@@ -286,7 +298,9 @@ const QString &PlantUMLRunner::plantUmlPath() const
 void PlantUMLRunner::setPlantUmlPath(const QString &plantUmlPath)
 {
     if (QFile::exists(plantUmlPath))
+    {
         m_plantUmlPath = plantUmlPath;
+    }
 }
 
 const QString &PlantUMLRunner::javaPath() const
@@ -297,5 +311,7 @@ const QString &PlantUMLRunner::javaPath() const
 void PlantUMLRunner::setJavaPath(const QString &javaPath)
 {
     if (QFile::exists(javaPath))
+    {
         m_javaPath = javaPath;
+    }
 }
