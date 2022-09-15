@@ -48,6 +48,7 @@ ClientView::ClientView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget
 {
     m_editorStackedWidget->addWidget(m_markdownEditor);
     m_editorStackedWidget->addWidget(m_plantUMLEditor);
+    m_plantUMLEditor->setReadOnly(false);
 
     m_splitter->addWidget(m_editorStackedWidget);
     m_splitter->addWidget(m_preview);
@@ -256,6 +257,10 @@ void ClientView::copy()
     {
         m_markdownEditor->copy();
     }
+    else if (!isCurrentMarkdownEditor() && m_plantUMLEditor->hasFocus())
+    {
+        m_plantUMLEditor->copy();
+    }
     else
     {
         m_preview->triggerPageAction(QWebEnginePage::Copy);
@@ -267,6 +272,10 @@ void ClientView::cut()
     if (isCurrentMarkdownEditor() && m_markdownEditor->hasFocus())
     {
         m_markdownEditor->cut();
+    }
+    else if (!isCurrentMarkdownEditor() && m_plantUMLEditor->hasFocus())
+    {
+        m_plantUMLEditor->cut();
     }
     else
     {
@@ -280,6 +289,10 @@ void ClientView::paste()
     {
         m_markdownEditor->paste();
     }
+    else if (!isCurrentMarkdownEditor() && m_plantUMLEditor->hasFocus())
+    {
+        m_plantUMLEditor->paste();
+    }
     else
     {
         m_preview->triggerPageAction(QWebEnginePage::Paste);
@@ -291,6 +304,10 @@ void ClientView::selectAll()
     if (isCurrentMarkdownEditor() && m_markdownEditor->hasFocus())
     {
         m_markdownEditor->selectAll();
+    }
+    else if (!isCurrentMarkdownEditor() && m_plantUMLEditor->hasFocus())
+    {
+        m_plantUMLEditor->selectAll();
     }
     else
     {
@@ -304,6 +321,10 @@ void ClientView::undo()
     {
         m_markdownEditor->undo();
     }
+    else if (!isCurrentMarkdownEditor() && m_plantUMLEditor->hasFocus())
+    {
+        m_plantUMLEditor->undo();
+    }
     else
     {
         m_preview->triggerPageAction(QWebEnginePage::Undo);
@@ -316,6 +337,10 @@ void ClientView::redo()
     {
         m_markdownEditor->redo();
     }
+    else if (!isCurrentMarkdownEditor() && m_plantUMLEditor->hasFocus())
+    {
+        m_plantUMLEditor->redo();
+    }
     else
     {
         m_preview->triggerPageAction(QWebEnginePage::Redo);
@@ -325,7 +350,7 @@ void ClientView::redo()
 void ClientView::copyAsHTML()
 {
     Q_ASSERT(m_preview);
-    auto *page = (PreviewPage *)m_preview->page();
+    auto *page = dynamic_cast<PreviewPage *>(m_preview->page());
     Q_ASSERT(page);
     page->inlineImages();
 }
@@ -333,7 +358,7 @@ void ClientView::copyAsHTML()
 void ClientView::copyTheFirstImage()
 {
     Q_ASSERT(m_preview);
-    auto *page = (PreviewPage *)m_preview->page();
+    auto *page = dynamic_cast<PreviewPage *>(m_preview->page());
     Q_ASSERT(page);
     page->copy1stImage();
 }
@@ -535,22 +560,38 @@ MarkdownEditor *ClientView::editor()
     return m_markdownEditor;
 }
 
-QString ClientView::selectedText() const
+QString ClientView::selectedText()
 {
-    Q_ASSERT(m_markdownEditor);
-    if (m_markdownEditor->hasFocus() || !m_preview || !m_preview->hasFocus() || m_preview->selectedText().isEmpty())
+    if (isCurrentMarkdownEditor())
     {
-        QTextCursor c = m_markdownEditor->textCursor();
-        return c.selectedText();
+        Q_ASSERT(m_markdownEditor);
+        if (m_markdownEditor->hasFocus() || !m_preview || !m_preview->hasFocus() || m_preview->selectedText().isEmpty())
+        {
+            QTextCursor c = m_markdownEditor->textCursor();
+            return c.selectedText();
+        }
+    }
+    if (!isCurrentMarkdownEditor())
+    {
+        Q_ASSERT(m_plantUMLEditor);
+        if (m_plantUMLEditor->hasFocus() || !m_preview || !m_preview->hasFocus() || m_preview->selectedText().isEmpty())
+        {
+            return m_plantUMLEditor->getSelText();
+        }
     }
     Q_ASSERT(m_preview);
     return m_preview->selectedText();
 }
 
-QString ClientView::fullText() const
+QString ClientView::fullText()
 {
-    Q_ASSERT(m_markdownEditor);
-    return m_markdownEditor->content();
+    if (isCurrentMarkdownEditor())
+    {
+        Q_ASSERT(m_markdownEditor);
+        return m_markdownEditor->content();
+    }
+    Q_ASSERT(m_plantUMLEditor);
+    return m_plantUMLEditor->content();
 }
 
 QSplitter *ClientView::splitter()

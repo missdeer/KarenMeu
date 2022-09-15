@@ -34,8 +34,8 @@ public:
     void                          openFromFile(const QString &fileName);
     void                          setInitialDocument(const QString &content);
     [[nodiscard]] MarkdownEditor *editor();
-    [[nodiscard]] QString         selectedText() const;
-    [[nodiscard]] QString         fullText() const;
+    [[nodiscard]] QString         selectedText();
+    [[nodiscard]] QString         fullText();
     [[nodiscard]] QSplitter      *splitter();
     void                          setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor);
     void                          setCustomPreivewThemeEditor(PreviewThemeEditor *customPreivewThemeEditor);
