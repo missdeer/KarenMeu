@@ -142,6 +142,21 @@
         <translation>文件(&amp;F)</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="43"/>
+        <source>Recent Opened Documents</source>
+        <translation>最近打开文档</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="50"/>
+        <source>New Document From Template...</source>
+        <translation>从模板新建文档...</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="61"/>
+        <source>Recent Opened Workspaces</source>
+        <translation>最近打开工作空间</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="68"/>
         <source>New</source>
         <translation>新建</translation>
@@ -202,9 +217,19 @@
         <translation>格式工具栏</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="319"/>
+        <source>&amp;New Document</source>
+        <translation>新建文档(&amp;N)</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="322"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="331"/>
+        <source>&amp;Open Document...</source>
+        <translation>打开文档(&amp;O)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="334"/>
@@ -212,9 +237,19 @@
         <translation>Ctrl+O</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="343"/>
+        <source>&amp;Save Document</source>
+        <translation>保存文档(&amp;S)</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="346"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="355"/>
+        <source>Save Document &amp;As...</source>
+        <translation>文档另存为(&amp;A)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="360"/>
@@ -754,11 +789,6 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1110"/>
-        <source>Clear Recent Markdown Document List</source>
-        <translation>清除最近打开Markdown文档列表</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="1119"/>
         <source>Dictionary</source>
         <translation>查词典</translation>
@@ -818,6 +848,11 @@
         <location filename="../mainwindow.ui" line="1122"/>
         <source>F6</source>
         <translation>F6</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="1110"/>
+        <source>Clear Recent Document List</source>
+        <translation>清除最近文档列表</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1134"/>
@@ -881,21 +916,6 @@
         <translation>导出渲染后的文档...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="43"/>
-        <source>Recent Markdown Documents</source>
-        <translation>最近打开Markdown文档</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="50"/>
-        <source>New Markdown Document From Template...</source>
-        <translation>从模板新建Markdown文档...</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="61"/>
-        <source>Recent Workspaces</source>
-        <translation>最近打开工作空间</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="177"/>
         <source>&amp;Translation</source>
         <translation>翻译(&amp;T)</translation>
@@ -914,26 +934,6 @@
         <location filename="../mainwindow.ui" line="300"/>
         <source>Translate Toolbar</source>
         <translation>翻译工具栏</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="319"/>
-        <source>&amp;New Markdown Document</source>
-        <translation>新建Markdown文档(&amp;N)</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="331"/>
-        <source>&amp;Open Markdown Document...</source>
-        <translation>打开Markdown文档(&amp;O)...</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="343"/>
-        <source>&amp;Save Markdown Document</source>
-        <translation>保存Markdown文档(&amp;S)</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="355"/>
-        <source>Save Markdown Document &amp;As...</source>
-        <translation>Markdown文档另存为(&amp;A)...</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1149"/>

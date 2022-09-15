@@ -139,7 +139,7 @@ private:
 
     Ui::MainWindow                       *ui;
     FileCache                            *m_fileCache;
-    MarkdownView                         *m_view;
+    MarkdownView                         *m_markdownView;
     QFileSystemModel                     *m_fsModel {nullptr};
     QTreeView                            *m_fsView {nullptr};
     QTreeView                            *m_webDAVView {nullptr};

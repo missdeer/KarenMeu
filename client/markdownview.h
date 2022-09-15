@@ -23,21 +23,21 @@ class MarkdownView : public QWidget
 public:
     explicit MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget *parent = nullptr);
     ~MarkdownView() override;
-    void             forceConvert();
-    bool             maybeSave();
-    void             updatePreviewTheme();
-    void             updatePreviewMode();
-    void             updateMarkdownEngine();
-    void             updateMacStyleCodeBlock();
-    void             openFromFile(const QString &fileName);
-    void             setInitialDocument(const QString &content);
-    MarkdownEditor *editor();
-    [[nodiscard]] QString selectedText() const;
-    [[nodiscard]] QString fullText() const;
-    QSplitter *      splitter();
-    void             setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor);
-    void             setCustomPreivewThemeEditor(PreviewThemeEditor *customPreivewThemeEditor);
-    QWebEnginePage * devToolPage();
+    void                          forceConvert();
+    [[nodiscard]] bool            maybeSave();
+    void                          updatePreviewTheme();
+    void                          updatePreviewMode();
+    void                          updateMarkdownEngine();
+    void                          updateMacStyleCodeBlock();
+    void                          openFromFile(const QString &fileName);
+    void                          setInitialDocument(const QString &content);
+    [[nodiscard]] MarkdownEditor *editor();
+    [[nodiscard]] QString         selectedText() const;
+    [[nodiscard]] QString         fullText() const;
+    [[nodiscard]] QSplitter      *splitter();
+    void                          setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor);
+    void                          setCustomPreivewThemeEditor(PreviewThemeEditor *customPreivewThemeEditor);
+    [[nodiscard]] QWebEnginePage *devToolPage();
 
 signals:
     void formatStrong();
@@ -98,20 +98,31 @@ protected:
 
 private:
     bool                   m_modified {false};
-    QSplitter *            m_splitter;
-    MarkdownEditor *      m_editor;
-    QWebEngineView *       m_preview;
-    QTimer *               m_convertTimer;
+    QSplitter             *m_splitter;
+    MarkdownEditor        *m_editor;
+    QWebEngineView        *m_preview;
+    QTimer                *m_convertTimer;
     QNetworkAccessManager *m_nam;
-    PreviewThemeEditor *   m_previewHTMLEditor;
-    PreviewThemeEditor *   m_customPreivewThemeEditor;
-    PlantUMLUrlCodec *     m_plantUMLUrlCodec {nullptr};
-    FileCache *            m_fileCache;
+    PreviewThemeEditor    *m_previewHTMLEditor;
+    PreviewThemeEditor    *m_customPreivewThemeEditor;
+    PlantUMLUrlCodec      *m_plantUMLUrlCodec {nullptr};
+    FileCache             *m_fileCache;
     QString                m_savePath;
     RenderedDocument       m_renderedContent;
     RenderedDocument       m_themeStyle;
     RenderedDocument       m_wxboxWidth;
     RenderedDocument       m_macStyleCodeBlock;
+    void                   saveToFile(const QString &savePath);
+    void                   renderMarkdownToHTML();
+    void                   doRendering(const QByteArray &ba, QList<QByteArray> &metaDataLines, std::map<QString, QString> &images);
+    void                   setRenderedHTML(const QString &html);
+    void                   downloadImages(const std::map<QString, QString> &images);
+    void                   preprocessMarkdown(QList<QByteArray>          &lines,
+                                              QList<QByteArray>          &metaDataLines,
+                                              std::map<QString, QString> &images,
+                                              std::map<QString, QString> &imagesToDownload);
+    void preprocessPlantUML(QList<QByteArray> &lines, std::map<QString, QString> &images, std::map<QString, QString> &imagesToDownload);
+    void preprocessGraphviz(QList<QByteArray> &lines, std::map<QString, QString> &images, std::map<QString, QString> &imagesToDownload);
 
     enum DocumentType
     {
@@ -120,18 +131,7 @@ private:
         GRAPHVIZ,
     };
 
-    void saveToFile(const QString &savePath);
-    void renderMarkdownToHTML();
-    void         doRendering(const QByteArray &ba, QList<QByteArray> &metaDataLines, std::map<QString, QString> &images);
-    void setRenderedHTML(const QString &html);
-    void         downloadImages(const std::map<QString, QString> &images);
-    void         preprocessMarkdown(QList<QByteArray>          &lines,
-                                    QList<QByteArray>          &metaDataLines,
-                                    std::map<QString, QString> &images,
-                                    std::map<QString, QString> &imagesToDownload);
-    void         preprocessPlantUML(QList<QByteArray> &lines, std::map<QString, QString> &images, std::map<QString, QString> &imagesToDownload);
-    void         preprocessGraphviz(QList<QByteArray> &lines, std::map<QString, QString> &images, std::map<QString, QString> &imagesToDownload);
-    DocumentType guessDocumentType(QList<QByteArray> &lines);
+    [[nodiscard]] DocumentType guessDocumentType(QList<QByteArray> &lines);
 };
 
 #endif // MARKDOWNVIEW_H
