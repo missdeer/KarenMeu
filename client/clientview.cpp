@@ -10,6 +10,7 @@
 #include <QResizeEvent>
 #include <QScrollBar>
 #include <QSplitter>
+#include <QStackedWidget>
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QWebChannel>
@@ -25,6 +26,7 @@
 #include "markdowneditor.h"
 #include "networkreplyhelper.h"
 #include "plantumlrunner.h"
+#include "plantumlsourceeditor.h"
 #include "plantumlurlcodec.h"
 #include "previewpage.h"
 #include "previewthemeeditor.h"
@@ -35,14 +37,19 @@ static const auto g_loadingGif = QStringLiteral("https://miro.medium.com/max/100
 
 ClientView::ClientView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget *parent)
     : QWidget(parent),
+      m_editorStackedWidget(new QStackedWidget(this)),
       m_splitter(new QSplitter(this)),
-      m_editor(new MarkdownEditor(g_settings->markdownEditorConfig(), g_settings->textEditorParameters(), this)),
+      m_markdownEditor(new MarkdownEditor(g_settings->markdownEditorConfig(), g_settings->textEditorParameters(), this)),
+      m_plantUMLEditor(new PlantUMLSourceEditor(this)),
       m_preview(new QWebEngineView(this)),
       m_convertTimer(new QTimer),
       m_nam(nam),
       m_fileCache(fileCache)
 {
-    m_splitter->addWidget(m_editor);
+    m_editorStackedWidget->addWidget(m_markdownEditor);
+    m_editorStackedWidget->addWidget(m_plantUMLEditor);
+
+    m_splitter->addWidget(m_editorStackedWidget);
     m_splitter->addWidget(m_preview);
     m_splitter->setStyleSheet("QSplitter:handle { border: 0 }"
                               "QSplitter { border: 0; margin: 0; padding: 0 }");
@@ -63,39 +70,40 @@ ClientView::ClientView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget
 
     setLayout(layout);
     m_splitter->setSizes(QList<int>() << width() / 2 << width() / 2);
-    m_editor->initialize();
-    connect(m_editor, &MarkdownEditor::contentModified, this, &ClientView::documentModified);
-    connect(this, &ClientView::formatStrong, m_editor, &MarkdownEditor::formatStrong);
-    connect(this, &ClientView::formatEmphasize, m_editor, &MarkdownEditor::formatEmphasize);
-    connect(this, &ClientView::formatStrikethrough, m_editor, &MarkdownEditor::formatStrikethrough);
-    connect(this, &ClientView::formatInlineCode, m_editor, &MarkdownEditor::formatInlineCode);
-    connect(this, &ClientView::formatCodeBlock, m_editor, &MarkdownEditor::formatCodeBlock);
-    connect(this, &ClientView::formatComment, m_editor, &MarkdownEditor::formatComment);
-    connect(this, &ClientView::formatOrderedList, m_editor, &MarkdownEditor::formatOrderedList);
-    connect(this, &ClientView::formatUnorderedList, m_editor, &MarkdownEditor::formatUnorderedList);
-    connect(this, &ClientView::formatBlockquote, m_editor, &MarkdownEditor::formatBlockquote);
-    connect(this, &ClientView::formatHyperlink, m_editor, &MarkdownEditor::formatHyperlink);
-    connect(this, &ClientView::formatImage, m_editor, &MarkdownEditor::formatImage);
-    connect(this, &ClientView::formatNewParagraph, m_editor, &MarkdownEditor::formatNewParagraph);
-    connect(this, &ClientView::formatHorizontalRule, m_editor, &MarkdownEditor::formatHorizontalRule);
-    connect(this, &ClientView::formatHeader1, m_editor, &MarkdownEditor::formatHeader1);
-    connect(this, &ClientView::formatHeader2, m_editor, &MarkdownEditor::formatHeader2);
-    connect(this, &ClientView::formatHeader3, m_editor, &MarkdownEditor::formatHeader3);
-    connect(this, &ClientView::formatHeader4, m_editor, &MarkdownEditor::formatHeader4);
-    connect(this, &ClientView::formatHeader5, m_editor, &MarkdownEditor::formatHeader5);
-    connect(this, &ClientView::formatHeader6, m_editor, &MarkdownEditor::formatHeader6);
-    connect(this, &ClientView::formatShiftRight, m_editor, &MarkdownEditor::formatShiftRight);
-    connect(this, &ClientView::formatShiftLeft, m_editor, &MarkdownEditor::formatShiftLeft);
-    connect(this, &ClientView::insertText, m_editor,
-            &MarkdownEditor::insertText);
+    m_plantUMLEditor->initialize();
+    connect(m_plantUMLEditor, &PlantUMLSourceEditor::contentModified, this, &ClientView::documentModified);
+    m_markdownEditor->initialize();
+    connect(m_markdownEditor, &MarkdownEditor::contentModified, this, &ClientView::documentModified);
+    connect(this, &ClientView::formatStrong, m_markdownEditor, &MarkdownEditor::formatStrong);
+    connect(this, &ClientView::formatEmphasize, m_markdownEditor, &MarkdownEditor::formatEmphasize);
+    connect(this, &ClientView::formatStrikethrough, m_markdownEditor, &MarkdownEditor::formatStrikethrough);
+    connect(this, &ClientView::formatInlineCode, m_markdownEditor, &MarkdownEditor::formatInlineCode);
+    connect(this, &ClientView::formatCodeBlock, m_markdownEditor, &MarkdownEditor::formatCodeBlock);
+    connect(this, &ClientView::formatComment, m_markdownEditor, &MarkdownEditor::formatComment);
+    connect(this, &ClientView::formatOrderedList, m_markdownEditor, &MarkdownEditor::formatOrderedList);
+    connect(this, &ClientView::formatUnorderedList, m_markdownEditor, &MarkdownEditor::formatUnorderedList);
+    connect(this, &ClientView::formatBlockquote, m_markdownEditor, &MarkdownEditor::formatBlockquote);
+    connect(this, &ClientView::formatHyperlink, m_markdownEditor, &MarkdownEditor::formatHyperlink);
+    connect(this, &ClientView::formatImage, m_markdownEditor, &MarkdownEditor::formatImage);
+    connect(this, &ClientView::formatNewParagraph, m_markdownEditor, &MarkdownEditor::formatNewParagraph);
+    connect(this, &ClientView::formatHorizontalRule, m_markdownEditor, &MarkdownEditor::formatHorizontalRule);
+    connect(this, &ClientView::formatHeader1, m_markdownEditor, &MarkdownEditor::formatHeader1);
+    connect(this, &ClientView::formatHeader2, m_markdownEditor, &MarkdownEditor::formatHeader2);
+    connect(this, &ClientView::formatHeader3, m_markdownEditor, &MarkdownEditor::formatHeader3);
+    connect(this, &ClientView::formatHeader4, m_markdownEditor, &MarkdownEditor::formatHeader4);
+    connect(this, &ClientView::formatHeader5, m_markdownEditor, &MarkdownEditor::formatHeader5);
+    connect(this, &ClientView::formatHeader6, m_markdownEditor, &MarkdownEditor::formatHeader6);
+    connect(this, &ClientView::formatShiftRight, m_markdownEditor, &MarkdownEditor::formatShiftRight);
+    connect(this, &ClientView::formatShiftLeft, m_markdownEditor, &MarkdownEditor::formatShiftLeft);
+    connect(this, &ClientView::insertText, m_markdownEditor, &MarkdownEditor::insertText);
 
     auto *page = new PreviewPage(nam, this);
     m_preview->setPage(page);
     connect(page, &PreviewPage::allImagesEmbeded, this, &ClientView::onAllImagesEmbeded);
     connect(page, &PreviewPage::gotAllImages, this, &ClientView::onGotAllImages);
-    connect(m_editor, &MarkdownEditor::scrollValueChanged, this, &ClientView::updatePreviewScrollBar);
-    Q_ASSERT(m_editor->document());
-    connect(m_editor->document(), &QTextDocument::cursorPositionChanged, this, &ClientView::updatePreviewScrollBar);
+    connect(m_markdownEditor, &MarkdownEditor::scrollValueChanged, this, &ClientView::updatePreviewScrollBar);
+    Q_ASSERT(m_markdownEditor->document());
+    connect(m_markdownEditor->document(), &QTextDocument::cursorPositionChanged, this, &ClientView::updatePreviewScrollBar);
 
     auto *channel = new QWebChannel(this);
     channel->registerObject(QStringLiteral("content"), &m_renderedContent);
@@ -123,12 +131,14 @@ ClientView::~ClientView()
 
 void ClientView::forceConvert()
 {
-    renderMarkdownToHTML();
+    renderToHTML();
 }
 
 bool ClientView::maybeSave()
 {
-    if (m_editor->modify())
+    Q_ASSERT(m_markdownEditor);
+    Q_ASSERT(m_plantUMLEditor);
+    if ((isCurrentMarkdownEditor() && m_markdownEditor->modify()) || (!isCurrentMarkdownEditor() && m_plantUMLEditor->modify()))
     {
         int res = QMessageBox::question(this,
                                         tr("Confirm"),
@@ -149,22 +159,9 @@ bool ClientView::maybeSave()
 
 void ClientView::openDocument()
 {
-    if (m_editor->modify())
+    if (!maybeSave())
     {
-        // prompt user to save document first
-        int res = QMessageBox::question(this,
-                                        tr("Confirm"),
-                                        tr("Modified document has not been saved, do you want to save it?"),
-                                        QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel,
-                                        QMessageBox::Yes);
-        if (res == QMessageBox::Yes)
-        {
-            saveDocument();
-        }
-        if (res == QMessageBox::Cancel)
-        {
-            return;
-        }
+        return;
     }
     QString fileName =
         QFileDialog::getOpenFileName(this,
@@ -176,7 +173,8 @@ void ClientView::openDocument()
     {
         return;
     }
-    m_editor->clear();
+    m_markdownEditor->clear();
+    m_plantUMLEditor->clear();
     openFromFile(fileName);
 }
 
@@ -209,33 +207,41 @@ void ClientView::saveAsDocument()
         return;
     }
 
+    auto newDocType       = guessDocumentType(fileName);
+    bool differentDocType = !(guessDocumentType(m_savePath) == newDocType);
     m_savePath = fileName;
     saveToFile(m_savePath);
+    if (differentDocType)
+    {
+        if (newDocType == MARKDOWN || newDocType == UNKNOWN)
+        {
+            switchToMarkdownEditor();
+            m_markdownEditor->clear();
+            m_markdownEditor->setContent(m_plantUMLEditor->content());
+            m_markdownEditor->setSavePoint();
+            m_markdownEditor->emptyUndoBuffer();
+        }
+        else
+        {
+            switchToPlantUMLEditor();
+            m_plantUMLEditor->clear();
+            m_plantUMLEditor->setContent(m_markdownEditor->content());
+            m_plantUMLEditor->setSavePoint();
+            m_plantUMLEditor->emptyUndoBuffer();
+        }
+    }
 }
 
 void ClientView::newDocument()
 {
-    Q_ASSERT(m_editor);
-    if (m_editor->modify())
+    if (!maybeSave())
     {
-        // prompt user to save document first
-        int res = QMessageBox::question(this,
-                                        tr("Confirm"),
-                                        tr("Modified document has not been saved, do you want to save it?"),
-                                        QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel,
-                                        QMessageBox::Yes);
-        if (res == QMessageBox::Yes)
-        {
-            saveDocument();
-        }
-        if (res == QMessageBox::Cancel)
-        {
-            return;
-        }
+        return;
     }
-    m_editor->clear();
-    m_editor->setSavePoint();
-    m_editor->emptyUndoBuffer();
+    switchToMarkdownEditor();
+    m_markdownEditor->clear();
+    m_markdownEditor->setSavePoint();
+    m_markdownEditor->emptyUndoBuffer();
     m_savePath.clear();
     static int untitledCount = 0;
     untitledCount++;
@@ -246,9 +252,9 @@ void ClientView::newDocument()
 
 void ClientView::copy()
 {
-    if (m_editor->hasFocus())
+    if (isCurrentMarkdownEditor() && m_markdownEditor->hasFocus())
     {
-        m_editor->copy();
+        m_markdownEditor->copy();
     }
     else
     {
@@ -258,9 +264,9 @@ void ClientView::copy()
 
 void ClientView::cut()
 {
-    if (m_editor->hasFocus())
+    if (isCurrentMarkdownEditor() && m_markdownEditor->hasFocus())
     {
-        m_editor->cut();
+        m_markdownEditor->cut();
     }
     else
     {
@@ -270,9 +276,9 @@ void ClientView::cut()
 
 void ClientView::paste()
 {
-    if (m_editor->hasFocus())
+    if (isCurrentMarkdownEditor() && m_markdownEditor->hasFocus())
     {
-        m_editor->paste();
+        m_markdownEditor->paste();
     }
     else
     {
@@ -282,9 +288,9 @@ void ClientView::paste()
 
 void ClientView::selectAll()
 {
-    if (m_editor->hasFocus())
+    if (isCurrentMarkdownEditor() && m_markdownEditor->hasFocus())
     {
-        m_editor->selectAll();
+        m_markdownEditor->selectAll();
     }
     else
     {
@@ -294,9 +300,9 @@ void ClientView::selectAll()
 
 void ClientView::undo()
 {
-    if (m_editor->hasFocus())
+    if (isCurrentMarkdownEditor() && m_markdownEditor->hasFocus())
     {
-        m_editor->undo();
+        m_markdownEditor->undo();
     }
     else
     {
@@ -306,9 +312,9 @@ void ClientView::undo()
 
 void ClientView::redo()
 {
-    if (m_editor->hasFocus())
+    if (isCurrentMarkdownEditor() && m_markdownEditor->hasFocus())
     {
-        m_editor->redo();
+        m_markdownEditor->redo();
     }
     else
     {
@@ -385,7 +391,7 @@ void ClientView::convertTimeout()
     if (m_modified)
     {
         m_modified = false;
-        renderMarkdownToHTML();
+        renderToHTML();
     }
 }
 
@@ -409,7 +415,7 @@ void ClientView::updatePreviewTheme()
         m_customPreivewThemeEditor->clearAll();
     }
     m_themeStyle.setText(QString::fromUtf8(ba));
-    ClientUtils::InitializeWidgetFont(m_editor);
+    ClientUtils::InitializeWidgetFont(m_markdownEditor);
 }
 
 void ClientView::updatePreviewMode()
@@ -493,10 +499,21 @@ void ClientView::openFromFile(const QString &fileName)
         if (f.open(QIODevice::ReadOnly))
         {
             QByteArray ba = f.readAll();
-            m_editor->setContent(ba);
-            m_editor->setSavePoint();
-            m_editor->emptyUndoBuffer();
-            m_editor->setBasePath(QFileInfo(fileName).absolutePath());
+            if (auto type = guessDocumentType(fileName); type == GRAPHVIZ || type == PLANTUML)
+            {
+                m_plantUMLEditor->setContent(ba);
+                m_plantUMLEditor->setSavePoint();
+                m_plantUMLEditor->emptyUndoBuffer();
+                switchToPlantUMLEditor();
+            }
+            else
+            {
+                m_markdownEditor->setContent(ba);
+                m_markdownEditor->setSavePoint();
+                m_markdownEditor->emptyUndoBuffer();
+                m_markdownEditor->setBasePath(QFileInfo(fileName).absolutePath());
+                switchToMarkdownEditor();
+            }
             f.close();
             m_savePath = fileName;
         }
@@ -508,22 +525,22 @@ void ClientView::openFromFile(const QString &fileName)
 
 void ClientView::setInitialDocument(const QString &content)
 {
-    m_editor->setContent(content.toUtf8());
-    m_editor->setSavePoint();
-    m_editor->emptyUndoBuffer();
+    m_markdownEditor->setContent(content.toUtf8());
+    m_markdownEditor->setSavePoint();
+    m_markdownEditor->emptyUndoBuffer();
 }
 
 MarkdownEditor *ClientView::editor()
 {
-    return m_editor;
+    return m_markdownEditor;
 }
 
 QString ClientView::selectedText() const
 {
-    Q_ASSERT(m_editor);
-    if (m_editor->hasFocus() || !m_preview || !m_preview->hasFocus() || m_preview->selectedText().isEmpty())
+    Q_ASSERT(m_markdownEditor);
+    if (m_markdownEditor->hasFocus() || !m_preview || !m_preview->hasFocus() || m_preview->selectedText().isEmpty())
     {
-        QTextCursor c = m_editor->textCursor();
+        QTextCursor c = m_markdownEditor->textCursor();
         return c.selectedText();
     }
     Q_ASSERT(m_preview);
@@ -532,8 +549,8 @@ QString ClientView::selectedText() const
 
 QString ClientView::fullText() const
 {
-    Q_ASSERT(m_editor);
-    return m_editor->content();
+    Q_ASSERT(m_markdownEditor);
+    return m_markdownEditor->content();
 }
 
 QSplitter *ClientView::splitter()
@@ -643,6 +660,11 @@ QWebEnginePage *ClientView::devToolPage()
     return m_preview->page()->devToolsPage();
 }
 
+bool ClientView::isModified()
+{
+    return m_modified;
+}
+
 void ClientView::setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor)
 {
     m_previewHTMLEditor = previewHTMLEditor;
@@ -654,10 +676,18 @@ void ClientView::saveToFile(const QString &savePath)
     QApplication::setOverrideCursor(Qt::WaitCursor);
     if (f.open(QIODevice::Truncate | QIODevice::WriteOnly))
     {
-        f.write(m_editor->content());
+        if (isCurrentMarkdownEditor())
+        {
+            f.write(m_markdownEditor->content());
+            m_markdownEditor->setSavePoint();
+            m_markdownEditor->setBasePath(QFileInfo(savePath).absolutePath());
+        }
+        else
+        {
+            f.write(m_plantUMLEditor->content());
+            m_plantUMLEditor->setSavePoint();
+        }
         f.close();
-        m_editor->setSavePoint();
-        m_editor->setBasePath(QFileInfo(savePath).absolutePath());
     }
     QApplication::restoreOverrideCursor();
 
@@ -839,19 +869,11 @@ void ClientView::preprocessGraphviz(QList<QByteArray> &lines, std::map<QString, 
 
 ClientView::DocumentType ClientView::guessDocumentType(QList<QByteArray> &lines)
 {
-    if (m_savePath.endsWith(".md", Qt::CaseInsensitive) || m_savePath.endsWith(".markdown", Qt::CaseInsensitive) ||
-        m_savePath.endsWith(".mdown", Qt::CaseInsensitive))
+    if (auto type = guessDocumentType(m_savePath); type != UNKNOWN)
     {
-        return MARKDOWN;
+        return type;
     }
-    if (m_savePath.endsWith(".puml", Qt::CaseInsensitive) || m_savePath.endsWith(".plantuml", Qt::CaseInsensitive))
-    {
-        return PLANTUML;
-    }
-    if (m_savePath.endsWith(".dot", Qt::CaseInsensitive) || m_savePath.endsWith(".gv", Qt::CaseInsensitive))
-    {
-        return GRAPHVIZ;
-    }
+
     int startLineIndex = 0;
     while (lines[startLineIndex].trimmed().isEmpty())
     {
@@ -872,18 +894,60 @@ ClientView::DocumentType ClientView::guessDocumentType(QList<QByteArray> &lines)
     return MARKDOWN;
 }
 
+ClientView::DocumentType ClientView::guessDocumentType(const QString &fileName)
+{
+    if (fileName.endsWith(".md", Qt::CaseInsensitive) || fileName.endsWith(".markdown", Qt::CaseInsensitive) ||
+        fileName.endsWith(".mdown", Qt::CaseInsensitive))
+    {
+        return MARKDOWN;
+    }
+    if (fileName.endsWith(".puml", Qt::CaseInsensitive) || fileName.endsWith(".plantuml", Qt::CaseInsensitive))
+    {
+        return PLANTUML;
+    }
+    if (fileName.endsWith(".dot", Qt::CaseInsensitive) || fileName.endsWith(".gv", Qt::CaseInsensitive))
+    {
+        return GRAPHVIZ;
+    }
+    return UNKNOWN;
+}
+
+void ClientView::switchToMarkdownEditor()
+{
+    if (isCurrentMarkdownEditor())
+    {
+        return;
+    }
+    Q_ASSERT(m_editorStackedWidget);
+    m_editorStackedWidget->setCurrentIndex(0);
+}
+
+void ClientView::switchToPlantUMLEditor()
+{
+    if (!isCurrentMarkdownEditor())
+    {
+        return;
+    }
+    Q_ASSERT(m_editorStackedWidget);
+    m_editorStackedWidget->setCurrentIndex(1);
+}
+
+bool ClientView::isCurrentMarkdownEditor()
+{
+    Q_ASSERT(m_editorStackedWidget);
+    return m_editorStackedWidget->currentIndex() == 0;
+}
+
 void ClientView::updatePreviewScrollBar()
 {
-    Q_ASSERT(m_editor);
-    auto *scrollBar = m_editor->getTextEdit()->verticalScrollBar();
     Q_ASSERT(m_preview);
-    auto *page = (PreviewPage *)m_preview->page();
+    auto *page = dynamic_cast<PreviewPage *>(m_preview->page());
     Q_ASSERT(page);
 
-    int currentDocumentLine      = m_editor->currentDocumentLineNumber();
-    int firstVisibleDocumentLine = m_editor->firstVisibleDocumentLineNumber();
-    int lastVisibleDocumentLine  = m_editor->lastVisibleDocumentLineNumber();
-    int documentLineCount        = m_editor->documentLineCount();
+    int currentDocumentLine      = m_markdownEditor->currentDocumentLineNumber();
+    int firstVisibleDocumentLine = m_markdownEditor->firstVisibleDocumentLineNumber();
+    int lastVisibleDocumentLine  = m_markdownEditor->lastVisibleDocumentLineNumber();
+    int documentLineCount        = m_markdownEditor->documentLineCount();
 #if !defined(QT_NO_DEBUG)
     int currentEditorLine      = m_editor->currentEditorLineNumber();
     int firstVisibleEditorLine = m_editor->firstVisibleEditorLineNumber();
@@ -902,6 +966,9 @@ void ClientView::updatePreviewScrollBar()
     }
     else
     {
+        Q_ASSERT(m_markdownEditor);
+        Q_ASSERT(m_markdownEditor->getTextEdit());
+        auto *scrollBar = m_markdownEditor->getTextEdit()->verticalScrollBar();
         page->onEditorScrollMoved(scrollBar->value(), scrollBar->maximum());
     }
 }
@@ -916,9 +983,9 @@ void ClientView::resizeEvent(QResizeEvent *event)
     QWidget::resizeEvent(event);
 }
 
-void ClientView::renderMarkdownToHTML()
+void ClientView::renderToHTML()
 {
-    QByteArray ba = m_editor->content();
+    QByteArray ba = isCurrentMarkdownEditor() ? m_markdownEditor->content() : m_plantUMLEditor->content();
     if (ba.isEmpty())
     {
         return;
@@ -931,9 +998,11 @@ void ClientView::renderMarkdownToHTML()
     temp.replace('\r', ' ');
     QList<QByteArray> lines = temp.split('\n');
 
-    auto docType = guessDocumentType(lines);
+    auto docType = isCurrentMarkdownEditor() ? guessDocumentType(lines) : guessDocumentType(m_savePath);
     switch (docType)
     {
+    case UNKNOWN:
+        [[fallthrough]];
     case MARKDOWN:
         preprocessMarkdown(lines, metaDataLines, images, imagesToDownload);
         break;

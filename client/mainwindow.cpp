@@ -135,7 +135,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionHeader6, &QAction::triggered, m_clientView, &ClientView::formatHeader6);
     connect(ui->actionShiftRight, &QAction::triggered, m_clientView, &ClientView::formatShiftRight);
     connect(ui->actionShiftLeft, &QAction::triggered, m_clientView, &ClientView::formatShiftLeft);
-    connect(m_clientView, &ClientView::setCurrentFile, this, &MainWindow::onSetCurrentMarkdownDocument);
+    connect(m_clientView, &ClientView::setCurrentFile, this, &MainWindow::onSetCurrentDocument);
     connect(m_clientView, &ClientView::contentModified, this, &MainWindow::onDocumentModified);
     connect(m_youdaoDict, &YoudaoDict::result, this, &MainWindow::onYoudaoDictResult);
 
@@ -349,11 +349,9 @@ void MainWindow::saveWorkspace(const QString &fileName)
 void MainWindow::updateWindowTitle()
 {
     Q_ASSERT(m_clientView);
-    auto *editor = m_clientView->editor();
-    Q_ASSERT(editor);
     if (!m_currentOpenedFile.isEmpty())
     {
-        setWindowTitle(QString("%1%2 - KarenMeu").arg(QFileInfo(m_currentOpenedFile).fileName(), (editor->isModified() ? "*" : "")));
+        setWindowTitle(QString("%1%2 - KarenMeu").arg(QFileInfo(m_currentOpenedFile).fileName(), (m_clientView->isModified() ? "*" : "")));
     }
     else
     {
@@ -522,7 +520,7 @@ void MainWindow::updateRecentWorkspaceActions(const QStringList &files)
     }
 }
 
-void MainWindow::onSetCurrentMarkdownDocument(const QString &fileName)
+void MainWindow::onSetCurrentDocument(const QString &fileName)
 {
     m_currentOpenedFile = fileName;
     g_settings->setLastOpenedFilePath(fileName);

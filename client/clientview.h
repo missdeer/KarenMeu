@@ -6,11 +6,14 @@
 #include "rendereddocument.h"
 
 QT_FORWARD_DECLARE_CLASS(QSplitter);
+QT_FORWARD_DECLARE_CLASS(QStackedWidget);
 QT_FORWARD_DECLARE_CLASS(QWebEngineView);
 QT_FORWARD_DECLARE_CLASS(QTimer);
 QT_FORWARD_DECLARE_CLASS(QResizeEvent);
 QT_FORWARD_DECLARE_CLASS(QWebEnginePage);
 QT_FORWARD_DECLARE_CLASS(QNetworkAccessManager);
+
+class PlantUMLSourceEditor;
 class MarkdownEditor;
 class PreviewThemeEditor;
 class PlantUMLUrlCodec;
@@ -37,6 +40,7 @@ public:
     void                          setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor);
     void                          setCustomPreivewThemeEditor(PreviewThemeEditor *customPreivewThemeEditor);
     [[nodiscard]] QWebEnginePage *devToolPage();
+    [[nodiscard]] bool            isModified();
 
 signals:
     void formatStrong();
@@ -97,8 +101,10 @@ protected:
 
 private:
     bool                   m_modified {false};
+    QStackedWidget        *m_editorStackedWidget;
     QSplitter             *m_splitter;
-    MarkdownEditor        *m_editor;
+    MarkdownEditor        *m_markdownEditor;
+    PlantUMLSourceEditor  *m_plantUMLEditor;
     QWebEngineView        *m_preview;
     QTimer                *m_convertTimer;
     QNetworkAccessManager *m_nam;
@@ -112,7 +118,7 @@ private:
     RenderedDocument       m_wxboxWidth;
     RenderedDocument       m_macStyleCodeBlock;
     void                   saveToFile(const QString &savePath);
-    void                   renderMarkdownToHTML();
+    void                   renderToHTML();
     void                   doRendering(const QByteArray &ba, QList<QByteArray> &metaDataLines, std::map<QString, QString> &images);
     void                   setRenderedHTML(const QString &html);
     void                   downloadImages(const std::map<QString, QString> &images);
@@ -128,9 +134,14 @@ private:
         MARKDOWN,
         PLANTUML,
         GRAPHVIZ,
+        UNKNOWN,
     };
 
     [[nodiscard]] DocumentType guessDocumentType(QList<QByteArray> &lines);
+    [[nodiscard]] DocumentType guessDocumentType(const QString &fileName);
+    void                       switchToMarkdownEditor();
+    void                       switchToPlantUMLEditor();
+    [[nodiscard]] bool         isCurrentMarkdownEditor();
 };
 
 #endif // MARKDOWNVIEW_H

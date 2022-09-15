@@ -69,7 +69,7 @@ private slots:
 
     void on_actionTranslateSelected_triggered();
 
-    void onSetCurrentMarkdownDocument(const QString &fileName);
+    void onSetCurrentDocument(const QString &fileName);
     void onSetCurrentWorkspace(const QString &fileName);
     void onFileSystemItemActivated(const QModelIndex &index);
 
