@@ -7,7 +7,7 @@
 
 class ScintillaConfig;
 
-class PreviewThemeEditor : public QWidget
+class PreviewThemeEditor : public ScintillaEdit
 {
     Q_OBJECT
 public:
@@ -15,7 +15,7 @@ public:
     void       initialize(const QString &lexer);
     void       setContent(const QByteArray &content);
     QByteArray content();
-    void       clearAll();
+
 signals:
     void contentModified();
 private slots:
@@ -30,7 +30,6 @@ private slots:
                   Scintilla::FoldLevel         foldPrev);
 
 private:
-    ScintillaEdit *  m_editor;
     ScintillaConfig *m_sc;
     QString          m_lexer;
 };

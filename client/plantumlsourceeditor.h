@@ -7,7 +7,7 @@
 
 class ScintillaConfig;
 
-class PlantUMLSourceEditor : public QWidget
+class PlantUMLSourceEditor : public ScintillaEdit
 {
     Q_OBJECT
 public:
@@ -16,8 +16,7 @@ public:
     void       initialize();
     void       setContent(const QByteArray &content);
     QByteArray content();
-    void       clearAll();
-    void       setReadOnly(bool readOnly);
+
 signals:
     void contentModified();
 private slots:
@@ -32,7 +31,6 @@ private slots:
                   Scintilla::FoldLevel         foldPrev);
 
 private:
-    ScintillaEdit   *m_editor;
     ScintillaConfig *m_sc;
 };
 
