@@ -466,7 +466,6 @@ void MainWindow::on_actionPreference_triggered()
         updateTranslationActions();
 
         m_markdownView->updatePreviewTheme();
-        m_markdownView->updateMarkdownEngine();
         m_markdownView->updatePreviewMode();
         m_markdownView->updateMacStyleCodeBlock();
         m_markdownView->forceConvert();
@@ -603,7 +602,6 @@ void MainWindow::onCurrentMarkdownEngineChanged(const QString &text)
     if (g_settings->markdownEngine() != text)
     {
         g_settings->setMarkdownEngine(text);
-        m_markdownView->updateMarkdownEngine();
         m_markdownView->forceConvert();
     }
 }

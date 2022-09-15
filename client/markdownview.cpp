@@ -31,11 +31,7 @@
 #include "settings.h"
 #include "utils.h"
 
-using namespace vte;
-
-using pFMarkdownEngine          = char *(*)(GoString, GoString, GoUint8);
-pFMarkdownEngine markdownEngine = nullptr;
-static auto      g_loadingGif   = QStringLiteral("https://miro.medium.com/max/1000/1*CsJ05WEGfunYMLGfsT2sXA.gif");
+static const auto g_loadingGif = QStringLiteral("https://miro.medium.com/max/1000/1*CsJ05WEGfunYMLGfsT2sXA.gif");
 
 MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget *parent)
     : QWidget(parent),
@@ -113,10 +109,7 @@ MarkdownView::MarkdownView(QNetworkAccessManager *nam, FileCache *fileCache, QWi
     connect(m_preview, &QWebEngineView::loadFinished, this, &MarkdownView::previewLoadFinished);
     connect(page, &QWebEnginePage::pdfPrintingFinished, this, &MarkdownView::pdfPrintingFinished);
 
-    auto *devToolPage = new QWebEnginePage;
-    page->setDevToolsPage(devToolPage);
-
-    updateMarkdownEngine();
+    page->setDevToolsPage(new QWebEnginePage);
 
     connect(m_convertTimer, &QTimer::timeout, this, &MarkdownView::convertTimeout);
     m_convertTimer->start(g_settings->autoRefreshInterval());
@@ -177,8 +170,8 @@ void MarkdownView::openDocument()
         QFileDialog::getOpenFileName(this,
                                      tr("Open file"),
                                      ClientUtils::getDefaultFileSaveOpenDirectory(),
-                                     tr("All supproted files (*.md *.markdown *.mdown *.puml *.plantuml *.dot);; Markdown files (*.md "
-                                        "*.markdown *.mdown);; PlantUML files (*.puml *.plantuml);; Graphviz files (*.dot);; All files (*.*)"));
+                                     tr("All supproted files (*.md *.markdown *.mdown *.puml *.plantuml *.dot *.gv);; Markdown files (*.md "
+                                        "*.markdown *.mdown);; PlantUML files (*.puml *.plantuml);; Graphviz files (*.dot *.gv);; All files (*.*)"));
     if (!QFile::exists(fileName))
     {
         return;
@@ -191,7 +184,8 @@ void MarkdownView::saveDocument()
 {
     if (!QFile::exists(m_savePath) || (!m_savePath.endsWith(".md", Qt::CaseInsensitive) && !m_savePath.endsWith(".mdown", Qt::CaseInsensitive) &&
                                        !m_savePath.endsWith(".markdown", Qt::CaseInsensitive) && !m_savePath.endsWith(".puml", Qt::CaseInsensitive) &&
-                                       !m_savePath.endsWith(".plantuml", Qt::CaseInsensitive) && !m_savePath.endsWith(".dot", Qt::CaseInsensitive)))
+                                       !m_savePath.endsWith(".plantuml", Qt::CaseInsensitive) && !m_savePath.endsWith(".gv", Qt::CaseInsensitive) &&
+                                       !m_savePath.endsWith(".dot", Qt::CaseInsensitive)))
     {
         saveAsDocument();
     }
@@ -203,12 +197,12 @@ void MarkdownView::saveDocument()
 
 void MarkdownView::saveAsDocument()
 {
-    QString fileName =
-        QFileDialog::getSaveFileName(this,
-                                     tr("Save file"),
-                                     QStandardPaths::writableLocation(QStandardPaths::DataLocation),
-                                     tr("Markdown files (*.md *.markdown *.mdown);; PlantUML files (*.puml *.plantuml);; Graphviz files (*.dot);; "
-                                        "All supproted files (*.md *.markdown *.mdown *.puml *.plantuml *.dot);; All files (*.*)"));
+    QString fileName = QFileDialog::getSaveFileName(
+        this,
+        tr("Save file"),
+        QStandardPaths::writableLocation(QStandardPaths::DataLocation),
+        tr("Markdown files (*.md *.markdown *.mdown);; PlantUML files (*.puml *.plantuml);; Graphviz files (*.dot *.gv);; "
+           "All supproted files (*.md *.markdown *.mdown *.puml *.plantuml *.dot *.gv);; All files (*.*)"));
 
     if (fileName.isEmpty())
     {
@@ -423,16 +417,6 @@ void MarkdownView::updatePreviewMode()
     m_wxboxWidth.setText(g_settings->previewMode() == tr("Blog Post") ? "95%" : "70%");
 }
 
-void MarkdownView::updateMarkdownEngine()
-{
-    QMap<QString, pFMarkdownEngine> m = {
-        {"Goldmark", &Goldmark},
-        {"Lute", &Lute},
-    };
-
-    markdownEngine = m[g_settings->markdownEngine()];
-}
-
 void MarkdownView::updateMacStyleCodeBlock()
 {
     static std::map<QString, QString> styleBackground = {
@@ -559,7 +543,6 @@ QSplitter *MarkdownView::splitter()
 
 void MarkdownView::previewLoadFinished(bool /*unused*/)
 {
-    updateMarkdownEngine();
     updatePreviewMode();
     updateMacStyleCodeBlock();
     updatePreviewTheme();
@@ -865,7 +848,7 @@ MarkdownView::DocumentType MarkdownView::guessDocumentType(QList<QByteArray> &li
     {
         return PLANTUML;
     }
-    if (m_savePath.endsWith(".dot", Qt::CaseInsensitive))
+    if (m_savePath.endsWith(".dot", Qt::CaseInsensitive) || m_savePath.endsWith(".gv", Qt::CaseInsensitive))
     {
         return GRAPHVIZ;
     }
@@ -977,8 +960,15 @@ void MarkdownView::doRendering(const QByteArray &ba, QList<QByteArray> &metaData
     QByteArray style = g_settings->codeBlockStyle().toUtf8();
     GoString   styleContent {(const char *)style.data(), static_cast<ptrdiff_t>(style.size())};
 
-    auto *res          = markdownEngine(content, styleContent, g_settings->enableLineNumbers());
-    auto  renderedHTML = QString::fromUtf8(res);
+    using pFMarkdownEngine                                   = char *(*)(GoString, GoString, GoUint8);
+    static QMap<QString, pFMarkdownEngine> markdownEngineMap = {
+        {"Goldmark", &Goldmark},
+        {"Lute", &Lute},
+    };
+
+    auto  markdownEngine = markdownEngineMap[g_settings->markdownEngine()];
+    auto *res            = markdownEngine(content, styleContent, g_settings->enableLineNumbers());
+    auto  renderedHTML   = QString::fromUtf8(res);
 
     // fix h1/h2/h3 tag for style
     static auto regexpH1 = QRegularExpression(R"(<h1(\s+id=".*")?>)");

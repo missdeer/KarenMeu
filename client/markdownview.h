@@ -27,7 +27,6 @@ public:
     [[nodiscard]] bool            maybeSave();
     void                          updatePreviewTheme();
     void                          updatePreviewMode();
-    void                          updateMarkdownEngine();
     void                          updateMacStyleCodeBlock();
     void                          openFromFile(const QString &fileName);
     void                          setInitialDocument(const QString &content);
