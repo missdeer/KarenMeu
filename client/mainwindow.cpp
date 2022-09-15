@@ -38,13 +38,13 @@
 #include "mainwindow.h"
 #include "baidutranslator.h"
 #include "clientutils.h"
+#include "clientview.h"
 #include "custompreviewthemeeditwidget.h"
 #include "deepltranslator.h"
 #include "filecache.h"
 #include "findreplacedialog.h"
 #include "googletranslator.h"
 #include "markdowneditor.h"
-#include "markdownview.h"
 #include "plantumlsourceeditor.h"
 #include "preferencedialog.h"
 #include "previewthemeeditor.h"
@@ -78,7 +78,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
       m_fileCache(new FileCache(FILE_CACHE_SIZE, this)),
-      m_markdownView(new MarkdownView(&m_nam, m_fileCache, this)),
+      m_clientView(new ClientView(&m_nam, m_fileCache, this)),
       m_youdaoDict(new YoudaoDict(m_nam)),
       m_templateManager(new TemplateManager)
 {
@@ -88,7 +88,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->setupUi(this);
     statusBar()->hide();
-    setCentralWidget(m_markdownView);
+    setCentralWidget(m_clientView);
 
     if (g_settings->markdownViewArrange() == 0)
     {
@@ -99,44 +99,44 @@ MainWindow::MainWindow(QWidget *parent)
         ui->actionLeftRightOrTopBottomViews->setText(tr("Switch to Top/Bottom View"));
     }
 
-    connect(ui->actionNewDocument, &QAction::triggered, m_markdownView, &MarkdownView::newDocument);
-    connect(ui->actionOpenDocument, &QAction::triggered, m_markdownView, &MarkdownView::openDocument);
-    connect(ui->actionSaveDocument, &QAction::triggered, m_markdownView, &MarkdownView::saveDocument);
-    connect(ui->actionSaveDocumentAs, &QAction::triggered, m_markdownView, &MarkdownView::saveAsDocument);
-    connect(ui->actionCut, &QAction::triggered, m_markdownView, &MarkdownView::cut);
-    connect(ui->actionCopy, &QAction::triggered, m_markdownView, &MarkdownView::copy);
-    connect(ui->actionPaste, &QAction::triggered, m_markdownView, &MarkdownView::paste);
-    connect(ui->actionUndo, &QAction::triggered, m_markdownView, &MarkdownView::undo);
-    connect(ui->actionRedo, &QAction::triggered, m_markdownView, &MarkdownView::redo);
-    connect(ui->actionSelectAll, &QAction::triggered, m_markdownView, &MarkdownView::selectAll);
-    connect(ui->actionCopyAsHTML, &QAction::triggered, m_markdownView, &MarkdownView::copyAsHTML);
-    connect(ui->actionCopyTheFirstImage, &QAction::triggered, m_markdownView, &MarkdownView::copyTheFirstImage);
-    connect(ui->actionListImages, &QAction::triggered, m_markdownView, &MarkdownView::listImages);
-    connect(ui->actionExportAsPDF, &QAction::triggered, m_markdownView, &MarkdownView::exportAsPDF);
-    connect(ui->actionExportAsHTML, &QAction::triggered, m_markdownView, &MarkdownView::exportAsHTML);
-    connect(ui->actionStrong, &QAction::triggered, m_markdownView, &MarkdownView::formatStrong);
-    connect(ui->actionEmphasize, &QAction::triggered, m_markdownView, &MarkdownView::formatEmphasize);
-    connect(ui->actionStrikethrough, &QAction::triggered, m_markdownView, &MarkdownView::formatStrikethrough);
-    connect(ui->actionInlineCode, &QAction::triggered, m_markdownView, &MarkdownView::formatInlineCode);
-    connect(ui->actionCodeBlock, &QAction::triggered, m_markdownView, &MarkdownView::formatCodeBlock);
-    connect(ui->actionComment, &QAction::triggered, m_markdownView, &MarkdownView::formatComment);
-    connect(ui->actionOrderedList, &QAction::triggered, m_markdownView, &MarkdownView::formatOrderedList);
-    connect(ui->actionUnorderedList, &QAction::triggered, m_markdownView, &MarkdownView::formatUnorderedList);
-    connect(ui->actionBlockquote, &QAction::triggered, m_markdownView, &MarkdownView::formatBlockquote);
-    connect(ui->actionHyperlink, &QAction::triggered, m_markdownView, &MarkdownView::formatHyperlink);
-    connect(ui->actionImage, &QAction::triggered, m_markdownView, &MarkdownView::formatImage);
-    connect(ui->actionNewParagraph, &QAction::triggered, m_markdownView, &MarkdownView::formatNewParagraph);
-    connect(ui->actionHorizontalRule, &QAction::triggered, m_markdownView, &MarkdownView::formatHorizontalRule);
-    connect(ui->actionHeader1, &QAction::triggered, m_markdownView, &MarkdownView::formatHeader1);
-    connect(ui->actionHeader2, &QAction::triggered, m_markdownView, &MarkdownView::formatHeader2);
-    connect(ui->actionHeader3, &QAction::triggered, m_markdownView, &MarkdownView::formatHeader3);
-    connect(ui->actionHeader4, &QAction::triggered, m_markdownView, &MarkdownView::formatHeader4);
-    connect(ui->actionHeader5, &QAction::triggered, m_markdownView, &MarkdownView::formatHeader5);
-    connect(ui->actionHeader6, &QAction::triggered, m_markdownView, &MarkdownView::formatHeader6);
-    connect(ui->actionShiftRight, &QAction::triggered, m_markdownView, &MarkdownView::formatShiftRight);
-    connect(ui->actionShiftLeft, &QAction::triggered, m_markdownView, &MarkdownView::formatShiftLeft);
-    connect(m_markdownView, &MarkdownView::setCurrentFile, this, &MainWindow::onSetCurrentMarkdownDocument);
-    connect(m_markdownView, &MarkdownView::contentModified, this, &MainWindow::onDocumentModified);
+    connect(ui->actionNewDocument, &QAction::triggered, m_clientView, &ClientView::newDocument);
+    connect(ui->actionOpenDocument, &QAction::triggered, m_clientView, &ClientView::openDocument);
+    connect(ui->actionSaveDocument, &QAction::triggered, m_clientView, &ClientView::saveDocument);
+    connect(ui->actionSaveDocumentAs, &QAction::triggered, m_clientView, &ClientView::saveAsDocument);
+    connect(ui->actionCut, &QAction::triggered, m_clientView, &ClientView::cut);
+    connect(ui->actionCopy, &QAction::triggered, m_clientView, &ClientView::copy);
+    connect(ui->actionPaste, &QAction::triggered, m_clientView, &ClientView::paste);
+    connect(ui->actionUndo, &QAction::triggered, m_clientView, &ClientView::undo);
+    connect(ui->actionRedo, &QAction::triggered, m_clientView, &ClientView::redo);
+    connect(ui->actionSelectAll, &QAction::triggered, m_clientView, &ClientView::selectAll);
+    connect(ui->actionCopyAsHTML, &QAction::triggered, m_clientView, &ClientView::copyAsHTML);
+    connect(ui->actionCopyTheFirstImage, &QAction::triggered, m_clientView, &ClientView::copyTheFirstImage);
+    connect(ui->actionListImages, &QAction::triggered, m_clientView, &ClientView::listImages);
+    connect(ui->actionExportAsPDF, &QAction::triggered, m_clientView, &ClientView::exportAsPDF);
+    connect(ui->actionExportAsHTML, &QAction::triggered, m_clientView, &ClientView::exportAsHTML);
+    connect(ui->actionStrong, &QAction::triggered, m_clientView, &ClientView::formatStrong);
+    connect(ui->actionEmphasize, &QAction::triggered, m_clientView, &ClientView::formatEmphasize);
+    connect(ui->actionStrikethrough, &QAction::triggered, m_clientView, &ClientView::formatStrikethrough);
+    connect(ui->actionInlineCode, &QAction::triggered, m_clientView, &ClientView::formatInlineCode);
+    connect(ui->actionCodeBlock, &QAction::triggered, m_clientView, &ClientView::formatCodeBlock);
+    connect(ui->actionComment, &QAction::triggered, m_clientView, &ClientView::formatComment);
+    connect(ui->actionOrderedList, &QAction::triggered, m_clientView, &ClientView::formatOrderedList);
+    connect(ui->actionUnorderedList, &QAction::triggered, m_clientView, &ClientView::formatUnorderedList);
+    connect(ui->actionBlockquote, &QAction::triggered, m_clientView, &ClientView::formatBlockquote);
+    connect(ui->actionHyperlink, &QAction::triggered, m_clientView, &ClientView::formatHyperlink);
+    connect(ui->actionImage, &QAction::triggered, m_clientView, &ClientView::formatImage);
+    connect(ui->actionNewParagraph, &QAction::triggered, m_clientView, &ClientView::formatNewParagraph);
+    connect(ui->actionHorizontalRule, &QAction::triggered, m_clientView, &ClientView::formatHorizontalRule);
+    connect(ui->actionHeader1, &QAction::triggered, m_clientView, &ClientView::formatHeader1);
+    connect(ui->actionHeader2, &QAction::triggered, m_clientView, &ClientView::formatHeader2);
+    connect(ui->actionHeader3, &QAction::triggered, m_clientView, &ClientView::formatHeader3);
+    connect(ui->actionHeader4, &QAction::triggered, m_clientView, &ClientView::formatHeader4);
+    connect(ui->actionHeader5, &QAction::triggered, m_clientView, &ClientView::formatHeader5);
+    connect(ui->actionHeader6, &QAction::triggered, m_clientView, &ClientView::formatHeader6);
+    connect(ui->actionShiftRight, &QAction::triggered, m_clientView, &ClientView::formatShiftRight);
+    connect(ui->actionShiftLeft, &QAction::triggered, m_clientView, &ClientView::formatShiftLeft);
+    connect(m_clientView, &ClientView::setCurrentFile, this, &MainWindow::onSetCurrentMarkdownDocument);
+    connect(m_clientView, &ClientView::contentModified, this, &MainWindow::onDocumentModified);
     connect(m_youdaoDict, &YoudaoDict::result, this, &MainWindow::onYoudaoDictResult);
 
     ui->menuView->addAction(ui->fileToolbar->toggleViewAction());
@@ -216,15 +216,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::openMarkdownDocument(const QString &fileName)
 {
-    Q_ASSERT(m_markdownView);
+    Q_ASSERT(m_clientView);
 
-    m_markdownView->newDocument();
-    m_markdownView->openFromFile(fileName);
+    m_clientView->newDocument();
+    m_clientView->openFromFile(fileName);
 }
 
 void MainWindow::openWorkspace(const QString &fileName)
 {
-    Q_ASSERT(m_markdownView);
+    Q_ASSERT(m_clientView);
     QSettings settings(fileName, xmlFormat);
     auto      content = settings.value("content").toString();
     newDocumentWithContent(content);
@@ -277,9 +277,9 @@ void MainWindow::openWorkspace(const QString &fileName)
 
 void MainWindow::saveWorkspace(const QString &fileName)
 {
-    Q_ASSERT(m_markdownView);
+    Q_ASSERT(m_clientView);
     QSettings settings(fileName, xmlFormat);
-    settings.setValue("content", m_markdownView->fullText());
+    settings.setValue("content", m_clientView->fullText());
     auto mainWindowState = saveState();
     settings.setValue("windowState", mainWindowState);
     auto mainWindowGeometry = saveGeometry();
@@ -348,8 +348,8 @@ void MainWindow::saveWorkspace(const QString &fileName)
 
 void MainWindow::updateWindowTitle()
 {
-    Q_ASSERT(m_markdownView);
-    auto *editor = m_markdownView->editor();
+    Q_ASSERT(m_clientView);
+    auto *editor = m_clientView->editor();
     Q_ASSERT(editor);
     if (!m_currentOpenedFile.isEmpty())
     {
@@ -363,7 +363,7 @@ void MainWindow::updateWindowTitle()
 
 FindReplaceDialog *MainWindow::getFindReplaceDialog()
 {
-    static auto *dlg = new FindReplaceDialog(m_markdownView->editor(), this);
+    static auto *dlg = new FindReplaceDialog(m_clientView->editor(), this);
     return dlg;
 }
 
@@ -448,9 +448,9 @@ void MainWindow::updateNewFromTemplateMenus()
 
 void MainWindow::newDocumentWithContent(const QString &content)
 {
-    Q_ASSERT(m_markdownView);
-    m_markdownView->newDocument();
-    m_markdownView->setInitialDocument(content);
+    Q_ASSERT(m_clientView);
+    m_clientView->newDocument();
+    m_clientView->setInitialDocument(content);
 }
 
 void MainWindow::on_actionPreference_triggered()
@@ -465,16 +465,16 @@ void MainWindow::on_actionPreference_triggered()
 
         updateTranslationActions();
 
-        m_markdownView->updatePreviewTheme();
-        m_markdownView->updatePreviewMode();
-        m_markdownView->updateMacStyleCodeBlock();
-        m_markdownView->forceConvert();
+        m_clientView->updatePreviewTheme();
+        m_clientView->updatePreviewMode();
+        m_clientView->updateMacStyleCodeBlock();
+        m_clientView->forceConvert();
     }
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    if (m_markdownView->maybeSave())
+    if (m_clientView->maybeSave())
     {
         event->accept();
     }
@@ -592,8 +592,8 @@ void MainWindow::onCurrentPreviewModeChanged(const QString &text)
     if (g_settings->previewMode() != text)
     {
         g_settings->setPreviewMode(text);
-        m_markdownView->updatePreviewMode();
-        m_markdownView->forceConvert();
+        m_clientView->updatePreviewMode();
+        m_clientView->forceConvert();
     }
 }
 
@@ -602,7 +602,7 @@ void MainWindow::onCurrentMarkdownEngineChanged(const QString &text)
     if (g_settings->markdownEngine() != text)
     {
         g_settings->setMarkdownEngine(text);
-        m_markdownView->forceConvert();
+        m_clientView->forceConvert();
     }
 }
 
@@ -611,7 +611,7 @@ void MainWindow::onCurrentCodeBlockStyleChanged(const QString &text)
     if (g_settings->codeBlockStyle() != text)
     {
         g_settings->setCodeBlockStyle(text);
-        m_markdownView->forceConvert();
+        m_clientView->forceConvert();
     }
 }
 
@@ -620,8 +620,8 @@ void MainWindow::onCurrentPreviewThemeChanged(const QString &text)
     if (g_settings->previewTheme() != text)
     {
         g_settings->setPreviewTheme(text);
-        m_markdownView->updatePreviewTheme();
-        m_markdownView->forceConvert();
+        m_clientView->updatePreviewTheme();
+        m_clientView->forceConvert();
     }
 }
 
@@ -629,8 +629,8 @@ void MainWindow::onCustomPreviewThemeChanged()
 {
     if (g_settings->previewTheme() == tr("Custom"))
     {
-        m_markdownView->updatePreviewTheme();
-        m_markdownView->forceConvert();
+        m_clientView->updatePreviewTheme();
+        m_clientView->forceConvert();
     }
 }
 
@@ -697,9 +697,9 @@ void MainWindow::onNewFromTemplateTriggered()
     }
     else
     {
-        Q_ASSERT(m_markdownView);
-        m_markdownView->newDocument();
-        m_markdownView->setInitialDocument(fileContent);
+        Q_ASSERT(m_clientView);
+        m_clientView->newDocument();
+        m_clientView->setInitialDocument(fileContent);
     }
 }
 
@@ -820,7 +820,7 @@ void MainWindow::setupDockPanels()
 
     QVector<QAction *> toggleViewActions;
 
-    auto  getSelectionCallback = [this] { return m_markdownView->selectedText(); };
+    auto  getSelectionCallback = [this] { return m_clientView->selectedText(); };
     auto *googleTranslateDock  = new QDockWidget(tr("Google Translate"), this);
     googleTranslateDock->setObjectName("googleTranslate");
     m_googleTranslateEditor = new TranslateOutputWidget(new GoogleTranslator, googleTranslateDock);
@@ -961,7 +961,7 @@ void MainWindow::setupDockPanels()
     toggleViewAction = previewHTMLDock->toggleViewAction();
     toggleViewAction->setShortcut(QKeySequence("Shift+Alt+H"));
     ui->menuView->addAction(toggleViewAction);
-    m_markdownView->setPreviewHTMLEditor(m_previewHTMLEditor);
+    m_clientView->setPreviewHTMLEditor(m_previewHTMLEditor);
 
     auto *customThemeEditorDock = new QDockWidget(tr("Custom Theme Editor"), this);
     customThemeEditorDock->setObjectName("customThemeEditorDock");
@@ -971,13 +971,13 @@ void MainWindow::setupDockPanels()
     toggleViewAction = customThemeEditorDock->toggleViewAction();
     toggleViewAction->setShortcut(QKeySequence("Shift+Alt+T"));
     ui->menuView->addAction(toggleViewAction);
-    m_markdownView->setCustomPreivewThemeEditor(m_customPreivewThemeEditor->editor());
+    m_clientView->setCustomPreivewThemeEditor(m_customPreivewThemeEditor->editor());
     connect(m_customPreivewThemeEditor, &CustomPreviewThemeEditWidget::contentModified, this, &MainWindow::onCustomPreviewThemeChanged);
 
     auto *devToolDock = new QDockWidget(tr("DevTool"), this);
     devToolDock->setObjectName("devToolDock");
     auto *devToolView = new QWebEngineView(devToolDock);
-    devToolView->setPage(m_markdownView->devToolPage());
+    devToolView->setPage(m_clientView->devToolPage());
     devToolDock->setWidget(devToolView);
     addDockWidget(Qt::RightDockWidgetArea, devToolDock);
     toggleViewAction = devToolDock->toggleViewAction();
@@ -1178,8 +1178,8 @@ void MainWindow::on_actionDictionary_triggered()
 {
     Q_ASSERT(m_youdaoDictionaryEditor);
     m_youdaoDictionaryEditor->clear();
-    Q_ASSERT(m_markdownView);
-    QString text = m_markdownView->selectedText();
+    Q_ASSERT(m_clientView);
+    QString text = m_clientView->selectedText();
     if (text.isEmpty())
     {
         return;
@@ -1190,7 +1190,7 @@ void MainWindow::on_actionDictionary_triggered()
 
 void MainWindow::on_actionTranslateSelected_triggered()
 {
-    Q_ASSERT(m_markdownView);
+    Q_ASSERT(m_clientView);
     Q_ASSERT(m_webBrowser);
     QString text;
     if (m_webBrowser->hasFocus())
@@ -1201,14 +1201,14 @@ void MainWindow::on_actionTranslateSelected_triggered()
         }
         else
         {
-            text = m_markdownView->selectedText();
+            text = m_clientView->selectedText();
         }
     }
     else
     {
-        if (!m_markdownView->selectedText().isEmpty())
+        if (!m_clientView->selectedText().isEmpty())
         {
-            text = m_markdownView->selectedText();
+            text = m_clientView->selectedText();
         }
         else
         {
@@ -1309,8 +1309,8 @@ void MainWindow::on_actionClearRecentWorkspaceList_triggered()
 
 void MainWindow::on_actionTranslateFullText_triggered()
 {
-    Q_ASSERT(m_markdownView);
-    QString text = m_markdownView->fullText();
+    Q_ASSERT(m_clientView);
+    QString text = m_clientView->fullText();
     translateText(text);
 }
 
@@ -1452,7 +1452,7 @@ void MainWindow::reloadSamples(SampleResult *sampleResult)
 
 void MainWindow::insertSampleSource(const QString &code)
 {
-    emit m_markdownView->insertText(code);
+    emit m_clientView->insertText(code);
 }
 
 QListWidget *MainWindow::newSampleListWidget(const QSize &iconSize, QWidget *parent)

@@ -11,7 +11,7 @@ namespace Ui
 {
     class MainWindow;
 }
-class MarkdownView;
+class ClientView;
 class PreviewThemeEditor;
 class PlantUMLSourceEditor;
 class CustomPreviewThemeEditWidget;
@@ -139,7 +139,7 @@ private:
 
     Ui::MainWindow                       *ui;
     FileCache                            *m_fileCache;
-    MarkdownView                         *m_markdownView;
+    ClientView                           *m_clientView;
     QFileSystemModel                     *m_fsModel {nullptr};
     QTreeView                            *m_fsView {nullptr};
     QTreeView                            *m_webDAVView {nullptr};

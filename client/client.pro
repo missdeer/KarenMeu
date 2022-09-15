@@ -38,7 +38,7 @@ SOURCES += \
         $$PWD/rendereddocument.cpp \
         $$PWD/main.cpp \
         $$PWD/mainwindow.cpp \
-        $$PWD/markdownview.cpp \
+        $$PWD/clientview.cpp \
         $$PWD/preferencedialog.cpp \
         $$PWD/scintillaconfig.cpp \
         $$PWD/settings.cpp \
@@ -73,7 +73,7 @@ HEADERS += \
         $$PWD/previewthemeeditor.h \
         $$PWD/rendereddocument.h \
         $$PWD/mainwindow.h \
-        $$PWD/markdownview.h \
+        $$PWD/clientview.h \
         $$PWD/preferencedialog.h \
         $$PWD/scintillaconfig.h \
         $$PWD/settings.h \
