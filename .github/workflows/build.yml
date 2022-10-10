@@ -453,19 +453,14 @@ jobs:
       qt_target: desktop
     # 步骤
     steps:
-      - name: Cache Qt
-        id: cache-qt
-        uses: actions/cache@v1  # not v2!
-        with:
-          path: ../Qt
-          key: ${{ matrix.qt_arch }}-$${{ env.qt_ver }}-QtCache
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
-          cached: ${{ steps.cache-qt.outputs.cache-hit }}
           version: ${{ env.qt_ver }}
           target: ${{ env.qt_target }}
           arch: ${{ matrix.qt_arch }}
+          cache: 'true'
+          cache-key-prefix: 'install-qt-action-${{ matrix.qt_arch }}-${{ env.qt_ver }}'
           modules: qtwebengine
           
       - name: cache intel install
