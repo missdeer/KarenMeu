@@ -1,10 +1,11 @@
 #include <QCoreApplication>
+#include <QDir>
 #include <QFile>
 #include <QProcess>
+#include <QStandardPaths>
 #include <QtCore>
 
 #include "plantumlrunner.h"
-
 #include "utils.h"
 
 PlantUMLRunner::PlantUMLRunner(QObject *parent) : QObject(parent) {}
@@ -20,16 +21,17 @@ void PlantUMLRunner::searchDefaultExecutablePaths()
 #endif
 
     if (QFile::exists(dotPath))
+    {
         m_graphvizPath = dotPath;
+    }
 
+    const QString javaExecutable     = "java";
+    const QString dotExecutable      = "dot";
+    const QString plantumlExecutable = "plantuml.jar";
 #if defined(Q_OS_WIN)
-    const QString javaExecutable = "java.exe";
-    const QString dotExecutable  = "dot.exe";
     auto          paths          = envPath.split(";");
     paths << QCoreApplication::applicationDirPath() + "/graphviz/bin/" << QCoreApplication::applicationDirPath();
 #else
-    const QString javaExecutable = "java";
-    const QString dotExecutable  = "dot";
     auto          paths          = envPath.split(":");
     paths << "/usr/local/bin";
 #endif
@@ -37,21 +39,21 @@ void PlantUMLRunner::searchDefaultExecutablePaths()
 #if defined(Q_OS_MAC)
     paths << QCoreApplication::applicationDirPath() + "/../Resources/";
 #endif
+    m_javaPath     = QStandardPaths::findExecutable(javaExecutable, paths);
+    m_graphvizPath = QStandardPaths::findExecutable(dotExecutable, paths);
+    m_plantUmlPath = QStandardPaths::findExecutable(plantumlExecutable, paths);
 
-    for (const auto &path : qAsConst(paths))
+    if (m_plantUmlPath.isEmpty())
     {
-        qDebug() << path;
-        if (m_javaPath.isEmpty() && QFile::exists(path + "/" + javaExecutable))
+        for (const auto &path : qAsConst(paths))
         {
-            m_javaPath = path + "/" + javaExecutable;
-        }
-        if (m_graphvizPath.isEmpty() && QFile::exists(path + "/" + dotExecutable))
-        {
-            m_graphvizPath = path + "/" + dotExecutable;
-        }
-        if (m_plantUmlPath.isEmpty() && QFile::exists(path + "/plantuml.jar"))
-        {
-            m_plantUmlPath = path + "/plantuml.jar";
+            QDir dir(path);
+            auto entries = dir.entryList({"plantuml*.jar"}, QDir::Files);
+            if (!entries.isEmpty())
+            {
+                m_plantUmlPath = entries.at(0);
+                break;
+            }
         }
     }
 }

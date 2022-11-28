@@ -109,9 +109,9 @@
         <translation type="unfinished">HTML内容已复制到剪切板。</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="1106"/>
+        <location filename="../clientview.cpp" line="1109"/>
         <source>Metadata</source>
-        <translation type="unfinished">元数据</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

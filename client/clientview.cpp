@@ -210,7 +210,7 @@ void ClientView::saveAsDocument()
 
     auto newDocType       = guessDocumentType(fileName);
     bool differentDocType = !(guessDocumentType(m_savePath) == newDocType);
-    m_savePath = fileName;
+    m_savePath            = fileName;
     saveToFile(m_savePath);
     if (differentDocType)
     {
@@ -422,8 +422,8 @@ void ClientView::convertTimeout()
 
 void ClientView::updatePreviewTheme()
 {
-    const auto &   previewTheme = g_settings->previewTheme();
-    QByteArray     ba;
+    const auto &previewTheme = g_settings->previewTheme();
+    QByteArray  ba;
     if (previewTheme == tr("Custom"))
     {
         ba = g_settings->customPreviewThemeStyle();
@@ -764,9 +764,10 @@ void ClientView::downloadImages(const std::map<QString, QString> &images)
 }
 
 void ClientView::preprocessMarkdown(QList<QByteArray>          &lines,
-                                      QList<QByteArray>          &metaDataLines,
-                                      std::map<QString, QString> &images,
-                                      std::map<QString, QString> &imagesToDownload)
+                                    QList<QByteArray>          &metaDataLines,
+                                    std::map<QString, QString> &images,
+                                    std::map<QString, QString> &imagesToDownload,
+                                    const QString              &imageType)
 {
     // extract leading YAML header for some kind of markdown document, suck as Jekyll document
     QRegularExpression reMetadataSeparator(R"(^\-{3,}[\s\t]*$)");
@@ -836,7 +837,7 @@ void ClientView::preprocessMarkdown(QList<QByteArray>          &lines,
 #endif
         QByteArray embedGraphCode = embedGraphCodeLines.join("\n");
         auto       md5sum         = QCryptographicHash::hash(embedGraphCode, QCryptographicHash::Md5).toHex();
-        QString    cacheKey       = QString("%1-%2.png").arg(md5sum, mark);
+        QString    cacheKey       = QString("%1-%2.%3").arg(md5sum, mark, imageType);
 
         // insert img tag sync
         bool       hasCached   = m_fileCache->hasItem(cacheKey);
@@ -846,43 +847,45 @@ void ClientView::preprocessMarkdown(QList<QByteArray>          &lines,
         *it = tag;
         lines.erase(it + 1, itEnd + 1);
 
-        if (!hasCached)
+        if (hasCached)
         {
-            // generate final image async
-            if (g_settings->plantUMLRemoteServiceEnabled())
+            continue;
+        }
+        // generate final image async
+        if (g_settings->plantUMLRemoteServiceEnabled())
+        {
+            if (!m_plantUMLUrlCodec)
             {
-                if (!m_plantUMLUrlCodec)
-                {
-                    m_plantUMLUrlCodec = new PlantUMLUrlCodec;
-                }
-                auto    encodedStr = m_plantUMLUrlCodec->Encode(embedGraphCode.toStdString());
-                QString engine     = graphvizEngines.contains(mark) ? mark : "plantuml";
-                QString header     = graphvizEngines.contains(mark) ? "" : "~1";
-                QString embedImageUrl =
-                    QString("%1%2/png/%3%4")
-                        .arg(graphvizEngines.contains(mark) ? "https://plantuml.ismisv.com/" : g_settings->plantUMLRemoteServiceAddress(),
-                             engine,
-                             header,
-                             QString::fromStdString(encodedStr));
-                imagesToDownload.insert(std::make_pair(cacheKey, embedImageUrl));
+                m_plantUMLUrlCodec = new PlantUMLUrlCodec;
+            }
+            auto    encodedStr = m_plantUMLUrlCodec->Encode(embedGraphCode.toStdString());
+            QString engine     = graphvizEngines.contains(mark) ? mark : "plantuml";
+            QString header     = graphvizEngines.contains(mark) ? "" : "~1";
+            QString embedImageUrl =
+                QString("%1%2/%3/%4%5")
+                    .arg(graphvizEngines.contains(mark) ? "https://plantuml.ismisv.com/" : g_settings->plantUMLRemoteServiceAddress(),
+                         engine,
+                         imageType,
+                         header,
+                         QString::fromStdString(encodedStr));
+            imagesToDownload.insert(std::make_pair(cacheKey, embedImageUrl));
+        }
+        else
+        {
+            auto *runner = new PlantUMLRunner;
+            connect(runner, &PlantUMLRunner::result, this, &ClientView::onRequestLocalImageDone);
+            runner->searchDefaultExecutablePaths();
+            runner->setGraphvizPath(g_settings->dotPath());
+            runner->setJavaPath(g_settings->javaPath());
+            runner->setPlantUmlPath(g_settings->plantUMLJarPath());
+            runner->setCacheKey(cacheKey);
+            if (graphvizEngines.contains(mark))
+            {
+                runner->runGraphviz(embedGraphCode, imageType, mark);
             }
             else
             {
-                auto *runner = new PlantUMLRunner;
-                connect(runner, &PlantUMLRunner::result, this, &ClientView::onRequestLocalImageDone);
-                runner->searchDefaultExecutablePaths();
-                runner->setGraphvizPath(g_settings->dotPath());
-                runner->setJavaPath(g_settings->javaPath());
-                runner->setPlantUmlPath(g_settings->plantUMLJarPath());
-                runner->setCacheKey(cacheKey);
-                if (graphvizEngines.contains(mark))
-                {
-                    runner->runGraphviz(embedGraphCode, "png", mark);
-                }
-                else
-                {
-                    runner->runPlantUML(embedGraphCode, "png");
-                }
+                runner->runPlantUML(embedGraphCode, imageType);
             }
         }
     }
@@ -892,9 +895,9 @@ void ClientView::preprocessPlantUML(QList<QByteArray> &lines, std::map<QString, 
 {
     lines.insert(0, QByteArrayLiteral("```plantuml"));
     lines.append(QByteArrayLiteral("```"));
-
+    std::transform(lines.begin(), lines.end(), lines.begin(), [](const QByteArray &line) { return line.trimmed(); });
     QList<QByteArray> dummy;
-    preprocessMarkdown(lines, dummy, images, imagesToDownload);
+    preprocessMarkdown(lines, dummy, images, imagesToDownload, QStringLiteral("svg"));
 }
 
 void ClientView::preprocessGraphviz(QList<QByteArray> &lines, std::map<QString, QString> &images, std::map<QString, QString> &imagesToDownload)
@@ -905,7 +908,7 @@ void ClientView::preprocessGraphviz(QList<QByteArray> &lines, std::map<QString, 
     lines.append(QByteArrayLiteral("```"));
 
     QList<QByteArray> dummy;
-    preprocessMarkdown(lines, dummy, images, imagesToDownload);
+    preprocessMarkdown(lines, dummy, images, imagesToDownload, QStringLiteral("png"));
 }
 
 ClientView::DocumentType ClientView::guessDocumentType(QList<QByteArray> &lines)

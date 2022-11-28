@@ -125,7 +125,8 @@ private:
     void                   preprocessMarkdown(QList<QByteArray>          &lines,
                                               QList<QByteArray>          &metaDataLines,
                                               std::map<QString, QString> &images,
-                                              std::map<QString, QString> &imagesToDownload);
+                                              std::map<QString, QString> &imagesToDownload,
+                                              const QString              &imageType = QStringLiteral("png"));
     void preprocessPlantUML(QList<QByteArray> &lines, std::map<QString, QString> &images, std::map<QString, QString> &imagesToDownload);
     void preprocessGraphviz(QList<QByteArray> &lines, std::map<QString, QString> &images, std::map<QString, QString> &imagesToDownload);
 
