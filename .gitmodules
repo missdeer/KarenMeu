@@ -1,6 +1,7 @@
 [submodule "3rdparty/scintilla"]
 	path = 3rdparty/scintilla
 	url = https://github.com/missdeer/scintilla.git
+	branch = master
 [submodule "3rdparty/vtextedit"]
 	path = 3rdparty/vtextedit
 	url = https://github.com/vnotex/vtextedit.git
