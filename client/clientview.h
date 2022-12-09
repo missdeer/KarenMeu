@@ -67,6 +67,8 @@ signals:
     void setCurrentFile(const QString &);
     void insertText(const QString &);
     void contentModified();
+    void setModified();
+    void resetModified();
 
 public slots:
     void openDocument();
@@ -138,11 +140,13 @@ private:
         UNKNOWN,
     };
 
-    [[nodiscard]] DocumentType guessDocumentType(QList<QByteArray> &lines);
-    [[nodiscard]] DocumentType guessDocumentType(const QString &fileName);
-    void                       switchToMarkdownEditor();
-    void                       switchToPlantUMLEditor();
-    [[nodiscard]] bool         isCurrentMarkdownEditor();
+    [[nodiscard]] DocumentType        guessDocumentType(QList<QByteArray> &lines);
+    [[nodiscard]] static DocumentType guessDocumentType(const QString &fileName);
+    void                              switchToMarkdownEditor();
+    void                              switchToPlantUMLEditor();
+    [[nodiscard]] bool                isCurrentMarkdownEditor();
+    void                              disableDocumentModifiedSignals();
+    void                              enableDocumentModifiedSignals();
 };
 
 #endif // MARKDOWNVIEW_H

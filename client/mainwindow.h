@@ -195,7 +195,7 @@ private:
     void               translateText(const QString &text);
     void               updateNewFromTemplateMenus();
     void               newDocumentWithContent(const QString &content);
-    void               openMarkdownDocument(const QString &fileName);
+    void               openDocument(const QString &fileName);
     void               openWorkspace(const QString &fileName);
     void               saveWorkspace(const QString &fileName);
     void               updateWindowTitle();

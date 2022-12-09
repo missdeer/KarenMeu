@@ -196,7 +196,7 @@ void MainWindow::openFile(const QString &fileName)
         fileName.endsWith(".mdown", Qt::CaseInsensitive) || fileName.endsWith(".htm", Qt::CaseInsensitive) ||
         fileName.endsWith(".html", Qt::CaseInsensitive))
     {
-        openMarkdownDocument(fileName);
+        openDocument(fileName);
     }
 }
 
@@ -214,7 +214,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::openMarkdownDocument(const QString &fileName)
+void MainWindow::openDocument(const QString &fileName)
 {
     Q_ASSERT(m_clientView);
 
@@ -351,6 +351,7 @@ void MainWindow::updateWindowTitle()
     Q_ASSERT(m_clientView);
     if (!m_currentOpenedFile.isEmpty())
     {
+        qDebug() << __FUNCTION__ << __LINE__ << m_clientView->isModified();
         setWindowTitle(QString("%1%2 - KarenMeu").arg(QFileInfo(m_currentOpenedFile).fileName(), (m_clientView->isModified() ? "*" : "")));
     }
     else
@@ -522,6 +523,7 @@ void MainWindow::updateRecentWorkspaceActions(const QStringList &files)
 
 void MainWindow::onSetCurrentDocument(const QString &fileName)
 {
+    qDebug() << __FUNCTION__ << __LINE__ << fileName;
     m_currentOpenedFile = fileName;
     g_settings->setLastOpenedFilePath(fileName);
     setWindowFilePath(m_currentOpenedFile);
@@ -691,7 +693,7 @@ void MainWindow::onNewFromTemplateTriggered()
         file.write(fileContent.toUtf8());
         file.close();
         // open file
-        openMarkdownDocument(filePath);
+        openDocument(filePath);
     }
     else
     {
@@ -703,6 +705,7 @@ void MainWindow::onNewFromTemplateTriggered()
 
 void MainWindow::onDocumentModified()
 {
+    qDebug() << __FUNCTION__ << __LINE__;
     updateWindowTitle();
 }
 
@@ -724,7 +727,7 @@ void MainWindow::openRecentFile()
 {
     auto *action = qobject_cast<QAction *>(sender());
     Q_ASSERT(action);
-    openMarkdownDocument(action->data().toString());
+    openDocument(action->data().toString());
 }
 
 void MainWindow::openRecentWorkspace()

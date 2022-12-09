@@ -72,9 +72,9 @@ ClientView::ClientView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget
     setLayout(layout);
     m_splitter->setSizes(QList<int>() << width() / 2 << width() / 2);
     m_plantUMLEditor->initialize();
-    connect(m_plantUMLEditor, &PlantUMLSourceEditor::contentModified, this, &ClientView::documentModified);
     m_markdownEditor->initialize();
-    connect(m_markdownEditor, &MarkdownEditor::contentModified, this, &ClientView::documentModified);
+    connect(this, &ClientView::setModified, [this] { m_modified = true; });
+    connect(this, &ClientView::resetModified, [this] { m_modified = false; });
     connect(this, &ClientView::formatStrong, m_markdownEditor, &MarkdownEditor::formatStrong);
     connect(this, &ClientView::formatEmphasize, m_markdownEditor, &MarkdownEditor::formatEmphasize);
     connect(this, &ClientView::formatStrikethrough, m_markdownEditor, &MarkdownEditor::formatStrikethrough);
@@ -174,9 +174,11 @@ void ClientView::openDocument()
     {
         return;
     }
+    disableDocumentModifiedSignals();
     m_markdownEditor->clear();
     m_plantUMLEditor->clear();
     openFromFile(fileName);
+    enableDocumentModifiedSignals();
 }
 
 void ClientView::saveDocument()
@@ -240,10 +242,13 @@ void ClientView::newDocument()
         return;
     }
     switchToMarkdownEditor();
+    disableDocumentModifiedSignals();
     m_markdownEditor->clear();
     m_markdownEditor->setSavePoint();
     m_markdownEditor->emptyUndoBuffer();
+    enableDocumentModifiedSignals();
     m_savePath.clear();
+    emit       resetModified();
     static int untitledCount = 0;
     untitledCount++;
     emit setCurrentFile(tr("Untitled%1").arg(untitledCount));
@@ -523,6 +528,7 @@ void ClientView::openFromFile(const QString &fileName)
         QApplication::setOverrideCursor(Qt::WaitCursor);
         if (f.open(QIODevice::ReadOnly))
         {
+            disableDocumentModifiedSignals();
             QByteArray ba = f.readAll();
             if (auto type = guessDocumentType(fileName); type == GRAPHVIZ || type == PLANTUML)
             {
@@ -541,6 +547,8 @@ void ClientView::openFromFile(const QString &fileName)
             }
             f.close();
             m_savePath = fileName;
+            enableDocumentModifiedSignals();
+            emit resetModified();
         }
         QApplication::restoreOverrideCursor();
 
@@ -550,9 +558,11 @@ void ClientView::openFromFile(const QString &fileName)
 
 void ClientView::setInitialDocument(const QString &content)
 {
+    disableDocumentModifiedSignals();
     m_markdownEditor->setContent(content.toUtf8());
     m_markdownEditor->setSavePoint();
     m_markdownEditor->emptyUndoBuffer();
+    enableDocumentModifiedSignals();
 }
 
 MarkdownEditor *ClientView::editor()
@@ -703,7 +713,7 @@ QWebEnginePage *ClientView::devToolPage()
 
 bool ClientView::isModified()
 {
-    return m_modified;
+    return isCurrentMarkdownEditor() ? m_modified : m_plantUMLEditor->modify();
 }
 
 void ClientView::setPreviewHTMLEditor(PreviewThemeEditor *previewHTMLEditor)
@@ -923,13 +933,13 @@ ClientView::DocumentType ClientView::guessDocumentType(QList<QByteArray> &lines)
     {
         startLineIndex++;
     }
-    QRegularExpression regPlantUML(R"(^\@start(uml|ditaa|dot|mindmap|wbs|gantt|math|latex|salt|json|yaml)[\s\t]*$)");
+    static QRegularExpression regPlantUML(R"(^\@start(uml|ditaa|dot|mindmap|wbs|gantt|math|latex|salt|json|yaml)[\s\t]*$)");
     auto               match = regPlantUML.match(QString(lines[startLineIndex]));
     if (match.hasMatch())
     {
         return PLANTUML;
     }
-    QRegularExpression regGraphviz(R"(^(strict\s+)?(graph|digraph)\s[a-zA-Z0-9_]+)");
+    static QRegularExpression regGraphviz(R"(^(strict\s+)?(graph|digraph)\s[a-zA-Z0-9_]+)");
     match = regGraphviz.match(QString(lines[startLineIndex]));
     if (match.hasMatch())
     {
@@ -980,6 +990,18 @@ bool ClientView::isCurrentMarkdownEditor()
 {
     Q_ASSERT(m_editorStackedWidget);
     return m_editorStackedWidget->currentIndex() == 0;
+}
+
+void ClientView::disableDocumentModifiedSignals()
+{
+    disconnect(m_plantUMLEditor, &PlantUMLSourceEditor::contentModified, this, &ClientView::documentModified);
+    disconnect(m_markdownEditor, &MarkdownEditor::contentModified, this, &ClientView::documentModified);
+}
+
+void ClientView::enableDocumentModifiedSignals()
+{
+    connect(m_plantUMLEditor, &PlantUMLSourceEditor::contentModified, this, &ClientView::documentModified);
+    connect(m_markdownEditor, &MarkdownEditor::contentModified, this, &ClientView::documentModified);
 }
 
 void ClientView::updatePreviewScrollBar()
@@ -1066,9 +1088,9 @@ void ClientView::renderToHTML()
     downloadImages(imagesToDownload);
 }
 
-void ClientView::doRendering(const QByteArray &ba, QList<QByteArray> &metaDataLines, std::map<QString, QString> &images)
+void ClientView::doRendering(const QByteArray &rawContent, QList<QByteArray> &metaDataLines, std::map<QString, QString> &images)
 {
-    GoString content {ba.data(), static_cast<ptrdiff_t>(ba.size())};
+    GoString content {rawContent.data(), static_cast<ptrdiff_t>(rawContent.size())};
 
     QByteArray style = g_settings->codeBlockStyle().toUtf8();
     GoString   styleContent {(const char *)style.data(), static_cast<ptrdiff_t>(style.size())};
