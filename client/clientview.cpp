@@ -73,8 +73,6 @@ ClientView::ClientView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget
     m_splitter->setSizes(QList<int>() << width() / 2 << width() / 2);
     m_plantUMLEditor->initialize();
     m_markdownEditor->initialize();
-    connect(this, &ClientView::setModified, [this] { m_modified = true; });
-    connect(this, &ClientView::resetModified, [this] { m_modified = false; });
     connect(this, &ClientView::formatStrong, m_markdownEditor, &MarkdownEditor::formatStrong);
     connect(this, &ClientView::formatEmphasize, m_markdownEditor, &MarkdownEditor::formatEmphasize);
     connect(this, &ClientView::formatStrikethrough, m_markdownEditor, &MarkdownEditor::formatStrikethrough);
@@ -974,6 +972,8 @@ void ClientView::switchToMarkdownEditor()
     }
     Q_ASSERT(m_editorStackedWidget);
     m_editorStackedWidget->setCurrentIndex(0);
+    disconnect(m_markdownEditor, &MarkdownEditor::contentModified, this, &ClientView::documentModified);
+    connect(m_plantUMLEditor, &PlantUMLSourceEditor::contentModified, this, &ClientView::documentModified);
 }
 
 void ClientView::switchToPlantUMLEditor()
@@ -984,6 +984,8 @@ void ClientView::switchToPlantUMLEditor()
     }
     Q_ASSERT(m_editorStackedWidget);
     m_editorStackedWidget->setCurrentIndex(1);
+    disconnect(m_plantUMLEditor, &PlantUMLSourceEditor::contentModified, this, &ClientView::documentModified);
+    connect(m_markdownEditor, &MarkdownEditor::contentModified, this, &ClientView::documentModified);
 }
 
 bool ClientView::isCurrentMarkdownEditor()

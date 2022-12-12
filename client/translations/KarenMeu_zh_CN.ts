@@ -4,112 +4,112 @@
 <context>
     <name>ClientView</name>
     <message>
-        <location filename="../clientview.cpp" line="145"/>
+        <location filename="../clientview.cpp" line="143"/>
         <source>Confirm</source>
         <translation type="unfinished">确认</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="146"/>
+        <location filename="../clientview.cpp" line="144"/>
         <source>Modified document has not been saved, do you want to save it?</source>
         <translation type="unfinished">文档被修改且尚未保存，要保存吗？</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="169"/>
+        <location filename="../clientview.cpp" line="167"/>
         <source>Open file</source>
         <translation type="unfinished">打开文件</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="171"/>
+        <location filename="../clientview.cpp" line="169"/>
         <source>All supproted files (*.md *.markdown *.mdown *.puml *.plantuml *.dot *.gv);; Markdown files (*.md *.markdown *.mdown);; PlantUML files (*.puml *.plantuml);; Graphviz files (*.dot *.gv);; All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="203"/>
+        <location filename="../clientview.cpp" line="201"/>
         <source>Save file</source>
         <translation type="unfinished">保存文件</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="205"/>
+        <location filename="../clientview.cpp" line="203"/>
         <source>Markdown files (*.md *.markdown *.mdown);; PlantUML files (*.puml *.plantuml);; Graphviz files (*.dot *.gv);; All supproted files (*.md *.markdown *.mdown *.puml *.plantuml *.dot *.gv);; All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="254"/>
+        <location filename="../clientview.cpp" line="252"/>
         <source>Untitled%1</source>
         <translation type="unfinished">未命名%1</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="382"/>
+        <location filename="../clientview.cpp" line="380"/>
         <source>Export As HTML</source>
         <translation type="unfinished">导出为HTML</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="382"/>
+        <location filename="../clientview.cpp" line="380"/>
         <source>HTML file (*.html)</source>
         <translation type="unfinished">HTML文档 (*.html)</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="395"/>
+        <location filename="../clientview.cpp" line="393"/>
         <source>HTML exported</source>
         <translation type="unfinished">HTML已导出</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="396"/>
+        <location filename="../clientview.cpp" line="394"/>
         <source>HTML file has been exported to %1 successfully.</source>
         <translation type="unfinished">HTML文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="405"/>
+        <location filename="../clientview.cpp" line="403"/>
         <source>Export As PDF</source>
         <translation type="unfinished">导出为PDF</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="405"/>
+        <location filename="../clientview.cpp" line="403"/>
         <source>Adobe PDF file (*.pdf)</source>
         <translation type="unfinished">Adobe PDF文档 (*.pdf)</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="432"/>
+        <location filename="../clientview.cpp" line="430"/>
         <source>Custom</source>
         <translation type="unfinished">自定义</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="453"/>
+        <location filename="../clientview.cpp" line="451"/>
         <source>Blog Post</source>
         <translation type="unfinished">博客文章</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="624"/>
+        <location filename="../clientview.cpp" line="622"/>
         <source>PDF exported</source>
         <translation type="unfinished">PDF已导出</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="624"/>
+        <location filename="../clientview.cpp" line="622"/>
         <source>PDF file has been exported to %1 successfully.</source>
         <translation type="unfinished">PDF文档成功导出到%1。</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="629"/>
+        <location filename="../clientview.cpp" line="627"/>
         <source>PDF exporting failed</source>
         <translation type="unfinished">导出PDF失败</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="629"/>
+        <location filename="../clientview.cpp" line="627"/>
         <source>PDF file has not been exported to %1.</source>
         <translation type="unfinished">PDF文档未导出到%1。</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="694"/>
+        <location filename="../clientview.cpp" line="692"/>
         <source>HTML copied</source>
         <translation type="unfinished">HTML已复制</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="694"/>
+        <location filename="../clientview.cpp" line="692"/>
         <source>HTML content has been copied into clipboard.</source>
         <translation type="unfinished">HTML内容已复制到剪切板。</translation>
     </message>
     <message>
-        <location filename="../clientview.cpp" line="1131"/>
+        <location filename="../clientview.cpp" line="1133"/>
         <source>Metadata</source>
         <translation type="unfinished"></translation>
     </message>
