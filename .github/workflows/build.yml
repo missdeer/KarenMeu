@@ -28,7 +28,7 @@ jobs:
       targetName: KarenMeu
     steps:
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         with:
           version: ${{ matrix.qt_ver }}
           cache: 'true'
@@ -107,7 +107,7 @@ jobs:
     # 步骤
     steps:          
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         with:
           version: ${{ env.qt_ver }}
           target: ${{ env.qt_target }}
@@ -267,7 +267,7 @@ jobs:
     # 步骤
     steps:
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         with:
           version: ${{ env.qt_ver }}
           target: ${{ env.qt_target }}
@@ -438,7 +438,7 @@ jobs:
     # 步骤
     steps:
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         with:
           version: ${{ env.qt_ver }}
           target: ${{ env.qt_target }}
