@@ -592,7 +592,7 @@ jobs:
           copy build\registerProtocolHandler\Release\registerProtocolHandler.exe %target_dir%\
           copy utils\utils.dll %target_dir%\
           copy server\KarenMeuCloud.exe %target_dir%\
-          copy "C:\Program Files (x86)\Intel\oneAPI\compiler\2022.0.3\windows\redist\intel64_win\compiler\libmmd.dll" %target_dir%\
+          copy "C:\Program Files (x86)\Intel\oneAPI\compiler\${{ env.COMPILER_VERSION }}\windows\redist\intel64_win\compiler\libmmd.dll" %target_dir%\
           windeployqt %target_dir%\${{ env.targetName }}.exe
 
       - name: upload artifact
