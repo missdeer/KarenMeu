@@ -26,7 +26,6 @@ require (
 	github.com/yuin/goldmark-emoji v1.0.1
 	github.com/yuin/goldmark-highlighting v0.0.0-20220208100518-594be1970594
 	github.com/yuin/goldmark-meta v1.1.0
-	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
-	golang.org/x/net v0.0.0-20220812174116-3211cb980234 // indirect
+	golang.org/x/net v0.7.0 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 )
