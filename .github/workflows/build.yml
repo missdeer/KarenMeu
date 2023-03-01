@@ -265,7 +265,7 @@ jobs:
             clang_link: llvm-win-x64.7z
     env:
       targetName: KarenMeu
-      go_version: 1.20
+      go_version: 1.20.1
       qt_ver: 5.15.2
       qt_target: desktop
     # 步骤
@@ -438,7 +438,7 @@ jobs:
             BUILDRP: build-x64.bat
     env:
       targetName: KarenMeu
-      go_version: 1.20
+      go_version: 1.20.1
       qt_ver: 5.15.2
       qt_target: desktop
     # 步骤
