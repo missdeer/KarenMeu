@@ -57,9 +57,11 @@ jobs:
           python WidgetGen.py
           cd ../../../..
           cd utils
+          go get -u
           make
           cd ..
           cd server
+          go get -u
           go build -ldflags="-s -w" -o KarenMeuCloud
           cd ..
           mkdir build
@@ -159,6 +161,7 @@ jobs:
           set CGO_ENABLED=1
           cd server
           go env
+          go get -u
           go build -v -ldflags="-s -w" -o KarenMeuCloud.exe
           dir
           cd ..
@@ -175,6 +178,7 @@ jobs:
           set CGO_ENABLED=1
           cd utils
           go env
+          go get -u
           go build -v -buildmode=c-archive  -ldflags="-s -w" -o utils.a 
           dir
           cd ..
@@ -319,6 +323,7 @@ jobs:
           set CGO_ENABLED=1
           cd server
           go env
+          go get -u
           go build -v -ldflags="-s -w" -o KarenMeuCloud.exe
           dir
           cd ..
@@ -335,6 +340,7 @@ jobs:
           set CGO_ENABLED=1
           cd utils
           go env
+          go get -u
           go build -v -buildmode=c-archive  -ldflags="-s -w" -o utils.a 
           dir
           cd ..
@@ -513,6 +519,7 @@ jobs:
           set CGO_ENABLED=1
           cd server
           go env
+          go get -u
           go build -v -ldflags="-s -w" -o KarenMeuCloud.exe
           dir
           cd ..
@@ -529,6 +536,7 @@ jobs:
           set CGO_ENABLED=1
           cd utils
           go env
+          go get -u
           go build -v -buildmode=c-archive  -ldflags="-s -w" -o utils.a 
           dir
           cd ..
