@@ -10,11 +10,15 @@ on:
       - 'LICENSE'
 
 env:
-  WINDOWS_BASEKIT_URL: https://registrationcenter-download.intel.com/akdlm/irc_nas/19078/w_BaseKit_p_2023.0.0.25940_offline.exe
-  WINDOWS_HPCKIT_URL: https://registrationcenter-download.intel.com/akdlm/irc_nas/19085/w_HPCKit_p_2023.0.0.25931_offline.exe
-  WINDOWS_CPP_COMPONENTS: intel.oneapi.win.cpp-compiler
-  WINDOWS_DPCPP_COMPONENTS: intel.oneapi.win.dpcpp-compiler
-  COMPILER_VERSION: 2023.0.0
+  WINDOWS_BASEKIT_URL: https://registrationcenter-download.intel.com/akdlm/IRC_NAS/62641e01-1e8d-4ace-91d6-ae03f7f8a71f/w_BaseKit_p_2024.0.0.49563_offline.exe
+  WINDOWS_HPCKIT_URL: https://registrationcenter-download.intel.com/akdlm/IRC_NAS/5b36181e-4974-4733-91c7-0c10c54900a5/w_HPCKit_p_2024.0.0.49588_offline.exe
+  WINDOWS_CPP_COMPONENTS: intel.oneapi.win.cpp-dpcpp-common
+  WINDOWS_DPCPP_COMPONENTS: intel.oneapi.win.cpp-dpcpp-common
+  CACHE_NUMBER: 6
+  SAMPLES_TAG: 2024.0.0
+  COMPILER_VERSION: 2024.0.0
+  TBB_VERSION: 2021.11.0
+  VS_VER: vs2022
 
 jobs:
   macOS:
@@ -577,8 +581,10 @@ jobs:
           vc_arch: ${{ matrix.msvc_arch }}
         run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" %vc_arch%
-          call "C:\Program Files (x86)\Intel\oneAPI\compiler\${{ env.COMPILER_VERSION }}\env\vars.bat"
-          set PATH="C:\Program Files (x86)\Intel\oneAPI\compiler\${{ env.COMPILER_VERSION }}\windows\bin-llvm\";%CD%\jom;%PATH%
+          for /f "tokens=* usebackq" %%f in (`dir /b "C:\Program Files (x86)\Intel\oneAPI\compiler\" ^| findstr /V latest ^| sort`) do @set "LATEST_VERSION=%%f"
+          echo %LATEST_VERSION%
+          call "C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_VERSION%\env\vars.bat"
+          set PATH="C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_VERSION%\bin\";%CD%\llvm\bin;%CD%\jom;%PATH%
           mkdir build
           cd build
           qmake -r -spec win32-clang-msvc CONFIG+=release CONFIG+=qtquickcompiler ..\${{ env.targetName }}.pro
@@ -599,8 +605,10 @@ jobs:
           copy build\client\Release\${{ env.targetName }}.exe %target_dir%\
           copy build\registerProtocolHandler\Release\registerProtocolHandler.exe %target_dir%\
           copy utils\utils.dll %target_dir%\
-          copy server\KarenMeuCloud.exe %target_dir%\
-          copy "C:\Program Files (x86)\Intel\oneAPI\compiler\${{ env.COMPILER_VERSION }}\windows\redist\intel64_win\compiler\libmmd.dll" %target_dir%\
+          copy server\KarenMeuCloud.exe %target_dir%\              
+          for /f "tokens=* usebackq" %%f in (`dir /b "C:\Program Files (x86)\Intel\oneAPI\compiler\" ^| findstr /V latest ^| sort`) do @set "LATEST_VERSION=%%f"
+          echo %LATEST_VERSION%
+          copy "C:\Program Files (x86)\Intel\oneAPI\compiler\%LATEST_VERSION%\bin\libmmd.dll" %target_dir%\
           windeployqt %target_dir%\${{ env.targetName }}.exe
 
       - name: upload artifact
