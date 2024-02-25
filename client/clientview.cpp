@@ -66,7 +66,7 @@ ClientView::ClientView(QNetworkAccessManager *nam, FileCache *fileCache, QWidget
         m_splitter->setOrientation(Qt::Horizontal);
     }
     layout->addWidget(m_splitter);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
 
     setLayout(layout);
@@ -199,7 +199,7 @@ void ClientView::saveAsDocument()
     QString fileName = QFileDialog::getSaveFileName(
         this,
         tr("Save file"),
-        QStandardPaths::writableLocation(QStandardPaths::DataLocation),
+        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation),
         tr("Markdown files (*.md *.markdown *.mdown);; PlantUML files (*.puml *.plantuml);; Graphviz files (*.dot *.gv);; "
            "All supproted files (*.md *.markdown *.mdown *.puml *.plantuml *.dot *.gv);; All files (*.*)"));
 
@@ -752,7 +752,7 @@ void ClientView::setRenderedHTML(const QString &html)
 
 void ClientView::downloadImages(const std::map<QString, QString> &images)
 {
-    for (const auto &[cacheKey, u] : qAsConst(images))
+    for (const auto &[cacheKey, u] : std::as_const(images))
     {
         QUrl            url(u);
         QNetworkRequest req(url);

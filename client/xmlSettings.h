@@ -116,9 +116,9 @@ bool writeSettingsXml(QIODevice &device, const QMap<QString, QVariant> &map)
     // of this step is to put all the keys of one category next to each other.
     // but we do not sort within the category. in this step, we place our results
     // from the QStringList of QMap.keys() into a tree-like structure
-    foreach (const QString &unsplitKey, map.keys())
+    for (const auto &unsplitKey : map.keys())
     {
-        QStringList segs = unsplitKey.split("/", QString::SkipEmptyParts);
+        QStringList segs = unsplitKey.split("/", Qt::SkipEmptyParts);
         QString     val  = map[unsplitKey].toString();
 
         XmlNode *cur = root;

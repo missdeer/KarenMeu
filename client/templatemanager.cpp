@@ -32,7 +32,7 @@ bool TemplateManager::load()
 bool TemplateManager::save()
 {
     bool res = true;
-    for (const auto &tmpl : qAsConst(m_templates))
+    for (const auto &tmpl : std::as_const(m_templates))
     {
         res &= tmpl->save();
     }

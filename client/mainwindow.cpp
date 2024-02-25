@@ -169,9 +169,9 @@ MainWindow::MainWindow(QWidget *parent)
     applyMarkdownEditorTheme();
 
     m_sampleInsertSignalMapper = new QSignalMapper(this);
-    connect(m_sampleInsertSignalMapper, QOverload<QWidget *>::of(&QSignalMapper::mapped), this, &MainWindow::onSampleItemInsert);
+    connect(m_sampleInsertSignalMapper, &QSignalMapper::mappedObject, this, &MainWindow::onSampleItemInsert);
 
-    for (auto *sampleResult : qAsConst(m_sampleResults))
+    for (auto *sampleResult : std::as_const(m_sampleResults))
     {
         reloadSamples(sampleResult);
     }
@@ -426,7 +426,7 @@ void MainWindow::translateText(const QString &text)
 void MainWindow::updateNewFromTemplateMenus()
 {
     // clear old actions
-    for (auto *action : qAsConst(m_newFromTemplateActions))
+    for (auto *action : std::as_const(m_newFromTemplateActions))
     {
         ui->menuNewFromTemplate->removeAction(action);
     }
@@ -756,15 +756,15 @@ void MainWindow::applyMarkdownEditorTheme()
 
 void MainWindow::setupWebBrowserPane()
 {
-    auto *defaultSettings = QWebEngineSettings::globalSettings();
+    auto *defaultProfile = QWebEngineProfile::defaultProfile();
+
+    defaultProfile->setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
+
+    auto *defaultSettings = defaultProfile->settings();
 
     defaultSettings->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
     defaultSettings->setAttribute(QWebEngineSettings::ScrollAnimatorEnabled, true);
     defaultSettings->setAttribute(QWebEngineSettings::PluginsEnabled, true);
-
-    auto *defaultProfile = QWebEngineProfile::defaultProfile();
-
-    defaultProfile->setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
 
     auto *browserDock = new QDockWidget(tr("WebBrowser"), this);
     browserDock->setObjectName("webBrowser");
@@ -787,7 +787,7 @@ void MainWindow::setupWebBrowserPane()
     browserAddressBar->setCompleter(m_urlCompleter);
     browserToolBar->addWidget(browserAddressBar);
     browserLayout->addWidget(browserToolBar);
-    browserLayout->setMargin(0);
+    browserLayout->setContentsMargins(0, 0, 0, 0);
     browserLayout->addWidget(m_webBrowser);
     browserContainer->setLayout(browserLayout);
     browserDock->setWidget(browserContainer);
@@ -1034,7 +1034,7 @@ void MainWindow::setupDockPanels()
 #if !defined(Q_WS_WIN) // BUG: icons are not displayed when cross-linking
     m_showSampleResultDockAction->setIcon(QIcon(":/rc/icons/sample-result.png"));
 #endif
-    m_showSampleResultDockAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_1));
+    m_showSampleResultDockAction->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_1));
     ui->menuView->addAction(m_showSampleResultDockAction);
 
     auto *dockSampleSource =
@@ -1052,7 +1052,7 @@ void MainWindow::setupDockPanels()
 #if !defined(Q_WS_WIN) // BUG: icons are not displayed when cross-linking
     m_showSampleSourceDockAction->setIcon(QIcon(":/rc/icons/sample-source.png"));
 #endif
-    m_showSampleSourceDockAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_2));
+    m_showSampleSourceDockAction->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_2));
     ui->menuView->addAction(m_showSampleSourceDockAction);
 }
 
@@ -1161,7 +1161,7 @@ void MainWindow::changeEvent(QEvent *event)
         auto *stateChangeEvent = dynamic_cast<QWindowStateChangeEvent *>(event);
         if (stateChangeEvent->oldState() & Qt::WindowFullScreen)
         {
-            for (auto *toolbar : qAsConst(m_visibleToolbars))
+            for (auto *toolbar : std::as_const(m_visibleToolbars))
             {
                 toolbar->setVisible(true);
             }
@@ -1371,7 +1371,7 @@ void MainWindow::onSampleResultFocus()
     focusSampleResult();
 }
 
-void MainWindow::onSampleItemInsert(QWidget *widget)
+void MainWindow::onSampleItemInsert(QObject *widget)
 {
     auto *listWidget = qobject_cast<QListWidget *>(widget);
     if (listWidget)
@@ -1412,7 +1412,7 @@ void MainWindow::onSampleItemDoubleClicked(QListWidgetItem *item)
 
 void MainWindow::reloadSamples(SampleResult *sampleResult)
 {
-    for (auto *widget : qAsConst(sampleResult->sampleWidgets))
+    for (auto *widget : std::as_const(sampleResult->sampleWidgets))
     {
         widget->deleteLater();
     }
@@ -1442,7 +1442,7 @@ void MainWindow::reloadSamples(SampleResult *sampleResult)
         connect(view, &QListWidget::itemSelectionChanged, this, &MainWindow::onSampleItemSelectionChanged);
 
         auto *action = new QAction(this);
-        action->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Return));
+        action->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
         m_sampleInsertSignalMapper->setMapping(action, view);
         connect(action, &QAction::triggered, m_sampleInsertSignalMapper, QOverload<>::of(&QSignalMapper::map));
         view->addAction(action);

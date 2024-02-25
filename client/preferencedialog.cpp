@@ -174,7 +174,7 @@ void PreferenceDialog::setupPreviewThemeEditor()
     auto *layout         = new QVBoxLayout;
     m_previewThemeEditor = new PreviewThemeEditor(ui->previewThemeEditorContainer);
     layout->addWidget(m_previewThemeEditor);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     ui->previewThemeEditorContainer->setLayout(layout);
 
     m_previewThemeEditor->initialize("css");

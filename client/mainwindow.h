@@ -84,7 +84,7 @@ private slots:
     void onWebBrowserSelectionChangedTimeout();
     void onSampleItemDoubleClicked(QListWidgetItem *item);
     void onSampleResultFocus();
-    void onSampleItemInsert(QWidget *widget);
+    void onSampleItemInsert(QObject *widget);
     void onSampleItemSelectionChanged();
     void onCurrentSampleResultChanged(int index);
     void onSampleResultDockLocationChanged(Qt::DockWidgetArea area);

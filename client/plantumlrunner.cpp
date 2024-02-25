@@ -45,7 +45,7 @@ void PlantUMLRunner::searchDefaultExecutablePaths()
 
     if (m_plantUmlPath.isEmpty())
     {
-        for (const auto &path : qAsConst(paths))
+        for (const auto &path : std::as_const(paths))
         {
             QDir dir(path);
             auto entries = dir.entryList({"plantuml*.jar"}, QDir::Files);

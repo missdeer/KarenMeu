@@ -71,7 +71,11 @@ void YoudaoDict::onFinished()
 
     QString     output;
     QTextStream textStream(&output);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     textStream.setCodec("UTF-8");
+#else
+    textStream.setEncoding(QStringConverter::Utf8);
+#endif
 
     auto        query        = obj["query"].toString();
     auto        translations = obj["translation"].toArray();

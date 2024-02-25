@@ -1733,17 +1733,17 @@
         <translation>不支持SSL，一些功能可能无法正常工作。</translation>
     </message>
     <message>
-        <location filename="../youdaodict.cpp" line="97"/>
+        <location filename="../youdaodict.cpp" line="101"/>
         <source>[Translation]</source>
         <translation>【翻译】</translation>
     </message>
     <message>
-        <location filename="../youdaodict.cpp" line="102"/>
+        <location filename="../youdaodict.cpp" line="106"/>
         <source>[Explain]</source>
         <translation>【释义】</translation>
     </message>
     <message>
-        <location filename="../youdaodict.cpp" line="116"/>
+        <location filename="../youdaodict.cpp" line="120"/>
         <source>[Web]</source>
         <translation>【网络用语】</translation>
     </message>

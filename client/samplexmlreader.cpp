@@ -12,7 +12,7 @@ SampleReader::SampleReader(QObject *parent)
 
 void SampleReader::scan(const QString &path)
 {
-    for (auto *sample : qAsConst(m_items))
+    for (auto *sample : std::as_const(m_items))
     {
         delete sample;
     }
@@ -47,7 +47,7 @@ Sample::Sample(const QString &name, QObject *parent)
 
 Sample::~Sample()
 {
-    for (auto *item : qAsConst(m_items))
+    for (auto *item : std::as_const(m_items))
     {
         delete item;
     }

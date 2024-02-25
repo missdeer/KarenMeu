@@ -6,7 +6,7 @@
 
 QT       += core gui widgets network xml svg webenginewidgets webchannel
 lessThan(QT_MAJOR_VERSION, 6): QT += webengine
-equals(QT_MAJOR_VERSION, 6): QT += core5compat
+equals(QT_MAJOR_VERSION, 6): QT += core5compat webenginecore
 
 TARGET = KarenMeu
 TEMPLATE = app
