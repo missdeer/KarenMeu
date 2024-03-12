@@ -42,7 +42,7 @@ jobs:
       - name: Set up Go 
         uses: actions/setup-go@v2
         with:
-          go-version: 1.20.1
+          go-version: 1.22
         id: go
       
       - uses: actions/checkout@v2
@@ -107,7 +107,7 @@ jobs:
             BUILDRP: build-x64.bat
     env:
       targetName: KarenMeu
-      go_version: 1.20.1
+      go_version: 1.22
       qt_ver: 5.15.2
       qt_target: desktop
     # 步骤
@@ -269,7 +269,7 @@ jobs:
             clang_link: llvm-win-x64.7z
     env:
       targetName: KarenMeu
-      go_version: 1.20.1
+      go_version: 1.22
       qt_ver: 5.15.2
       qt_target: desktop
     # 步骤
@@ -442,7 +442,7 @@ jobs:
             BUILDRP: build-x64.bat
     env:
       targetName: KarenMeu
-      go_version: 1.20.1
+      go_version: 1.22
       qt_ver: 5.15.2
       qt_target: desktop
     # 步骤
